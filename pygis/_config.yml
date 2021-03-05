@@ -1,0 +1,46 @@
+#######################################################################################
+# A default configuration that will be loaded for all jupyter books
+# See the documentation for help and more options: 
+# https://jupyterbook.org/customize/config.html
+
+#######################################################################################
+# Book settings
+title                       : PyGIS - Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
+author                      : Michael Mann & Others  # The author of the book
+copyright                   : "2021"  # Copyright year to be placed in the footer
+logo                        : logo.jpg  # A path to the book logo
+
+sphinx:
+  extra_extensions: []
+
+
+#######################################################################################
+# Execution settings
+execute:
+  execute_notebooks           : cache
+
+#######################################################################################
+# HTML-specific settings
+html:
+  home_page_in_navbar         : true
+
+# #######################################################################################
+# Interact link settings
+notebook_interface            : "notebook"
+
+#######################################################################################
+# Launch button settings
+repository:
+  url                         : https://github.com/executablebooks/quantecon-mini-example
+  path_to_book                : "mini_book"
+
+binder:
+  binderhub_url               : "https://mybinder.org"
+  text                        : "Launch binder"
+
+latex:
+  latex_engine                : "xelatex"
+  latex_documents:
+    targetname: book.tex
+
+  ]
