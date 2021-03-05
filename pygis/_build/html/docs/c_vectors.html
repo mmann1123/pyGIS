@@ -209,7 +209,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/c_vectors.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/quantecon-mini-example/master?urlpath=tree/mini_book/docs/c_vectors.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -256,6 +256,11 @@
          Polyline
         </a>
        </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#polygon">
+         Polygon
+        </a>
+       </li>
       </ul>
      </li>
     </ul>
@@ -276,23 +281,15 @@
                 
   <div class="section" id="vector-data">
 <span id="c-vectors"></span><h1>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                     <span class="c1"># Load the library</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>    <span class="c1"># Create even grid from -π to π</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                          <span class="c1"># Apply cosine to each element of a</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>                          <span class="c1"># Apply sin to each element of a</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="feature-representation">
 <h2>Feature Representation<a class="headerlink" href="#feature-representation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="vector-vs-raster">
 <h3>Vector vs. Raster<a class="headerlink" href="#vector-vs-raster" title="Permalink to this headline">¶</a></h3>
 <p>To work in a GIS environment, real world observations (objects or events that can be recorded in 2D or 3D space) need to be reduced to spatial entities. These spatial entities can be represented in a GIS as a <strong>vector data model</strong> or a <strong>raster data model</strong>.</p>
-<p><img alt="raster vs vector" src="docs/_static/img/vector_vs_raster.jpg" /></p>
+<div class="figure align-default" id="raster-vs-vector">
+<img alt="../_images/vector_vs_raster.jpg" src="../_images/vector_vs_raster.jpg" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Vector and raster representations of a river feature.</span><a class="headerlink" href="#raster-vs-vector" title="Permalink to this image">¶</a></p>
+</div>
 <div class="section" id="vector">
 <h4>Vector<a class="headerlink" href="#vector" title="Permalink to this headline">¶</a></h4>
 <p>Vector features can be decomposed into three different geometric primitives: <strong>points</strong>, <strong>polylines</strong> and <strong>polygons</strong>.</p>
@@ -300,26 +297,26 @@
 <h5>Point<a class="headerlink" href="#point" title="Permalink to this headline">¶</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
 
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span><span class="p">,</span> <span class="s1">&#39;Baltimore</span><span class="se">\n</span><span class="s1">(39.29, -76.61)&#39;</span><span class="p">,</span><span class="s1">&#39;Fredrick</span><span class="se">\n</span><span class="s1">(39.41,-77.40)&#39;</span><span class="p">],</span> 
+     <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)]}</span>
 
-<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span><span class="p">,</span> <span class="s1">&#39;Baltimore</span><span class="se">\n</span><span class="s1">(39.29, -76.61)&#39;</span><span class="p">],</span> <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mf">38.907192</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.036873</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mf">39.290386</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.612190</span><span class="p">)]}</span>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">38.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">38.8</span><span class="p">,</span> <span class="mf">39.6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">77.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.2</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">gdf</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/c_vectors_3_0.png" src="../_images/c_vectors_3_0.png" />
 </div>
 </div>
 <p>A point is composed of one coordinate pair representing a specific location in a coordinate system. Points are the most basic geometric primitives having no length or area. By definition a point can’t be “seen” since it has no area; but this is not practical if such primitives are to be mapped. So points on a map are represented using <em>symbols</em> that have both area and shape (e.g. circle, square, plus signs).</p>
@@ -327,38 +324,42 @@
 </div>
 <div class="section" id="polyline">
 <h5>Polyline<a class="headerlink" href="#polyline" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span> <span class="p">],</span> 
+     <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">LineString</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])]}</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A polyline is composed of a sequence of two or more coordinate pairs called vertices. A vertex is defined by coordinate pairs, just like a point, but what differentiates a vertex from a point is its explicitly defined relationship with neighboring vertices. A vertex is connected to at least one other vertex.</p>
+<p>Like a point, a true line can’t be seen since it has no area. And like a point, a line is symbolized using shapes that have a color, width and style (e.g. solid, dashed, dotted, etc…). Roads and rivers are commonly stored as polylines in a GIS.</p>
+</div>
+<div class="section" id="polygon">
+<h5>Polygon<a class="headerlink" href="#polygon" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span> <span class="p">],</span> 
+     <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])]}</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A polygon is composed of three or more line segments whose starting and ending coordinate pairs are the same. Sometimes you will see the words <em>lattice</em> or <em>area</em> used in lieu of ‘polygon’. Polygons represent both length (i.e. the perimeter of the area) and area. They also embody the idea of an inside and an outside; in fact, the area that a polygon encloses is explicitly defined in a GIS environment. If it isn’t, then you are working with a polyline feature. If this does not seem intuitive, think of three connected lines defining a triangle: they can represent three connected road segments (thus polyline features), or they can represent the grassy strip enclosed by the connected roads (in which case an ‘inside’ is implied thus defining a polygon).</p>
 <!-- 
-```{r echo=FALSE, fig.cap = "A simple polyline object defined by connected vertices.", fig.height=1.8, fig.width=1.8}
 
-OP <- par( mar=c(0,0,0,0))
-ggplot()  + geom_line(aes(x=X, y=Y), col="red", size=1) +
-    theme(title = NULL)  +
-    coord_cartesian(xlim = c(0,4), ylim = c(0,4)) +
-   geom_point(aes(x=X, y=Y), size=2) +
-   geom_text(aes(x=X, y=Y, label = paste("(",X,",",Y,")",sep="")),hjust = 1.2, size=3)
-par(OP)
-
-```
-
-
-A polyline is composed of a sequence of two or more coordinate pairs called vertices. A vertex is defined by coordinate pairs, just like a point, but what differentiates a vertex from a point is its explicitly defined relationship with neighboring vertices. A vertex is connected to at least one other vertex.
-
-Like a point, a true line can't be seen since it has no area. And like a point, a line is symbolized using shapes that have a color, width and style (e.g. solid, dashed, dotted, etc...). Roads and rivers are commonly stored as polylines in a GIS.
-
-##### Polygon
-
-```{r echo=FALSE, fig.cap = "A simple polygon object defined by an area enclosed by connected vertices.", fig.height=1.8, fig.width=1.8}
-OP <- par( mar=c(0,0,0,0))
-ggplot()  + 
-   geom_polygon(aes(x=X, y=Y), col="red", fill="orange") +
-   theme(title = NULL) +
-   coord_cartesian(xlim = c(0,4), ylim = c(0,4)) +
-  geom_point(aes(x=X, y=Y), size=2) +
-  geom_text(aes(x=X, y=Y, label = paste("(",X,",",Y,")",sep="")), hjust = 1.2, size=3)
-par(OP)
-```
-
-A polygon is composed of three or more line segments whose starting and ending coordinate pairs are the same. Sometimes you will see the words *lattice* or *area* used in lieu of 'polygon'. Polygons represent both length (i.e. the perimeter of the area) and area. They also embody the idea of an inside and an outside; in fact, the area that a polygon encloses is explicitly defined in a GIS environment. If it isn't, then you are working with a polyline feature. If this does not seem intuitive, think of three connected lines defining a triangle: they can represent three connected road segments (thus polyline features), or they can represent the grassy strip enclosed by the connected roads (in which case an 'inside' is implied thus defining a polygon).
 
 #### Raster
 

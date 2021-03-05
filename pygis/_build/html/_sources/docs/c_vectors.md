@@ -12,15 +12,6 @@ kernelspec:
 (c_vectors)=
 
 # Vector Data
-
-```{code-cell} ipython3
-import numpy as np                     # Load the library
-
-a = np.linspace(-np.pi, np.pi, 100)    # Create even grid from -π to π
-b = np.cos(a)                          # Apply cosine to each element of a
-c = np.sin(a)                          # Apply sin to each element of a
-
-```
  
 ## Feature Representation  
 
@@ -28,7 +19,10 @@ c = np.sin(a)                          # Apply sin to each element of a
 
 To work in a GIS environment, real world observations (objects or events that can be recorded in 2D or 3D space) need to be reduced to spatial entities. These spatial entities can be represented in a GIS as a **vector data model** or a **raster data model**. 
 
-![raster vs vector](_static/img/vector_vs_raster.jpg)
+```{figure} ../_static/img/vector_vs_raster.jpg
+:name: raster vs vector
+Vector and raster representations of a river feature. 
+```
 
 #### Vector
 
@@ -37,23 +31,24 @@ Vector features can be decomposed into three different geometric primitives: **p
 ##### Point
  
 ```{code-cell} ipython3
-:class: dropdown
-
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
 plt.style.use('bmh') # better for plotting geometries vs general plots.
 
+d = {'name': ['Washington\n(38.90, -77.03)', 'Baltimore\n(39.29, -76.61)','Fredrick\n(39.41,-77.40)'], 
+     'geometry': [Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)]}
 
-d = {'name': ['Washington\n(38.90, -77.03)', 'Baltimore\n(39.29, -76.61)'], 'geometry': [Point(38.907192, -77.036873), Point(39.290386, -76.612190)]}
 gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
 
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf.plot(ax=ax)
-plt.xlim([38.5, 40])
+plt.ylim([38.8, 39.6])
+plt.xlim([-77.5, -76.2])
 
 for x, y, label in zip(gdf.geometry.x, gdf.geometry.y, gdf.name):
     ax.annotate(label, xy=(x, y), xytext=(3, 3), textcoords="offset points")
+plt.show()
 ```
 
 
@@ -62,38 +57,44 @@ A point is composed of one coordinate pair representing a specific location in a
 We seem capable of interpreting such symbols as points, but there may be instances when such interpretation may be ambiguous (e.g. is a round symbol delineating the area of a round feature on the ground such as a large oil storage tank or is it representing the point location of that tank?).
 
 ##### Polyline
-<!-- 
-```{r echo=FALSE, fig.cap = "A simple polyline object defined by connected vertices.", fig.height=1.8, fig.width=1.8}
+```{code-cell} ipython3
+plt.style.use('bmh') # better for plotting geometries vs general plots.
 
-OP <- par( mar=c(0,0,0,0))
-ggplot()  + geom_line(aes(x=X, y=Y), col="red", size=1) +
-    theme(title = NULL)  +
-    coord_cartesian(xlim = c(0,4), ylim = c(0,4)) +
-   geom_point(aes(x=X, y=Y), size=2) +
-   geom_text(aes(x=X, y=Y, label = paste("(",X,",",Y,")",sep="")),hjust = 1.2, size=3)
-par(OP)
+d = {'name': ['Washington\n(38.90, -77.03)' ], 
+     'geometry': [LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
+
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf.plot(ax=ax)
+plt.show()
 
 ```
-
+ 
 
 A polyline is composed of a sequence of two or more coordinate pairs called vertices. A vertex is defined by coordinate pairs, just like a point, but what differentiates a vertex from a point is its explicitly defined relationship with neighboring vertices. A vertex is connected to at least one other vertex.
 
 Like a point, a true line can't be seen since it has no area. And like a point, a line is symbolized using shapes that have a color, width and style (e.g. solid, dashed, dotted, etc...). Roads and rivers are commonly stored as polylines in a GIS.
 
 ##### Polygon
+ 
+```{code-cell} ipython3
+d = {'name': ['Washington\n(38.90, -77.03)' ], 
+     'geometry': [Polygon([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
 
-```{r echo=FALSE, fig.cap = "A simple polygon object defined by an area enclosed by connected vertices.", fig.height=1.8, fig.width=1.8}
-OP <- par( mar=c(0,0,0,0))
-ggplot()  + 
-   geom_polygon(aes(x=X, y=Y), col="red", fill="orange") +
-   theme(title = NULL) +
-   coord_cartesian(xlim = c(0,4), ylim = c(0,4)) +
-  geom_point(aes(x=X, y=Y), size=2) +
-  geom_text(aes(x=X, y=Y, label = paste("(",X,",",Y,")",sep="")), hjust = 1.2, size=3)
-par(OP)
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf.plot(ax=ax)
+plt.show()
+
 ```
 
 A polygon is composed of three or more line segments whose starting and ending coordinate pairs are the same. Sometimes you will see the words *lattice* or *area* used in lieu of 'polygon'. Polygons represent both length (i.e. the perimeter of the area) and area. They also embody the idea of an inside and an outside; in fact, the area that a polygon encloses is explicitly defined in a GIS environment. If it isn't, then you are working with a polyline feature. If this does not seem intuitive, think of three connected lines defining a triangle: they can represent three connected road segments (thus polyline features), or they can represent the grassy strip enclosed by the connected roads (in which case an 'inside' is implied thus defining a polygon).
+
+
+
+
+<!-- 
+
 
 #### Raster
 

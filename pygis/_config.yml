@@ -43,4 +43,4 @@ latex:
   latex_documents:
     targetname: book.tex
 
-  ]
+  
