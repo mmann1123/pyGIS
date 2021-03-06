@@ -28,7 +28,7 @@ d = {'name': ['Washington\n(38.90, -77.03)', 'Baltimore\n(39.29, -76.61)','Fredr
      'geometry': [Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)]}
 
 gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
-
+print(gdf)
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf.plot(ax=ax)
 plt.ylim([38.8, 39.6])

@@ -31,8 +31,41 @@ gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf.plot(ax=ax)
 
-# plt.xlim([38.5, 40])
 
 from shapely.geometry import Polygon
+
+d = {'name': ['Washington\n(38.90, -77.03)' ], 
+     'geometry': [Polygon([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
+
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf.plot(ax=ax)
+
+import numpy as np
+
+X=np.random.randint(256, size=(10, 10))
+
+fig = plt.figure(figsize=(8,6))
+plt.imshow(X)
+plt.title("Plot 2D array")
+plt.show()
+
+
+import geopandas
+l= geopandas.GeoSeries([LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
+l
+
+from shapely.geometry import Polygon
+p= geopandas.GeoSeries([Polygon([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
+p
+
+geopandas.datasets.available
+
+cities = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+cities.head()
+
+world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+
+world.cx[:, :0]
 
 
