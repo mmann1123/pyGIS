@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vector Data &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Raster Data" href="c_rasters.html" />
+    <link rel="prev" title="Data Storage Formats" href="c_store_features.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/pygis.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a_intro.html">
+   Welcome to PyGIS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_intro_py.html">
+   Welcome - Let’s get started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_about_py.html">
+   Getting Started in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_getting_started.html">
+   Setting up Your Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_python_by_example.html">
+   An Introductory Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_learn_more.html">
+   Learn More
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Data Types
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_features.html">
+   Feature Representation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_store_features.html">
+   Data Storage Formats
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations &amp; Plots
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Skills
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="c_attributes.html">
+     Attributes: Adding &amp; Indexing
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Raster Skills
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/docs/c_vectors.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/c_vectors.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/quantecon-mini-example/master?urlpath=tree/mini_book/docs/c_vectors.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geopandas">
+   GeoPandas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-structures">
+   Data Structures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geoseries">
+     GeoSeries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#geodataframe">
+     GeoDataFrame
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="vector-data">
+<span id="c-vectors"></span><h1>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="geopandas">
+<h2>GeoPandas<a class="headerlink" href="#geopandas" title="Permalink to this headline">¶</a></h2>
+<p>The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pandas and shapely, providing geospatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.</p>
+</div>
+<div class="section" id="data-structures">
+<h2>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<p>GeoPandas implements two main data structures, a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. These are subclasses of pandas Series and DataFrame, respectively.</p>
+<div class="section" id="geoseries">
+<h3>GeoSeries<a class="headerlink" href="#geoseries" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> is essentially a vector where each entry in the vector is a set of shapes corresponding to one observation. An entry may consist of only one shape (like a single polygon) or multiple shapes that are meant to be thought of as one observation (like the many polygons that make up the State of Hawaii or a country like Indonesia).</p>
+<p>geopandas has three basic classes of geometric objects (which are actually shapely objects):</p>
+<ul class="simple">
+<li><p>Points / Multi-Points</p></li>
+<li><p>Lines / Multi-Lines</p></li>
+<li><p>Polygons / Multi-Polygons</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POINT (1.00000 1.00000)
+1    POINT (2.00000 2.00000)
+2    POINT (3.00000 3.00000)
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
+<span class="n">l</span><span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">LineString</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
+<span class="n">l</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    LINESTRING (-77.03687 38.90719, -76.61219 39.2...
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+<span class="n">p</span><span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
+<span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POLYGON ((-77.03687 38.90719, -76.61219 39.290...
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that all entries in a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> need not be of the same geometric type, although certain export operations will fail if this is not the case.</p>
+</div>
+<div class="section" id="geodataframe">
+<h3>GeoDataFrame<a class="headerlink" href="#geodataframe" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is a tabular data structure that contains a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code>.</p>
+<p>The most important property of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is that it always has one <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> column that holds a special status. This <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> is referred to as the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame’s</span></code> “geometry”. When a spatial method is applied to a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> (or a spatial attribute like area is called), this commands will always act on the “geometry” column.</p>
+<p>The “geometry” column – no matter its name – can be accessed through the geometry attribute (gdf.geometry), and the name of the geometry column can be found by typing <a class="reference external" href="http://gdf.geometry.name">gdf.geometry.name</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> may also contain other columns with geometrical (shapely) objects, but only one column can be the active geometry at a time. To change which column is the active geometry column, use the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.set_geometry()</span></code> method.</p>
+</div>
+<p>An example using the worlds <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop_est</th>
+      <th>continent</th>
+      <th>name</th>
+      <th>iso_a3</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>920938</td>
+      <td>Oceania</td>
+      <td>Fiji</td>
+      <td>FJI</td>
+      <td>8374.0</td>
+      <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>53950935</td>
+      <td>Africa</td>
+      <td>Tanzania</td>
+      <td>TZA</td>
+      <td>150600.0</td>
+      <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>603253</td>
+      <td>Africa</td>
+      <td>W. Sahara</td>
+      <td>ESH</td>
+      <td>906.5</td>
+      <td>POLYGON ((-8.66559 27.65643, -8.66512 27.58948...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>35623680</td>
+      <td>North America</td>
+      <td>Canada</td>
+      <td>CAN</td>
+      <td>1674000.0</td>
+      <td>MULTIPOLYGON (((-122.84000 49.00000, -122.9742...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>326625791</td>
+      <td>North America</td>
+      <td>United States of America</td>
+      <td>USA</td>
+      <td>18560000.0</td>
+      <td>MULTIPOLYGON (((-122.84000 49.00000, -120.0000...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/c_vectors_6_1.png" src="../_images/c_vectors_6_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="c_store_features.html" title="previous page">Data Storage Formats</a>
+    <a class='right-next' id="next-link" href="c_rasters.html" title="next page">Raster Data</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Mann & Steven Chao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+plt.style.use('bmh') # better for plotting geometries vs general plots.
+
+d = {'name': ['Washington\n(38.90, -77.03)' ], 
+     'geometry': [LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
+
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf.plot(ax=ax)
+plt.show()
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-2-8f44e6800842>[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[1;32m      3[0m d = {'name': ['Washington\n(38.90, -77.03)' ], 
+[0;32m----> 4[0;31m      'geometry': [LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+[0m[1;32m      5[0m [0mgdf[0m [0;34m=[0m [0mgpd[0m[0;34m.[0m[0mGeoDataFrame[0m[0;34m([0m[0md[0m[0;34m,[0m [0mcrs[0m[0;34m=[0m[0;34m"EPSG:4326"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m [0;34m[0m[0m
+
+[0;31mNameError[0m: name 'LineString' is not defined
+NameError: name 'LineString' is not defined
+
