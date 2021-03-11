@@ -13,7 +13,7 @@ If you'd like to develop on and build the PyGIS - Open Source Geospatial Program
 
 - Clone this repository and run
 - Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
-- Navigate to `./pyGIS/pygis/`
+- Navigate to `./pyGIS/`
 - (Recommended) Remove the existing `/pyGIS/pygis/_build/` directory
 - Run `jupyter-book build pygis`
 
