@@ -5,10 +5,10 @@
 
 #######################################################################################
 # Book settings
-title                       : PyGIS - Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
+title                       : Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
 author                      : Michael Mann & Steven Chao  # The author of the book
 copyright                   : "2021"  # Copyright year to be placed in the footer
-logo                        : logo.jpg  # A path to the book logo
+logo                        : pygis.png  # A path to the book logo
 
 sphinx:
   extra_extensions: []
@@ -31,12 +31,12 @@ notebook_interface            : "notebook"
 #######################################################################################
 # Launch button settings
 repository:
-  url                         : https://github.com/executablebooks/quantecon-mini-example
-  path_to_book                : "mini_book"
+  url                         : https://mmann1123.github.io/pyGIS/docs/intro.html
+  path_to_book                : "PyGIS"
 
-binder:
-  binderhub_url               : "https://mybinder.org"
-  text                        : "Launch binder"
+# binder:
+#   binderhub_url               : "https://mybinder.org"
+#   text                        : "Launch binder"
 
 latex:
   latex_engine                : "xelatex"

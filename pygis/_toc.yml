@@ -32,6 +32,7 @@
     - file: docs/d_crs_what_is_it
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
+    - file: docs/d_exercises
 - part: Basic Operations & Plots
   chapters:
     - file: docs/e_vector_op_intro
