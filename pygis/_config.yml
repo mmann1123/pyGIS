@@ -12,7 +12,7 @@ logo                        : pygis.png  # A path to the book logo
 
 sphinx:
   extra_extensions: []
-
+#  myst_enable_extensions = ["dollarmath", "amsmath"]
 
 #######################################################################################
 # Execution settings

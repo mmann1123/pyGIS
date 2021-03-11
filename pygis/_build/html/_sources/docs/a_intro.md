@@ -38,8 +38,9 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 - https://automating-gis-processes.github.io/site/notebooks/L2/projections.html
 - https://mgimond.github.io/Spatial/chp09-0.html
 - Turtle draw excercise in "mastering geospatil analysis with python"
-
-
+- https://autogis-site.readthedocs.io/en/latest/notebooks/L2/02-projections.html
+ -https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html
+ 
 ----------------------
 # Opening and Ploting Spatial Data
 ## Vector
