@@ -16,7 +16,45 @@ kernelspec:
 ## Vector Data File Formats
 
 ### GeoJSON
-GeoJSON is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include points, line strings, polygons, and multi-part collections of these types. One of it's primary advantages is that it is human readible and stores all the relevant data in a single text file. As result however, these files can get very large when storing complex geometries.
+GeoJSON is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include points, line strings, polygons, and multi-part collections of these types. One of it's primary advantages is that it is human readible and stores all the relevant data in a single text file. As result however, these files can get very large when storing complex geometries. 
+
+Here's a simple example of a FeatureCollection that includes a point, line and polygon `geometry` with some attributes stored as `properties`:
+
+```
+  { "type": "FeatureCollection",
+    "features": [
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+        "properties": {"prop0": "value0"}
+        },
+      { "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+            ]
+          },
+        "properties": {
+          "prop0": "value0",
+          "prop1": 0.0
+          }
+        },
+      { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+               [100.0, 1.0], [100.0, 0.0] ]
+             ]
+         },
+         "properties": {
+           "prop0": "value0",
+           "prop1": {"this": "that"}
+           }
+         }
+       ]
+     }
+```
 
 ### GeoPackage
 

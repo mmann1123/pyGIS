@@ -140,14 +140,53 @@
    Data Storage Formats
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="c_vectors.html">
    Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations &amp; Plots
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="c_attributes.html">
-     Manipulating Attributes
+     Attributes: Adding &amp; Indexing
     </a>
    </li>
   </ul>
@@ -155,8 +194,8 @@
   </i>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Raster Data
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
  </li>
 </ul>
@@ -255,13 +294,18 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shapefile">
-     Shapefile
+    <a class="reference internal nav-link" href="#geojson">
+     GeoJSON
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#geopackage">
      GeoPackage
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shapefile">
+     Shapefile
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -309,6 +353,50 @@
 <span id="c-store-features"></span><h1>Data Storage Formats<a class="headerlink" href="#data-storage-formats" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vector-data-file-formats">
 <h2>Vector Data File Formats<a class="headerlink" href="#vector-data-file-formats" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="geojson">
+<h3>GeoJSON<a class="headerlink" href="#geojson" title="Permalink to this headline">¶</a></h3>
+<p>GeoJSON is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include points, line strings, polygons, and multi-part collections of these types. One of it’s primary advantages is that it is human readible and stores all the relevant data in a single text file. As result however, these files can get very large when storing complex geometries.</p>
+<p>Here’s a simple example of a FeatureCollection that includes a point, line and polygon <code class="docutils literal notranslate"><span class="pre">geometry</span></code> with some attributes stored as <code class="docutils literal notranslate"><span class="pre">properties</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">102.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]},</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;prop0&quot;</span><span class="p">:</span> <span class="s2">&quot;value0&quot;</span><span class="p">}</span>
+        <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LineString&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mf">102.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">103.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">104.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">105.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;prop0&quot;</span><span class="p">:</span> <span class="s2">&quot;value0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;prop1&quot;</span><span class="p">:</span> <span class="mf">0.0</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+             <span class="p">[</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">101.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">101.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span> <span class="p">]</span>
+             <span class="p">]</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s2">&quot;prop0&quot;</span><span class="p">:</span> <span class="s2">&quot;value0&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;prop1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;this&quot;</span><span class="p">:</span> <span class="s2">&quot;that&quot;</span><span class="p">}</span>
+           <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">]</span>
+     <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="geopackage">
+<h3>GeoPackage<a class="headerlink" href="#geopackage" title="Permalink to this headline">¶</a></h3>
+<p>This is a relatively new data format that follows <a class="reference external" href="https://en.wikipedia.org/wiki/Open_format">open format standards</a> (i.e. it is non-proprietary). It’s built on top of SQLite (a self-contained relational database). Its one big advantage over many other vector formats is its compactness–coordinate value, metadata, attribute table, projection information, etc…, are all stored in a <em>single</em> file which facilitates portability. Its filename usually ends in <code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>. Applications such as QGIS (2.12 and up), R and ArcGIS will recognize this format (ArcGIS version 10.2.2 and above will read the file from ArcCatalog but requires a script to create a GeoPackage).</p>
+</div>
 <div class="section" id="shapefile">
 <h3>Shapefile<a class="headerlink" href="#shapefile" title="Permalink to this headline">¶</a></h3>
 <p>A <strong>shapefile</strong> is a file-based data format native to ArcView 3.x software (a much older version of ArcMap). Conceptually, a shapefile is a feature class–it stores a collection of features that have the same geometry type (point, line, or polygon), the same attributes, and a common spatial extent.</p>
@@ -347,10 +435,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="geopackage">
-<h3>GeoPackage<a class="headerlink" href="#geopackage" title="Permalink to this headline">¶</a></h3>
-<p>This is a relatively new data format that follows <a class="reference external" href="https://en.wikipedia.org/wiki/Open_format">open format standards</a> (i.e. it is non-proprietary). It’s built on top of SQLite (a self-contained relational database). Its one big advantage over many other vector formats is its compactness–coordinate value, metadata, attribute table, projection information, etc…, are all stored in a <em>single</em> file which facilitates portability. Its filename usually ends in <code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>. Applications such as QGIS (2.12 and up), R and ArcGIS will recognize this format (ArcGIS version 10.2.2 and above will read the file from ArcCatalog but requires a script to create a GeoPackage).</p>
 </div>
 <div class="section" id="file-geodatabase">
 <h3>File Geodatabase<a class="headerlink" href="#file-geodatabase" title="Permalink to this headline">¶</a></h3>

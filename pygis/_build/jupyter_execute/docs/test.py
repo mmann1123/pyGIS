@@ -66,6 +66,16 @@ cities.head()
 
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 
-world.cx[:, :0]
+world.cx 
+
+import pandas
+name = 'fudge'
+name[0:3]
+
+world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
+northern_world = world.iloc[ 0:4 ]    
+northern_world.plot(figsize=(10, 3))  
+
+
 
 

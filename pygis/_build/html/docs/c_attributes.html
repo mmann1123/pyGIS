@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manipulating Attributes &#8212; PyGIS - Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Attributes: Adding &amp; Indexing &#8212; PyGIS - Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Raster Data" href="c_rasters.html" />
-    <link rel="prev" title="Vector Data" href="c_vectors.html" />
+    <link rel="next" title="Vector Operations &amp; Visualization" href="e_raster_op_intro.html" />
+    <link rel="prev" title="Vector Operations &amp; Visualization" href="e_vector_op_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -129,7 +129,7 @@
   Data Types
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="c_features.html">
    Feature Representation
@@ -140,14 +140,53 @@
    Data Storage Formats
   </a>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="c_vectors.html">
    Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations &amp; Plots
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Manipulating Attributes
+     Attributes: Adding &amp; Indexing
     </a>
    </li>
   </ul>
@@ -155,8 +194,8 @@
   </i>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Raster Data
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
  </li>
 </ul>
@@ -260,8 +299,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#coordinate-inding">
-     Coordinate Inding
+    <a class="reference internal nav-link" href="#selection-by-index-position">
+     Selection by Index Position¶
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#coordinate-indexing">
+     Coordinate Indexing
     </a>
    </li>
   </ul>
@@ -278,8 +322,8 @@
         
               <div>
                 
-  <div class="section" id="manipulating-attributes">
-<span id="c-attributes"></span><h1>Manipulating Attributes<a class="headerlink" href="#manipulating-attributes" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="attributes-adding-indexing">
+<span id="c-attributes"></span><h1>Attributes: Adding &amp; Indexing<a class="headerlink" href="#attributes-adding-indexing" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-default" id="vector-properties">
 <img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">¶</a></p>
 </div>
@@ -309,7 +353,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;m_pop_est&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
-<span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -362,76 +406,140 @@
       <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
       <td>53.950935</td>
     </tr>
-    <tr>
-      <th>2</th>
-      <td>603253</td>
-      <td>Africa</td>
-      <td>W. Sahara</td>
-      <td>ESH</td>
-      <td>906.5</td>
-      <td>POLYGON ((-8.66559 27.65643, -8.66512 27.58948...</td>
-      <td>0.603253</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>35623680</td>
-      <td>North America</td>
-      <td>Canada</td>
-      <td>CAN</td>
-      <td>1674000.0</td>
-      <td>MULTIPOLYGON (((-122.84000 49.00000, -122.9742...</td>
-      <td>35.623680</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>326625791</td>
-      <td>North America</td>
-      <td>United States of America</td>
-      <td>USA</td>
-      <td>18560000.0</td>
-      <td>MULTIPOLYGON (((-122.84000 49.00000, -120.0000...</td>
-      <td>326.625791</td>
-    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="indexing-and-selecting-data">
 <h2>Indexing and Selecting Data<a class="headerlink" href="#indexing-and-selecting-data" title="Permalink to this headline">¶</a></h2>
-<p>GeoPandas inherits the standard pandas methods for indexing/selecting data. This includes label based indexing with .loc and integer position based indexing with .iloc, which apply to both GeoSeries and GeoDataFrame objects. For more information on indexing/selecting, see the pandas documentation.</p>
+<p>GeoPandas inherits the standard pandas methods for indexing/selecting data. This includes label based indexing with .loc and integer position based indexing with .iloc, which apply to both GeoSeries and GeoDataFrame objects. For more information on indexing/selecting, see the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">pandas documentation</a>.</p>
+<div class="section" id="selection-by-index-position">
+<h3>Selection by Index Position¶<a class="headerlink" href="#selection-by-index-position" title="Permalink to this headline">¶</a></h3>
+<p>Pandas provides a suite of methods in order to get purely integer based indexing. The semantics follow closely Python and NumPy slicing. These are 0-based indexing. When slicing, the start bound is included, while the upper bound is excluded.  For instance <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">'fudge'</span></code> with <code class="docutils literal notranslate"><span class="pre">name[0:3]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'fud'</span></code>, where f is at 0 and g is at the 3 position with the upper bound excluded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
+
+<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span> <span class="p">]</span>    
+<span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c_attributes_5_0.png" src="../_images/c_attributes_5_0.png" />
+</div>
+</div>
+<p><strong>Different choices for indexing</strong></p>
+<p>Object selection has had a number of user-requested additions in order to
+support more explicit location based indexing.</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<ul>
+<li><p class="card-text"><code class="docutils literal notranslate"><span class="pre">.loc</span></code> is primarily label based, but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when the items are not found. Allowed inputs are:</p>
+<ul class="simple">
+<li><p class="card-text">A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a
+<em>label</em> of the index. This use is <strong>not</strong> an integer position along the
+index.).</p></li>
+<li><p class="card-text">A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>.</p></li>
+<li><p class="card-text">A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual Python
+slices, <strong>both</strong> the start and the stop are included, when present in the
+index! See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-slicing-with-labels">Slicing with labels</a>
+and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-endpoints-are-inclusive">Endpoints are inclusive</a></p></li>
+<li><p class="card-text">A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p class="card-text">A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
+that returns valid output for indexing (one of the above).</p></li>
+</ul>
+<p class="card-text">See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-label">Selection by Label</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<ul>
+<li><p class="card-text"><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to
+<code class="docutils literal notranslate"><span class="pre">length-1</span></code> of the axis), but may also be used with a boolean
+array.  <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a requested
+indexer is out-of-bounds, except <em>slice</em> indexers which allow
+out-of-bounds indexing.  (this conforms with Python/NumPy <em>slice</em>
+semantics).  Allowed inputs are:</p>
+<ul class="simple">
+<li><p class="card-text">An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p class="card-text">A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</p></li>
+<li><p class="card-text">A slice object with integers <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</p></li>
+<li><p class="card-text">A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p class="card-text">A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
+that returns valid output for indexing (one of the above).</p></li>
+</ul>
+<p class="card-text">See more at : <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-integer">Selection by Position</a> and
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced">Advanced Indexing</a>.</p>
+</li>
+<li><p class="card-text"><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer. See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-callable">Selection By Callable</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Getting values from an object with multi-axes selection uses the following
+notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as
+well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of
+the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to
+<code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Object Type</p></th>
+<th class="text-align:right head"><p>Indexers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Series</p></td>
+<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>DataFrame</p></td>
+<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="coordinate-indexing">
+<h3>Coordinate Indexing<a class="headerlink" href="#coordinate-indexing" title="Permalink to this headline">¶</a></h3>
 <p>In addition to the standard pandas methods, GeoPandas also provides coordinate based indexing with the cx indexer, which slices using a bounding box. Geometries in the GeoSeries or GeoDataFrame that intersect the bounding box will be returned.</p>
-<div class="section" id="coordinate-inding">
-<h3>Coordinate Inding<a class="headerlink" href="#coordinate-inding" title="Permalink to this headline">¶</a></h3>
-<p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>.</p>
+<p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>. <code class="docutils literal notranslate"><span class="pre">.cx</span></code> allows you to quickly access the table’s <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, where indexing reflects <code class="docutils literal notranslate"><span class="pre">[x,y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[lon,lat]</span></code>. Here we will query points above and below 0 degrees latitude:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>
-<span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
+<span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
-</div>
-<img alt="../_images/c_attributes_5_1.png" src="../_images/c_attributes_5_1.png" />
+<img alt="../_images/c_attributes_7_0.png" src="../_images/c_attributes_7_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>
-<span class="n">southern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
+<span class="n">southern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
-</div>
-<img alt="../_images/c_attributes_6_1.png" src="../_images/c_attributes_6_1.png" />
+<img alt="../_images/c_attributes_8_0.png" src="../_images/c_attributes_8_0.png" />
 </div>
 </div>
 </div>
@@ -463,8 +571,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="c_vectors.html" title="previous page">Vector Data</a>
-    <a class='right-next' id="next-link" href="c_rasters.html" title="next page">Raster Data</a>
+    <a class='left-prev' id="prev-link" href="e_vector_op_intro.html" title="previous page">Vector Operations &amp; Visualization</a>
+    <a class='right-next' id="next-link" href="e_raster_op_intro.html" title="next page">Vector Operations &amp; Visualization</a>
 
         </div>
         

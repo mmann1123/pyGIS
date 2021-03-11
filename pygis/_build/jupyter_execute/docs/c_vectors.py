@@ -52,11 +52,3 @@ world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 world.head()
 
 world.plot()
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-
-c_attributes
-```

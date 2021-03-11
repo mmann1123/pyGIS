@@ -25,8 +25,19 @@
     - file: docs/c_features
     - file: docs/c_store_features
     - file: docs/c_vectors
+
+    - file: docs/c_rasters
+- part: Nature of Coordinate Systems
+  chapters:
+    - file: docs/d_crs_what_is_it
+    - file: docs/d_vector_crs_intro
+    - file: docs/d_raster_crs_intro
+- part: Basic Operations & Plots
+  chapters:
+    - file: docs/e_vector_op_intro
       sections:
       - file: docs/c_attributes
-    - file: docs/c_rasters
+    - file: docs/e_raster_op_intro
+
 
  

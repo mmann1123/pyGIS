@@ -33,7 +33,6 @@ Vector features can be decomposed into three different geometric primitives: **p
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
-plt.style.use('bmh') # better for plotting geometries vs general plots.
 
 d = {'name': ['Washington\n(38.90, -77.03)', 'Baltimore\n(39.29, -76.61)','Fredrick\n(39.41,-77.40)'], 
      'geometry': [Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)]}
@@ -46,6 +45,8 @@ A point is composed of one coordinate pair representing a specific location in a
 
 ```{code-cell} ipython3
 :class: dropdown
+plt.style.use('bmh') # better for plotting geometries vs general plots.
+
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf.plot(ax=ax)
 plt.ylim([38.8, 39.6])
@@ -59,9 +60,9 @@ plt.show()
 We seem capable of interpreting such symbols as points, but there may be instances when such interpretation may be ambiguous (e.g. is a round symbol delineating the area of a round feature on the ground such as a large oil storage tank or is it representing the point location of that tank?).
 
 #### Polyline
+
 ```{code-cell} ipython3
 from shapely.geometry import LineString
-plt.style.use('bmh') # better for plotting geometries vs general plots.
 
 d = {'name': ['Washington\n(38.90, -77.03)' ], 
      'geometry': [LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}

@@ -138,14 +138,53 @@
    Data Storage Formats
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="c_vectors.html">
    Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations &amp; Plots
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="c_attributes.html">
-     Manipulating Attributes
+     Attributes: Adding &amp; Indexing
     </a>
    </li>
   </ul>
@@ -153,8 +192,8 @@
   </i>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Raster Data
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Vector Operations &amp; Visualization
   </a>
  </li>
 </ul>
@@ -473,410 +512,44 @@ dtype: geometry
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
 
-<span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">world</span><span class="o">.</span><span class="n">cx</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pop_est</th>
-      <th>continent</th>
-      <th>name</th>
-      <th>iso_a3</th>
-      <th>gdp_md_est</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>920938</td>
-      <td>Oceania</td>
-      <td>Fiji</td>
-      <td>FJI</td>
-      <td>8374.0</td>
-      <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>53950935</td>
-      <td>Africa</td>
-      <td>Tanzania</td>
-      <td>TZA</td>
-      <td>150600.0</td>
-      <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>6909701</td>
-      <td>Oceania</td>
-      <td>Papua New Guinea</td>
-      <td>PNG</td>
-      <td>28020.0</td>
-      <td>MULTIPOLYGON (((141.00021 -2.60015, 142.73525 ...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>260580739</td>
-      <td>Asia</td>
-      <td>Indonesia</td>
-      <td>IDN</td>
-      <td>3028000.0</td>
-      <td>MULTIPOLYGON (((141.00021 -2.60015, 141.01706 ...</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>44293293</td>
-      <td>South America</td>
-      <td>Argentina</td>
-      <td>ARG</td>
-      <td>879400.0</td>
-      <td>MULTIPOLYGON (((-68.63401 -52.63637, -68.25000...</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>17789267</td>
-      <td>South America</td>
-      <td>Chile</td>
-      <td>CHL</td>
-      <td>436100.0</td>
-      <td>MULTIPOLYGON (((-68.63401 -52.63637, -68.63335...</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>83301151</td>
-      <td>Africa</td>
-      <td>Dem. Rep. Congo</td>
-      <td>COD</td>
-      <td>66010.0</td>
-      <td>POLYGON ((29.34000 -4.49998, 29.51999 -5.41998...</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>7531386</td>
-      <td>Africa</td>
-      <td>Somalia</td>
-      <td>SOM</td>
-      <td>4719.0</td>
-      <td>POLYGON ((41.58513 -1.68325, 40.99300 -0.85829...</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>47615739</td>
-      <td>Africa</td>
-      <td>Kenya</td>
-      <td>KEN</td>
-      <td>152700.0</td>
-      <td>POLYGON ((39.20222 -4.67677, 37.76690 -3.67712...</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>2931</td>
-      <td>South America</td>
-      <td>Falkland Is.</td>
-      <td>FLK</td>
-      <td>281.8</td>
-      <td>POLYGON ((-61.20000 -51.85000, -60.00000 -51.2...</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>140</td>
-      <td>Seven seas (open ocean)</td>
-      <td>Fr. S. Antarctic Lands</td>
-      <td>ATF</td>
-      <td>16.0</td>
-      <td>POLYGON ((68.93500 -48.62500, 69.58000 -48.940...</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>1291358</td>
-      <td>Asia</td>
-      <td>Timor-Leste</td>
-      <td>TLS</td>
-      <td>4975.0</td>
-      <td>POLYGON ((124.96868 -8.89279, 125.08625 -8.656...</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>54841552</td>
-      <td>Africa</td>
-      <td>South Africa</td>
-      <td>ZAF</td>
-      <td>739100.0</td>
-      <td>POLYGON ((16.34498 -28.57671, 16.82402 -28.082...</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>1958042</td>
-      <td>Africa</td>
-      <td>Lesotho</td>
-      <td>LSO</td>
-      <td>6019.0</td>
-      <td>POLYGON ((28.97826 -28.95560, 29.32517 -29.257...</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>3360148</td>
-      <td>South America</td>
-      <td>Uruguay</td>
-      <td>URY</td>
-      <td>73250.0</td>
-      <td>POLYGON ((-57.62513 -30.21629, -56.97603 -30.1...</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>207353391</td>
-      <td>South America</td>
-      <td>Brazil</td>
-      <td>BRA</td>
-      <td>3081000.0</td>
-      <td>POLYGON ((-53.37366 -33.76838, -53.65054 -33.2...</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>11138234</td>
-      <td>South America</td>
-      <td>Bolivia</td>
-      <td>BOL</td>
-      <td>78350.0</td>
-      <td>POLYGON ((-69.52968 -10.95173, -68.78616 -11.0...</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>31036656</td>
-      <td>South America</td>
-      <td>Peru</td>
-      <td>PER</td>
-      <td>410400.0</td>
-      <td>POLYGON ((-69.89364 -4.29819, -70.79477 -4.251...</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>47698524</td>
-      <td>South America</td>
-      <td>Colombia</td>
-      <td>COL</td>
-      <td>688000.0</td>
-      <td>POLYGON ((-66.87633 1.25336, -67.06505 1.13011...</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>16290913</td>
-      <td>South America</td>
-      <td>Ecuador</td>
-      <td>ECU</td>
-      <td>182400.0</td>
-      <td>POLYGON ((-75.37322 -0.15203, -75.23372 -0.911...</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>13805084</td>
-      <td>Africa</td>
-      <td>Zimbabwe</td>
-      <td>ZWE</td>
-      <td>28330.0</td>
-      <td>POLYGON ((31.19141 -22.25151, 30.65987 -22.151...</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>2214858</td>
-      <td>Africa</td>
-      <td>Botswana</td>
-      <td>BWA</td>
-      <td>35900.0</td>
-      <td>POLYGON ((29.43219 -22.09131, 28.01724 -22.827...</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>2484780</td>
-      <td>Africa</td>
-      <td>Namibia</td>
-      <td>NAM</td>
-      <td>25990.0</td>
-      <td>POLYGON ((19.89577 -24.76779, 19.89473 -28.461...</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>4954674</td>
-      <td>Africa</td>
-      <td>Congo</td>
-      <td>COG</td>
-      <td>30270.0</td>
-      <td>POLYGON ((18.45307 3.50439, 18.39379 2.90044, ...</td>
-    </tr>
-    <tr>
-      <th>68</th>
-      <td>1772255</td>
-      <td>Africa</td>
-      <td>Gabon</td>
-      <td>GAB</td>
-      <td>35980.0</td>
-      <td>POLYGON ((11.27645 2.26105, 11.75167 2.32676, ...</td>
-    </tr>
-    <tr>
-      <th>70</th>
-      <td>15972000</td>
-      <td>Africa</td>
-      <td>Zambia</td>
-      <td>ZMB</td>
-      <td>65170.0</td>
-      <td>POLYGON ((30.74001 -8.34001, 31.15775 -8.59458...</td>
-    </tr>
-    <tr>
-      <th>71</th>
-      <td>19196246</td>
-      <td>Africa</td>
-      <td>Malawi</td>
-      <td>MWI</td>
-      <td>21200.0</td>
-      <td>POLYGON ((32.75938 -9.23060, 33.73972 -9.41715...</td>
-    </tr>
-    <tr>
-      <th>72</th>
-      <td>26573706</td>
-      <td>Africa</td>
-      <td>Mozambique</td>
-      <td>MOZ</td>
-      <td>35010.0</td>
-      <td>POLYGON ((34.55999 -11.52002, 35.31240 -11.439...</td>
-    </tr>
-    <tr>
-      <th>73</th>
-      <td>1467152</td>
-      <td>Africa</td>
-      <td>eSwatini</td>
-      <td>SWZ</td>
-      <td>11060.0</td>
-      <td>POLYGON ((32.07167 -26.73382, 31.86806 -27.177...</td>
-    </tr>
-    <tr>
-      <th>74</th>
-      <td>29310273</td>
-      <td>Africa</td>
-      <td>Angola</td>
-      <td>AGO</td>
-      <td>189000.0</td>
-      <td>MULTIPOLYGON (((12.99552 -4.78110, 12.63161 -4...</td>
-    </tr>
-    <tr>
-      <th>75</th>
-      <td>11466756</td>
-      <td>Africa</td>
-      <td>Burundi</td>
-      <td>BDI</td>
-      <td>7892.0</td>
-      <td>POLYGON ((30.46967 -2.41385, 30.52766 -2.80762...</td>
-    </tr>
-    <tr>
-      <th>78</th>
-      <td>25054161</td>
-      <td>Africa</td>
-      <td>Madagascar</td>
-      <td>MDG</td>
-      <td>36860.0</td>
-      <td>POLYGON ((49.54352 -12.46983, 49.80898 -12.895...</td>
-    </tr>
-    <tr>
-      <th>89</th>
-      <td>282814</td>
-      <td>Oceania</td>
-      <td>Vanuatu</td>
-      <td>VUT</td>
-      <td>723.0</td>
-      <td>MULTIPOLYGON (((167.21680 -15.89185, 167.84488...</td>
-    </tr>
-    <tr>
-      <th>134</th>
-      <td>279070</td>
-      <td>Oceania</td>
-      <td>New Caledonia</td>
-      <td>NCL</td>
-      <td>10770.0</td>
-      <td>POLYGON ((165.77999 -21.08000, 166.59999 -21.7...</td>
-    </tr>
-    <tr>
-      <th>135</th>
-      <td>647581</td>
-      <td>Oceania</td>
-      <td>Solomon Is.</td>
-      <td>SLB</td>
-      <td>1198.0</td>
-      <td>MULTIPOLYGON (((162.11902 -10.48272, 162.39865...</td>
-    </tr>
-    <tr>
-      <th>136</th>
-      <td>4510327</td>
-      <td>Oceania</td>
-      <td>New Zealand</td>
-      <td>NZL</td>
-      <td>174800.0</td>
-      <td>MULTIPOLYGON (((176.88582 -40.06598, 176.50802...</td>
-    </tr>
-    <tr>
-      <th>137</th>
-      <td>23232413</td>
-      <td>Oceania</td>
-      <td>Australia</td>
-      <td>AUS</td>
-      <td>1189000.0</td>
-      <td>MULTIPOLYGON (((147.68926 -40.80826, 148.28907...</td>
-    </tr>
-    <tr>
-      <th>156</th>
-      <td>6943739</td>
-      <td>South America</td>
-      <td>Paraguay</td>
-      <td>PRY</td>
-      <td>64670.0</td>
-      <td>POLYGON ((-58.16639 -20.17670, -57.87067 -20.7...</td>
-    </tr>
-    <tr>
-      <th>159</th>
-      <td>4050</td>
-      <td>Antarctica</td>
-      <td>Antarctica</td>
-      <td>ATA</td>
-      <td>810.0</td>
-      <td>MULTIPOLYGON (((-48.66062 -78.04702, -48.15140...</td>
-    </tr>
-    <tr>
-      <th>168</th>
-      <td>39570125</td>
-      <td>Africa</td>
-      <td>Uganda</td>
-      <td>UGA</td>
-      <td>84930.0</td>
-      <td>POLYGON ((33.90371 -0.95000, 31.86617 -1.02736...</td>
-    </tr>
-    <tr>
-      <th>169</th>
-      <td>11901484</td>
-      <td>Africa</td>
-      <td>Rwanda</td>
-      <td>RWA</td>
-      <td>21970.0</td>
-      <td>POLYGON ((30.41910 -1.13466, 30.81613 -1.69891...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;geopandas.base._CoordinateIndexer at 0x7fbaeb6b9950&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fudge&#39;</span>
+<span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;fud&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span> <span class="p">]</span>    
+<span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/test_10_1.png" src="../_images/test_10_1.png" />
+</div>
 </div>
 
     <script type="text/x-thebe-config">
