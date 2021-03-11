@@ -6,7 +6,7 @@
 #######################################################################################
 # Book settings
 title                       : PyGIS - Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
-author                      : Michael Mann & Others  # The author of the book
+author                      : Michael Mann & Steven Chao  # The author of the book
 copyright                   : "2021"  # Copyright year to be placed in the footer
 logo                        : logo.jpg  # A path to the book logo
 
