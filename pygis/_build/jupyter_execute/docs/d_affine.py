@@ -2,7 +2,7 @@
 
 
 
-## Affine Transforms
+# Affine Transforms
 <!-- https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html -->
 
 <!-- https://people.cs.clemson.edu/~dhouse/courses/401/notes/affines-matrices.pdf -->
@@ -229,6 +229,34 @@ $$
 
 Congrats you reached (0,0), just like you always dreamed!  
 
+
+```{figure} ../_static/d_crs/translate_ex.png
+:name: Moving a point
+Moving a point
+```
+
 :::{note} 
 Remember the bottom row can be ignored because $ \begin{bmatrix} x  \\  y \\ 1  \end{bmatrix}$
 :::
+
+
+#### Rotate 
+All the transformations follow the same procedure, let's try rotation just to make sure that we have it figured out. Let's rotate our point at (-2,-2) by 180 degrees around the origin:
+
+$$
+   \begin{eqnarray}
+     \begin{bmatrix} -2 \\ -2 \\  1 \end{bmatrix} 
+     \begin{bmatrix} \cos{180} & -\sin{180} & 0 \\  \sin{180} & \cos{180} & 0 \\ 0 & 0 & 1 \end{bmatrix}  =
+   \end{eqnarray}
+$$
+$$
+   \begin{eqnarray}
+     \begin{bmatrix} -2 \times \cos{180} + -2 \times -\sin{180} + 1 \times 0 \\ -2 \times \sin{180} + -2 \times \cos{180} + 1 \times 0 \\ 1 \times 0 + 1 \times 0 + 1 \times 1 \end{bmatrix}  =  \begin{bmatrix} 2 \\ 2 \\  1 \end{bmatrix} 
+   \end{eqnarray}
+$$
+
+
+```{figure} ../_static/d_crs/rotate_ex.png
+:name: Rotate a point
+Rotate a point
+```
