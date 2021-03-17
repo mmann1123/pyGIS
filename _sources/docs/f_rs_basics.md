@@ -9,8 +9,10 @@ kernelspec:
   name: python3
 ---
 
-(e_raster_op_intro)=
+(f_rs_basics)=
 
-# Raster Skills
+# Remote Sensing Basics
  
-In this section we will learn how to:
+Learning Objectives:
+  -
+  -

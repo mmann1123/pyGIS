@@ -9,8 +9,10 @@ kernelspec:
   name: python3
 ---
 
-(e_raster_op_intro)=
+(f_rs_intro)=
 
-# Raster Skills
+# Remote Sensing w. Geowombat
  
-In this section we will learn how to:
+Learning Objectives:
+  -
+  -

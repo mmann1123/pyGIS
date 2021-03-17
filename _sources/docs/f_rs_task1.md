@@ -9,8 +9,10 @@ kernelspec:
   name: python3
 ---
 
-(e_raster_op_intro)=
+(f_rs_task1)=
 
-# Raster Skills
+# Something
  
-In this section we will learn how to:
+Learning Objectives:
+  -
+  -
