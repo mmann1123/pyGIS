@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setting up Your Python Environment &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/pygis.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/a_intro.html">
+   Welcome to PyGIS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_intro_py.html">
+   Welcome - Let’s get started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_about_py.html">
+   Getting Started in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_getting_started.html">
+   Setting up Your Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_python_by_example.html">
+   An Introductory Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_learn_more.html">
+   Learn More
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Data Types
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_features.html">
+   Feature Representation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_store_features.html">
+   Data Storage Formats
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_vectors.html">
+   Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_affine.html">
+   Affine Transforms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/d_exercises.html">
+   CRS Exercises
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/d_understand_crs_codes.html">
+     Understanding PROJ.4 and EPSG Codes
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/e_vector_op_intro.html">
+   Vector Skills
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/c_attributes.html">
+     Attributes &amp; Indexing
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/e_raster_op_intro.html">
+   Raster Skills
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Remote Sensing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/f_rs_intro.html">
+   Remote Sensing w. Geowombat
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/f_rs_basics.html">
+     Remote Sensing Basics
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/f_rs_common_task.html">
+   Common Tasks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/f_rs_task1.html">
+     Something
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/_build_OLD/jupyter_execute/docs/getting_started.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anaconda">
+   Anaconda
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installing-anaconda">
+     Installing Anaconda
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-anaconda">
+     Updating Anaconda
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jupyter-notebooks">
+   Jupyter Notebooks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#starting-the-jupyter-notebook">
+     Starting the Jupyter Notebook
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notebook-basics">
+     Notebook Basics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#running-cells">
+       Running Cells
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#modal-editing">
+       Modal Editing
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#inserting-unicode-e-g-greek-letters">
+       Inserting Unicode (e.g., Greek Letters)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-test-program">
+       A Test Program
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-with-the-notebook">
+     Working with the Notebook
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tab-completion">
+       Tab Completion
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#on-line-help">
+       On-Line Help
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-content">
+       Other Content
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sharing-notebooks">
+     Sharing Notebooks
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="setting-up-your-python-environment">
+<span id="getting-started"></span><h1>Setting up Your Python Environment<a class="headerlink" href="#setting-up-your-python-environment" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In this lecture, you will learn how to</p>
+<ol class="simple">
+<li><p>get a Python environment up and running</p></li>
+<li><p>execute simple Python commands</p></li>
+<li><p>run a sample program</p></li>
+<li><p>install the code libraries that underpin these lectures</p></li>
+</ol>
+</div>
+<div class="section" id="anaconda">
+<h2>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://www.python.org/downloads/">core Python package</a> is easy to
+install but <em>not</em> what you should choose for these lectures.</p>
+<p>These lectures require the entire scientific programming ecosystem,
+which</p>
+<ul class="simple">
+<li><p>the core installation doesn’t provide</p></li>
+<li><p>is painful to install one piece at a time.</p></li>
+</ul>
+<p>Hence the best approach for our purposes is to install a Python
+distribution that contains</p>
+<ol class="simple">
+<li><p>the core Python language <strong>and</strong></p></li>
+<li><p>compatible versions of the most popular scientific libraries.</p></li>
+</ol>
+<p>The best such distribution is
+<a class="reference external" href="https://www.anaconda.com/what-is-anaconda/">Anaconda</a>.</p>
+<p>Anaconda is</p>
+<ul class="simple">
+<li><p>very popular</p></li>
+<li><p>cross-platform</p></li>
+<li><p>comprehensive</p></li>
+<li><p>completely unrelated to the Nicki Minaj song of the same name</p></li>
+</ul>
+<p>Anaconda also comes with a great package management system to organize
+your code libraries.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of what follows assumes that you adopt this recommendation!</p>
+</div>
+<div class="section" id="installing-anaconda">
+<span id="install-anaconda"></span><h3>Installing Anaconda<a class="headerlink" href="#installing-anaconda" title="Permalink to this headline">¶</a></h3>
+<p>To install Anaconda, <a class="reference external" href="https://www.anaconda.com/download/">download</a> the
+binary and follow the instructions.</p>
+<p>Important points:</p>
+<ul class="simple">
+<li><p>Install the latest version!</p></li>
+<li><p>If you are asked during the installation process whether you’d like
+to make Anaconda your default Python installation, say yes.</p></li>
+</ul>
+</div>
+<div class="section" id="updating-anaconda">
+<h3>Updating Anaconda<a class="headerlink" href="#updating-anaconda" title="Permalink to this headline">¶</a></h3>
+<p>Anaconda supplies a tool called <code class="docutils literal notranslate"><span class="pre">conda</span></code> to manage and
+upgrade your Anaconda packages.</p>
+<p>One <code class="docutils literal notranslate"><span class="pre">conda</span></code> command you should execute regularly is the one
+that updates the whole Anaconda distribution.</p>
+<p>As a practice run, please execute the following</p>
+<ol class="simple">
+<li><p>Open up a terminal</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">anaconda</span></code></p></li>
+</ol>
+<p>For more information on <code class="docutils literal notranslate"><span class="pre">conda</span></code>, type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">help</span></code> in a terminal.</p>
+</div>
+</div>
+<div class="section" id="jupyter-notebooks">
+<span id="ipython-notebook"></span><h2>Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://jupyter.org/">Jupyter</a> notebooks are one of the many possible
+ways to interact with Python and the scientific libraries.</p>
+<p>They use a <em>browser-based</em> interface to Python with</p>
+<ul class="simple">
+<li><p>The ability to write and execute Python commands.</p></li>
+<li><p>Formatted output in the browser, including tables, figures,
+animation, etc.</p></li>
+<li><p>The option to mix in formatted text and mathematical expressions.</p></li>
+</ul>
+<p>Because of these features, Jupyter is now a major player in the
+scientific computing ecosystem.</p>
+<p><a class="reference internal" href="../../../docs/b_getting_started.html#jp-demo"><span class="std std-numref">Figure 1</span></a> shows the execution of some code (borrowed from
+<a class="reference external" href="http://matplotlib.org/examples/pylab_examples/hexbin_demo.html">here</a>)
+in a Jupyter notebook</p>
+<div class="figure align-default" id="jp-demo">
+<a class="reference internal image-reference" href="../../../_images/jp_demo.png"><img alt="../../../_images/jp_demo.png" src="../../../_images/jp_demo.png" style="width: 403.0px; height: 476.0px;" /></a>
+<p class="caption"><span class="caption-text">A Jupyter notebook viewed in the browser</span><a class="headerlink" href="#jp-demo" title="Permalink to this image">¶</a></p>
+</div>
+<p>While Jupyter isn’t the only way to code in Python, it’s great for
+when you wish to</p>
+<ul class="simple">
+<li><p>get started</p></li>
+<li><p>test new ideas or interact with small pieces of code</p></li>
+<li><p>share scientific ideas with students or colleagues</p></li>
+</ul>
+<div class="section" id="starting-the-jupyter-notebook">
+<h3>Starting the Jupyter Notebook<a class="headerlink" href="#starting-the-jupyter-notebook" title="Permalink to this headline">¶</a></h3>
+<p>Once you have installed Anaconda, you can start the Jupyter notebook.</p>
+<p>Either</p>
+<ul class="simple">
+<li><p>search for Jupyter in your applications menu, or</p></li>
+<li><p>open up a terminal and type <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p>
+<ul>
+<li><p>Windows users should substitute “Anaconda command prompt” for “terminal” in the previous line.</p></li>
+</ul>
+</li>
+</ul>
+<p>If you use the second option, you will see something like this</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/starting_nb.png"><img alt="../../../_images/starting_nb.png" src="../../../_images/starting_nb.png" style="width: 369.5px; height: 217.5px;" /></a>
+</div>
+<p>The output tells us the notebook is running at <code class="docutils literal notranslate"><span class="pre">http://localhost:8888/</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">localhost</span></code> is the name of the local machine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">8888</span></code> refers to <a class="reference external" href="https://en.wikipedia.org/wiki/Port_%28computer_networking%29">port number</a>
+8888 on your computer</p></li>
+</ul>
+<p>Thus, the Jupyter kernel is listening for Python commands on port 8888 of our
+local machine.</p>
+<p>Hopefully, your default browser has also opened up with a web page that
+looks something like this</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb.png"><img alt="../../../_images/nb.png" src="../../../_images/nb.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+<p>What you see here is called the Jupyter <em>dashboard</em>.</p>
+<p>If you look at the URL at the top, it should be <code class="docutils literal notranslate"><span class="pre">localhost:8888</span></code> or
+similar, matching the message above.</p>
+<p>Assuming all this has worked OK, you can now click on <code class="docutils literal notranslate"><span class="pre">New</span></code> at the top
+right and select <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> or similar.</p>
+<p>Here’s what shows up on our machine:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb2.png"><img alt="../../../_images/nb2.png" src="../../../_images/nb2.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+<p>The notebook displays an <em>active cell</em>, into which you can type Python
+commands.</p>
+</div>
+<div class="section" id="notebook-basics">
+<h3>Notebook Basics<a class="headerlink" href="#notebook-basics" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with how to edit code and run simple programs.</p>
+<div class="section" id="running-cells">
+<h4>Running Cells<a class="headerlink" href="#running-cells" title="Permalink to this headline">¶</a></h4>
+<p>Notice that, in the previous figure, the cell is surrounded by a green
+border.</p>
+<p>This means that the cell is in <em>edit mode</em>.</p>
+<p>In this mode, whatever you type will appear in the cell with the
+flashing cursor.</p>
+<p>When you’re ready to execute the code in a cell, hit <code class="docutils literal notranslate"><span class="pre">Shift-Enter</span></code>
+instead of the usual <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb3.png"><img alt="../../../_images/nb3.png" src="../../../_images/nb3.png" style="width: 472.0px; height: 443.0px;" /></a>
+</div>
+<p>(Note: There are also menu and button options for running code in a cell
+that you can find by exploring)</p>
+</div>
+<div class="section" id="modal-editing">
+<h4>Modal Editing<a class="headerlink" href="#modal-editing" title="Permalink to this headline">¶</a></h4>
+<p>The next thing to understand about the Jupyter notebook is that it uses
+a <em>modal</em> editing system.</p>
+<p>This means that the effect of typing at the keyboard <strong>depends on which
+mode you are in</strong>.</p>
+<p>The two modes are</p>
+<ol class="simple">
+<li><p>Edit mode</p>
+<ul class="simple">
+<li><p>Indicated by a green border around one cell, plus a blinking cursor</p></li>
+<li><p>Whatever you type appears as is in that cell</p></li>
+</ul>
+</li>
+<li><p>Command mode</p>
+<ul class="simple">
+<li><p>The green border is replaced by a grey (or grey and blue) border</p></li>
+<li><p>Keystrokes are interpreted as commands — for example, typing <code class="docutils literal notranslate"><span class="pre">b</span></code> adds a new cell below the current one</p></li>
+</ul>
+</li>
+</ol>
+<p>To switch to</p>
+<ul class="simple">
+<li><p>command mode from edit mode, hit the <code class="docutils literal notranslate"><span class="pre">Esc</span></code> key or <code class="docutils literal notranslate"><span class="pre">Ctrl-M</span></code></p></li>
+<li><p>edit mode from command mode, hit <code class="docutils literal notranslate"><span class="pre">Enter</span></code> or click in a cell</p></li>
+</ul>
+<p>The modal behavior of the Jupyter notebook is very efficient when you
+get used to it.</p>
+</div>
+<div class="section" id="inserting-unicode-e-g-greek-letters">
+<h4>Inserting Unicode (e.g., Greek Letters)<a class="headerlink" href="#inserting-unicode-e-g-greek-letters" title="Permalink to this headline">¶</a></h4>
+<p>Python supports <a class="reference external" href="https://docs.python.org/3/howto/unicode.html">unicode</a>,
+allowing the use of characters such as <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> as names in
+your code.</p>
+<p>In a code cell, try typing <code class="docutils literal notranslate"><span class="pre">\alpha</span></code> and then hitting the
+<code class="docutils literal notranslate"><span class="pre">tab</span></code> key on your keyboard.</p>
+</div>
+<div class="section" id="a-test-program">
+<span id="id1"></span><h4>A Test Program<a class="headerlink" href="#a-test-program" title="Permalink to this headline">¶</a></h4>
+<p>Let’s run a test program.</p>
+<p>Here’s an arbitrary program we can use:
+<a class="reference external" href="http://matplotlib.org/3.1.1/gallery/pie_and_polar_charts/polar_bar.html">http://matplotlib.org/3.1.1/gallery/pie_and_polar_charts/polar_bar.html</a>.</p>
+<p>On that page, you’ll see the following code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Fixing random state for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
+
+<span class="c1"># Compute pie slices</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">radii</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">radii</span> <span class="o">/</span> <span class="mf">10.</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;polar&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">radii</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/getting_started_1_0.png" src="../../../_images/getting_started_1_0.png" />
+</div>
+</div>
+<p>Don’t worry about the details for now — let’s just run it and see
+what happens.</p>
+<p>The easiest way to run this code is to copy and paste it into a cell in
+the notebook.</p>
+<p>Hopefully you will get a similar plot.</p>
+</div>
+</div>
+<div class="section" id="working-with-the-notebook">
+<h3>Working with the Notebook<a class="headerlink" href="#working-with-the-notebook" title="Permalink to this headline">¶</a></h3>
+<p>Here are a few more tips on working with Jupyter notebooks.</p>
+<div class="section" id="tab-completion">
+<h4>Tab Completion<a class="headerlink" href="#tab-completion" title="Permalink to this headline">¶</a></h4>
+<p>In the previous program, we executed the line <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p>
+<ul class="simple">
+<li><p>NumPy is a numerical library we’ll work with in depth.</p></li>
+</ul>
+<p>After this import command, functions in NumPy can be accessed with
+<code class="docutils literal notranslate"><span class="pre">np.function_name</span></code> type syntax.</p>
+<ul class="simple">
+<li><p>For example, try <code class="docutils literal notranslate"><span class="pre">np.random.randn(3)</span></code>.</p></li>
+</ul>
+<p>We can explore these attributes of <code class="docutils literal notranslate"><span class="pre">np</span></code> using the <code class="docutils literal notranslate"><span class="pre">Tab</span></code> key.</p>
+<p>For example, here we type <code class="docutils literal notranslate"><span class="pre">np.ran</span></code> and hit Tab</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb6.png"><img alt="../../../_images/nb6.png" src="../../../_images/nb6.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+<p>Jupyter offers up the two possible completions, <code class="docutils literal notranslate"><span class="pre">random</span></code> and <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p>
+<p>In this way, the Tab key helps remind you of what’s available and also
+saves you typing.</p>
+</div>
+<div class="section" id="on-line-help">
+<span id="gs-help"></span><h4>On-Line Help<a class="headerlink" href="#on-line-help" title="Permalink to this headline">¶</a></h4>
+<p>To get help on <code class="docutils literal notranslate"><span class="pre">np.rank</span></code>, say, we can execute <code class="docutils literal notranslate"><span class="pre">np.rank?</span></code>.</p>
+<p>Documentation appears in a split window of the browser, like so</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb6a.png"><img alt="../../../_images/nb6a.png" src="../../../_images/nb6a.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+<p>Clicking on the top right of the lower split closes the on-line help.</p>
+</div>
+<div class="section" id="other-content">
+<h4>Other Content<a class="headerlink" href="#other-content" title="Permalink to this headline">¶</a></h4>
+<p>In addition to executing code, the Jupyter notebook allows you to embed
+text, equations, figures and even videos in the page.</p>
+<p>For example, here we enter a mixture of plain text and LaTeX instead of
+code</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb7.png"><img alt="../../../_images/nb7.png" src="../../../_images/nb7.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+<p>Next we <code class="docutils literal notranslate"><span class="pre">Esc</span></code> to enter command mode and then type <code class="docutils literal notranslate"><span class="pre">m</span></code> to indicate that
+we are writing <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a>,
+a mark-up language similar to (but simpler than) LaTeX.</p>
+<p>(You can also use your mouse to select <code class="docutils literal notranslate"><span class="pre">Markdown</span></code> from the <code class="docutils literal notranslate"><span class="pre">Code</span></code>
+drop-down box just below the list of menu items)</p>
+<p>Now we <code class="docutils literal notranslate"><span class="pre">Shift+Enter</span></code> to produce this</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../../../_images/nb8.png"><img alt="../../../_images/nb8.png" src="../../../_images/nb8.png" style="width: 472.0px; height: 464.5px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="sharing-notebooks">
+<h3>Sharing Notebooks<a class="headerlink" href="#sharing-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>Notebook files are just text files structured in
+<a class="reference external" href="https://en.wikipedia.org/wiki/JSON">JSON</a> and typically ending with
+<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>.</p>
+<p>You can share them in the usual way that you share files — or by
+using web services such as <a class="reference external" href="http://nbviewer.jupyter.org/">nbviewer</a>.</p>
+<p>The notebooks you see on that site are <strong>static</strong> html representations.</p>
+<p>To run one, download it as an <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> file by clicking on the download
+icon.</p>
+<p>Save it somewhere, navigate to it from the Jupyter dashboard and then
+run as discussed above.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./_build_OLD/jupyter_execute/docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Mann & Steven Chao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
