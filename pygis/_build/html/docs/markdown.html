@@ -162,11 +162,6 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_affine.html">
-   Types of Transformations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_affine.html#affine-transforms">
    Affine Transforms
   </a>
  </li>
@@ -197,7 +192,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Basic Operations &amp; Plots
+  Basic Operations
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -208,7 +203,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="c_attributes.html">
-     Attributes: Adding &amp; Indexing
+     Attributes &amp; Indexing
     </a>
    </li>
   </ul>
@@ -219,6 +214,41 @@
   <a class="reference internal" href="e_raster_op_intro.html">
    Raster Skills
   </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Remote Sensing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_intro.html">
+   Remote Sensing w. Geowombat
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_basics.html">
+     Remote Sensing Basics
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_common_task.html">
+   Common Tasks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_task1.html">
+     Something
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
@@ -311,11 +341,6 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#adding-a-citation">
-     Adding a citation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#executing-code-in-your-markdown-files">
      Executing code in your markdown files
     </a>
@@ -394,22 +419,6 @@ refer directly to another page by its relative path. For example, the
 role syntax <code class="docutils literal notranslate"><span class="pre">{doc}`intro`</span></code> will result in: <span class="xref std std-doc">intro</span>.</p>
 <p>For more information on writing roles, see the
 <a class="reference external" href="https://myst-parser.readthedocs.io/">MyST documentation</a>.</p>
-</div>
-<div class="section" id="adding-a-citation">
-<h3>Adding a citation<a class="headerlink" href="#adding-a-citation" title="Permalink to this headline">¶</a></h3>
-<p>You can also cite references that are stored in a <code class="docutils literal notranslate"><span class="pre">bibtex</span></code> file. For example,
-the following syntax: <code class="docutils literal notranslate"><span class="pre">{cite}`holdgraf_evidence_2014`</span></code> will render like
-this: <a href="#id1"><span class="problematic" id="id2">:cite:`holdgraf_evidence_2014`</span></a>.</p>
-<p>Moreover, you can insert a bibliography into your page with this syntax.
-The <code class="docutils literal notranslate"><span class="pre">{bibliography}</span></code> directive must be used for all the <code class="docutils literal notranslate"><span class="pre">{cite}</span></code> roles to
-render properly.
-For example, if the references for your book are stored in <code class="docutils literal notranslate"><span class="pre">references.bib</span></code>,
-then the bibliography is inserted with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```{bibliography} references.bib
-```
-</pre></div>
-</div>
-<p>Resulting in a rendered bibliography that looks like:</p>
 </div>
 <div class="section" id="executing-code-in-your-markdown-files">
 <h3>Executing code in your markdown files<a class="headerlink" href="#executing-code-in-your-markdown-files" title="Permalink to this headline">¶</a></h3>

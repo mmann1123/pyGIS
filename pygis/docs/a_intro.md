@@ -4,7 +4,7 @@ Welcome to PyGIS
 The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for geospatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application. 
 
 -----------------------
-# Data Types
+# A: Data Types
 - Vector Data
   - Geojson
   - Shp
@@ -19,7 +19,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 
 
 -----------------------------
-# Nature of Coordinate Systems
+# B: Nature of Coordinate Systems
 - Geographic Coordinates
 - Projected Coordinates
 - CRS and Proj4Strings
@@ -42,7 +42,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
  -https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html
  
 ----------------------
-# Opening and Ploting Spatial Data
+# C: Basics with Spatial Data
 ## Vector
 - read/write geopandas
 - plots
@@ -51,6 +51,10 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
   - Create new data
   - reproject
   - Non-spatial left join new data into shapefile
+- Geoprocessing
+  - Unions
+  - Intersect
+  - etc
 
 ## Raster
 - read/write rasterio
@@ -58,19 +62,13 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 - Basic operations
   - band math
   - clip
-
------------------------
-# Geoprocessing & Vector Raster Operations
-- Geoprocessing
-  - Unions
-  - Intersect
-  - etc
 - Vector Raster Operations
   - Extract by feature
   - Summarize by feature
 
+
 ----------------------
-# Remote Sensing with Geowombat
+# D: Remote Sensing with Geowombat
 
 - Common Operations
   - Mosaic

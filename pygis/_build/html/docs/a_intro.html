@@ -193,7 +193,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Basic Operations &amp; Plots
+  Basic Operations
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -204,7 +204,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="c_attributes.html">
-     Attributes: Adding &amp; Indexing
+     Attributes &amp; Indexing
     </a>
    </li>
   </ul>
@@ -215,6 +215,41 @@
   <a class="reference internal" href="e_raster_op_intro.html">
    Raster Skills
   </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Remote Sensing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_intro.html">
+   Remote Sensing w. Geowombat
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_basics.html">
+     Remote Sensing Basics
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_common_task.html">
+   Common Tasks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_task1.html">
+     Something
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
@@ -292,13 +327,13 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-types">
-   Data Types
+  <a class="reference internal nav-link" href="#a-data-types">
+   A: Data Types
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nature-of-coordinate-systems">
-   Nature of Coordinate Systems
+  <a class="reference internal nav-link" href="#b-nature-of-coordinate-systems">
+   B: Nature of Coordinate Systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -319,8 +354,8 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-and-ploting-spatial-data">
-   Opening and Ploting Spatial Data
+  <a class="reference internal nav-link" href="#c-basics-with-spatial-data">
+   C: Basics with Spatial Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -336,13 +371,8 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#geoprocessing-vector-raster-operations">
-   Geoprocessing &amp; Vector Raster Operations
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#remote-sensing-with-geowombat">
-   Remote Sensing with Geowombat
+  <a class="reference internal nav-link" href="#d-remote-sensing-with-geowombat">
+   D: Remote Sensing with Geowombat
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -376,8 +406,8 @@
 <p>The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for geospatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="data-types">
-<h1>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-data-types">
+<h1>A: Data Types<a class="headerlink" href="#a-data-types" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Vector Data</p>
 <ul>
@@ -400,8 +430,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="nature-of-coordinate-systems">
-<h1>Nature of Coordinate Systems<a class="headerlink" href="#nature-of-coordinate-systems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="b-nature-of-coordinate-systems">
+<h1>B: Nature of Coordinate Systems<a class="headerlink" href="#b-nature-of-coordinate-systems" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Geographic Coordinates</p></li>
 <li><p>Projected Coordinates</p></li>
@@ -435,8 +465,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="opening-and-ploting-spatial-data">
-<h1>Opening and Ploting Spatial Data<a class="headerlink" href="#opening-and-ploting-spatial-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="c-basics-with-spatial-data">
+<h1>C: Basics with Spatial Data<a class="headerlink" href="#c-basics-with-spatial-data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vector">
 <h2>Vector<a class="headerlink" href="#vector" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -448,6 +478,13 @@
 <li><p>Create new data</p></li>
 <li><p>reproject</p></li>
 <li><p>Non-spatial left join new data into shapefile</p></li>
+</ul>
+</li>
+<li><p>Geoprocessing</p>
+<ul>
+<li><p>Unions</p></li>
+<li><p>Intersect</p></li>
+<li><p>etc</p></li>
 </ul>
 </li>
 </ul>
@@ -463,20 +500,6 @@
 <li><p>clip</p></li>
 </ul>
 </li>
-</ul>
-</div>
-</div>
-<hr class="docutils" />
-<div class="section" id="geoprocessing-vector-raster-operations">
-<h1>Geoprocessing &amp; Vector Raster Operations<a class="headerlink" href="#geoprocessing-vector-raster-operations" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Geoprocessing</p>
-<ul>
-<li><p>Unions</p></li>
-<li><p>Intersect</p></li>
-<li><p>etc</p></li>
-</ul>
-</li>
 <li><p>Vector Raster Operations</p>
 <ul>
 <li><p>Extract by feature</p></li>
@@ -485,9 +508,10 @@
 </li>
 </ul>
 </div>
+</div>
 <hr class="docutils" />
-<div class="section" id="remote-sensing-with-geowombat">
-<h1>Remote Sensing with Geowombat<a class="headerlink" href="#remote-sensing-with-geowombat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="d-remote-sensing-with-geowombat">
+<h1>D: Remote Sensing with Geowombat<a class="headerlink" href="#d-remote-sensing-with-geowombat" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Common Operations</p>
 <ul>
@@ -519,6 +543,8 @@
 <li><p><a class="reference external" href="https://jupyterbook.org/intro.html">https://jupyterbook.org/intro.html</a></p></li>
 <li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/">https://www.sphinx-doc.org/en/master/</a></p></li>
 </ul>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">

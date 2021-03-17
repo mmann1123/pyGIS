@@ -1,6 +1,6 @@
 (c_attributes)=
  
-# Attributes: Adding & Indexing  
+# Attributes & Indexing  
 
 ```{figure} ../_static/c_data_types/dataframe.svg
 :name: vector properties 

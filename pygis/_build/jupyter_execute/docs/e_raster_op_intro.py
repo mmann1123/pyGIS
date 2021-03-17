@@ -1,4 +1,4 @@
-(e_vector_op_intro)=
+(e_raster_op_intro)=
 
 # Raster Skills
  

@@ -38,12 +38,21 @@
       sections:
       - file: docs/d_understand_crs_codes
 
-- part: Basic Operations & Plots
+- part: Basic Operations
   chapters:
     - file: docs/e_vector_op_intro
       sections:
       - file: docs/c_attributes
     - file: docs/e_raster_op_intro
 
+- part: Remote Sensing
+  chapters:
+    - file: docs/f_rs_intro
+      sections:
+      - file: docs/f_rs_basics
+      - file: docs/f_rs_gw_basics
+    - file: docs/f_rs_common_task
+      sections:
+      - file: docs/f_rs_task1
 
  
