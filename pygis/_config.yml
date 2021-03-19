@@ -20,24 +20,30 @@ execute:
   execute_notebooks           : auto
   exclude_patterns          : []    # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 
-#######################################################################################
-# HTML-specific settings
-html:
-  home_page_in_navbar         : true
+only_build_toc_files: true
 
+ 
 # #######################################################################################
 # Interact link settings
 notebook_interface            : "notebook"
 
+repository:
+  url                       : https://mmann1123.github.io/pyGIS/pygis  # The URL to your book's repository
+  path_to_book              : ""  # A path to your book's folder, relative to the repository root.
+  branch                    : main  # Which branch of the repository should be used when creating links
+
+html:
+  use_edit_page_button:         false
+  use_issues_button:            false
+  home_page_in_navbar         : true
+
+
 #######################################################################################
 # Launch button settings
-repository:
-  url                         : https://mmann1123.github.io/pyGIS/docs/a_intro.html
-  path_to_book                : "PyGIS"
 
 latex:
   latex_engine                : "xelatex"
   latex_documents:
-    targetname: book.tex
+    targetname:                 book.tex
 
   

@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Affine Transforms &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <img src="../../../_static/pygis.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/a_intro.html">
+   Welcome to PyGIS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_intro_py.html">
+   Welcome - Let’s get started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_about_py.html">
+   Getting Started in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_getting_started.html">
+   Setting up Your Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_python_by_example.html">
+   An Introductory Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/b_learn_more.html">
+   Learn More
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Data Types
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_features.html">
+   Feature Representation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_store_features.html">
+   Data Storage Formats
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_vectors.html">
+   Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_affine.html">
+   Affine Transforms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/d_exercises.html">
+   CRS Exercises
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/d_understand_crs_codes.html">
+     Understanding PROJ.4 and EPSG Codes
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/e_vector_op_intro.html">
+   Vector Skills
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/c_attributes.html">
+     Attributes &amp; Indexing
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../docs/e_raster_op_intro.html">
+   Raster Skills
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Remote Sensing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/f_rs_intro.html">
+   Remote Sensing w. Geowombat
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/f_rs_basics.html">
+     Remote Sensing Basics
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../../../docs/f_rs_common_task.html">
+   Common Tasks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../docs/f_rs_task1.html">
+     Something
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/_build_OLD/jupyter_execute/docs/d_affine.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        
+        
+        <a class="edit-button" href="https://github.com/docs/a_intro.html/edit/master/PyGIS/_build_OLD/jupyter_execute/docs/d_affine.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#types-of-transformations">
+   Types of Transformations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-transform-examples">
+     Simple Transform Examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transforming-matrices">
+     Transforming Matrices
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numeric-examples">
+     Numeric Examples
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#translate">
+       Translate
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rotate">
+       Rotate
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="affine-transforms">
+<span id="d-affine"></span><h1>Affine Transforms<a class="headerlink" href="#affine-transforms" title="Permalink to this headline">¶</a></h1>
+<!-- https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html -->
+<!-- https://people.cs.clemson.edu/~dhouse/courses/401/notes/affines-matrices.pdf -->
+<p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.</p>
+<div class="figure align-default" id="example-of-a-warped-reprojected-image">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/warp.png" src="_build_OLD/jupyter_execute/_static/d_crs/warp.png" />
+<p class="caption"><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
+</div>
+<p>First some general properties of affine transforms:</p>
+<ul class="simple">
+<li><p><strong>Preserves</strong></p>
+<ul>
+<li><p>Points, straight linear &amp; planes</p></li>
+<li><p>Sets of parallel lines</p></li>
+<li><p>Ratio of distances between points on same straight line</p></li>
+</ul>
+</li>
+<li><p><strong>Distorts</strong></p>
+<ul>
+<li><p>Angle between lines</p></li>
+<li><p>Distance between points</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="types-of-transformations">
+<h2>Types of Transformations<a class="headerlink" href="#types-of-transformations" title="Permalink to this headline">¶</a></h2>
+<p>There are four core ways that you can manipulate an image. These are called “Transforms”:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Transform</p></th>
+<th class="text-align:right head"><p>Description</p></th>
+<th class="text-align:right head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Translation</p></td>
+<td class="text-align:right"><p>Moves a set of points some fixed distance in the x and y plane</p></td>
+<td class="text-align:right"><p><img alt="translate image" src="_build_OLD/jupyter_execute/_static/d_crs/translate.png" /></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Scale</p></td>
+<td class="text-align:right"><p>Increases or decreases the scale, or distance between points in the x and y plane</p></td>
+<td class="text-align:right"><p><img alt="scale image" src="_build_OLD/jupyter_execute/_static/d_crs/scale.png" /></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Rotate</p></td>
+<td class="text-align:right"><p>Rotates points around the origin, or some defined axis</p></td>
+<td class="text-align:right"><p><img alt="rotate image" src="_build_OLD/jupyter_execute/_static/d_crs/rotate.png" /></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Shear</p></td>
+<td class="text-align:right"><p>Shifts points in proportion to any given points x and y coordinate</p></td>
+<td class="text-align:right"><p><img alt="shear image" src="_build_OLD/jupyter_execute/_static/d_crs/shear.png" /></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Image Credit: <a class="reference external" href="https://en.wikipedia.org/wiki/Affine_transformation">Wikipedia</a></em></p>
+<p>In combination we can warp any point, or set of points (e.g. raster image) into a new projection. This is the equivalent of reprojection for vector data. In order to implement these transforms we will need to learn about the math behind <em>Affine Transforms</em>! Yeah!</p>
+<div class="section" id="simple-transform-examples">
+<h3>Simple Transform Examples<a class="headerlink" href="#simple-transform-examples" title="Permalink to this headline">¶</a></h3>
+<p>To simplify things first lets think about how to do transformations of a single point in a 2d space.</p>
+<p>For any location <span class="math notranslate nohighlight">\( \mathbf{x} = (x,y)\)</span> we can transform <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> to <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> using simple linear adjustments. Here we can think of point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as being stored as an array:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{x}  =  \left[ \begin{array}{cc|r}x \\ y \end{array} \right] \mbox{can be transformed to } \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}\acute{x} \\ \acute{y} \end{array} \right]
+   \end{eqnarray} 
+\end{split}\]</div>
+<p>From here we can transform the values in the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> position using scaler values <span class="math notranslate nohighlight">\(a\)</span> through <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}ax+by+c \\ dx+ey+f \end{array} \right]
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Looking at the formula above, we are adjusting the value of <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(ax+by+c\)</span>, so <span class="math notranslate nohighlight">\(x\)</span> can be multiplied (scaled) by some value <span class="math notranslate nohighlight">\(a\)</span>, it can also be scaled based on the <span class="math notranslate nohighlight">\(y\)</span> value with <span class="math notranslate nohighlight">\(+ by\)</span>, or simply adjusted up or down by the value <span class="math notranslate nohighlight">\(+ c\)</span></p>
+</div>
+<p>To understand how this works, let’s walk through the basic transformations of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p>
+<p>If we multiply <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by one, by setting <span class="math notranslate nohighlight">\(a,e = 1\)</span>, and zero out the effect of the other axis, by setting <span class="math notranslate nohighlight">\(b,d = 0\)</span>, we have a simple case of translation, where <span class="math notranslate nohighlight">\(x\)</span> moves right by <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(y\)</span> up by the value of <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="figure align-default" id="translate-a-coordinate">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/translate_coord.png" src="_build_OLD/jupyter_execute/_static/d_crs/translate_coord.png" />
+<p class="caption"><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by using <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}ax \\ ey \end{array} \right]
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="figure align-default" id="scale-a-coordinate">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/scale_coord.png" src="_build_OLD/jupyter_execute/_static/d_crs/scale_coord.png" />
+<p class="caption"><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can rotate a point around the origin by setting <span class="math notranslate nohighlight">\(a,e = \cos\theta\)</span>, <span class="math notranslate nohighlight">\(b = -\sin\theta\)</span> and <span class="math notranslate nohighlight">\(c,f = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r} x\cos\theta - y\sin\theta \\ x\sin\theta+y\cos\theta \end{array} \right]
+   \end{eqnarray}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle of rotation (counterclockwise) around the origin.</p>
+<div class="figure align-default" id="rotate-a-coordinate">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/rotate_coord.png" src="_build_OLD/jupyter_execute/_static/d_crs/rotate_coord.png" />
+<p class="caption"><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">¶</a></p>
+</div>
+<p>Finally by adjusting <span class="math notranslate nohighlight">\(x\)</span> based on the value of <span class="math notranslate nohighlight">\(y\)</span> (and visa versa), we can achieve a shear transform:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r} x+by \\ y+dx \end{array} \right]
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="figure align-default" id="shear-transform-a-coordinate">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/shear_coord.png" src="_build_OLD/jupyter_execute/_static/d_crs/shear_coord.png" />
+<p class="caption"><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="transforming-matrices">
+<h3>Transforming Matrices<a class="headerlink" href="#transforming-matrices" title="Permalink to this headline">¶</a></h3>
+<p>It is often convenient to represent these equations as matrices. This allows us to easily chain together a series of operations. We can represent our transformed point <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+    \left[ \begin{array}{cc|r} \acute{x} \\ \acute{y} \end{array} \right] =
+    \left[ \begin{array}{cc|r} ax+by \\ dx+ey \end{array} \right]  =
+    \left[ \begin{array}{cc|r} a \ \ b \\ d \ \ e \end{array} \right] \left[ \begin{array}{cc|r} x \\ y \end{array} \right] 
+     
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you aren’t familiar with how matrix multiplication works please watch <a class="reference external" href="https://youtu.be/OMA2Mwo0aZg">this</a>.</p>
+</div>
+<p>In this new context we can easily do a scale, rotate or shear transform by replacing the matrix of <span class="math notranslate nohighlight">\(a,b,d,e\)</span> with:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \mbox{Rotate: } \left[ \begin{array}{cc|r} \cos\theta \ \ -\sin\theta \\  \sin\theta \ \ \cos\theta  \end{array} \right] 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+   \mbox{Scale: } \left[ \begin{array}{cc|r} S_{x} \\ S_{y}  \end{array} \right] 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+   \mbox{Shear: } \left[ \begin{array}{cc|r} 1 \ \ r_{x} \\ r_{y} \ \ 1  \end{array} \right] 
+   \end{eqnarray}
+\end{split}\]</div>
+<p><em>But wait, what about the easiest transform, “translation”?</em> Unfortunately that makes things a little more complicated! But not that complicated.</p>
+<p>In order to be able to perform a translate in matrix form we need to extend our matrices, adding one row along the bottom.  In the following form we can now perform all the basic transformations to calculate <span class="math notranslate nohighlight">\(
+\mathbf{\acute{x}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+    \left[ \begin{array}{cc|r} \acute{x} \\ \acute{y} \\ 1 \end{array} \right] =
+    \left[ \begin{array}{cc|r} a \ \ b \ \ c \\ d \ \ e \ \ f \\ 0 \ \ 0 \ \ 1 \end{array} \right] 
+    \left[ \begin{array}{cc|r} x \\ y \\ 1  \end{array} \right] =
+    \left[ \begin{array}{cc|r} ax+by+c \\ dx+ey+f \\ 1 \end{array} \right] 
+     
+   \end{eqnarray}
+\end{split}\]</div>
+<p>Now that we have scalers <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(f\)</span> all the transforms are possible. We do however, need to update our previous operations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \mbox{Translate: }  \begin{bmatrix} 1 &amp; 0 &amp; \Delta x \\  0 &amp; 1 &amp; \Delta y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  
+   \end{eqnarray}
+\end{split}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\Delta x\)</span> shifts in the <span class="math notranslate nohighlight">\(x\)</span> axis and <span class="math notranslate nohighlight">\(\Delta y\)</span> determines the shift in the <span class="math notranslate nohighlight">\(y\)</span> axis.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \mbox{Rotate: } \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\  \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+   \mbox{Scale: }  \begin{bmatrix} S_{x} &amp; 0 &amp; 0 \\ 0 &amp; S_{y} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+   \mbox{Shear: }  \begin{bmatrix} 1 &amp; r_{x} &amp; 0 \\ r_{y} &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
+   \end{eqnarray}
+\end{split}\]</div>
+</div>
+<div class="section" id="numeric-examples">
+<h3>Numeric Examples<a class="headerlink" href="#numeric-examples" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="translate">
+<h4>Translate<a class="headerlink" href="#translate" title="Permalink to this headline">¶</a></h4>
+<p>Now let’s assume we have a point a at (-2,-2) for (x,y). For simplicity sake lets assume we want to move it up to the origin by adding 2 to both x and y.</p>
+<p>Let’s start by defining our point in our matrix form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+    \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}  =  \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix}  
+   \end{eqnarray}
+\end{split}\]</div>
+<p>Let’s get our transform matrix <span class="math notranslate nohighlight">\(M\)</span> to perform our translate, where <span class="math notranslate nohighlight">\(\Delta x, \Delta y = 2\)</span> because we want to move it up and to the right:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \begin{bmatrix} 1 &amp; 0 &amp; 2 \\  0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  
+   \end{eqnarray}
+\end{split}\]</div>
+<p>We can then multiply the two:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix}   \begin{bmatrix} 1 &amp; 0 &amp; 2 \\  0 &amp; 1 &amp; 2 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  =
+      \begin{bmatrix} -2 \times 1 + -2 \times 0 + 1 \times 2  \\  -2 \times 0 + -2 \times 1 + 1 \times 2 \\ -2 \times 0 + -2 \times 0 + 1 \times 1  \end{bmatrix} = 
+      \begin{bmatrix} 0  \\  0 \\ 1  \end{bmatrix}
+   \end{eqnarray}
+\end{split}\]</div>
+<p>Congrats you reached (0,0), just like you always dreamed!</p>
+<div class="figure align-default" id="moving-a-point">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/translate_ex.png" src="_build_OLD/jupyter_execute/_static/d_crs/translate_ex.png" />
+<p class="caption"><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember the bottom row can be ignored because <span class="math notranslate nohighlight">\( \begin{bmatrix} x  \\  y \\ 1  \end{bmatrix}\)</span></p>
+</div>
+</div>
+<div class="section" id="rotate">
+<h4>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h4>
+<p>All the transformations follow the same procedure, let’s try rotation just to make sure that we have it figured out. Let’s rotate our point at (-2,-2) by 180 degrees around the origin:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \begin{bmatrix} -2 \\ -2 \\  1 \end{bmatrix} 
+     \begin{bmatrix} \cos{180} &amp; -\sin{180} &amp; 0 \\  \sin{180} &amp; \cos{180} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  =
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \begin{bmatrix} -2 \times \cos{180} + -2 \times -\sin{180} + 1 \times 0 \\ -2 \times \sin{180} + -2 \times \cos{180} + 1 \times 0 \\ 1 \times 0 + 1 \times 0 + 1 \times 1 \end{bmatrix}  =  \begin{bmatrix} 2 \\ 2 \\  1 \end{bmatrix} 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="figure align-default" id="rotate-a-point">
+<img alt="_build_OLD/jupyter_execute/_static/d_crs/rotate_ex.png" src="_build_OLD/jupyter_execute/_static/d_crs/rotate_ex.png" />
+<p class="caption"><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./_build_OLD/jupyter_execute/docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Mann & Steven Chao<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
