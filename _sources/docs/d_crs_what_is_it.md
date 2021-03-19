@@ -21,15 +21,22 @@ A geographic coordinate system is a reference system for identifying locations o
 
 ```{figure} ../_static/img/lat_vs_lon.png
 :name: lat lon
-Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0&amp;deg; degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).
+Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0&deg; degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).
 ```
 
-A latitude measures the angle from the equatorial plane to the location on the earth's surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example Colby College is located at around 45.56&deg; North and 69.66&deg; West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (`+`) sign and South and West are assigned a negative (`-`) sign. Colby College's location is therefore encoded as +45.56&deg; and -69.66&deg;.
- 
+A latitude measures the angle from the equatorial plane to the location on the earth's surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example The George Washington University is located at around 38.89&deg; North and -77.04&deg; West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (`+`) sign and South and West are assigned a negative (`-`) sign. The university location is therefore encoded as +38.89&deg; and -77.04&deg;.
 
-```{figure} ../_static/img/Colby_location_sphere.jpg
-:name: A slice of earth showing the latitude and longitude measurements.
-A slice of earth showing the latitude and longitude measurements.
+
+```{code-cell} ipython3
+:tags: ["hide-input"]
+import geopandas
+import contextily as ctx
+cities = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
+cities = cities[cities.name == 'Washington, D.C.']
+cities = cities.to_crs(epsg=3857) # project to webmercator
+
+ax = cities.plot(figsize=(10, 10), alpha=0.5, edgecolor='k')
+ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron,zoom = 6, reset_extent = True)
 ```
 
 A GCS is defined by an **ellipsoid**, **geoid** and **datum**. These elements are presented next.
@@ -122,13 +129,14 @@ The surface of the earth is curved but maps are flat. A projected coordinate sys
 
 ### Planar Projections
 
+**Tangent Case**
 A planar projection (aka Azimuthal projection) maps the earth surface features to a flat surface that touches the earth's surface at a point (**tangent** case),
-
 
 ```{figure} ../_static/img/Planar_projection_tangent.svg
 
 ```
 
+**Secant Case**
  or along a line of tangency (a **secant** case). 
 
 ```{figure} ../_static/img/Planar_projection_secant.svg

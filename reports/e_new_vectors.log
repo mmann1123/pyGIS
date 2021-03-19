@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import matplotlib.pyplot as plt
+plt.style.use('bmh') # better for plotting geometries vs general plots.
+
+#zip the coordinates into a point object and convert to a GeoData Frame
+geometry = [Point(xy) for xy in zip(df.X, df.Y)]
+geo_df = gpd.GeoDataFrame(df, geometry=geometry)
+geo_df.plot()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-10-e6028a74a939>[0m in [0;36m<module>[0;34m[0m
+[1;32m      3[0m [0;34m[0m[0m
+[1;32m      4[0m [0;31m#zip the coordinates into a point object and convert to a GeoData Frame[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 5[0;31m [0mgeometry[0m [0;34m=[0m [0;34m[[0m[0mPoint[0m[0;34m([0m[0mxy[0m[0;34m)[0m [0;32mfor[0m [0mxy[0m [0;32min[0m [0mzip[0m[0;34m([0m[0mdf[0m[0;34m.[0m[0mX[0m[0;34m,[0m [0mdf[0m[0;34m.[0m[0mY[0m[0;34m)[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      6[0m [0mgeo_df[0m [0;34m=[0m [0mgpd[0m[0;34m.[0m[0mGeoDataFrame[0m[0;34m([0m[0mdf[0m[0;34m,[0m [0mgeometry[0m[0;34m=[0m[0mgeometry[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m [0mgeo_df[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbook/lib/python3.7/site-packages/pandas/core/generic.py[0m in [0;36m__getattr__[0;34m(self, name)[0m
+[1;32m   5463[0m             [0;32mif[0m [0mself[0m[0;34m.[0m[0m_info_axis[0m[0;34m.[0m[0m_can_hold_identifiers_and_holds_name[0m[0;34m([0m[0mname[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   5464[0m                 [0;32mreturn[0m [0mself[0m[0;34m[[0m[0mname[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 5465[0;31m             [0;32mreturn[0m [0mobject[0m[0;34m.[0m[0m__getattribute__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   5466[0m [0;34m[0m[0m
+[1;32m   5467[0m     [0;32mdef[0m [0m__setattr__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mname[0m[0;34m:[0m [0mstr[0m[0;34m,[0m [0mvalue[0m[0;34m)[0m [0;34m->[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mAttributeError[0m: 'DataFrame' object has no attribute 'X'
+AttributeError: 'DataFrame' object has no attribute 'X'
+

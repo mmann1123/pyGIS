@@ -48,7 +48,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 - plots
 - Basic operations
   - Subset rows
-  - Create new data
+  - Create new data from lat lon
   - reproject
   - Non-spatial left join new data into shapefile
 - Geoprocessing
@@ -84,7 +84,8 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
   - Object detection
   - Others?
 
-
+# Visualization
+- https://handsondataviz.org/geojsonio.html
 
 ## Book rendering options
 - https://executablebooks.github.io/quantecon-mini-example/docs/python_by_example.html
