@@ -512,7 +512,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_6_01.png" src="../_images/d_understand_crs_codes_6_01.png" />
+<img alt="../_images/d_understand_crs_codes_6_0.png" src="../_images/d_understand_crs_codes_6_0.png" />
 </div>
 </div>
 <p>Looks like Washington, DC, albeit a bit lopsided! Now let’s see how we can work with CRS’s in Python.</p>
@@ -623,8 +623,8 @@ Example 2:  {&#39;init&#39;: &#39;epsg:4269&#39;, &#39;no_defs&#39;: True}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_17_01.png" src="../_images/d_understand_crs_codes_17_01.png" />
-<img alt="../_images/d_understand_crs_codes_17_11.png" src="../_images/d_understand_crs_codes_17_11.png" />
+<img alt="../_images/d_understand_crs_codes_17_0.png" src="../_images/d_understand_crs_codes_17_0.png" />
+<img alt="../_images/d_understand_crs_codes_17_1.png" src="../_images/d_understand_crs_codes_17_1.png" />
 </div>
 </div>
 <p>The two maps above utilize a geographic coordinate system, as evidenced by the latitude and longitude values on the axes. Another way to check is to look at the geometry of the shapefiles.</p>
@@ -670,7 +670,7 @@ Name: geometry, dtype: object
 Name: geometry, dtype: object
 </pre></div>
 </div>
-<img alt="../_images/d_understand_crs_codes_21_11.png" src="../_images/d_understand_crs_codes_21_11.png" />
+<img alt="../_images/d_understand_crs_codes_21_1.png" src="../_images/d_understand_crs_codes_21_1.png" />
 </div>
 </div>
 <p>Here, we used the Lambert Conformal Conic projection. Notice how the values on the axes changed from latitude and longitude to meters. Also notice how the DC appears to be “tilted” to the left when compared to DC in the previous CRS’s. That’s because the center of this projection is at the 90th meridian west (<code class="docutils literal notranslate"><span class="pre">+lon_0=-90</span></code>; negative is used to denote West) and the Equator (<code class="docutils literal notranslate"><span class="pre">+lat_0=0</span></code>; 0 is the default value when not specified in the PROJ.4 string)</p>
@@ -690,7 +690,7 @@ Name: geometry, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_23_01.png" src="../_images/d_understand_crs_codes_23_01.png" />
+<img alt="../_images/d_understand_crs_codes_23_0.png" src="../_images/d_understand_crs_codes_23_0.png" />
 </div>
 </div>
 <p>As seen in the new graph above, the values on both axes have changed. The origin (0, 0) is now in the center of DC.</p>
@@ -711,7 +711,7 @@ Name: geometry, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_25_01.png" src="../_images/d_understand_crs_codes_25_01.png" />
+<img alt="../_images/d_understand_crs_codes_25_0.png" src="../_images/d_understand_crs_codes_25_0.png" />
 </div>
 </div>
 <p>Two standard parallels at 38.850 N andd 39.950 N were chosen as they fall within the DC boundaries. Nothing really appears to be different; however, these values are important. Look what happens when we assign different values, ones that don’t really make sense for mapping in DC, and compare the resulting DC map to the previous map.</p>
@@ -730,7 +730,7 @@ Name: geometry, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_27_01.png" src="../_images/d_understand_crs_codes_27_01.png" />
+<img alt="../_images/d_understand_crs_codes_27_0.png" src="../_images/d_understand_crs_codes_27_0.png" />
 </div>
 </div>
 <p>It appears DC has shrunk! Of course, that’s not actually the case in reality, but because map projections are inherently imperfect, choosing arbitrary parameters can make things worse. In this case, because the chosen standard parallels are relatively far from each other and from DC, all the data in between the standard parallels end up being compressed even more. For more information, visit <a class="reference external" href="https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf">https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf</a>.</p>
@@ -751,7 +751,7 @@ Name: geometry, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_29_01.png" src="../_images/d_understand_crs_codes_29_01.png" />
+<img alt="../_images/d_understand_crs_codes_29_0.png" src="../_images/d_understand_crs_codes_29_0.png" />
 </div>
 </div>
 <p>Notice that the x-axis shifted to the left by 500,000 units. The y-axis stayed the same because we did not use false northing. Now, the “origin” is (500000, 0).</p>
@@ -772,7 +772,7 @@ Name: geometry, dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_understand_crs_codes_31_01.png" src="../_images/d_understand_crs_codes_31_01.png" />
+<img alt="../_images/d_understand_crs_codes_31_0.png" src="../_images/d_understand_crs_codes_31_0.png" />
 </div>
 </div>
 <p>Looks pretty much the same!</p>
