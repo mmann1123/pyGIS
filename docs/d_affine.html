@@ -380,7 +380,7 @@
 <p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.</p>
 <div class="figure align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
 </div>
 <p>First some general properties of affine transforms:</p>
 <ul class="simple">
@@ -454,7 +454,7 @@
 <p>If we multiply <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by one, by setting <span class="math notranslate nohighlight">\(a,e = 1\)</span>, and zero out the effect of the other axis, by setting <span class="math notranslate nohighlight">\(b,d = 0\)</span>, we have a simple case of translation, where <span class="math notranslate nohighlight">\(x\)</span> moves right by <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(y\)</span> up by the value of <span class="math notranslate nohighlight">\(f\)</span>:</p>
 <div class="figure align-default" id="translate-a-coordinate">
 <img alt="../_images/translate_coord.png" src="../_images/translate_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by using <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
 <div class="math notranslate nohighlight">
@@ -465,7 +465,7 @@
 \end{split}\]</div>
 <div class="figure align-default" id="scale-a-coordinate">
 <img alt="../_images/scale_coord.png" src="../_images/scale_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">¶</a></p>
 </div>
 <p>We can rotate a point around the origin by setting <span class="math notranslate nohighlight">\(a,e = \cos\theta\)</span>, <span class="math notranslate nohighlight">\(b = -\sin\theta\)</span> and <span class="math notranslate nohighlight">\(c,f = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -477,7 +477,7 @@
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle of rotation (counterclockwise) around the origin.</p>
 <div class="figure align-default" id="rotate-a-coordinate">
 <img alt="../_images/rotate_coord.png" src="../_images/rotate_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">¶</a></p>
 </div>
 <p>Finally by adjusting <span class="math notranslate nohighlight">\(x\)</span> based on the value of <span class="math notranslate nohighlight">\(y\)</span> (and visa versa), we can achieve a shear transform:</p>
 <div class="math notranslate nohighlight">
@@ -488,7 +488,7 @@
 \end{split}\]</div>
 <div class="figure align-default" id="shear-transform-a-coordinate">
 <img alt="../_images/shear_coord.png" src="../_images/shear_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="transforming-matrices">
@@ -597,7 +597,7 @@
 <p>Congrats you reached (0,0), just like you always dreamed!</p>
 <div class="figure align-default" id="moving-a-point">
 <img alt="../_images/translate_ex.png" src="../_images/translate_ex.png" />
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -622,7 +622,7 @@
 \end{split}\]</div>
 <div class="figure align-default" id="rotate-a-point">
 <img alt="../_images/rotate_ex.png" src="../_images/rotate_ex.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

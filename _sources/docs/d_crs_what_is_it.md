@@ -45,7 +45,7 @@ Assuming that the earth is a perfect sphere greatly simplifies mathematical calc
 The reason the earth has a slightly ellipsoidal shape has to do with its rotation which induces a centripetal force along the equator. This results in an equatorial axis that is roughly 21 km longer than the polar axis.
 
 
-```{figure} ../_static/img/globe_0_0_center.svg
+```{figure} ../_static/img/Globe_0_0_center.svg
 :name: The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).
 The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).
 ```
@@ -67,8 +67,8 @@ Representing the earth's true shape, the *geoid*, as a mathematical model is cru
 
 
 ```{figure} ../_static/img/Geoids_sm_NASA.jpg
-:name: Earth's geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source: NASA)
-Earth's geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source: NASA)
+:name: Earth's geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)
+Earth's geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)
 ```
 
 The earth's gravitational field is dynamic and is tied to the flow of the earth's hot and fluid core. Hence its geoid is constantly changing, albeit at a large temporal scale.The measurement and representation of the earth's shape is at the heart of geodesy--a branch of applied mathematics.
@@ -124,13 +124,10 @@ The surface of the earth is curved but maps are flat. A projected coordinate sys
 
 A planar projection (aka Azimuthal projection) maps the earth surface features to a flat surface that touches the earth's surface at a point (**tangent** case),
 
-![](img/Planar_projection_tangent.svg)<!-- -->
-
 
 ```{figure} ../_static/img/Planar_projection_tangent.svg
 
 ```
-
 
  or along a line of tangency (a **secant** case). 
 
@@ -142,8 +139,8 @@ This projection is often used in mapping polar regions but can be used for any l
 
 
 ```{figure} ../_static/img/Planar_Examples.svg
-:name: Examples of three planar projections: orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.
-Examples of three planar projections: orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.
+:name: Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.
+Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.
 ```
 
 ### Cylindrical Projection
@@ -187,8 +184,8 @@ Distortion is minimized along the tangent or secant lines and increases as the d
 Conical projections are also popular PCS' in European maps such as Europe Albers Equal Area Conic and Europe Lambert Conformal Conic.
  
 ```{figure} ../_static/img/Conical_Examples.svg
-:name: Examples of three conical projections: Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).
-Examples of three conical projections: Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).
+:name: Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).
+Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).
 ```
 
 ## Spatial Properties
