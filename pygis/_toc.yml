@@ -31,18 +31,18 @@
 - part: Nature of Coordinate Systems
   chapters:
     - file: docs/d_crs_what_is_it
+    - file: docs/d_understand_crs_codes
     - file: docs/d_affine
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
     - file: docs/d_exercises
-      sections:
-      - file: docs/d_understand_crs_codes
 
 - part: Basic Operations
   chapters:
     - file: docs/e_vector_op_intro
       sections:
-      - file: docs/c_attributes
+      - file: docs/e_attributes
+      - file: docs/e_new_vectors
     - file: docs/e_raster_op_intro
 
 - part: Remote Sensing

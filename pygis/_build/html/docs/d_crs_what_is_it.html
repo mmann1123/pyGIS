@@ -54,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Affine Transforms" href="d_affine.html" />
+    <link rel="next" title="Understanding CRS codes" href="d_understand_crs_codes.html" />
     <link rel="prev" title="Raster Data" href="c_rasters.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -163,6 +163,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="d_understand_crs_codes.html">
+   Understanding CRS codes
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="d_affine.html">
    Affine Transforms
   </a>
@@ -177,19 +182,10 @@
    Raster CRS
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="d_exercises.html">
    CRS Exercises
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="d_understand_crs_codes.html">
-     Understanding PROJ.4 and EPSG Codes
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -204,8 +200,13 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="c_attributes.html">
+    <a class="reference internal" href="e_attributes.html">
      Attributes &amp; Indexing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_new_vectors.html">
+     Creating Spatial Data
     </a>
    </li>
   </ul>
@@ -306,6 +307,24 @@
 
             <!-- Source interaction buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_crs_what_is_it.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_crs_what_is_it.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
 
             <!-- Full screen (wrap in <a> to have style consistency -->
             <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -314,6 +333,23 @@
                         class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_crs_what_is_it.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
 
         </div>
 
@@ -416,12 +452,25 @@
 <p>A geographic coordinate system is a reference system for identifying locations on the curved surface of the earth. Locations on the earth’s surface are measured in angular units from the center of the earth relative to two planes: the plane defined by the equator and the plane defined by the prime meridian (which crosses Greenwich England). A location is therefore defined by two values: a latitudinal value and a longitudinal value.</p>
 <div class="figure align-default" id="lat-lon">
 <img alt="../_images/lat_vs_lon.png" src="../_images/lat_vs_lon.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0&amp;deg; degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).</span><a class="headerlink" href="#lat-lon" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0° degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).</span><a class="headerlink" href="#lat-lon" title="Permalink to this image">¶</a></p>
 </div>
-<p>A latitude measures the angle from the equatorial plane to the location on the earth’s surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example Colby College is located at around 45.56° North and 69.66° West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (<code class="docutils literal notranslate"><span class="pre">+</span></code>) sign and South and West are assigned a negative (<code class="docutils literal notranslate"><span class="pre">-</span></code>) sign. Colby College’s location is therefore encoded as +45.56° and -69.66°.</p>
-<div class="figure align-default" id="a-slice-of-earth-showing-the-latitude-and-longitude-measurements">
-<img alt="../_images/Colby_location_sphere.jpg" src="../_images/Colby_location_sphere.jpg" />
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">A slice of earth showing the latitude and longitude measurements.</span><a class="headerlink" href="#a-slice-of-earth-showing-the-latitude-and-longitude-measurements" title="Permalink to this image">¶</a></p>
+<p>A latitude measures the angle from the equatorial plane to the location on the earth’s surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example The George Washington University is located at around 38.89° North and -77.04° West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (<code class="docutils literal notranslate"><span class="pre">+</span></code>) sign and South and West are assigned a negative (<code class="docutils literal notranslate"><span class="pre">-</span></code>) sign. The university location is therefore encoded as +38.89° and -77.04°.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span> <span class="c1"># project to webmercator</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">reset_extent</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_crs_what_is_it_1_0.png" src="../_images/d_crs_what_is_it_1_0.png" />
+</div>
 </div>
 <p>A GCS is defined by an <strong>ellipsoid</strong>, <strong>geoid</strong> and <strong>datum</strong>. These elements are presented next.</p>
 <div class="section" id="sphere-and-ellipsoid">
@@ -431,12 +480,12 @@
 <img alt="../_images/Ellipsoid.svg" src="../_images/Ellipsoid.svg" /></div>
 <p>The reason the earth has a slightly ellipsoidal shape has to do with its rotation which induces a centripetal force along the equator. This results in an equatorial axis that is roughly 21 km longer than the polar axis.</p>
 <div class="figure align-default" id="the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right">
-<img alt="../_images/Globe_0_0_center.svg" src="../_images/Globe_0_0_center.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).</span><a class="headerlink" href="#the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Globe_0_0_center.svg" src="../_images/Globe_0_0_center.svg" /><p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).</span><a class="headerlink" href="#the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right" title="Permalink to this image">¶</a></p>
 </div>
 <p>Our estimate of these radii is quite precise thanks to satellite and computational capabilities. The semi-major axis is 6,378,137 meters and the semi-minor axis is 6,356,752 meters.</p>
 <p>Differences in distance measurements along the surfaces of an ellipsoid vs. a sphere are small but measurable (the difference can be as high as 20 km) as illustrated in the following lattice plots.</p>
 <div class="figure align-default" id="differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian">
-<img alt="../_images/Ellipsoid_vs_sphere_distances.svg" src="../_images/Ellipsoid_vs_sphere_distances.svg" /><p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Differences in distance measurements between the surface of a sphere and an ellipsoid. Each graphic plots the differences in distance measurements made from a single point location along the 0&amp;deg; meridian identified by the green colored box (latitude value) to various latitudinal locations along a longitude (whose value is listed in the bisque colored box). For example, the second plot from the top-left corner plot shows the differences in distance measurements made from a location at 90&amp;deg; north (along the prime meridian) to a range of latitudinal locations along the 45&amp;deg; meridian.</span><a class="headerlink" href="#differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Ellipsoid_vs_sphere_distances.svg" src="../_images/Ellipsoid_vs_sphere_distances.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Differences in distance measurements between the surface of a sphere and an ellipsoid. Each graphic plots the differences in distance measurements made from a single point location along the 0&amp;deg; meridian identified by the green colored box (latitude value) to various latitudinal locations along a longitude (whose value is listed in the bisque colored box). For example, the second plot from the top-left corner plot shows the differences in distance measurements made from a location at 90&amp;deg; north (along the prime meridian) to a range of latitudinal locations along the 45&amp;deg; meridian.</span><a class="headerlink" href="#differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="geoid">
@@ -444,7 +493,7 @@
 <p>Representing the earth’s true shape, the <em>geoid</em>, as a mathematical model is crucial for a GIS environment. However, the earth’s shape is not a perfectly smooth surface. It has undulations resulting from changes in gravitational pull across its surface. These undulations may not be visible with the naked eye, but they are measurable and can influence locational measurements. Note that we are not including mountains and ocean bottoms in our discussion, instead we are focusing solely on the earth’s gravitational potential which can be best visualized by imagining the earth’s surface completely immersed in water and measuring the distance from the earth’s center to the water surface over the entire earth surface.</p>
 <div class="figure align-default" id="earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa">
 <img alt="../_images/Geoids_sm_NASA.jpg" src="../_images/Geoids_sm_NASA.jpg" />
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Earth’s geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)</span><a class="headerlink" href="#earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Earth’s geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)</span><a class="headerlink" href="#earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa" title="Permalink to this image">¶</a></p>
 </div>
 <p>The earth’s gravitational field is dynamic and is tied to the flow of the earth’s hot and fluid core. Hence its geoid is constantly changing, albeit at a large temporal scale.The measurement and representation of the earth’s shape is at the heart of geodesy–a branch of applied mathematics.</p>
 </div>
@@ -454,7 +503,7 @@
 <div class="section" id="local-datum">
 <h4>Local Datum<a class="headerlink" href="#local-datum" title="Permalink to this headline">¶</a></h4>
 <div class="figure align-default" id="a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface">
-<img alt="../_images/Datum_local.svg" src="../_images/Datum_local.svg" /><p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A local datum couples a geoid with the ellipsoid at a location on each element’s surface.</span><a class="headerlink" href="#a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Datum_local.svg" src="../_images/Datum_local.svg" /><p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A local datum couples a geoid with the ellipsoid at a location on each element’s surface.</span><a class="headerlink" href="#a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface" title="Permalink to this image">¶</a></p>
 </div>
 <p>There are many local datums to choose from, some are old while others are more recently defined. The choice of datum is largely driven by the location of interest. For example, when working in the US, a popular local datum to choose from is the North American Datum of 1927 (or NAD27 for short). NAD27 works well for the US but it’s not well suited for other parts of the world. For example, a far better local datum for Europe is the European Datum of 1950 (ED50 for short). Examples of common local datums are shown in the following table:</p>
 <table class="colwidths-auto table">
@@ -487,7 +536,7 @@
 <div class="section" id="geocentric-datum">
 <h4>Geocentric Datum<a class="headerlink" href="#geocentric-datum" title="Permalink to this headline">¶</a></h4>
 <div class="figure align-default" id="a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass">
-<img alt="../_images/Datum_geocentric.svg" src="../_images/Datum_geocentric.svg" /><p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">A geocentric  datum couples a geoid with the ellipsoid at each element’s center of mass.</span><a class="headerlink" href="#a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Datum_geocentric.svg" src="../_images/Datum_geocentric.svg" /><p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A geocentric  datum couples a geoid with the ellipsoid at each element’s center of mass.</span><a class="headerlink" href="#a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass" title="Permalink to this image">¶</a></p>
 </div>
 <p>Many of the modern datums use a geocentric alignment. These include the popular World Geodetic Survey for 1984 (WGS84) and the North American Datums of 1983 (NAD83). Most of the popular geocentric datums use the WGS84 ellipsoid or the GRS80 ellipsoid. These two ellipsoids share nearly identical semi-major and semi-minor axes: 6,378,137 meters and 6,356,752 meters respectively. Examples of popular geocentric datums are shown in the following table:</p>
 <table class="colwidths-auto table">
@@ -523,7 +572,7 @@
 <p>A Geographic Coordinate System (GCS) is defined by the ellipsoid model and by the way this ellipsoid is aligned with the geoid (defining the datum). It is important to know which GCS is associated with a GIS file or a map document reference system. This is particularly true when the overlapping layers are tied to different datums (and therefore GCS’). This is because a location on the earth’s surface can take on different coordinate values. For example, a location recorded in an NAD 1927 GCS having a coordinate pair of 44.56698° north and 69.65939° west will register a coordinate value of 44.56704° north and 69.65888° west in a NAD83 GCS and a coordinate value of 44.37465° north and -69.65888° west in a sphere based WGS84 GCS. If the coordinate systems for these point coordinate values were not properly defined, then they could be misplaced on a map.  This is analogous to recording temperature using different units of measure (degrees Celsius, Fahrenheit and Kelvin)–each unit of measure will produce a different numeric value.</p>
 <div class="figure align-default" id="map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-amp-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005-amp-deg-longitudinal-offset-between-both-reference-systems">
 <img alt="../_images/GCS_diff_coord_values.png" src="../_images/GCS_diff_coord_values.png" />
-<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639&amp;deg; line of latitude relative to the flagpole. Also note the 0.0005&amp;deg; longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-amp-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005-amp-deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639&amp;deg; line of latitude relative to the flagpole. Also note the 0.0005&amp;deg; longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-amp-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005-amp-deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -532,15 +581,17 @@
 <p>The surface of the earth is curved but maps are flat. A projected coordinate system (PCS) is a reference system for identifying locations and measuring features on a flat (map) surface. It consists of lines that intersect at right angles, forming a grid. Projected coordinate systems (which are based on Cartesian coordinates) have an origin, an <em>x</em> axis, a <em>y</em> axis, and a linear unit of measure. Going from a GCS to a PCS requires mathematical transformations. The myriad of projection types can be aggregated into three groups: <strong>planar</strong>, <strong>cylindrical</strong> and <strong>conical</strong>.</p>
 <div class="section" id="planar-projections">
 <h3>Planar Projections<a class="headerlink" href="#planar-projections" title="Permalink to this headline">¶</a></h3>
-<p>A planar projection (aka Azimuthal projection) maps the earth surface features to a flat surface that touches the earth’s surface at a point (<strong>tangent</strong> case),</p>
+<p><strong>Tangent Case</strong>
+A planar projection (aka Azimuthal projection) maps the earth surface features to a flat surface that touches the earth’s surface at a point (<strong>tangent</strong> case),</p>
 <div class="figure align-default">
 <img alt="../_images/Planar_projection_tangent.svg" src="../_images/Planar_projection_tangent.svg" /></div>
-<p>or along a line of tangency (a <strong>secant</strong> case).</p>
+<p><strong>Secant Case</strong>
+or along a line of tangency (a <strong>secant</strong> case).</p>
 <div class="figure align-default">
 <img alt="../_images/Planar_projection_secant.svg" src="../_images/Planar_projection_secant.svg" /></div>
 <p>This projection is often used in mapping polar regions but can be used for any location on the earth’s surface (in which case they are called oblique planar projections).</p>
 <div class="figure align-default" id="examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties">
-<img alt="../_images/Planar_Examples.svg" src="../_images/Planar_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.</span><a class="headerlink" href="#examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Planar_Examples.svg" src="../_images/Planar_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.</span><a class="headerlink" href="#examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="cylindrical-projection">
@@ -554,7 +605,7 @@
 <p>The cylinder can be tangent to the equator or it can be oblique. A special case is the Transverse aspect which is tangent to lines of longitude. This is a popular projection used in defining the Universal Transverse Mercator (UTM) and State Plane coordinate systems. The UTM PCS covers the entire globe and is a popular coordinate system in the US. It’s important to note that the UTM PCS is broken down into zones and therefore limits its extent to these zones that are 6° wide. For example, the State of Maine (USA) uses the UTM coordinate system (Zone 19 North) for most of its statewide GIS maps. Most USGS quad maps are also presented in a UTM coordinate system. Popular datums tied to the UTM coordinate system in the US include NAD27 and NAD83. There is also a WGS84 based UTM coordinate system.</p>
 <p>Distortion is minimized along the tangent or secant lines and increases as the distance from these lines increases.</p>
 <div class="figure align-default" id="examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape">
-<img alt="../_images/Cylindrical_Examples.svg" src="../_images/Cylindrical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).```</span><a class="headerlink" href="#examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Cylindrical_Examples.svg" src="../_images/Cylindrical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).```</span><a class="headerlink" href="#examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape" title="Permalink to this image">¶</a></p>
 <div class="legend">
 </div>
 </div>
@@ -570,7 +621,7 @@
 <p>Distortion is minimized along the tangent or secant lines and increases as the distance from these lines increases. When distance or area measurements are needed for the contiguous 48 states, use one of the conical projections such as Equidistant Conic (distance preserving) or Albers Equal Area Conic (area preserving).</p>
 <p>Conical projections are also popular PCS’ in European maps such as Europe Albers Equal Area Conic and Europe Lambert Conformal Conic.</p>
 <div class="figure align-default" id="examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape">
-<img alt="../_images/Conical_Examples.svg" src="../_images/Conical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).</span><a class="headerlink" href="#examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Conical_Examples.svg" src="../_images/Conical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).</span><a class="headerlink" href="#examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -640,7 +691,7 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="c_rasters.html" title="previous page">Raster Data</a>
-    <a class='right-next' id="next-link" href="d_affine.html" title="next page">Affine Transforms</a>
+    <a class='right-next' id="next-link" href="d_understand_crs_codes.html" title="next page">Understanding CRS codes</a>
 
         </div>
         
@@ -650,9 +701,9 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
     <div class="container">
       <p>
         
-          By Michael Mann & Steven Chao<br/>
+          By Michael Mann, Steven Chao, Nina Feldman<br/>
         
-            &copy; Copyright 2021.<br/>
+            &copy; Copyright 2020.<br/>
       </p>
     </div>
   </footer>

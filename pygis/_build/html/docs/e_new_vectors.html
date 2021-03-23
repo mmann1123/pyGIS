@@ -1,0 +1,943 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating Spatial Data &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Raster Skills" href="e_raster_op_intro.html" />
+    <link rel="prev" title="Attributes &amp; Indexing" href="e_attributes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/pygis.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a_intro.html">
+   Welcome to PyGIS
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get Started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_intro_py.html">
+   Welcome - Let’s get started
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_about_py.html">
+   Getting Started in Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_getting_started.html">
+   Setting up Your Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_python_by_example.html">
+   An Introductory Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_learn_more.html">
+   Learn More
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Data Types
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_features.html">
+   Feature Representation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_store_features.html">
+   Data Storage Formats
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_vectors.html">
+   Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_rasters.html">
+   Raster Data
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Nature of Coordinate Systems
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_crs_what_is_it.html">
+   What is a CRS?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_understand_crs_codes.html">
+   Understanding CRS codes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_affine.html">
+   Affine Transforms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html">
+   Vector CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_raster_crs_intro.html">
+   Raster CRS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_exercises.html">
+   CRS Exercises
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Basic Operations
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Skills
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_attributes.html">
+     Attributes &amp; Indexing
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Creating Spatial Data
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Raster Skills
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Remote Sensing
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_intro.html">
+   Remote Sensing w. Geowombat
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_basics.html">
+     Remote Sensing Basics
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="f_rs_common_task.html">
+   Common Tasks
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_task1.html">
+     Something
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/docs/e_new_vectors.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/e_new_vectors.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_new_vectors.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_new_vectors.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_new_vectors.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-geodataframe-geometries">
+   Creating GeoDataFrame geometries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-points-from-list-of-coordinates">
+     Create Points from list of coordinates
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-points-from-csv-of-latitude-and-longitude-lat-lon">
+     Creating Points from csv of latitude and longitude (lat, lon)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-lines">
+     Creating lines
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-polygons">
+     Creating Polygons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-points-admittedly-the-long-way">
+     Creating Points (admittedly the long way)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <hr class="docutils" id="e-new-vectors" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>An example of an admonition with a title.</p>
+<ul class="simple">
+<li><p>Create new geospatial objects (points, lines, polygons)</p></li>
+<li><p>Assign the correct projection or CRS</p></li>
+<li><p>Create points from a table or csv of lat and lon</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">CRS what is it?</span></a></p></li>
+<li><p><a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">Understand CRS codes</span></a></p></li>
+<li><p><a class="reference internal" href="c_vectors.html#c-vectors"><span class="std std-ref">Vector data structures</span></a></p></li>
+<li><p><a class="reference external" href="https://geojson.io/">Find Lat Lon of your own points, lines, polygons</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="creating-spatial-data">
+<h1>Creating Spatial Data<a class="headerlink" href="#creating-spatial-data" title="Permalink to this headline">¶</a></h1>
+<p>We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.</p>
+<div class="section" id="creating-geodataframe-geometries">
+<h2>Creating GeoDataFrame geometries<a class="headerlink" href="#creating-geodataframe-geometries" title="Permalink to this headline">¶</a></h2>
+<p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
+<p>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules first</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
+
+<span class="c1"># Create an empty geopandas GeoDataFrame</span>
+<span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
+<span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
+<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty GeoDataFrame
+Columns: [geometry]
+Index: []
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.</p>
+<div class="section" id="create-points-from-list-of-coordinates">
+<h3>Create Points from list of coordinates<a class="headerlink" href="#create-points-from-list-of-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">ESPG code</span></a>.<br />
+<a class="reference internal" href="#e-points-the-long-way"><span class="std std-ref">Click here for a more detailed explanation of this process</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates of the GW department of geography in Decimal Degrees</span>
+<span class="n">coordinate</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">77.04639494419096</span><span class="p">,</span>  <span class="mf">38.89934963421794</span><span class="p">]</span>
+
+<span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
+<span class="n">point_coord</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+
+<span class="c1"># create a dataframe with needed attributes and required geometry column</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;GWU&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Dept Geography&#39;</span><span class="p">],</span> <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">point_coord</span><span class="p">]}</span>
+
+<span class="c1"># Convert shapely object to a geodataframe </span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">point</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/e_new_vectors_3_1.png" src="../_images/e_new_vectors_3_1.png" />
+</div>
+</div>
+<p>We can apply the same process to a set of points stored in a pandas dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of attributes and coordinates</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;City&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">,</span> <span class="s1">&#39;Brasilia&#39;</span><span class="p">,</span> <span class="s1">&#39;Santiago&#39;</span><span class="p">,</span> <span class="s1">&#39;Bogota&#39;</span><span class="p">,</span> <span class="s1">&#39;Caracas&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;Country&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">,</span> <span class="s1">&#39;Chile&#39;</span><span class="p">,</span> <span class="s1">&#39;Colombia&#39;</span><span class="p">,</span> <span class="s1">&#39;Venezuela&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">34.58</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.78</span><span class="p">,</span> <span class="o">-</span><span class="mf">33.45</span><span class="p">,</span> <span class="mf">4.60</span><span class="p">,</span> <span class="mf">10.48</span><span class="p">],</span>
+     <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">58.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">47.91</span><span class="p">,</span> <span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">66.86</span><span class="p">]})</span>
+
+<span class="c1"># Create a Shapely points from the coordinate-tuple list</span>
+<span class="n">ply_coord</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">)]</span>
+
+<span class="c1"># Convert shapely object to a geodataframe with a crs</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">ply_coord</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/e_new_vectors_5_1.png" src="../_images/e_new_vectors_5_1.png" />
+</div>
+</div>
+<p><a class="reference external" href="https://geopandas.org/gallery/create_geopandas_from_pandas.html">adapted from geopandas</a></p>
+</div>
+<div class="section" id="creating-points-from-csv-of-latitude-and-longitude-lat-lon">
+<h3>Creating Points from csv of latitude and longitude (lat, lon)<a class="headerlink" href="#creating-points-from-csv-of-latitude-and-longitude-lat-lon" title="Permalink to this headline">¶</a></h3>
+<p>One of the most common data creation tasks is creating a shapefile from a list of points or a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. Luckily getting this data into usable format is easy enough.</p>
+<p>First we have to create an example <code class="docutils literal notranslate"><span class="pre">.csv</span></code> dataset to work from:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># create an outline of Washington DC and write to csv</span>
+<span class="n">path_to_csv</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../temp/points.csv&#39;</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Corner&#39;</span><span class="p">:[</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">],</span>
+          <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">77.0412826538086</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.11681365966797</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.01896667480469</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.0412826538086</span><span class="p">],</span> 
+          <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">38.99570671505043</span><span class="p">,</span> <span class="mf">38.936713143230044</span><span class="p">,</span> <span class="mf">38.807610542357594</span><span class="p">,</span> <span class="mf">38.99570671505043</span><span class="p">]}</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">points</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_to_csv</span><span class="p">)</span>              
+</pre></div>
+</div>
+</div>
+</div>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">geodataframe</span></code> from our data you simply need to read it back in, an specify the geometry column values using <code class="docutils literal notranslate"><span class="pre">points_from_xy</span></code> pointing it to the correct columns of <code class="docutils literal notranslate"><span class="pre">df</span></code>, namely <code class="docutils literal notranslate"><span class="pre">df.lon</span></code> anf <code class="docutils literal notranslate"><span class="pre">df.lat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read the point data in </span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_to_csv</span><span class="p">)</span>
+
+<span class="c1"># Create a geodataframe from the data using and &#39;EPSG&#39; code to assign WGS84 coordinate reference system</span>
+<span class="n">points</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+<span class="n">points</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Corner</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>N</td>
+      <td>-77.041283</td>
+      <td>38.995707</td>
+      <td>POINT (-77.04128 38.99571)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>E</td>
+      <td>-77.116814</td>
+      <td>38.936713</td>
+      <td>POINT (-77.11681 38.93671)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>S</td>
+      <td>-77.018967</td>
+      <td>38.807611</td>
+      <td>POINT (-77.01897 38.80761)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>W</td>
+      <td>-77.041283</td>
+      <td>38.995707</td>
+      <td>POINT (-77.04128 38.99571)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In this case <code class="docutils literal notranslate"><span class="pre">points_from_xy()</span></code> was used to transform lat and lon into a list of <code class="docutils literal notranslate"><span class="pre">shapely.Point</span></code> objects. This then is used as the geometry for the GeoDataFrame. (<code class="docutils literal notranslate"><span class="pre">points_from_xy()</span></code> is simply an enhanced wrapper for <code class="docutils literal notranslate"><span class="pre">[Point(x,</span> <span class="pre">y)</span> <span class="pre">for</span> <span class="pre">x,</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">zip(df.lon,</span> <span class="pre">df.lat)]</span></code>)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul class="simple">
+<li><p>Although we say “lat lon” python uses “lon lat” instead, this follows the preference for using x,y for notation.</p></li>
+<li><p>Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-lines">
+<h3>Creating lines<a class="headerlink" href="#creating-lines" title="Permalink to this headline">¶</a></h3>
+<p>Following the examples above we can specify lines easily. In this case let’s say we have lines tracking three people riding their bikes through town. We keep track of their unique id <code class="docutils literal notranslate"><span class="pre">ID</span></code>, their location <code class="docutils literal notranslate"><span class="pre">X,Y</span></code>, and their <code class="docutils literal notranslate"><span class="pre">Speed</span></code>, and read in the data below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span> 
+<span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">ID,X,Y,Speed</span>
+<span class="s2">1,  -87.789,  41.976,  16</span>
+<span class="s2">1,  -87.482,  41.677,  17</span>
+<span class="s2">2,  -87.739,  41.876,  16</span>
+<span class="s2">2,  -87.681,  41.798,  16</span>
+<span class="s2">2,  -87.599,  41.708,  16</span>
+<span class="s2">3,  -87.599,  41.908,  17</span>
+<span class="s2">3,  -87.598,  41.708,  17</span>
+<span class="s2">3,  -87.643,  41.675,  17</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="c1"># use StringIO to read in text chunk</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s convert these to points and take a look. Notice that points are not a good replacement for lines in the case, we have three individuals, and they need to be treated separately.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#zip the coordinates into a point object and convert to a GeoData Frame</span>
+<span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Y</span><span class="p">)]</span>
+<span class="n">geo_df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+<span class="n">geo_df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/e_new_vectors_13_1.png" src="../_images/e_new_vectors_13_1.png" />
+</div>
+</div>
+<p>Now let’s tread these data as lines, we can take advantage of the column <code class="docutils literal notranslate"><span class="pre">ID</span></code> to <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>. Luckily geopandas <code class="docutils literal notranslate"><span class="pre">.groupby</span></code> is consistent with the use in pandas. So here we <code class="docutils literal notranslate"><span class="pre">.groupby(['ID'])</span></code>, for each <code class="docutils literal notranslate"><span class="pre">ID</span></code> group we convert the values to a list, and store it in a Fiona <code class="docutils literal notranslate"><span class="pre">LineString</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># treat each `ID` group of points as a line</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">geo_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">])[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">LineString</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+
+<span class="c1"># store as a GeodataFrame and add &#39;ID&#39; as a column (currently stored as the &#39;index&#39;)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span> 
+<span class="n">lines</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/e_new_vectors_15_1.png" src="../_images/e_new_vectors_15_1.png" />
+</div>
+</div>
+<p>Now we can see that each line is treated separately by <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and plot them using <code class="docutils literal notranslate"><span class="pre">.plot(column='ID')</span></code>.</p>
+</div>
+<div class="section" id="creating-polygons">
+<h3>Creating Polygons<a class="headerlink" href="#creating-polygons" title="Permalink to this headline">¶</a></h3>
+<p>Creating a polyon in geopandas is very similiar to the other exercises. First we create a Fiona geometry object from our coordinates, add that to a dataframe with any attributes and then create a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> with an assigned coordinate reference system (CRS).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of coordindate pairs</span>
+<span class="n">coordinates</span> <span class="o">=</span> <span class="p">[[</span> <span class="o">-</span><span class="mf">77.0412826538086</span><span class="p">,</span> <span class="mf">38.99570671505043</span> <span class="p">],</span> <span class="p">[</span> <span class="o">-</span><span class="mf">77.11681365966797</span><span class="p">,</span> <span class="mf">38.936713143230044</span> <span class="p">],</span> <span class="p">[</span> <span class="o">-</span><span class="mf">77.01896667480469</span><span class="p">,</span> <span class="mf">38.807610542357594</span><span class="p">],</span>
+               <span class="p">[</span><span class="o">-</span><span class="mf">76.90910339355469</span><span class="p">,</span>  <span class="mf">38.892636142310295</span><span class="p">]]</span>           
+
+<span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
+<span class="n">ply_coord</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+
+<span class="c1"># create a dictionary with needed attributes and required geometry column</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Attribute&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;name1&#39;</span><span class="p">],</span> <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="n">ply_coord</span><span class="p">}</span>
+
+<span class="c1"># Convert shapely object to a geodataframe </span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/e_new_vectors_17_1.png" src="../_images/e_new_vectors_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="creating-points-admittedly-the-long-way">
+<span id="e-points-the-long-way"></span><h3>Creating Points (admittedly the long way)<a class="headerlink" href="#creating-points-admittedly-the-long-way" title="Permalink to this headline">¶</a></h3>
+<p>Let’s create a Shapely Point representing the GWU Department of Geography that we can insert to our GeoDataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates of the GW department of geography in Decimal Degrees</span>
+<span class="n">coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">77.04639494419096</span><span class="p">,</span>  <span class="mf">38.89934963421794</span><span class="p">)</span>
+
+<span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see what we have</span>
+<span class="n">point</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e_new_vectors_19_0.svg" src="../_images/e_new_vectors_19_0.svg" /></div>
+</div>
+<p>Okay, so now we have appropriate Polygon -object.</p>
+<p>Let’s insert the polygon into our ‘geometry’ column in our GeoDataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Insert the polygon into &#39;geometry&#39; -column at index 0</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span>
+
+<span class="c1"># Let&#39;s see what we have now</span>
+<span class="n">newdata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (-77.04639 38.89935)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we have a GeoDataFrame with Point that we can export to a Shapefile.</p>
+<p>Let’s add another column to our GeoDataFrame called Location with text GWU Geography.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a new column and insert data</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;GWU Geography&#39;</span>
+
+<span class="c1"># Let&#39;s check the data</span>
+<span class="n">newdata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (-77.04639 38.89935)</td>
+      <td>GWU Geography</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Okay, now we have additional information that is useful to be able to recognize what the feature represents.</p>
+<p>Before exporting the data it is useful to determine the coordinate reference system (CRS, ‘projection’) for the GeoDataFrame.</p>
+<p>GeoDataFrame has a property called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that (<a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">review here</span></a>) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. <code class="docutils literal notranslate"><span class="pre">newdata.crs</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+<p>Let’s add a crs for our GeoDataFrame. A Python module called fiona has a nice function called from_epsg() for passing coordinate system for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326) which is the most common choice for lat lon CRSs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import specific function &#39;from_epsg&#39; from fiona module</span>
+<span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+
+<span class="c1"># Set the GeoDataFrame&#39;s coordinate system to WGS84</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="n">from_epsg</span><span class="p">(</span><span class="n">code</span> <span class="o">=</span> <span class="mi">4326</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s see how the crs definition looks like</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/pyproj/crs/crs.py:53: FutureWarning: &#39;+init=&lt;authority&gt;:&lt;code&gt;&#39; syntax is deprecated. &#39;&lt;authority&gt;:&lt;code&gt;&#39; is the preferred initialization method. When making the change, be mindful of axis order changes: https://pyproj4.github.io/pyproj/stable/gotchas.html#axis-order-changes-in-proj-6
+  return _prepare_from_string(&quot; &quot;.join(pjargs))
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: +init=epsg:4326 +no_defs +type=crs&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- lon[east]: Longitude (degree)
+- lat[north]: Latitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can export the data using GeoDataFrames .to_file() -function. The function works similarly as numpy or pandas, but here we only need to provide the output path for the Shapefile. Easy isn’t it!:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the output path for the Shapefile</span>
+<span class="n">outfp</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;../temp/gwu_geog.shp&quot;</span>
+
+<span class="c1"># Write the data into that Shapefile</span>
+<span class="n">newdata</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">outfp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><a class="reference external" href="https://automating-gis-processes.github.io/CSC18/lessons/L2/geopandas-basics.html#creating-geometries-into-a-geodataframe">Adapted from Intro to Python GIS</a></p>
+<!-- 
+```{tip}  Becuase GeoPandas are so intertwined spend the time to learn more about here [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
+```
+ 
+```{code-cell} ipython3
+import geopandas
+world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+world.columns
+```  
+--></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="e_attributes.html" title="previous page">Attributes &amp; Indexing</a>
+    <a class='right-next' id="next-link" href="e_raster_op_intro.html" title="next page">Raster Skills</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Michael Mann, Steven Chao, Nina Feldman<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

@@ -4,3 +4,4 @@ numpy
 ghp-import
 pyproj
 geopandas
+contextily

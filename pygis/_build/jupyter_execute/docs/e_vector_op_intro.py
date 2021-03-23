@@ -10,5 +10,6 @@ In this section we will learn how to:
 :titlesonly:
 
 
-c_attributes
+e_attributes
+e_new_vectors
 ```

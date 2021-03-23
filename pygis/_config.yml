@@ -6,8 +6,8 @@
 #######################################################################################
 # Book settings
 title                       : Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
-author                      : Michael Mann & Steven Chao  # The author of the book
-copyright                   : "2021"  # Copyright year to be placed in the footer
+author                      : Michael Mann, Steven Chao, Nina Feldman  # The author of the book
+#copyright                   : "2021"  # Copyright year to be placed in the footer
 logo                        : pygis.png  # A path to the book logo
 
 sphinx:
@@ -28,15 +28,15 @@ only_build_toc_files: true
 notebook_interface            : "notebook"
 
 repository:
-  url                       : https://mmann1123.github.io/pyGIS/pygis  # The URL to your book's repository
-  path_to_book              : ""  # A path to your book's folder, relative to the repository root.
+  url                       : https://github.com/mmann1123/pyGIS  # The URL to your book's repository
+  path_to_book              : "./pygis"  # A path to your book's folder, relative to the repository root.
   branch                    : main  # Which branch of the repository should be used when creating links
 
 html:
-  use_edit_page_button:         false
-  use_issues_button:            false
-  home_page_in_navbar         : true
-
+  use_edit_page_button:         true
+  use_issues_button:            true
+  home_page_in_navbar:          true
+  use_repository_button:        true
 
 #######################################################################################
 # Launch button settings
