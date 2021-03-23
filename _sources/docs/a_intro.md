@@ -3,7 +3,10 @@ Welcome to PyGIS
 
 The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for geospatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application. 
 
------------------------
+```{tableofcontents}
+```
+
+<!-- -----------------------
 # A: Data Types
 - Vector Data
   - Geojson
@@ -90,4 +93,4 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 ## Book rendering options
 - https://executablebooks.github.io/quantecon-mini-example/docs/python_by_example.html
 - https://jupyterbook.org/intro.html
-- https://www.sphinx-doc.org/en/master/
+- https://www.sphinx-doc.org/en/master/ -->

@@ -12,17 +12,19 @@ kernelspec:
 (e_new_vectors)=
  
 ----------------
-**Learning Objectives**
+
+```{admonition} Learning Objectives
+An example of an admonition with a title.
 * Create new geospatial objects (points, lines, polygons)
 * Assign the correct projection or CRS
 * Create points from a table or csv of lat and lon 
-
-**Review**
+```
+```{admonition} Review
 * [CRS what is it?](d_crs_what_is_it)
 * [Understand CRS codes](d_understand_crs_codes)
 * [Vector data structures](c_vectors)
 * [Find Lat Lon of your own points, lines, polygons](https://geojson.io/)
-
+```
 ----------------
 
 
@@ -53,12 +55,156 @@ print(newdata)
 
 Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.
 
-### Creating Points (addmitedly the long way)
+### Create Points from list of coordinates
+Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes).   
+[Click here for a more detailed explanation of this process](e_points_the_long_way)
+
+```{code-cell} ipython3
+# Coordinates of the GW department of geography in Decimal Degrees
+coordinate = [-77.04639494419096,  38.89934963421794]
+
+# Create a Shapely polygon from the coordinate-tuple list
+point_coord = Point(coordinate)
+
+# create a dataframe with needed attributes and required geometry column
+df = {'GWU': ['Dept Geography'], 'geometry': [point_coord]}
+
+# Convert shapely object to a geodataframe 
+point = gpd.GeoDataFrame(df, geometry='geometry', crs ="EPSG:4326")
+
+# Let's see what we have
+point.plot()
+```
+We can apply the same process to a set of points stored in a pandas dataframe. 
+
+```{code-cell} ipython3
+# list of attributes and coordinates
+df = pd.DataFrame(
+    {'City': ['Buenos Aires', 'Brasilia', 'Santiago', 'Bogota', 'Caracas'],
+     'Country': ['Argentina', 'Brazil', 'Chile', 'Colombia', 'Venezuela'],
+     'lat': [-34.58, -15.78, -33.45, 4.60, 10.48],
+     'lon': [-58.66, -47.91, -70.66, -74.08, -66.86]})
+
+# Create a Shapely points from the coordinate-tuple list
+ply_coord = [Point(x, y) for x, y in zip(df.lat, df.lon)]
+
+# Convert shapely object to a geodataframe with a crs
+poly = gpd.GeoDataFrame(df, geometry=ply_coord, crs ="EPSG:4326")
+
+# Let's see what we have
+poly.plot()
+```
+[adapted from geopandas](https://geopandas.org/gallery/create_geopandas_from_pandas.html)
+
+### Creating Points from csv of latitude and longitude (lat, lon)
+
+One of the most common data creation tasks is creating a shapefile from a list of points or a `.csv` file. Luckily getting this data into usable format is easy enough. 
+
+First we have to create an example `.csv` dataset to work from:
+
+```{code-cell} ipython3
+import pandas as pd
+# create an outline of Washington DC and write to csv
+path_to_csv = r'../temp/points.csv'
+points = {'Corner':['N','E','S','W'],
+          'lon': [-77.0412826538086, -77.11681365966797, -77.01896667480469, -77.0412826538086], 
+          'lat': [38.99570671505043, 38.936713143230044, 38.807610542357594, 38.99570671505043]}
+points = pd.DataFrame.from_dict(points)
+points.to_csv(path_to_csv)              
+```
+To create a `geodataframe` from our data you simply need to read it back in, an specify the geometry column values using `points_from_xy` pointing it to the correct columns of `df`, namely `df.lon` anf `df.lat`.
+
+```{code-cell} ipython3
+# read the point data in 
+df = pd.read_csv(path_to_csv)
+
+# Create a geodataframe from the data using and 'EPSG' code to assign WGS84 coordinate reference system
+points= gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(x=df.lon, y=df.lat), crs = 'EPSG:4326')
+points
+```
+In this case `points_from_xy()` was used to transform lat and lon into a list of `shapely.Point` objects. This then is used as the geometry for the GeoDataFrame. (`points_from_xy()` is simply an enhanced wrapper for `[Point(x, y) for x, y in zip(df.lon, df.lat)]`)
+
+```{tip}  
+- Although we say "lat lon" python uses "lon lat" instead, this follows the preference for using x,y for notation. 
+- Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)
+```
+
+### Creating lines
+
+Following the examples above we can specify lines easily. In this case let's say we have lines tracking three people riding their bikes through town. We keep track of their unique id `ID`, their location `X,Y`, and their `Speed`, and read in the data below:
+
+```{code-cell} ipython3
+from io import StringIO 
+data = """
+ID,X,Y,Speed
+1,  -87.789,  41.976,  16
+1,  -87.482,  41.677,  17
+2,  -87.739,  41.876,  16
+2,  -87.681,  41.798,  16
+2,  -87.599,  41.708,  16
+3,  -87.599,  41.908,  17
+3,  -87.598,  41.708,  17
+3,  -87.643,  41.675,  17
+"""
+# use StringIO to read in text chunk
+df = pd.read_table(StringIO(data), sep=',')
+```
+
+Let's convert these to points and take a look. Notice that points are not a good replacement for lines in the case, we have three individuals, and they need to be treated separately.
+
+
+```{code-cell} ipython3
+#zip the coordinates into a point object and convert to a GeoData Frame
+points = [Point(xy) for xy in zip(df.X, df.Y)]
+geo_df = gpd.GeoDataFrame(df, geometry=points, crs = 'EPSG:4326')
+geo_df.plot()
+```
+Now let's tread these data as lines, we can take advantage of the column `ID` to `.groupby`. Luckily geopandas `.groupby` is consistent with the use in pandas. So here we `.groupby(['ID'])`, for each `ID` group we convert the values to a list, and store it in a Fiona `LineString` object. 
+
+```{code-cell} ipython3
+# treat each `ID` group of points as a line
+lines = geo_df.groupby(['ID'])['geometry'].apply(lambda x:  LineString(x.tolist()))
+
+# store as a GeodataFrame and add 'ID' as a column (currently stored as the 'index')
+lines = gpd.GeoDataFrame(lines, geometry='geometry', crs="EPSG:4326") 
+lines.reset_index(inplace=True)
+lines.plot(column='ID')
+```
+Now we can see that each line is treated separately by `ID`, and plot them using `.plot(column='ID')`.
+
+
+### Creating Polygons
+
+Creating a polyon in geopandas is very similiar to the other exercises. First we create a Fiona geometry object from our coordinates, add that to a dataframe with any attributes and then create a `GeoDataFrame` with an assigned coordinate reference system (CRS).
+
+```{code-cell} ipython3
+# list of coordindate pairs
+coordinates = [[ -77.0412826538086, 38.99570671505043 ], [ -77.11681365966797, 38.936713143230044 ], [ -77.01896667480469, 38.807610542357594],
+               [-76.90910339355469,  38.892636142310295]]           
+
+# Create a Shapely polygon from the coordinate-tuple list
+ply_coord = Polygon(coordinates)
+
+# create a dictionary with needed attributes and required geometry column
+df = {'Attribute': ['name1'], 'geometry': ply_coord}
+
+# Convert shapely object to a geodataframe 
+poly = gpd.GeoDataFrame(df, geometry='geometry', crs ="EPSG:4326")
+
+# Let's see what we have
+poly.plot()
+```
+
+
+
+(e_points_the_long_way)=
+
+### Creating Points (admittedly the long way)
 
 Let’s create a Shapely Point representing the GWU Department of Geography that we can insert to our GeoDataFrame:
 
 ```{code-cell} ipython3
-# Coordinates of the Helsinki Senate square in Decimal Degrees
+# Coordinates of the GW department of geography in Decimal Degrees
 coordinates = (-77.04639494419096,  38.89934963421794)
 
 # Create a Shapely polygon from the coordinate-tuple list
@@ -118,100 +264,6 @@ outfp = r"../temp/gwu_geog.shp"
 # Write the data into that Shapefile
 newdata.to_file(outfp)
 ```
-
-### Creating Points from csv of latitude and longitude (lat, lon)
-
-One of the most common data creation tasks is creating a shapefile from a list of points or a `.csv` file. Luckily getting this data into usable format is easy enough. 
-
-First we have to create an example `.csv` dataset to work from:
-
-```{code-cell} ipython3
-import pandas as pd
-# create an outline of Washington DC and write to csv
-path_to_csv = r'../temp/points.csv'
-points = {'Corner':['N','E','S','W'],
-          'lon': [-77.0412826538086, -77.11681365966797, -77.01896667480469, -77.0412826538086], 
-          'lat': [38.99570671505043, 38.936713143230044, 38.807610542357594, 38.99570671505043]}
-points = pd.DataFrame.from_dict(points)
-points.to_csv(path_to_csv)              
-```
-To create a `geodataframe` from our data you simply need to read it back in, an specify the geometry column values using `points_from_xy` pointing it to the correct columns of `df`, namely `df.lon` anf `df.lat`.
-
-```{code-cell} ipython3
-from geopandas import GeoDataFrame as gdf
-# read the point data in 
-df = pd.read_csv(path_to_csv)
-
-# Create a geodataframe from the data using from_epsg to assign WGS84 coordinate reference system
-points= gdf(df, geometry=gpd.points_from_xy(x=df.lon, y=df.lat), crs = from_epsg(4326))
-points
-```
-
-
-```{tip}  
-- Although we say "lat lon" python uses "lon lat" instead, this follows the preference for using x,y for notation. 
-- Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)
-```
-
-### Creating lines
-
-Following the examples above we can specify lines easily. In this case let's say we have lines tracking three people riding their bikes through town. We keep track of their unique id `ID`, their location `X,Y`, and their `Speed`, and read in the data below:
-
-```{code-cell} ipython3
-from io import StringIO 
-data = """
-ID,X,Y,Speed
-1,  -87.78976,  41.97658,   16
-1,  -87.48234,  41.677342,  17
-2,  -87.73956,  41.876827,  16
-2,  -87.68161,  41.79886,   16
-2,  -87.5999,   41.7083,    16
-3,  -87.59918,  41.708485,  17
-3,  -87.59857,  41.708393,  17
-3,  -87.64391,  41.675133,  17
-"""
-
-df = pd.read_table(StringIO(data),sep=',',header=0)
-```
-
-Let's convert these to points and take a look. Notice that points are not a good replacement for lines in the case, we have three individuals, and they need to be treated separately.
-
-
-```{code-cell} ipython3
-#zip the coordinates into a point object and convert to a GeoData Frame
-geometry = [Point(xy) for xy in zip(df.X, df.Y)]
-geo_df = gpd.GeoDataFrame(df, geometry=geometry)
-geo_df.plot()
-```
-Now let's tread these data as lines, we can take advantage of the column `ID` to `.groupby`. Luckily geopandas `.groupby` is consistent with the use in pandas. So here we `.groupby(['ID'])`, for each `ID` group we convert the values to a list, and store it in a Fiona `LineString` object. 
-
-```{code-cell} ipython3
-# treat each `ID` group of points as a line
-lines = geo_df.groupby(['ID'])['geometry'].apply(lambda x:  LineString(x.tolist()))
-
-# store as a GeodataFrame and add 'ID' as a column (currently stored as the 'index')
-lines = gpd.GeoDataFrame(lines, geometry='geometry')
-lines.reset_index(inplace=True)
-lines.plot(column='ID')
-```
-
-
-### Creating Polygons
-<!-- 
-# Coordinates of the Helsinki Senate square in Decimal Degrees
-coordinates = [(24.950899, 60.169158), (24.953492, 60.169158), (24.953510, 60.170104), (24.950958, 60.169990)]
-
-# Create a Shapely polygon from the coordinate-tuple list
-poly = Polygon(coordinates)
-
-# Let's see what we have
-poly
-
- [[ -77.0412826538086, 38.99570671505043 ], [ -77.11681365966797, 38.936713143230044 ], [ -77.01896667480469, 38.807610542357594],
-            [ -76.90910339355469,  38.892636142310295]]           
-  -->
-
-
 
 -------------------
 
