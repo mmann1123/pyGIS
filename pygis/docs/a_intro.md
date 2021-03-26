@@ -43,7 +43,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 - Turtle draw excercise in "mastering geospatil analysis with python"
 - https://autogis-site.readthedocs.io/en/latest/notebooks/L2/02-projections.html
  -https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html
- 
+ - https://people.cs.clemson.edu/~dhouse/courses/401/notes/affines-matrices.pdf
 ----------------------
 # C: Basics with Spatial Data
 ## Vector

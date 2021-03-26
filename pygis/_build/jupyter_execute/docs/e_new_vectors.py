@@ -18,12 +18,7 @@ An example of an admonition with a title.
 
 
 # Creating Spatial Data
-We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation. 
-
-## Creating GeoDataFrame geometries
-Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.
-
-Let’s create an empty `GeoDataFrame` and create a new column called geometry that will contain our Shapely objects:
+We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.
 
 # Import necessary modules first
 import pandas as pd
@@ -33,12 +28,23 @@ import fiona
 import matplotlib.pyplot as plt
 plt.style.use('bmh') # better for plotting geometries vs general plots.
 
+## Creating GeoDataFrame geometries
+A `GeoDataFrame` object is a `pandas.DataFrame` that has a column with geometry. An empty `GeoDataFrame` is just that, empty, essentially just like the pandas one. Let’s create an empty `GeoDataFrame` and create a new column called geometry that will contain our Shapely objects:
+
 # Create an empty geopandas GeoDataFrame
 newdata = gpd.GeoDataFrame()
-# Create a new column called 'geometry' to the GeoDataFrame
-newdata['geometry'] = None
-
 print(newdata)
+
+In order to have a working spatial dataframe we need define a few things:
+
+**GeoDataFrame Components**
+- data: a pandas.DataFrame, dictionary, or empty list [] containing an desired attribute data. Use [] if no data is 
+- crs:  Coordinate Reference System of the geometry objects. Can be anything accepted by `pyproj.CRS.from_user_input()`, such as an authority string (eg “EPSG:4326”) or a WKT string.
+- geometry:  Column name in a DataFrame to use as geometry or Shapely point, line, or polygon object. 
+
+Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.
+
+ 
 
 Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.
 
@@ -174,6 +180,18 @@ poly.plot()
 (e_points_the_long_way)=
 
 ### Creating Points (admittedly the long way)
+
+
+Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.
+
+Let’s create an empty `GeoDataFrame` and create a new column called geometry that will contain our Shapely objects:
+
+# Create an empty geopandas GeoDataFrame
+newdata = gpd.GeoDataFrame()
+# Create a new column called 'geometry' to the GeoDataFrame
+newdata['geometry'] = None
+
+print(newdata)
 
 Let’s create a Shapely Point representing the GWU Department of Geography that we can insert to our GeoDataFrame:
 

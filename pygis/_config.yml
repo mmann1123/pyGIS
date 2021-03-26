@@ -9,7 +9,6 @@ title                       : Open Source Geospatial Programming & Remote Sensin
 author                      : Michael Mann, Steven Chao, Nina Feldman  # The author of the book
 #copyright                   : "2021"  # Copyright year to be placed in the footer
 logo                        : pygis.png  # A path to the book logo
-
 sphinx:
   extra_extensions: []
 #  myst_enable_extensions = ["dollarmath", "amsmath"]
@@ -37,7 +36,8 @@ html:
   use_issues_button:            true
   home_page_in_navbar:          true
   use_repository_button:        true
-
+  google_analytics_id       : "G-BEC4RYX023"  # A GA id that can be used to track book views.
+  extra_footer              : 'Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>'  # Will be displayed underneath the footer.
 #######################################################################################
 # Launch button settings
 

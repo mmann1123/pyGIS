@@ -113,7 +113,7 @@ $$
 :name: Shear transform a coordinate
 Shear transform a coordinate
 ```
-
+(d_affine_transform_matrix)=
 ### Transforming Matrices 
 It is often convenient to represent these equations as matrices. This allows us to easily chain together a series of operations. We can represent our transformed point $\mathbf{\acute{x}}$ as follows:
 
@@ -166,6 +166,8 @@ $$
    \end{eqnarray}
 $$
 
+(d_affine_trans_scale)=
+
 Now that we have scalers $c$ and $f$ all the transforms are possible. We do however, need to update our previous operations:
 
 
@@ -197,6 +199,7 @@ $$
 
 ### Numeric Examples
 
+(d_affine_trans)=
 #### Translate 
 Now let's assume we have a point a at (-2,-2) for (x,y). For simplicity sake lets assume we want to move it up to the origin by adding 2 to both x and y. 
 
