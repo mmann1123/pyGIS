@@ -12,7 +12,8 @@ kernelspec:
 (d_raster_crs_intro)=
 
 
-
+To Do:
+- show how warping works
 
 ----------------
 
