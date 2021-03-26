@@ -428,10 +428,6 @@
 <div class="section" id="creating-spatial-data">
 <h1>Creating Spatial Data<a class="headerlink" href="#creating-spatial-data" title="Permalink to this headline">¶</a></h1>
 <p>We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.</p>
-<div class="section" id="creating-geodataframe-geometries">
-<h2>Creating GeoDataFrame geometries<a class="headerlink" href="#creating-geodataframe-geometries" title="Permalink to this headline">¶</a></h2>
-<p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
-<p>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules first</span>
@@ -441,24 +437,37 @@
 <span class="kn">import</span> <span class="nn">fiona</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
-
-<span class="c1"># Create an empty geopandas GeoDataFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-geodataframe-geometries">
+<h2>Creating GeoDataFrame geometries<a class="headerlink" href="#creating-geodataframe-geometries" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> object is a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> that has a column with geometry. An empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is just that, empty, essentially just like the pandas one. Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty geopandas GeoDataFrame</span>
 <span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
-<span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
-<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
 <span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty GeoDataFrame
-Columns: [geometry]
+Columns: []
 Index: []
 </pre></div>
 </div>
 </div>
 </div>
+<p>In order to have a working spatial dataframe we need define a few things:</p>
+<p><strong>GeoDataFrame Components</strong></p>
+<ul class="simple">
+<li><p>data: a pandas.DataFrame, dictionary, or empty list [] containing an desired attribute data. Use [] if no data is</p></li>
+<li><p>crs:  Coordinate Reference System of the geometry objects. Can be anything accepted by <code class="docutils literal notranslate"><span class="pre">pyproj.CRS.from_user_input()</span></code>, such as an authority string (eg “EPSG:4326”) or a WKT string.</p></li>
+<li><p>geometry:  Column name in a DataFrame to use as geometry or Shapely point, line, or polygon object.</p></li>
+</ul>
+<p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
 <p>Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.</p>
 <div class="section" id="create-points-from-list-of-coordinates">
 <h3>Create Points from list of coordinates<a class="headerlink" href="#create-points-from-list-of-coordinates" title="Permalink to this headline">¶</a></h3>
@@ -487,7 +496,7 @@ Index: []
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/e_new_vectors_3_1.png" src="../_images/e_new_vectors_3_1.png" />
+<img alt="../_images/e_new_vectors_5_1.png" src="../_images/e_new_vectors_5_1.png" />
 </div>
 </div>
 <p>We can apply the same process to a set of points stored in a pandas dataframe.</p>
@@ -515,7 +524,7 @@ Index: []
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/e_new_vectors_5_1.png" src="../_images/e_new_vectors_5_1.png" />
+<img alt="../_images/e_new_vectors_7_1.png" src="../_images/e_new_vectors_7_1.png" />
 </div>
 </div>
 <p><a class="reference external" href="https://geopandas.org/gallery/create_geopandas_from_pandas.html">adapted from geopandas</a></p>
@@ -659,7 +668,7 @@ Index: []
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/e_new_vectors_13_1.png" src="../_images/e_new_vectors_13_1.png" />
+<img alt="../_images/e_new_vectors_15_1.png" src="../_images/e_new_vectors_15_1.png" />
 </div>
 </div>
 <p>Now let’s tread these data as lines, we can take advantage of the column <code class="docutils literal notranslate"><span class="pre">ID</span></code> to <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>. Luckily geopandas <code class="docutils literal notranslate"><span class="pre">.groupby</span></code> is consistent with the use in pandas. So here we <code class="docutils literal notranslate"><span class="pre">.groupby(['ID'])</span></code>, for each <code class="docutils literal notranslate"><span class="pre">ID</span></code> group we convert the values to a list, and store it in a Fiona <code class="docutils literal notranslate"><span class="pre">LineString</span></code> object.</p>
@@ -679,7 +688,7 @@ Index: []
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/e_new_vectors_15_1.png" src="../_images/e_new_vectors_15_1.png" />
+<img alt="../_images/e_new_vectors_17_1.png" src="../_images/e_new_vectors_17_1.png" />
 </div>
 </div>
 <p>Now we can see that each line is treated separately by <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and plot them using <code class="docutils literal notranslate"><span class="pre">.plot(column='ID')</span></code>.</p>
@@ -711,12 +720,33 @@ Index: []
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/e_new_vectors_17_1.png" src="../_images/e_new_vectors_17_1.png" />
+<img alt="../_images/e_new_vectors_19_1.png" src="../_images/e_new_vectors_19_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="creating-points-admittedly-the-long-way">
 <span id="e-points-the-long-way"></span><h3>Creating Points (admittedly the long way)<a class="headerlink" href="#creating-points-admittedly-the-long-way" title="Permalink to this headline">¶</a></h3>
+<p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
+<p>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty geopandas GeoDataFrame</span>
+<span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
+<span class="c1"># Create a new column called &#39;geometry&#39; to the GeoDataFrame</span>
+<span class="n">newdata</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty GeoDataFrame
+Columns: [geometry]
+Index: []
+</pre></div>
+</div>
+</div>
+</div>
 <p>Let’s create a Shapely Point representing the GWU Department of Geography that we can insert to our GeoDataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -732,7 +762,7 @@ Index: []
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e_new_vectors_19_0.svg" src="../_images/e_new_vectors_19_0.svg" /></div>
+<img alt="../_images/e_new_vectors_23_0.svg" src="../_images/e_new_vectors_23_0.svg" /></div>
 </div>
 <p>Okay, so now we have appropriate Polygon -object.</p>
 <p>Let’s insert the polygon into our ‘geometry’ column in our GeoDataFrame:</p>
@@ -925,6 +955,9 @@ world.columns
           By Michael Mann, Steven Chao, Nina Feldman<br/>
         
             &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+          </div>
       </p>
     </div>
   </footer>
@@ -938,6 +971,16 @@ world.columns
   <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

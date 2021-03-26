@@ -52,6 +52,8 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="What is a CRS?" href="d_crs_what_is_it.html" />
@@ -364,8 +366,147 @@
         
               <div>
                 
-  <div class="section" id="raster-data">
-<span id="c-rasters"></span><h1>Raster Data<a class="headerlink" href="#raster-data" title="Permalink to this headline">¶</a></h1>
+  <hr class="docutils" id="c-rasters" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>An example of an admonition with a title.</p>
+<ul class="simple">
+<li><p>Create new raster objects</p></li>
+<li><p>Assign the correct projection or CRS</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">IMPORTANT: Affine transformation</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="raster-data">
+<h1>Raster Data<a class="headerlink" href="#raster-data" title="Permalink to this headline">¶</a></h1>
+<p>In order to work with raster data we will be using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>. Behind the scenes a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> does all the heavy lifting. To understand how raster works it helps to construct one from scratch.</p>
+<p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.],
+       [-90., -60., -30.,   0.,  30.,  60.,  90.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 90.,  90.,  90.,  90.,  90.,  90.,  90.],
+       [ 60.,  60.,  60.,  60.,  60.,  60.,  60.],
+       [ 30.,  30.,  30.,  30.,  30.,  30.,  30.],
+       [  0.,   0.,   0.,   0.,   0.,   0.,   0.],
+       [-30., -30., -30., -30., -30., -30., -30.],
+       [-60., -60., -60., -60., -60., -60., -60.],
+       [-90., -90., -90., -90., -90., -90., -90.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Both arrays have the same spatial resolution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.714285714285715
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s generate some data representing temperature and store it an array <code class="docutils literal notranslate"><span class="pre">Z</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">Z1</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Z2</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span>  <span class="p">(</span><span class="n">Z1</span> <span class="o">-</span> <span class="n">Z2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Temperature&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c_rasters_6_0.png" src="../_images/c_rasters_6_0.png" />
+</div>
+</div>
+<p>In this example the coordinate reference system will be ‘+proj=latlong’, which describes an equirectangular coordinate reference system with units of decimal degrees. Although <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> seems relevant to understanding the location of cell values, <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). <a class="reference internal" href="d_affine.html#d-affine-trans-scale"><span class="std std-ref">Review affine transformations</span></a> and <a class="reference internal" href="d_affine.html#d-affine-trans"><span class="std std-ref">see an example here</span></a>.</p>
+<p>The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> define the location of the upper left hand corner of our new <code class="docutils literal notranslate"><span class="pre">Z</span></code> ndarray. As a reminder the translation matrix takes the form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+     \mbox{Translate: }  \begin{bmatrix} 1 &amp; 0 &amp; \Delta x \\  0 &amp; 1 &amp; \Delta y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  
+   \end{eqnarray}
+\end{split}\]</div>
+<p>Now we can define our translation matrix using the point coordinates (<code class="docutils literal notranslate"><span class="pre">x[0]</span></code>,<code class="docutils literal notranslate"><span class="pre">y[0]</span></code>), but these need to be offset by 1/2 the resolution so that the cell is centered over the coodinate (-90,90):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.transform</span> <span class="kn">import</span> <span class="n">Affine</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Affine</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 1.00, 0.00,-102.86|
+| 0.00, 1.00, 77.14|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also need to scale our data based on the resolution of each cell, the scale matrix is defined here:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+   \mbox{Scale: }  \begin{bmatrix} S_{x} &amp; 0 &amp; 0 \\ 0 &amp; S_{y} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
+   \end{eqnarray}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 25.71, 0.00, 0.00|
+| 0.00, 25.71, 0.00|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
+</div>
+<p>______________ USE THE AFFINE SCALE EXAMPLE FROM THE BOOK TO SHOW HOW THIS WORKS ____________</p>
+<hr class="docutils" />
+<p>Credits: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html">rasterio quickstart</a></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -407,6 +548,9 @@
           By Michael Mann, Steven Chao, Nina Feldman<br/>
         
             &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+          </div>
       </p>
     </div>
   </footer>
@@ -420,6 +564,16 @@
   <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

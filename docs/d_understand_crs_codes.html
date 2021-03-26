@@ -460,20 +460,29 @@
                 
   <div class="section" id="understanding-crs-codes">
 <span id="d-understand-crs-codes"></span><h1>Understanding CRS codes<a class="headerlink" href="#understanding-crs-codes" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
 <p>Lesson objectives:</p>
 <ul class="simple">
 <li><p>Understand how to read a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string</p></li>
 <li><p>Understand how a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string relates to an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code</p></li>
 <li><p>Visually explore changing <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string parameters</p></li>
 </ul>
-<p>Steven Chao, v2</p>
-<p>March 21, 2021</p>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">CRS what is it?</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Steven Chao</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>A coordinate reference system tells Python where and how to place coordinates on Earth’s surface. For a detailed lesson on projections please go <a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">here</span></a>.</p>
 <p>As you may recall, a coordinate reference system can either be a geographic coordinate system or a projected coordinate system (also known as a map projection). A geographic coordinate system consists of a datum, which consists of an ellipsoid model and how this ellipsoid is aligned with the geoid. It’s spherical in nature, and units are typically angular (latitude and longitude). A projected coordinate system is created by taking a geographic coordinate system and using math to transform a 3-D surface onto a flat, 2-D surface. Units are typically linear and are oftentimes measured in meters. For a refresher on coordinate systems, check out this <a class="reference external" href="https://youtu.be/HnWNhyxyUHg">YouTube video</a>.</p>
 <p>All map projections introduce error because they are inherently imperfect. The “best” or “perfect” projection to use is highly dependent on what needs to be mapped and where. Therefore, as you can expect, there are many projections to choose from.</p>
-<p>Sources: <a class="reference external" href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara</a>; <a class="reference external" href="https://mgimond.github.io/Spatial/chp09-0.html">Chapter 9: Coordinate Systems, Manuel Gimond</a>; <a class="reference external" href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/coordinate-systems-difference/">Coordinate Systems: What’s the Difference?, Esri</a>; <a class="reference external" href="https://automating-gis-processes.github.io/CSC18/lessons/L2/projections.html">Map projections, Henrikki Tenkanen</a>; <a class="reference external" href="https://autogis-site.readthedocs.io/en/stable/notebooks/L2/projections.html">Map projections, Henrikki Tenkanen &amp; Vuokko Heikinheimo</a></p>
 <hr class="docutils" />
 <p>In this chapter, we will check, utilize, change, and create CRSs in Python. To provide visual examples along the way, we will use a shapefile of the Washington, DC, boundary from Open Data DC (<a class="reference external" href="https://opendata.dc.gov/datasets/washington-dc-boundary">https://opendata.dc.gov/datasets/washington-dc-boundary</a>).</p>
 <p>Let’s begin by reading in this dataset (no need to download the shapefile as we will pull it directly from the website).</p>
@@ -921,6 +930,7 @@ Name: geometry, dtype: geometry
 </div>
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
 <p>To get the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string from an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, we can <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html">use the <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> module</a>.</p>
+<p>Sources: <a class="reference external" href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara</a>; <a class="reference external" href="https://mgimond.github.io/Spatial/chp09-0.html">Chapter 9: Coordinate Systems, Manuel Gimond</a>; <a class="reference external" href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/coordinate-systems-difference/">Coordinate Systems: What’s the Difference?, Esri</a>; <a class="reference external" href="https://automating-gis-processes.github.io/CSC18/lessons/L2/projections.html">Map projections, Henrikki Tenkanen</a>; <a class="reference external" href="https://autogis-site.readthedocs.io/en/stable/notebooks/L2/projections.html">Map projections, Henrikki Tenkanen &amp; Vuokko Heikinheimo</a></p>
 </div>
 </div>
 </div>
@@ -965,6 +975,9 @@ Name: geometry, dtype: geometry
           By Michael Mann, Steven Chao, Nina Feldman<br/>
         
             &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+          </div>
       </p>
     </div>
   </footer>
@@ -978,6 +991,16 @@ Name: geometry, dtype: geometry
   <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

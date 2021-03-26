@@ -528,7 +528,7 @@
 </div>
 </div>
 <div class="section" id="transforming-matrices">
-<h3>Transforming Matrices<a class="headerlink" href="#transforming-matrices" title="Permalink to this headline">¶</a></h3>
+<span id="d-affine-transform-matrix"></span><h3>Transforming Matrices<a class="headerlink" href="#transforming-matrices" title="Permalink to this headline">¶</a></h3>
 <p>It is often convenient to represent these equations as matrices. This allows us to easily chain together a series of operations. We can represent our transformed point <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -575,7 +575,7 @@
      
    \end{eqnarray}
 \end{split}\]</div>
-<p>Now that we have scalers <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(f\)</span> all the transforms are possible. We do however, need to update our previous operations:</p>
+<p id="d-affine-trans-scale">Now that we have scalers <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(f\)</span> all the transforms are possible. We do however, need to update our previous operations:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
    \begin{eqnarray}
@@ -605,7 +605,7 @@
 <div class="section" id="numeric-examples">
 <h3>Numeric Examples<a class="headerlink" href="#numeric-examples" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="translate">
-<h4>Translate<a class="headerlink" href="#translate" title="Permalink to this headline">¶</a></h4>
+<span id="d-affine-trans"></span><h4>Translate<a class="headerlink" href="#translate" title="Permalink to this headline">¶</a></h4>
 <p>Now let’s assume we have a point a at (-2,-2) for (x,y). For simplicity sake lets assume we want to move it up to the origin by adding 2 to both x and y.</p>
 <p>Let’s start by defining our point in our matrix form:</p>
 <div class="math notranslate nohighlight">
@@ -704,6 +704,9 @@
           By Michael Mann, Steven Chao, Nina Feldman<br/>
         
             &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+          </div>
       </p>
     </div>
   </footer>
@@ -717,6 +720,16 @@
   <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     
   </body>
 </html>

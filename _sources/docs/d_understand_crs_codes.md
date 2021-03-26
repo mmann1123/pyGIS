@@ -12,16 +12,20 @@ kernelspec:
 (d_understand_crs_codes)=
 
 # Understanding CRS codes
+----------------
 
-
+```{admonition} Learning Objectives
 Lesson objectives:
 * Understand how to read a `PROJ.4` string
 * Understand how a `PROJ.4` string relates to an `EPSG` code
 * Visually explore changing `PROJ.4` string parameters
+```
+```{admonition} Review
+* [CRS what is it?](d_crs_what_is_it)
+```
+----------------
 
-Steven Chao, v2
-
-March 21, 2021
+Steven Chao
 
 +++
 
@@ -33,8 +37,6 @@ A coordinate reference system tells Python where and how to place coordinates on
 As you may recall, a coordinate reference system can either be a geographic coordinate system or a projected coordinate system (also known as a map projection). A geographic coordinate system consists of a datum, which consists of an ellipsoid model and how this ellipsoid is aligned with the geoid. It's spherical in nature, and units are typically angular (latitude and longitude). A projected coordinate system is created by taking a geographic coordinate system and using math to transform a 3-D surface onto a flat, 2-D surface. Units are typically linear and are oftentimes measured in meters. For a refresher on coordinate systems, check out this [YouTube video](https://youtu.be/HnWNhyxyUHg).
 
 All map projections introduce error because they are inherently imperfect. The "best" or "perfect" projection to use is highly dependent on what needs to be mapped and where. Therefore, as you can expect, there are many projections to choose from.
-
-Sources: [Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf); [Chapter 9: Coordinate Systems, Manuel Gimond](https://mgimond.github.io/Spatial/chp09-0.html); [Coordinate Systems: What's the Difference?, Esri](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/coordinate-systems-difference/); [Map projections, Henrikki Tenkanen](https://automating-gis-processes.github.io/CSC18/lessons/L2/projections.html); [Map projections, Henrikki Tenkanen & Vuokko Heikinheimo](https://autogis-site.readthedocs.io/en/stable/notebooks/L2/projections.html)
 
 ---
 
@@ -377,6 +379,8 @@ Source: [Managing Projections: Coordinate Reference Systems, GeoPandas](https://
 
 To get the `PROJ.4` string from an `EPSG` code, we can [use the `rasterio` module](https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html).
 
-```{code-cell} ipython3
 
-```
+
+
+
+Sources: [Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf); [Chapter 9: Coordinate Systems, Manuel Gimond](https://mgimond.github.io/Spatial/chp09-0.html); [Coordinate Systems: What's the Difference?, Esri](https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/coordinate-systems-difference/); [Map projections, Henrikki Tenkanen](https://automating-gis-processes.github.io/CSC18/lessons/L2/projections.html); [Map projections, Henrikki Tenkanen & Vuokko Heikinheimo](https://autogis-site.readthedocs.io/en/stable/notebooks/L2/projections.html)
