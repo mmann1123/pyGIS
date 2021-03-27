@@ -134,7 +134,7 @@ Example of using affine translation of a matrix to shift the upper left hand cor
 The final coordinate of the upper left hand corner are $(x_0,y_0) = (-105,105)$
 
 ### Translate is a "map"
-Now here's the magic, our new `translate` matrix can be used to easily find the coordinates of any cell based on its row and column number. Just to see how if works, we are going to multiply our `translate` matrix by `(row_number, column_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `translate` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
+Now here's the magic, our new `translate` matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our `translate` matrix by `(row_number, column_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `translate` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
  
 Let's see how we can calculate a few coordinates (upper left) based on the visual examples below:
 
