@@ -1,32 +1,45 @@
 Traceback (most recent call last):
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-xres = (x[-1] - x[0]) / len(x)
-xres
+with rasterio.open(
+    '../temp/Z.tif',
+    'w',
+    driver='GTiff',
+    height=Z.shape[0],
+    width=Z.shape[1],
+    count=1,
+    dtype=Z.dtype,
+    crs='+proj=latlong',
+    transform=transform,
+) as dst:
+    dst.write(Z, 1)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-1-9f0a7089c4bc>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mxres[0m [0;34m=[0m [0;34m([0m[0mx[0m[0;34m[[0m[0;34m-[0m[0;36m1[0m[0;34m][0m [0;34m-[0m [0mx[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m)[0m [0;34m/[0m [0mlen[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0mxres[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-7-18b916674da7>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m with rasterio.open(
+[0m[1;32m      2[0m     [0;34m'../temp/Z.tif'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m     [0;34m'w'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m     [0mdriver[0m[0;34m=[0m[0;34m'GTiff'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m     [0mheight[0m[0;34m=[0m[0mZ[0m[0;34m.[0m[0mshape[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'x' is not defined
-NameError: name 'x' is not defined
+[0;31mNameError[0m: name 'rasterio' is not defined
+NameError: name 'rasterio' is not defined
 
