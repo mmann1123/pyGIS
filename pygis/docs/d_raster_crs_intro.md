@@ -106,7 +106,7 @@ print(transform)
 ```
 
 ### The Crazy Tale of the Upper Left Hand Corner
-To help us understand what is going on it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the right of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
+To help us understand what is going on it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
 
 We can visualize what we need to do here: 
 
@@ -125,8 +125,10 @@ Example of using affine translation of a matrix to shift the upper left hand cor
 ```
 The final coordinate of the upper left hand corner are $(x_0,y_0) = (-105,105)$
 
-### Transform is a "map"
-Now here's the magic, our new `transform` matrix can be used to easily find the coordinates of any cell based on its row and column number. Just to see how if works, we are going to multiply our `transform` matrix by `(row_number, column_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `transform` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
+
+### Translate is a "map"
+Now here's the magic, our new `translate` matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our `translate` matrix by `(row_number, column_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `translate` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
+
  
 Let's see how we can calculate a few coordinates (upper left) based on the visual examples below:
 
