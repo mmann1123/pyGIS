@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -359,7 +359,8 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -374,13 +375,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#translate-is-a-map">
-     Translate is a “map”
+    <a class="reference internal nav-link" href="#transform-is-a-map">
+     Transform is a “map”
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#how-translate-works">
-       How translate works
+      <a class="reference internal nav-link" href="#how-transform-works">
+       How transform works
       </a>
      </li>
     </ul>
@@ -404,7 +405,11 @@
         
               <div>
                 
-  <hr class="docutils" id="d-raster-crs-intro" />
+  <p id="d-raster-crs-intro">To Do:</p>
+<ul class="simple">
+<li><p>show how warping works</p></li>
+</ul>
+<hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <p>Learning Objectives:</p>
@@ -423,49 +428,15 @@
 <hr class="docutils" />
 <div class="section" id="raster-crs">
 <h1>Raster CRS<a class="headerlink" href="#raster-crs" title="Permalink to this headline">¶</a></h1>
-<p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
+<p>Let’s start from the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> <code class="docutils literal notranslate"><span class="pre">Z</span></code> that we want to span from [-90°,90°] longitude, and [-90°,90°] latitude. For more detail on the construction of these arrays please refer to <a class="reference internal" href="c_rasters.html#c-rasters"><span class="std std-ref">the raster section</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">X</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.]])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 90.,  90.,  90.,  90.,  90.,  90.],
-       [ 54.,  54.,  54.,  54.,  54.,  54.],
-       [ 18.,  18.,  18.,  18.,  18.,  18.],
-       [-18., -18., -18., -18., -18., -18.],
-       [-54., -54., -54., -54., -54., -54.],
-       [-90., -90., -90., -90., -90., -90.]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s generate some data representing temperature and store it an array <code class="docutils literal notranslate"><span class="pre">Z</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">Z1</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">Z2</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -478,7 +449,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d_raster_crs_intro_4_0.png" src="../_images/d_raster_crs_intro_4_0.png" />
+<img alt="../_images/d_raster_crs_intro_1_0.png" src="../_images/d_raster_crs_intro_1_0.png" />
 </div>
 </div>
 <div class="section" id="describing-the-array-location">
@@ -591,15 +562,15 @@
 </div>
 <p>The final coordinate of the upper left hand corner are <span class="math notranslate nohighlight">\((x_0,y_0) = (-105,105)\)</span></p>
 </div>
-<div class="section" id="translate-is-a-map">
-<h3>Translate is a “map”<a class="headerlink" href="#translate-is-a-map" title="Permalink to this headline">¶</a></h3>
-<p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. Just to see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(row_number,</span> <span class="pre">column_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
+<div class="section" id="transform-is-a-map">
+<h3>Transform is a “map”<a class="headerlink" href="#transform-is-a-map" title="Permalink to this headline">¶</a></h3>
+<p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">transform</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. Just to see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">transform</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(row_number,</span> <span class="pre">column_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">transform</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
-<div class="figure align-default" id="example-of-using-translate-to-identify-coordinates-based-on-row-and-column">
+<div class="figure align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
 <a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of using translate to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-translate-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">¶</a></p>
 </div>
-<p>Let’s start with the easiest and retreive the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">translate</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
+<p>Let’s start with the easiest and retrieve the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">transform</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
@@ -638,8 +609,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="how-translate-works">
-<h4>How translate works<a class="headerlink" href="#how-translate-works" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="how-transform-works">
+<h4>How transform works<a class="headerlink" href="#how-transform-works" title="Permalink to this headline">¶</a></h4>
 <p>Let’s work the example of finding the upper left coordinates of with <code class="docutils literal notranslate"><span class="pre">row=5</span></code>, <code class="docutils literal notranslate"><span class="pre">column=2</span></code>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -658,7 +629,7 @@
       \begin{bmatrix} 45  \\  45 \\ 1  \end{bmatrix}
    \end{eqnarray}
 \end{split}\]</div>
-<p>Wow, it works! Come on it’s at least a little bit cool. Depending on your defintion of cool.</p>
+<p>Wow, it works! Come on it’s at least a little bit cool. Depending on your definition of cool.</p>
 </div>
 </div>
 </div>
