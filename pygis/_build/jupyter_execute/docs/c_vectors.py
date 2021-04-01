@@ -52,3 +52,7 @@ world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 world.head()
 
 world.plot()
+
+-------------
+Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
+Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)

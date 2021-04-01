@@ -115,4 +115,6 @@ A popular public domain raster data format is the **GeoTIFF** format. If maximum
 
 A raster file can also be stored in a file geodatabase alongside vector files. Geodatabases have the benefit of defining image mosaic structures thus allowing the user to create “stitched” images from multiple image files stored in the geodatabase. Also, processing very large raster files can be computationally more efficient when stored in a file geodatabase as opposed to an Imagine or GeoTiff file format.
 
-
+------------
+Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
+Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)

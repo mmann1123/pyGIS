@@ -175,6 +175,12 @@ Text | Up to 64,000 characters | Letters and words
 While whole numbers can be stored as a float or double (i.e. we can store the number 2 as 2.0) doing so comes at a cost: an increase in storage space. This may not be a big deal if the dataset is small, but if it consists of tens of thousands of records the increase in file size and processing time may become an issue.
 
 While storing an integer value as a float may not have dire consequences, the same cannot be said of storing a float as an integer. For example, if your values consist of 0.2, 0.01, 0.34, 0.1 and 0.876, their integer counterpart would be 0, 0, 0, and 1 (i.e. values rounded to the nearest whole number). 
+
+
+--------------
+Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
+Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)
+
 <!-- This can have a significant impact on a map as shown in the following example.
 
 ```{r echo=FALSE, fig.cap = "Map of data represented as decimal (float) values.",  fig.height=3}

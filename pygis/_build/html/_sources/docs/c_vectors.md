@@ -71,3 +71,7 @@ world.head()
 ```{code-cell} ipython3
 world.plot()
 ```
+
+-------------
+Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
+Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)

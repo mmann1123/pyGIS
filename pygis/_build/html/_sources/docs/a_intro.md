@@ -6,7 +6,14 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 ```{tableofcontents}
 ```
 
+-------------
+Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
+Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)
+
 <!-- -----------------------
+
+https://autogis-site.readthedocs.io/en/latest/index.html
+
 # A: Data Types
 - Vector Data
   - Geojson
@@ -58,6 +65,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
   - Unions
   - Intersect
   - etc
+- Merge & Aggregate Attributes
 
 ## Raster
 - read/write rasterio

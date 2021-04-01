@@ -1,30 +1,89 @@
 Traceback (most recent call last):
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/home/mmann1123/anaconda3/envs/pygisbook/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-print(Affine.scale(xres, tres))
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=200)
+import geowombat as gw
+
+with gw.config.update(sensor="rgb"):
+    with gw.open("../temp/LS_scaled_20200518.tif") as src:
+        print(src.band)
+        src.where(src != 0).gw.imshow(robust=True, ax=ax)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-7-1da5f06f7112>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mprint[0m[0;34m([0m[0mAffine[0m[0;34m.[0m[0mscale[0m[0;34m([0m[0mxres[0m[0;34m,[0m [0mtres[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-15-7d9ea3ee767f>[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[1;32m      3[0m [0mfig[0m[0;34m,[0m [0max[0m [0;34m=[0m [0mplt[0m[0;34m.[0m[0msubplots[0m[0;34m([0m[0mdpi[0m[0;34m=[0m[0;36m200[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 4[0;31m [0;32mimport[0m [0mgeowombat[0m [0;32mas[0m [0mgw[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mconfig[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0msensor[0m[0;34m=[0m[0;34m"rgb"[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/__init__.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mfrom[0m [0;34m.[0m [0;32mimport[0m [0mconfig[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mfrom[0m [0;34m.[0m[0mcore[0m[0;34m.[0m[0mapi[0m [0;32mimport[0m [0mopen[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;32mfrom[0m [0;34m.[0m[0mcore[0m [0;32mimport[0m [0mextract[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;32mfrom[0m [0;34m.[0m[0mcore[0m [0;32mimport[0m [0msample[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;32mfrom[0m [0;34m.[0m[0mcore[0m [0;32mimport[0m [0mcalc_area[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/__init__.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mbackends[0m [0;32mimport[0m [0mtransform_crs[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;32mfrom[0m [0;34m.[0m[0mio[0m [0;32mimport[0m [0mapply[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;32mfrom[0m [0;34m.[0m[0mio[0m [0;32mimport[0m [0mto_raster[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;32mfrom[0m [0;34m.[0m[0mio[0m [0;32mimport[0m [0mto_netcdf[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;32mfrom[0m [0;34m.[0m[0mio[0m [0;32mimport[0m [0mto_vrt[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/__init__.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mfrom[0m [0;34m.[0m[0mdask_[0m [0;32mimport[0m [0mCluster[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mfrom[0m [0;34m.[0m[0mxarray_[0m [0;32mimport[0m [0mconcat[0m[0;34m,[0m [0mmosaic[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;32mfrom[0m [0;34m.[0m[0mxarray_[0m [0;32mimport[0m [0mwarp_open[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;32mfrom[0m [0;34m.[0m[0mxarray_[0m [0;32mimport[0m [0mtransform_crs[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/xarray_.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mhandler[0m [0;32mimport[0m [0madd_handler[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mcore[0m[0;34m.[0m[0mwindows[0m [0;32mimport[0m [0mget_window_offsets[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      8[0m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mcore[0m[0;34m.[0m[0mutil[0m [0;32mimport[0m [0mparse_filename_dates[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      9[0m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mconfig[0m [0;32mimport[0m [0mconfig[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/windows.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mfrom[0m [0;34m.[0m[0mutil[0m [0;32mimport[0m [0mn_rows_cols[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;34m[0m[0m
+[1;32m      3[0m [0;32mfrom[0m [0mrasterio[0m[0;34m.[0m[0mwindows[0m [0;32mimport[0m [0mWindow[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/util.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mhandler[0m [0;32mimport[0m [0madd_handler[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 9[0;31m [0;32mfrom[0m [0;34m.[0m[0;34m.[0m[0mmoving[0m [0;32mimport[0m [0mmoving_window[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     10[0m [0;34m[0m[0m
+[1;32m     11[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/moving/__init__.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mfrom[0m [0;34m.[0m[0m_moving[0m [0;32mimport[0m [0mmoving_window[0m[0;34m[0m[0;34m[0m[0m
 [0m
-[0;31mNameError[0m: name 'tres' is not defined
-NameError: name 'tres' is not defined
+[0;32mgeowombat/moving/_moving.pyx[0m in [0;36minit geowombat.moving._moving[0;34m()[0m
+
+[0;31mValueError[0m: numpy.ndarray size changed, may indicate binary incompatibility. Expected 88 from C header, got 80 from PyObject
+ValueError: numpy.ndarray size changed, may indicate binary incompatibility. Expected 88 from C header, got 80 from PyObject
 
