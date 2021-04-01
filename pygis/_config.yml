@@ -36,7 +36,7 @@ html:
   use_issues_button:            true
   home_page_in_navbar:          true
   use_repository_button:        true
-  google_analytics_id       : "G-BEC4RYX023"  # A GA id that can be used to track book views.
+  google_analytics_id       : G-BEC4RYX023  # A GA id that can be used to track book views.
   extra_footer              : 'Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>'  # Will be displayed underneath the footer.
 #######################################################################################
 # Launch button settings

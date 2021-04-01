@@ -104,6 +104,26 @@ $$
 transform = Affine.translation(x[0] - xres / 2, y[0] - yres / 2) * Affine.scale(xres, yres)
 print(transform)
 ```
+Now we need to write out a `tif` file that holds the data in `Z` and its data type with `dtype`, the location described by `transform`, in coordinates described by the coordinate reference system `+proj=latlon`, the number of 'bands' of data in `count` (in this case just one), and the shape in `height` and `width`. 
+
+```{code-cell} ipython3
+with rasterio.open(
+    '../temp/Z.tif',
+    'w',
+    driver='GTiff',
+    height=Z.shape[0],
+    width=Z.shape[1],
+    count=1,
+    dtype=Z.dtype,
+    crs='+proj=latlong',
+    transform=transform,
+) as dst:
+    dst.write(Z, 1)
+```
+All this info is stored in `dst` and then written to disk with `dst.write(Z,1)`. Where `write` gets the array of data `Z` and the band location to write to, in this case band `1`. This is a bit awkward, but I believe is a carryover from GDAL which rasterio relies on heavily (like all other platforms including arcmap etc). 
+
+
+
 
 ### The Crazy Tale of the Upper Left Hand Corner
 To help us understand what is going on it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
@@ -172,7 +192,5 @@ $$
 
 Wow, it works! Come on it's at least a little bit cool. Depending on your definition of cool.
 
-## Warping Images
- 
-
-
+## Warping Images (Reproject)
+How then do we reproject, or warp, a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system. 
