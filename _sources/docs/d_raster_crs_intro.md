@@ -194,7 +194,7 @@ $$
 Wow, it works! Come on it's at least a little bit cool. Depending on your definition of cool.
 
 ## Reproject a Raster - The Simple Case
-How then do we reproject a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system. If you haven't please study [affine transformations](d_affine).
+How then do we reproject a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system (CRS). If you haven't please study [affine transformations](d_affine).
 
 ### Shifting the Prime Meridian
 One of the easiest cases is that of false easting, or moving the prime meridian. Let's walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10&deg; to the west (e.g. using `+lon_0=10` from the  [proj4string](d_understand_crs_codes)). 
@@ -211,7 +211,7 @@ Example of using translate to reproject an image by moving prime meridian
 This is roughly equivalent to false easting `+x_0=10` which would shift the coordinates but not redefine the prime meridian location. 
 ```
 
-We can then use our knowledge of matrix algerbra and tranform matrices to solve for the new upper left hand corner coordinate ($x_B$, $y_B$)
+We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate ($x_B$, $y_B$)
 
 ```{figure} ../_static/d_crs/d_europe_translate_raster_m.png
 :name: Example of using translate matrix to reproject an image by moving prime meridian
@@ -219,7 +219,53 @@ We can then use our knowledge of matrix algerbra and tranform matrices to solve 
 Example of using translate matrix to reproject an image by moving prime meridian
 ```
 
-To accomplish this 
+## Reproject a Raster - The Complex Case
+In many cases reprojecting a raster requires changing the number of rows or columns, or 'warping' (i.e. bending) an image. All of these examples create a problem, the centroids of the new projected raster don't line up with the centroids of the original raster. Therefore they now represent locations on the ground that weren't in the original dataset. 
+
+Take for instance the case of a 'warped' raster image (below) which for instance occurs when you switch from a spherical CRS (like lat lon) to a projected (or flat) CRS. Notice that the centroids of the two rasters no longer over lap:
+
+
+```{figure} ../_static/d_crs/d_warp.png
+:name: Example of warping an image during reprojection
+:width: 500px
+Example of warping an image during reprojection
+```
+
+In this case we have a decision to make, how will we assign values to the new warped raster? Keep in mind the values must change because they now point to different locations on the ground.  For this we have a number of 'interpolation' options, some simple, some complex.
+
+```{note}
+What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. [Read more here](http://wiki.gis.com/wiki/index.php/Interpolation)
+```
+
+### Interpolation Options
+There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations. 
+
+In the visual example below we will try to estimate the value for location `C` based on the known values at locations `A` and `B`. 
+
+```{figure} ../_static/d_crs/d_bilinear.png
+:name: Example of nearest neighbor and bilinear interpolation
+:width: 500px
+Example of nearest neighbor and bilinear interpolation
+```
+
+
+```{figure} ../_static/d_crs/d_bicubic.png
+:name: Example of nearest neighbor and bilinear interpolation
+:width: 400px
+Example of nearest neighbor and bilinear interpolation
+```
+### Choosing the Right Interpolation Method
+Choosing the correct interpolation method is important. The following table should help you to decided. Remember categorical data might include land cover classes (forest, water, etc), and continuous data is measurable for instance rainfall (values 0 to 20mm).
+
+| Method    | Description    |  Fast  |  Categorical  | Continuous |
+| :--- | ---: | :--- | ---: |:--- | 
+| Nearest<br>Neighbor    | Assigns nearest value    | Y | Y | |
+| Bilinear | Linear estimation | Y |  | Y |
+| Bicubic | Non-Linear estimation | Sort of | | Y|
+
+For categorical data, Nearest Neighbor is your only choice, enjoy it. For continuous data, like quantity of rain, you can choose between Bilinear and Bicubic (i.e. "cubic convolution"). For most data Bilinear interpolation is fast and effective. However if you believe your data is highly non-linear, or widely spaced, you might consider using Bicubic. Some experimentation here is often informative. 
+
+
 <!-- 
 6.6 Reprojecting raster geometries
 

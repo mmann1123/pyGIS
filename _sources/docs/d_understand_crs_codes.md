@@ -162,8 +162,8 @@ A few `PROJ.4` parameters can be applied to most CRSs:
 | `+b` | Semiminor radius of the ellipsoid axis |
 | `+ellps` | Ellipsoid name |
 | `+k_0` | Scaling factor |
-| `+lat_0` | Latitude of origin (false northing) |
-| `+lon_0` | Central meridian (false easting) |
+| `+lat_0` | Latitude of origin |
+| `+lon_0` | Central meridian |
 | `+lon_wrap` | Center longitude to use for wrapping |
 | `+over` | Allow longitude output outside -180 to 180 range, disables wrapping |
 | `+pm` | Alternate prime meridian (typically a city name) |
