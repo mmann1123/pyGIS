@@ -11,16 +11,14 @@ kernelspec:
 
 (d_raster_crs_intro)=
 
-
-To Do:
-- show how warping works
+To do:
+- how to reproject rasters in rasterio
 
 ----------------
 
 ```{admonition} Learning Objectives
 Learning Objectives:
-- What is warping?
-- What is an affine transformation?
+- Learn how rasters are reprojected
 ```
 ```{admonition} Review
 Please Review:
@@ -261,9 +259,96 @@ Choosing the correct interpolation method is important. The following table shou
 | :--- | ---: | :--- | ---: |:--- | 
 | Nearest<br>Neighbor    | Assigns nearest value    | Y | Y | |
 | Bilinear | Linear estimation | Y |  | Y |
-| Bicubic | Non-Linear estimation | Sort of | | Y|
+| Bicubic | Non-Linear estimation | Most of<br>the time | | Y|
 
 For categorical data, Nearest Neighbor is your only choice, enjoy it. For continuous data, like quantity of rain, you can choose between Bilinear and Bicubic (i.e. "cubic convolution"). For most data Bilinear interpolation is fast and effective. However if you believe your data is highly non-linear, or widely spaced, you might consider using Bicubic. Some experimentation here is often informative. 
+
+## Reprojecting a Raster with Rasterio 
+Ok enough talk already, how do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster. 
+
+First, remember that the transform matrix takes the following form:
+
+$$
+    \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix} 
+$$
+
+Now let's calculate the tranform matrix for the destination raster:
+
+```{code-cell} ipython3
+import numpy as np
+import rasterio
+from rasterio.warp import reproject, Resampling, calculate_default_transform
+
+dst_crs = "EPSG:3857"  # web mercator(ie google maps)
+
+with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as src:
+
+    # transform for input raster
+    src_transform = src.transform
+
+    # calculate the transform matrix for the output
+    dst_transform, width, height = calculate_default_transform(
+        src.crs,    # source CRS
+        dst_crs,    # destination CRS
+        src.width,    # column count
+        src.height,  # row count
+        *src.bounds,  # unpacks outer boundaries (left, bottom, right, top)
+    )
+
+print("Source Transform:\n",src_transform,'\n')
+print("Destination Transform:\n", dst_transform)
+```
+Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x).
+
+Ok finally! 
+
+
+```{code-cell} ipython3
+dst_crs = "EPSG:3857"  # web mercator(ie google maps)
+
+with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as src:
+    src_transform = src.transform
+
+    # calculate the transform matrix for the output
+    dst_transform, width, height = calculate_default_transform(
+        src.crs,
+        dst_crs,
+        src.width,
+        src.height,
+        *src.bounds,  # unpacks outer boundaries (left, bottom, right, top)
+    )
+
+    # set properties for output
+    dst_kwargs = src.meta.copy()
+    dst_kwargs.update(
+        {
+            "crs": dst_crs,
+            "transform": dst_transform,
+            "width": width,
+            "height": height,
+            "nodata": 0,  # replace 0 with np.nan
+        }
+    )
+
+    with rasterio.open("../temp/LC08_20200518_webMC.tif", "w", **dst_kwargs) as dst:
+        for i in range(1, src.count + 1):
+            reproject(
+                source=rasterio.band(src, i),
+                destination=rasterio.band(dst, i),
+                src_transform=src.transform,
+                src_crs=src.crs,
+                dst_transform=dst_transform,
+                dst_crs=dst_crs,
+                resampling=Resampling.nearest,
+            )
+```
+
+```{figure} ../_static/d_crs/d_reproj_image.png
+:name: Reprojected Landsat Image
+:width: 400px
+Reprojected Landsat Image
+```
+
 
 
 <!-- 

@@ -11,8 +11,26 @@ kernelspec:
 
 (d_vector_crs_intro)=
 
+----------------
+
+```{admonition} Learning Objectives
+Learning Objectives:
+- What is warping?
+- What is an affine transformation?
+```
+```{admonition} Review
+Please Review:
+* [Affine transformation](d_affine)
+```
+----------------
+
+
+# https://geopandas.org/gallery/plotting_with_geoplot.html
+
 # Vector CRS 
  
+
+
 <!--
 https://geocompr.robinlovelace.net/geometric-operations.html
  In this section we will learn how to reproject vector data:

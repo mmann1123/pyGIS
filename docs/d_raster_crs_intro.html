@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CRS Exercises" href="d_exercises.html" />
-    <link rel="prev" title="Vector CRS" href="d_vector_crs_intro.html" />
+    <link rel="prev" title="https://geopandas.org/gallery/plotting_with_geoplot.html" href="d_vector_crs_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -176,6 +176,11 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_vector_crs_intro.html">
+   https://geopandas.org/gallery/plotting_with_geoplot.html
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_vector_crs_intro.html#vector-crs">
    Vector CRS
   </a>
  </li>
@@ -359,7 +364,8 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -416,6 +422,11 @@
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reprojecting-a-raster-with-rasterio">
+   Reprojecting a Raster with Rasterio
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -428,17 +439,16 @@
         
               <div>
                 
-  <p id="d-raster-crs-intro">To Do:</p>
+  <p id="d-raster-crs-intro">To do:</p>
 <ul class="simple">
-<li><p>show how warping works</p></li>
+<li><p>how to reproject rasters in rasterio</p></li>
 </ul>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <p>Learning Objectives:</p>
 <ul class="simple">
-<li><p>What is warping?</p></li>
-<li><p>What is an affine transformation?</p></li>
+<li><p>Learn how rasters are reprojected</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -752,13 +762,114 @@
 </tr>
 <tr class="row-even"><td class="text-align:left"><p>Bicubic</p></td>
 <td class="text-align:right"><p>Non-Linear estimation</p></td>
-<td class="text-align:left"><p>Sort of</p></td>
+<td class="text-align:left"><p>Most of<br>the time</p></td>
 <td class="text-align:right"><p></p></td>
 <td class="text-align:left"><p>Y</p></td>
 </tr>
 </tbody>
 </table>
 <p>For categorical data, Nearest Neighbor is your only choice, enjoy it. For continuous data, like quantity of rain, you can choose between Bilinear and Bicubic (i.e. “cubic convolution”). For most data Bilinear interpolation is fast and effective. However if you believe your data is highly non-linear, or widely spaced, you might consider using Bicubic. Some experimentation here is often informative.</p>
+</div>
+</div>
+<div class="section" id="reprojecting-a-raster-with-rasterio">
+<h2>Reprojecting a Raster with Rasterio<a class="headerlink" href="#reprojecting-a-raster-with-rasterio" title="Permalink to this headline">¶</a></h2>
+<p>Ok enough talk already, how do we reproject a raster? Before we get into it, we need to talk some more… about <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code>. <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code> allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the <code class="docutils literal notranslate"><span class="pre">source</span></code> (src) is the original input raster, and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> (dst) is the outputed reprojected raster.</p>
+<p>First, remember that the transform matrix takes the following form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \mbox{Transform} =  \begin{bmatrix} xres &amp; 0 &amp; \Delta x \\ 0 &amp; yres &amp; \Delta y \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
+\end{split}\]</div>
+<p>Now let’s calculate the tranform matrix for the destination raster:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
+
+<span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+
+<span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+
+    <span class="c1"># transform for input raster</span>
+    <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
+
+    <span class="c1"># calculate the transform matrix for the output</span>
+    <span class="n">dst_transform</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">calculate_default_transform</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>    <span class="c1"># source CRS</span>
+        <span class="n">dst_crs</span><span class="p">,</span>    <span class="c1"># destination CRS</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>    <span class="c1"># column count</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># row count</span>
+        <span class="o">*</span><span class="n">src</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>  <span class="c1"># unpacks outer boundaries (left, bottom, right, top)</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source Transform:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">src_transform</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Destination Transform:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dst_transform</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Transform:
+ | 30.00, 0.00, 717345.00|
+| 0.00,-30.00,-2776995.00|
+| 0.00, 0.00, 1.00| 
+
+Destination Transform:
+ | 33.24, 0.00,-6105300.09|
+| 0.00,-33.24,-2885952.71|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x).</p>
+<p>Ok finally!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+
+<span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
+
+    <span class="c1"># calculate the transform matrix for the output</span>
+    <span class="n">dst_transform</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">calculate_default_transform</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+        <span class="n">dst_crs</span><span class="p">,</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">src</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>  <span class="c1"># unpacks outer boundaries (left, bottom, right, top)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># set properties for output</span>
+    <span class="n">dst_kwargs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">dst_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;crs&quot;</span><span class="p">:</span> <span class="n">dst_crs</span><span class="p">,</span>
+            <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="n">dst_transform</span><span class="p">,</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">height</span><span class="p">,</span>
+            <span class="s2">&quot;nodata&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># replace 0 with np.nan</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/LC08_20200518_webMC.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">dst_kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">reproject</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                <span class="n">destination</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                <span class="n">src_transform</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+                <span class="n">src_crs</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+                <span class="n">dst_transform</span><span class="o">=</span><span class="n">dst_transform</span><span class="p">,</span>
+                <span class="n">dst_crs</span><span class="o">=</span><span class="n">dst_crs</span><span class="p">,</span>
+                <span class="n">resampling</span><span class="o">=</span><span class="n">Resampling</span><span class="o">.</span><span class="n">nearest</span><span class="p">,</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="reprojected-landsat-image">
+<a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
+</div>
 <!-- 
 6.6 Reprojecting raster geometries
 
@@ -815,7 +926,6 @@ Of course, the limitations of 2D Earth projections apply as much to vector as to
 
 There is more to learn about CRSs. An excellent resource in this area, also implemented in R, is the website R Spatial. Chapter 6 for this free online book is recommended reading — see: rspatial.org/spatial/6-crs.html --></div>
 </div>
-</div>
 
     <script type="text/x-thebe-config">
     {
@@ -842,7 +952,7 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="d_vector_crs_intro.html" title="previous page">Vector CRS</a>
+    <a class='left-prev' id="prev-link" href="d_vector_crs_intro.html" title="previous page">https://geopandas.org/gallery/plotting_with_geoplot.html</a>
     <a class='right-next' id="next-link" href="d_exercises.html" title="next page">CRS Exercises</a>
 
         </div>
