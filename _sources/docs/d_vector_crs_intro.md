@@ -25,13 +25,15 @@ Please Review:
 ----------------
 
 
-# https://geopandas.org/gallery/plotting_with_geoplot.html
 
 # Vector CRS 
  
 
 
 <!--
+
+ https://geopandas.org/gallery/plotting_with_geoplot.html
+
 https://geocompr.robinlovelace.net/geometric-operations.html
  In this section we will learn how to reproject vector data:
 
