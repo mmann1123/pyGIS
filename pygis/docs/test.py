@@ -728,5 +728,109 @@ with rasterio.open(
     transform=transform,
 ) as dst:
     dst.write(Z, 1)
+#%%
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import rasterio
+from rasterio.warp import reproject, Resampling, calculate_default_transform
+from matplotlib import pyplot
+
+dst_crs = "EPSG:3857"  # web mercator(ie google maps)
+
+with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as src:
+    src_transform = src.transform
+
+    # calculate the transform matrix for the output
+    dst_transform, width, height = calculate_default_transform(
+        src.crs,
+        dst_crs,
+        src.width,
+        src.height,
+        *src.bounds,  # unpacks outer boundaries (left, bottom, right, top)
+    )
+
+    # set properties for output
+    dst_kwargs = src.meta.copy()
+    dst_kwargs.update(
+        {
+            "crs": dst_crs,
+            "transform": dst_transform,
+            "width": width,
+            "height": height,
+            "nodata": 0,  # replace 0 with np.nan
+        }
+    )
+
+    with rasterio.open("../temp/LC08_20200518_webMC.tif", "w", **dst_kwargs) as dst:
+        for i in range(1, src.count + 1):
+            reproject(
+                source=rasterio.band(src, i),
+                destination=rasterio.band(dst, i),
+                src_transform=src.transform,
+                src_crs=src.crs,
+                dst_transform=dst_transform,
+                dst_crs=dst_crs,
+                resampling=Resampling.nearest,
+            )
+
+        #%%
+        from rasterio.plot import show
+
+        show(src)
+
+#%%
+
+dst_crs = "EPSG:3857"  # web mercator(ie google maps)
+
+with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as src:
+
+    # calculate the transform matrix for the output
+    dst_transform, width, height = calculate_default_transform(
+        src.crs,  # source CRS
+        dst_crs,  # destination CRS
+        src.width,  # column count
+        src.height,  # row count
+        *src.bounds,  # unpacks outer boundaries (left, bottom, right, top)
+    )
+
+print("Source Transform:\n", src.transform, "\n")
+print("Destination Transform:\n", dst_transform)
+
 
 # %%
+
+import geopandas
+from shapely.geometry import Point, LineString, Polygon
+
+s = geopandas.GeoSeries(
+    [Point(1, 1), LineString([(1, -1), (1, 0)]), Polygon([(3, -1), (4, 0), (3, 1)]),]
+)
+
+print(s)
+
+r = s.rotate(90)
+r.plot()
+
+# %%
+c = s.scale(2, 3, origin=(0, 0))
+c.plot()
+
+t = s.translate(2, 3)
+t.plot()
+# %%
+import geoplot
+
+world = geopandas.read_file(geopandas.datasets.get_path("naturalearth_lowres"))
+
+geoplot.polyplot(world, figsize=(8, 4))
+# %%
+
+# Using readlines()
+with open("../../../census_api.txt", "r") as f:
+    c = f.read()
+    print(Lines)
+
+# %%
+

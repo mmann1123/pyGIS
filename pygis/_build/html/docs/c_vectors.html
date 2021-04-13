@@ -209,6 +209,11 @@
      Creating Spatial Data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge, Dissolve, Map w. Census Data
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -396,8 +401,23 @@
         
               <div>
                 
-  <div class="section" id="vector-data">
-<span id="c-vectors"></span><h1>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h1>
+  <hr class="docutils" id="c-vectors" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Create a Geopandas GeoSeries and Dataframe</p></li>
+<li><p>Plot a basic map</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="c_features.html#c-features"><span class="std std-ref">Data Structures</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="vector-data">
+<h1>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="geopandas">
 <h2>GeoPandas<a class="headerlink" href="#geopandas" title="Permalink to this headline">¶</a></h2>
 <p>The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pandas and shapely, providing geospatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.</p>
@@ -571,9 +591,6 @@ dtype: geometry
 <img alt="../_images/c_vectors_6_1.png" src="../_images/c_vectors_6_1.png" />
 </div>
 </div>
-<hr class="docutils" />
-<p>Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
-Take a class with <a class="reference external" href="https://geography.columbian.gwu.edu/michael-mann">Prof Mann</a></p>
 </div>
 </div>
 </div>
@@ -618,7 +635,13 @@ Take a class with <a class="reference external" href="https://geography.columbia
         
             &copy; Copyright 2020.<br/>
           <div class="extra_footer">
-            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+            <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300">
+</div>
+
           </div>
       </p>
     </div>
@@ -637,7 +660,7 @@ Take a class with <a class="reference external" href="https://geography.columbia
     <!-- Google Analytics -->
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('create', 'UA-192844775-1', 'auto');
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>

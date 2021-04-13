@@ -17,16 +17,29 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-xres = (x[-1] - x[0]) / len(x)
-xres
+with rasterio.open(
+    '../temp/Z.tif',
+    'w',
+    driver='GTiff',
+    height=Z.shape[0],
+    width=Z.shape[1],
+    count=1,
+    dtype=Z.dtype,
+    crs='+proj=latlong',
+    transform=transform,
+) as dst:
+    dst.write(Z, 1)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-1-9f0a7089c4bc>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mxres[0m [0;34m=[0m [0;34m([0m[0mx[0m[0;34m[[0m[0;34m-[0m[0;36m1[0m[0;34m][0m [0;34m-[0m [0mx[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m)[0m [0;34m/[0m [0mlen[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0mxres[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-7-18b916674da7>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m with rasterio.open(
+[0m[1;32m      2[0m     [0;34m'../temp/Z.tif'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m     [0;34m'w'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m     [0mdriver[0m[0;34m=[0m[0;34m'GTiff'[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m     [0mheight[0m[0;34m=[0m[0mZ[0m[0;34m.[0m[0mshape[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'x' is not defined
-NameError: name 'x' is not defined
+[0;31mNameError[0m: name 'rasterio' is not defined
+NameError: name 'rasterio' is not defined
 

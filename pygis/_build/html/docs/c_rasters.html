@@ -209,6 +209,11 @@
      Creating Spatial Data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge, Dissolve, Map w. Census Data
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -658,9 +663,6 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[   0    0    0 ...    0    0    0]
   [   0    0    0 ...    0    0    0]
   [   0    0    0 ...    0    0    0]
@@ -685,6 +687,9 @@
   [7586 7590 7610 ... 7440 7411 7425]
   [7576 7743 7770 ... 7464 7443 7406]]]
 --------------
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
 </pre></div>
 </div>
 <img alt="../_images/c_rasters_18_2.png" src="../_images/c_rasters_18_2.png" />
@@ -796,34 +801,34 @@ Coordinates:
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/50 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|█▌        | 8/50 [00:00&lt;00:00, 75.64it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 9/50 [00:00&lt;00:00, 80.55it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 32%|███▏      | 16/50 [00:00&lt;00:00, 76.05it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▌      | 18/50 [00:00&lt;00:00, 78.32it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 24/50 [00:00&lt;00:00, 55.66it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 52%|█████▏    | 26/50 [00:00&lt;00:00, 74.96it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|██████▏   | 31/50 [00:00&lt;00:00, 53.31it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|██████▊   | 34/50 [00:00&lt;00:00, 73.98it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 76%|███████▌  | 38/50 [00:00&lt;00:00, 57.76it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████▍ | 42/50 [00:00&lt;00:00, 72.12it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 46/50 [00:00&lt;00:00, 61.74it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 70.92it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 61.24it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 72.95it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/14 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 7/14 [00:00&lt;00:00, 66.96it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 7/14 [00:00&lt;00:00, 64.98it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 14/14 [00:00&lt;00:00, 73.56it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 14/14 [00:00&lt;00:00, 73.87it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -834,8 +839,6 @@ Coordinates:
 </div>
 <hr class="docutils" />
 <p>Credits: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html">rasterio quickstart</a></p>
-<p>Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a></p>
-<p>Take a class with <a class="reference external" href="https://geography.columbian.gwu.edu/michael-mann">Prof Mann</a></p>
 </div>
 </div>
 
@@ -879,7 +882,13 @@ Coordinates:
         
             &copy; Copyright 2020.<br/>
           <div class="extra_footer">
-            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+            <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300">
+</div>
+
           </div>
       </p>
     </div>
@@ -898,7 +907,7 @@ Coordinates:
     <!-- Google Analytics -->
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('create', 'UA-192844775-1', 'auto');
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>

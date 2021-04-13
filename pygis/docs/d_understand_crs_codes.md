@@ -161,7 +161,6 @@ A few `PROJ.4` parameters can be applied to most CRSs:
 | `+axis` | Axis orientation |
 | `+b` | Semiminor radius of the ellipsoid axis |
 | `+ellps` | Ellipsoid name |
-| `+k` | Scaling factor (deprecated) |
 | `+k_0` | Scaling factor |
 | `+lat_0` | Latitude of origin |
 | `+lon_0` | Central meridian |

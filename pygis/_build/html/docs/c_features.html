@@ -211,6 +211,11 @@
      Creating Spatial Data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge, Dissolve, Map w. Census Data
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -449,8 +454,18 @@
         
               <div>
                 
-  <div class="section" id="feature-representation">
-<span id="c-features"></span><h1>Feature Representation<a class="headerlink" href="#feature-representation" title="Permalink to this headline">¶</a></h1>
+  <hr class="docutils" id="c-features" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Learn the difference between raster and vector data</p></li>
+<li><p>Learn how to manually create each data structure</p></li>
+<li><p>Learn about data measurement</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="feature-representation">
+<h1>Feature Representation<a class="headerlink" href="#feature-representation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vector-vs-raster">
 <h2>Vector vs. Raster<a class="headerlink" href="#vector-vs-raster" title="Permalink to this headline">¶</a></h2>
 <p>To work in a GIS environment, real world observations (objects or events that can be recorded in 2D or 3D space) need to be reduced to spatial entities. These spatial entities can be represented in a GIS as a <strong>vector data model</strong> or a <strong>raster data model</strong>.</p>
@@ -653,9 +668,6 @@
 </table>
 <p>While whole numbers can be stored as a float or double (i.e. we can store the number 2 as 2.0) doing so comes at a cost: an increase in storage space. This may not be a big deal if the dataset is small, but if it consists of tens of thousands of records the increase in file size and processing time may become an issue.</p>
 <p>While storing an integer value as a float may not have dire consequences, the same cannot be said of storing a float as an integer. For example, if your values consist of 0.2, 0.01, 0.34, 0.1 and 0.876, their integer counterpart would be 0, 0, 0, and 1 (i.e. values rounded to the nearest whole number).</p>
-<hr class="docutils" />
-<p>Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
-Take a class with <a class="reference external" href="https://geography.columbian.gwu.edu/michael-mann">Prof Mann</a></p>
 <!-- This can have a significant impact on a map as shown in the following example.
 
 ```{r echo=FALSE, fig.cap = "Map of data represented as decimal (float) values.",  fig.height=3}
@@ -725,7 +737,13 @@ spplot(eire, z="x.int", at= brks, col.regions =clr, col="white", sp.layout=l2)
         
             &copy; Copyright 2020.<br/>
           <div class="extra_footer">
-            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+            <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300">
+</div>
+
           </div>
       </p>
     </div>
@@ -744,7 +762,7 @@ spplot(eire, z="x.int", at= brks, col.regions =clr, col="white", sp.layout=l2)
     <!-- Google Analytics -->
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('create', 'UA-192844775-1', 'auto');
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>

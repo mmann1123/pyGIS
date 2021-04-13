@@ -7,3 +7,5 @@ geopandas
 contextily
 cython
 earthpy
+census 
+us

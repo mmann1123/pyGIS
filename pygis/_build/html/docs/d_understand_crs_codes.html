@@ -209,6 +209,11 @@
      Creating Spatial Data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge, Dissolve, Map w. Census Data
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -612,7 +617,7 @@ Example 2 (EPSG code) CRS: epsg:4269
 <p>Sources: <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
 <div class="section" id="what-is-in-a-proj-4-string">
 <h3>What is in a PROJ.4 string?<a class="headerlink" href="#what-is-in-a-proj-4-string" title="Permalink to this headline">¶</a></h3>
-<p>Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and distinctly identify each individual parameter, each parameter begins with a <code class="docutils literal notranslate"><span class="pre">+</span></code> sign. A CRS parameter is defined after the <code class="docutils literal notranslate"><span class="pre">+</span></code> sign.</p>
+<p>Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and identify each individual parameter, each parameter begins with a <code class="docutils literal notranslate"><span class="pre">+</span></code> sign. A CRS parameter is defined after the <code class="docutils literal notranslate"><span class="pre">+</span></code> sign.</p>
 <p>A few <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> parameters can be applied to most CRSs:</p>
 <table class="colwidths-auto table">
 <thead>
@@ -633,40 +638,37 @@ Example 2 (EPSG code) CRS: epsg:4269
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+ellps</span></code></p></td>
 <td><p>Ellipsoid name</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+k</span></code></p></td>
-<td><p>Scaling factor (deprecated)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+k_0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+k_0</span></code></p></td>
 <td><p>Scaling factor</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lat_0</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lat_0</span></code></p></td>
 <td><p>Latitude of origin</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_0</span></code></p></td>
 <td><p>Central meridian</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_wrap</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_wrap</span></code></p></td>
 <td><p>Center longitude to use for wrapping</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+over</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+over</span></code></p></td>
 <td><p>Allow longitude output outside -180 to 180 range, disables wrapping</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+pm</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+pm</span></code></p></td>
 <td><p>Alternate prime meridian (typically a city name)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+proj</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+proj</span></code></p></td>
 <td><p>Projection name</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+units</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+units</span></code></p></td>
 <td><p>meters, US survey feet, etc.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+vunits</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+vunits</span></code></p></td>
 <td><p>vertical units</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+x_0</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+x_0</span></code></p></td>
 <td><p>False easting</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+y_0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+y_0</span></code></p></td>
 <td><p>False northing</p></td>
 </tr>
 </tbody>
@@ -977,7 +979,13 @@ Name: geometry, dtype: geometry
         
             &copy; Copyright 2020.<br/>
           <div class="extra_footer">
-            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+            <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300">
+</div>
+
           </div>
       </p>
     </div>
@@ -996,7 +1004,7 @@ Name: geometry, dtype: geometry
     <!-- Google Analytics -->
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('create', 'UA-192844775-1', 'auto');
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>

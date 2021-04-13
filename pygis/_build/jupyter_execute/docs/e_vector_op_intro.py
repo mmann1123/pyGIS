@@ -12,4 +12,5 @@ In this section we will learn how to:
 
 e_attributes
 e_new_vectors
+e_vector_merge_dissolve
 ```

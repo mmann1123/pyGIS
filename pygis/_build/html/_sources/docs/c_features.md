@@ -11,6 +11,17 @@ kernelspec:
 
 (c_features)=
 
+
+---------------
+```{admonition} Learning Objectives
+* Learn the difference between raster and vector data
+* Learn how to manually create each data structure
+* Learn about data measurement 
+
+```
+--------------
+
+
 # Feature Representation  
 
 ## Vector vs. Raster
@@ -176,10 +187,6 @@ While whole numbers can be stored as a float or double (i.e. we can store the nu
 
 While storing an integer value as a float may not have dire consequences, the same cannot be said of storing a float as an integer. For example, if your values consist of 0.2, 0.01, 0.34, 0.1 and 0.876, their integer counterpart would be 0, 0, 0, and 1 (i.e. values rounded to the nearest whole number). 
 
-
---------------
-Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
-Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)
 
 <!-- This can have a significant impact on a map as shown in the following example.
 

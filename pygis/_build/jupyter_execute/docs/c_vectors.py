@@ -1,5 +1,16 @@
 (c_vectors)=
 
+
+---------------
+```{admonition} Learning Objectives
+* Create a Geopandas GeoSeries and Dataframe
+* Plot a basic map 
+```
+```{admonition} Review
+* [Data Structures](c_features)
+```
+--------------
+
 # Vector Data 
 
 ## GeoPandas
@@ -52,7 +63,3 @@ world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 world.head()
 
 world.plot()
-
--------------
-Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
-Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)

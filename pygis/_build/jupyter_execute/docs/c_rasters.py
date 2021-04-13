@@ -205,7 +205,3 @@ with gw.config.update(sensor="bgr"):
 
 ----------
 Credits: [rasterio quickstart](https://rasterio.readthedocs.io/en/latest/quickstart.html)
-
-Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
-
-Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)

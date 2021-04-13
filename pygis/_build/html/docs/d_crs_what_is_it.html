@@ -209,6 +209,11 @@
      Creating Spatial Data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge, Dissolve, Map w. Census Data
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -445,8 +450,26 @@
         
               <div>
                 
-  <div class="section" id="what-is-a-crs">
-<span id="d-crs-what-is-it"></span><h1>What is a CRS?<a class="headerlink" href="#what-is-a-crs" title="Permalink to this headline">¶</a></h1>
+  <hr class="docutils" id="d-crs-what-is-it" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<p>Lesson objectives:</p>
+<ul class="simple">
+<li><p>Learn what a Coordinate Reference System (CRS) is</p></li>
+<li><p>Learn about the properties of a CRS</p></li>
+<li><p>Differentiate projected and geographic CRSs</p></li>
+<li><p>Understand CRS impact on shape, area and distance</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine Transforms</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="what-is-a-crs">
+<h1>What is a CRS?<a class="headerlink" href="#what-is-a-crs" title="Permalink to this headline">¶</a></h1>
 <p>Implicit with any GIS data is a spatial reference system. It can consist of a simple arbitrary reference system such as a 10 m x 10 m sampling grid in a wood lot or, the boundaries of a soccer field or, it can consist of a geographic reference system, i.e. one where the spatial features are mapped to an earth based reference system. The focus of this topic is on earth reference systems which can be based on a Geographic Coordinate System (GCS) or a Project Coordinate System (PCS).</p>
 <div class="section" id="geographic-coordinate-systems">
 <h2>Geographic Coordinate Systems<a class="headerlink" href="#geographic-coordinate-systems" title="Permalink to this headline">¶</a></h2>
@@ -706,7 +729,13 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
         
             &copy; Copyright 2020.<br/>
           <div class="extra_footer">
-            Supported by  <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a>
+            <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300">
+</div>
+
           </div>
       </p>
     </div>
@@ -725,7 +754,7 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
     <!-- Google Analytics -->
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'G-BEC4RYX023', 'auto');
+      ga('create', 'UA-192844775-1', 'auto');
       ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
     </script>

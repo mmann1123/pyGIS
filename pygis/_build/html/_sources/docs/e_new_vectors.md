@@ -14,7 +14,6 @@ kernelspec:
 ----------------
 
 ```{admonition} Learning Objectives
-An example of an admonition with a title.
 * Create new geospatial objects (points, lines, polygons)
 * Assign the correct projection or CRS
 * Create points from a table or csv of lat and lon 

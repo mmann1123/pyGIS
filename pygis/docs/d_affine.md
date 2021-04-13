@@ -12,6 +12,18 @@ kernelspec:
 (d_affine)=
 
 
+---------------
+```{admonition} Learning Objectives
+* Learn how to use Affine transforms
+* Differentiate translate, rotate, skew, shear
+```
+```{admonition} Review
+* [Data Structures](c_features)
+* [Vector Data ](c_vectors)
+* [Raster Data ](c_rasters)
+* [Matrix Algebra Intro](https://youtu.be/OMA2Mwo0aZg)
+```
+--------------
 
 # Affine Transforms
 <!-- https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html -->

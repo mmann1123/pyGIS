@@ -151,7 +151,7 @@ Sources: [Using PROJ](https://proj.org/usage/quickstart.html); [Lesson 4. Unders
 
 ### What is in a PROJ.4 string?
 
-Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and distinctly identify each individual parameter, each parameter begins with a `+` sign. A CRS parameter is defined after the `+` sign.
+Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and identify each individual parameter, each parameter begins with a `+` sign. A CRS parameter is defined after the `+` sign.
 
 A few `PROJ.4` parameters can be applied to most CRSs:
 
@@ -161,7 +161,6 @@ A few `PROJ.4` parameters can be applied to most CRSs:
 | `+axis` | Axis orientation |
 | `+b` | Semiminor radius of the ellipsoid axis |
 | `+ellps` | Ellipsoid name |
-| `+k` | Scaling factor (deprecated) |
 | `+k_0` | Scaling factor |
 | `+lat_0` | Latitude of origin |
 | `+lon_0` | Central meridian |

@@ -11,6 +11,21 @@ kernelspec:
 
 (e_attributes)=
  
+
+----------------
+
+```{admonition} Learning Objectives
+Lesson objectives:
+* Create and manipulate vector attributes
+* Subset data
+* Plot lat lon as points
+```
+```{admonition} Review
+* [Vector Data](c_vectors)
+```
+----------------
+
+
 # Attributes & Indexing  
 
 ```{figure} ../_static/c_data_types/dataframe.svg
