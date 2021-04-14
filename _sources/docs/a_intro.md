@@ -5,11 +5,7 @@ The globe is now digital. Everything from monitoring deforestation, predicting w
 
 ```{tableofcontents}
 ```
-
--------------
-Supported by: <a href="https://geography.columbian.gwu.edu/">GW Dept of Geography</a> 
-Take a class with [Prof Mann](https://geography.columbian.gwu.edu/michael-mann)
-
+ 
 <!-- -----------------------
 
 https://autogis-site.readthedocs.io/en/latest/index.html
