@@ -17,11 +17,9 @@ To do:
 ----------------
 
 ```{admonition} Learning Objectives
-Learning Objectives:
 - Learn how rasters are reprojected
 ```
 ```{admonition} Review
-Please Review:
 * [Affine transformation](d_affine)
 ```
 ----------------
@@ -30,6 +28,14 @@ Please Review:
 
 
 # Raster CRS 
+
+Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.
+
+
+```{figure} ../_static/d_crs/warp.png
+:name: Example of a warped (reprojected) image
+Example of a warped (reprojected) image
+```
  
 Let's start from the `ndarray` `Z` that we want to span from [-90&deg;,90&deg;] longitude, and [-90&deg;,90&deg;] latitude. For more detail on the construction of these arrays please refer to [the raster section](c_rasters).
 
@@ -50,7 +56,7 @@ plt.title("Temperature")
 plt.show()
 ```
 
-## Describing the Array Location
+## Describing the Array Location (Define a Projection)
 In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale) and [see an example here](d_affine_trans).
 
 The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where $\Delta x$ and $\Delta y$ define the location of the upper left hand corner of our new `Z` ndarray. As a reminder the translation matrix takes the form:
@@ -298,7 +304,7 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
 print("Source Transform:\n",src_transform,'\n')
 print("Destination Transform:\n", dst_transform)
 ```
-Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x).
+Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x$).
 
 Ok finally! 
 

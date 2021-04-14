@@ -361,6 +361,26 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#describing-the-vector-location-define-a-projection">
+   Describing the Vector Location (Define a Projection)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reproject">
+   Reproject
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -372,23 +392,29 @@
   <hr class="docutils" id="d-vector-crs-intro" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
-<p>Learning Objectives:</p>
 <ul class="simple">
-<li><p>What is warping?</p></li>
-<li><p>What is an affine transformation?</p></li>
+<li><p>How to reproject vector data</p></li>
+<li><p>How does affine transforms relate to reprojection?</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
-<p>Please Review:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="e_new_vectors.html#e-new-vectors"><span class="std std-ref">Creating Points, Lines, Polygons</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="vector-crs">
 <h1>Vector CRS<a class="headerlink" href="#vector-crs" title="Permalink to this headline">¶</a></h1>
+<p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to define projections and reproject data.</p>
+<div class="section" id="describing-the-vector-location-define-a-projection">
+<h2>Describing the Vector Location (Define a Projection)<a class="headerlink" href="#describing-the-vector-location-define-a-projection" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="reproject">
+<h2>Reproject<a class="headerlink" href="#reproject" title="Permalink to this headline">¶</a></h2>
 <!--
+https://kartoweb.itc.nl/geometrics/Coordinate%20transformations/coordtrans.html
 
  https://geopandas.org/gallery/plotting_with_geoplot.html
 
@@ -433,6 +459,7 @@ FIGURE 5.5: Illustrations of affine transformations: shift, scale and rotate.
 Finally, the newly created geometries can replace the old ones with the st_set_geometry() function:
 
 nz_scale_sf = st_set_geometry(nz, nz_scale) --></div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -472,13 +499,15 @@ nz_scale_sf = st_set_geometry(nz, nz_scale) --></div>
         
           By Michael Mann, Steven Chao, Nina Feldman<br/>
         
-            &copy; Copyright 2020.<br/>
           <div class="extra_footer">
             <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
   width="300">
+</div>
+<div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 </div>
 
           </div>

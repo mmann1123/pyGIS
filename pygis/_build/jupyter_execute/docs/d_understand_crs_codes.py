@@ -4,7 +4,6 @@
 ----------------
 
 ```{admonition} Learning Objectives
-Lesson objectives:
 * Understand how to read a `PROJ.4` string
 * Understand how a `PROJ.4` string relates to an `EPSG` code
 * Visually explore changing `PROJ.4` string parameters

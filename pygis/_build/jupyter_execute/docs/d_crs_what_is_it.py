@@ -3,7 +3,6 @@
 ----------------
 
 ```{admonition} Learning Objectives
-Lesson objectives:
 * Learn what a Coordinate Reference System (CRS) is
 * Learn about the properties of a CRS
 * Differentiate projected and geographic CRSs

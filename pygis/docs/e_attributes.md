@@ -15,7 +15,6 @@ kernelspec:
 ----------------
 
 ```{admonition} Learning Objectives
-Lesson objectives:
 * Create and manipulate vector attributes
 * Subset data
 * Plot lat lon as points

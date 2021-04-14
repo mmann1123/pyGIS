@@ -3,23 +3,26 @@
 ----------------
 
 ```{admonition} Learning Objectives
-Learning Objectives:
-- What is warping?
-- What is an affine transformation?
+- How to reproject vector data
+- How does affine transforms relate to reprojection?
 ```
 ```{admonition} Review
-Please Review:
 * [Affine transformation](d_affine)
+* [Creating Points, Lines, Polygons](e_new_vectors)
 ```
 ----------------
 
-
-
 # Vector CRS 
- 
 
+Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to define projections and reproject data.
+
+## Describing the Vector Location (Define a Projection)
+
+
+## Reproject
 
 <!--
+https://kartoweb.itc.nl/geometrics/Coordinate%20transformations/coordtrans.html
 
  https://geopandas.org/gallery/plotting_with_geoplot.html
 

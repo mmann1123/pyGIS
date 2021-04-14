@@ -18,12 +18,10 @@ To Do:
 ----------------
 
 ```{admonition} Learning Objectives
-Learning Objectives:
 - What is it?
 
 ```
 ```{admonition} Review
-Please Review:
 * [Affine transformation](d_affine)
 ```
 ----------------

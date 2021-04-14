@@ -31,6 +31,12 @@ repository:
   path_to_book              : "./pygis"  # A path to your book's folder, relative to the repository root.
   branch                    : main  # Which branch of the repository should be used when creating links
 
+sphinx:
+  config:
+    html_show_copyright: false
+  extra_extensions:
+    - sphinx_sitemap
+
 html:
   use_edit_page_button:         true
   use_issues_button:            true
@@ -44,6 +50,9 @@ html:
             <a href="https://geography.columbian.gwu.edu/">
          <img alt="GW Geography" src="../_static/global/GWBlue.png"
           width="300">
+        </div>
+        <div>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
         </div>
 # Will be displayed underneath the footer. width=150" height="70"
 

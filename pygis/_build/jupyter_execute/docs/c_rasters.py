@@ -3,7 +3,6 @@
 ----------------
 
 ```{admonition} Learning Objectives
-An example of an admonition with a title.
 * Create new raster objects 
 * Assign the correct projection or CRS
 ```
