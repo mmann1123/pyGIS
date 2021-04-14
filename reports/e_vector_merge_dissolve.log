@@ -25,7 +25,8 @@ va_tract = gpd.read_file("https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2
 va_tract = va_tract.to_crs(epsg = 32617)
 
 # Print GeoDataFrame of shapefile
-print(va_tract)
+print(va_tract.head(2))
+print('Shape: ', va_tract.shape)
 
 # Check shapefile projection
 print("\nThe shapefile projection is: {}".format(va_tract.crs))
@@ -33,7 +34,7 @@ print("\nThe shapefile projection is: {}".format(va_tract.crs))
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mHTTPError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-6-fd901759b0fc>[0m in [0;36m<module>[0;34m[0m
+[0;32m<ipython-input-6-65047e885468>[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;31m# Access shapefile of Virginia census tracts[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 2[0;31m [0mva_tract[0m [0;34m=[0m [0mgpd[0m[0;34m.[0m[0mread_file[0m[0;34m([0m[0;34m"https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      3[0m [0;34m[0m[0m
