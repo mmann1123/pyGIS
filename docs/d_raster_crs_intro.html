@@ -68,7 +68,7 @@
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/d_raster_crs_intro.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Raster CRS" />
-<meta property="og:description" content="Raster CRS  Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, " />
+<meta property="og:description" content="Raster CRS  Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates (x,y) for each pixel in a ras" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -469,10 +469,10 @@
 <hr class="docutils" />
 <div class="section" id="raster-crs">
 <h1>Raster CRS<a class="headerlink" href="#raster-crs" title="Permalink to this headline">¶</a></h1>
-<p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.</p>
+<p>Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new geospatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.</p>
 <div class="figure align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s start from the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> <code class="docutils literal notranslate"><span class="pre">Z</span></code> that we want to span from [-90°,90°] longitude, and [-90°,90°] latitude. For more detail on the construction of these arrays please refer to <a class="reference internal" href="c_rasters.html#c-rasters"><span class="std std-ref">the raster section</span></a>.</p>
 <div class="cell docutils container">
@@ -498,6 +498,8 @@
 <img alt="../_images/d_raster_crs_intro_1_0.png" src="../_images/d_raster_crs_intro_1_0.png" />
 </div>
 </div>
+<p>Note that <em><code class="docutils literal notranslate"><span class="pre">Z</span></code> contains no data on its location</em>. Its just an array, the information stored in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> aren’t associated with it at all. This location data will often be stored in the header of file. In order to ‘locate’ the array on the map we will use affine transformations.</p>
+<p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.</p>
 <div class="section" id="describing-the-array-location-define-a-projection">
 <h2>Describing the Array Location (Define a Projection)<a class="headerlink" href="#describing-the-array-location-define-a-projection" title="Permalink to this headline">¶</a></h2>
 <p>In this example the coordinate reference system will be ‘+proj=latlong’, which describes an equirectangular coordinate reference system with units of decimal degrees. Although <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> seems relevant to understanding the location of cell values, <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). <a class="reference internal" href="d_affine.html#d-affine-trans-scale"><span class="std std-ref">Review affine transformations</span></a> and <a class="reference internal" href="d_affine.html#d-affine-trans"><span class="std std-ref">see an example here</span></a>.</p>
@@ -620,12 +622,12 @@
 <p>We can visualize what we need to do here:</p>
 <div class="figure align-default" id="example-of-using-affine-translation-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_drawing.png"><img alt="../_images/c_raster_upperleft_drawing.png" src="../_images/c_raster_upperleft_drawing.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s walk through the math behind the scenes. Here we use our transform matrix to move our upper left hand corner which is assumed to start at the origin (0,0).</p>
 <div class="figure align-default" id="example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_transform.png"><img alt="../_images/c_raster_upperleft_transform.png" src="../_images/c_raster_upperleft_transform.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
 </div>
 <p>The final coordinate of the upper left hand corner are <span class="math notranslate nohighlight">\((x_0,y_0) = (-105,105)\)</span></p>
 </div>
@@ -635,7 +637,7 @@
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
 <div class="figure align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
 <a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">¶</a></p>
 </div>
 <p>Let’s start with the easiest and retrieve the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">transform</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
 <div class="cell docutils container">
@@ -709,7 +711,7 @@
 <p>Let’s start be looking visually at what we plan to do:</p>
 <div class="figure align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -718,7 +720,7 @@
 <p>We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate (<span class="math notranslate nohighlight">\(x_B\)</span>, <span class="math notranslate nohighlight">\(y_B\)</span>)</p>
 <div class="figure align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster_m.png"><img alt="../_images/d_europe_translate_raster_m.png" src="../_images/d_europe_translate_raster_m.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -728,7 +730,7 @@
 <p>Take for instance the case of a ‘warped’ raster image (below) which for instance occurs when you switch from a spherical CRS (like lat lon) to a projected (or flat) CRS. Notice that the centroids of the two rasters no longer over lap:</p>
 <div class="figure align-default" id="example-of-warping-an-image-during-reprojection">
 <a class="reference internal image-reference" href="../_images/d_warp.png"><img alt="../_images/d_warp.png" src="../_images/d_warp.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">¶</a></p>
 </div>
 <p>In this case we have a decision to make, how will we assign values to the new warped raster? Keep in mind the values must change because they now point to different locations on the ground.  For this we have a number of ‘interpolation’ options, some simple, some complex.</p>
 <div class="admonition note">
@@ -741,11 +743,11 @@
 <p>In the visual example below we will try to estimate the value for location <code class="docutils literal notranslate"><span class="pre">C</span></code> based on the known values at locations <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
 <div class="figure align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">¶</a></p>
 </div>
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="choosing-the-right-interpolation-method">
@@ -881,7 +883,7 @@ Destination Transform:
 </div>
 <div class="figure align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
 </div>
 <!-- 
 6.6 Reprojecting raster geometries
@@ -983,10 +985,10 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
-  width="300">
+  width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
           </div>
