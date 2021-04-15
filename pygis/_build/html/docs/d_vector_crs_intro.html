@@ -52,6 +52,9 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/d_vector_crs_intro.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Raster CRS" href="d_raster_crs_intro.html" />
@@ -60,6 +63,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
 
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/d_vector_crs_intro.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Vector CRS" />
+<meta property="og:description" content="Vector CRS  When it comes to coordinate reference systems points, lines and polygons are convenient because each point or node has an assigned coordinate pair (" />
+<meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
+
+<meta name="twitter:card" content="summary" />
 
 
   </head>
@@ -368,13 +380,13 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#describing-the-vector-location-define-a-projection">
-   Describing the Vector Location (Define a Projection)
+  <a class="reference internal nav-link" href="#define-a-projection-for-points-lines-polygons">
+   Define a Projection for Points, Lines, Polygons
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reproject">
-   Reproject
+  <a class="reference internal nav-link" href="#reproject-points-lines-polygons">
+   Reproject Points, Lines, Polygons
   </a>
  </li>
 </ul>
@@ -407,12 +419,95 @@
 <hr class="docutils" />
 <div class="section" id="vector-crs">
 <h1>Vector CRS<a class="headerlink" href="#vector-crs" title="Permalink to this headline">¶</a></h1>
-<p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to define projections and reproject data.</p>
-<div class="section" id="describing-the-vector-location-define-a-projection">
-<h2>Describing the Vector Location (Define a Projection)<a class="headerlink" href="#describing-the-vector-location-define-a-projection" title="Permalink to this headline">¶</a></h2>
+<p>When it comes to coordinate reference systems points, lines and polygons are convenient because each point or node has an assigned coordinate pair (x,y). The only trick then is to know how those coordinates relate to the coordinate space, or location on the ground.</p>
+<div class="section" id="define-a-projection-for-points-lines-polygons">
+<h2>Define a Projection for Points, Lines, Polygons<a class="headerlink" href="#define-a-projection-for-points-lines-polygons" title="Permalink to this headline">¶</a></h2>
+<p>When a point, line or polyon is created each point or node has two coordinates <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. The location of these two points on the ground will change wildly between projections. The coordinate pair (0,0) might mean a location just off shore from Ghana with WGS84 LatLon, or in the middle of the Pacific ocean in another.</p>
+<p>Let’s take a look at the example of a polygon with coordinates (0,45),(5,45),(5,40),(0,40) below. In the left pane we can see that, although we have the polygon’s node coordinates, we don’t know where they are located! This is because no coordinate reference system has been assigned to it. Could be in outer space for all we know. On the right, we can see that we have assigned it WGS84 geographic lat lon i.e. <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>. Suddenly the coordinates make sense, because we know how they relate to locations on the ground.</p>
+<div class="figure align-default" id="example-of-assigning-a-coordinate-reference-system">
+<a class="reference internal image-reference" href="../_images/d_crs_assigned.png"><img alt="../_images/d_crs_assigned.png" src="../_images/d_crs_assigned.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Example of assigning a coordinate reference system</span><a class="headerlink" href="#example-of-assigning-a-coordinate-reference-system" title="Permalink to this image">¶</a></p>
 </div>
-<div class="section" id="reproject">
-<h2>Reproject<a class="headerlink" href="#reproject" title="Permalink to this headline">¶</a></h2>
+<p>Every time we create vector data (or receive it from someone else), we need to make sure that a projection is assigned to it.</p>
+<p>The following demonstrates how to</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>  
+
+<span class="n">a_square</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span> <span class="p">],</span> 
+     <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">45</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)])]}</span>
+
+<span class="c1"># create a dataframe from the nodes and assign the CRS</span>
+<span class="n">gdf_square</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">a_square</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>  
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gdf_square</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_vector_crs_intro_1_0.png" src="../_images/d_vector_crs_intro_1_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Take a moment to review proj4 string and EPSG codes <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">here</span></a></p>
+</div>
+</div>
+<div class="section" id="reproject-points-lines-polygons">
+<h2>Reproject Points, Lines, Polygons<a class="headerlink" href="#reproject-points-lines-polygons" title="Permalink to this headline">¶</a></h2>
+<p>Once a projection is assigned we often have to ‘reproject’ it to another one. Reprojection entails using a set of formulas to convert (x,y) stored in latitude and longitude into another coordinate space. This entails a two step process.</p>
+<p>Looking at the example below, we will move from Sinosoidal to Hobo-Dyer. The first step however is to use the “inverse equation” to convert coordinate pairs from Sinosoidal back to lat lon, and the use the forward equation to convert lat lon into the Hobo-Dyer coordinate space.</p>
+<div class="figure align-default" id="reprojecting-vectors-with-inverse-and-forward-equations">
+<a class="reference internal image-reference" href="../_images/d_reprojection_example.jpg"><img alt="../_images/d_reprojection_example.jpg" src="../_images/d_reprojection_example.jpg" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Reprojecting vectors with inverse and forward equations</span><a class="headerlink" href="#reprojecting-vectors-with-inverse-and-forward-equations" title="Permalink to this image">¶</a></p>
+</div>
+<!-- Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to reproject data. -->
+<p>These ‘forward’ and ‘inverse’ equations can be simple or complex. To make things easy to understand lets look at the example of reprojecting from proj4 code <code class="docutils literal notranslate"><span class="pre">+proj=longlat</span> <span class="pre">+datum=WGS84</span></code> to <code class="docutils literal notranslate"><span class="pre">+proj=longlat</span> <span class="pre">+datum=WGS84</span> <span class="pre">+lon_0=-10</span></code>, where <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> just moves the prime meridian 10 degrees west (west is negative). Because we are already in latitude and longitude we can ignore the ‘inverse’ equation and just look at the ‘forward’ equation.</p>
+<p>In this case the ‘forward’ equation is very simple:</p>
+<div class="math notranslate nohighlight">
+\[
+x = x + 10 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y = y
+\]</div>
+<p>As result the polygon remains in the same location, but in the ‘new’ projection longitude values are now all 10 degrees higher.</p>
+<div class="figure align-default" id="reprojecting-by-moving-the-prime-meridian-west">
+<a class="reference internal image-reference" href="../_images/d_europe_translate_vector.png"><img alt="../_images/d_europe_translate_vector.png" src="../_images/d_europe_translate_vector.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Reprojecting by moving the prime meridian west</span><a class="headerlink" href="#reprojecting-by-moving-the-prime-meridian-west" title="Permalink to this image">¶</a></p>
+</div>
+<p>Most ‘forward’ and ‘inverse’ equations are non-linear and more complex. Take for instance the Gall-Peters forward projection equations are shown below:</p>
+<div class="math notranslate nohighlight">
+\[
+x=\frac {R\pi \lambda \cos 45^{\circ }}{180^{\circ }}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y={\frac {R\sin \varphi }{\cos 45^{\circ }}} 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is the longitude from the central meridian in degrees, <span class="math notranslate nohighlight">\(\varphi\)</span> is the latitude, and R is the radius of the globe used as the model of the earth for projection. Luckily computers make all these calculation quick and easy.</p>
+<p>Refering back to our previous example, let’s use geopandas to move the prime meridian 10 degrees west:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproject the data</span>
+<span class="n">gdf_square_10w</span> <span class="o">=</span> <span class="n">gdf_square</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;+proj=longlat +datum=WGS84 +lon_0=-10&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gdf_square_10w</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_vector_crs_intro_3_0.png" src="../_images/d_vector_crs_intro_3_0.png" />
+</div>
+</div>
+<p>Note the shift in coordinates along x by 10.</p>
 <!--
 https://kartoweb.itc.nl/geometrics/Coordinate%20transformations/coordtrans.html
 
@@ -504,10 +599,10 @@ nz_scale_sf = st_set_geometry(nz, nz_scale) --></div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
-  width="300">
+  width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
           </div>

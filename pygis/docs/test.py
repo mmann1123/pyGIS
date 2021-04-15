@@ -834,3 +834,28 @@ with open("../../../census_api.txt", "r") as f:
 
 # %%
 
+import geopandas as gpd
+from shapely.geometry import Point, Polygon
+import matplotlib.pyplot as plt
+
+plt.style.use("bmh")
+
+a_square = {
+    "name": ["Washington\n(38.90, -77.03)"],
+    "geometry": [Polygon([Point(0, 45), Point(5, 45), Point(5, 40), Point(0, 40)])],
+}
+
+# create a dataframe from the nodes and assign the CRS
+gdf_square = gpd.GeoDataFrame(a_square, crs="EPSG:4326")
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf_square.plot(ax=ax)
+plt.show()
+
+# %%
+gdf_square_10w = gdf_square.to_crs("+proj=longlat +datum=WGS84 +lon_0=-10")
+
+fig, ax = plt.subplots(figsize=(12, 6))
+gdf_square_10w.plot(ax=ax)
+plt.show()
+
+# %%
