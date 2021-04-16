@@ -24,7 +24,7 @@ kernelspec:
 ```
 ----------------
 
-# Reproject Raster
+# Reproject Rasters
 
 
 
@@ -43,12 +43,25 @@ with gw.config.update(ref_crs=proj4):
     with gw.open(image, resampling="nearest") as src:
     
         src.gw.to_raster(
-            "../temp/output.tif",
+            "../temp/LC08_20200518_aea.tif",
             verbose=0,
             n_workers=4,  # number of process workers 
             n_threads=2,  # number of thread workers ``dask.compute``
             overwrite=True,
         ) 
+```
+
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=200)
+
+image = "../temp/LC08_20200518_aea.tif"
+with gw.open(image) as src:
+    src.where(src != 0).sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+    plt.tight_layout(pad=1)
+
 ```
 
 Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra. 
