@@ -45,6 +45,9 @@
       - file: docs/e_new_vectors
       - file: docs/e_vector_merge_dissolve
     - file: docs/e_raster_op_intro
+      sections:
+      - file: docs/e_raster_reproject
+
 
 - part: Remote Sensing
   chapters:

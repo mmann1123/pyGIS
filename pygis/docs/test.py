@@ -849,6 +849,8 @@ a_square = {
 gdf_square = gpd.GeoDataFrame(a_square, crs="EPSG:4326")
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf_square.plot(ax=ax)
+plt.ylim(38, 50)
+plt.xlim(0, 20)
 plt.show()
 
 # %%
@@ -856,6 +858,48 @@ gdf_square_10w = gdf_square.to_crs("+proj=longlat +datum=WGS84 +lon_0=-10")
 
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf_square_10w.plot(ax=ax)
+plt.ylim(38, 50)
+plt.xlim(0, 20)
 plt.show()
+
+# %%
+import geoplot as gplt
+import geoplot.crs as gcrs
+
+ax = gplt.webmap(contiguous_usa, projection=gcrs.WebMercator())
+gplt.pointplot(continental_usa_cities, ax=ax)
+
+# %%
+import geowombat as gw
+import matplotlib.pyplot as plt
+
+# fig, ax = plt.subplots(dpi=200)
+
+proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
+image = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+with gw.config.update(ref_crs=proj4):
+    with gw.open(image, resampling="nearest") as src:
+        # src.where(src != 0).sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+        # plt.tight_layout(pad=1)
+        # Write the data to a GeoTiff
+        src.gw.to_raster(
+            "../temp/LC08_20200518_aea.tif",
+            verbose=0,
+            n_workers=4,  # number of process workers sent to ``concurrent.futures``
+            n_threads=2,  # number of thread workers sent to ``dask.compute``
+            overwrite=True,
+        )  # number of window chunks to send as concurrent futures
+
+# %%
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=200)
+
+image = "../temp/LC08_20200518_aea.tif"
+with gw.open(image) as src:
+    src.where(src != 0).sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+    plt.tight_layout(pad=1)
+
 
 # %%

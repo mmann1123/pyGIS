@@ -14,11 +14,11 @@ kernelspec:
 ----------------
 
 ```{admonition} Learning Objectives
+- how to assign a projection to vector data
 - How to reproject vector data
-- How does affine transforms relate to reprojection?
 ```
 ```{admonition} Review
-* [Affine transformation](d_affine)
+* [Understanding CRS codes](d_understand_crs_codes)
 * [Creating Points, Lines, Polygons](e_new_vectors)
 ```
 ----------------
@@ -53,6 +53,8 @@ a_square = {'name': ['Washington\n(38.90, -77.03)' ],
 gdf_square = gpd.GeoDataFrame(a_square, crs="EPSG:4326")  
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf_square.plot(ax=ax)
+plt.ylim(38, 50)
+plt.xlim(0, 20)
 plt.show()
 ```
 
@@ -112,9 +114,11 @@ gdf_square_10w = gdf_square.to_crs("+proj=longlat +datum=WGS84 +lon_0=-10")
 
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf_square_10w.plot(ax=ax)
+plt.ylim(38, 50)
+plt.xlim(0, 20)
 plt.show()
 ```
-Note the shift in coordinates along x by 10.
+Note the shift in coordinates along x by 10 degrees west.
 
 <!--
 https://kartoweb.itc.nl/geometrics/Coordinate%20transformations/coordtrans.html

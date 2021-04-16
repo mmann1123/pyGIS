@@ -1,4 +1,4 @@
-# Merge, Dissolve, Map w. Census Data
+# Merge & Dissolve Polygons
 
 By: Steven Chao
 

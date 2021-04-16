@@ -223,17 +223,26 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge, Dissolve, Map w. Census Data
+     Merge &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
    Raster Skills
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_raster_reproject.html">
+     Reproject Rasters
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -405,14 +414,14 @@
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
+<li><p>how to assign a projection to vector data</p></li>
 <li><p>How to reproject vector data</p></li>
-<li><p>How does affine transforms relate to reprojection?</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">Understanding CRS codes</span></a></p></li>
 <li><p><a class="reference internal" href="e_new_vectors.html#e-new-vectors"><span class="std std-ref">Creating Points, Lines, Polygons</span></a></p></li>
 </ul>
 </div>
@@ -444,6 +453,8 @@
 <span class="n">gdf_square</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">a_square</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>  
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">gdf_square</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -499,6 +510,8 @@ y={\frac {R\sin \varphi }{\cos 45^{\circ }}}
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">gdf_square_10w</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -507,7 +520,7 @@ y={\frac {R\sin \varphi }{\cos 45^{\circ }}}
 <img alt="../_images/d_vector_crs_intro_3_0.png" src="../_images/d_vector_crs_intro_3_0.png" />
 </div>
 </div>
-<p>Note the shift in coordinates along x by 10.</p>
+<p>Note the shift in coordinates along x by 10 degrees west.</p>
 <!--
 https://kartoweb.itc.nl/geometrics/Coordinate%20transformations/coordtrans.html
 
