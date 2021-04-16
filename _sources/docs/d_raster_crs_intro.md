@@ -201,7 +201,7 @@ Wow, it works! Come on it's at least a little bit cool. Depending on your defini
 How then do we reproject a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system (CRS). If you haven't please study [affine transformations](d_affine).
 
 ### Shifting the Prime Meridian
-One of the easiest cases is that of false easting, or moving the prime meridian. Let's walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10&deg; to the west (e.g. using `+lon_0=10` from the  [proj4string](d_understand_crs_codes)). 
+One of the easiest cases is that of false easting, or moving the prime meridian. Let's walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10&deg; to the west (e.g. using `+lon_0=-10` from the  [proj4string](d_understand_crs_codes)). 
 
 Let's start be looking visually at what we plan to do:
 
@@ -211,9 +211,7 @@ Let's start be looking visually at what we plan to do:
 :width: 500px
 Example of using translate to reproject an image by moving prime meridian
 ```
-```{note}
-This is roughly equivalent to false easting `+x_0=10` which would shift the coordinates but not redefine the prime meridian location. 
-```
+
 
 We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate ($x_B$, $y_B$)
 

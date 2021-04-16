@@ -10,7 +10,7 @@ kernelspec:
   name: python371064bitpygisbookgwconda0513153e7d7b4503839be1e6673bfbb2
 ---
 
-# Merge, Dissolve, Map w. Census Data
+# Merge & Dissolve Polygons
 
 By: Steven Chao
 

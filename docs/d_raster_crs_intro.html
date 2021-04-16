@@ -223,17 +223,26 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge, Dissolve, Map w. Census Data
+     Merge &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
    Raster Skills
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_raster_reproject.html">
+     Reproject Raster
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -707,15 +716,11 @@
 <p>How then do we reproject a raster? Since <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a map of pixel locations, warping a raster then becomes as simple as knowing the <code class="docutils literal notranslate"><span class="pre">transform</span></code> of your destination based on the description of the new coordinate reference system (CRS). If you haven’t please study <a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">affine transformations</span></a>.</p>
 <div class="section" id="shifting-the-prime-meridian">
 <h3>Shifting the Prime Meridian<a class="headerlink" href="#shifting-the-prime-meridian" title="Permalink to this headline">¶</a></h3>
-<p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">proj4string</span></a>).</p>
+<p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">proj4string</span></a>).</p>
 <p>Let’s start be looking visually at what we plan to do:</p>
 <div class="figure align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is roughly equivalent to false easting <code class="docutils literal notranslate"><span class="pre">+x_0=10</span></code> which would shift the coordinates but not redefine the prime meridian location.</p>
 </div>
 <p>We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate (<span class="math notranslate nohighlight">\(x_B\)</span>, <span class="math notranslate nohighlight">\(y_B\)</span>)</p>
 <div class="figure align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
