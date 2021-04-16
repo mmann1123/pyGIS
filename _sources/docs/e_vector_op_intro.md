@@ -14,3 +14,6 @@ kernelspec:
 # Vector Skills
  
 In this section we will learn how to:
+
+```{tableofcontents}
+```
