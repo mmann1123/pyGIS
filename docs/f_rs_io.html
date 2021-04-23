@@ -55,7 +55,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/f_rs_io.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Common Tasks" href="f_rs_common_task.html" />
+    <link rel="next" title="Plot Remote Sensed Images" href="f_rs_plot.html" />
     <link rel="prev" title="Remote Sensing w. Geowombat" href="f_rs_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,7 +66,7 @@
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/f_rs_io.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Opening Remote Sensed Images" />
-<meta property="og:description" content="Opening Remote Sensed Images    Learning Objectives  How to open multiple common remotely sensed image types  Handle RGB, BGR, LandSat, PlanetScope images and o" />
+<meta property="og:description" content="Opening Remote Sensed Images  GeoWombat’s file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -259,6 +259,11 @@
      Opening Remote Sensed Images
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_plot.html">
+     Plot Remote Sensed Images
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -413,15 +418,13 @@
         
               <div>
                 
-  <div class="section" id="opening-remote-sensed-images">
-<span id="f-rs-io"></span><h1>Opening Remote Sensed Images<a class="headerlink" href="#opening-remote-sensed-images" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
+  <hr class="docutils" id="f-rs-io" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
 <li><p>How to open multiple common remotely sensed image types</p></li>
 <li><p>Handle RGB, BGR, LandSat, PlanetScope images and other sensor types</p></li>
-<li><p>Mosaic multiple images</p></li>
+<li><p>Mosaic multiple remotely sensed images</p></li>
 <li><p>Create a time series stack</p></li>
 </ul>
 </div>
@@ -433,6 +436,8 @@
 </ul>
 </div>
 <hr class="docutils" />
+<div class="section" id="opening-remote-sensed-images">
+<h1>Opening Remote Sensed Images<a class="headerlink" href="#opening-remote-sensed-images" title="Permalink to this headline">¶</a></h1>
 <p>GeoWombat’s file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using the function <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code>. GeoWombat uses <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code> to load data into an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>. In GeoWombat, the data are always chunked, meaning the data are always loaded as Dask arrays. As with <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code>, the opened DataArrays always have at least 1 band.</p>
 <div class="section" id="opening-a-single-image">
 <h2>Opening a single image<a class="headerlink" href="#opening-a-single-image" title="Permalink to this headline">¶</a></h2>
@@ -527,7 +532,7 @@ Attributes:
 </div>
 </div>
 <p>By default, GeoWombat will stack multiple files by time. So, to stack multiple bands with the same timestamp, change the <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> keyword.</p>
-<p>Also note the use of <code class="docutils literal notranslate"><span class="pre">band_names</span></code> parameter. Here we can set it to anything we want for instance <code class="docutils literal notranslate"><span class="pre">['blue','green','red']</span></code>, but in this case we will keep it simple with <code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code></p>
+<p>Also note the use of <code class="docutils literal notranslate"><span class="pre">band_names</span></code> parameter. Here we can set it to anything we want for instance <code class="docutils literal notranslate"><span class="pre">['blue','green','red']</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
@@ -572,9 +577,9 @@ Attributes:
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="p">[</span><span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span><span class="p">],</span>
     <span class="n">stack_dim</span><span class="o">=</span><span class="s2">&quot;band&quot;</span><span class="p">,</span>
-    <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">],</span>
 <span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -679,7 +684,7 @@ Attributes:
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="f_rs_intro.html" title="previous page">Remote Sensing w. Geowombat</a>
-    <a class='right-next' id="next-link" href="f_rs_common_task.html" title="next page">Common Tasks</a>
+    <a class='right-next' id="next-link" href="f_rs_plot.html" title="next page">Plot Remote Sensed Images</a>
 
         </div>
         

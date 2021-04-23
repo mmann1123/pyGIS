@@ -11,13 +11,12 @@ kernelspec:
 
 (f_rs_io)=
 
-# Opening Remote Sensed Images
 
 ---------------
 ```{admonition} Learning Objectives
   - How to open multiple common remotely sensed image types
   - Handle RGB, BGR, LandSat, PlanetScope images and other sensor types
-  - Mosaic multiple images
+  - Mosaic multiple remotely sensed images
   - Create a time series stack
 ```
 ```{admonition} Review
@@ -26,6 +25,8 @@ kernelspec:
 ```
 --------------
 
+
+# Opening Remote Sensed Images
 
 GeoWombat's file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using the function `geowombat.open`. GeoWombat uses `xarray.open_rasterio` to load data into an `xarray.DataArray`. In GeoWombat, the data are always chunked, meaning the data are always loaded as Dask arrays. As with `xarray.open_rasterio`, the opened DataArrays always have at least 1 band.
 
@@ -67,7 +68,7 @@ with gw.open([l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B
 
 By default, GeoWombat will stack multiple files by time. So, to stack multiple bands with the same timestamp, change the `stack_dim` keyword.
 
-Also note the use of `band_names` parameter. Here we can set it to anything we want for instance `['blue','green','red']`, but in this case we will keep it simple with `[1,2,3]`
+Also note the use of `band_names` parameter. Here we can set it to anything we want for instance `['blue','green','red']`.
 
 ```{code-cell} ipython3
 from geowombat.data import l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B4
@@ -83,14 +84,13 @@ You will see this looks the same as the multiband raster:
 
 
 ```{code-cell} ipython3
-
 fig, ax = plt.subplots(dpi=200)
 with gw.open(
     [l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B4],
     stack_dim="band",
-    band_names=[1, 2, 3],
+    band_names=['blue','green','red'],
 ) as src:
-    src.where(src != 0).sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+    src.where(src != 0).sel(band=['red','blue','green']).gw.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 ```
 

@@ -261,6 +261,11 @@
      Opening Remote Sensed Images
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_plot.html">
+     Plot Remote Sensed Images
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -642,7 +647,7 @@
 </div>
 <div class="section" id="translate-is-a-map">
 <h3>Translate is a “map”<a class="headerlink" href="#translate-is-a-map" title="Permalink to this headline">¶</a></h3>
-<p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(row_number,</span> <span class="pre">column_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
+<p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(column_number,</span> <span class="pre">row_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
 <div class="figure align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
 <a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
@@ -674,7 +679,7 @@
 </div>
 </div>
 </div>
-<p>Just to make sure it works let’s find a harder one:</p>
+<p>Just to make sure it works let’s find a harder one, 5th column right, 2nd row down:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
@@ -890,6 +895,7 @@ Destination Transform:
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
 </div>
+<p>Source: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data">Creating Raster Data</a></p>
 <!-- 
 6.6 Reprojecting raster geometries
 
