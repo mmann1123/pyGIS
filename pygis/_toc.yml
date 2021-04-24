@@ -53,8 +53,9 @@
   chapters:
     - file: docs/f_rs_intro
       sections:
-      - file: docs/f_rs_basics
       - file: docs/f_rs_gw_basics
+      - file: docs/f_rs_io
+      - file: docs/f_rs_plot
     - file: docs/f_rs_common_task
       sections:
       - file: docs/f_rs_task1

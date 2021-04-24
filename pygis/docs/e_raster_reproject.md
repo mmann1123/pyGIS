@@ -34,6 +34,7 @@ Far and away the easiest way to handle raster data is by using [geowombat](https
 In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.
 
 ```{code-cell} ipython3
+:tags: ["hide-output"]
 import geowombat as gw
 
 proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"

@@ -38,6 +38,8 @@ with gw.config.update(ref_crs=proj4):
             overwrite=True,
         ) 
 
+Let's take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use `.sel(band=[3,2,1])` to put them back in the right order.
+
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(dpi=200)

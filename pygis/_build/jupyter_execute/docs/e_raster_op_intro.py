@@ -4,6 +4,9 @@
  
 In this section we will learn how to:
 
+```{tableofcontents}
+```
+
 
 ```{toctree}
 :hidden:

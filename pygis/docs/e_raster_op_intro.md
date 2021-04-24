@@ -14,3 +14,6 @@ kernelspec:
 # Raster Skills
  
 In this section we will learn how to:
+
+```{tableofcontents}
+```

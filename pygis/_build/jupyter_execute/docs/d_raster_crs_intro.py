@@ -131,7 +131,7 @@ The final coordinate of the upper left hand corner are $(x_0,y_0) = (-105,105)$
 
 
 ### Translate is a "map"
-Now here's the magic, our new `translate` matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our `translate` matrix by `(row_number, column_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `translate` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
+Now here's the magic, our new `translate` matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our `translate` matrix by `(column_number, row_number)` to retrieve the coordinates of that cell's upper right hand corner. Essentially, `translate` "maps" row and column indexes to coordinates! OMG! This is fun... ok kidding, but it's useful. 
 
  
 Let's see how we can calculate a few coordinates (upper left) based on the visual examples below:
@@ -149,7 +149,7 @@ Let's find the corner that is one cell down (-30&deg;) and to the right (+30&deg
 
 print(transform*(1,1))
 
-Just to make sure it works let's find a harder one:
+Just to make sure it works let's find a harder one, 5th column right, 2nd row down:
 
 print(transform*(5,2))
 
@@ -327,7 +327,7 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
 Reprojected Landsat Image
 ```
 
-
+Source: [Creating Raster Data](https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data)
 
 <!-- 
 6.6 Reprojecting raster geometries
