@@ -17,5 +17,7 @@ In this section you will learn how to:
 
 f_rs_gw_basics
 f_rs_io
+f_rs_edit
 f_rs_plot
+f_rs_mosaic
 ```

@@ -33,56 +33,111 @@ Import required modules and data.
 # Import GeoWombat
 import geowombat as gw
 
-# Load image names
-from geowombat.data import l8_224078_20200518, l8_224077_20200518_B2, l8_224078_20200518_B2
-from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
-
+# import plotting
 from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as pe
 ```
-## Plot a LandSat Image
-Here we open the image, missing data is removed with `.where(src != 0)`, remember the bands are stored in reverse order (blue, green, red), so we put them back into order `.sel(band=[3, 2, 1])`.
+
+## Plot a Single Band Image
 
 ```{code-cell} ipython3
+from geowombat.data import l8_224077_20200518_B2 
+
+fig, ax = plt.subplots(dpi=200)
+
+with gw.open(l8_224077_20200518_B2,
+                band_names=['blue']) as src:
+    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+plt.tight_layout(pad=1)
+```
+
+## Plot a True Color LandSat Image
+Here we open the image, missing data is removed with `.where(src != 0)`, remember the bands in this file are stored in reverse order (blue, green, red), so we put them back into order `.sel(band=[3, 2, 1])`.
+
+```{code-cell} ipython3
+# load example data
+from geowombat.data import l8_224078_20200518
+
 fig, ax = plt.subplots(dpi=200)
 with gw.open(l8_224078_20200518) as src:
     src.where(src != 0).sel(band=[3, 2, 1]).plot.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)
-```
+``` 
 
-## Plot Union of two LandSat Images
-As an example let's plot the union with `mosaic=True` of two images, blue band only. Note we rename the band name with `band_names=['blue']`.
+## Plot False Color Composites 
+We can use the red, green, and blue channels to show different parts of the spectrum. This allows us for instance to "see" near-infrared (nir). Moreover certain combinations of bands allow us to better identify vegetation, urban environments, water, etc. There are many false colored composites that can be used to highlight different features. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YP0et8l_bvY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Color Infrared (vegetation)
+Here we will look at a common false color combo to assigns the nir band to the color red. This make vegetation appear bright red. 
 
 ```{code-cell} ipython3
+from geowombat.data import rgbn
+
 fig, ax = plt.subplots(dpi=200)
-filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
-with gw.open(filenames,
-                band_names=['blue'],
-                mosaic=True,
-                bounds_by='union') as src:
-    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+
+with gw.open(rgbn,
+            band_names=['red','green','blue','nir'],) as src:
+    src.where(src != 0).sel(band=['nir','red', 'green']).plot.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)
+plt.savefig("rgb_plot.png", dpi=150)
+```
+
+### Common Band Combinations for Landsat 8
+
+| Name    | Band Combination    |
+| :--- | ---: |
+| Natural Color    | 4 3 2  |
+| False Color (urban) |  7 6 4|
+| Color Infrared (vegetation) |	5 4 3|
+| Agriculture |	6 5 2|
+| Atmospheric Penetration |	7 6 5|
+| Healthy Vegetation |	5 6 2 |
+| Land/Water |	5 6 4|
+| Natural With Atmospheric Removal |	7 5 3 |
+|Shortwave Infrared |	7 5 4|
+|Vegetation Analysis| 	6 5 4|
+
+<!-- 
+## Plot Union of two LandSat Images
+As an example let's plot the union with `mosaic=True` of two images taken on the same day, but blue band only. Note we rename the band name with `band_names=['blue']`.
+
+```{code-cell} ipython3
+# from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
+
+# fig, ax = plt.subplots(dpi=200)
+# filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
+# with gw.open(filenames,
+#                 band_names=['blue'],
+#                 mosaic=True,
+#                 bounds_by='union') as src:
+#     src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+# plt.tight_layout(pad=1)
 ```
 
 ## Plot Intersection of two LandSat Images
 Same idea with the intersection, using `bounds_by='intersection'`, we still need to mosaic the two images `mosaic=True`.
 
 ```{code-cell} ipython3
-fig, ax = plt.subplots(dpi=200)
-filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
-with gw.open(filenames,
-                band_names=['blue'],
-                mosaic=True,
-                bounds_by='intersection') as src:
-    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
-plt.tight_layout(pad=1)
+# fig, ax = plt.subplots(dpi=200)
+# filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
+# with gw.open(filenames,
+#                 band_names=['blue'],
+#                 mosaic=True,
+#                 bounds_by='intersection') as src:
+#     src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+# plt.tight_layout(pad=1)
 ```
+ -->
 
 ## Plot LandSat Tile Footprints
 Here we set up a more complicated plotting function for near IR 'nir'.  Note the use of `footprint_grid`. 
 
 ```{code-cell} ipython3
+from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
+
 def plot(bounds_by, ref_image=None, cmap='viridis'):
     fig, ax = plt.subplots(dpi=200)
     with gw.config.update(ref_image=ref_image):

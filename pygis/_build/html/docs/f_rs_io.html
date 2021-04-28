@@ -55,7 +55,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/f_rs_io.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plot Remote Sensed Images" href="f_rs_plot.html" />
+    <link rel="next" title="Editing rasters" href="f_rs_edit.html" />
     <link rel="prev" title="Remote Sensing w. Geowombat" href="f_rs_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -260,8 +260,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_edit.html">
+     Editing rasters
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="f_rs_plot.html">
      Plot Remote Sensed Images
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_mosaic.html">
+     Overlaying Remotely Sensed Images
     </a>
    </li>
   </ul>
@@ -406,6 +416,16 @@
    Opening multiple bands as a mosaic
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-time-series-stack">
+   Create a Time Series Stack
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-dataarrays-to-file">
+   Writing DataArrays to file
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -426,6 +446,7 @@
 <li><p>Handle RGB, BGR, LandSat, PlanetScope images and other sensor types</p></li>
 <li><p>Mosaic multiple remotely sensed images</p></li>
 <li><p>Create a time series stack</p></li>
+<li><p>Write files to disk</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -655,7 +676,108 @@ Attributes:
 <img alt="../_images/f_rs_io_13_0.png" src="../_images/f_rs_io_13_0.png" />
 </div>
 </div>
-<!-- See :ref:`io` for more examples illustrating file opening. --></div>
+<!-- See :ref:`io` for more examples illustrating file opening. -->
+</div>
+<div class="section" id="create-a-time-series-stack">
+<h2>Create a Time Series Stack<a class="headerlink" href="#create-a-time-series-stack" title="Permalink to this headline">¶</a></h2>
+<p>Let’s pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names <code class="docutils literal notranslate"><span class="pre">[l8_224078_20200518,</span> <span class="pre">l8_224078_20200518]</span></code>, it also helps to be specific and assign <code class="docutils literal notranslate"><span class="pre">time_names=['t1',</span> <span class="pre">'t2']</span></code>, and specify which dimension we want to stack our data along with <code class="docutils literal notranslate"><span class="pre">stack_dim='time'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span>
+            <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">],</span>
+            <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span>
+            <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, band: 3, y: 1860, x: 2041)&gt;
+dask.array&lt;concatenate, shape=(2, 3, 1860, 2041), dtype=uint16, chunksize=(1, 1, 256, 256), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
+Attributes:
+    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                +init=epsg:32621
+    res:                (30.0, 30.0)
+    is_tiled:           1
+    nodatavals:         (nan, nan, nan)
+    scales:             (1.0, 1.0, 1.0)
+    offsets:            (0.0, 0.0, 0.0)
+    AREA_OR_POINT:      Area
+    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC0...
+    resampling:         nearest
+    data_are_separate:  1
+    data_are_stacked:   1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="writing-dataarrays-to-file">
+<h2>Writing DataArrays to file<a class="headerlink" href="#writing-dataarrays-to-file" title="Permalink to this headline">¶</a></h2>
+<p>GeoWombat’s I/O can be accessed through the <code class="docutils literal notranslate"><span class="pre">to_vrt</span></code> and <code class="docutils literal notranslate"><span class="pre">to_raster</span></code> functions. These functions use
+Rasterio’s <code class="docutils literal notranslate"><span class="pre">write</span></code> and Dask.array <code class="docutils literal notranslate"><span class="pre">store</span></code> functions as I/O backends. In the examples below,
+<code class="docutils literal notranslate"><span class="pre">src</span></code> is an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> with the necessary transform information to write to an image file.</p>
+<p>Write to a VRT file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+
+<span class="c1"># Transform the data to lat/lon</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
+
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+
+        <span class="c1"># Write the data to a VRT</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_vrt</span><span class="p">(</span><span class="s1">&#39;lat_lon_file.vrt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">941</span><span class="n">b8eead27a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="c1"># Write the data to a VRT</span>
+
+<span class="ne">NameError</span>: name &#39;l8_224077_20200518_B4&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Write to a raster file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+
+        <span class="c1"># Xarray drops attributes</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Apply operations on the DataArray</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">src</span> <span class="o">*</span> <span class="mf">10.0</span>
+
+        <span class="n">src</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+
+        <span class="c1"># Write the data to a GeoTiff</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
+                            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
+                            <span class="n">n_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>    <span class="c1"># number of thread workers sent to ``dask.compute``</span>
+                            <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
+</pre></div>
+</div>
+</div>
+</div>
+<!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. --></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -684,7 +806,7 @@ Attributes:
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="f_rs_intro.html" title="previous page">Remote Sensing w. Geowombat</a>
-    <a class='right-next' id="next-link" href="f_rs_plot.html" title="next page">Plot Remote Sensed Images</a>
+    <a class='right-next' id="next-link" href="f_rs_edit.html" title="next page">Editing rasters</a>
 
         </div>
         

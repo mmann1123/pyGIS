@@ -55,7 +55,9 @@
       sections:
       - file: docs/f_rs_gw_basics
       - file: docs/f_rs_io
+      - file: docs/f_rs_edit
       - file: docs/f_rs_plot
+      - file: docs/f_rs_mosaic
     - file: docs/f_rs_common_task
       sections:
       - file: docs/f_rs_task1
