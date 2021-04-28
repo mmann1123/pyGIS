@@ -18,7 +18,7 @@ kernelspec:
 * Assign the correct projection or CRS
 ```
 ```{admonition} Review
-* [Please review Affine transformation](d_affine)
+* [Please review Affine transformation](d_affine.md)
 ```
 ----------------
 
@@ -70,7 +70,7 @@ The final array `Z` still lacks a number of elements that transform it from bein
 | nodata  | a “nodata” value   |  `-9999`|
 
 ```{note}
-`transform` defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for `transform` are complex and beyond the scope of the chapter, please refer to the next chapter @ [affine transforms](d_affine) and [raster crs](d_raster_crs_intro) for more info. 
+`transform` defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for `transform` are complex and beyond the scope of the chapter, please refer to the next chapter @ [affine transforms](d_affine.md) and [raster crs](d_raster_crs_intro.md) for more info. 
 ```
 ## Writing Rasters
 To save this array along with geospatial information to a file, we call `rasterio.open()` with a path to the new file to be created, and 'w' to specify writing mode, along with the arguments above. 
@@ -112,7 +112,7 @@ plt.show()
 ```
 
 
-So in summary, a geospatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it), and number of bands. This information is typically accessed and updated via the `.profile`.
+So in summary, a geospatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it.md), and number of bands. This information is typically accessed and updated via the `.profile`.
 
 ```{code-cell} ipython3
 print(raster.profile)
@@ -209,7 +209,7 @@ with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
     show(src,adjust='linear')
 ```
 
-To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro).
+To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro.md).
 
 Just as a preview, here's how to do this in `geowombat`. 
 

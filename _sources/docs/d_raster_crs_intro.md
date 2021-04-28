@@ -20,7 +20,7 @@ To do:
 - Learn how rasters are reprojected
 ```
 ```{admonition} Review
-* [Affine transformation](d_affine)
+* [Affine transformation](d_affine.md)
 ```
 ----------------
 
@@ -35,7 +35,7 @@ Raster data is very different that vector data, one of the key differences is th
 Example of a warped (reprojected) image
 ```
  
-Let's start from the `ndarray` `Z` that we want to span from [-90&deg;,90&deg;] longitude, and [-90&deg;,90&deg;] latitude. For more detail on the construction of these arrays please refer to [the raster section](c_rasters).
+Let's start from the `ndarray` `Z` that we want to span from [-90&deg;,90&deg;] longitude, and [-90&deg;,90&deg;] latitude. For more detail on the construction of these arrays please refer to [the raster section](c_rasters.md).
 
  ```{code-cell} ipython3
 import numpy as np
@@ -59,7 +59,7 @@ Note that *`Z` contains no data on its location*. Its just an array, the informa
 Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.
 
 ## Describing the Array Location (Define a Projection)
-In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale) and [see an example here](d_affine_trans).
+In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale.md) and [see an example here](d_affine_trans.md).
 
 The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where $\Delta x$ and $\Delta y$ define the location of the upper left hand corner of our new `Z` ndarray. As a reminder the translation matrix takes the form:
 
@@ -198,10 +198,10 @@ $$
 Wow, it works! Come on it's at least a little bit cool. Depending on your definition of cool.
 
 ## Reproject a Raster - The Simple Case
-How then do we reproject a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system (CRS). If you haven't please study [affine transformations](d_affine).
+How then do we reproject a raster? Since `transform` is a map of pixel locations, warping a raster then becomes as simple as knowing the `transform` of your destination based on the description of the new coordinate reference system (CRS). If you haven't please study [affine transformations](d_affine.md).
 
 ### Shifting the Prime Meridian
-One of the easiest cases is that of false easting, or moving the prime meridian. Let's walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10&deg; to the west (e.g. using `+lon_0=-10` from the  [proj4string](d_understand_crs_codes)). 
+One of the easiest cases is that of false easting, or moving the prime meridian. Let's walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10&deg; to the west (e.g. using `+lon_0=-10` from the  [proj4string](d_understand_crs_codes.md)). 
 
 Let's start be looking visually at what we plan to do:
 

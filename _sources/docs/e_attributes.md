@@ -20,7 +20,7 @@ kernelspec:
 * Plot lat lon as points
 ```
 ```{admonition} Review
-* [Vector Data](c_vectors)
+* [Vector Data](c_vectors.md)
 ```
 ----------------
 

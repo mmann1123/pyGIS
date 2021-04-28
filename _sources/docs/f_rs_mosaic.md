@@ -20,14 +20,15 @@ kernelspec:
 
 ```
 ```{admonition} Review
-* [Raster Operations](e_raster_op_intro)
+* [Opening Remotely Sensed Data](f_rs_io.md)
+* [Raster Operations](e_raster_op_intro.md)
 ```
 ----------------
 <!-- https://www.l3harrisgeospatial.com/docs/MosaicSeamless.html -->
 <!-- 
 https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-a-mosaic.htm -->
 
-# Overlaying Remotely Sensed Images
+# Handle Multiple Remotely Sensed Images
 Doing analysis over larger areas often requires the use of image mosaics (combining two or more images). Luckily for us geowombat makes this process relatively easy. 
 
 ## Union (Mosaic) of Remotely Sensed Image

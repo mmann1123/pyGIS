@@ -276,21 +276,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_mosaic.html">
-     Overlaying Remotely Sensed Images
+     Handle Multiple Remotely Sensed Images
     </a>
    </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_common_task.html">
-   Common Tasks
-  </a>
-  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_task1.html">
-     Something
+    <a class="reference internal" href="f_rs_config.html">
+     Configuration manager
     </a>
    </li>
   </ul>
@@ -502,7 +493,7 @@
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine Transforms</span></a></p></li>
+<li><p><a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine Transforms</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -519,7 +510,7 @@
 <p>A latitude measures the angle from the equatorial plane to the location on the earth’s surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example The George Washington University is located at around 38.89° North and -77.04° West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (<code class="docutils literal notranslate"><span class="pre">+</span></code>) sign and South and West are assigned a negative (<code class="docutils literal notranslate"><span class="pre">-</span></code>) sign. The university location is therefore encoded as +38.89° and -77.04°.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
 <span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
 <span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
@@ -529,6 +520,9 @@
 <span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">reset_extent</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_crs_what_is_it_1_0.png" src="../_images/d_crs_what_is_it_1_0.png" />
 </div>
 </div>
 <p>A GCS is defined by an <strong>ellipsoid</strong>, <strong>geoid</strong> and <strong>datum</strong>. These elements are presented next.</p>

@@ -18,9 +18,9 @@ kernelspec:
 * Differentiate translate, rotate, skew, shear
 ```
 ```{admonition} Review
-* [Data Structures](c_features)
-* [Vector Data ](c_vectors)
-* [Raster Data ](c_rasters)
+* [Data Structures](c_features.md)
+* [Vector Data ](c_vectors.md)
+* [Raster Data ](c_rasters.md)
 * [Matrix Algebra Intro](https://youtu.be/OMA2Mwo0aZg)
 ```
 --------------

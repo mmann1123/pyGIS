@@ -18,8 +18,8 @@ kernelspec:
 - How to reproject vector data
 ```
 ```{admonition} Review
-* [Understanding CRS codes](d_understand_crs_codes)
-* [Creating Points, Lines, Polygons](e_new_vectors)
+* [Understanding CRS codes](d_understand_crs_codes.md)
+* [Creating Points, Lines, Polygons](e_new_vectors.md)
 ```
 ----------------
 
@@ -59,7 +59,7 @@ plt.show()
 ```
 
 ```{note}
-Take a moment to review proj4 string and EPSG codes [here](d_understand_crs_codes)
+Take a moment to review proj4 string and EPSG codes [here](d_understand_crs_codes.md)
 ```
  
 ## Reproject Points, Lines, Polygons

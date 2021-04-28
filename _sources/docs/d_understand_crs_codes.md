@@ -20,7 +20,7 @@ kernelspec:
 * Visually explore changing `PROJ.4` string parameters
 ```
 ```{admonition} Review
-* [CRS what is it?](d_crs_what_is_it)
+* [CRS what is it?](d_crs_what_is_it.md)
 ```
 ----------------
 

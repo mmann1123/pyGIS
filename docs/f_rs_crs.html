@@ -55,7 +55,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/f_rs_crs.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overlaying Remotely Sensed Images" href="f_rs_mosaic.html" />
+    <link rel="next" title="Handle Multiple Remotely Sensed Images" href="f_rs_mosaic.html" />
     <link rel="prev" title="Plot Remote Sensed Images" href="f_rs_plot.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -276,21 +276,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_mosaic.html">
-     Overlaying Remotely Sensed Images
+     Handle Multiple Remotely Sensed Images
     </a>
    </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_common_task.html">
-   Common Tasks
-  </a>
-  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_task1.html">
-     Something
+    <a class="reference internal" href="f_rs_config.html">
+     Configuration manager
     </a>
    </li>
   </ul>
@@ -450,15 +441,15 @@
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">What is a CRS</span></a></p></li>
-<li><p><a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">Understanding CRS codes</span></a></p></li>
-<li><p><a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Raster CRS</span></a></p></li>
+<li><p><a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">What is a CRS</span></a></p></li>
+<li><p><a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understanding CRS codes</span></a></p></li>
+<li><p><a class="reference internal" href="d_raster_crs_intro.html"><span class="doc std std-doc">Raster CRS</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="remote-sensing-coordinate-reference-systems">
 <h1>Remote Sensing Coordinate Reference Systems<a class="headerlink" href="#remote-sensing-coordinate-reference-systems" title="Permalink to this headline">¶</a></h1>
-<p>Image projections can be transformed in GeoWombat using the configuration manager (see <span class="xref myst">Config Manager</span>). With the configuration manager, the CRS is transformed using <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html">rasterio CRS</a> and <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/topics/virtual-warping.html">virtual warping</a>. For references, see <a class="reference external" href="https://spatialreference.org/">Spatial Reference</a> and <a class="reference external" href="http://epsg.io/">epsg.io</a>.</p>
+<p>Image projections can be transformed in GeoWombat using the configuration manager (see <a class="reference internal" href="f_rs_config.html"><span class="doc std std-doc">Config Manager</span></a>). With the configuration manager, the CRS is transformed using <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html">rasterio CRS</a> and <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/topics/virtual-warping.html">virtual warping</a>. For references, see <a class="reference external" href="https://spatialreference.org/">Spatial Reference</a> and <a class="reference external" href="http://epsg.io/">epsg.io</a>.</p>
 <div class="section" id="view-image-coordinate-reference-system-properties">
 <h2>View Image Coordinate Reference System &amp; Properties<a class="headerlink" href="#view-image-coordinate-reference-system-properties" title="Permalink to this headline">¶</a></h2>
 <p>In the following we will print out the properties relevant to CRS for the red, green blue image. The CRS can be accessed from the <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html">xarray.DataArray</a> attributes.</p>
@@ -491,7 +482,7 @@ nearest
 </div>
 <div class="section" id="transforming-a-crs-on-the-fly">
 <h2>Transforming a CRS On-The-Fly<a class="headerlink" href="#transforming-a-crs-on-the-fly" title="Permalink to this headline">¶</a></h2>
-<p>To transform the CRS, use the context manager. In this example, an proj4 code is used. See <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">understanding CRS codes</span></a> for more details.</p>
+<p>To transform the CRS, use the context manager. In this example, an proj4 code is used. See <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">understanding CRS codes</span></a> for more details.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -593,6 +584,38 @@ cubic
 <p>To transform an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> outside of a configuration context, use the <code class="docutils literal notranslate"><span class="pre">geowombat.transform_crs</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">src_tr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">transform_crs</span><span class="p">(</span><span class="n">proj4</span><span class="p">,</span> <span class="n">dst_res</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
++init=epsg:32618
+nearest
+(5.0, 5.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10.0, 0.0, 2502400.7632678417, 0.0, -10.0, -2147313.7330151177)
+PROJCS[&quot;unknown&quot;,GEOGCS[&quot;unknown&quot;,DATUM[&quot;North_American_Datum_1983&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]]],PROJECTION[&quot;Albers_Conic_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,40],PARAMETER[&quot;longitude_of_center&quot;,-96],PARAMETER[&quot;standard_parallel_1&quot;,20],PARAMETER[&quot;standard_parallel_2&quot;,60],PARAMETER[&quot;false_easting&quot;,0],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH]]
+bilinear
+(10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>For more help we can read through the docs a bit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">,</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">help</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">transform_crs</span><span class="p">))</span>
 </pre></div>
@@ -632,37 +655,6 @@ None
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">src_tr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">transform_crs</span><span class="p">(</span><span class="n">proj4</span><span class="p">,</span> <span class="n">dst_res</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-+init=epsg:32618
-nearest
-(5.0, 5.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10.0, 0.0, 2502400.7632678417, 0.0, -10.0, -2147313.7330151177)
-PROJCS[&quot;unknown&quot;,GEOGCS[&quot;unknown&quot;,DATUM[&quot;North_American_Datum_1983&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6269&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]]],PROJECTION[&quot;Albers_Conic_Equal_Area&quot;],PARAMETER[&quot;latitude_of_center&quot;,40],PARAMETER[&quot;longitude_of_center&quot;,-96],PARAMETER[&quot;standard_parallel_1&quot;,20],PARAMETER[&quot;standard_parallel_2&quot;,60],PARAMETER[&quot;false_easting&quot;,0],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH]]
-bilinear
-(10, 10)
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 </div>
 
@@ -692,7 +684,7 @@ bilinear
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="f_rs_plot.html" title="previous page">Plot Remote Sensed Images</a>
-    <a class='right-next' id="next-link" href="f_rs_mosaic.html" title="next page">Overlaying Remotely Sensed Images</a>
+    <a class='right-next' id="next-link" href="f_rs_mosaic.html" title="next page">Handle Multiple Remotely Sensed Images</a>
 
         </div>
         

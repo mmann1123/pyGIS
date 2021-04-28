@@ -20,16 +20,16 @@ kernelspec:
 - Understand resampling options
 ```
 ```{admonition} Review
-* [What is a CRS](d_crs_what_is_it)
-* [Understanding CRS codes](d_understand_crs_codes)
-* [Raster CRS](d_raster_crs_intro)
+* [What is a CRS](d_crs_what_is_it.md)
+* [Understanding CRS codes](d_understand_crs_codes.md)
+* [Raster CRS](d_raster_crs_intro.md)
 ```
 ----------------
 
 
 # Remote Sensing Coordinate Reference Systems
 
-Image projections can be transformed in GeoWombat using the configuration manager (see [Config Manager](f_rs_config)). With the configuration manager, the CRS is transformed using [rasterio CRS](https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html) and [virtual warping](https://rasterio.readthedocs.io/en/latest/topics/virtual-warping.html). For references, see [Spatial Reference](https://spatialreference.org/) and [epsg.io](http://epsg.io/).
+Image projections can be transformed in GeoWombat using the configuration manager (see [Config Manager](f_rs_config.md)). With the configuration manager, the CRS is transformed using [rasterio CRS](https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html) and [virtual warping](https://rasterio.readthedocs.io/en/latest/topics/virtual-warping.html). For references, see [Spatial Reference](https://spatialreference.org/) and [epsg.io](http://epsg.io/).
 
 ## View Image Coordinate Reference System & Properties
 In the following we will print out the properties relevant to CRS for the red, green blue image. The CRS can be accessed from the [xarray.DataArray](http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html) attributes.
@@ -49,7 +49,7 @@ with gw.open(rgbn) as src:
 
 ## Transforming a CRS On-The-Fly
 
-To transform the CRS, use the context manager. In this example, an proj4 code is used. See [understanding CRS codes](d_understand_crs_codes) for more details.
+To transform the CRS, use the context manager. In this example, an proj4 code is used. See [understanding CRS codes](d_understand_crs_codes.md) for more details.
 
 
 ```{code-cell} ipython3
@@ -107,10 +107,6 @@ with gw.config.update(ref_crs=31972, ref_res=(10, 10)):
 
 To transform an `xarray.DataArray` outside of a configuration context, use the `geowombat.transform_crs` function.
 
-```{code-cell} ipython3
-with gw.open(rgbn, resampling='cubic') as src:
-    print(help(src.gw.transform_crs))
-```
 
 ```{code-cell} ipython3
 with gw.open(rgbn) as src:
@@ -124,4 +120,10 @@ with gw.open(rgbn) as src:
     print(src_tr.crs)
     print(src_tr.resampling)
     print(src_tr.res)
+```
+For more help we can read through the docs a bit. 
+
+```{code-cell} ipython3
+with gw.open(rgbn, resampling='cubic') as src:
+    print(help(src.gw.transform_crs))
 ```

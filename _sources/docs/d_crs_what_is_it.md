@@ -20,7 +20,7 @@ kernelspec:
 * Understand CRS impact on shape, area and distance
 ```
 ```{admonition} Review
-* [Affine Transforms](d_affine)
+* [Affine Transforms](d_affine.md)
 ```
 ----------------
 

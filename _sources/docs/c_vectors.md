@@ -18,7 +18,7 @@ kernelspec:
 * Plot a basic map 
 ```
 ```{admonition} Review
-* [Data Structures](c_features)
+* [Data Structures](c_features.md)
 ```
 --------------
 

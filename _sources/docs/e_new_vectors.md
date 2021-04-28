@@ -19,9 +19,9 @@ kernelspec:
 * Create points from a table or csv of lat and lon 
 ```
 ```{admonition} Review
-* [CRS what is it?](d_crs_what_is_it)
-* [Understand CRS codes](d_understand_crs_codes)
-* [Vector data structures](c_vectors)
+* [CRS what is it?](d_crs_what_is_it.md)
+* [Understand CRS codes](d_understand_crs_codes.md)
+* [Vector data structures](c_vectors.md)
 * [Find Lat Lon of your own points, lines, polygons](https://geojson.io/)
 ```
 ----------------
@@ -63,8 +63,8 @@ Since geopandas takes advantage of Shapely geometric objects it is possible to c
 Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.
 
 ### Create Points from list of coordinates
-Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes).   
-[Click here for a more detailed explanation of this process](e_points_the_long_way)
+Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes.md).   
+[Click here for a more detailed explanation of this process](e_points_the_long_way.md)
 
 ```{code-cell} ipython3
 # Coordinates of the GW department of geography in Decimal Degrees
@@ -262,7 +262,7 @@ Okay, now we have additional information that is useful to be able to recognize 
 
 Before exporting the data it is useful to determine the coordinate reference system (CRS, 'projection') for the GeoDataFrame.
 
-GeoDataFrame has a property called `.crs` that ([review here](d_understand_crs_codes)) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. `newdata.crs` returns `None`).
+GeoDataFrame has a property called `.crs` that ([review here](d_understand_crs_codes.md)) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. `newdata.crs` returns `None`).
 
 Let’s add a crs for our GeoDataFrame. A Python module called fiona has a nice function called from_epsg() for passing coordinate system for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326) which is the most common choice for lat lon CRSs:
 

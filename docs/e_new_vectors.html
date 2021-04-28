@@ -276,21 +276,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_mosaic.html">
-     Overlaying Remotely Sensed Images
+     Handle Multiple Remotely Sensed Images
     </a>
    </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_common_task.html">
-   Common Tasks
-  </a>
-  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_task1.html">
-     Something
+    <a class="reference internal" href="f_rs_config.html">
+     Configuration manager
     </a>
    </li>
   </ul>
@@ -462,9 +453,9 @@
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">CRS what is it?</span></a></p></li>
-<li><p><a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">Understand CRS codes</span></a></p></li>
-<li><p><a class="reference internal" href="c_vectors.html#c-vectors"><span class="std std-ref">Vector data structures</span></a></p></li>
+<li><p><a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">CRS what is it?</span></a></p></li>
+<li><p><a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understand CRS codes</span></a></p></li>
+<li><p><a class="reference internal" href="c_vectors.html"><span class="doc std std-doc">Vector data structures</span></a></p></li>
 <li><p><a class="reference external" href="https://geojson.io/">Find Lat Lon of your own points, lines, polygons</a></p></li>
 </ul>
 </div>
@@ -515,8 +506,8 @@ Index: []
 <p>Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.</p>
 <div class="section" id="create-points-from-list-of-coordinates">
 <h3>Create Points from list of coordinates<a class="headerlink" href="#create-points-from-list-of-coordinates" title="Permalink to this headline">¶</a></h3>
-<p>Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">ESPG code</span></a>.<br />
-<a class="reference internal" href="#e-points-the-long-way"><span class="std std-ref">Click here for a more detailed explanation of this process</span></a></p>
+<p>Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">ESPG code</span></a>.<br />
+<span class="xref myst">Click here for a more detailed explanation of this process</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates of the GW department of geography in Decimal Degrees</span>
@@ -898,7 +889,7 @@ Index: []
 </div>
 <p>Okay, now we have additional information that is useful to be able to recognize what the feature represents.</p>
 <p>Before exporting the data it is useful to determine the coordinate reference system (CRS, ‘projection’) for the GeoDataFrame.</p>
-<p>GeoDataFrame has a property called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that (<a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">review here</span></a>) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. <code class="docutils literal notranslate"><span class="pre">newdata.crs</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+<p>GeoDataFrame has a property called <code class="docutils literal notranslate"><span class="pre">.crs</span></code> that (<a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">review here</span></a>) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. <code class="docutils literal notranslate"><span class="pre">newdata.crs</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
 <p>Let’s add a crs for our GeoDataFrame. A Python module called fiona has a nice function called from_epsg() for passing coordinate system for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326) which is the most common choice for lat lon CRSs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
