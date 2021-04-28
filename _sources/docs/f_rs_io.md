@@ -18,6 +18,7 @@ kernelspec:
   - Handle RGB, BGR, LandSat, PlanetScope images and other sensor types
   - Mosaic multiple remotely sensed images
   - Create a time series stack
+  - Write files to disk
 ```
 ```{admonition} Review
 * [Data Structures](c_features)
@@ -134,3 +135,60 @@ plt.tight_layout(pad=1)
 ```
 
 <!-- See :ref:`io` for more examples illustrating file opening. -->
+
+## Create a Time Series Stack
+Let's pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names `[l8_224078_20200518, l8_224078_20200518]`, it also helps to be specific and assign `time_names=['t1', 't2']`, and specify which dimension we want to stack our data along with `stack_dim='time'`.
+
+```{code-cell} ipython3
+with gw.open([l8_224078_20200518, l8_224078_20200518],
+            band_names=['blue', 'green', 'red'],
+            time_names=['t1', 't2'],
+            stack_dim='time') as src:
+    print(src)
+```
+
+## Writing DataArrays to file
+
+GeoWombat's I/O can be accessed through the `to_vrt` and `to_raster` functions. These functions use
+Rasterio's `write` and Dask.array `store` functions as I/O backends. In the examples below,
+``src`` is an ``xarray.DataArray`` with the necessary transform information to write to an image file.
+
+Write to a VRT file.
+
+
+```{code-cell} ipython3
+import geowombat as gw
+
+# Transform the data to lat/lon
+with gw.config.update(ref_crs=4326):
+
+    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+
+        # Write the data to a VRT
+        src.gw.to_vrt('lat_lon_file.vrt')
+```
+
+Write to a raster file.
+
+```{code-cell} ipython3
+    import geowombat as gw
+
+    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+
+        # Xarray drops attributes
+        attrs = src.attrs.copy()
+
+        # Apply operations on the DataArray
+        src = src * 10.0
+
+        src.attrs = attrs
+
+        # Write the data to a GeoTiff
+        src.gw.to_raster('output.tif',
+                            verbose=1,
+                            n_workers=4,    # number of process workers sent to ``concurrent.futures``
+                            n_threads=2,    # number of thread workers sent to ``dask.compute``
+                            n_chunks=200)   # number of window chunks to send as concurrent futures
+```
+
+<!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. -->

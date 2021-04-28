@@ -100,35 +100,37 @@ plt.savefig("rgb_plot.png", dpi=150)
 |Shortwave Infrared |	7 5 4|
 |Vegetation Analysis| 	6 5 4|
 
+<!-- 
 ## Plot Union of two LandSat Images
 As an example let's plot the union with `mosaic=True` of two images taken on the same day, but blue band only. Note we rename the band name with `band_names=['blue']`.
 
 ```{code-cell} ipython3
-from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
+# from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
 
-fig, ax = plt.subplots(dpi=200)
-filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
-with gw.open(filenames,
-                band_names=['blue'],
-                mosaic=True,
-                bounds_by='union') as src:
-    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
-plt.tight_layout(pad=1)
+# fig, ax = plt.subplots(dpi=200)
+# filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
+# with gw.open(filenames,
+#                 band_names=['blue'],
+#                 mosaic=True,
+#                 bounds_by='union') as src:
+#     src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+# plt.tight_layout(pad=1)
 ```
 
 ## Plot Intersection of two LandSat Images
 Same idea with the intersection, using `bounds_by='intersection'`, we still need to mosaic the two images `mosaic=True`.
 
 ```{code-cell} ipython3
-fig, ax = plt.subplots(dpi=200)
-filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
-with gw.open(filenames,
-                band_names=['blue'],
-                mosaic=True,
-                bounds_by='intersection') as src:
-    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
-plt.tight_layout(pad=1)
+# fig, ax = plt.subplots(dpi=200)
+# filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
+# with gw.open(filenames,
+#                 band_names=['blue'],
+#                 mosaic=True,
+#                 bounds_by='intersection') as src:
+#     src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+# plt.tight_layout(pad=1)
 ```
+ -->
 
 ## Plot LandSat Tile Footprints
 Here we set up a more complicated plotting function for near IR 'nir'.  Note the use of `footprint_grid`. 
