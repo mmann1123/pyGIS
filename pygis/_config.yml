@@ -6,8 +6,7 @@
 #######################################################################################
 # Book settings
 title                       : Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
-author                      : Michael Mann, Steven Chao, Nina Feldman  # The author of the book
-#copyright                   : "2021"  # Copyright year to be placed in the footer
+author                      : Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman  # The author of the book
 logo                        : pygis.png  # A path to the book logo
 sphinx:
   config:
@@ -21,7 +20,8 @@ sphinx:
 # Execution settings
 execute:
   execute_notebooks           : auto
-  exclude_patterns          : []    # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
+  # exclude_patterns          : ['a_*','b_*','c_*','d_*','e_*','f_rs_crs*','f_rs_mosaic*']    # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
+  timeout: 100
 
 only_build_toc_files: true
 

@@ -8,9 +8,9 @@
   - 
 ```
 ```{admonition} Review
-* [Data Structures](c_features)
-* [Raster Data ](c_rasters)
-* [Opening Remotely Sensed Data](f_rs_io)
+* [Data Structures](c_features.md)
+* [Raster Data ](c_rasters.md)
+* [Opening Remotely Sensed Data](f_rs_io.md)
 ```
 --------------
 

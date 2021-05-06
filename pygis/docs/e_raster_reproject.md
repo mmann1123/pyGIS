@@ -19,8 +19,8 @@ kernelspec:
 
 ```
 ```{admonition} Review
-* [Affine transformation](d_affine)
-* [Raster Coordinate Reference Systems](d_raster_crs_intro)
+* [Affine transformation](d_affine.md)
+* [Raster Coordinate Reference Systems](d_raster_crs_intro.md)
 ```
 ----------------
 

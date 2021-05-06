@@ -10,10 +10,9 @@
 
 ```
 ```{admonition} Review
-* [Opening remotely sensed data](f_rs_io)
+* [Opening remotely sensed data](f_rs_io.md)
 ```
 ----------------
-
 
 # Editing rasters
 

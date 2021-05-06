@@ -4,8 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vector Data &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn to create new vector objects, assign projections or CRS, and write them to a shapefile or geojson. We also cover creating basic maps with points, lines and polygons." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à créer de nouveaux objets vectoriels, à attribuer des projections ou à des CRS et à les écrire dans un fichier de formes ou un geojson. Nous couvrons également la création de cartes de base avec des points, des lignes et des polygones." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a crear nuevos objetos vectoriales, asigne proyecciones o CRS y escríbalos en un shapefile o geojson. También cubrimos la creación de mapas básicos con puntos, líneas y polígonos." lang="es" name="description" xml:lang="es" />
+<meta content=" geospatial, shapefile, geopandas" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
+    <title>Geospatial Vector Data &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -55,7 +60,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/c_vectors.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Raster Data" href="c_rasters.html" />
+    <link rel="next" title="Geospatial Raster Data" href="c_rasters.html" />
     <link rel="prev" title="Data Storage Formats" href="c_store_features.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -65,8 +70,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/c_vectors.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Vector Data" />
-<meta property="og:description" content="Vector Data  GeoPandas  The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pandas and shapely, prov" />
+<meta property="og:title"       content="Geospatial Vector Data" />
+<meta property="og:description" content="Geospatial Vector Data  Intro to GeoPandas  The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pand" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -98,7 +103,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="a_intro.html">
-   Welcome to PyGIS
+   PyGIS
   </a>
  </li>
 </ul>
@@ -142,7 +147,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="c_features.html">
-   Feature Representation
+   Geospatial Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -152,12 +157,12 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Vector Data
+   Geospatial Vector Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Geospatial Raster Data
   </a>
  </li>
 </ul>
@@ -184,17 +189,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_vector_crs_intro.html">
-   Vector CRS
+   Vector Coordinate Reference Systems (CRS)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster CRS
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_exercises.html">
-   CRS Exercises
+   Raster Coodinate Reference Systems (CRS)
   </a>
  </li>
 </ul>
@@ -211,12 +211,12 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="e_attributes.html">
-     Attributes &amp; Indexing
+     Attributes &amp; Indexing for Vector Data
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_new_vectors.html">
-     Creating Spatial Data
+     Creating Geospatial Vector Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -270,22 +270,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_mosaic.html">
-     Overlaying Remotely Sensed Images
+    <a class="reference internal" href="f_rs_crs.html">
+     Remote Sensing Coordinate Reference Systems
     </a>
    </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
- </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_common_task.html">
-   Common Tasks
-  </a>
-  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_task1.html">
-     Something
+    <a class="reference internal" href="f_rs_mosaic.html">
+     Handle Multiple Remotely Sensed Images
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_config.html">
+     Configuration manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_band_math.html">
+     Band Math
     </a>
    </li>
   </ul>
@@ -402,8 +403,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#geopandas">
-   GeoPandas
+  <a class="reference internal nav-link" href="#intro-to-geopandas">
+   Intro to GeoPandas
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -446,14 +447,14 @@
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="c_features.html#c-features"><span class="std std-ref">Data Structures</span></a></p></li>
+<li><p><a class="reference internal" href="c_features.html"><span class="doc std std-doc">Data Structures</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="vector-data">
-<h1>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="geopandas">
-<h2>GeoPandas<a class="headerlink" href="#geopandas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="geospatial-vector-data">
+<h1>Geospatial Vector Data<a class="headerlink" href="#geospatial-vector-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="intro-to-geopandas">
+<h2>Intro to GeoPandas<a class="headerlink" href="#intro-to-geopandas" title="Permalink to this headline">¶</a></h2>
 <p>The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pandas and shapely, providing geospatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.</p>
 </div>
 <div class="section" id="data-structures">
@@ -655,7 +656,7 @@ dtype: geometry
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="c_store_features.html" title="previous page">Data Storage Formats</a>
-    <a class='right-next' id="next-link" href="c_rasters.html" title="next page">Raster Data</a>
+    <a class='right-next' id="next-link" href="c_rasters.html" title="next page">Geospatial Raster Data</a>
 
         </div>
         
@@ -665,7 +666,7 @@ dtype: geometry
     <div class="container">
       <p>
         
-          By Michael Mann, Steven Chao, Nina Feldman<br/>
+          By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
         
           <div class="extra_footer">
             <div>

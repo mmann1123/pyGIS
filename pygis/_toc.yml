@@ -35,7 +35,7 @@
     - file: docs/d_affine
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
-    - file: docs/d_exercises
+    # - file: docs/d_exercises
 
 - part: Basic Operations
   chapters:
@@ -57,9 +57,12 @@
       - file: docs/f_rs_io
       - file: docs/f_rs_edit
       - file: docs/f_rs_plot
+      - file: docs/f_rs_crs
       - file: docs/f_rs_mosaic
-    - file: docs/f_rs_common_task
-      sections:
-      - file: docs/f_rs_task1
+      - file: docs/f_rs_config
+      - file: docs/f_rs_band_math
+    # - file: docs/f_rs_common_task
+    #   sections:
+    #   - file: docs/f_rs_task1
 
  

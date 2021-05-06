@@ -23,8 +23,8 @@ By: Steven Chao
 * Dissolve vector geometries based on attribute values
 ```
 ```{admonition} Review
-* [Data Structures](c_features)
-* [Vector Data ](c_vectors)
+* [Data Structures](c_features.md)
+* [Vector Data ](c_vectors.md)
 ```
 --------------
 

@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to create new vector data (shapefile), and assign a projection (CRS). This includes an example of plotting latitude longitude data stored in a .csv file."
+  "description lang=fr": "Apprenez à modifier, sous-ensemble et tracer des données attributaires de données vectorielles (fichier de formes). Cela inclut un exemple de traçage des données de longitude de latitude ainsi que le sous-ensemble (indexation) par emplacement."
+  "description lang=es": "Aprenda a cambiar, crear subconjuntos y trazar datos de atributos de datos vectoriales (shapefile). Esto incluye un ejemplo de trazado de datos de latitud y longitud, así como subconjuntos (indexación) por ubicación."
+  "keywords": "geospatial, attribute data, subset,  shapefile"
+  "property=og:locale": "en_US"
 ---
 
 (e_new_vectors)=
@@ -19,15 +25,15 @@ kernelspec:
 * Create points from a table or csv of lat and lon 
 ```
 ```{admonition} Review
-* [CRS what is it?](d_crs_what_is_it)
-* [Understand CRS codes](d_understand_crs_codes)
-* [Vector data structures](c_vectors)
+* [CRS what is it?](d_crs_what_is_it.md)
+* [Understand CRS codes](d_understand_crs_codes.md)
+* [Vector data structures](c_vectors.md)
 * [Find Lat Lon of your own points, lines, polygons](https://geojson.io/)
 ```
 ----------------
 
 
-# Creating Spatial Data
+# Creating Geospatial Vector Data
 We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation. 
 ```{code-cell} ipython3
 # Import necessary modules first
@@ -40,7 +46,7 @@ plt.style.use('bmh') # better for plotting geometries vs general plots.
 ```
 
 
-## Creating GeoDataFrame geometries
+## Creating GeoDataFrame Geometries
 A `GeoDataFrame` object is a `pandas.DataFrame` that has a column with geometry. An empty `GeoDataFrame` is just that, empty, essentially just like the pandas one. Let’s create an empty `GeoDataFrame` and create a new column called geometry that will contain our Shapely objects:
 
 ```{code-cell} ipython3
@@ -51,7 +57,7 @@ print(newdata)
 
 In order to have a working spatial dataframe we need define a few things:
 
-**GeoDataFrame Components**
+### GeoDataFrame Components
 - data: a pandas.DataFrame, dictionary, or empty list [] containing an desired attribute data. Use [] if no data is 
 - crs:  Coordinate Reference System of the geometry objects. Can be anything accepted by `pyproj.CRS.from_user_input()`, such as an authority string (eg “EPSG:4326”) or a WKT string.
 - geometry:  Column name in a DataFrame to use as geometry or Shapely point, line, or polygon object. 
@@ -63,8 +69,8 @@ Since geopandas takes advantage of Shapely geometric objects it is possible to c
 Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.
 
 ### Create Points from list of coordinates
-Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes).   
-[Click here for a more detailed explanation of this process](e_points_the_long_way)
+Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes.md).   
+[Click here for a more detailed explanation of this process](e_points_the_long_way.md)
 
 ```{code-cell} ipython3
 # Coordinates of the GW department of geography in Decimal Degrees
@@ -136,7 +142,7 @@ In this case `points_from_xy()` was used to transform lat and lon into a list of
 - Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)
 ```
 
-### Creating lines
+### Creating Geospatial lines
 
 Following the examples above we can specify lines easily. In this case let's say we have lines tracking three people riding their bikes through town. We keep track of their unique id `ID`, their location `X,Y`, and their `Speed`, and read in the data below:
 
@@ -180,7 +186,7 @@ lines.plot(column='ID')
 Now we can see that each line is treated separately by `ID`, and plot them using `.plot(column='ID')`.
 
 
-### Creating Polygons
+### Creating Geospatial Polygons
 
 Creating a polyon in geopandas is very similiar to the other exercises. First we create a Fiona geometry object from our coordinates, add that to a dataframe with any attributes and then create a `GeoDataFrame` with an assigned coordinate reference system (CRS).
 
@@ -206,7 +212,7 @@ poly.plot()
 
 (e_points_the_long_way)=
 
-### Creating Points (admittedly the long way)
+### Creating Geospatial Points (admittedly the long way)
 
 
 Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.
@@ -262,7 +268,7 @@ Okay, now we have additional information that is useful to be able to recognize 
 
 Before exporting the data it is useful to determine the coordinate reference system (CRS, 'projection') for the GeoDataFrame.
 
-GeoDataFrame has a property called `.crs` that ([review here](d_understand_crs_codes)) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. `newdata.crs` returns `None`).
+GeoDataFrame has a property called `.crs` that ([review here](d_understand_crs_codes.md)) shows the coordinate system of the data which is empty (None) in our case since we are creating the data from the scratch (e.g. `newdata.crs` returns `None`).
 
 Let’s add a crs for our GeoDataFrame. A Python module called fiona has a nice function called from_epsg() for passing coordinate system for the GeoDataFrame. Next we will use that and determine the projection to WGS84 (epsg code: 4326) which is the most common choice for lat lon CRSs:
 
@@ -286,18 +292,10 @@ outfp = r"../temp/gwu_geog.shp"
 newdata.to_file(outfp)
 ```
 
+```{tip}  Because GeoPandas are so intertwined spend the time to learn more about here [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
+```
+
 -------------------
 
 [Adapted from Intro to Python GIS](https://automating-gis-processes.github.io/CSC18/lessons/L2/geopandas-basics.html#creating-geometries-into-a-geodataframe)
 
-
-<!-- 
-```{tip}  Becuase GeoPandas are so intertwined spend the time to learn more about here [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
-```
- 
-```{code-cell} ipython3
-import geopandas
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
-world.columns
-```  
--->

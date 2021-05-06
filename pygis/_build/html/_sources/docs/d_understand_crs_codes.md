@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to interpret and use coordinate reference codes like proj4strings, and EPSG codes. This includes defining a CRS, creating custom projections, interpreting proj4strings, with examples of false easting and northing, and changing the prime meridian."
+  "description lang=fr": "Apprenez à interpréter et à utiliser des codes de référence de coordonnées tels que proj4strings et codes EPSG. Cela comprend la définition d'un CRS, la création de projections personnalisées, l'interprétation de chaînes de projection, avec des exemples de faux est et nord, et la modification du méridien principal."
+  "description lang=es": "Aprenda a interpretar y utilizar códigos de referencia de coordenadas como proj4strings y códigos EPSG. Esto incluye la definición de un CRS, la creación de proyecciones personalizadas, la interpretación de cadenas de proyectos, con ejemplos de falso este y norte, y el cambio del primer meridiano."
+  "keywords": "geospatial, crs, proj4string, EPSG, coordinate reference system, projection"
+  "property=og:locale": "en_US"
 ---
 
 (d_understand_crs_codes)=
@@ -20,15 +26,15 @@ kernelspec:
 * Visually explore changing `PROJ.4` string parameters
 ```
 ```{admonition} Review
-* [CRS what is it?](d_crs_what_is_it)
+* [CRS what is it?](d_crs_what_is_it.md)
 ```
 ----------------
 
-Steven Chao
+By: Steven Chao
 
-+++
+---------------
 
-## Introduction
+## Intro to Coordinate Reference Systems
 
 
 A coordinate reference system tells Python where and how to place coordinates on Earth's surface. For a detailed lesson on projections please go [here](d_crs_what_is_it).
@@ -89,7 +95,7 @@ map_data([dc], "Washington, DC")
 
 It looks like Washington, DC, albeit a bit squished! Next, let's see how we can work with CRSs in Python.
 
-+++
+
 
 ## Checking and Setting Coordinate Reference Systems in Python
 
@@ -103,8 +109,6 @@ print("CRS: {}".format(dc.crs))
 ```
 
 For our shapefile, the output is a dictionary with a value of `'epsg:4326'`. We'll cover what this means in more detail later in this chapter, but just know for now that an `EPSG` code is a way to reference a CRS.
-
-+++
 
 
 
@@ -146,7 +150,6 @@ A `PROJ.4` string identifies and defines a particular CRS. The string holds the 
 
 Sources: [Using PROJ](https://proj.org/usage/quickstart.html); [Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser](https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/)
 
-+++
 
 ### What is in a PROJ.4 string?
 
@@ -176,7 +179,6 @@ Some parameters (not listed above) are specific to certain CRSs. Be sure to alwa
 
 Sources: [Cartographic projection](https://proj.org/usage/projections.html); [Using PROJ](https://proj.org/usage/quickstart.html); [Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser](https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/)
 
-+++
 
 ### Creating a custom CRS using PROJ.4 string
 

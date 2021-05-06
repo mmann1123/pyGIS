@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to change, subset, and plot vector data (shapefile) attribute data. This includes an example of plotting latitude longitude data as well as subsetting (indexing) by location."
+  "description lang=fr": "Apprenez à modifier, sous-ensemble et tracer des données attributaires de données vectorielles (fichier de formes). Cela inclut un exemple de traçage des données de longitude de latitude ainsi que le sous-ensemble (indexation) par emplacement."
+  "description lang=es": "Aprenda a cambiar, crear subconjuntos y trazar datos de atributos de datos vectoriales (shapefile). Esto incluye un ejemplo de trazado de datos de latitud y longitud, así como subconjuntos (indexación) por ubicación."
+  "keywords": "geospatial, attribute data, subset,  shapefile"
+  "property=og:locale": "en_US"
 ---
 
 (e_attributes)=
@@ -18,14 +24,15 @@ kernelspec:
 * Create and manipulate vector attributes
 * Subset data
 * Plot lat lon as points
+* Subset points by location
 ```
 ```{admonition} Review
-* [Vector Data](c_vectors)
+* [Vector Data](c_vectors.md)
 ```
 ----------------
 
 
-# Attributes & Indexing  
+# Attributes & Indexing for Vector Data
 
 ```{figure} ../_static/c_data_types/dataframe.svg
 :name: vector properties 
@@ -38,7 +45,7 @@ Each `GeoSeries` can contain any geometry type (e.g. points, lines, polygon) and
 ```{tip}  Becuase GeoPandas are so intertwined spend the time to learn more about here [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
 ```
 
-## Create Attributes
+## Create New Attributes
 
 One of the most basic operations is creating new attributes. Let's say for instance we want to look at the world population in millions. We can start with an existing column of data `pop_est`. Let's start by looking at the column names:
 
@@ -62,7 +69,7 @@ world.head(2)
 GeoPandas inherits the standard pandas methods for indexing/selecting data. This includes label based indexing with .loc and integer position based indexing with .iloc, which apply to both GeoSeries and GeoDataFrame objects. For more information on indexing/selecting, see the [pandas documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html).
 
 
-### Selection by Index Position¶
+### Selection by Index Position
  
 Pandas provides a suite of methods in order to get purely integer based indexing. The semantics follow closely Python and NumPy slicing. These are 0-based indexing. When slicing, the start bound is included, while the upper bound is excluded.  For instance `name = 'fudge'` with `name[0:3]` returns `'fud'`, where f is at 0 and g is at the 3 position with the upper bound excluded. 
 
@@ -76,7 +83,7 @@ northern_world.plot(figsize=(10,5))
 plt.show()
 ```
 
-**Different choices for indexing**
+#### Different choices for indexing
 
 Object selection has had a number of user-requested additions in order to
 support more explicit location based indexing.  
@@ -134,7 +141,7 @@ the specification are assumed to be ``:``, e.g. ``p.loc['a']`` is equivalent to
 | Series    | `s.loc[indexer]`   |
 | DataFrame    | `df.loc[row_indexer,column_indexer]`   |
 
-### Coordinate Indexing 
+### Subset Points by Location
 In addition to the standard pandas methods, GeoPandas also provides coordinate based indexing with the cx indexer, which slices using a bounding box. Geometries in the GeoSeries or GeoDataFrame that intersect the bounding box will be returned.
 
 Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a `_CoordinateIndexer` using `.cx`. `.cx` allows you to quickly access the table's `geometry`, where indexing reflects `[x,y]` or `[lon,lat]`. Here we will query points above and below 0 degrees latitude:

@@ -21,8 +21,8 @@ kernelspec:
   - Write files to disk
 ```
 ```{admonition} Review
-* [Data Structures](c_features)
-* [Raster Data ](c_rasters)
+* [Data Structures](c_features.md)
+* [Raster Data ](c_rasters.md)
 ```
 --------------
 

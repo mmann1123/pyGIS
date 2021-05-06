@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn the difference between raster and vector data, manually create geospatial data, and data measurement issues"
+  "description lang=fr": "Découvrez la différence entre les données raster et vectorielles, créez manuellement des données géospatiales et les problèmes de mesure des données"
+  "description lang=es": "Conozca la diferencia entre datos ráster y vectoriales, cree manualmente datos geoespaciales y problemas de medición de datos"
+  "keywords": "points, lines, polygons,raster, geospatial, attribute table"
+  "property=og:locale": "en_US"
 ---
 
 (c_features)=
@@ -22,9 +28,9 @@ kernelspec:
 --------------
 
 
-# Feature Representation  
+# Geospatial Data
 
-## Vector vs. Raster
+## Vector vs. Raster Data
 
 To work in a GIS environment, real world observations (objects or events that can be recorded in 2D or 3D space) need to be reduced to spatial entities. These spatial entities can be represented in a GIS as a **vector data model** or a **raster data model**. 
 
@@ -33,7 +39,7 @@ To work in a GIS environment, real world observations (objects or events that ca
 Vector and raster representations of a river feature. 
 ```
 
-### Vector
+### Vector Data
 
 Vector features can be decomposed into three different geometric primitives: **points**, **polylines** and **polygons**.
 
@@ -101,7 +107,7 @@ plt.show()
 
 A polygon is composed of three or more line segments whose starting and ending coordinate pairs are the same. Sometimes you will see the words *lattice* or *area* used in lieu of 'polygon'. Polygons represent both length (i.e. the perimeter of the area) and area. They also embody the idea of an inside and an outside; in fact, the area that a polygon encloses is explicitly defined in a GIS environment. If it isn't, then you are working with a polyline feature. If this does not seem intuitive, think of three connected lines defining a triangle: they can represent three connected road segments (thus polyline features), or they can represent the grassy strip enclosed by the connected roads (in which case an 'inside' is implied thus defining a polygon).
 
-### Raster
+### Raster Data
  
 ```{code-cell} ipython3
 import numpy as np

@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn to create new geospatial raster objects, assign projections or CRS."
+  "description lang=fr": "Apprenez à créer de nouveaux objets raster, à attribuer des projections ou CRS."
+  "description lang=es": "Aprenda a crear nuevos objetos ráster, asignar proyecciones o CRS."
+  "keywords": "raster, geospatial, shapefile, rasterio, numpy"
+  "property=og:locale": "en_US"
 ---
 
 (c_rasters)=
@@ -18,11 +24,11 @@ kernelspec:
 * Assign the correct projection or CRS
 ```
 ```{admonition} Review
-* [Please review Affine transformation](d_affine)
+* [Please review Affine transformation](d_affine.md)
 ```
 ----------------
 
-# Raster Data 
+# Geospatial Raster Data 
 A raster data model uses an array of cells, or pixels, to represent real-world objects. Raster datasets are commonly used for representing and managing imagery, surface temperatures, digital elevation models, and numerous other entities. A raster can be thought of as a special case of an area object where the area is divided into a regular grid of cells. But a regularly spaced array of marked points may be a better analogy since rasters are stored as an array of values where each cell is defined by a single coordinate pair inside of most GIS environments. Implicit in a raster data model is a value associated with each cell or pixel. This is in contrast to a vector model that may or may not have a value associated with the geometric primitive.
 
 In order to work with raster data we will be using `rasterio` and later `geowombat`. Behind the scenes a `numpy.ndarray` does all the heavy lifting. To understand how raster works it helps to construct one from scratch. 
@@ -54,7 +60,7 @@ plt.title("Temperature")
 plt.show()
 ```
 
-## Creating raster data
+## Creating Raster Data
 
 The final array `Z` still lacks a number of elements that transform it from being a non-spatial `numpy` array to a spatial one usable by `rasterio` etc. `Rasterio` requires the following elements to write out a geotif, or spatial raster dataset:
 
@@ -70,7 +76,7 @@ The final array `Z` still lacks a number of elements that transform it from bein
 | nodata  | a “nodata” value   |  `-9999`|
 
 ```{note}
-`transform` defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for `transform` are complex and beyond the scope of the chapter, please refer to the next chapter @ [affine transforms](d_affine) and [raster crs](d_raster_crs_intro) for more info. 
+`transform` defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for `transform` are complex and beyond the scope of the chapter, please refer to the next chapter @ [affine transforms](d_affine.md) and [raster crs](d_raster_crs_intro.md) for more info. 
 ```
 ## Writing Rasters
 To save this array along with geospatial information to a file, we call `rasterio.open()` with a path to the new file to be created, and 'w' to specify writing mode, along with the arguments above. 
@@ -112,7 +118,7 @@ plt.show()
 ```
 
 
-So in summary, a geospatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it), and number of bands. This information is typically accessed and updated via the `.profile`.
+So in summary, a geospatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it.md), and number of bands. This information is typically accessed and updated via the `.profile`.
 
 ```{code-cell} ipython3
 print(raster.profile)
@@ -209,7 +215,7 @@ with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
     show(src,adjust='linear')
 ```
 
-To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro).
+To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro.md).
 
 Just as a preview, here's how to do this in `geowombat`. 
 
