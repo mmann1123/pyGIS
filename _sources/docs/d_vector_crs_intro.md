@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to define a projection for and reproject vector data (shapefiles, geojson) using geopandas. We use examples based on changes to proj4strings."
+  "description lang=fr": "Apprenez à définir une projection et à reprojeter des données vectorielles (fichiers de formes, geojson) à l'aide de géopandas. Nous utilisons des exemples basés sur des changements apportés à proj4strings."
+  "description lang=es": "Aprenda a definir una proyección y reproyectar datos vectoriales (shapefiles, geojson) usando geopandas. Usamos ejemplos basados en cambios en proj4strings."
+  "keywords": "geospatial, crs, proj4string, EPSG, coordinate reference system, projection, vector, shapefile"
+  "property=og:locale": "en_US"
 ---
 
 (d_vector_crs_intro)=
@@ -14,7 +20,7 @@ kernelspec:
 ----------------
 
 ```{admonition} Learning Objectives
-- how to assign a projection to vector data
+- How to assign a projection to vector data
 - How to reproject vector data
 ```
 ```{admonition} Review
@@ -23,7 +29,7 @@ kernelspec:
 ```
 ----------------
 
-# Vector CRS 
+# Vector Coordinate Reference Systems (CRS)
 When it comes to coordinate reference systems points, lines and polygons are convenient because each point or node has an assigned coordinate pair (x,y). The only trick then is to know how those coordinates relate to the coordinate space, or location on the ground. 
 
 ## Define a Projection for Points, Lines, Polygons
