@@ -18,6 +18,7 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import geowombat as gw
+from geowombat.data import l8_224077_20200518_B4
 
 # Transform the data to lat/lon
 with gw.config.update(ref_crs=4326):
@@ -29,14 +30,39 @@ with gw.config.update(ref_crs=4326):
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-9-941b8eead27a>[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mconfig[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mref_crs[0m[0;34m=[0m[0;36m4326[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;34m[0m[0m
-[0;32m----> 6[0;31m     [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224077_20200518_B4[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m1024[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      7[0m [0;34m[0m[0m
-[1;32m      8[0m         [0;31m# Write the data to a VRT[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;31mRuntimeError[0m                              Traceback (most recent call last)
+[0;32m<ipython-input-9-40e8fe083c67>[0m in [0;36m<module>[0;34m[0m
+[1;32m      5[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mconfig[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mref_crs[0m[0;34m=[0m[0;36m4326[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m [0;34m[0m[0m
+[0;32m----> 7[0;31m     [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224077_20200518_B4[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m1024[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      8[0m [0;34m[0m[0m
+[1;32m      9[0m         [0;31m# Write the data to a VRT[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'l8_224077_20200518_B4' is not defined
-NameError: name 'l8_224077_20200518_B4' is not defined
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/api.py[0m in [0;36m__init__[0;34m(self, filename, band_names, time_names, stack_dim, bounds, bounds_by, resampling, persist_filenames, netcdf_vars, mosaic, overlap, nodata, dtype, num_workers, **kwargs)[0m
+[1;32m    490[0m                                           [0mdtype[0m[0;34m=[0m[0mdtype[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    491[0m                                           [0mnetcdf_vars[0m[0;34m=[0m[0mnetcdf_vars[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 492[0;31m                                           **kwargs)
+[0m[1;32m    493[0m [0;34m[0m[0m
+[1;32m    494[0m                 [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/xarray_.py[0m in [0;36mwarp_open[0;34m(filename, band_names, resampling, dtype, netcdf_vars, nodata, return_windows, warp_mem_limit, num_threads, tap, **kwargs)[0m
+[1;32m    267[0m                                [0mresampling[0m[0;34m=[0m[0mresampling[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    268[0m                                **ref_kwargs),
+[0;32m--> 269[0;31m                           **kwargs) if not filenames else warp_netcdf_vars() as src:
+[0m[1;32m    270[0m [0;34m[0m[0m
+[1;32m    271[0m         [0;32mif[0m [0mband_names[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/rasterio_.py[0m in [0;36mwarp[0;34m(filename, resampling, bounds, crs, res, nodata, warp_mem_limit, num_threads, tap, tac)[0m
+[1;32m    891[0m                                            'warp_option': f'NUM_THREADS={num_threads}'}}
+[1;32m    892[0m [0;34m[0m[0m
+[0;32m--> 893[0;31m             [0;32mwith[0m [0mWarpedVRT[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0;34m**[0m[0mvrt_options[0m[0;34m)[0m [0;32mas[0m [0mvrt[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    894[0m                 [0moutput[0m [0;34m=[0m [0mvrt[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    895[0m [0;34m[0m[0m
+
+[0;32mrasterio/_warp.pyx[0m in [0;36mrasterio._warp.WarpedVRTReaderBase.__init__[0;34m()[0m
+
+[0;31mRuntimeError[0m: Parameterization error: src_crs=CRS.from_epsg(32621), dst_crs=CRS.from_epsg(4326), dst_width=0, dst_height=0, dst_transform=Affine(30.0, 0.0, -55.0776322510587,
+       0.0, -30.0, -24.99373277810876)
+RuntimeError: Parameterization error: src_crs=CRS.from_epsg(32621), dst_crs=CRS.from_epsg(4326), dst_width=0, dst_height=0, dst_transform=Affine(30.0, 0.0, -55.0776322510587,
+       0.0, -30.0, -24.99373277810876)
 

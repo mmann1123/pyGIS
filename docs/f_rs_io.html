@@ -722,6 +722,7 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B4</span>
 
 <span class="c1"># Transform the data to lat/lon</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
@@ -735,15 +736,39 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">941</span><span class="n">b8eead27a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="c1"># Write the data to a VRT</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mf">40e8</span><span class="n">fe083c67</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="c1"># Write the data to a VRT</span>
 
-<span class="ne">NameError</span>: name &#39;l8_224077_20200518_B4&#39; is not defined
+<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/api.py</span> in <span class="ni">__init__</span><span class="nt">(self, filename, band_names, time_names, stack_dim, bounds, bounds_by, resampling, persist_filenames, netcdf_vars, mosaic, overlap, nodata, dtype, num_workers, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">490</span>                                           <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span>                                           <span class="n">netcdf_vars</span><span class="o">=</span><span class="n">netcdf_vars</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">492</span>                                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> 
+<span class="g g-Whitespace">    </span><span class="mi">494</span>                 <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/xarray_.py</span> in <span class="ni">warp_open</span><span class="nt">(filename, band_names, resampling, dtype, netcdf_vars, nodata, return_windows, warp_mem_limit, num_threads, tap, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span>                                <span class="n">resampling</span><span class="o">=</span><span class="n">resampling</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">268</span>                                <span class="o">**</span><span class="n">ref_kwargs</span><span class="p">),</span>
+<span class="ne">--&gt; </span><span class="mi">269</span>                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">filenames</span> <span class="k">else</span> <span class="n">warp_netcdf_vars</span><span class="p">()</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> 
+<span class="g g-Whitespace">    </span><span class="mi">271</span>         <span class="k">if</span> <span class="n">band_names</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/rasterio_.py</span> in <span class="ni">warp</span><span class="nt">(filename, resampling, bounds, crs, res, nodata, warp_mem_limit, num_threads, tap, tac)</span>
+<span class="g g-Whitespace">    </span><span class="mi">891</span>                                            <span class="s1">&#39;warp_option&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;NUM_THREADS=</span><span class="si">{</span><span class="n">num_threads</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}}</span>
+<span class="g g-Whitespace">    </span><span class="mi">892</span> 
+<span class="ne">--&gt; </span><span class="mi">893</span>             <span class="k">with</span> <span class="n">WarpedVRT</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">vrt_options</span><span class="p">)</span> <span class="k">as</span> <span class="n">vrt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">894</span>                 <span class="n">output</span> <span class="o">=</span> <span class="n">vrt</span>
+<span class="g g-Whitespace">    </span><span class="mi">895</span> 
+
+<span class="nn">rasterio/_warp.pyx</span> in <span class="ni">rasterio._warp.WarpedVRTReaderBase.__init__</span><span class="nt">()</span>
+
+<span class="ne">RuntimeError</span>: Parameterization error: src_crs=CRS.from_epsg(32621), dst_crs=CRS.from_epsg(4326), dst_width=0, dst_height=0, dst_transform=Affine(30.0, 0.0, -55.0776322510587,
+<span class="g g-Whitespace">       </span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">24.99373277810876</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

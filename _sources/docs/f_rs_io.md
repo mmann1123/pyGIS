@@ -158,6 +158,7 @@ Write to a VRT file.
 
 ```{code-cell} ipython3
 import geowombat as gw
+from geowombat.data import l8_224077_20200518_B4
 
 # Transform the data to lat/lon
 with gw.config.update(ref_crs=4326):
