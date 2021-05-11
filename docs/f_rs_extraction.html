@@ -4,10 +4,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks." lang="en" name="description" xml:lang="en" />
-<meta content="Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques" lang="fr" name="description" xml:lang="fr" />
-<meta content="Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo." lang="es" name="description" xml:lang="es" />
-<meta content="geospatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel" name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how extract pixel values from raster data like sentinel imagery, additionally extract by row and column index, extract by bound window, extract by coordinate, extract by polygon." lang="en" name="description" xml:lang="en" />
+<meta content="Découvrez comment extraire des valeurs de pixels à partir de données raster telles que l'imagerie sentinelle, extraire en outre par index de ligne et de colonne, extraire par fenêtre liée, extraire par coordonnées, extraire par polygone." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a extraer valores de píxeles de datos ráster como imágenes centinela, extraer adicionalmente por índice de fila y columna, extraer por ventana vinculada, extraer por coordenada, extraer por polígono." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial,raster, extract by point, extract by polygon, extract by bounds, remote sensing" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
     <title>Raster Data Extraction &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
@@ -60,7 +60,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/f_rs_extraction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Band Math" href="f_rs_band_math.html" />
+    <link rel="prev" title="Band Math &amp; Vegetation Indices" href="f_rs_band_math.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -260,7 +260,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_edit.html">
-     Editing rasters
+     Editing Rasters and Remotely Sensed Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -285,7 +285,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -544,7 +544,7 @@ Attributes:
 </div>
 <div class="section" id="extracting-data-by-coordinates">
 <h2>Extracting data by coordinates<a class="headerlink" href="#extracting-data-by-coordinates" title="Permalink to this headline">¶</a></h2>
-<p>To extract values at a coordinate pair, translate the coordinates into array indices.</p>
+<p>To extract values at a coordinate pair, translate the coordinates into array indices. For extraction by geometry, for instance with a shapefile, see <a class="reference internal" href="#f-rs-extraction-point"><span class="std std-ref">extract by point geometry</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -556,6 +556,7 @@ Attributes:
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="c1"># Transform the map coordinates to data indices</span>
     <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gw</span><span class="o">.</span><span class="n">coords_to_indices</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+    <span class="c1"># Subset by index</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
@@ -596,8 +597,8 @@ Attributes:
 </div>
 </div>
 <div class="section" id="extracting-data-with-point-geometry">
-<h2>Extracting data with point geometry<a class="headerlink" href="#extracting-data-with-point-geometry" title="Permalink to this headline">¶</a></h2>
-<p>In the example below, ‘l8_224078_20200518_points’ is a <a class="reference external" href="https://www.geopackage.org/">GeoPackage</a> of point locations, and the output <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <a class="reference external" href="https://geopandas.org/reference/geopandas.GeoDataFrame.html">GeoPandas GeoDataFrame</a>. To extract the raster values at the point locations, use <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code>.</p>
+<span id="f-rs-extraction-point"></span><h2>Extracting data with point geometry<a class="headerlink" href="#extracting-data-with-point-geometry" title="Permalink to this headline">¶</a></h2>
+<p>In the example below, ‘l8_224078_20200518_points’ is a <a class="reference external" href="https://www.geopackage.org/">GeoPackage</a> of point locations, and the output <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html?highlight=geodataframe#geopandas.GeoDataFrame">GeoPandas GeoDataFrame</a>. To extract the raster values at the point locations, use <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -624,9 +625,9 @@ Attributes:
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The line <strong>df = src.gw.extract(l8_224078_20200518_points)</strong> could also have been written as <strong>df = gw.extract(src, l8_224078_20200518_points)</strong>.</p>
+<p>The line <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">src.gw.extract(l8_224078_20200518_points)</span></code> could also have been written as <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">gw.extract(src,</span> <span class="pre">l8_224078_20200518_points)</span></code>.</p>
 </div>
-<p>In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code> function would have transformed the CRS on-the-fly.</p>
+<p>In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code> function transforms the CRS on-the-fly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -695,6 +696,7 @@ Attributes:
 </div>
 <div class="section" id="extracting-time-series-images-by-point-geometry">
 <h2>Extracting time series images by point geometry<a class="headerlink" href="#extracting-time-series-images-by-point-geometry" title="Permalink to this headline">¶</a></h2>
+<p>We can also easily extract a time series of raster images. Extracted pixel values are provided in ‘wide’ format with appropriate labels, for instance the column ‘t2_blue’ would be the blue band for the second time period</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_points</span>
@@ -782,7 +784,7 @@ Attributes:
 </div>
 <div class="section" id="calculate-mean-pixel-value-by-polygon">
 <h3>Calculate mean pixel value by polygon<a class="headerlink" href="#calculate-mean-pixel-value-by-polygon" title="Permalink to this headline">¶</a></h3>
-<p>It is simple then to calculate the mean value of pixels within each polygon by using the polygon <code class="docutils literal notranslate"><span class="pre">id</span></code> column and pandas groupby function.</p>
+<p>It is simple then to calculate the mean value of pixels within each polygon by using the polygon <code class="docutils literal notranslate"><span class="pre">id</span></code> column and pandas groupby function. You can easily calculate other statistics like min, max, median etc.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
@@ -837,7 +839,7 @@ id
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="f_rs_band_math.html" title="previous page">Band Math</a>
+    <a class='left-prev' id="prev-link" href="f_rs_band_math.html" title="previous page">Band Math &amp; Vegetation Indices</a>
 
         </div>
         
