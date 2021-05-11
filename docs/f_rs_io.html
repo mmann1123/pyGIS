@@ -4,7 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques" lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
     <title>Opening Remote Sensed Images &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -56,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Editing rasters" href="f_rs_edit.html" />
-    <link rel="prev" title="Remote Sensing w. Geowombat" href="f_rs_intro.html" />
+    <link rel="prev" title="Remote Sensing with Python using Geowombat" href="f_rs_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -201,7 +206,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -216,7 +221,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -225,7 +230,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -246,7 +251,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2 current active">
@@ -282,6 +287,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
      Band Math
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -408,6 +418,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#opening-images-from-different-sensors">
+   Opening images from different sensors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#opening-multiple-bands-as-a-mosaic">
    Opening multiple bands as a mosaic
   </a>
@@ -472,7 +487,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-2100a9b5874553d9994fcb24fe99bf2d&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-69b4fee8b4aa41fec41aeb999421ffca&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
@@ -541,7 +556,6 @@ Attributes:
     offsets:            (0.0,)
     AREA_OR_POINT:      Point
     filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    resampling:         nearest
     data_are_separate:  1
     data_are_stacked:   1
 </pre></div>
@@ -580,7 +594,6 @@ Attributes:
     offsets:            (0.0,)
     AREA_OR_POINT:      Point
     filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    resampling:         nearest
     data_are_separate:  1
     data_are_stacked:   1
 </pre></div>
@@ -617,6 +630,21 @@ Attributes:
 <p>No file parsing overhead</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">long_file_list</span><span class="p">,</span> <span class="n">time_names</span><span class="o">=</span><span class="n">my_time_names</span><span class="p">,</span> <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="opening-images-from-different-sensors">
+<h2>Opening images from different sensors<a class="headerlink" href="#opening-images-from-different-sensors" title="Permalink to this headline">¶</a></h2>
+<p>One of many complications of using remotely sensed data is that there are so many different sensors such as LandSat, Sentinel, PlantScope etc each with their own band order and properties. Geowombat makes this much easier by providing a broad list of potential sensor configurations. <a class="reference internal" href="f_rs_config.html#f-rs-crs-sensors"><span class="std std-ref">Read in more detail about sensor configurations here.</span></a> For this section, let’s keep things simple and show you how to open a Sentinel 2 image using the configuration manager, frankly, it’s pretty easy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;filepath.tif&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">band</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To see all available sensor names, use the <strong>avail_sensors</strong> property.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;filepath.tif&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">sensor_name</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">avail_sensors</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sensor_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,9 +747,7 @@ Attributes:
 Rasterio’s <code class="docutils literal notranslate"><span class="pre">write</span></code> and Dask.array <code class="docutils literal notranslate"><span class="pre">store</span></code> functions as I/O backends. In the examples below,
 <code class="docutils literal notranslate"><span class="pre">src</span></code> is an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> with the necessary transform information to write to an image file.</p>
 <p>Write to a VRT file.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B4</span>
 
 <span class="c1"># Transform the data to lat/lon</span>
@@ -730,70 +756,44 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
 
         <span class="c1"># Write the data to a VRT</span>
-        <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_vrt</span><span class="p">(</span><span class="s1">&#39;lat_lon_file.vrt&#39;</span><span class="p">)</span>
+        <span class="n">gw</span><span class="o">.</span><span class="n">to_vrt</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="s1">&#39;lat_lon_file.vrt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Write to a raster file.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+
+    <span class="c1"># Xarray drops attributes</span>
+    <span class="n">attrs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Apply operations on the DataArray</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">src</span> <span class="o">*</span> <span class="mf">10.0</span>
+
+    <span class="n">src</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+
+    <span class="c1"># Write the data to a GeoTiff</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
+                        <span class="n">n_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>    <span class="c1"># number of thread workers sent to ``dask.compute``</span>
+                        <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mf">40e8</span><span class="n">fe083c67</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">4326</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> 
-<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> 
-<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="c1"># Write the data to a VRT</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">b40ddd073fb5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="c1"># Xarray drops attributes</span>
 
-<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/api.py</span> in <span class="ni">__init__</span><span class="nt">(self, filename, band_names, time_names, stack_dim, bounds, bounds_by, resampling, persist_filenames, netcdf_vars, mosaic, overlap, nodata, dtype, num_workers, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span>                                           <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span>                                           <span class="n">netcdf_vars</span><span class="o">=</span><span class="n">netcdf_vars</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">492</span>                                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span> 
-<span class="g g-Whitespace">    </span><span class="mi">494</span>                 <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/xarray_.py</span> in <span class="ni">warp_open</span><span class="nt">(filename, band_names, resampling, dtype, netcdf_vars, nodata, return_windows, warp_mem_limit, num_threads, tap, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span>                                <span class="n">resampling</span><span class="o">=</span><span class="n">resampling</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">268</span>                                <span class="o">**</span><span class="n">ref_kwargs</span><span class="p">),</span>
-<span class="ne">--&gt; </span><span class="mi">269</span>                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">filenames</span> <span class="k">else</span> <span class="n">warp_netcdf_vars</span><span class="p">()</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span> 
-<span class="g g-Whitespace">    </span><span class="mi">271</span>         <span class="k">if</span> <span class="n">band_names</span><span class="p">:</span>
-
-<span class="nn">~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/backends/rasterio_.py</span> in <span class="ni">warp</span><span class="nt">(filename, resampling, bounds, crs, res, nodata, warp_mem_limit, num_threads, tap, tac)</span>
-<span class="g g-Whitespace">    </span><span class="mi">891</span>                                            <span class="s1">&#39;warp_option&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;NUM_THREADS=</span><span class="si">{</span><span class="n">num_threads</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}}</span>
-<span class="g g-Whitespace">    </span><span class="mi">892</span> 
-<span class="ne">--&gt; </span><span class="mi">893</span>             <span class="k">with</span> <span class="n">WarpedVRT</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">**</span><span class="n">vrt_options</span><span class="p">)</span> <span class="k">as</span> <span class="n">vrt</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">894</span>                 <span class="n">output</span> <span class="o">=</span> <span class="n">vrt</span>
-<span class="g g-Whitespace">    </span><span class="mi">895</span> 
-
-<span class="nn">rasterio/_warp.pyx</span> in <span class="ni">rasterio._warp.WarpedVRTReaderBase.__init__</span><span class="nt">()</span>
-
-<span class="ne">RuntimeError</span>: Parameterization error: src_crs=CRS.from_epsg(32621), dst_crs=CRS.from_epsg(4326), dst_width=0, dst_height=0, dst_transform=Affine(30.0, 0.0, -55.0776322510587,
-<span class="g g-Whitespace">       </span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">24.99373277810876</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Write to a raster file.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-
-        <span class="c1"># Xarray drops attributes</span>
-        <span class="n">attrs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-        <span class="c1"># Apply operations on the DataArray</span>
-        <span class="n">src</span> <span class="o">=</span> <span class="n">src</span> <span class="o">*</span> <span class="mf">10.0</span>
-
-        <span class="n">src</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
-
-        <span class="c1"># Write the data to a GeoTiff</span>
-        <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
-                            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                            <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
-                            <span class="n">n_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>    <span class="c1"># number of thread workers sent to ``dask.compute``</span>
-                            <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
+<span class="ne">NameError</span>: name &#39;l8_224077_20200518_B4&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -826,7 +826,7 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="f_rs_intro.html" title="previous page">Remote Sensing w. Geowombat</a>
+    <a class='left-prev' id="prev-link" href="f_rs_intro.html" title="previous page">Remote Sensing with Python using Geowombat</a>
     <a class='right-next' id="next-link" href="f_rs_edit.html" title="next page">Editing rasters</a>
 
         </div>

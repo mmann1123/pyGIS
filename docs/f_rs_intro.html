@@ -4,8 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Remote Sensing w. Geowombat &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="This chapter covers all the core operations you need to do remote sensing with Python. We focus on the use of Geowombat because it makes opening, writing, mosaicing, and classifying images easy and intuitive." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à lire et à écrire facilement des données de télédétection à partir de divers capteurs, mosaïques Ce chapitre couvre toutes les opérations de base dont vous avez besoin pour effectuer la télédétection avec Python. Nous nous concentrons sur l'utilisation de Geowombat car il permet d'ouvrir, d'écrire, de mosaïquer et de classer des images de manière simple et intuitive." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a leer y escribir fácilmente datos de teledetección desde una variedad de sensores, mosaico. Este capítulo cubre todas las operaciones básicas que necesita para realizar teledetección con Python. Nos enfocamos en el uso de Geowombat porque hace que abrir, escribir, crear mosaicos y clasificar imágenes sea fácil e intuitivo, o crea pilas de series de tiempo." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial,remote sensing, operations, sensors, analysis" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
+    <title>Remote Sensing with Python using Geowombat &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -65,8 +70,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/f_rs_intro.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Remote Sensing w. Geowombat" />
-<meta property="og:description" content="Remote Sensing w. Geowombat  For now this section is going to be more or less a copy and paste job from Jordan’s excellent tutorials at Geowombat’s readthedocs." />
+<meta property="og:title"       content="Remote Sensing with Python using Geowombat" />
+<meta property="og:description" content="Remote Sensing with Python using Geowombat  For now this section is going to be more or less a copy and paste job from Jordan’s excellent tutorials at Geowombat" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -201,7 +206,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -216,7 +221,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -225,7 +230,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -246,7 +251,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -281,7 +286,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -399,9 +409,10 @@
         
               <div>
                 
-  <div class="section" id="remote-sensing-w-geowombat">
-<span id="f-rs-intro"></span><h1>Remote Sensing w. Geowombat<a class="headerlink" href="#remote-sensing-w-geowombat" title="Permalink to this headline">¶</a></h1>
-<p>For now this section is going to be more or less a copy and paste job from Jordan’s excellent tutorials at <span class="xref myst">Geowombat’s readthedocs</span>. I promise however to build this out over the coming months!</p>
+  <div class="section" id="remote-sensing-with-python-using-geowombat">
+<span id="f-rs-intro"></span><h1>Remote Sensing with Python using Geowombat<a class="headerlink" href="#remote-sensing-with-python-using-geowombat" title="Permalink to this headline">¶</a></h1>
+<p>For now this section is going to be more or less a copy and paste job from Jordan’s excellent tutorials at <span class="xref myst">Geowombat’s readthedocs</span>.</p>
+<p>Geowombat is designed to make remote sensing accessible to the public. No longer do you need a PhD in geography and a supercomputer to do a land cover classification for a whole state or country! Vive la révolution!</p>
 <p>In this section you will learn how to:</p>
 <div class="tableofcontents-wrapper compound">
 <ul>
@@ -411,7 +422,8 @@
 <li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
