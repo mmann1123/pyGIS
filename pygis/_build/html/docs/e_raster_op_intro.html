@@ -4,8 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Raster Skills &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="This chapter walks you through all the basics operations you will need to do geospatial modeling with raster data. This includes everything from reprojection to cropping and extracting pixel values to points or polygons" lang="en" name="description" xml:lang="en" />
+<meta content="Ce chapitre vous guide à travers toutes les opérations de base dont vous aurez besoin pour effectuer une modélisation géospatiale avec des données raster. Cela comprend tout, de la reprojection au recadrage et à l'extraction des valeurs de pixels en passant par les points ou les polygones" lang="fr" name="description" xml:lang="fr" />
+<meta content="Este capítulo lo guía a través de todas las operaciones básicas que necesitará para realizar un modelado geoespacial con datos ráster. Esto incluye todo, desde la reproyección hasta el recorte y la extracción de valores de píxeles hasta puntos o polígonos." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial, raster, clip, extract, resample, reproject, band math, reading, writing" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
+    <title>Raster Operations &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -56,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reproject Rasters" href="e_raster_reproject.html" />
-    <link rel="prev" title="Merge &amp; Dissolve Polygons" href="e_vector_merge_dissolve.html" />
+    <link rel="prev" title="Merge Data &amp; Dissolve Polygons" href="e_vector_merge_dissolve.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -65,8 +70,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/e_raster_op_intro.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Raster Skills" />
-<meta property="og:description" content="Raster Skills  In this section we will learn how to:  Reproject Rasters  " />
+<meta property="og:title"       content="Raster Operations" />
+<meta property="og:description" content="Raster Operations  In this section we will learn how to:  Reproject Rasters  " />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -201,7 +206,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -216,7 +221,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -225,7 +230,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -246,7 +251,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -282,6 +287,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
      Band Math
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -399,8 +409,8 @@
         
               <div>
                 
-  <div class="section" id="raster-skills">
-<span id="e-raster-op-intro"></span><h1>Raster Skills<a class="headerlink" href="#raster-skills" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="raster-operations">
+<span id="e-raster-op-intro"></span><h1>Raster Operations<a class="headerlink" href="#raster-operations" title="Permalink to this headline">¶</a></h1>
 <p>In this section we will learn how to:</p>
 <div class="tableofcontents-wrapper compound">
 <ul>
@@ -436,7 +446,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="e_vector_merge_dissolve.html" title="previous page">Merge &amp; Dissolve Polygons</a>
+    <a class='left-prev' id="prev-link" href="e_vector_merge_dissolve.html" title="previous page">Merge Data &amp; Dissolve Polygons</a>
     <a class='right-next' id="next-link" href="e_raster_reproject.html" title="next page">Reproject Rasters</a>
 
         </div>

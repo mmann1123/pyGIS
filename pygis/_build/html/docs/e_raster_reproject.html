@@ -4,7 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to reproject single and multi-band rasters using rasterio and geowombat. We demonstrate these using LandSat imagery as examples." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à reprojeter des rasters mono et multibande à l'aide de rasterio et de geowombat. Nous les démontrons en utilisant les images LandSat comme exemples." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a reproyectar rásteres de una o varias bandas mediante rasterio y geowombat. Demostramos esto usando imágenes de LandSat como ejemplos." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial, raster, reproject, crs, landsat" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
     <title>Reproject Rasters &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -57,8 +62,8 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/e_raster_reproject.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Remote Sensing w. Geowombat" href="f_rs_intro.html" />
-    <link rel="prev" title="Raster Skills" href="e_raster_op_intro.html" />
+    <link rel="next" title="Remote Sensing with Python using Geowombat" href="f_rs_intro.html" />
+    <link rel="prev" title="Raster Operations" href="e_raster_op_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -203,7 +208,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -218,7 +223,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -227,7 +232,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2 current active">
@@ -248,7 +253,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -284,6 +289,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
      Band Math
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -445,7 +455,7 @@
 <p>In order to reproject on the fly we are going to open the raster using <code class="docutils literal notranslate"><span class="pre">gw.config.update()</span></code>.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -463,160 +473,11 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/130 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:34,  3.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|▍         | 5/130 [00:00&lt;00:09, 13.43it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 9/130 [00:00&lt;00:07, 17.25it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|█         | 13/130 [00:00&lt;00:05, 19.94it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 13%|█▎        | 17/130 [00:00&lt;00:05, 20.98it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|█▌        | 21/130 [00:01&lt;00:05, 21.74it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 24/130 [00:01&lt;00:04, 21.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 27/130 [00:01&lt;00:04, 21.24it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|██▎       | 30/130 [00:01&lt;00:04, 21.13it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 33/130 [00:01&lt;00:04, 19.40it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|██▋       | 35/130 [00:01&lt;00:05, 18.16it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 37/130 [00:02&lt;00:05, 16.63it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 32%|███▏      | 41/130 [00:02&lt;00:04, 18.24it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 34%|███▍      | 44/130 [00:02&lt;00:04, 19.70it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|███▌      | 46/130 [00:02&lt;00:05, 16.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███▋      | 48/130 [00:02&lt;00:04, 16.73it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|███▊      | 50/130 [00:02&lt;00:05, 15.54it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|████      | 53/130 [00:03&lt;00:05, 14.65it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|████▎     | 56/130 [00:03&lt;00:04, 17.08it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▍     | 58/130 [00:03&lt;00:04, 15.46it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|████▌     | 60/130 [00:03&lt;00:04, 15.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 62/130 [00:03&lt;00:05, 12.20it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 65/130 [00:03&lt;00:04, 13.80it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 52%|█████▏    | 67/130 [00:04&lt;00:04, 13.28it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:04&lt;00:05, 12.06it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▍    | 71/130 [00:04&lt;00:04, 13.20it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 56%|█████▌    | 73/130 [00:04&lt;00:04, 12.33it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:04&lt;00:04, 13.44it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|█████▉    | 77/130 [00:04&lt;00:03, 13.96it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:04&lt;00:03, 14.38it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|██████▏   | 81/130 [00:05&lt;00:03, 13.78it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 64%|██████▍   | 83/130 [00:05&lt;00:03, 12.18it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|██████▋   | 87/130 [00:05&lt;00:03, 13.81it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|███████   | 91/130 [00:05&lt;00:02, 15.73it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|███████▏  | 94/130 [00:05&lt;00:02, 15.62it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 74%|███████▍  | 96/130 [00:06&lt;00:02, 14.40it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 76%|███████▌  | 99/130 [00:06&lt;00:02, 14.95it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|███████▉  | 103/130 [00:06&lt;00:01, 17.37it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 82%|████████▏ | 106/130 [00:06&lt;00:01, 18.00it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|████████▎ | 108/130 [00:06&lt;00:01, 17.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|████████▌ | 111/130 [00:06&lt;00:01, 18.13it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 114/130 [00:06&lt;00:00, 20.22it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 90%|█████████ | 117/130 [00:07&lt;00:00, 21.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 120/130 [00:07&lt;00:00, 18.27it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▍| 123/130 [00:07&lt;00:00, 17.91it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|█████████▊| 127/130 [00:07&lt;00:00, 19.21it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:07&lt;00:00, 16.83it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </div>
 <p>Let’s take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use <code class="docutils literal notranslate"><span class="pre">.sel(band=[3,2,1])</span></code> to put them back in the right order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -626,9 +487,6 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_reproject_3_0.png" src="../_images/e_raster_reproject_3_0.png" />
 </div>
 </div>
 <p>Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra.</p>
@@ -644,7 +502,7 @@
 <p>Now let’s calculate the tranform matrix for the destination raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 
@@ -669,25 +527,12 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Transform:
- | 30.00, 0.00, 717345.00|
-| 0.00,-30.00,-2776995.00|
-| 0.00, 0.00, 1.00| 
-
-Destination Transform:
- | 33.24, 0.00,-6105300.09|
-| 0.00,-33.24,-2885952.71|
-| 0.00, 0.00, 1.00|
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check <span class="math notranslate nohighlight">\(\Delta x, \Delta x\)</span>).</p>
 <p>Ok finally!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
 
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
@@ -760,8 +605,8 @@ Destination Transform:
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="e_raster_op_intro.html" title="previous page">Raster Skills</a>
-    <a class='right-next' id="next-link" href="f_rs_intro.html" title="next page">Remote Sensing w. Geowombat</a>
+    <a class='left-prev' id="prev-link" href="e_raster_op_intro.html" title="previous page">Raster Operations</a>
+    <a class='right-next' id="next-link" href="f_rs_intro.html" title="next page">Remote Sensing with Python using Geowombat</a>
 
         </div>
         

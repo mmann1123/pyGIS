@@ -31,7 +31,7 @@ For instance you might want to set the bound (extent) of your analysis. By setti
 
 To use GeoWombat's configuration manager, just call `geowombat.config.update` before opening a file. For example,
 
-```python
+``` python
 import geowombat as gw
 
 with gw.config.update(<keywords>...):
@@ -128,6 +128,7 @@ with gw.config.update(ref_image=l8_224077_20200518_B2):
     with gw.open(l8_224078_20200518) as src:
         print(src.gw.bounds)
 
+(f_rs_crs_sensors)=
 ### Reference settings: Sensors
 
 Because rasters are opened as DataArrays, the band coordinates will be named. By default, the bands will be named by their index position (starting at 1). It might, however, be more intuitive to store the band names as strings, where the names correspond to the sensor wavelengths. In GeoWombat, you can set the band names explicitly upon opening a file by using the :func:`geowombat.open` **band_names** keyword. Alternatively, if the sensor is known (and supported by GeoWombat), then you can set the band names by specifying the sensor name in the configuration settings.

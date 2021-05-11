@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editing rasters &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Editing Rasters and Remotely Sensed Data &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -65,8 +65,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/f_rs_edit.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Editing rasters" />
-<meta property="og:description" content="Editing rasters  Setting ‘no data’ Values  The xarray.DataArray.where function masks data by setting nans, as demonstrated by the example below.  import geowomb" />
+<meta property="og:title"       content="Editing Rasters and Remotely Sensed Data" />
+<meta property="og:description" content="Editing Rasters and Remotely Sensed Data  Setting ‘no data’ Values  The xarray.DataArray.where function masks data by setting nans, as demonstrated by the examp" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -201,7 +201,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -216,7 +216,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -225,7 +225,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -246,7 +246,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -256,7 +256,7 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Editing rasters
+     Editing Rasters and Remotely Sensed Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -281,7 +281,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -440,8 +445,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="editing-rasters">
-<h1>Editing rasters<a class="headerlink" href="#editing-rasters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="editing-rasters-and-remotely-sensed-data">
+<h1>Editing Rasters and Remotely Sensed Data<a class="headerlink" href="#editing-rasters-and-remotely-sensed-data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="setting-no-data-values">
 <h2>Setting ‘no data’ Values<a class="headerlink" href="#setting-no-data-values" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">xarray.DataArray.where</span></code> function masks data by setting nans, as demonstrated by the example below.</p>

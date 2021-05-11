@@ -1124,3 +1124,111 @@ with gw.config.update(sensor='rgbn'):
         d = ds.gw.norm_diff('red', 'nir')
         print(d)
 # %%
+import geowombat as gw
+from geowombat.data import l8_224077_20200518_B4
+
+# Transform the data to lat/lon
+with gw.config.update(ref_crs=32621):
+
+    with gw.open(l8_224077_20200518_B4) as src:
+
+        # Write the data to a VRT
+        gw.to_vrt(src, 'lat_lon_file.vrt')
+
+# %%
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518
+from geowombat import to_vrt
+
+# Transform a CRS and save to VRT
+
+# with gw.config.update(ref_crs=102033):
+
+with gw.open([l8_224078_20200518,l8_224078_20200518]) as src:
+        print(src)
+        attrs = src.attrs.copy()
+        src.attrs = attrs
+
+        to_vrt(src,  'output.vrt')
+                  
+                  
+# %%
+# %%
+import geowombat as gw
+
+with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+
+    # Xarray drops attributes
+    # attrs = src.attrs.copy()
+
+    # Apply operations on the DataArray
+    src = src * 10.0
+
+    # src.attrs = attrs
+
+    # Write the data to a GeoTiff
+    src.gw.to_raster('output.tif',
+                        verbose=1,
+                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
+                        n_threads=2,    # number of thread workers sent to ``dask.compute``
+                        n_chunks=200)   # number of window chunks to send as concurrent futures
+# %%
+import geowombat as gw
+from geowombat.data import rgbn
+
+from rasterio.windows import Window
+w = Window(row_off=0, col_off=0, height=100, width=100)
+
+with gw.open(rgbn,
+                band_names=['blue', 'green', 'red'],
+                num_workers=8,
+                indexes=[1, 2, 3],
+                window=w,
+                ) as src:
+    print(src)
+# %% 
+bounds = (793475.76, 2049033.03, 794222.03, 2049527.24)
+
+with gw.open(rgbn,
+                band_names=['green', 'red', 'nir'],
+                num_workers=8,
+                indexes=[2, 3, 4],
+                bounds=bounds,
+                out_dtype='float32') as src:
+    print(src)
+
+
+# %%
+with gw.config.update(ref_bounds=bounds):
+
+    with gw.open(rgbn) as src:
+        print(src)
+# %%
+with gw.config.update(ref_bounds=bounds, ref_tar=rgbn):
+
+    with gw.open(rgbn) as src:
+        print(src)
+# %%
+from geowombat.data import l8_224078_20200518, l8_224078_20200518_points
+
+with gw.open([l8_224078_20200518, l8_224078_20200518],
+            band_names=['blue', 'green', 'red'],
+            time_names=['1/4/2020', '1/5/2020'],
+            stack_dim='time') as src:
+
+    # Extract and by point geometry
+    df = src.gw.extract(l8_224078_20200518_points)
+
+print(df)
+ 
+
+# %%
+from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
+
+with gw.config.update(sensor='bgr'):
+    with gw.open(l8_224078_20200518) as src:
+        print(src.values)
+        dat  = src.sel(band='red')-src.sel(band='blue')
+        print(dat.values)
+# %%

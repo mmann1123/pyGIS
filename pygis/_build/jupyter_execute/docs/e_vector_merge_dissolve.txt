@@ -1,4 +1,4 @@
-# Merge & Dissolve Polygons
+# Merge Data & Dissolve Polygons
 
 By: Steven Chao
 

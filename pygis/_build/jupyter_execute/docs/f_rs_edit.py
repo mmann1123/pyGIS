@@ -14,7 +14,7 @@
 ```
 ----------------
 
-# Editing rasters
+# Editing Rasters and Remotely Sensed Data
 
 
 ## Setting 'no data' Values

@@ -53,7 +53,6 @@
   chapters:
     - file: docs/f_rs_intro
       sections:
-      - file: docs/f_rs_gw_basics
       - file: docs/f_rs_io
       - file: docs/f_rs_edit
       - file: docs/f_rs_plot
@@ -61,6 +60,7 @@
       - file: docs/f_rs_mosaic
       - file: docs/f_rs_config
       - file: docs/f_rs_band_math
+      - file: docs/f_rs_extraction   
     # - file: docs/f_rs_common_task
     #   sections:
     #   - file: docs/f_rs_task1

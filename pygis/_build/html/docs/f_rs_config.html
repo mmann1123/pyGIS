@@ -4,7 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to easily read in remote sensing data from a variety of sensors including LandSat, Sentinel, PlanetScope, and QuickBird, do easy reprojection and snap raster operations on-the-fly, and resampling." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à lire facilement les données de télédétection à partir d'une variété de capteurs, y compris LandSat, Sentinel, PlanetScope et QuickBird, effectuez une reprojection facile et capturez des opérations raster à la volée, et rééchantillonnez." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a leer fácilmente los datos de teledetección de una variedad de sensores, incluidos LandSat, Sentinel, PlanetScope y QuickBird, realice operaciones de reproyección y captura de ráster sobre la marcha y remuestreo." lang="es" name="description" xml:lang="es" />
+<meta content="geospatial,raster, remote sensing, projection, resample, sentinel, landsat " name="keywords" />
+<meta content="en_US" property="og:locale" />
+
     <title>Configuration manager &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
@@ -201,7 +206,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_vector_op_intro.html">
-   Vector Skills
+   Vector Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -216,7 +221,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
-     Merge &amp; Dissolve Polygons
+     Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
@@ -225,7 +230,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="e_raster_op_intro.html">
-   Raster Skills
+   Raster Operations
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -246,7 +251,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing w. Geowombat
+   Remote Sensing with Python using Geowombat
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2">
@@ -282,6 +287,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
      Band Math
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="f_rs_extraction.html">
+     Raster Data Extraction
     </a>
    </li>
   </ul>
@@ -428,6 +438,11 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reference-settings-snap-raster-target">
+     Reference settings: Snap Raster Target
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#reference-image">
      Reference Image
     </a>
@@ -496,7 +511,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">geowombat.config.update</span></code> stores keywords in a dictionary. To see all GeoWombat configuration keywords, just iterate over the dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Using the manager without keywords will set defaults</span>
@@ -507,38 +522,13 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Keyword: with_config     Value: True
-Keyword: ignore_warnings Value: False
-Keyword: sensor          Value: None
-Keyword: scale_factor    Value: 1.0
-Keyword: nodata          Value: None
-Keyword: ref_image       Value: None
-Keyword: ref_bounds      Value: None
-Keyword: ref_crs         Value: None
-Keyword: ref_res         Value: None
-Keyword: ref_tar         Value: None
-Keyword: blockxsize      Value: 512
-Keyword: blockysize      Value: 512
-Keyword: compress        Value: None
-Keyword: driver          Value: GTiff
-Keyword: tiled           Value: True
-Keyword: bigtiff         Value: NO
-Keyword: l57_angles_path Value: None
-Keyword: l8_angles_path  Value: None
-Keyword: nasa_earthdata_user Value: None
-Keyword: nasa_earthdata_key Value: None
-Keyword: nasa_earthdata_code Value: None
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="reference-settings-crs">
 <h3>Reference settings: CRS<a class="headerlink" href="#reference-settings-crs" title="Permalink to this headline">¶</a></h3>
 <p>Configuration keywords beginning with <strong>ref</strong> are the most important commands when opening rasters. For example, to transform the CRS of the data on-the-fly, use <strong>ref_crs</strong>. For more on Coordinate Reference Systems, see <a class="reference internal" href="f_rs_crs.html"><span class="doc std std-doc">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs &quot;</span>
@@ -554,12 +544,6 @@ Keyword: nasa_earthdata_code Value: None
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+init=epsg:32621
-+proj=aea +lat_0=-32 +lon_0=-60 +lat_1=-5 +lat_2=-42 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs=True
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="reference-settings-cell-size">
@@ -567,7 +551,7 @@ Keyword: nasa_earthdata_code Value: None
 <p>It is possible to combine multiple configuration keywords. In the example below, the raster CRS is transformed from UTM to Albers Equal Area with a resampled cell size of 100m x 100m.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Without the manager</span>
@@ -581,14 +565,6 @@ Keyword: nasa_earthdata_code Value: None
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0 30.0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0 100.0
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="reference-settings-bounds">
@@ -596,7 +572,7 @@ Keyword: nasa_earthdata_code Value: None
 <p>To subset an image, specify bounds as a <strong>tuple</strong> of (left, bottom, right, top) or a rasterio <strong>BoundingBox</strong> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 <span class="kn">from</span> <span class="nn">rasterio.coords</span> <span class="kn">import</span> <span class="n">BoundingBox</span>
 
@@ -616,12 +592,16 @@ Keyword: nasa_earthdata_code Value: None
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(717345.0, -2832795.0, 778575.0, -2776995.0)
-(724634.17, -2806481.42, 737654.17, -2796221.42)
+</div>
+</div>
+<div class="section" id="reference-settings-snap-raster-target">
+<h3>Reference settings: Snap Raster Target<a class="headerlink" href="#reference-settings-snap-raster-target" title="Permalink to this headline">¶</a></h3>
+<p>By default, the bounding subset will be returned by the upper left coordinates of the bounds, potentially shifting cell alignment with the reference raster. To subset a raster and align it to the same grid, use the <strong>ref_tar</strong> keyword. This is equivalent to a “snap raster” in ArcGIS.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">ref_tar</span><span class="o">=</span><span class="n">rgbn</span><span class="p">):</span>
+
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="reference-image">
@@ -629,7 +609,7 @@ Keyword: nasa_earthdata_code Value: None
 <p>To use another image as a reference, just set <strong>ref_image</strong>. Then, the opened file’s bounds, CRS, and cell size will be transformed to match those of the reference image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224077_20200518_B2</span>
 
 <span class="c1"># Without the manager</span>
@@ -646,17 +626,10 @@ Keyword: nasa_earthdata_code Value: None
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(717345.0, -2832795.0, 778575.0, -2776995.0)
-(694005.0, -2812065.0, 754185.0, -2766615.0)
-(694005.0, -2812065.0, 754185.0, -2766615.0)
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="reference-settings-sensors">
-<h3>Reference settings: Sensors<a class="headerlink" href="#reference-settings-sensors" title="Permalink to this headline">¶</a></h3>
+<span id="f-rs-crs-sensors"></span><h3>Reference settings: Sensors<a class="headerlink" href="#reference-settings-sensors" title="Permalink to this headline">¶</a></h3>
 <p>Because rasters are opened as DataArrays, the band coordinates will be named. By default, the bands will be named by their index position (starting at 1). It might, however, be more intuitive to store the band names as strings, where the names correspond to the sensor wavelengths. In GeoWombat, you can set the band names explicitly upon opening a file by using the :func:<code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code> <strong>band_names</strong> keyword. Alternatively, if the sensor is known (and supported by GeoWombat), then you can set the band names by specifying the sensor name in the configuration settings.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -664,7 +637,7 @@ Keyword: nasa_earthdata_code Value: None
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Without the manager</span>
@@ -678,18 +651,6 @@ Keyword: nasa_earthdata_code Value: None
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;band&#39; (band: 3)&gt;
-array([1, 2, 3])
-Coordinates:
-  * band     (band) int64 1 2 3
-&lt;xarray.DataArray &#39;band&#39; (band: 3)&gt;
-array([&#39;blue&#39;, &#39;green&#39;, &#39;red&#39;], dtype=&#39;&lt;U5&#39;)
-Coordinates:
-  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>To see all available sensor names, use the <strong>avail_sensors</strong> property.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -700,36 +661,9 @@ Coordinates:
 <p>For a short description of the sensor, use the <strong>sensor_names</strong> property.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">sensor_name</span><span class="p">,</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">sensor_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sensor_name</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">description</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rgb            : red, green, and blue
-rgbn           : red, green, blue, and NIR
-bgr            : blue, green, and red
-bgrn           : blue, green, red, and NIR
-l5             : Landsat 5 Thematic Mapper (TM)
-l7             : Landsat 7 Enhanced Thematic Mapper Plus (ETM+) without panchromatic and thermal bands
-l7th           : Landsat 7 Enhanced Thematic Mapper Plus (ETM+) with thermal band
-l7mspan        : Landsat 7 Enhanced Thematic Mapper Plus (ETM+) with panchromatic band
-l7pan          : Landsat 7 panchromatic band
-l8             : Landsat 8 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) without panchromatic and thermal bands
-l8l7           : Landsat 8 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) with 6 Landsat 7-like bands
-l8l7mspan      : Landsat 8 Operational Land Imager (OLI) and panchromatic band with 6 Landsat 7-like bands
-l8th           : Landsat 8 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) with thermal band
-l8pan          : Landsat 8 panchromatic band
-s2             : Sentinel 2 Multi-Spectral Instrument (MSI) without 3 60m bands (coastal, water vapor, cirrus)
-s2f            : Sentinel 2 Multi-Spectral Instrument (MSI) with 3 60m bands (coastal, water vapor, cirrus)
-s2l7           : Sentinel 2 Multi-Spectral Instrument (MSI) with 6 Landsat 7-like bands
-s210           : Sentinel 2 Multi-Spectral Instrument (MSI) with 4 10m (visible + NIR) bands
-s220           : Sentinel 2 Multi-Spectral Instrument (MSI) with 6 20m bands
-s2cloudless    : Sentinel 2 Multi-Spectral Instrument (MSI) with 10 bands for s2cloudless
-ps             : PlanetScope with 4 (visible + NIR) bands
-qb             : Quickbird with 4 (visible + NIR) bands
-ik             : IKONOS with 4 (visible + NIR) bands
 </pre></div>
 </div>
 </div>

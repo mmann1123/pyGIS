@@ -1,6 +1,6 @@
 (e_vector_op_intro)=
 
-# Vector Skills
+# Vector Operations
  
 In this section we will learn how to:
 

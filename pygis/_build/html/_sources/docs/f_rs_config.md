@@ -7,6 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to easily read in remote sensing data from a variety of sensors including LandSat, Sentinel, PlanetScope, and QuickBird, do easy reprojection and snap raster operations on-the-fly, and resampling."
+  "description lang=fr": "Apprenez à lire facilement les données de télédétection à partir d'une variété de capteurs, y compris LandSat, Sentinel, PlanetScope et QuickBird, effectuez une reprojection facile et capturez des opérations raster à la volée, et rééchantillonnez."
+  "description lang=es": "Aprenda a leer fácilmente los datos de teledetección de una variedad de sensores, incluidos LandSat, Sentinel, PlanetScope y QuickBird, realice operaciones de reproyección y captura de ráster sobre la marcha y remuestreo."
+  "keywords": "geospatial,raster, remote sensing, projection, resample, sentinel, landsat "
+  "property=og:locale": "en_US"
 ---
 
 (f_rs_crs)=
@@ -42,7 +48,7 @@ For instance you might want to set the bound (extent) of your analysis. By setti
 
 To use GeoWombat's configuration manager, just call `geowombat.config.update` before opening a file. For example,
 
-```python
+``` python
 import geowombat as gw
 
 with gw.config.update(<keywords>...):
@@ -128,6 +134,17 @@ with gw.config.update(ref_bounds=bounds):
         print(src.gw.bounds)
 ```
 
+### Reference settings: Snap Raster Target
+
+By default, the bounding subset will be returned by the upper left coordinates of the bounds, potentially shifting cell alignment with the reference raster. To subset a raster and align it to the same grid, use the **ref_tar** keyword. This is equivalent to a "snap raster" in ArcGIS. 
+
+``` python #{code-cell} ipython3
+with gw.config.update(ref_bounds=bounds, ref_tar=rgbn):
+
+    with gw.open(rgbn) as src:
+        print(src)
+```
+
 ### Reference Image
 
 To use another image as a reference, just set **ref_image**. Then, the opened file's bounds, CRS, and cell size will be transformed to match those of the reference image.
@@ -148,7 +165,7 @@ with gw.config.update(ref_image=l8_224077_20200518_B2):
     with gw.open(l8_224078_20200518) as src:
         print(src.gw.bounds)
 ```
-
+(f_rs_crs_sensors)=
 ### Reference settings: Sensors
 
 Because rasters are opened as DataArrays, the band coordinates will be named. By default, the bands will be named by their index position (starting at 1). It might, however, be more intuitive to store the band names as strings, where the names correspond to the sensor wavelengths. In GeoWombat, you can set the band names explicitly upon opening a file by using the :func:`geowombat.open` **band_names** keyword. Alternatively, if the sensor is known (and supported by GeoWombat), then you can set the band names by specifying the sensor name in the configuration settings.

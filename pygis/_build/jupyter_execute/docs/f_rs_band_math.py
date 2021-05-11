@@ -15,7 +15,7 @@
 --------------
 
 
-# Band Math
+# Band Math & Vegetation Indices
 
 ## Vegetation indices
 Healthy vegetation (with chlorophyll) reflects more near-infrared (NIR) and green light compared to other wavelengths and absorbs more red and blue light. We can use this effect to generate a number of vegetation indices including the following:
@@ -76,10 +76,15 @@ with gw.config.update(sensor='rgbn'):
 ### Tasseled Cap Transformations
 Tasseled cap tranform uses a linear equation to try to differentiate different components of the spectrum that are of interest for vegetation dynamics such as phenological stages. The output includes three bands including `brightness`, `greeness` for vegetation, and `wetness` as an idicator of soil and canopy moisture. Use `.sel(band='wetness')` to select them individually.
 
+fig, ax = plt.subplots(dpi=150)
+
 with gw.config.update(sensor='qb', scale_factor=0.0001):
     with gw.open(rgbn) as ds:
         tcap = ds.gw.tasseled_cap()
-        print(tcap) 
+        tcap.sel(band='wetness').plot(robust=True, ax=ax)
+        print(tcap)
+plt.tight_layout(pad=1)
+
 
 Sources: 
 - [Wikipedia EVI](https://en.wikipedia.org/wiki/Enhanced_vegetation_index)

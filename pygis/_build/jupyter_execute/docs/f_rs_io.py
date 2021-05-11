@@ -91,6 +91,22 @@ No file parsing overhead
 with gw.open(long_file_list, time_names=my_time_names, stack_dim='time') as src:
     ...
 ```
+## Opening images from different sensors
+One of many complications of using remotely sensed data is that there are so many different sensors such as LandSat, Sentinel, PlantScope etc each with their own band order and properties. Geowombat makes this much easier by providing a broad list of potential sensor configurations. [Read in more detail about sensor configurations here.](f_rs_crs_sensors) For this section, let's keep things simple and show you how to open a Sentinel 2 image using the configuration manager, frankly, it's pretty easy:
+
+``` python
+with gw.config.update(sensor='s2'):
+    with gw.open('filepath.tif') as src:
+        print(src.band)
+```
+
+To see all available sensor names, use the **avail_sensors** property.
+
+``` python
+with gw.open('filepath.tif') as src:
+    for sensor_name in src.gw.avail_sensors:
+        print(sensor_name)
+```
 
 ## Opening multiple bands as a mosaic
 
@@ -129,7 +145,10 @@ Rasterio's `write` and Dask.array `store` functions as I/O backends. In the exam
 
 Write to a VRT file.
 
+
+``` python
 import geowombat as gw
+from geowombat.data import l8_224077_20200518_B4
 
 # Transform the data to lat/lon
 with gw.config.update(ref_crs=4326):
@@ -137,27 +156,28 @@ with gw.config.update(ref_crs=4326):
     with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
 
         # Write the data to a VRT
-        src.gw.to_vrt('lat_lon_file.vrt')
+        gw.to_vrt(src, 'lat_lon_file.vrt')
+```
 
 Write to a raster file.
 
-    import geowombat as gw
+import geowombat as gw
 
-    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
 
-        # Xarray drops attributes
-        attrs = src.attrs.copy()
+    # Xarray drops attributes
+    attrs = src.attrs.copy()
 
-        # Apply operations on the DataArray
-        src = src * 10.0
+    # Apply operations on the DataArray
+    src = src * 10.0
 
-        src.attrs = attrs
+    src.attrs = attrs
 
-        # Write the data to a GeoTiff
-        src.gw.to_raster('output.tif',
-                            verbose=1,
-                            n_workers=4,    # number of process workers sent to ``concurrent.futures``
-                            n_threads=2,    # number of thread workers sent to ``dask.compute``
-                            n_chunks=200)   # number of window chunks to send as concurrent futures
+    # Write the data to a GeoTiff
+    src.gw.to_raster('output.tif',
+                        verbose=1,
+                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
+                        n_threads=2,    # number of thread workers sent to ``dask.compute``
+                        n_chunks=200)   # number of window chunks to send as concurrent futures
 
 <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. -->

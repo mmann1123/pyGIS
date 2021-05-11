@@ -19,23 +19,32 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import geowombat as gw
 
-# Transform the data to lat/lon
-with gw.config.update(ref_crs=4326):
+with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
 
-    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+    # Xarray drops attributes
+    attrs = src.attrs.copy()
 
-        # Write the data to a VRT
-        src.gw.to_vrt('lat_lon_file.vrt')
+    # Apply operations on the DataArray
+    src = src * 10.0
+
+    src.attrs = attrs
+
+    # Write the data to a GeoTiff
+    src.gw.to_raster('output.tif',
+                        verbose=1,
+                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
+                        n_threads=2,    # number of thread workers sent to ``dask.compute``
+                        n_chunks=200)   # number of window chunks to send as concurrent futures
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-9-941b8eead27a>[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mconfig[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mref_crs[0m[0;34m=[0m[0;36m4326[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;34m[0m[0m
-[0;32m----> 6[0;31m     [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224077_20200518_B4[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m1024[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      7[0m [0;34m[0m[0m
-[1;32m      8[0m         [0;31m# Write the data to a VRT[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-9-b40ddd073fb5>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mgeowombat[0m [0;32mas[0m [0mgw[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[0;32m----> 3[0;31m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224077_20200518_B4[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m1024[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m     [0;31m# Xarray drops attributes[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mNameError[0m: name 'l8_224077_20200518_B4' is not defined
 NameError: name 'l8_224077_20200518_B4' is not defined
