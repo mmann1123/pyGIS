@@ -12,7 +12,8 @@
 
     <title>Raster Data Extraction &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -24,14 +25,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -39,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -49,7 +46,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -60,24 +57,15 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/f_rs_extraction.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Band Math" href="f_rs_band_math.html" />
-
+    <link rel="prev" title="Band Math &amp; Vegetation Indices" href="f_rs_band_math.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/f_rs_extraction.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Raster Data Extraction" />
-<meta property="og:description" content="Raster Data Extraction  Raster data is often of little use unless we can extract and summarize the data. For instance, extracting raster to points by coordinate" />
-<meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -86,32 +74,32 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/pygis.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/pygis.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="a_intro.html">
    PyGIS
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Get Started
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="b_intro_py.html">
    Welcome - Let’s get started
@@ -138,12 +126,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Data Types
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="c_features.html">
    Geospatial Data
@@ -165,12 +153,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Nature of Coordinate Systems
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="d_crs_what_is_it.html">
    What is a CRS?
@@ -197,17 +185,22 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Basic Operations
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="e_vector_op_intro.html">
    Vector Operations
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="e_attributes.html">
      Attributes &amp; Indexing for Vector Data
@@ -219,40 +212,61 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_overlay.html">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_extraction.html">
+     Extraction
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summary Operations to Depict Concentrations
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="e_vector_merge_dissolve.html">
      Merge Data &amp; Dissolve Polygons
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="e_raster_op_intro.html">
    Raster Operations
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="e_raster_reproject.html">
      Reproject Rasters
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Remote Sensing
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active collapsible-parent">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="f_rs_intro.html">
    Remote Sensing with Python using Geowombat
   </a>
-  <ul class="current collapse-ul">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_io.html">
      Opening Remote Sensed Images
@@ -260,7 +274,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_edit.html">
-     Editing rasters
+     Editing Rasters and Remotely Sensed Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -285,7 +299,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
     </a>
    </li>
    <li class="toctree-l2 current active">
@@ -294,11 +308,10 @@
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -369,12 +382,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -400,12 +413,11 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#subsetting-rasters">
    Subsetting rasters
@@ -440,8 +452,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -496,21 +507,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;array-c1686f70048cb766e2fe94fb3c34fb6d&#39; (band: 3, y: 100, x: 100)&gt;
-dask.array&lt;array, shape=(3, 100, 100), dtype=float32, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
-  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.05e+06 2.05e+06
-  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.935e+05 7.935e+05
-Attributes:
-    transform:          | 5.00, 0.00, 792988.00|\n| 0.00,-5.00, 2050382.00|\n...
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan, nan)
-    offsets:            (0.0, 0.0, 0.0, 0.0)
-    data_are_separate:  0
-    data_are_stacked:   0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">f99cfce8bf74</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">rasterio.windows</span> <span class="kn">import</span> <span class="n">Window</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">row_off</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_off</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;geowombat&#39;
 </pre></div>
 </div>
 </div>
@@ -544,7 +550,7 @@ Attributes:
 </div>
 <div class="section" id="extracting-data-by-coordinates">
 <h2>Extracting data by coordinates<a class="headerlink" href="#extracting-data-by-coordinates" title="Permalink to this headline">¶</a></h2>
-<p>To extract values at a coordinate pair, translate the coordinates into array indices.</p>
+<p>To extract values at a coordinate pair, translate the coordinates into array indices. For extraction by geometry, for instance with a shapefile, see <a class="reference internal" href="#f-rs-extraction-point"><span class="std std-ref">extract by point geometry</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -556,14 +562,10 @@ Attributes:
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="c1"># Transform the map coordinates to data indices</span>
     <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">gw</span><span class="o">.</span><span class="n">coords_to_indices</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+    <span class="c1"># Subset by index</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7448 6882 6090]
 </pre></div>
 </div>
 </div>
@@ -588,16 +590,11 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7448 6882 6090]
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="extracting-data-with-point-geometry">
-<h2>Extracting data with point geometry<a class="headerlink" href="#extracting-data-with-point-geometry" title="Permalink to this headline">¶</a></h2>
-<p>In the example below, ‘l8_224078_20200518_points’ is a <a class="reference external" href="https://www.geopackage.org/">GeoPackage</a> of point locations, and the output <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <a class="reference external" href="https://geopandas.org/reference/geopandas.GeoDataFrame.html">GeoPandas GeoDataFrame</a>. To extract the raster values at the point locations, use <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code>.</p>
+<span id="f-rs-extraction-point"></span><h2>Extracting data with point geometry<a class="headerlink" href="#extracting-data-with-point-geometry" title="Permalink to this headline">¶</a></h2>
+<p>In the example below, ‘l8_224078_20200518_points’ is a <a class="reference external" href="https://www.geopackage.org/">GeoPackage</a> of point locations, and the output <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html?highlight=geodataframe#geopandas.GeoDataFrame">GeoPandas GeoDataFrame</a>. To extract the raster values at the point locations, use <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -610,23 +607,12 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                         geometry  id     1     2     3
-0      water  POINT (741522.314 -2811204.698)   0  7966  7326  6254
-1       crop  POINT (736140.845 -2806478.364)   1  8030  7490  8080
-2       tree  POINT (745919.508 -2805168.579)   2  7561  6874  6106
-3  developed  POINT (739056.735 -2811710.662)   3  8302  8202  8111
-4      water  POINT (737802.183 -2818016.412)   4  8277  7982  7341
-5       tree  POINT (759209.443 -2828566.230)   5  7398  6711  6007
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The line <strong>df = src.gw.extract(l8_224078_20200518_points)</strong> could also have been written as <strong>df = gw.extract(src, l8_224078_20200518_points)</strong>.</p>
+<p>The line <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">src.gw.extract(l8_224078_20200518_points)</span></code> could also have been written as <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">gw.extract(src,</span> <span class="pre">l8_224078_20200518_points)</span></code>.</p>
 </div>
-<p>In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code> function would have transformed the CRS on-the-fly.</p>
+<p>In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code> function transforms the CRS on-the-fly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -647,23 +633,6 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epsg:32621
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epsg:4326
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                         geometry  id     1     2     3
-0      water  POINT (741522.314 -2811204.698)   0  7966  7326  6254
-1       crop  POINT (736140.845 -2806478.364)   1  8030  7490  8080
-2       tree  POINT (745919.508 -2805168.579)   2  7561  6874  6106
-3  developed  POINT (739056.735 -2811710.662)   3  8302  8202  8111
-4      water  POINT (737802.183 -2818016.412)   4  8277  7982  7341
-5       tree  POINT (759209.443 -2828566.230)   5  7398  6711  6007
-</pre></div>
-</div>
-</div>
 </div>
 <p>Set the data band names using <code class="docutils literal notranslate"><span class="pre">sensor</span> <span class="pre">=</span> <span class="pre">'bgr'</span></code>, which assigns the band names blue, green, red.</p>
 <div class="cell docutils container">
@@ -680,21 +649,11 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                         geometry  id  blue  green   red
-0      water  POINT (741522.314 -2811204.698)   0  7966   7326  6254
-1       crop  POINT (736140.845 -2806478.364)   1  8030   7490  8080
-2       tree  POINT (745919.508 -2805168.579)   2  7561   6874  6106
-3  developed  POINT (739056.735 -2811710.662)   3  8302   8202  8111
-4      water  POINT (737802.183 -2818016.412)   4  8277   7982  7341
-5       tree  POINT (759209.443 -2828566.230)   5  7398   6711  6007
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="extracting-time-series-images-by-point-geometry">
 <h2>Extracting time series images by point geometry<a class="headerlink" href="#extracting-time-series-images-by-point-geometry" title="Permalink to this headline">¶</a></h2>
+<p>We can also easily extract a time series of raster images. Extracted pixel values are provided in ‘wide’ format with appropriate labels, for instance the column ‘t2_blue’ would be the blue band for the second time period</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_points</span>
@@ -708,25 +667,6 @@ Attributes:
         <span class="n">df</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">l8_224078_20200518_points</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                         geometry  id  t1_blue  t1_green  t1_red  \
-0      water  POINT (741522.314 -2811204.698)   0     7966      7326    6254   
-1       crop  POINT (736140.845 -2806478.364)   1     8030      7490    8080   
-2       tree  POINT (745919.508 -2805168.579)   2     7561      6874    6106   
-3  developed  POINT (739056.735 -2811710.662)   3     8302      8202    8111   
-4      water  POINT (737802.183 -2818016.412)   4     8277      7982    7341   
-5       tree  POINT (759209.443 -2828566.230)   5     7398      6711    6007   
-
-   t2_blue  t2_green  t2_red  
-0     7966      7326    6254  
-1     8030      7490    8080  
-2     7561      6874    6106  
-3     8302      8202    8111  
-4     8277      7982    7341  
-5     7398      6711    6007  
 </pre></div>
 </div>
 </div>
@@ -748,37 +688,6 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     id  point                         geometry       name   blue  green  \
-0     0      0  POINT (737535.000 -2795205.000)      water   8017   7435   
-1     0      1  POINT (737565.000 -2795205.000)      water   8016   7439   
-2     0      2  POINT (737595.000 -2795205.000)      water   8012   7442   
-3     0      3  POINT (737625.000 -2795205.000)      water   7997   7422   
-4     0      4  POINT (737655.000 -2795205.000)      water   7997   7405   
-..   ..    ...                              ...        ...    ...    ...   
-667   3    667  POINT (739005.000 -2811795.000)  developed   9014   8236   
-668   3    668  POINT (739035.000 -2811795.000)  developed   8567   8564   
-669   3    669  POINT (739065.000 -2811795.000)  developed   8099   7676   
-670   3    670  POINT (739095.000 -2811795.000)  developed  10151   9651   
-671   3    671  POINT (739125.000 -2811795.000)  developed   8065   7735   
-
-       red  
-0     6283  
-1     6294  
-2     6295  
-3     6284  
-4     6266  
-..     ...  
-667   8325  
-668   8447  
-669   7332  
-670  10153  
-671   7501  
-
-[672 rows x 7 columns]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="calculate-mean-pixel-value-by-polygon">
 <h3>Calculate mean pixel value by polygon<a class="headerlink" href="#calculate-mean-pixel-value-by-polygon" title="Permalink to this headline">¶</a></h3>
@@ -794,16 +703,6 @@ Attributes:
         <span class="c1"># use pandas groupby to calc pixel mean  </span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    point         blue        green          red
-id                                              
-0   103.5  7990.052885  7388.432692  6264.807692
-1   304.0  7692.481865  7037.419689  7571.207254
-2   497.0  7506.901554  6838.704663  6091.932642
-3   632.5  8668.423077  8294.717949  8312.192308
 </pre></div>
 </div>
 </div>
@@ -837,7 +736,7 @@ id
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="f_rs_band_math.html" title="previous page">Band Math</a>
+    <a class='left-prev' id="prev-link" href="f_rs_band_math.html" title="previous page">Band Math &amp; Vegetation Indices</a>
 
         </div>
         
@@ -869,21 +768,19 @@ id
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+  
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-192844775-1', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
 
-
-    
-    <!-- Google Analytics -->
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-192844775-1', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
-    
   </body>
 </html>

@@ -1,51 +1,39 @@
 Traceback (most recent call last):
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
     record_timing=False,
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/asyncio/base_events.py", line 473, in run_until_complete
     return future.result()
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/client.py", line 554, in async_execute
     cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/client.py", line 857, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+  File "/Users/Stevington/anaconda/envs/ThesisOSMNX3-6/lib/python3.6/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import geowombat as gw
+from geowombat.data import l8_224078_20200518
+import matplotlib.pyplot as plt
 
-with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
-
-    # Xarray drops attributes
-    attrs = src.attrs.copy()
-
-    # Apply operations on the DataArray
-    src = src * 10.0
-
-    src.attrs = attrs
-
-    # Write the data to a GeoTiff
-    src.gw.to_raster('output.tif',
-                        verbose=1,
-                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
-                        n_threads=2,    # number of thread workers sent to ``dask.compute``
-                        n_chunks=200)   # number of window chunks to send as concurrent futures
+with gw.open(l8_224078_20200518) as src:
+    print(src)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-9-b40ddd073fb5>[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0;32mimport[0m [0mgeowombat[0m [0;32mas[0m [0mgw[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;34m[0m[0m
-[0;32m----> 3[0;31m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224077_20200518_B4[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m1024[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      4[0m [0;34m[0m[0m
-[1;32m      5[0m     [0;31m# Xarray drops attributes[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-1-cfe63dbcd86e>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mimport[0m [0mgeowombat[0m [0;32mas[0m [0mgw[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;32mfrom[0m [0mgeowombat[0m[0;34m.[0m[0mdata[0m [0;32mimport[0m [0ml8_224078_20200518[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224078_20200518[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mNameError[0m: name 'l8_224077_20200518_B4' is not defined
-NameError: name 'l8_224077_20200518_B4' is not defined
+[0;31mModuleNotFoundError[0m: No module named 'geowombat'
+ModuleNotFoundError: No module named 'geowombat'
 

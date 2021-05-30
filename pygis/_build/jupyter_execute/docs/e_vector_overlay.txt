@@ -1,0 +1,188 @@
+# Import modules
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+# Load data
+
+# County boundaries
+# Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640
+counties = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp")
+
+# Watershed boundaries
+# Source: https://gis.data.ca.gov/datasets/CDFW::epa-surf-your-watershed-ds732?geometry=-128.711%2C36.474%2C-115.835%2C39.504
+# Modified by author so that only the watersheds with centroids in the Bay Area counties were kept
+watersheds = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_watersheds/sf_bay_watersheds.shp")
+
+# Well locations
+# Source: https://gis.data.ca.gov/datasets/3a3e681b894644a9a95f9815aeeeb57f_0?geometry=-123.143%2C36.405%2C-119.230%2C37.175
+# Modified by author so that only the well locations within the counties and the surrounding 50 km were kept
+wells = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_wells_50km/sf_bay_wells_50km.shp")
+
+# Reproject data to NAD83(HARN) / California Zone 3
+# https://spatialreference.org/ref/epsg/2768/
+proj = 2768
+counties = counties.to_crs(proj)
+watersheds = watersheds.to_crs(proj)
+wells = wells.to_crs(proj)
+
+def display_table(table_name, attribute_table):
+    '''Display the first and last five rows of attribute table.'''
+
+    # Print title
+    print("Attribute Table: {}".format(table_name))
+
+    # Print number of rows and columns
+    print("\nTable shape (rows, columns): {}".format(attribute_table.shape))
+
+    # Display first five rows of attribute table
+    print("\nFirst five rows:")
+    display(attribute_table.head())
+
+    # Display last five rows of attribute table
+    print("\nLast five rows:")
+    display(attribute_table.tail())
+
+
+def plot_overlay(overlay_type, overlay_result):
+    '''Plot the overlay result on a map and add the outlines of the original shapefiles on top.'''
+
+    # Create subplots
+    fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+    # Plot overlay data
+    overlay_result.plot(ax = ax, cmap = 'Set2', edgecolor = 'black')
+
+    # Plot outlines of original shapefiles
+    counties.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
+    watersheds.plot(ax = ax, color = 'none', edgecolor = 'dodgerblue')
+
+    # Stylize plots
+    plt.style.use('bmh')
+
+    # Set title
+    ax.set_title('San Francisco Bay Area County and Watershed Boundaries\n{}'.format(overlay_type), fontdict = {'fontsize': '15', 'fontweight' : '3'})
+
+
+def plot_merge(merge_type, merge_result, merge_vector):
+    '''Plot the merge result on a map.'''
+
+    # Create subplots
+    fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+    # Plot data depending on vector type
+    # For points
+    if merge_vector == "point":
+
+        # Plot data
+        counties.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
+        merge_result.plot(ax = ax, marker = 'o', color = 'dodgerblue', markersize = 3)
+
+    # For polygons
+    else:
+
+        # Plot data
+        merge_result.plot(ax = ax, cmap = 'Set2', edgecolor = 'black')
+
+    # Stylize plots
+    plt.style.use('bmh')
+
+    # Set title
+    ax.set_title('San Francisco Bay Area County Boundaries and Well Locations\n{}'.format(merge_type), fontdict = {'fontsize': '15', 'fontweight' : '3'})
+
+# Create subplots
+fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+# Plot data
+counties.plot(ax = ax, color = 'bisque', edgecolor = 'dimgray', alpha = 0.75)
+watersheds.plot(ax = ax, color = 'lightskyblue', edgecolor = 'dodgerblue', alpha = 0.55)
+
+# Stylize plots
+plt.style.use('bmh')
+
+# Set title
+ax.set_title('San Francisco Bay Area County and Watershed Boundaries', fontdict = {'fontsize': '15', 'fontweight' : '3'})
+
+# Print attribute table
+display(counties)
+
+# Print attribute table
+display(watersheds)
+
+# Get union
+union_result = gpd.overlay(counties, watersheds, how = 'union')
+
+# Print head and tail of attribute table
+display_table(table_name = "Union", attribute_table = union_result)
+
+# Plot overlay
+plot_overlay(overlay_type = "Union", overlay_result = union_result)
+
+# Get intersection
+intersection_result = gpd.overlay(counties, watersheds, how = 'intersection')
+
+# Print head and tail of attribute table
+display_table(table_name = "Intersection", attribute_table = intersection_result)
+
+# Plot overlay
+plot_overlay(overlay_type = "Intersection", overlay_result = intersection_result)
+
+# Get identity
+identity_result = gpd.overlay(counties, watersheds, how = 'identity')
+
+# Print head and tail of attribute table
+display_table(table_name = "Identity", attribute_table = identity_result)
+
+# Plot overlay
+plot_overlay(overlay_type = "Identity", overlay_result = identity_result)
+
+# Get difference
+difference_result = gpd.overlay(counties, watersheds, how = 'difference')
+
+# Print head and tail of attribute table
+display_table(table_name = "Difference", attribute_table = difference_result)
+
+# Plot overlay
+plot_overlay(overlay_type = "Difference", overlay_result = difference_result)
+
+# Print head and tail of attribute table
+display_table(table_name = "San Francisco Bay Area and Surrounding Area Wells", attribute_table = wells)
+
+# Create subplots
+fig, ax = plt.subplots(1, 1, figsize = (10, 10))
+
+# Plot data
+counties.plot(ax = ax, color = 'bisque', edgecolor = 'dimgray')
+wells.plot(ax = ax, marker = 'o', color = 'dodgerblue', markersize = 3)
+
+# Stylize plots
+plt.style.use('bmh')
+
+# Set title
+ax.set_title('San Francisco Bay Area County Boundaries and Well Locations', fontdict = {'fontsize': '15', 'fontweight' : '3'})
+
+# Get inner join
+left_join_result = gpd.sjoin(wells, counties, how = "left", op = 'within')
+
+# Print head and tail of attribute table
+display_table(table_name = "Left Join", attribute_table = left_join_result)
+
+# Plot merge
+plot_merge(merge_type = "Left Join", merge_result = left_join_result, merge_vector = "point")
+
+# Get inner join
+right_join_result = gpd.sjoin(wells, counties, how = "right", op = 'within')
+
+# Print head and tail of attribute table
+display_table(table_name = "Right Join", attribute_table = right_join_result)
+
+# Plot merge
+plot_merge(merge_type = "Right Join", merge_result = right_join_result, merge_vector = "polygon")
+
+# Get inner join
+inner_join_result = gpd.sjoin(wells, counties, how = "inner", op = 'within')
+
+# Print head and tail of attribute table
+display_table(table_name = "Inner Join", attribute_table = inner_join_result)
+
+# Plot merge
+plot_merge(merge_type = "Inner Join", merge_result = inner_join_result, merge_vector = "point")
