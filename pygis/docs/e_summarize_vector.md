@@ -27,6 +27,8 @@ html_meta:
 * [Creating Geospatial Vector Data](e_new_vectors.md)
 ```
 
+----------------
+
 # Summary Operations to Depict Concentrations
 
 Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.
@@ -512,7 +514,7 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
 # Export raster
 export_kde_raster(Z = Z_sp, XX = XX_sp, YY = YY_sp,
                   min_x = min_x_sp, max_x = max_x_sp, min_y = min_y_sp, max_y = max_y_sp,
-                  proj = proj, filename = "bay-area-wells_kde_scipy.tif")
+                  proj = proj, filename = "../_static/e_vector_shapefiles/outputs/bay-area-wells_kde_scipy.tif")
 ```
 
 ### Method 3 - Display and export with `scikit-learn`
@@ -567,7 +569,7 @@ plt.show()
 # Export raster
 export_kde_raster(Z = Z_sk, XX = XX_sk, YY = YY_sk,
                   min_x = min_x_sk, max_x = max_x_sk, min_y = min_y_sk, max_y = max_y_sk,
-                  proj = proj_wgs, filename = "bay-area-wells_kde_sklearn.tif")
+                  proj = proj_wgs, filename = "../_static/e_vector_shapefiles/outputs/bay-area-wells_kde_sklearn.tif")
 ```
 
 There are a few other ways to compute KDE in Python. This [article](https://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/) reviews and compares all these implementations.
