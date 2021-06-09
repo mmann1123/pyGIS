@@ -43,6 +43,9 @@
       sections:
       - file: docs/e_attributes
       - file: docs/e_new_vectors
+      - file: docs/e_vector_overlay
+      - file: docs/e_extraction
+      - file: docs/e_summarize_vector
       - file: docs/e_vector_merge_dissolve
     - file: docs/e_raster_op_intro
       sections:
