@@ -73,7 +73,7 @@ with gw.config.update(ref_bounds=bounds, ref_tar=rgbn):
 
 ## Extracting data by coordinates
  
-To extract values at a coordinate pair, translate the coordinates into array indices.
+To extract values at a coordinate pair, translate the coordinates into array indices. For extraction by geometry, for instance with a shapefile, see [extract by point geometry](f_rs_extraction_point).
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
@@ -84,6 +84,7 @@ y, x = -2823031.15, 761592.60
 with gw.open(l8_224078_20200518) as src:
     # Transform the map coordinates to data indices
     j, i = gw.coords_to_indices(x, y, src)
+    # Subset by index
     data = src[:, i, j].data.compute()
 
 print(data.flatten())
@@ -105,9 +106,10 @@ with gw.open(l8_224078_20200518) as src:
 
 print(data.flatten())
 
-## Extracting data with point geometry
+(f_rs_extraction_point)=
+## Extracting data with point geometry 
 
-In the example below, 'l8_224078_20200518_points' is a [GeoPackage](https://www.geopackage.org/) of point locations, and the output `df` is a [GeoPandas GeoDataFrame](https://geopandas.org/reference/geopandas.GeoDataFrame.html). To extract the raster values at the point locations, use `geowombat.extract`.
+In the example below, 'l8_224078_20200518_points' is a [GeoPackage](https://www.geopackage.org/) of point locations, and the output `df` is a [GeoPandas GeoDataFrame](https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html?highlight=geodataframe#geopandas.GeoDataFrame). To extract the raster values at the point locations, use `geowombat.extract`.
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_points
@@ -119,10 +121,10 @@ print(df)
 
 ```{note} 
 
-The line **df = src.gw.extract(l8_224078_20200518_points)** could also have been written as **df = gw.extract(src, l8_224078_20200518_points)**.
+The line `df = src.gw.extract(l8_224078_20200518_points)` could also have been written as `df = gw.extract(src, l8_224078_20200518_points)`.
 ```
 
-In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the `geowombat.extract` function would have transformed the CRS on-the-fly.
+In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the `geowombat.extract` function transforms the CRS on-the-fly.
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_points
@@ -153,6 +155,7 @@ with gw.config.update(sensor='bgr'):
 print(df)
 
 ## Extracting time series images by point geometry
+We can also easily extract a time series of raster images. Extracted pixel values are provided in 'wide' format with appropriate labels, for instance the column 't2_blue' would be the blue band for the second time period
 
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_points
 
@@ -180,7 +183,7 @@ with gw.config.update(sensor='bgr'):
     print(df)
 
 ### Calculate mean pixel value by polygon
-It is simple then to calculate the mean value of pixels within each polygon by using the polygon `id` column and pandas groupby function.
+It is simple then to calculate the mean value of pixels within each polygon by using the polygon `id` column and pandas groupby function. You can easily calculate other statistics like min, max, median etc.
 
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
 

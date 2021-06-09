@@ -8,10 +8,10 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": "Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks."
-  "description lang=fr": "Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques"
-  "description lang=es": "Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo."
-  "keywords": "geospatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel"
+  "description lang=en": "Learn how extract pixel values from raster data like sentinel imagery, additionally extract by row and column index, extract by bound window, extract by coordinate, extract by polygon."
+  "description lang=fr": "Découvrez comment extraire des valeurs de pixels à partir de données raster telles que l'imagerie sentinelle, extraire en outre par index de ligne et de colonne, extraire par fenêtre liée, extraire par coordonnées, extraire par polygone."
+  "description lang=es": "Aprenda a extraer valores de píxeles de datos ráster como imágenes centinela, extraer adicionalmente por índice de fila y columna, extraer por ventana vinculada, extraer por coordenada, extraer por polígono."
+  "keywords": "geospatial,raster, extract by point, extract by polygon, extract by bounds, remote sensing"
   "property=og:locale": "en_US"
 ---
 
@@ -213,7 +213,7 @@ with gw.config.update(sensor='bgr'):
 ```
 
 ### Calculate mean pixel value by polygon
-It is simple then to calculate the mean value of pixels within each polygon by using the polygon `id` column and pandas groupby function. 
+It is simple then to calculate the mean value of pixels within each polygon by using the polygon `id` column and pandas groupby function. You can easily calculate other statistics like min, max, median etc. 
 
 ```{code-cell} ipython3
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
