@@ -446,10 +446,7 @@ x_sp = wells["geometry"].x
 y_sp = wells["geometry"].y
 
 # Get minimum and maximum coordinate values of well points
-min_x_sp = x_sp.min()
-max_x_sp = x_sp.max()
-min_y_sp = y_sp.min()
-max_y_sp = y_sp.max()
+min_x_sp, min_y_sp, max_x_sp, max_y_sp = wells.total_bounds
 
 # Create a 100 by 100 cell mesh grid
 # Horizontal and vertical cell count should be the same
@@ -529,10 +526,7 @@ x_sk = wells_wgs["geometry"].x
 y_sk = wells_wgs["geometry"].y
 
 # Get minimum and maximum coordinate values of well points
-min_x_sk = x_sk.min()
-max_x_sk = x_sk.max()
-min_y_sk = y_sk.min()
-max_y_sk = y_sk.max()
+min_x_sk, min_y_sk, max_x_sk, max_y_sk = wells_wgs.total_bounds
 
 # Create a 100 by 100 cell mesh grid
 # Horizontal and vertical cell count should be the same
