@@ -3,14 +3,12 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.10.3
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location."
-  "keywords": "geospatial, attribute data, subset, extract, selection, vector, shapefile"
-  "property=og:locale": "en_US"
 ---
 
 ----------------
@@ -31,7 +29,7 @@ html_meta:
 
 Subsetting and extracting data is useful when we want to select or analyze a portion of the dataset based on a feature's location, attribute, or its spatial relationship to another dataset.
 
-In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select by attribute, and select by location.
+In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select location by attribute, and select by location.
 
 ## Setup
 
@@ -97,13 +95,13 @@ def display_table(table_name, attribute_table):
     # Print number of rows and columns
     print("\nTable shape (rows, columns): {}".format(attribute_table.shape))
 
-    # Display first five rows of attribute table
-    print("\nFirst five rows:")
-    display(attribute_table.head())
+    # Display first two rows of attribute table
+    print("\nFirst two rows:")
+    display(attribute_table.head(2))
 
-    # Display last five rows of attribute table
-    print("\nLast five rows:")
-    display(attribute_table.tail())
+    # Display last two rows of attribute table
+    print("\nLast two rows:")
+    display(attribute_table.tail(2))
 
 
 def plot_df(result_name, result_df, result_geom_type, area = None):
@@ -165,9 +163,9 @@ plt.style.use('bmh')
 ax.set_title('San Francisco Bay Area', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 ```
 
-## Clip
+## Clip Spatial Polygons
 
-Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  `clip()` in `geopandas`, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. All attributes for the resulting clipped vector will be kept.
+Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  `clip()` in `geopandas`, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. *All attributes for the resulting clipped vector will be kept.*
 
 ```{note}
 This function is only available in the more recent versions of `geopandas`.
@@ -201,9 +199,9 @@ display(clip_wells)
 plot_df(result_name = "San Francisco Bay Area Wells\nClip", result_df = clip_wells, result_geom_type = "point", area = poly)
 ```
 
-## Select by Attribute
+## Select Location by Attributes
 
-Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. `geopandas` uses the indexing and selection methods in `pandas`, so data in a GeoDataFrame can be selected and queried in the same way a `pandas` dataframe can.
+Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. `geopandas` uses the indexing and selection methods  in `pandas`, so data in a GeoDataFrame can be selected and queried in the same way a `pandas` dataframe can.
 
 Sources: [Indexing and Selecting Data, GeoPandas](https://geopandas.org/docs/user_guide/indexing.html); [Indexing and selecting data, pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html); [How do I select a subset of a DataFrame?, pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html)
 
@@ -211,7 +209,7 @@ We will use use different criteria to subset the wells dataset.
 
 ```{code-cell} ipython3
 # Display attribute table
-display(wells)
+display(wells.head(2))
 ```
 
 The criteria can use a variety of operators, including comparison and logical operators.
@@ -220,7 +218,7 @@ The criteria can use a variety of operators, including comparison and logical op
 # Select wells that are public supply
 wells_subset_1 = wells[(wells["WELL_USE"] == "Public Supply")]
 
-# Display first five and last five rows of attribute table
+# Display first two and last two rows of attribute table
 display_table(table_name = "San Francisco Bay Area Wells - Public Supply", attribute_table = wells_subset_1)
 ```
 
@@ -228,7 +226,7 @@ display_table(table_name = "San Francisco Bay Area Wells - Public Supply", attri
 # Select wells that are public supply and have a depth greater than 50 ft
 wells_subset_2 = wells[(wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)]
 
-# Display first five and last five rows of attribute table
+# Display first two and last two rows of attribute table
 display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft", attribute_table = wells_subset_2)
 ```
 
@@ -236,18 +234,24 @@ display_table(table_name = "San Francisco Bay Area Wells - Public Supply with De
 # Select wells that are public supply and have a depth greater than 50 ft OR are residential
 wells_subset_3 = wells[((wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)) | (wells["WELL_USE"] == "Residential")]
 
-# Display first five and last five rows of attribute table
+# Display first two and last two rows of attribute table
 display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential", attribute_table = wells_subset_3)
 ```
 
 ## Select by Location
 
-Selecting by location selects features based on its relative spatial relationship with another dataset.
+Selecting by location selects features based on its relative spatial relationship with another dataset. In other words, features are selected based on their location relative to the location of another dataset.
+
+For example:
+* to know how many wells there are in Santa Clara County, we could select all the wells that fall within Santa Clara County boundaries (which we do in one of the examples below)
+* to know what rivers flow through Santa Clara County, we could select all the river polylines that intersect with Santa Clara County boundaries
+
+For more information on selecting by location and spatial relationships, check out this [ArcGIS documentation](https://desktop.arcgis.com/en/arcmap/10.3/map/working-with-layers/using-select-by-location.htm).
 
 There are multiple spatial relationships available in `geopandas`.
 
 | Spatial Relationship | Function(s) |
-| :------------ | ---------------------------------------: |
+| ------------ | --------------------------------------- |
 | contains | `contains()` |
 | covers | `covers()` |
 | covered by | `covered_by()` |
@@ -261,90 +265,45 @@ There are multiple spatial relationships available in `geopandas`.
 
 Source: [GeoSeries - Binary Predicates, GeoPandas](https://geopandas.org/docs/reference/geoseries.html#binary-predicates)
 
+```{note}
 The functions for these spatial relationships will generally output a `pandas` series with Boolean values (`True` or `False`) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (only the rows that have a `True` output will be retained).
+```
 
 These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.
 
 ```{code-cell} ipython3
 # Select wells that fall within Shapely rectangle
-wells_location_subset_1 = wells[wells.within(poly_shapely)]
+wells_within_rect_shapely = wells[wells.within(poly_shapely)]
 
-# Display first five and last five rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", attribute_table = wells_location_subset_1)
+# Display first two and last two rows of attribute table
+display_table(table_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", attribute_table = wells_within_rect_shapely)
 
 # Plot selection
-plot_df(result_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", result_df = wells_location_subset_1, result_geom_type = "point", area = poly)
+plot_df(result_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", result_df = wells_within_rect_shapely, result_geom_type = "point", area = poly)
 ```
 
 If we're trying to select features that have a specified spatial relationship with another `geopandas` object, it gets a little tricky. This is because the `geopandas` spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on.
 
 As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets--or else we'll get a warning and the output will be empty.
 
-Not easy if we want to check a bunch of features against one extent (with one geometry)... Fortunately, there are two workarounds that get the same result.
+Because each record in a GeoDataFrame has a geometry column that stores that record's geometry as a `shapely` object, we can call this object if we want to check a bunch of features against one extent (with one geometry).
 
-Source: [geopandas.GeoSeries.within, GeoPandas](https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html)
-
-### Workaround 1 - Manipulate extent GeoDataFrame
-
-The first workaround copies the extent GeoDataFrame multiple times so that the number of rows (all with the exact same geometry) matches the number of rows in the GeoDataFrame in which we're selecting features.
+Sources: [geopandas.GeoSeries.within, GeoPandas](https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html); [Data Structures, GeoPandas](https://geopandas.org/docs/user_guide/data_structures.html)
 
 ```{code-cell} ipython3
 # Select the Santa Clara County boundary
 sc_county = counties[counties["coname"] == "Santa Clara County"]
 
-# Multiply the boundary dataset by the number of rows in the wells dataset, and concatenate all the boundary datasets together into one dataframe
-sc_county_replicate_df = pd.concat([sc_county] * wells.shape[0], ignore_index = True)
+# Subset the GeoDataFrame by checking which wells are within Santa Clara County's shapely object
+wells_within_sc_shapely = wells[wells.within(sc_county.geometry.values[0])]
 
-# Create a GeoDataFrame from the county dataframe
-sc_county_replicate_gdf = gpd.GeoDataFrame(sc_county_replicate_df)
-
-# Subset the GeoDataFrame by checking which wells are within Santa Clara County
-wells_location_subset_2 = wells[wells.within(sc_county_replicate_gdf)]
-
-# Display first five and last five rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells within Santa Clara County", attribute_table = wells_location_subset_2)
+# Display first two and last two rows of attribute table
+display_table(table_name = "San Francisco Bay Area Wells within Santa Clara County", attribute_table = wells_within_sc_shapely)
 
 # Plot selection
-plot_df(result_name = "San Francisco Bay Area Wells within Santa Clara County", result_df = wells_location_subset_2, result_geom_type = "point", area = sc_county)
+plot_df(result_name = "San Francisco Bay Area Wells within Santa Clara County", result_df = wells_within_sc_shapely, result_geom_type = "point", area = sc_county)
 ```
 
-### Workaround 2 - Iterate through each feature
-
-The second workaround iterates through each row of the GeoDataFrame from which we're selecting features, comparing each row/feature one at a time with the extent GeoDataFrame.
-
-```{code-cell} ipython3
-# Create copy of Santa Clara County boundary
-sc_county_reset = sc_county.copy()
-
-# Reset index of copied dataset (to 0)
-sc_county_reset = sc_county_reset.reset_index(drop = True)
-
-# Create empty list to hold Boolean values indicating if spatial relationship is met
-criteria_met_list = []
-
-# Iterate through each feature in wells dataset
-for i in range(0, wells.shape[0]):
-
-    # Get a well point by index
-    well = wells.iloc[[i]]
-
-    # Reset index of well point (to 0) to match the index-reset Santa Clara County boundary
-    well = well.reset_index(drop = True)
-
-    # Check if well is within Santa Clara County
-    criteria_met = well.within(sc_county_reset)[0]
-
-    # If criteria is met (True), append True to list
-    if criteria_met:
-        criteria_met_list.append(True)
-
-    # Otherwise, criteria is not met (False), and append False to list
-    else:
-        criteria_met_list.append(False)
-
-# Subset data based on the list of Boolean values
-wells_location_subset_3 = wells[criteria_met_list]
-
-# Display first five and last five rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells within Santa Clara County", attribute_table = wells_location_subset_3)
+```{tip}
+If we are interested in wells that fall within two or more counties (i.e., we have multiple records that will be used for selection), we can enclose the above code in a `for` loop.
 ```
