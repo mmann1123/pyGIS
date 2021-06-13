@@ -40,8 +40,8 @@ First, let's import the necessary modules.
 
 ```{code-cell} ipython3
 # Import modules
-import matplotlib.pyplot as plt
 import geopandas as gpd
+import matplotlib.pyplot as plt
 ```
 
 To illustrate these geoprocessing tools, we will utilize shapefiles of San Francisco Bay Area county boundaries, Bay Area watershed boundaries, and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data.
@@ -179,6 +179,11 @@ display(watersheds)
 
 With `how='union'`, all data (all geometries regardless of overlap) is kept.
 
+```{figure} ../_static/img/vector_union.jpg
+:name: Union
+Union keeps all the data.
+```
+
 Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have `NaN` as values in the fields that originated from the other dataset.
 
 Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
@@ -202,6 +207,11 @@ plot_overlay(overlay_type = "Union", overlay_result = union_result)
 
 With `how='intersection'`, only the areas where all datasets contain data (have geometries) are combined together.
 
+```{figure} ../_static/img/vector_intersection.jpg
+:name: Intersection
+Intersection keeps the geometries that overlap with each other.
+```
+
 Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any `NaN` values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color).
 
 Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
@@ -220,6 +230,11 @@ plot_overlay(overlay_type = "Intersection", overlay_result = intersection_result
 ### Identity
 
 With `how='identity'`, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded.
+
+```{figure} ../_static/img/vector_identity.jpg
+:name: Identity
+Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included.
+```
 
 Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have `NaN` as values.
 
@@ -241,6 +256,11 @@ plot_overlay(overlay_type = "Identity", overlay_result = identity_result)
 ### Difference (Erase)
 
 With `how='difference'`, the areas covered by the second dataset is used to "cut out" or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept.
+
+```{figure} ../_static/img/vector_erase.jpg
+:name: Difference or Erase
+Difference (erase) removes geometries that intersect with each other.
+```
 
 Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was "combined" with the first dataset by discarding some data (altering the geometry) from the first dataset.
 
