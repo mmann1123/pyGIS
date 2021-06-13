@@ -279,6 +279,8 @@ Source: [GeoSeries - Binary Predicates, GeoPandas](https://geopandas.org/docs/re
 The functions for these spatial relationships will generally output a `pandas` series with Boolean values (`True` or `False`) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (only the rows that have a `True` output will be retained).
 ```
 
+### Method 1 - Shapely vector
+
 These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.
 
 ```{code-cell} ipython3
@@ -291,6 +293,8 @@ display_table(table_name = "San Francisco Bay Area Wells within a User-Defined R
 # Plot selection
 plot_df(result_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", result_df = wells_within_rect_shapely, result_geom_type = "point", area = poly)
 ```
+
+### Method 2 - GeoDataFrame
 
 If we're trying to select features that have a specified spatial relationship with another `geopandas` object, it gets a little tricky. This is because the `geopandas` spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on.
 
