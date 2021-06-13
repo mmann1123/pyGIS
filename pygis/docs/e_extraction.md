@@ -36,6 +36,8 @@ In this chapter, we will explore three ways that data from a GeoDataFrame can be
 First, let's import the necessary modules.
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 # Import modules
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -49,6 +51,8 @@ We will utilize shapefiles of San Francisco Bay Area county boundaries and wells
 ```
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 # Load data
 
 # County boundaries
@@ -70,7 +74,9 @@ wells = wells.to_crs(proj)
 We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use [bbox finder](http://bboxfinder.com/) to generate custom bounding boxes and obtain their coordinates.
 
 ```{code-cell} ipython3
-# Create list of coordindate pairs
+:tags: ["hide-cell"]
+
+# Create list of coordinate pairs
 coordinates = [[1790787, 736108], [1929652, 736108], [1929652, 598414], [1790787, 598414]]
 
 # Create a Shapely polygon from the coordinate-tuple list
@@ -86,6 +92,8 @@ poly = gpd.GeoDataFrame(attributes_df, geometry = 'geometry', crs = "EPSG:2768")
 We'll define some functions to make displaying and mapping our results a bit easier.
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 def display_table(table_name, attribute_table):
     '''Display the first and last five rows of attribute table.'''
 
@@ -216,26 +224,26 @@ The criteria can use a variety of operators, including comparison and logical op
 
 ```{code-cell} ipython3
 # Select wells that are public supply
-wells_subset_1 = wells[(wells["WELL_USE"] == "Public Supply")]
+wells_public = wells[(wells["WELL_USE"] == "Public Supply")]
 
 # Display first two and last two rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells - Public Supply", attribute_table = wells_subset_1)
+display_table(table_name = "San Francisco Bay Area Wells - Public Supply", attribute_table = wells_public)
 ```
 
 ```{code-cell} ipython3
 # Select wells that are public supply and have a depth greater than 50 ft
-wells_subset_2 = wells[(wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)]
+wells_public_deep = wells[(wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)]
 
 # Display first two and last two rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft", attribute_table = wells_subset_2)
+display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft", attribute_table = wells_public_deep)
 ```
 
 ```{code-cell} ipython3
 # Select wells that are public supply and have a depth greater than 50 ft OR are residential
-wells_subset_3 = wells[((wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)) | (wells["WELL_USE"] == "Residential")]
+wells_public_deep_residential = wells[((wells["WELL_USE"] == "Public Supply") & (wells["WELL_DEPTH"] > 50)) | (wells["WELL_USE"] == "Residential")]
 
 # Display first two and last two rows of attribute table
-display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential", attribute_table = wells_subset_3)
+display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential", attribute_table = wells_public_deep_residential)
 ```
 
 ## Select by Location
@@ -294,7 +302,7 @@ Sources: [geopandas.GeoSeries.within, GeoPandas](https://geopandas.org/docs/refe
 # Select the Santa Clara County boundary
 sc_county = counties[counties["coname"] == "Santa Clara County"]
 
-# Subset the GeoDataFrame by checking which wells are within Santa Clara County's shapely object
+# Subset the GeoDataFrame by checking which wells are within Santa Clara County's Shapely object
 wells_within_sc_shapely = wells[wells.within(sc_county.geometry.values[0])]
 
 # Display first two and last two rows of attribute table
