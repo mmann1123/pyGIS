@@ -3,12 +3,14 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
+html_meta:
+  "description lang=en": "Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location."
+  "keywords": "geospatial, attribute data, subset, extract, selection, vector, shapefile"
+  "property=og:locale": "en_US"
 ---
 
 ----------------
@@ -259,7 +261,7 @@ For more information on selecting by location and spatial relationships, check o
 There are multiple spatial relationships available in `geopandas`.
 
 | Spatial Relationship | Function(s) |
-| ------------ | --------------------------------------- |
+| :------------ | ---------------------------------------: |
 | contains | `contains()` |
 | covers | `covers()` |
 | covered by | `covered_by()` |
