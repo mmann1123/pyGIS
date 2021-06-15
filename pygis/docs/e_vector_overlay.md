@@ -37,20 +37,24 @@ Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/use
 
 ## Setup
 
-First, let's import the necessary modules.
+First, let's import the necessary modules (click the + below to show code cell).
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 # Import modules
 import geopandas as gpd
 import matplotlib.pyplot as plt
 ```
 
-To illustrate these geoprocessing tools, we will utilize shapefiles of San Francisco Bay Area county boundaries, Bay Area watershed boundaries, and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data.
+To illustrate these geoprocessing tools, we will utilize shapefiles of San Francisco Bay Area county boundaries, Bay Area watershed boundaries, and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data (click the + below to show code cell).
 
 ```{important} All the data must have the same coordinate system in order for extraction to work correctly.
 ```
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 # Load data
 
 # County boundaries
@@ -75,9 +79,11 @@ watersheds = watersheds.to_crs(proj)
 wells = wells.to_crs(proj)
 ```
 
-We'll define some functions to make displaying and mapping our results a bit easier.
+We'll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).
 
 ```{code-cell} ipython3
+:tags: ["hide-cell"]
+
 def display_table(table_name, attribute_table):
     '''Display the first and last five rows of attribute table.'''
 

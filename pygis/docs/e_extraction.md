@@ -35,7 +35,7 @@ In this chapter, we will explore three ways that data from a GeoDataFrame can be
 
 ## Setup
 
-First, let's import the necessary modules.
+First, let's import the necessary modules (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -47,7 +47,7 @@ import pandas as pd
 from shapely.geometry import Polygon
 ```
 
-We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will first load in the data and reproject the data.
+We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will first load in the data and reproject the data (click the + below to show code cell).
 
 ```{important} All the data must have the same coordinate system in order for extraction to work correctly.
 ```
@@ -73,7 +73,7 @@ counties = counties.to_crs(proj)
 wells = wells.to_crs(proj)
 ```
 
-We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use [bbox finder](http://bboxfinder.com/) to generate custom bounding boxes and obtain their coordinates.
+We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use [bbox finder](http://bboxfinder.com/) to generate custom bounding boxes and obtain their coordinates (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -91,7 +91,7 @@ attributes_df = {'Attribute': ['name1'], 'geometry': poly_shapely}
 poly = gpd.GeoDataFrame(attributes_df, geometry = 'geometry', crs = "EPSG:2768")
 ```
 
-We'll define some functions to make displaying and mapping our results a bit easier.
+We'll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
