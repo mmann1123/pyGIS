@@ -13,6 +13,7 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
+
 ----------------
 
 ```{admonition} Learning Objectives
@@ -32,7 +33,7 @@ Combining two or more datasets together is a fundamental aspect of GIS. Using `g
 
 In this chapter, we will focus on vector overlays, which involve combining vector data. We'll explore five types of vector overlays and merging: union, intersection, difference (erase), identity, and spatial join.
 
-Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
+Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
 
 ## Setup
 
@@ -180,13 +181,13 @@ display(watersheds)
 With `how='union'`, all data (all geometries regardless of overlap) is kept.
 
 ```{figure} ../_static/img/vector_union.jpg
-:name: Union
-Union keeps all the data.
+:name: Union of all geometries keeps all data.
+Union keeps all the data. In the figure above, all of A and B are kept.
 ```
 
 Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have `NaN` as values in the fields that originated from the other dataset.
 
-Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
+Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
 
 ```{code-cell} ipython3
 # Get union
@@ -208,13 +209,13 @@ plot_overlay(overlay_type = "Union", overlay_result = union_result)
 With `how='intersection'`, only the areas where all datasets contain data (have geometries) are combined together.
 
 ```{figure} ../_static/img/vector_intersection.jpg
-:name: Intersection
-Intersection keeps the geometries that overlap with each other.
+:name: Intersection of geometries keeps overlapping geometries.
+Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.
 ```
 
 Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any `NaN` values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color).
 
-Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
+Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
 
 ```{code-cell} ipython3
 # Get intersection
@@ -232,8 +233,8 @@ plot_overlay(overlay_type = "Intersection", overlay_result = intersection_result
 With `how='identity'`, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded.
 
 ```{figure} ../_static/img/vector_identity.jpg
-:name: Identity
-Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included.
+:name: Identity of the geometries keeps the geometries covered by the first dataset or both datasets.
+Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.
 ```
 
 Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have `NaN` as values.
@@ -258,15 +259,15 @@ plot_overlay(overlay_type = "Identity", overlay_result = identity_result)
 With `how='difference'`, the areas covered by the second dataset is used to "cut out" or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept.
 
 ```{figure} ../_static/img/vector_erase.jpg
-:name: Difference or Erase
-Difference (erase) removes geometries that intersect with each other.
+:name: Difference or Erase removes the geometries of the first dataset from the second dataset.
+Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.
 ```
 
 Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was "combined" with the first dataset by discarding some data (altering the geometry) from the first dataset.
 
 Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).
 
-Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bostad
+Sources: [Set-Operations with Overlay, GeoPandas](https://geopandas.org/docs/user_guide/set_operations.html); GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
 
 ```{code-cell} ipython3
 # Get difference
@@ -300,6 +301,10 @@ The following spatial relationships are available in `geopandas`.
 
 ```{note}
 Note that these define the relationships from the first dataset to the second dataset (for example, `contains` specifies that a feature from the first dataset must contain a feature from the second dataset for a join to occur).
+```
+
+```{warning}
+Depending on the argument specified in the `op` parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, `op = "intersects"` will count that point twice and allocate it to both geometries that share the boundary, whereas `op = "within"` will not count the point at all.
 ```
 
 Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the `how` parameter.
