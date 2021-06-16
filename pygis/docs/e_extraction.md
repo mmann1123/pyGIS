@@ -260,23 +260,23 @@ For more information on selecting by location and spatial relationships, check o
 
 There are multiple spatial relationships available in `geopandas`.
 
-| Spatial Relationship | Function(s) |
-| :------------ | ---------------------------------------: |
-| contains | `contains()` |
-| covers | `covers()` |
-| covered by | `covered_by()` |
-| crosses | `crosses()` |
-| disjoint | `disjoint()` |
-| equal geometry | `geom_equals()`, `geom_almost_equals()`, `geom_equals_exact()` |
-| intersects | `intersects()` |
-| overlaps | `overlaps()` |
-| touches | `touches()` |
-| within | `within()` |
+| Spatial Relationship | Function(s) | Description |
+| :------------ | ------------------ | ----------------------------------: |
+| contains | `contains()` | geometry encompasses the other geometry’s boundary and interior without any boundaries touching |
+| covers | `covers()` | all of the geometry's points are to the exterior of the other geometry's points |
+| covered by | `covered_by()` | all of the geometry's points are to the interior of the other geometry's points |
+| crosses | `crosses()` | geometry's interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry |
+| disjoint | `disjoint()` | geometry's boundary and interior do not intersect the boundary and interior of the other geometry |
+| equal geometry | `geom_equals()`, `geom_almost_equals()`, `geom_equals_exact()` | geometry's boundary, interior, and exterior matches (within a range) those of the other |
+| intersects | `intersects()` | geometry's boundary or interior touches or crosses any part of the other geometry |
+| overlaps | `overlaps()` | geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions |
+| touches | `touches()` | geometry shares at least one point with the other geometry, provided that no part of the geometry's interior intersects with the other geometry |
+| within | `within()` | geometry is enclosed in the other geometry (geometry's boundary and interior intersects with the other geometry's interior only) |
 
 Source: [GeoSeries - Binary Predicates, GeoPandas](https://geopandas.org/docs/reference/geoseries.html#binary-predicates)
 
 ```{note}
-The functions for these spatial relationships will generally output a `pandas` series with Boolean values (`True` or `False`) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (only the rows that have a `True` output will be retained).
+The functions for these spatial relationships will generally output a `pandas` series with Boolean values (`True` or `False`) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a `True` output will be retained).
 ```
 
 ### Method 1 - Shapely vector
