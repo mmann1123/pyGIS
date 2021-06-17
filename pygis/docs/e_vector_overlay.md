@@ -85,7 +85,7 @@ We'll define some functions to make displaying and mapping our results a bit eas
 :tags: ["hide-cell"]
 
 def display_table(table_name, attribute_table):
-    '''Display the first and last five rows of attribute table.'''
+    '''Display the first and last two rows of attribute table.'''
 
     # Print title
     print("Attribute Table: {}".format(table_name))
@@ -93,13 +93,13 @@ def display_table(table_name, attribute_table):
     # Print number of rows and columns
     print("\nTable shape (rows, columns): {}".format(attribute_table.shape))
 
-    # Display first five rows of attribute table
-    print("\nFirst five rows:")
-    display(attribute_table.head())
+    # Display first two rows of attribute table
+    print("\nFirst two rows:")
+    display(attribute_table.head(2))
 
-    # Display last five rows of attribute table
-    print("\nLast five rows:")
-    display(attribute_table.tail())
+    # Display last two rows of attribute table
+    print("\nLast two rows:")
+    display(attribute_table.tail(2))
 
 
 def plot_overlay(overlay_type, overlay_result):
@@ -296,21 +296,23 @@ In `geopandas`, we use the `sjoin()` function. In addition to passing the datase
 
 The `op` parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another.
 
-The following spatial relationships are available in `geopandas`.
+The following spatial relationships are available in `geopandas`:
 
-* `intersects`
-* `contains`
-* `within`
-* `touches`
-* `crosses`
-* `overlaps`
+| Spatial Relationship | Description |
+| :------------ | ----------------------------------: |
+| `contains` | geometry's points are not to the exterior of the other geometry, provided that the geometry's interior contains at least one point of the other geometry's interior |
+| `crosses` | geometry's interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry |
+| `intersects` | geometry's boundary or interior touches or crosses any part of the other geometry |
+| `overlaps` | geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions |
+| `touches` | geometry shares at least one point with the other geometry, provided that no part of the geometry's interior intersects with the other geometry |
+| `within` | geometry is enclosed in the other geometry (geometry's boundary and interior intersects with the other geometry's interior only) |
 
 ```{note}
-Note that these define the relationships from the first dataset to the second dataset (for example, `contains` specifies that a feature from the first dataset must contain a feature from the second dataset for a join to occur).
+These relationships are defined from the first dataset to the second dataset (for example, `contains` specifies that a feature from the first dataset must contain a feature from the second dataset for a join to occur).
 ```
 
 ```{warning}
-Depending on the argument specified in the `op` parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, `op = "intersects"` will count that point twice and allocate it to both geometries that share the boundary, whereas `op = "within"` will not count the point at all.
+Depending on the argument specified in the `op` parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, `op = "intersects"` will count that point twice and allocate (join) it to both geometries that share the boundary, whereas `op = "within"` will not count or allocate the point at all.
 ```
 
 Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the `how` parameter.
