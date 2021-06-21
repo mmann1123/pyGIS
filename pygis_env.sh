@@ -18,6 +18,7 @@ dependencies:
 - libspatialindex
 - gdal
 - census
+- geoplot
 - pip
 - pip:
   - pip-tools
@@ -30,7 +31,6 @@ dependencies:
   - geopandas
   - contextily
   - us
-  - geoplot
   '> pygisbookgw.yml
 
 conda env create -f pygisbookgw.yml  

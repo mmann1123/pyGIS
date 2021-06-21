@@ -33,7 +33,7 @@ html_meta:
 ----------------
 
 
-# Raster Coodinate Reference Systems (CRS)
+# Raster Coordinate Reference Systems (CRS)
 
 Raster data is very different that vector data, one of the key differences is that we don't have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new geospatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.
 
@@ -77,7 +77,7 @@ $$
    \end{eqnarray}
 $$
 
-Now we can define our translation matrix using the point coordinates (`x[0]`,`y[0]`), but these need to be offset by 1/2 the resolution so that the cell is centered over the coodinate (-90,90). Notice however there are some difference between the x and y resolution:
+Now we can define our translation matrix using the point coordinates (`x[0]`,`y[0]`), but these need to be offset by 1/2 the resolution so that the cell is centered over the coordinate (-90,90). Notice however there are some difference between the x and y resolution:
 
 Both arrays have the same spatial resolution
 ```{code-cell} ipython3

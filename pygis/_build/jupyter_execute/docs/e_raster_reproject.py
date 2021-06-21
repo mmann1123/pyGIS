@@ -1,26 +1,32 @@
-(e_raster_reproject)=
+#!/usr/bin/env python
+# coding: utf-8
 
-----------------
+# (e_raster_reproject)=
+# 
+# ----------------
+# 
+# ```{admonition} Learning Objectives
+# - Reproject a raster with rasterio
+# - Reproject a raster with geowombat
+# 
+# ```
+# ```{admonition} Review
+# * [Affine transformation](d_affine.md)
+# * [Raster Coordinate Reference Systems](d_raster_crs_intro.md)
+# ```
+# ----------------
+# 
+# # Reproject Rasters
+# 
+# 
+# 
+# ## Reprojecting a Raster with Geowombat
+# Far and away the easiest way to handle raster data is by using [geowombat](https://geowombat.readthedocs.io/en/latest/index.html). Here's an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.
+# 
+# In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.
 
-```{admonition} Learning Objectives
-- Reproject a raster with rasterio
-- Reproject a raster with geowombat
+# In[1]:
 
-```
-```{admonition} Review
-* [Affine transformation](d_affine.md)
-* [Raster Coordinate Reference Systems](d_raster_crs_intro.md)
-```
-----------------
-
-# Reproject Rasters
-
-
-
-## Reprojecting a Raster with Geowombat
-Far and away the easiest way to handle raster data is by using [geowombat](https://geowombat.readthedocs.io/en/latest/index.html). Here's an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.
-
-In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.
 
 import geowombat as gw
 
@@ -38,7 +44,11 @@ with gw.config.update(ref_crs=proj4):
             overwrite=True,
         ) 
 
-Let's take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use `.sel(band=[3,2,1])` to put them back in the right order.
+
+# Let's take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use `.sel(band=[3,2,1])` to put them back in the right order.
+
+# In[2]:
+
 
 import matplotlib.pyplot as plt
 
@@ -50,18 +60,21 @@ with gw.open(image) as src:
     plt.tight_layout(pad=1)
 
 
-Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra. 
+# Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra. 
+# 
+# ## Reprojecting a Raster with Rasterio 
+# How do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster. 
+# 
+# First, remember that the transform matrix takes the following form:
+# 
+# $$
+#     \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix} 
+# $$
+# 
+# Now let's calculate the tranform matrix for the destination raster:
 
-## Reprojecting a Raster with Rasterio 
-How do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster. 
+# In[3]:
 
-First, remember that the transform matrix takes the following form:
-
-$$
-    \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix} 
-$$
-
-Now let's calculate the tranform matrix for the destination raster:
 
 import numpy as np
 import rasterio
@@ -86,9 +99,13 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
 print("Source Transform:\n",src_transform,'\n')
 print("Destination Transform:\n", dst_transform)
 
-Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x$).
 
-Ok finally!
+# Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x$).
+# 
+# Ok finally!
+
+# In[4]:
+
 
 dst_crs = "EPSG:3857"  # web mercator(ie google maps)
 
@@ -128,8 +145,9 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
                 resampling=Resampling.nearest,
             )
 
-```{figure} ../_static/d_crs/d_reproj_image.png
-:name: Reprojected Landsat Image
-:width: 400px
-Reprojected Landsat Image
-```
+
+# ```{figure} ../_static/d_crs/d_reproj_image.png
+# :name: Reprojected Landsat Image
+# :width: 400px
+# Reprojected Landsat Image
+# ```

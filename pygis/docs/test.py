@@ -1232,3 +1232,19 @@ with gw.config.update(sensor='bgr'):
         dat  = src.sel(band='red')-src.sel(band='blue')
         print(dat.values)
 # %%
+
+
+# Import modules
+import geopandas as gpd
+import geoplot as gplt
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import rasterio
+from rasterio.transform import Affine
+from scipy import stats
+from shapely.geometry import Polygon, box
+from sklearn.datasets import fetch_species_distributions
+from sklearn.neighbors import KernelDensity
+# %%

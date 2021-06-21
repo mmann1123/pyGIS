@@ -10,7 +10,7 @@
 <meta content="geospatial, raster, affine, crs, coordinate reference system, interpolation, projection" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Raster Coodinate Reference Systems (CRS) &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Raster Coordinate Reference Systems (CRS) &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -31,7 +31,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -72,8 +72,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/d_raster_crs_intro.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Raster Coodinate Reference Systems (CRS)" />
-<meta property="og:description" content="Raster Coodinate Reference Systems (CRS)  Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates" />
+<meta property="og:title"       content="Raster Coordinate Reference Systems (CRS)" />
+<meta property="og:description" content="Raster Coordinate Reference Systems (CRS)  Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinate" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -105,7 +105,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="a_intro.html">
-   PyGIS
+   PyGIS - Open Source Geospatial Programming &amp; Remote Sensing
   </a>
  </li>
 </ul>
@@ -196,7 +196,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Raster Coodinate Reference Systems (CRS)
+   Raster Coordinate Reference Systems (CRS)
   </a>
  </li>
 </ul>
@@ -219,6 +219,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="e_new_vectors.html">
      Creating Geospatial Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_overlay.html">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_extraction.html">
+     Extracting Spatial Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summarizing Point Patterns
     </a>
    </li>
    <li class="toctree-l2">
@@ -263,7 +278,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_edit.html">
-     Editing rasters
+     Editing Rasters and Remotely Sensed Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -288,7 +303,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
     </a>
    </li>
    <li class="toctree-l2">
@@ -497,8 +512,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="raster-coodinate-reference-systems-crs">
-<h1>Raster Coodinate Reference Systems (CRS)<a class="headerlink" href="#raster-coodinate-reference-systems-crs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="raster-coordinate-reference-systems-crs">
+<h1>Raster Coordinate Reference Systems (CRS)<a class="headerlink" href="#raster-coordinate-reference-systems-crs" title="Permalink to this headline">¶</a></h1>
 <p>Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new geospatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.</p>
 <div class="figure align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
@@ -537,7 +552,7 @@
      \mbox{Translate} =  \begin{bmatrix} 1 &amp; 0 &amp; \Delta x \\  0 &amp; 1 &amp; \Delta y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}  
    \end{eqnarray}
 \end{split}\]</div>
-<p>Now we can define our translation matrix using the point coordinates (<code class="docutils literal notranslate"><span class="pre">x[0]</span></code>,<code class="docutils literal notranslate"><span class="pre">y[0]</span></code>), but these need to be offset by 1/2 the resolution so that the cell is centered over the coodinate (-90,90). Notice however there are some difference between the x and y resolution:</p>
+<p>Now we can define our translation matrix using the point coordinates (<code class="docutils literal notranslate"><span class="pre">x[0]</span></code>,<code class="docutils literal notranslate"><span class="pre">y[0]</span></code>), but these need to be offset by 1/2 the resolution so that the cell is centered over the coordinate (-90,90). Notice however there are some difference between the x and y resolution:</p>
 <p>Both arrays have the same spatial resolution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
