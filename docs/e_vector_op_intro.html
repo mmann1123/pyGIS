@@ -31,7 +31,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Attributes &amp; Indexing for Vector Data" href="e_attributes.html" />
-    <link rel="prev" title="Raster Coodinate Reference Systems (CRS)" href="d_raster_crs_intro.html" />
+    <link rel="prev" title="Raster Coordinate Reference Systems (CRS)" href="d_raster_crs_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -71,7 +71,7 @@
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/e_vector_op_intro.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Vector Operations" />
-<meta property="og:description" content="Vector Operations  In this section we will learn how to:  Attributes &amp; Indexing for Vector Data  Creating Geospatial Vector Data  Merge Data &amp; Dissolve Polygons" />
+<meta property="og:description" content="Vector Operations  In this section we will learn how to:  Attributes &amp; Indexing for Vector Data  Creating Geospatial Vector Data  Vector Overlays and Joins  Ext" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -103,7 +103,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="a_intro.html">
-   PyGIS
+   PyGIS - Open Source Geospatial Programming &amp; Remote Sensing
   </a>
  </li>
 </ul>
@@ -194,7 +194,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster Coodinate Reference Systems (CRS)
+   Raster Coordinate Reference Systems (CRS)
   </a>
  </li>
 </ul>
@@ -217,6 +217,21 @@
    <li class="toctree-l2">
     <a class="reference internal" href="e_new_vectors.html">
      Creating Geospatial Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_overlay.html">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_extraction.html">
+     Extracting Spatial Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summarizing Point Patterns
     </a>
    </li>
    <li class="toctree-l2">
@@ -261,7 +276,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_edit.html">
-     Editing rasters
+     Editing Rasters and Remotely Sensed Data
     </a>
    </li>
    <li class="toctree-l2">
@@ -286,7 +301,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="f_rs_band_math.html">
-     Band Math
+     Band Math &amp; Vegetation Indices
     </a>
    </li>
    <li class="toctree-l2">
@@ -416,6 +431,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="e_new_vectors.html">Creating Geospatial Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Vector Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Summarizing Point Patterns</a></li>
 <li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
 </ul>
 </div>
@@ -448,7 +466,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="d_raster_crs_intro.html" title="previous page">Raster Coodinate Reference Systems (CRS)</a>
+    <a class='left-prev' id="prev-link" href="d_raster_crs_intro.html" title="previous page">Raster Coordinate Reference Systems (CRS)</a>
     <a class='right-next' id="next-link" href="e_attributes.html" title="next page">Attributes &amp; Indexing for Vector Data</a>
 
         </div>
