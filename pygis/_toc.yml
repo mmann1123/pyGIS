@@ -47,6 +47,7 @@
       - file: docs/e_extraction
       - file: docs/e_summarize_vector
       - file: docs/e_vector_merge_dissolve
+      - file: docs/e_interpolation
     - file: docs/e_raster_op_intro
       sections:
       - file: docs/e_raster_reproject
