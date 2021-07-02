@@ -30,9 +30,7 @@ html_meta:
 
 # Interpolation
 
-Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas.
-
-Source: GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
+Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas. [^bolstad]
 
 In this chapter, we will explore three interpolation methods: Thiessen polygons (Voronoi diagrams), k-nearest neighbors (KNN), and kriging.
 
@@ -55,6 +53,7 @@ from rasterio.transform import Affine
 from scipy.spatial import Voronoi, voronoi_plot_2d
 from shapely.geometry import Polygon, Point
 from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsRegressor
 ```
 
@@ -74,13 +73,14 @@ counties = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_
 # Modified by author by clipping raster to San Francisco Bay Area, generating random points, and extracting raster values (0-255) to the points
 rainfall = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_rainfall/sf_bay_rainfall.shp")
 
-# Reproject data to WGS 84
-proj = 4326
+# Reproject data to WGS 84 UTM Zone 10N
+# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-10n/
+proj = 32610
 counties = counties.to_crs(proj)
 rainfall = rainfall.to_crs(proj)
 ```
 
-Next, we'll prepare the data for geoprocessing and define a function for exporting rasters (click the + below to show code cell).
+Next, we'll prepare the data for geoprocessing (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -100,10 +100,6 @@ min_x_counties, min_y_counties, max_x_counties, max_y_counties = counties.total_
 
 # Get list of rainfall "values"
 value_rain = list(rainfall["VALUE"])
-```
-
-```{code-cell} ipython3
-:tags: [hide-cell]
 
 # Create a copy of counties dataset
 counties_dissolved = counties.copy()
@@ -115,9 +111,9 @@ counties_dissolved["constant"] = 1
 counties_dissolved = counties_dissolved.dissolve(by = "constant").reset_index(drop = True)
 ```
 
-```{code-cell} ipython3
-:tags: [hide-cell]
+We will also define a function for exporting rasters.
 
+```{code-cell} ipython3
 def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
     '''Export and save a kernel density raster.'''
 
@@ -143,7 +139,20 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
             new_dataset.write(Z, 1)
 ```
 
-We will also generate random unsampled points for which we will predict the values using each method (click the + below to show code cell).
+With any model used for prediction, it is important to assess the model fit for unknown points (or the accuracy of the values predicted by the model in relation to their actual true values, which we may not even know). Thus, in order to assess the fit, we can set aside a portion of our dataset--this portion will not be "seen" by the model (in other words, it will not be used to build the model). Instead, we can use this "unseen" subsetted data to validate or test the model since we know what their actual true values are (and we can compare it to the values that the model predicts). The other portion will be used to build the model.
+
+We will separate our rainfall dataset into two subsets: one for training and the other for testing. These subsets will be used in our KNN and kriging analyses.
+
+```{code-cell} ipython3
+# Split data into testing and training sets
+coords_rain_train, coords_rain_test, value_rain_train, value_rain_test = train_test_split(coords_rain, value_rain, test_size = 0.33, random_state = 42)
+
+# Create separate GeoDataFrames for testing and training sets
+coords_rain_train_gdf = gpd.GeoDataFrame(geometry = [Point(x, y) for x, y in coords_rain_train], crs = proj)
+coords_rain_test_gdf = gpd.GeoDataFrame(geometry = [Point(x, y) for x, y in coords_rain_test], crs = proj)
+```
+
+In addition to the testing dataset, we will also generate random unsampled points for which we will predict the values using each method (click the + below to show code cell). Unlike the previous testing dataset, we do not know the actual values for each data point.
 
 ```{code-cell} ipython3
 :tags: [hide-cell]
@@ -201,18 +210,19 @@ plt.style.use('bmh')
 
 # Plot data
 counties.plot(ax = ax, color = 'bisque', edgecolor = 'dimgray')
-rainfall.plot(ax = ax, marker = 'o', color = 'dodgerblue', markersize = 3)
+coords_rain_train_gdf.plot(ax = ax, marker = 'o', color = 'limegreen', markersize = 3)
+coords_rain_test_gdf.plot(ax = ax, marker = 'o', color = 'royalblue', markersize = 3)
 random_points.plot(ax = ax, marker = 'o', color = 'lightseagreen', markersize = 100)
 
 # Set title
 ax.set_title('San Francisco Bay Area - Rainfall Measurement Locations & Random Points', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 ```
 
+In the map above, the green and blue points are the rainfall points that we loaded separated into the training set and testing set, respectively. The large turquoise (blue-green) points are the random points that we generated.
+
 ## Thiessen Polygons (Voronoi Diagrams)
 
-Thiessen polygons (also known as Voronoi diagrams) polygons allow us to perform nearest neighbor interpolation, which is perhaps the most basic type of interpolation. Thiessen polygons are be constructed around each sampled point so all the space within a specific polygon is closest in distance to that sampled point (as compared to other sampled points). Then, to perform nearest neighbor interpolation, all that space is assigned the value of that sampled point.
-
-Source: GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
+Thiessen polygons (also known as Voronoi diagrams) polygons allow us to perform nearest neighbor interpolation, which is perhaps the most basic type of interpolation. Thiessen polygons are be constructed around each sampled point so all the space within a specific polygon is closest in distance to that sampled point (as compared to other sampled points). Then, to perform nearest neighbor interpolation, all that space is assigned the value of that sampled point. [^bolstad]
 
 We can use the [`scipy` package](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html) to create Thiessen polygons. After running the `Voronoi()` function, we can use the `vertices` attribute to get a list of vertices, which we can subsequently use to generate polygons.
 
@@ -221,9 +231,7 @@ We can use the [`scipy` package](https://docs.scipy.org/doc/scipy/reference/gene
 
 ```{code-cell} ipython3
 # Extend extent of counties feature by using buffer
-# Buffer size depends on projection used (due to units)
-# We can ignore any warning because the buffer doesn't have to be exact
-counties_buffer = counties.buffer(3)
+counties_buffer = counties.buffer(100000)
 
 # Get extent of buffered input feature
 min_x_cty_tp, min_y_cty_tp, max_x_cty_tp, max_y_cty_tp = counties_buffer.total_bounds
@@ -325,11 +333,9 @@ rainfall.plot(ax = ax, marker = 'o', color = 'dimgray', markersize = 3)
 ax.set_title('San Francisco Bay Area - Rainfall Measurement Locations & Thiessen Polygons', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 ```
 
-In addition to `vertices`, there are a few other attributes we can call if we want to further explore the polygons. These attributes will provide actual values (e.g., vertices) or provide the indices for querying other attributes.
+In addition to `vertices`, there are a few other attributes we can call if we want to further explore the polygons. These attributes will provide actual values (e.g., vertices) or provide the indices for querying other attributes. [^scipy_voronoi]
 
 In the example below, we demonstrate how to get the Thiessen polygon of one point. We use the `point_region` attribute to provide the index of a point's Voronoi region, and we use that index to get the region in `regions`. That provides indices of the vertices that make up the polygon, which we use to get the appropriate values in `vertices`.
-
-Source: [scipy.spatial.Voronoi, SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html)
 
 ```{code-cell} ipython3
 # Set index for feature of interest
@@ -376,9 +382,7 @@ ax.set_title('San Francisco Bay Area - One Point and Thiessen Polygon', fontdict
 
 ## K-Nearest Neighbors
 
-KNN (also stylized as kNN) is a neighbor-based learning method that can be used for interpolation. Unlike the Thiessen polygons method, KNN looks for a specified number `K` of sampled points closest to an unknown point. The `K` known points can be used to predict the value (discrete or continuous) of the unknown point.
-
-Source: [Nearest Neighbors, scikit-learn](https://scikit-learn.org/stable/modules/neighbors.html)
+KNN (also stylized as kNN) is a neighbor-based learning method that can be used for interpolation. Unlike the Thiessen polygons method, KNN looks for a specified number `K` of sampled points closest to an unknown point. The `K` known points can be used to predict the value (discrete or continuous) of the unknown point. [^sk_nn]
 
 We can use the [`scikit-learn` module](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) to perform KNN analysis.
 
@@ -390,20 +394,44 @@ neighbors = 5
 knn_regressor = KNeighborsRegressor(n_neighbors = neighbors, weights = "distance")
 
 # Fit regressor to data
-knn_regressor.fit(coords_rain, value_rain)
-
-# Generate R^2
-r_squared_knn = knn_regressor.score(coords_rain, value_rain)
-print("KNN r-squared: {}".format(round(r_squared_knn, 2)))
+knn_regressor.fit(coords_rain_train, value_rain_train)
 ```
 
-Our r-squared is unusually high, but we'll ignore that for now. We can subsequently get the nearest neighbors for each random point.
+Now that we have created the KNN model, we can get the in-sample r-squared value. An in-sample statistic, as suggested by its name, is calculated by using the data that were used to build the model (the training dataset).
+
+```{code-cell} ipython3
+# Generate in-sample R^2
+in_r_squared_knn = knn_regressor.score(coords_rain_train, value_rain_train)
+print("KNN in-sample r-squared: {}".format(round(in_r_squared_knn, 2)))
+```
+
+Similarily, we can also get the out-of-sample r-squared value, which is calculated by using the data points that the model did not use (the testing dataset). We can also compare the test dataset's actual values to the values as predicted by the model.
+
+```{code-cell} ipython3
+# Generate out-of-sample R^2
+out_r_squared_knn = knn_regressor.score(coords_rain_test, value_rain_test)
+print("KNN out-of-sample r-squared: {}".format(round(out_r_squared_knn, 2)))
+
+# Predict values for testing dataset
+coords_rain_test_predict_knn = knn_regressor.predict(coords_rain_test)
+
+# Create dictionary holding the actual and predicted values
+predict_dict_knn = {"Coordinate Pair": coords_rain_test, "Actual Value": value_rain_test, "VALUE_Predict": coords_rain_test_predict_knn}
+
+# Create dataframe from dictionary
+predict_df_knn = pd.DataFrame(predict_dict_knn)
+
+# Display attribute table
+print("\nAttribute Table: Testing Set Interpolated Values - KNN Method")
+display(predict_df_knn.head(2))
+```
+
+Out-of-sample r-squared looks pretty strong!
+
+Finally, we can try to predict the values for our actual unknown points. Remember that KNN uses `K` nearest neighbors to get a value, so let's take a look at the nearest neighbors for each of our random unknown points.
 
 ```{tip}
 If you are just interested in identifying the `k` nearest neighbors (no interpolation), use the [`NearestNeighbors()` function](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors).
-```
-
-```{caution} You may get different results depending on the coordinate system used (as distances will vary by coordinate system).
 ```
 
 ```{code-cell} ipython3
@@ -427,7 +455,7 @@ for i in range(len(random_coords_list)):
     print("\n")
 ```
 
-Finally, we can predict the values.
+Now, we can predict the values.
 
 ```{code-cell} ipython3
 # Predict rainfall "values" for the random points
@@ -446,22 +474,44 @@ display(random_points_knn)
 
 ## Kriging
 
-Kriging is a type of interpolation that uses a semivariogram, which measures spatial autocorrelation (how similar close points are in value and how this similarity changes as distance between points increases). Thus, the semivariogram determines how much influence a known point has on an unknown point as the distance between the known point and the unknown point increases. In other words, the weight of a known point on an unknown point decreases with increasing distance, and the semivariogram determines how quickly that weight tapers with increasing distance.
-
-Sources: GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad; [How Kriging works, Esri](https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm)
+Kriging is a type of interpolation that uses a semivariogram, which measures spatial autocorrelation (how similar close points are in value and how this similarity changes as distance between points increases). Thus, the semivariogram determines how much influence a known point has on an unknown point as the distance between the known point and the unknown point increases. In other words, the weight of a known point on an unknown point decreases with increasing distance, and the semivariogram determines how quickly that weight tapers with increasing distance. [^bolstad], [^esri_kriging]
 
 For more information, see this [ArcGIS help guide on kriging](https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm).
 
-Two Python packages that can be used for kriging include `scikit-learn` and `pykrige`.
+Two Python packages that can be used for kriging include `scikit-learn` and `pykrige`. These packages work best when the input data has a WGS 84 projection, so we will begin by reprojecting all of our data to that coordinate system (click the + below to show code cell).
+
+```{code-cell} ipython3
+:tags: [hide-cell]
+
+# Set projection to WGS 84 and reproject data
+proj_wgs = 4326
+counties_wgs = counties.to_crs(proj_wgs)
+rainfall_wgs = rainfall.to_crs(proj_wgs)
+coords_rain_train_gdf_wgs = coords_rain_train_gdf.to_crs(proj_wgs)
+coords_rain_test_gdf_wgs = coords_rain_test_gdf.to_crs(proj_wgs)
+random_points_wgs = random_points.to_crs(proj_wgs)
+
+# Get X and Y coordinates of rainfall points
+x_rain_wgs = rainfall_wgs["geometry"].x
+y_rain_wgs = rainfall_wgs["geometry"].y
+
+# Create list of XY coordinate pairs
+coords_rain_train_wgs = [list(xy) for xy in zip(coords_rain_train_gdf_wgs["geometry"].x, coords_rain_train_gdf_wgs["geometry"].y)]
+coords_rain_test_wgs = [list(xy) for xy in zip(coords_rain_test_gdf_wgs["geometry"].x, coords_rain_test_gdf_wgs["geometry"].y)]
+random_coords_list_wgs = [list(xy) for xy in zip(random_points_wgs["geometry"].x, random_points_wgs["geometry"].y)]
+
+# Get minimum and maximum coordinate values of rainfall points
+min_x_rain_wgs, min_y_rain_wgs, max_x_rain_wgs, max_y_rain_wgs = rainfall_wgs.total_bounds
+```
 
 ### Method 1 - Using `scikit-learn`
 
-Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified.
+Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
 
 ```{code-cell} ipython3
 # Create a 100 by 100 cell mesh grid
 # Horizontal and vertical cell counts should be the same
-XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain:max_x_rain:100j, min_y_rain:max_y_rain:100j]
+XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]
 
 # Create 2-D array of the coordinates (paired) of each cell in the mesh grid
 positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T
@@ -470,20 +520,41 @@ positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T
 gp = GaussianProcessRegressor(n_restarts_optimizer = 10)
 
 # Fit kernel density estimator to coordinates and values
-gp.fit(coords_rain, value_rain)
+gp.fit(coords_rain_train_wgs, value_rain_train)
 
 # Evaluate the model on coordinate pairs
 Z_sk_krig = gp.predict(positions_sk_krig)
 
 # Reshape the data to fit mesh grid
 Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)
-
-# Generate R^2
-r_squared_sk_krig = gp.score(coords_rain, value_rain)
-print("Kriging r-squared: {}".format(round(r_squared_sk_krig, 2)))
 ```
 
-We can export the raster.
+Next, we can calculate our r-squared statistics and predictions.
+
+```{code-cell} ipython3
+# Generate in-sample R^2
+in_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)
+print("Kriging in-sample r-squared: {}".format(round(in_r_squared_sk_krig, 2)))
+
+# Generate out-of-sample R^2
+out_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)
+print("Kriging out-of-sample r-squared: {}".format(round(out_r_squared_sk_krig, 2)))
+
+# Predict values for testing dataset
+coords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)
+
+# Create dictionary holding the actual and predicted values
+predict_dict_sk_krig = {"Coordinate Pair": coords_rain_test_wgs, "Actual Value": value_rain_test, "VALUE_Predict": coords_rain_test_predict_sk_krig}
+
+# Create dataframe from dictionary
+predict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)
+
+# Display attribute table
+print("\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method")
+display(predict_df_sk_krig.head(2))
+```
+
+Model seems like a good fit! Let's export the raster.
 
 ```{code-cell} ipython3
 # Flip array vertically and rotate 270 degrees
@@ -491,8 +562,8 @@ Z_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)
 
 # Export raster
 export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
-                  min_x = min_x_rain, max_x = max_x_rain, min_y = min_y_rain, max_y = max_y_rain,
-                  proj = proj, filename = "../_static/e_vector_shapefiles/outputs/bay-area-rain_sk_kriging.tif")
+                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,
+                  proj = proj_wgs, filename = "../temp/e_bay-area-rain_sk_kriging.tif")
 ```
 
 ```{attention} The resulting raster should be clipped. Because the resulting raster covers the extent of the points in a bounding box fashion, the raster in this case covers areas that are not within the counties boundaries (such as in the ocean) where we do not have sample points. Thus, there will be interpolated values in those areas that might not make sense.
@@ -502,13 +573,13 @@ Finally, we import the raster, extract the interpolated values of the raster to 
 
 ```{code-cell} ipython3
 # Open raster
-raster_sk = rasterio.open("../_static/e_vector_shapefiles/outputs/bay-area-rain_sk_kriging.tif")
+raster_sk = rasterio.open("../temp/e_bay-area-rain_sk_kriging.tif")
 
 # Create copy of random points GeoDataFrame
-random_points_sk_krig = random_points.copy()
+random_points_sk_krig = random_points_wgs.copy()
 
 # Extract raster value at each random point and add the values to the GeoDataFrame
-random_points_sk_krig["VALUE_Predict"] = [x[0] for x in raster_sk.sample(random_coords_list)]
+random_points_sk_krig["VALUE_Predict"] = [x[0] for x in raster_sk.sample(random_coords_list_wgs)]
 
 # Display attribute table
 print("Attribute Table: Random Points Interpolated Values - Scikit-Learn Kriging Method")
@@ -517,7 +588,7 @@ display(random_points_sk_krig)
 
 ```{code-cell} ipython3
 # Mask raster to counties shape
-out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties.geometry.values, crop = True)
+out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)
 
 # Stylize plots
 plt.style.use('bmh')
@@ -525,9 +596,9 @@ plt.style.use('bmh')
 # Plot data
 fig, ax = plt.subplots(1, figsize = (10, 10))
 show(out_image_sk, ax = ax, transform = out_transform_sk, cmap = "RdPu")
-ax.plot(x_rain, y_rain, 'k.', markersize = 2, alpha = 0.5)
+ax.plot(x_rain_wgs, y_rain_wgs, 'k.', markersize = 2, alpha = 0.5)
 random_points_sk_krig.plot(ax = ax, color = 'dimgray', markersize = 100)
-counties.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
+counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
 plt.gca().invert_yaxis()
 
 # Set title
@@ -546,13 +617,13 @@ The [`pykrige` module](https://geostat-framework.readthedocs.io/projects/pykrige
 
 # Create a 100 by 100 grid
 # Horizontal and vertical cell counts should be the same
-XX_pk_krig = np.linspace(min_x_rain, max_x_rain, 100)
-YY_pk_krig = np.linspace(min_y_rain, max_y_rain, 100)
+XX_pk_krig = np.linspace(min_x_rain_wgs, max_x_rain_wgs, 100)
+YY_pk_krig = np.linspace(min_y_rain_wgs, max_y_rain_wgs, 100)
 
 # Generate ordinary kriging object
 OK = OrdinaryKriging(
-    np.array(x_rain),
-    np.array(y_rain),
+    np.array(x_rain_wgs),
+    np.array(y_rain_wgs),
     value_rain,
     variogram_model = "linear",
     verbose = False,
@@ -565,24 +636,24 @@ Z_pk_krig, sigma_squared_p_krig = OK.execute("grid", XX_pk_krig, YY_pk_krig)
 
 # Export raster
 export_kde_raster(Z = Z_pk_krig, XX = XX_pk_krig, YY = YY_pk_krig,
-                  min_x = min_x_rain, max_x = max_x_rain, min_y = min_y_rain, max_y = max_y_rain,
-                  proj = proj, filename = "../_static/e_vector_shapefiles/outputs/bay-area-rain_pk_kriging.tif")
+                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,
+                  proj = proj_wgs, filename = "../temp/e_bay-area-rain_pk_kriging.tif")
 
 # Open raster
-raster_pk = rasterio.open("../_static/e_vector_shapefiles/outputs/bay-area-rain_pk_kriging.tif")
+raster_pk = rasterio.open("../temp/e_bay-area-rain_pk_kriging.tif")
 
 # Create copy of random points GeoDataFrame
-random_points_pk_krig = random_points.copy()
+random_points_pk_krig = random_points_wgs.copy()
 
 # Extract raster value at each random point and add the values to the GeoDataFrame
-random_points_pk_krig["VALUE_Predict"] = [x[0] for x in raster_pk.sample(random_coords_list)]
+random_points_pk_krig["VALUE_Predict"] = [x[0] for x in raster_pk.sample(random_coords_list_wgs)]
 
 # Display attribute table
 print("Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method")
 display(random_points_pk_krig)
 
 # Mask raster to counties shape
-out_image_pk, out_transform_pk = rasterio.mask.mask(raster_pk, counties.geometry.values, crop = True)
+out_image_pk, out_transform_pk = rasterio.mask.mask(raster_pk, counties_wgs.geometry.values, crop = True)
 
 # Stylize plots
 plt.style.use('bmh')
@@ -590,9 +661,9 @@ plt.style.use('bmh')
 # Plot data
 fig, ax = plt.subplots(1, figsize = (10, 10))
 show(out_image_pk, ax = ax, transform = out_transform_pk, cmap = "RdPu")
-ax.plot(x_rain, y_rain, 'k.', markersize = 2, alpha = 0.5)
+ax.plot(x_rain_wgs, y_rain_wgs, 'k.', markersize = 2, alpha = 0.5)
 random_points_pk_krig.plot(ax = ax, color = 'dimgray', markersize = 100)
-counties.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
+counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
 plt.gca().invert_yaxis()
 
 # Set title
@@ -601,3 +672,8 @@ ax.set_title('San Francisco Bay Area - Interpolating Rainfall using Kriging from
 # Display plot
 plt.show()
 ```
+
+[^bolstad]: GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad
+[^scipy_voronoi]: [scipy.spatial.Voronoi, SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html)
+[^sk_nn]: [Nearest Neighbors, scikit-learn](https://scikit-learn.org/stable/modules/neighbors.html)
+[^esri_kriging]: [How Kriging works, Esri](https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm)
