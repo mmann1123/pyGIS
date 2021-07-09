@@ -1,17 +1,4 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-# - file: docs/a_intro
-# - file: docs/b_intro_py
-#   sections:
-#     - file: docs/b_about_py
-#     - file: docs/b_getting_started
-#     - file: docs/b_python_by_example
-#     - file: docs/b_learn_more
-# - file: docs/c_intro_structures
-#   sections:
-#     - file: docs/c_features
-#     - file: docs/c_vectors
-#     - file: docs/c_rasters
+---
 - file: docs/a_intro
 - part: Get Started
   chapters:
@@ -20,14 +7,12 @@
     - file: docs/b_getting_started
     - file: docs/b_python_by_example
     - file: docs/b_learn_more
-
 - part: Data Types
   chapters:
     - file: docs/c_features
     - file: docs/c_store_features
     - file: docs/c_vectors
     - file: docs/c_rasters
-
 - part: Nature of Coordinate Systems
   chapters:
     - file: docs/d_crs_what_is_it
@@ -35,9 +20,7 @@
     - file: docs/d_affine
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
-    # - file: docs/d_exercises
-
-- part: Basic Operations
+- part: Vector Operations
   chapters:
     - file: docs/e_vector_op_intro
       sections:
@@ -52,21 +35,15 @@
       sections:
       - file: docs/e_raster_reproject
 
-
 - part: Remote Sensing
   chapters:
     - file: docs/f_rs_intro
       sections:
-      - file: docs/f_rs_io
-      - file: docs/f_rs_edit
-      - file: docs/f_rs_plot
-      - file: docs/f_rs_crs
-      - file: docs/f_rs_mosaic
-      - file: docs/f_rs_config
-      - file: docs/f_rs_band_math
-      - file: docs/f_rs_extraction   
-    # - file: docs/f_rs_common_task
-    #   sections:
-    #   - file: docs/f_rs_task1
-
- 
+        - file: docs/f_rs_io
+        - file: docs/f_rs_edit
+        - file: docs/f_rs_plot
+        - file: docs/f_rs_crs
+        - file: docs/f_rs_mosaic
+        - file: docs/f_rs_config
+        - file: docs/f_rs_band_math
+        - file: docs/f_rs_extraction
