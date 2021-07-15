@@ -202,47 +202,63 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations
   </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_attributes.html">
+     Attributes &amp; Indexing for Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_new_vectors.html">
+     Creating Geospatial Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_overlay.html">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Extracting Spatial Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summarizing Point Patterns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge Data &amp; Dissolve Polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_interpolation.html">
+     Spatial Interpolation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_vectors.html">
-   Creating Geospatial Vector Data
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Raster Operations
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Vector Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Summarizing Point Patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Raster Operations
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters
-  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_raster_reproject.html">
+     Reproject Rasters
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -627,12 +643,11 @@
 </div>
 <div class="section" id="clip-spatial-polygons">
 <h2>Clip Spatial Polygons<a class="headerlink" href="#clip-spatial-polygons" title="Permalink to this headline">¶</a></h2>
-<p>Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  <code class="docutils literal notranslate"><span class="pre">clip()</span></code> in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. <em>All attributes for the resulting clipped vector will be kept.</em></p>
+<p>Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  <code class="docutils literal notranslate"><span class="pre">clip()</span></code> in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. <em>All attributes for the resulting clipped vector will be kept.</em> <a class="footnote-reference brackets" href="#gpd-clip" id="id1">1</a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This function is only available in the more recent versions of <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>.</p>
 </div>
-<p>Source: <a class="reference external" href="https://geopandas.org/gallery/plot_clip.html">Clip Vector Data with GeoPandas, GeoPandas</a></p>
 <p>We will first clip the Bay Area counties polygon to our created rectangle polygon.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -859,8 +874,7 @@
 </div>
 <div class="section" id="select-location-by-attributes">
 <h2>Select Location by Attributes<a class="headerlink" href="#select-location-by-attributes" title="Permalink to this headline">¶</a></h2>
-<p>Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> uses the indexing and selection methods  in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, so data in a GeoDataFrame can be selected and queried in the same way a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe can.</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/indexing.html">Indexing and Selecting Data, GeoPandas</a>; <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">Indexing and selecting data, pandas</a>; <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html">How do I select a subset of a DataFrame?, pandas</a></p>
+<p>Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> uses the indexing and selection methods  in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, so data in a GeoDataFrame can be selected and queried in the same way a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe can. <a class="footnote-reference brackets" href="#gpd-select" id="id2">2</a>, <a class="footnote-reference brackets" href="#pd-select" id="id3">3</a>, <a class="footnote-reference brackets" href="#pd-subset" id="id4">4</a></p>
 <p>We will use use different criteria to subset the wells dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1260,7 +1274,7 @@ First two rows:
 <li><p>to know what rivers flow through Santa Clara County, we could select all the river polylines that intersect with Santa Clara County boundaries</p></li>
 </ul>
 <p>For more information on selecting by location and spatial relationships, check out this <a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/map/working-with-layers/using-select-by-location.htm">ArcGIS documentation</a>.</p>
-<p>There are multiple spatial relationships available in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>.</p>
+<p>There are multiple spatial relationships available in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>: <a class="footnote-reference brackets" href="#gpd-binary" id="id5">5</a></p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p>Spatial Relationship</p></th>
@@ -1311,7 +1325,6 @@ First two rows:
 </tr>
 </tbody>
 </table>
-<p>Source: <a class="reference external" href="https://geopandas.org/docs/reference/geoseries.html#binary-predicates">GeoSeries - Binary Predicates, GeoPandas</a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The functions for these spatial relationships will generally output a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> series with Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a <code class="docutils literal notranslate"><span class="pre">True</span></code> output will be retained).</p>
@@ -1437,10 +1450,9 @@ First two rows:
 </div>
 <div class="section" id="method-2-geodataframe">
 <h3>Method 2 - GeoDataFrame<a class="headerlink" href="#method-2-geodataframe" title="Permalink to this headline">¶</a></h3>
-<p>If we’re trying to select features that have a specified spatial relationship with another <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> object, it gets a little tricky. This is because the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on.</p>
+<p>If we’re trying to select features that have a specified spatial relationship with another <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> object, it gets a little tricky. This is because the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on. <a class="footnote-reference brackets" href="#gpd-within" id="id6">6</a>, <a class="footnote-reference brackets" href="#gpd-data" id="id7">7</a></p>
 <p>As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets–or else we’ll get a warning and the output will be empty.</p>
-<p>Because each record in a GeoDataFrame has a geometry column that stores that record’s geometry as a <code class="docutils literal notranslate"><span class="pre">shapely</span></code> object, we can call this object if we want to check a bunch of features against one extent (with one geometry).</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html">geopandas.GeoSeries.within, GeoPandas</a>; <a class="reference external" href="https://geopandas.org/docs/user_guide/data_structures.html">Data Structures, GeoPandas</a></p>
+<p>Because each record in a GeoDataFrame has a geometry column that stores that record’s geometry as a <code class="docutils literal notranslate"><span class="pre">shapely</span></code> object, we can call this object if we want to check a bunch of features against one extent (with one geometry). <a class="footnote-reference brackets" href="#gpd-within" id="id8">6</a>, <a class="footnote-reference brackets" href="#gpd-data" id="id9">7</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
@@ -1563,6 +1575,30 @@ First two rows:
 <p class="admonition-title">Tip</p>
 <p>If we are interested in wells that fall within two or more counties (i.e., we have multiple records that will be used for selection), we can enclose the above code in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="gpd-clip"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/gallery/plot_clip.html">Clip Vector Data with GeoPandas, GeoPandas</a></p>
+</dd>
+<dt class="label" id="gpd-select"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/indexing.html">Indexing and Selecting Data, GeoPandas</a></p>
+</dd>
+<dt class="label" id="pd-select"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">Indexing and selecting data, pandas</a></p>
+</dd>
+<dt class="label" id="pd-subset"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html">How do I select a subset of a DataFrame?, pandas</a></p>
+</dd>
+<dt class="label" id="gpd-binary"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/reference/geoseries.html#binary-predicates">GeoSeries - Binary Predicates, GeoPandas</a></p>
+</dd>
+<dt class="label" id="gpd-within"><span class="brackets">6</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id8">2</a>)</span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html">geopandas.GeoSeries.within, GeoPandas</a></p>
+</dd>
+<dt class="label" id="gpd-data"><span class="brackets">7</span><span class="fn-backref">(<a href="#id7">1</a>,<a href="#id9">2</a>)</span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/data_structures.html">Data Structures, GeoPandas</a></p>
+</dd>
+</dl>
 </div>
 </div>
 </div>

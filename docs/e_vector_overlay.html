@@ -202,47 +202,63 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations
   </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_attributes.html">
+     Attributes &amp; Indexing for Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_new_vectors.html">
+     Creating Geospatial Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_extraction.html">
+     Extracting Spatial Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summarizing Point Patterns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_merge_dissolve.html">
+     Merge Data &amp; Dissolve Polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_interpolation.html">
+     Spatial Interpolation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_vectors.html">
-   Creating Geospatial Vector Data
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Raster Operations
   </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Vector Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Summarizing Point Patterns
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Raster Operations
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters
-  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_raster_reproject.html">
+     Reproject Rasters
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -501,9 +517,8 @@
 <hr class="docutils" />
 <div class="section" id="vector-overlays-and-joins">
 <h1>Vector Overlays and Joins<a class="headerlink" href="#vector-overlays-and-joins" title="Permalink to this headline">¶</a></h1>
-<p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together.</p>
+<p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
 <p>In this chapter, we will focus on vector overlays, which involve combining vector data. We’ll explore five types of vector overlays and merging: union, intersection, difference (erase), identity, and spatial join.</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a>; GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
@@ -811,13 +826,12 @@
 </div>
 <div class="section" id="union">
 <h3>Union<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept. <a class="footnote-reference brackets" href="#gpd-set" id="id3">1</a></p>
 <div class="figure align-default" id="union-of-all-geometries-keeps-all-data">
 <img alt="../_images/vector_union.jpg" src="../_images/vector_union.jpg" />
 <p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">¶</a></p>
 </div>
-<p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset.</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a>; GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
+<p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id5">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get union</span>
@@ -932,13 +946,12 @@ First two rows:
 </div>
 <div class="section" id="intersection">
 <h3>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id6">1</a></p>
 <div class="figure align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
 <img alt="../_images/vector_intersection.jpg" src="../_images/vector_intersection.jpg" />
 <p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">¶</a></p>
 </div>
-<p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color).</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a>; GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
+<p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get intersection</span>
@@ -1045,14 +1058,13 @@ First two rows:
 </div>
 <div class="section" id="identity">
 <h3>Identity<a class="headerlink" href="#identity" title="Permalink to this headline">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded. <a class="footnote-reference brackets" href="#gpd-set" id="id9">1</a></p>
 <div class="figure align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
 <img alt="../_images/vector_identity.jpg" src="../_images/vector_identity.jpg" />
 <p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">¶</a></p>
 </div>
 <p>Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values.</p>
 <p>Looking at the map, we see all combined geometries except for the areas that are unique to the second dataset (watershed boundaries dataset).</p>
-<p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get identity</span>
@@ -1159,14 +1171,13 @@ First two rows:
 </div>
 <div class="section" id="difference-erase">
 <h3>Difference (Erase)<a class="headerlink" href="#difference-erase" title="Permalink to this headline">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept. <a class="footnote-reference brackets" href="#gpd-set" id="id10">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id11">2</a></p>
 <div class="figure align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
 <img alt="../_images/vector_erase.jpg" src="../_images/vector_erase.jpg" />
 <p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">¶</a></p>
 </div>
 <p>Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was “combined” with the first dataset by discarding some data (altering the geometry) from the first dataset.</p>
 <p>Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).</p>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a>; GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get difference</span>
@@ -1270,9 +1281,8 @@ First two rows:
 <h2>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="spatial-join">
 <h3>Spatial Join<a class="headerlink" href="#spatial-join" title="Permalink to this headline">¶</a></h3>
-<p>With spatial join, attributes from one dataset are appended to those in another dataset based on a specified relative spatial relationship.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we use the <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> function. In addition to passing the datasets as arguments, and we also pass arguments for two parameters <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another.</p>
+<p>With spatial join, attributes from one dataset are appended to those in another dataset based on a specified relative spatial relationship. <a class="footnote-reference brackets" href="#gpd-merge" id="id12">3</a>, <a class="footnote-reference brackets" href="#esri-join" id="id13">4</a></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we use the <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> function. In addition to passing the datasets as arguments, and we also pass arguments for two parameters <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code>. The <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another. <a class="footnote-reference brackets" href="#gpd-merge" id="id14">3</a></p>
 <p>The following spatial relationships are available in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>:</p>
 <table class="colwidths-auto table">
 <thead>
@@ -1309,7 +1319,7 @@ First two rows:
 <p class="admonition-title">Warning</p>
 <p>Depending on the argument specified in the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;intersects&quot;</span></code> will count that point twice and allocate (join) it to both geometries that share the boundary, whereas <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;within&quot;</span></code> will not count or allocate the point at all.</p>
 </div>
-<p>Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter.</p>
+<p>Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter. <a class="footnote-reference brackets" href="#gpd-merge" id="id15">3</a>, <a class="footnote-reference brackets" href="#esri-join" id="id16">4</a></p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:left head"><p>Join Type</p></th>
@@ -1328,7 +1338,6 @@ First two rows:
 </tr>
 </tbody>
 </table>
-<p>Sources: <a class="reference external" href="https://geopandas.org/docs/user_guide/mergingdata.html">Merging Data, GeoPandas</a>; <a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm">Spatial Join (Analysis), Esri</a></p>
 <p>We’ll illustrate this geoprocessing using the county boundaries shapefile and the well locations shapefile. Let’s quickly examine the wells attribute table and plot both datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1851,6 +1860,21 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_27_4.png" src="../_images/e_vector_overlay_27_4.png" />
 </div>
 </div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="gpd-set"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>,<a href="#id6">4</a>,<a href="#id7">5</a>,<a href="#id9">6</a>,<a href="#id10">7</a>)</span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a></p>
+</dd>
+<dt class="label" id="bolstad"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>,<a href="#id8">3</a>,<a href="#id11">4</a>)</span></dt>
+<dd><p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
+</dd>
+<dt class="label" id="gpd-merge"><span class="brackets">3</span><span class="fn-backref">(<a href="#id12">1</a>,<a href="#id14">2</a>,<a href="#id15">3</a>)</span></dt>
+<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/mergingdata.html">Merging Data, GeoPandas</a></p>
+</dd>
+<dt class="label" id="esri-join"><span class="brackets">4</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id16">2</a>)</span></dt>
+<dd><p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm">Spatial Join (Analysis), Esri</a></p>
+</dd>
+</dl>
 </div>
 </div>
 </div>

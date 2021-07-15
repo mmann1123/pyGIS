@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to merge new data into a shapefiles attribute table, dissolve polygons by attributes, and other group-by operations in geopandas." lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment fusionner de nouvelles données dans une table attributaire de fichiers de formes, dissoudre des polygones par attributs et d'autres opérations de regroupement dans les géopandas." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a fusionar nuevos datos en una tabla de atributos de shapefiles, disolver polígonos por atributos y otras operaciones de agrupamiento en geopandas." lang="es" name="description" xml:lang="es" />
-<meta content="geospatial, polygon,vector,  shapefile, dissolve by attributes, merge attributes" name="keywords" />
+<meta content="python, geospatial, polygon,vector,  shapefile, dissolve by attributes, merge attributes" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
     <title>Merge Data &amp; Dissolve Polygons &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
@@ -60,7 +60,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/e_vector_merge_dissolve.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Reproject Rasters" href="e_raster_reproject.html" />
+    <link rel="next" title="Spatial Interpolation" href="e_interpolation.html" />
     <link rel="prev" title="Summarizing Point Patterns" href="e_summarize_vector.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -204,47 +204,63 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="e_vector_op_intro.html">
+   Vector Operations
   </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_attributes.html">
+     Attributes &amp; Indexing for Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_new_vectors.html">
+     Creating Geospatial Vector Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_vector_overlay.html">
+     Vector Overlays and Joins
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_extraction.html">
+     Extracting Spatial Data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_summarize_vector.html">
+     Summarizing Point Patterns
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Merge Data &amp; Dissolve Polygons
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_interpolation.html">
+     Spatial Interpolation
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_vectors.html">
-   Creating Geospatial Vector Data
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="e_raster_op_intro.html">
+   Raster Operations
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Vector Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Summarizing Point Patterns
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Raster Operations
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters
-  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="e_raster_reproject.html">
+     Reproject Rasters
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 <p class="caption collapsible-parent">
@@ -1082,7 +1098,7 @@ Shape:  (133, 5)
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="e_summarize_vector.html" title="previous page">Summarizing Point Patterns</a>
-    <a class='right-next' id="next-link" href="e_raster_reproject.html" title="next page">Reproject Rasters</a>
+    <a class='right-next' id="next-link" href="e_interpolation.html" title="next page">Spatial Interpolation</a>
 
         </div>
         
