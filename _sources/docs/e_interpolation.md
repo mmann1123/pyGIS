@@ -608,7 +608,8 @@ out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geom
 
 # Stylize plots
 plt.style.use('bmh')
-
+'''
+```
 ### Method 2- Using `scikit-learn`
 
 Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
