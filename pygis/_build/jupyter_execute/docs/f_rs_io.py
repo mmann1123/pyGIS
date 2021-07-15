@@ -182,7 +182,6 @@ with gw.open([l8_224078_20200518, l8_224078_20200518],
 # 
 # 
 # ``` python
-# import geowombat as gw
 # from geowombat.data import l8_224077_20200518_B4
 # 
 # # Transform the data to lat/lon
@@ -195,28 +194,26 @@ with gw.open([l8_224078_20200518, l8_224078_20200518],
 # ```
 # 
 # Write to a raster file.
-
-# In[9]:
-
-
-import geowombat as gw
-
-with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
-
-    # Xarray drops attributes
-    attrs = src.attrs.copy()
-
-    # Apply operations on the DataArray
-    src = src * 10.0
-
-    src.attrs = attrs
-
-    # Write the data to a GeoTiff
-    src.gw.to_raster('output.tif',
-                        verbose=1,
-                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
-                        n_threads=2,    # number of thread workers sent to ``dask.compute``
-                        n_chunks=200)   # number of window chunks to send as concurrent futures
-
-
+# 
+# ``` python
+# import geowombat as gw
+# 
+# with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+# 
+#     # Xarray drops attributes
+#     attrs = src.attrs.copy()
+# 
+#     # Apply operations on the DataArray
+#     src = src * 10.0
+# 
+#     src.attrs = attrs
+# 
+#     # Write the data to a GeoTiff
+#     src.gw.to_raster('output.tif',
+#                         verbose=1,
+#                         n_workers=4,    # number of process workers sent to ``concurrent.futures``
+#                         n_threads=2,    # number of thread workers sent to ``dask.compute``
+#                         n_chunks=200)   # number of window chunks to send as concurrent futures
+# ```
+# 
 # <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. -->

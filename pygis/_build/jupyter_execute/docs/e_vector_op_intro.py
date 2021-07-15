@@ -22,4 +22,5 @@
 # e_extraction
 # e_summarize_vector
 # e_vector_merge_dissolve
+# e_interpolation
 # ```

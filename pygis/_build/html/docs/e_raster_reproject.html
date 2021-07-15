@@ -62,8 +62,8 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/e_raster_reproject.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Remote Sensing with Python using Geowombat" href="f_rs_intro.html" />
-    <link rel="prev" title="Merge Data &amp; Dissolve Polygons" href="e_vector_merge_dissolve.html" />
+    <link rel="next" title="Opening Remote Sensed Images" href="f_rs_io.html" />
+    <link rel="prev" title="Spatial Interpolation" href="e_interpolation.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -236,6 +236,11 @@
    Merge Data &amp; Dissolve Polygons
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_interpolation.html">
+   Spatial Interpolation
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -255,54 +260,45 @@
  </span>
 </p>
 <ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing with Python using Geowombat
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_io.html">
+   Opening Remote Sensed Images
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_io.html">
-     Opening Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_edit.html">
-     Editing Rasters and Remotely Sensed Data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_plot.html">
-     Plot Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_crs.html">
-     Remote Sensing Coordinate Reference Systems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_mosaic.html">
-     Handle Multiple Remotely Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_config.html">
-     Configuration manager
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_band_math.html">
-     Band Math &amp; Vegetation Indices
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_extraction.html">
-     Raster Data Extraction
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_edit.html">
+   Editing Rasters and Remotely Sensed Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_plot.html">
+   Plot Remote Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_crs.html">
+   Remote Sensing Coordinate Reference Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_mosaic.html">
+   Handle Multiple Remotely Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_config.html">
+   Configuration manager
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_band_math.html">
+   Band Math &amp; Vegetation Indices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_extraction.html">
+   Raster Data Extraction
+  </a>
  </li>
 </ul>
 
@@ -481,100 +477,106 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/130 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:31,  4.09it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:28,  4.47it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  6%|▌         | 8/130 [00:00&lt;00:05, 23.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 7/130 [00:00&lt;00:04, 24.75it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█▏        | 15/130 [00:00&lt;00:03, 34.00it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|▊         | 11/130 [00:00&lt;00:04, 27.20it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▌        | 20/130 [00:00&lt;00:03, 35.72it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▍        | 18/130 [00:00&lt;00:02, 38.38it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 24/130 [00:00&lt;00:03, 33.01it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 23/130 [00:00&lt;00:03, 31.14it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|██▏       | 28/130 [00:00&lt;00:02, 34.43it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 27/130 [00:00&lt;00:03, 30.99it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 33/130 [00:01&lt;00:02, 33.34it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██▍       | 31/130 [00:01&lt;00:03, 29.03it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 37/130 [00:01&lt;00:03, 27.44it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|██▋       | 35/130 [00:01&lt;00:03, 27.56it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 32%|███▏      | 42/130 [00:01&lt;00:02, 30.61it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 30%|███       | 39/130 [00:01&lt;00:03, 29.55it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|███▌      | 46/130 [00:01&lt;00:03, 26.74it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███▎      | 43/130 [00:01&lt;00:03, 28.30it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|███▊      | 49/130 [00:01&lt;00:03, 25.20it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|███▌      | 46/130 [00:01&lt;00:03, 24.70it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|████      | 53/130 [00:01&lt;00:03, 25.55it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|███▊      | 49/130 [00:01&lt;00:03, 21.51it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|████▎     | 56/130 [00:02&lt;00:02, 25.12it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|████      | 53/130 [00:02&lt;00:03, 23.83it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 59/130 [00:02&lt;00:03, 21.32it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|████▎     | 56/130 [00:02&lt;00:03, 24.47it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 62/130 [00:02&lt;00:03, 17.75it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 59/130 [00:02&lt;00:03, 20.93it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████     | 66/130 [00:02&lt;00:03, 20.43it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 62/130 [00:02&lt;00:03, 17.96it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:02&lt;00:02, 21.52it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████     | 66/130 [00:02&lt;00:03, 21.04it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 72/130 [00:02&lt;00:02, 19.98it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:02&lt;00:02, 21.03it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:03&lt;00:02, 18.71it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 72/130 [00:03&lt;00:03, 18.97it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:03&lt;00:02, 22.49it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:03&lt;00:03, 17.11it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████▎   | 82/130 [00:03&lt;00:02, 19.98it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:03&lt;00:02, 20.24it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 85/130 [00:03&lt;00:02, 19.47it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████▎   | 82/130 [00:03&lt;00:02, 20.15it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|███████   | 92/130 [00:03&lt;00:01, 24.21it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 85/130 [00:03&lt;00:02, 19.87it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|███████▎  | 95/130 [00:03&lt;00:01, 24.65it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|██████▊   | 88/130 [00:03&lt;00:02, 20.86it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 98/130 [00:04&lt;00:01, 25.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|███████   | 92/130 [00:03&lt;00:01, 22.37it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|███████▉  | 103/130 [00:04&lt;00:00, 30.33it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|███████▎  | 95/130 [00:04&lt;00:01, 21.42it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 82%|████████▏ | 107/130 [00:04&lt;00:00, 26.05it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 76%|███████▌  | 99/130 [00:04&lt;00:01, 22.60it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 86%|████████▌ | 112/130 [00:04&lt;00:00, 28.83it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|████████  | 105/130 [00:04&lt;00:00, 25.32it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 90%|█████████ | 117/130 [00:04&lt;00:00, 33.47it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████▍ | 109/130 [00:04&lt;00:00, 28.29it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|█████████▎| 121/130 [00:04&lt;00:00, 33.65it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 114/130 [00:04&lt;00:00, 32.67it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|█████████▊| 127/130 [00:04&lt;00:00, 36.34it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|█████████ | 118/130 [00:04&lt;00:00, 33.77it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:04&lt;00:00, 26.76it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▍| 123/130 [00:04&lt;00:00, 37.21it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|█████████▊| 128/130 [00:05&lt;00:00, 39.74it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:05&lt;00:00, 25.84it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -729,8 +731,8 @@ Destination Transform:
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="e_vector_merge_dissolve.html" title="previous page">Merge Data &amp; Dissolve Polygons</a>
-    <a class='right-next' id="next-link" href="f_rs_intro.html" title="next page">Remote Sensing with Python using Geowombat</a>
+    <a class='left-prev' id="prev-link" href="e_interpolation.html" title="previous page">Spatial Interpolation</a>
+    <a class='right-next' id="next-link" href="f_rs_io.html" title="next page">Opening Remote Sensed Images</a>
 
         </div>
         

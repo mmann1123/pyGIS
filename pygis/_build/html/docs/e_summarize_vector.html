@@ -232,6 +232,11 @@
    Merge Data &amp; Dissolve Polygons
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_interpolation.html">
+   Spatial Interpolation
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -251,54 +256,45 @@
  </span>
 </p>
 <ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing with Python using Geowombat
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_io.html">
+   Opening Remote Sensed Images
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_io.html">
-     Opening Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_edit.html">
-     Editing Rasters and Remotely Sensed Data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_plot.html">
-     Plot Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_crs.html">
-     Remote Sensing Coordinate Reference Systems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_mosaic.html">
-     Handle Multiple Remotely Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_config.html">
-     Configuration manager
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_band_math.html">
-     Band Math &amp; Vegetation Indices
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_extraction.html">
-     Raster Data Extraction
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_edit.html">
+   Editing Rasters and Remotely Sensed Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_plot.html">
+   Plot Remote Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_crs.html">
+   Remote Sensing Coordinate Reference Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_mosaic.html">
+   Handle Multiple Remotely Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_config.html">
+   Configuration manager
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_band_math.html">
+   Band Math &amp; Vegetation Indices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_extraction.html">
+   Raster Data Extraction
+  </a>
  </li>
 </ul>
 
@@ -1102,12 +1098,11 @@ Number of well points in input data: 136
 </div>
 <div class="section" id="kernel-density-estimation">
 <h2>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this headline">¶</a></h2>
-<p>Kernel density estimation (KDE) visualizes concentrations points or polylines. It calculates a magnitude per unit area, providing the density estimate of features within a specified neighborhood surrounding each feature.</p>
-<p>A kernel function is used to fit a smooth surface to each feature. One of the most common types of kernels is the Gaussian kernel, which is a normal density function. Other types of kernel functions can be used, and the type affects the influence of surrounding points on a location’s density estimate as the points’ distances increase from that location. These kernels’ functions vary in shapes and characteristics, such as where the function peaks, how pointed the peak is, and how fast the peak is reached with distance.</p>
-<p>In addition to specifying a kernel, the bandwith can also be specified. This parameter defines how spread out the kernel is. A lower bandwith allows points far away from a location to affect the density estimate at that location, whereas with a higher bandwith, only close points have influence.</p>
-<p>Individual density functions based on a specified kernel are plotted for each feature. Then, individual density function values at a location are aggregated to produce the KDE value at that location, and this is repeated across the entire point or polyline extent. The final KDE result is a raster depicting the sum of all individual density functions.</p>
+<p>Kernel density estimation (KDE) visualizes concentrations points or polylines. It calculates a magnitude per unit area, providing the density estimate of features within a specified neighborhood surrounding each feature. <a class="footnote-reference brackets" href="#esri-kernel" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
+<p>A kernel function is used to fit a smooth surface to each feature. One of the most common types of kernels is the Gaussian kernel, which is a normal density function. Other types of kernel functions can be used, and the type affects the influence of surrounding points on a location’s density estimate as the points’ distances increase from that location. These kernels’ functions vary in shapes and characteristics, such as where the function peaks, how pointed the peak is, and how fast the peak is reached with distance. <a class="footnote-reference brackets" href="#esri-kernel" id="id3">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id4">2</a></p>
+<p>In addition to specifying a kernel, the bandwith can also be specified. This parameter defines how spread out the kernel is. A lower bandwith allows points far away from a location to affect the density estimate at that location, whereas with a higher bandwith, only close points have influence. <a class="footnote-reference brackets" href="#esri-kernel" id="id5">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id6">2</a></p>
+<p>Individual density functions based on a specified kernel are plotted for each feature. Then, individual density function values at a location are aggregated to produce the KDE value at that location, and this is repeated across the entire point or polyline extent. The final KDE result is a raster depicting the sum of all individual density functions. <a class="footnote-reference brackets" href="#esri-kernel" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
 <p>For more information on KDE, check out <a class="reference external" href="https://mathisonian.github.io/kde/">this visualization</a>.</p>
-<p>Source: <a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-kernel-density-works.htm">How Kernel Density works, Esri</a>; GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
 <p>We will demonstrate two ways to perform kernel density estimation. The first way allows us to quickly visualize the KDE. The second way also allows us to export and save a KDE raster for additional analysis.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1248,6 +1243,15 @@ Number of well points in input data: 136
 </div>
 </div>
 <p>There are a few other ways to compute KDE in Python. This <a class="reference external" href="https://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/">article</a> reviews and compares all these implementations.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="esri-kernel"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id5">3</a>,<a href="#id7">4</a>)</span></dt>
+<dd><p><a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-kernel-density-works.htm">How Kernel Density works, Esri</a></p>
+</dd>
+<dt class="label" id="bolstad"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id4">2</a>,<a href="#id6">3</a>,<a href="#id8">4</a>)</span></dt>
+<dd><p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>

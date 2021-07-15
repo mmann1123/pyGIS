@@ -149,10 +149,24 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Basic Operations
+# :caption: Vector Operations
 # 
-# e_vector_op_intro
-# e_raster_op_intro
+# e_attributes
+# e_new_vectors
+# e_vector_overlay
+# e_extraction
+# e_summarize_vector
+# e_vector_merge_dissolve
+# e_interpolation
+# ```
+# 
+# 
+# ```{toctree}
+# :hidden:
+# :titlesonly:
+# :caption: Raster Operations
+# 
+# e_raster_reproject
 # ```
 # 
 # 
@@ -161,5 +175,12 @@
 # :titlesonly:
 # :caption: Remote Sensing
 # 
-# f_rs_intro
+# f_rs_io
+# f_rs_edit
+# f_rs_plot
+# f_rs_crs
+# f_rs_mosaic
+# f_rs_config
+# f_rs_band_math
+# f_rs_extraction
 # ```

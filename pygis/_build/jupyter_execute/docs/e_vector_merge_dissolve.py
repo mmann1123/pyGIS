@@ -19,7 +19,6 @@
 # ```
 # --------------
 # 
-# 
 # ## Introduction
 # 
 # Dataframes are widely used in Python for manipulating data. Recall that a dataframe is essentially an Excel spreadsheet (a 2-D table of rows and columns); in fact, many of the functions that you might use in Excel can often be replicated when working with dataframes in Python!

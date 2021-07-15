@@ -179,7 +179,6 @@ Write to a VRT file.
 
 
 ``` python
-import geowombat as gw
 from geowombat.data import l8_224077_20200518_B4
 
 # Transform the data to lat/lon
@@ -193,8 +192,7 @@ with gw.config.update(ref_crs=4326):
 
 Write to a raster file.
 
-```{code-cell} ipython3
-:tags: ["output_scroll"]
+``` python
 import geowombat as gw
 
 with gw.open(l8_224077_20200518_B4, chunks=1024) as src:

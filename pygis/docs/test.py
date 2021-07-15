@@ -1248,3 +1248,94 @@ from shapely.geometry import Polygon, box
 from sklearn.datasets import fetch_species_distributions
 from sklearn.neighbors import KernelDensity
 # %%
+
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pykrige.ok import OrdinaryKriging
+import random
+import rasterio
+import rasterio.mask
+from rasterio.plot import show
+from rasterio.transform import Affine
+from scipy.spatial import Voronoi, voronoi_plot_2d
+from shapely.geometry import Polygon, Point
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.neighbors import KNeighborsRegressor
+# %%
+
+# County boundaries
+# Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640
+counties = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp")
+
+# Rainfall measurement "locations"
+# Source: https://earthworks.stanford.edu/catalog/stanford-td754wr4701
+# Modified by author by clipping raster to San Francisco Bay Area, generating random points, and extracting raster values (0-255) to the points
+rainfall = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_rainfall/sf_bay_rainfall.shp")
+
+# Reproject data to WGS 84
+proj = 4326
+counties = counties.to_crs(proj)
+rainfall = rainfall.to_crs(proj)
+# %%
+
+# Get X and Y coordinates of rainfall points
+x_rain = rainfall["geometry"].x
+y_rain = rainfall["geometry"].y
+
+# Create list of XY coordinate pairs
+coords_rain = [list(xy) for xy in zip(x_rain, y_rain)]
+
+# Get minimum and maximum coordinate values of rainfall points
+min_x_rain, min_y_rain, max_x_rain, max_y_rain = rainfall.total_bounds
+
+# Get extent of counties feature
+min_x_counties, min_y_counties, max_x_counties, max_y_counties = counties.total_bounds
+
+# Get list of rainfall "values"
+value_rain = list(rainfall["VALUE"])
+# %%
+
+# Create a copy of counties dataset
+counties_dissolved = counties.copy()
+
+# Add a field with constant value of 1
+counties_dissolved["constant"] = 1
+
+# Dissolve all counties to create one polygon
+counties_dissolved = counties_dissolved.dissolve(by = "constant").reset_index(drop = True)
+# %%
+
+def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
+    '''Export and save a kernel density raster.'''
+
+    # Get resolution
+    xres = (max_x - min_x) / len(XX)
+    yres = (max_y - min_y) / len(YY)
+
+    # Set transform
+    transform = Affine.translation(min_x - xres / 2, min_y - yres / 2) * Affine.scale(xres, yres)
+
+    # Export array as raster
+    with rasterio.open(
+            filename,
+            mode = "w",
+            driver = "GTiff",
+            height = Z.shape[0],
+            width = Z.shape[1],
+            count = 1,
+            dtype = Z.dtype,
+            crs = proj,
+            transform = transform,
+    ) as new_dataset:
+            new_dataset.write(Z, 1)
+# %%
+import matplotlib.pyplot as plt
+import pandas as pd
+import geopandas as gpd
+from census import Census
+from us import states
+va_tract = gpd.read_file("https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip")# %%
+
+# %%

@@ -231,6 +231,11 @@
    Merge Data &amp; Dissolve Polygons
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_interpolation.html">
+   Spatial Interpolation
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -250,54 +255,45 @@
  </span>
 </p>
 <ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="f_rs_intro.html">
-   Remote Sensing with Python using Geowombat
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_io.html">
+   Opening Remote Sensed Images
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_io.html">
-     Opening Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_edit.html">
-     Editing Rasters and Remotely Sensed Data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_plot.html">
-     Plot Remote Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_crs.html">
-     Remote Sensing Coordinate Reference Systems
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_mosaic.html">
-     Handle Multiple Remotely Sensed Images
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_config.html">
-     Configuration manager
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_band_math.html">
-     Band Math &amp; Vegetation Indices
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="f_rs_extraction.html">
-     Raster Data Extraction
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_edit.html">
+   Editing Rasters and Remotely Sensed Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_plot.html">
+   Plot Remote Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_crs.html">
+   Remote Sensing Coordinate Reference Systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_mosaic.html">
+   Handle Multiple Remotely Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_config.html">
+   Configuration manager
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_band_math.html">
+   Band Math &amp; Vegetation Indices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_extraction.html">
+   Raster Data Extraction
+  </a>
  </li>
 </ul>
 
@@ -707,9 +703,9 @@ your code.</p>
 <p>On that page, you’ll see the following code</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Fixing random state for reproducibility</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
@@ -727,6 +723,9 @@ your code.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b_getting_started_1_0.png" src="../_images/b_getting_started_1_0.png" />
 </div>
 </div>
 <p>Don’t worry about the details for now — let’s just run it and see
