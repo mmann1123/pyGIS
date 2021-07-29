@@ -247,6 +247,8 @@ In this case we have a decision to make, how will we assign values to the new wa
 What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. [Read more here](http://wiki.gis.com/wiki/index.php/Interpolation)
 ```
 
+(d_raster_crs_intro_interpolation_options)=
+
 ### Interpolation Options
 There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations. 
 

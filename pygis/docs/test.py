@@ -1331,11 +1331,87 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
     ) as new_dataset:
             new_dataset.write(Z, 1)
 # %%
-import matplotlib.pyplot as plt
-import pandas as pd
-import geopandas as gpd
-from census import Census
-from us import states
-va_tract = gpd.read_file("https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip")# %%
+with open("../../../census_api.txt", "r") as f:
+    c = Census(f.read().replace('\n', ''))
+# %%
+# 
+# %%
+import rasterio
+from rasterio.enums import Resampling
 
+image = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+
+upscale_factor = 2
+
+with rasterio.open(image) as dataset:
+
+    # resample data to target shape using upscale_factor
+    data = dataset.read(
+        out_shape=(
+            dataset.count,
+            int(dataset.height * upscale_factor),
+            int(dataset.width * upscale_factor)
+        ),
+        resampling=Resampling.bilinear
+    )
+
+    print('Shape before resample:', dataset.shape)
+    print('Shape after resample:', data.shape[1:])
+
+    # scale image transform
+    dst_transform = dataset.transform * dataset.transform.scale(
+        (dataset.width / data.shape[-1]),
+        (dataset.height / data.shape[-2])
+    )
+
+    print('Transform before resample:\n', dataset.transform, '\n')
+    print('Transform after resample:\n', dst_transform)
+
+    ## Write outputs
+    # set properties for output
+    dst_kwargs = src.meta.copy()
+    dst_kwargs.update(
+        {
+            "crs": dst_crs,
+            "transform": dst_transform,
+            "width": data.shape[-1],
+            "height": data.shape[-2],
+            "nodata": 0,  
+        }
+    )
+
+    with rasterio.open("../temp/LC08_20200518_webMC.tif", "w", **dst_kwargs) as dst:
+    # iterate through bands
+        for i in range(data.shape[0]):
+              dst.write(data[i].astype(rasterio.uint32), i+1)
+
+
+
+# %%
+
+import geowombat as gw
+ 
+image = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+
+with gw.config.update(ref_res=15):
+    with gw.open(image, resampling="bilinear") as src:
+        print(src.data)
+        
+        # to write out simply:
+        # src.gw.to_raster(
+        #     "../temp/LC08_20200518_15m.tif",
+        #     overwrite=True,
+        # ) 
+
+with gw.open(image, resampling="bilinear") as src:
+     print(src.data)
+
+
+# %%
+from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
+
+with gw.config.update():
+        with gw.open(l8_224078_20200518) as src:
+            for k, v in src.gw.config.items():
+                print('Keyword:', k.ljust(15), 'Value:', v)
 # %%
