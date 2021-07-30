@@ -250,7 +250,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters
+   Reproject Rasters w. Rasterio and Geowombat
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_raster_resample.html">
+   Resampling Rasters w. Rasterio and Geowombat
   </a>
  </li>
 </ul>
@@ -455,7 +460,7 @@
         
               <div>
                 
-  <hr class="docutils" id="d-affine" />
+  <hr class="docutils" id="d-affine-md" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
@@ -530,7 +535,7 @@
 <p><em>Image Credit: <a class="reference external" href="https://en.wikipedia.org/wiki/Affine_transformation">Wikipedia</a></em></p>
 <p>In combination we can warp any point, or set of points (e.g. raster image) into a new projection. This is the equivalent of reprojection for vector data. In order to implement these transforms we will need to learn about the math behind <em>Affine Transforms</em>! Yeah!</p>
 <div class="section" id="simple-transform-examples">
-<h3>Simple Transform Examples<a class="headerlink" href="#simple-transform-examples" title="Permalink to this headline">¶</a></h3>
+<span id="d-affine-simple"></span><h3>Simple Transform Examples<a class="headerlink" href="#simple-transform-examples" title="Permalink to this headline">¶</a></h3>
 <p>To simplify things first lets think about how to do transformations of a single point in a 2d space.</p>
 <p>For any location <span class="math notranslate nohighlight">\( \mathbf{x} = (x,y)\)</span> we can transform <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> to <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> using simple linear adjustments. Here we can think of point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as being stored as an array:</p>
 <div class="math notranslate nohighlight">
