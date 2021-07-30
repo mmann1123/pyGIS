@@ -1415,3 +1415,46 @@ with gw.config.update():
             for k, v in src.gw.config.items():
                 print('Keyword:', k.ljust(15), 'Value:', v)
 # %%
+
+import os
+import geopandas as gpd
+import shapely.speedups
+import geepy
+import ee
+
+ee.Initialize()
+from glob import glob
+
+shapely.speedups.enable()
+
+os.chdir("/home/mmann1123/Documents/github/pyGIS/pygis/data")
+
+
+aoi = "./grid.shp"
+start_date = "2020-06-01"
+end_date = "2020-06-11"
+
+geepy.get_collection(
+    aoi=aoi,
+    product="UCSB-CHG/CHIRPS/PENTAD",
+    band="precipitation",
+    scale=500,
+    start_date=start_date,
+    end_date=end_date,
+    export=True,
+)
+# %%
+import geowombat as gw
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(dpi=200)
+
+
+LS = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+precip = "../data/precipitation_20200601_500m.tif"
+
+with gw.config.update(ref_image=LS):
+    with gw.open(precip, resampling="bilinear", nodata=-9999) as src:
+        print(src)
+        ax.imshow(src.data[0])
+        
+# %%
