@@ -139,4 +139,3 @@ To avoid a many-to-one join and a many-to-many join, the join should be based on
 [^pd_join]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html
 [^psu]: https://www.e-education.psu.edu/spatialdb/l1_p4.html
 [^esri_cardinality]: https://support.esri.com/en/other-resources/gis-dictionary/term/62dad394-3106-4eb7-a5d7-84fc6a1df79f
-[^esri_join]: [Spatial Join (Analysis), Esri](https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm)
