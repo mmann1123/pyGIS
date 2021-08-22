@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn all about conducting spatial joins."
-  "keywords": "geospatial, join,"
+  "keywords": "geospatial, spatial, join"
   "property=og:locale": "en_US"
 ---
 
@@ -101,7 +101,7 @@ There are four types of spatial joins: outer join, inner join, left join, and ri
 There are four types of spatial joins. These Venn diagrams depict which features from both datasets are kept when they are joined together for each join type.
 ```
 
-Only the inner, left, and right join types are available in the `geopandas` module and are identical to those in pandas. [^gpd_merge]
+Only the inner, left, and right join types are available in the `geopandas` module and are identical to those in `pandas`. [^gpd_merge]
 
 ### Outer join
 
@@ -119,7 +119,7 @@ All features from the first or left dataset are kept, regardless if the features
 
 All features from the second or right dataset are kept, regardless if the features meet the specified spatial relationship criteria for a join. As all attribute fields are combined, rows that do not have a match with the left dataset may have null values in the fields that originated from the left dataset.
 
-For more details on join types, see the [chapter on joining feature attributes](link forthcoming).
+For more details on join types, see the [chapter on joining by attributes](e_table_joins.md).
 
 ## Table Relationships
 
