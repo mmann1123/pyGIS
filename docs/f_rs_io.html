@@ -486,35 +486,12 @@
 <p>Opening an image with default settings looks similar to <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code> and <code class="docutils literal notranslate"><span class="pre">rasterio.open</span></code>. <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code> expects a file name (<code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-cd30c5f7c3868320497352519d525008&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * band     (band) int64 1 2 3
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
-Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    AREA_OR_POINT:      Area
-    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
-    resampling:         nearest
-    data_are_separate:  0
-    data_are_stacked:   0
 </pre></div>
 </div>
 </div>
@@ -524,15 +501,12 @@ Attributes:
 <p>Let’s plot out what we have while removing missing values, stored at <code class="docutils literal notranslate"><span class="pre">0</span></code>, and switch the band order around to be RGB.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_io_3_0.png" src="../_images/f_rs_io_3_0.png" />
 </div>
 </div>
 </div>
@@ -541,33 +515,10 @@ Attributes:
 <p>Often, satellite bands will be stored in separate raster files. To open the files as one DataArray, specify a list instead of a file name.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span><span class="p">])</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 3, band: 1, y: 1860, x: 2041)&gt;
-dask.array&lt;concatenate, shape=(3, 1, 1860, 2041), dtype=uint16, chunksize=(1, 1, 256, 256), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * band     (band) int64 1
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
-  * time     (time) int64 1 2 3
-Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    data_are_separate:  1
-    data_are_stacked:   1
 </pre></div>
 </div>
 </div>
@@ -576,7 +527,7 @@ Attributes:
 <p>Also note the use of <code class="docutils literal notranslate"><span class="pre">band_names</span></code> parameter. Here we can set it to anything we want for instance <code class="docutils literal notranslate"><span class="pre">['blue','green','red']</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="p">[</span><span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span><span class="p">],</span>
@@ -587,33 +538,11 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;concatenate, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * band     (band) int64 1 2 3
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
-Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    data_are_separate:  1
-    data_are_stacked:   1
-</pre></div>
-</div>
-</div>
 </div>
 <p>You will see this looks the same as the multiband raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="p">[</span><span class="n">l8_224078_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B3</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span><span class="p">],</span>
     <span class="n">stack_dim</span><span class="o">=</span><span class="s2">&quot;band&quot;</span><span class="p">,</span>
@@ -623,9 +552,6 @@ Attributes:
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_io_9_0.png" src="../_images/f_rs_io_9_0.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -663,7 +589,7 @@ Attributes:
 <p>When a list of files are given, GeoWombat will stack the data by default. To mosaic multiple files into the same band coordinate, use the <strong>mosaic</strong> keyword.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span><span class="p">],</span>
               <span class="n">mosaic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -671,43 +597,17 @@ Attributes:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (y: 1515, x: 2006, band: 1)&gt;
-dask.array&lt;where, shape=(1515, 2006, 1), dtype=uint16, chunksize=(256, 256, 1), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * y        (y) float64 -2.767e+06 -2.767e+06 ... -2.812e+06 -2.812e+06
-  * x        (x) float64 6.94e+05 6.940e+05 6.941e+05 ... 7.541e+05 7.542e+05
-  * band     (band) int64 1
-Attributes:
-    transform:          (30.0, 0.0, 694005.0, 0.0, -30.0, -2766615.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224077_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    resampling:         nearest
-    data_are_separate:  1
-    data_are_stacked:   0
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now let’s take a look at the mosaiced band 2 image values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span><span class="p">],</span>
               <span class="n">mosaic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_io_13_0.png" src="../_images/f_rs_io_13_0.png" />
 </div>
 </div>
 <!-- See :ref:`io` for more examples illustrating file opening. -->
@@ -717,35 +617,11 @@ Attributes:
 <p>Let’s pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names <code class="docutils literal notranslate"><span class="pre">[l8_224078_20200518,</span> <span class="pre">l8_224078_20200518]</span></code>, it also helps to be specific and assign <code class="docutils literal notranslate"><span class="pre">time_names=['t1',</span> <span class="pre">'t2']</span></code>, and specify which dimension we want to stack our data along with <code class="docutils literal notranslate"><span class="pre">stack_dim='time'</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span>
             <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">],</span>
             <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span>
             <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;concatenate, shape=(2, 3, 1860, 2041), dtype=uint16, chunksize=(1, 1, 256, 256), chunktype=numpy.ndarray&gt;
-Coordinates:
-  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
-  * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
-Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    AREA_OR_POINT:      Area
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC0...
-    resampling:         nearest
-    data_are_separate:  1
-    data_are_stacked:   1
 </pre></div>
 </div>
 </div>
