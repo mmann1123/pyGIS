@@ -148,7 +148,7 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
     with rasterio.open("../temp/LC08_20200518_webMC.tif", "w", **dst_kwargs) as dst:
         # iterate through bands
         for i in range(1, src.count + 1):
-            array.reproject(
+            reproject(
                 source=rasterio.band(src, i),
                 destination=rasterio.band(dst, i),
                 src_transform=src.transform,

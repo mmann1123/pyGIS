@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Setting up Your Python Environment &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Setting up a Normal Python Environment &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/b_getting_started.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="An Introductory Example" href="b_python_by_example.html" />
+    <link rel="next" title="Setting up Python for Geospatial on Mac, Windows, and Linux" href="b_conda_started.html" />
     <link rel="prev" title="Getting Started in Python" href="b_about_py.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -67,8 +67,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/b_getting_started.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Setting up Your Python Environment" />
-<meta property="og:description" content="Setting up Your Python Environment  Overview  In this lecture, you will learn how to  get a Python environment up and running  execute simple Python commands  r" />
+<meta property="og:title"       content="Setting up a Normal Python Environment" />
+<meta property="og:description" content="Setting up a Normal Python Environment  Overview  In this lecture, you will learn how to  get a Python environment up and running  execute simple Python command" />
 <meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -122,7 +122,12 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Setting up Your Python Environment
+   Setting up a Normal Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_conda_started.html">
+   Setting up Python for Geospatial on Mac, Windows, and Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -509,8 +514,8 @@
         
               <div>
                 
-  <div class="section" id="setting-up-your-python-environment">
-<span id="b-getting-started"></span><h1>Setting up Your Python Environment<a class="headerlink" href="#setting-up-your-python-environment" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="setting-up-a-normal-python-environment">
+<span id="b-getting-started"></span><h1>Setting up a Normal Python Environment<a class="headerlink" href="#setting-up-a-normal-python-environment" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>In this lecture, you will learn how to</p>
@@ -708,9 +713,9 @@ your code.</p>
 <p>On that page, you’ll see the following code</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1"># Fixing random state for reproducibility</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
@@ -728,6 +733,9 @@ your code.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b_getting_started_1_0.png" src="../_images/b_getting_started_1_0.png" />
 </div>
 </div>
 <p>Don’t worry about the details for now — let’s just run it and see
@@ -831,7 +839,7 @@ run as discussed above.</p>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="b_about_py.html" title="previous page">Getting Started in Python</a>
-    <a class='right-next' id="next-link" href="b_python_by_example.html" title="next page">An Introductory Example</a>
+    <a class='right-next' id="next-link" href="b_conda_started.html" title="next page">Setting up Python for Geospatial on Mac, Windows, and Linux</a>
 
         </div>
         
