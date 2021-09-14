@@ -247,6 +247,8 @@ In this case we have a decision to make, how will we assign values to the new wa
 What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. [Read more here](http://wiki.gis.com/wiki/index.php/Interpolation)
 ```
 
+(d_raster_crs_intro_interpolation_options)=
+
 ### Interpolation Options
 There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations. 
 
@@ -260,9 +262,9 @@ Example of nearest neighbor and bilinear interpolation
 
 
 ```{figure} ../_static/d_crs/d_bicubic.png
-:name: Example of nearest neighbor and bilinear interpolation
+:name: Example of nearest neighbor and bicubic interpolation
 :width: 400px
-Example of nearest neighbor and bilinear interpolation
+Example of nearest neighbor and bicubic interpolation
 ```
 ### Choosing the Right Interpolation Method
 Choosing the correct interpolation method is important. The following table should help you to decided. Remember categorical data might include land cover classes (forest, water, etc), and continuous data is measurable for instance rainfall (values 0 to 20mm).

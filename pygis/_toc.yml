@@ -1,3 +1,6 @@
+# reminder compile book: jupyter-book build pygis
+# push to git ghp-import -n -p -f pygis/_build/html
+
 ---
 - file: docs/a_intro
 - part: Get Started
@@ -5,6 +8,7 @@
     - file: docs/b_intro_py
     - file: docs/b_about_py
     - file: docs/b_getting_started
+    - file: docs/b_conda_started
     - file: docs/b_python_by_example
     - file: docs/b_learn_more
 - part: Data Types
@@ -36,7 +40,8 @@
     # - file: docs/e_raster_op_intro
     #   sections:
     - file: docs/e_raster_reproject
-
+    - file: docs/e_raster_resample
+    
 - part: Remote Sensing
   chapters:
     # - file: docs/f_rs_intro

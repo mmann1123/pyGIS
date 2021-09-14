@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (d_affine)=
+# (d_affine.md)=
 # 
 # 
 # ---------------
@@ -55,7 +55,7 @@
 # 
 # In combination we can warp any point, or set of points (e.g. raster image) into a new projection. This is the equivalent of reprojection for vector data. In order to implement these transforms we will need to learn about the math behind *Affine Transforms*! Yeah!
 # 
-# 
+# (d_affine_simple)=
 # ### Simple Transform Examples
 # To simplify things first lets think about how to do transformations of a single point in a 2d space.  
 # 

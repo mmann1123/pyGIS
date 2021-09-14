@@ -262,9 +262,9 @@ Example of nearest neighbor and bilinear interpolation
 
 
 ```{figure} ../_static/d_crs/d_bicubic.png
-:name: Example of nearest neighbor and bilinear interpolation
+:name: Example of nearest neighbor and bicubic interpolation
 :width: 400px
-Example of nearest neighbor and bilinear interpolation
+Example of nearest neighbor and bicubic interpolation
 ```
 ### Choosing the Right Interpolation Method
 Choosing the correct interpolation method is important. The following table should help you to decided. Remember categorical data might include land cover classes (forest, water, etc), and continuous data is measurable for instance rainfall (values 0 to 20mm).

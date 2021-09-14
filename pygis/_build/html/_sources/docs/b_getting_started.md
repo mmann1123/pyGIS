@@ -11,7 +11,7 @@ kernelspec:
 
 (b_getting_started)=
 
-# Setting up Your Python Environment
+# Setting up a Normal Python Environment
 
 ## Overview
 

@@ -127,7 +127,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="b_getting_started.html">
-   Setting up Your Python Environment
+   Setting up a Normal Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="b_conda_started.html">
+   Setting up Python for Geospatial on Mac, Windows, and Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -250,7 +255,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters
+   Reproject Rasters w. Rasterio and Geowombat
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_raster_resample.html">
+   Resampling Rasters w. Rasterio and Geowombat
   </a>
  </li>
 </ul>
@@ -493,7 +503,7 @@
 <p class="admonition-title">Review</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="c_rasters.html"><span class="doc std std-doc">Intro to Raster data</span></a></p></li>
-<li><p><a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Affine transformation</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -734,7 +744,7 @@
 </div>
 <div class="section" id="reproject-a-raster-the-simple-case">
 <h2>Reproject a Raster - The Simple Case<a class="headerlink" href="#reproject-a-raster-the-simple-case" title="Permalink to this headline">¶</a></h2>
-<p>How then do we reproject a raster? Since <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a map of pixel locations, warping a raster then becomes as simple as knowing the <code class="docutils literal notranslate"><span class="pre">transform</span></code> of your destination based on the description of the new coordinate reference system (CRS). If you haven’t please study <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transformations</span></a>.</p>
+<p>How then do we reproject a raster? Since <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a map of pixel locations, warping a raster then becomes as simple as knowing the <code class="docutils literal notranslate"><span class="pre">transform</span></code> of your destination based on the description of the new coordinate reference system (CRS). If you haven’t please study <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">affine transformations</span></a>.</p>
 <div class="section" id="shifting-the-prime-meridian">
 <h3>Shifting the Prime Meridian<a class="headerlink" href="#shifting-the-prime-meridian" title="Permalink to this headline">¶</a></h3>
 <p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">proj4string</span></a>).</p>
@@ -764,16 +774,16 @@
 <p>What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. <a class="reference external" href="http://wiki.gis.com/wiki/index.php/Interpolation">Read more here</a></p>
 </div>
 <div class="section" id="interpolation-options">
-<h3>Interpolation Options<a class="headerlink" href="#interpolation-options" title="Permalink to this headline">¶</a></h3>
+<span id="d-raster-crs-intro-interpolation-options"></span><h3>Interpolation Options<a class="headerlink" href="#interpolation-options" title="Permalink to this headline">¶</a></h3>
 <p>There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations.</p>
 <p>In the visual example below we will try to estimate the value for location <code class="docutils literal notranslate"><span class="pre">C</span></code> based on the known values at locations <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
 <div class="figure align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">¶</a></p>
 </div>
-<div class="figure align-default" id="id1">
+<div class="figure align-default" id="example-of-nearest-neighbor-and-bicubic-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="choosing-the-right-interpolation-method">

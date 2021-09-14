@@ -16,8 +16,7 @@
 # ```
 # ----------------
 # 
-# # Reproject Rasters
-# 
+# # Reproject Rasters w. Rasterio and Geowombat
 # 
 # 
 # ## Reprojecting a Raster with Geowombat
@@ -62,10 +61,11 @@ with gw.open(image) as src:
 
 # Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra. 
 # 
-# ## Reprojecting a Raster with Rasterio 
+# ## Calculate_default_transform Explained
+# 
 # How do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster. 
 # 
-# First, remember that the transform matrix takes the following form:
+# First, remember that the transform matrix takes the following form ([review affine transforms here](d_affine.md)):
 # 
 # $$
 #     \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix} 
@@ -102,6 +102,8 @@ print("Destination Transform:\n", dst_transform)
 
 # Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x$).
 # 
+# ## Reprojecting a Raster with Rasterio 
+# 
 # Ok finally!
 
 # In[4]:
@@ -134,6 +136,7 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
     )
 
     with rasterio.open("../temp/LC08_20200518_webMC.tif", "w", **dst_kwargs) as dst:
+        # iterate through bands
         for i in range(1, src.count + 1):
             reproject(
                 source=rasterio.band(src, i),

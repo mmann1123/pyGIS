@@ -29,6 +29,7 @@
 # 
 # All map projections introduce error because they are inherently imperfect. The "best" or "perfect" projection to use is highly dependent on what needs to be mapped and where. Therefore, as you can expect, there are many projections to choose from.
 # 
+# 
 # ---
 # 
 # In this chapter, we will check, utilize, change, and create CRSs in Python. To provide visual examples along the way, we will use a shapefile of the Washington, DC, boundary from Open Data DC (https://opendata.dc.gov/datasets/washington-dc-boundary).

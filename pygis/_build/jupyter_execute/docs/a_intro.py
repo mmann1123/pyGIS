@@ -116,6 +116,7 @@
 # b_intro_py
 # b_about_py
 # b_getting_started
+# b_conda_started
 # b_python_by_example
 # b_learn_more
 # ```
@@ -167,6 +168,7 @@
 # :caption: Raster Operations
 # 
 # e_raster_reproject
+# e_raster_resample
 # ```
 # 
 # 
