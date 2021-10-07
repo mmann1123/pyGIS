@@ -40,8 +40,11 @@
 # :width: 400px
 # Resampling rasters - different resolution
 # ```
+# We can co-register images by resampling, and often reprojecting, one image to match another. 
+# 
+# (raster_resample_methods)=
 # ## Methods for Resampling Explained
-# There are [a number of methods](https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling) to resample data, but they often take the form of "nearest neighbor", "bilinear", and "cubic convolusion" - these interpolation methods [are explained here in some detail](d_raster_crs_intro_interpolation_options.md). 
+# There are [a number of methods](https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling) to resample data, but they often take the form of "nearest neighbor", "bilinear", and "cubic convolusion" - these interpolation methods [are explained here in some detail](d_raster_crs_intro_interpolation_options.md). But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’]. 
 # 
 # **resampling direction**
 # - Upsampling - converting to higher resolution/smaller cells. 
@@ -118,8 +121,8 @@ with rasterio.open(image) as dataset:
 # Read up on [affine transformations](d_affine_transform_matrix) to help you understand the `transform.scale` function above. 
 # ```
 # 
-# ### Geowombat Upsampling Example
-# As always the easiest way to deal with resampling is by deploying geowombat. It's like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with `ref_res`, and the `resampling` method in the open statement. Writing a file is a bit more intuitive too.
+# ### Geowombat Up/Down Sampling Example
+# As always the easiest way to deal with resampling is by deploying geowombat. It's like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with `ref_res`, and the `resampling` method in the open statement. We have a number of resampling methods available depending on the context [listed above](raster_resample_methods). Writing a file is a bit more intuitive too.
 
 # In[2]:
 
@@ -148,9 +151,9 @@ with gw.config.update(ref_res=15):
 # Our example data will look at registering LandSat data with precipitation data from CHIRPS. 
 # 
 # ### Example of Co-registering Rasters with Geowombat
-# Co-registering data is simple in geowombat, you simply need to choose an reference image to match the bounds, CRS, and cell size. 
+# Co-registering data is simple in geowombat, you simply need to choose an "reference image" to match the bounds, CRS, and cell size. 
 # 
-# The original input data `precip` is currently 500m but will be upsampled to 30m as seen in `print(src)`.  Also note the use of `nodata` to avoid missing values stored as -9999.
+# The original input data `precip` is currently 500m but will be upsampled to 30m as seen in `print(src)`.  Also note the use of `nodata` to avoid missing values stored as -9999. Note we can choose a number of `resampling` techniques [listed above](raster_resample_methods). For more detail on resampling go to [Introduction to Raster CRS](d_raster_crs_intro).
 
 # In[3]:
 

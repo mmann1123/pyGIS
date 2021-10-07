@@ -1,29 +1,3 @@
-----------------
-
-```{admonition} Learning Objectives
-* Create a grid to bin features
-* Bin features using the grid
-* Display kernel density estimation results and export resulting raster
-```
-```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
-* [Geospatial Raster Data](c_rasters.md)
-* [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](e_new_vectors.md)
-```
-
-----------------
-
-# Summarizing Point Patterns
-
-Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.
-
-This chapter will explore two summary operations that highlight concentrations of data: count points in a rectangular or hexagonal grid or by polygon and kernel density.
-
-## Setup
-
-First, we will import the necessary modules (click the + below to show code cell).
-
 # Import modules
 import geopandas as gpd
 import geoplot as gplt
@@ -37,8 +11,6 @@ from scipy import stats
 from shapely.geometry import Polygon, box
 from sklearn.datasets import fetch_species_distributions
 from sklearn.neighbors import KernelDensity
-
-We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data (click the + below to show code cell).
 
 # Load data
 
@@ -59,12 +31,6 @@ wells = wells.to_crs(proj)
 
 # Create a column that assigns each well a number
 wells["Well_ID"] = np.arange(wells.shape[0])
-
-## Count Points in Rectangular or Hexagonal Grid or by Polygon
-
-To summarize by grid, we create a new polygon layer consisting of a grid and overlay on another feature. We can summarize an aspect of that feature within each cell of the grid. The polygon layer commonly consists of a fishnet (rectangular cells), but using hexagons as a grid is becoming increasingly widespread.
-
-Let's define a function that will create a grid of either rectangles or hexagons of a specified side length.
 
 def create_grid(feature, shape, side_length):
     '''Create a grid consisting of either rectangles or hexagons with a specified side length that covers the extent of input feature.'''
@@ -154,10 +120,6 @@ def create_grid(feature, shape, side_length):
     # Return grid
     return grid
 
-We will illustrate this methodology by counting the number of well points within each cell of the grid. There are two different ways we can accomplish this methodology, both with advantages and disadvantages.
-
-To begin, we will set some global parameters for both examples.
-
 # Set side length for cells in grid
 # This is dependent on projection chosen as length is in units specified in projection
 side_length = 5000
@@ -165,12 +127,6 @@ side_length = 5000
 # Set shape of grid
 shape = "hexagon"
 # shape = "rectangle"
-
-### Method 1 - Group by
-
-This method involves using spatial joins to allocate each point to the cell in which it resides. All the points within each cell are subsequently grouped together and counted.
-
-First, we will create a grid over the Bay Area.
 
 # Create grid
 bay_area_grid = create_grid(feature = wells, shape = shape, side_length = side_length)
@@ -185,8 +141,6 @@ bay_area_grid.plot(ax = ax, color = 'none', edgecolor = 'lightseagreen', alpha =
 
 # Set title
 ax.set_title('San Francisco Bay Area - Boundaries, Wells, and Grids', fontdict = {'fontsize': '15', 'fontweight' : '3'})
-
-Next, we will conduct a spatial join for each well point, essentially assigning it to a cell. We can add a field with a value of `1`, group all the wells in a cell, and aggregate **(sum)** all those `1` values to get the total number of wells in a cell.
 
 # Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects
 # op = "intersects" also counts those that fall on a cell boundary (between two cells)
@@ -218,8 +172,6 @@ bay_area_grid[count_field] = bay_area_grid[count_field].astype(int)
 # Display grid attribute table
 display(bay_area_grid)
 
-We can plot the data to see how it looks.
-
 # Create subplots
 fig, ax = plt.subplots(1, 1, figsize = (10, 10))
 
@@ -231,22 +183,14 @@ bay_area_grid.plot(ax = ax, column = "Count", cmap = "RdPu", edgecolor = 'lights
 # Set title
 ax.set_title('San Francisco Bay Area - Binning Well Points', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 
-The advantage of this method is that it is pretty fast. To verify that all points have been counted once, we can check the aggregate of all the point sums for each cell.
-
 # Check total number of well points counted and compare to number of well points in input data
 print("Total number of well points counted: {}\nNumber of well points in input data: {}".format(sum(bay_area_grid.Count), len(wells)))
-
-### Method 2 - Iterate through each feature
-
-This second method is slightly more intuitive, but it can take a long time to run. We will use a subset of the input data--those that fall within Santa Clara County--to illustrate this example. We will first subset our data to Santa Clara County (click the + below to show code cell).
 
 # Select the Santa Clara County boundary
 sc_county = counties[counties["coname"] == "Santa Clara County"]
 
 # Subset the GeoDataFrame by checking which wells are within Santa Clara County
 sc_county_wells = wells[wells.within(sc_county.geometry.values[0])]
-
-Next, we will create a grid over Santa Clara County.
 
 # Create grid
 sc_county_grid = create_grid(feature = sc_county_wells, shape = shape, side_length = side_length)
@@ -261,8 +205,6 @@ sc_county_grid.plot(ax = ax, color = 'none', edgecolor = 'lightseagreen', alpha 
 
 # Set title
 ax.set_title('Santa Clara County - Boundaries, Wells, and Grids', fontdict = {'fontsize': '15', 'fontweight' : '3'})
-
-We iterate through each cell in the grid and set a counter for each cell. We iterate through each well point and see if it is within (or intersects) the cell. If it is, the counter is increased by 1, and the feature is "discarded" so that it won't be counted again (resolving the issue of a point falling on the boundary between two cells).
 
 # Create empty list used to hold count values for each grid
 counts_list = []
@@ -335,12 +277,8 @@ sc_county_grid['Count'] = pd.Series(counts_list)
 # Display grid attribute table
 display(sc_county_grid)
 
-We can check to make sure all well points in Santa Clara County were counted.
-
 # Check total number of well points counted and compare to number of well points in input data
 print("Total number of well points counted: {}\nNumber of well points in input data: {}".format(sum(counts_list), len(sc_county_wells)))
-
-Finally, we can plot the data.
 
 # Create subplots
 fig, ax = plt.subplots(1, 1, figsize = (10, 10))
@@ -352,27 +290,6 @@ sc_county_grid.plot(ax = ax, column = "Count", cmap = "RdPu", edgecolor = 'light
 
 # Set title
 ax.set_title('Santa Clara County - Binning Well Points', fontdict = {'fontsize': '15', 'fontweight' : '3'})
-
-## Kernel Density Estimation
-
-Kernel density estimation (KDE) visualizes concentrations points or polylines. It calculates a magnitude per unit area, providing the density estimate of features within a specified neighborhood surrounding each feature. [^esri_kernel], [^bolstad]
-
-A kernel function is used to fit a smooth surface to each feature. One of the most common types of kernels is the Gaussian kernel, which is a normal density function. Other types of kernel functions can be used, and the type affects the influence of surrounding points on a location's density estimate as the points' distances increase from that location. These kernels' functions vary in shapes and characteristics, such as where the function peaks, how pointed the peak is, and how fast the peak is reached with distance. [^esri_kernel], [^bolstad]
-
-In addition to specifying a kernel, the bandwith can also be specified. This parameter defines how spread out the kernel is. A lower bandwith allows points far away from a location to affect the density estimate at that location, whereas with a higher bandwith, only close points have influence. [^esri_kernel], [^bolstad]
-
-Individual density functions based on a specified kernel are plotted for each feature. Then, individual density function values at a location are aggregated to produce the KDE value at that location, and this is repeated across the entire point or polyline extent. The final KDE result is a raster depicting the sum of all individual density functions. [^esri_kernel], [^bolstad]
-
-For more information on KDE, check out [this visualization](https://mathisonian.github.io/kde/).
-
-We will demonstrate two ways to perform kernel density estimation. The first way allows us to quickly visualize the KDE. The second way also allows us to export and save a KDE raster for additional analysis.
-
-```{tip} We are intentionally keeping the well points beyond (but within 50 km) of the Bay Area boundaries. This provides a buffer to ensure that the KDE for wells data near the boundaries is not inadvertently influenced by these artificial county boundaries. Once KDE is run, the result can be clipped to the Bay Area boundaries (which we do in the first method).
-```
-
-### Method 1 - Display
-
-This method uses `geoplot`, a high-level plotting library for geospatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
 
 # Set projection to WGS 84 and reproject data
 proj_wgs = 4326
@@ -389,15 +306,6 @@ gplt.kdeplot(wells_wgs, cmap = "RdPu", shade = True, clip = counties_wgs, thresh
 
 # Set title
 ax.set_title('San Francisco Bay Area - Kernel Density Estimation for Wells', fontdict = {'fontsize': '15', 'fontweight' : '3'})
-
-### Method 2 - Display and export with `scikit-learn`
-
-This method uses `scikit-learn` to visualize and export the KDE result. We are able to specify and change various estimator parameters. Examples include:
-* kernel type
-* [metric (how distances from a location are calculated)](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
-* [algorithm (how to quickly identify neighboring points instead of performing time and resource intensive brute force)](https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
-
-For further reading, check out the [`scikit-learn` documentation](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity) and the [associated example](https://scikit-learn.org/stable/auto_examples/neighbors/plot_species_kde.html#sphx-glr-auto-examples-neighbors-plot-species-kde-py).
 
 # Get X and Y coordinates of well points
 x_sk = wells_wgs["geometry"].x
@@ -436,8 +344,6 @@ counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
 ax.set_title('San Francisco Bay Area - SciKit-Learn Kernel Density Estimation for Wells', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 plt.show()
 
-We can export the raster if necessary.
-
 def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
     '''Export and save a kernel density raster.'''
 
@@ -469,8 +375,3 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
 export_kde_raster(Z = Z_sk, XX = XX_sk, YY = YY_sk,
                   min_x = min_x_sk, max_x = max_x_sk, min_y = min_y_sk, max_y = max_y_sk,
                   proj = proj_wgs, filename = "../temp/bay-area-wells_kde_sklearn.tif")
-
-There are a few other ways to compute KDE in Python. This [article](https://jakevdp.github.io/blog/2013/12/01/kernel-density-estimation/) reviews and compares all these implementations.
-
-[^esri_kernel]: [How Kernel Density works, Esri](https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-kernel-density-works.htm)
-[^bolstad]: GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad

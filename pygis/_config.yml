@@ -11,7 +11,7 @@ logo                        : pygis.png  # A path to the book logo
 sphinx:
   config:
     html_show_copyright: false
-    html_baseurl: 'https://mmann1123.github.io/pyGIS'
+    html_baseurl: 'https://pygis.io' # 'https://mmann1123.github.io/pyGIS'
   extra_extensions:
     - sphinx_sitemap
     #  myst_enable_extensions = ["dollarmath", "amsmath"]
@@ -19,10 +19,13 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks           : auto  #auto, cache, off ,force
+  execute_notebooks           : cache  #auto, cache, off ,force
   exclude_patterns          : 
-                              [ #'a_*','b_*',
-                            #  'c_*','d_*', #'e_vector_*', 'f_*', 'e_*',
+                              [ #'a_*',
+                              #'b_*',
+                              # 'c_*','d_*', #'e_vector_*', 
+                              # 'f_*', 
+                               #'e_*',
                               #'f_rs_crs*','f_rs_mosaic*','f_rs_plot*','f_rs_config*'
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 

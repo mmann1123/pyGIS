@@ -57,7 +57,7 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/c_rasters.html" />
+    <link rel="canonical" href="https://pygis.io/docs/c_rasters.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="What is a CRS?" href="d_crs_what_is_it.html" />
@@ -68,11 +68,11 @@
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/c_rasters.html" />
+<meta property="og:url"         content="https://pygis.io/docs/c_rasters.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Geospatial Raster Data" />
 <meta property="og:description" content="Geospatial Raster Data  A raster data model uses an array of cells, or pixels, to represent real-world objects. Raster datasets are commonly used for representi" />
-<meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
+<meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
 
@@ -712,9 +712,6 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[   0    0    0 ...    0    0    0]
   [   0    0    0 ...    0    0    0]
   [   0    0    0 ...    0    0    0]
@@ -739,6 +736,9 @@
   [7586 7590 7610 ... 7440 7411 7425]
   [7576 7743 7770 ... 7464 7443 7406]]]
 --------------
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
 </pre></div>
 </div>
 <img alt="../_images/c_rasters_18_2.png" src="../_images/c_rasters_18_2.png" />
@@ -850,43 +850,40 @@ Coordinates:
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/50 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 9/50 [00:00&lt;00:00, 81.31it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 9/50 [00:00&lt;00:00, 82.56it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▌      | 18/50 [00:00&lt;00:00, 79.15it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▌      | 18/50 [00:00&lt;00:00, 79.51it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 52%|█████▏    | 26/50 [00:00&lt;00:00, 73.46it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 52%|█████▏    | 26/50 [00:00&lt;00:00, 78.19it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|██████▊   | 34/50 [00:00&lt;00:00, 73.97it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|██████▊   | 34/50 [00:00&lt;00:00, 74.41it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████▍ | 42/50 [00:00&lt;00:00, 73.77it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████▍ | 42/50 [00:00&lt;00:00, 75.57it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 73.73it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 76.03it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 74.49it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 50/50 [00:00&lt;00:00, 76.54it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/14 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 7/14 [00:00&lt;00:00, 68.29it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|█████▋    | 8/14 [00:00&lt;00:00, 75.63it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 14/14 [00:00&lt;00:00, 64.98it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 14/14 [00:00&lt;00:00, 65.28it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 14/14 [00:00&lt;00:00, 80.66it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<img alt="../_images/c_rasters_28_14.png" src="../_images/c_rasters_28_14.png" />
+<img alt="../_images/c_rasters_28_13.png" src="../_images/c_rasters_28_13.png" />
 </div>
 </div>
 <hr class="docutils" />

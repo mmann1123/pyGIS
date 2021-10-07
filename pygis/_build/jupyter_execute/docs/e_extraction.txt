@@ -1,37 +1,8 @@
-----------------
-
-```{admonition} Learning Objectives
-* Clip a vector feature using another vector feature
-* Select features by their attributes
-* Select features by their locations
-```
-```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
-* [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](e_new_vectors.md)
-```
-----------------
-
-# Extracting Spatial Data
-
-Subsetting and extracting data is useful when we want to select or analyze a portion of the dataset based on a feature's location, attribute, or its spatial relationship to another dataset.
-
-In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select location by attribute, and select by location.
-
-## Setup
-
-First, let's import the necessary modules (click the + below to show code cell).
-
 # Import modules
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import pandas as pd
 from shapely.geometry import Polygon
-
-We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will first load in the data and reproject the data (click the + below to show code cell).
-
-```{important} All the data must have the same coordinate system in order for extraction to work correctly.
-```
 
 # Load data
 
@@ -50,8 +21,6 @@ proj = 2768
 counties = counties.to_crs(proj)
 wells = wells.to_crs(proj)
 
-We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use [bbox finder](http://bboxfinder.com/) to generate custom bounding boxes and obtain their coordinates (click the + below to show code cell).
-
 # Create list of coordinate pairs
 coordinates = [[1790787, 736108], [1929652, 736108], [1929652, 598414], [1790787, 598414]]
 
@@ -63,8 +32,6 @@ attributes_df = {'Attribute': ['name1'], 'geometry': poly_shapely}
 
 # Convert shapely object to a GeoDataFrame
 poly = gpd.GeoDataFrame(attributes_df, geometry = 'geometry', crs = "EPSG:2768")
-
-We'll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).
 
 def display_table(table_name, attribute_table):
     '''Display the first and last five rows of attribute table.'''
@@ -124,8 +91,6 @@ def plot_df(result_name, result_df, result_geom_type, area = None):
     # Set title
     ax.set_title(result_name, fontdict = {'fontsize': '15', 'fontweight' : '3'})
 
-Let's take a look at what our input data looks like.
-
 # Create subplots
 fig, ax = plt.subplots(1, 1, figsize = (10, 10))
 
@@ -140,16 +105,6 @@ plt.style.use('bmh')
 # Set title
 ax.set_title('San Francisco Bay Area', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 
-## Clip Spatial Polygons
-
-Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  `clip()` in `geopandas`, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. *All attributes for the resulting clipped vector will be kept.* [^gpd_clip]
-
-```{note}
-This function is only available in the more recent versions of `geopandas`.
-```
-
-We will first clip the Bay Area counties polygon to our created rectangle polygon.
-
 # Clip data
 clip_counties = gpd.clip(counties, poly)
 
@@ -158,8 +113,6 @@ display(clip_counties)
 
 # Plot clip
 plot_df(result_name = "San Francisco Bay Area Counties\nClip", result_df = clip_counties, result_geom_type = "polygon", area = poly)
-
-We can clip any vector type. Next, we will clip the wells point data to our created rectangle polygon.
 
 # Clip data
 clip_wells = gpd.clip(wells, poly)
@@ -170,16 +123,8 @@ display(clip_wells)
 # Plot clip
 plot_df(result_name = "San Francisco Bay Area Wells\nClip", result_df = clip_wells, result_geom_type = "point", area = poly)
 
-## Select Location by Attributes
-
-Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. `geopandas` uses the indexing and selection methods  in `pandas`, so data in a GeoDataFrame can be selected and queried in the same way a `pandas` dataframe can. [^gpd_select], [^pd_select], [^pd_subset]
-
-We will use use different criteria to subset the wells dataset.
-
 # Display attribute table
 display(wells.head(2))
-
-The criteria can use a variety of operators, including comparison and logical operators.
 
 # Select wells that are public supply
 wells_public = wells[(wells["WELL_USE"] == "Public Supply")]
@@ -199,39 +144,6 @@ wells_public_deep_residential = wells[((wells["WELL_USE"] == "Public Supply") & 
 # Display first two and last two rows of attribute table
 display_table(table_name = "San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential", attribute_table = wells_public_deep_residential)
 
-## Select by Location
-
-Selecting by location selects features based on its relative spatial relationship with another dataset. In other words, features are selected based on their location relative to the location of another dataset.
-
-For example:
-* to know how many wells there are in Santa Clara County, we could select all the wells that fall within Santa Clara County boundaries (which we do in one of the examples below)
-* to know what rivers flow through Santa Clara County, we could select all the river polylines that intersect with Santa Clara County boundaries
-
-For more information on selecting by location and spatial relationships, check out this [ArcGIS documentation](https://desktop.arcgis.com/en/arcmap/10.3/map/working-with-layers/using-select-by-location.htm).
-
-There are multiple spatial relationships available in `geopandas`: [^gpd_binary]
-
-| Spatial Relationship | Function(s) | Description |
-| :------------ | ------------------ | ----------------------------------: |
-| contains | `contains()` | geometry encompasses the other geometry’s boundary and interior without any boundaries touching |
-| covers | `covers()` | all of the geometry's points are to the exterior of the other geometry's points |
-| covered by | `covered_by()` | all of the geometry's points are to the interior of the other geometry's points |
-| crosses | `crosses()` | geometry's interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry |
-| disjoint | `disjoint()` | geometry's boundary and interior do not intersect the boundary and interior of the other geometry |
-| equal geometry | `geom_equals()`, `geom_almost_equals()`, `geom_equals_exact()` | geometry's boundary, interior, and exterior matches (within a range) those of the other |
-| intersects | `intersects()` | geometry's boundary or interior touches or crosses any part of the other geometry |
-| overlaps | `overlaps()` | geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions |
-| touches | `touches()` | geometry shares at least one point with the other geometry, provided that no part of the geometry's interior intersects with the other geometry |
-| within | `within()` | geometry is enclosed in the other geometry (geometry's boundary and interior intersects with the other geometry's interior only) |
-
-```{note}
-The functions for these spatial relationships will generally output a `pandas` series with Boolean values (`True` or `False`) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a `True` output will be retained).
-```
-
-### Method 1 - Shapely vector
-
-These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.
-
 # Select wells that fall within Shapely rectangle
 wells_within_rect_shapely = wells[wells.within(poly_shapely)]
 
@@ -240,14 +152,6 @@ display_table(table_name = "San Francisco Bay Area Wells within a User-Defined R
 
 # Plot selection
 plot_df(result_name = "San Francisco Bay Area Wells within a User-Defined Rectangle", result_df = wells_within_rect_shapely, result_geom_type = "point", area = poly)
-
-### Method 2 - GeoDataFrame
-
-If we're trying to select features that have a specified spatial relationship with another `geopandas` object, it gets a little tricky. This is because the `geopandas` spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on. [^gpd_within], [^gpd_data]
-
-As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets--or else we'll get a warning and the output will be empty.
-
-Because each record in a GeoDataFrame has a geometry column that stores that record's geometry as a `shapely` object, we can call this object if we want to check a bunch of features against one extent (with one geometry). [^gpd_within], [^gpd_data]
 
 # Select the Santa Clara County boundary
 sc_county = counties[counties["coname"] == "Santa Clara County"]
@@ -260,15 +164,3 @@ display_table(table_name = "San Francisco Bay Area Wells within Santa Clara Coun
 
 # Plot selection
 plot_df(result_name = "San Francisco Bay Area Wells within Santa Clara County", result_df = wells_within_sc_shapely, result_geom_type = "point", area = sc_county)
-
-```{tip}
-If we are interested in wells that fall within two or more counties (i.e., we have multiple records that will be used for selection), we can enclose the above code in a `for` loop.
-```
-
-[^gpd_clip]: [Clip Vector Data with GeoPandas, GeoPandas](https://geopandas.org/gallery/plot_clip.html)
-[^gpd_select]: [Indexing and Selecting Data, GeoPandas](https://geopandas.org/docs/user_guide/indexing.html)
-[^pd_select]: [Indexing and selecting data, pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html)
-[^pd_subset]: [How do I select a subset of a DataFrame?, pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html)
-[^gpd_binary]: [GeoSeries - Binary Predicates, GeoPandas](https://geopandas.org/docs/reference/geoseries.html#binary-predicates)
-[^gpd_within]: [geopandas.GeoSeries.within, GeoPandas](https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html)
-[^gpd_data]: [Data Structures, GeoPandas](https://geopandas.org/docs/user_guide/data_structures.html)

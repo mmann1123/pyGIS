@@ -1458,3 +1458,20 @@ with gw.config.update(ref_image=LS):
         ax.imshow(src.data[0])
         
 # %%
+import geowombat as gw
+from geowombat.data import rgbn
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(dpi=200)
+
+proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
+
+with gw.config.update(ref_crs=proj4):
+    with gw.open(rgbn) as src:
+        print(src.transform)
+        print(src.crs)
+        print(src.resampling)
+        print(src.res)
+        src.where(src != 0).sel(band=[3,2,1]).plot.imshow(robust=True, ax=ax)
+
+plt.tight_layout(pad=1)
+#%%

@@ -59,7 +59,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/e_raster_reproject.html" />
+    <link rel="canonical" href="https://pygis.io/docs/e_raster_reproject.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Resampling Rasters w. Rasterio and Geowombat" href="e_raster_resample.html" />
@@ -70,11 +70,11 @@
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/e_raster_reproject.html" />
+<meta property="og:url"         content="https://pygis.io/docs/e_raster_reproject.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Reproject Rasters w. Rasterio and Geowombat" />
 <meta property="og:description" content="Reproject Rasters w. Rasterio and Geowombat  Reprojecting a Raster with Geowombat  Far and away the easiest way to handle raster data is by using geowombat. Her" />
-<meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
+<meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
 
@@ -434,6 +434,11 @@
    Reprojecting a Raster with Rasterio
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Reprojecting a Raster with Geowombat
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -492,94 +497,94 @@
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/130 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:29,  4.39it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:31,  4.06it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 9/130 [00:00&lt;00:04, 29.25it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 9/130 [00:00&lt;00:04, 27.75it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█         | 14/130 [00:00&lt;00:03, 35.72it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█         | 14/130 [00:00&lt;00:03, 33.60it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▌        | 20/130 [00:00&lt;00:02, 43.15it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▍        | 19/130 [00:00&lt;00:02, 37.34it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 19%|█▉        | 25/130 [00:00&lt;00:02, 36.78it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 24/130 [00:00&lt;00:02, 35.47it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██▍       | 31/130 [00:00&lt;00:02, 40.48it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|██▏       | 29/130 [00:00&lt;00:02, 36.28it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 36/130 [00:01&lt;00:02, 35.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 33/130 [00:01&lt;00:02, 32.83it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 31%|███       | 40/130 [00:01&lt;00:02, 34.58it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 37/130 [00:01&lt;00:03, 27.00it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 34%|███▍      | 44/130 [00:01&lt;00:02, 30.49it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███▎      | 43/130 [00:01&lt;00:02, 33.86it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 37%|███▋      | 48/130 [00:01&lt;00:03, 26.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▌      | 47/130 [00:01&lt;00:02, 28.66it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|████      | 53/130 [00:01&lt;00:02, 29.59it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|███▉      | 51/130 [00:01&lt;00:03, 25.88it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 44%|████▍     | 57/130 [00:01&lt;00:03, 24.26it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|████▏     | 55/130 [00:01&lt;00:02, 28.18it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|████▌     | 60/130 [00:02&lt;00:02, 23.97it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 59/130 [00:02&lt;00:02, 24.24it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 63/130 [00:02&lt;00:03, 21.95it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 62/130 [00:02&lt;00:03, 21.71it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████     | 66/130 [00:02&lt;00:02, 22.57it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████     | 66/130 [00:02&lt;00:02, 22.72it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:02&lt;00:02, 22.25it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:02&lt;00:02, 24.10it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 72/130 [00:02&lt;00:02, 20.65it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 72/130 [00:02&lt;00:02, 22.74it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:02&lt;00:02, 21.51it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:02&lt;00:02, 22.40it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:02&lt;00:02, 23.75it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:02&lt;00:02, 23.94it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████▎   | 82/130 [00:03&lt;00:02, 22.18it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████▎   | 82/130 [00:03&lt;00:02, 23.27it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 85/130 [00:03&lt;00:01, 23.46it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 85/130 [00:03&lt;00:02, 22.15it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 69%|██████▉   | 90/130 [00:03&lt;00:01, 27.32it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|███████   | 91/130 [00:03&lt;00:01, 28.95it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|███████▏  | 94/130 [00:03&lt;00:01, 25.00it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|███████▏  | 94/130 [00:03&lt;00:01, 25.65it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 98/130 [00:03&lt;00:01, 27.35it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▍  | 97/130 [00:03&lt;00:01, 24.96it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 81%|████████  | 105/130 [00:03&lt;00:00, 32.46it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 104/130 [00:03&lt;00:00, 32.39it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 84%|████████▍ | 109/130 [00:03&lt;00:00, 33.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|████████▎ | 108/130 [00:04&lt;00:00, 28.55it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 114/130 [00:04&lt;00:00, 33.15it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 115/130 [00:04&lt;00:00, 36.67it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|█████████ | 118/130 [00:04&lt;00:00, 34.10it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 119/130 [00:04&lt;00:00, 36.50it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▌| 124/130 [00:04&lt;00:00, 35.94it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|█████████▋| 126/130 [00:04&lt;00:00, 42.22it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:04&lt;00:00, 29.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:04&lt;00:00, 29.39it/s]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -709,6 +714,41 @@ Destination Transform:
 <div class="figure align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Reprojecting a Raster with Geowombat<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If that all looks too hard, well you are right. Thankfully geowombat comes to the rescue once again. All we need to do is pass a <code class="docutils literal notranslate"><span class="pre">ref_crs</span></code> to the configuration manager. We can also se the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method when we open the image, by default it will be <code class="docutils literal notranslate"><span class="pre">nearest</span></code>, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="n">proj4</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">,</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 2502400.7632678417, 0.0, -5.0, -2147313.7330151177)
++proj=aea +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs=True
+nearest
+(5.0, 5.0)
+</pre></div>
+</div>
+<img alt="../_images/e_raster_reproject_9_1.png" src="../_images/e_raster_reproject_9_1.png" />
+</div>
 </div>
 </div>
 </div>

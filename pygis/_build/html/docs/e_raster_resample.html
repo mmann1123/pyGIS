@@ -58,7 +58,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <link rel="canonical" href="https://mmann1123.github.io/pyGIS/docs/e_raster_resample.html" />
+    <link rel="canonical" href="https://pygis.io/docs/e_raster_resample.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Opening Remote Sensed Images" href="f_rs_io.html" />
@@ -69,11 +69,11 @@
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://mmann1123.github.io/pyGIS/docs/e_raster_resample.html" />
+<meta property="og:url"         content="https://pygis.io/docs/e_raster_resample.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Resampling Rasters w. Rasterio and Geowombat" />
 <meta property="og:description" content="Resampling Rasters w. Rasterio and Geowombat  Why is Resampling Important?  Before you begin any analysis using rater data it is critical that you have rasters " />
-<meta property="og:image"       content="https://mmann1123.github.io/pyGIS/_static/pygis.png" />
+<meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
 
@@ -439,8 +439,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#geowombat-upsampling-example">
-     Geowombat Upsampling Example
+    <a class="reference internal nav-link" href="#geowombat-up-down-sampling-example">
+     Geowombat Up/Down Sampling Example
     </a>
    </li>
   </ul>
@@ -505,10 +505,11 @@
 <a class="reference internal image-reference" href="../_images/Raster_diff-res.jpg"><img alt="../_images/Raster_diff-res.jpg" src="../_images/Raster_diff-res.jpg" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">¶</a></p>
 </div>
+<p>We can co-register images by resampling, and often reprojecting, one image to match another.</p>
 </div>
 <div class="section" id="methods-for-resampling-explained">
-<h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">¶</a></h2>
-<p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>.</p>
+<span id="raster-resample-methods"></span><h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">¶</a></h2>
+<p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>. But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <p><strong>resampling direction</strong></p>
 <ul class="simple">
 <li><p>Upsampling - converting to higher resolution/smaller cells.</p></li>
@@ -601,9 +602,9 @@ Transform after resample:
 <p>Read up on <a class="reference internal" href="d_affine.html#d-affine-transform-matrix"><span class="std std-ref">affine transformations</span></a> to help you understand the <code class="docutils literal notranslate"><span class="pre">transform.scale</span></code> function above.</p>
 </div>
 </div>
-<div class="section" id="geowombat-upsampling-example">
-<h3>Geowombat Upsampling Example<a class="headerlink" href="#geowombat-upsampling-example" title="Permalink to this headline">¶</a></h3>
-<p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. Writing a file is a bit more intuitive too.</p>
+<div class="section" id="geowombat-up-down-sampling-example">
+<h3>Geowombat Up/Down Sampling Example<a class="headerlink" href="#geowombat-up-down-sampling-example" title="Permalink to this headline">¶</a></h3>
+<p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. We have a number of resampling methods available depending on the context <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. Writing a file is a bit more intuitive too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
@@ -655,8 +656,8 @@ Attributes:
 <p>Our example data will look at registering LandSat data with precipitation data from CHIRPS.</p>
 <div class="section" id="example-of-co-registering-rasters-with-geowombat">
 <h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">¶</a></h3>
-<p>Co-registering data is simple in geowombat, you simply need to choose an reference image to match the bounds, CRS, and cell size.</p>
-<p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999.</p>
+<p>Co-registering data is simple in geowombat, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
+<p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>

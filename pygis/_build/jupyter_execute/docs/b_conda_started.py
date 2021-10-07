@@ -237,7 +237,7 @@
 # 
 # ````{tabbed} Linux
 # ```
-# # Or if browser is  present
+# # Iff browser is  present
 # sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
@@ -247,3 +247,80 @@
 # # THEN control click on URL printed to the bottom of terminal
 # ```
 # ````
+# Every time you want to run geowombat you are going to `run` the docker container called `geowombat`. 
+# 
+# ```{warning}
+# **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container.
+# ```
+# 
+# To make this a little easier you can create an executable script on your desktop to run it when you want. 
+# 
+# ````{tabbed} Mac Bash
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # write a shell script called run_geowombat
+# # between the ''s put whatever bash code you want
+# echo '
+# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# ' > run_geowombat.sh
+# 
+# # allow it to be executable
+# chmod 755 run_geowombat.sh  
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # Not sure yet!
+# ```
+# ````
+# 
+# ````{tabbed} Linux
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # write a shell script called run_geowombat
+# # between the ''s put whatever bash code you want
+# echo '
+# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# ' > run_geowombat.sh
+# 
+# # allow it to be executable
+# chmod +x run_geowombat.sh  
+# ```
+# ````
+# 
+# Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.
+# 
+# To execute our run_geowombat.sh script we need to navigate to the Desktop, then execute the file:
+# 
+# ````{tabbed} Mac Bash
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # execute it
+# ./run_geowombat.sh
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # Not sure yet!
+# ```
+# ````
+# 
+# ````{tabbed} Linux
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # execute it
+# ./run_geowombat.sh
+# ```
+# ````
+# 
+# When you're done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type `exit` in the terminal window to exit your geowombat container.
