@@ -488,7 +488,7 @@
 <p>The result of this formula generates a value between -1 and +1.  Low reflectance (low values) in the red channel and high reflectance in the NIR channel will yield a high EVI value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -498,10 +498,54 @@
 <p>Calculate a vegetation index, returning an <code class="docutils literal notranslate"><span class="pre">Xarray.DataArray</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
     <span class="n">evi</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">evi</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">evi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 4, y: 403, x: 515)&gt;
+dask.array&lt;open_rasterio-b3d223d294244e0149d01d15b4a9c936&lt;this-array&gt;, shape=(4, 403, 515), dtype=uint8, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1 2 3 4
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+Attributes: (12/13)
+    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                +init=epsg:32618
+    res:                (5.0, 5.0)
+    is_tiled:           1
+    nodatavals:         (nan, nan, nan, nan)
+    scales:             (1.0, 1.0, 1.0, 1.0)
+    ...                 ...
+    AREA_OR_POINT:      Area
+    DataType:           Generic
+    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
+    resampling:         nearest
+    data_are_separate:  0
+    data_are_stacked:   0
+&lt;xarray.DataArray (band: 1, y: 403, x: 515)&gt;
+dask.array&lt;broadcast_to, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * band     (band) &lt;U3 &#39;evi&#39;
+Attributes: (12/17)
+    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                +init=epsg:32618
+    res:                (5.0, 5.0)
+    is_tiled:           1
+    nodatavals:         None
+    scales:             (1.0,)
+    ...                 ...
+    data_are_separate:  0
+    data_are_stacked:   0
+    pre-scaling:        0.0001
+    sensor:             rgbn
+    vi:                 evi
+    drange:             (0, 1)
 </pre></div>
 </div>
 </div>
@@ -509,7 +553,7 @@
 <p>Or use the configuration context to set parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -519,6 +563,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_band_math_5_0.png" src="../_images/f_rs_band_math_5_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="two-band-enhanced-vegetation-index-evi2">
@@ -527,7 +574,7 @@
 <p>This allows us to extend EVI calculations back in time using AVHRR, and avoids some problems with the blue band which tends to be noisy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -537,6 +584,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_band_math_7_0.png" src="../_images/f_rs_band_math_7_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="normalized-difference-indices-ndvi">
@@ -545,10 +595,34 @@
 <p>We can calculate it using the generic <code class="docutils literal notranslate"><span class="pre">norm_diff</span></code> function for any two-band combination.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">norm_diff</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;nir&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 403, x: 515)&gt;
+dask.array&lt;broadcast_to, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * band     (band) &lt;U9 &#39;norm-diff&#39;
+Attributes: (12/17)
+    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                +init=epsg:32618
+    res:                (5.0, 5.0)
+    is_tiled:           1
+    nodatavals:         None
+    scales:             (1.0,)
+    ...                 ...
+    resampling:         nearest
+    data_are_separate:  0
+    data_are_stacked:   0
+    pre-scaling:        1.0
+    vi:                 norm-diff
+    drange:             (-1, 1)
 </pre></div>
 </div>
 </div>
@@ -559,7 +633,7 @@
 <p>Tasseled cap tranform uses a linear equation to try to differentiate different components of the spectrum that are of interest for vegetation dynamics such as phenological stages. The output includes three bands including <code class="docutils literal notranslate"><span class="pre">brightness</span></code>, <code class="docutils literal notranslate"><span class="pre">greeness</span></code> for vegetation, and <code class="docutils literal notranslate"><span class="pre">wetness</span></code> as an idicator of soil and canopy moisture. Use <code class="docutils literal notranslate"><span class="pre">.sel(band='wetness')</span></code> to select them individually.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;qb&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -569,6 +643,31 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 403, x: 515)&gt;
+dask.array&lt;astype, shape=(3, 403, 515), dtype=float64, chunksize=(3, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * band     (band) &lt;U10 &#39;brightness&#39; &#39;greenness&#39; &#39;wetness&#39;
+Attributes: (12/14)
+    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                +init=epsg:32618
+    res:                (5.0, 5.0)
+    is_tiled:           1
+    nodatavals:         (nan, nan, nan, nan)
+    scales:             (1.0, 1.0, 1.0, 1.0)
+    ...                 ...
+    DataType:           Generic
+    sensor:             Quickbird with 4 (visible + NIR) bands
+    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
+    resampling:         nearest
+    data_are_separate:  0
+    data_are_stacked:   0
+</pre></div>
+</div>
+<img alt="../_images/f_rs_band_math_11_1.png" src="../_images/f_rs_band_math_11_1.png" />
 </div>
 </div>
 <p>Sources:</p>
