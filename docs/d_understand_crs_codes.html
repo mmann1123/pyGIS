@@ -544,7 +544,7 @@
 <p>Let’s begin by reading in this dataset (no need to download the shapefile as we will pull it directly from the website).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="c1"># Read data (shapefile)</span>
@@ -556,7 +556,7 @@
 <p>Let’s also define a function that will allow us to quickly produce a map of our data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="k">def</span> <span class="nf">map_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
@@ -587,10 +587,13 @@
 <p>Now, we can see how the shapefile we just read in looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create map using DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create map using DC shapefile</span>
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc</span><span class="p">],</span> <span class="s2">&quot;Washington, DC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_5_0.png" src="../_images/d_understand_crs_codes_5_0.png" />
 </div>
 </div>
 <p>It looks like Washington, DC, albeit a bit squished! Next, let’s see how we can work with CRSs in Python.</p>
@@ -602,8 +605,13 @@
 <p>To check the dataset’s CRS (assuming it has one), use the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get CRS for DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get CRS for DC shapefile</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CRS: epsg:4326
 </pre></div>
 </div>
 </div>
@@ -615,7 +623,7 @@
 <p>To change a dataset’s CRS, we’ll need to reproject the data. Here, we will project copies of our data twice using the <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> function, once with a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string and once with an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code. Both of these values reference the same CRS (in this case, NAD83)–they are simply different ways to reference it. The projection will remain in latitude and longitude, but we will change the ellipsoid and datum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Create a copy of the DC shapefile</span>
 <span class="n">dc_reproject_proj4</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Example 1: Reproject the data to NAD83 using PROJ.4 string</span>
@@ -636,11 +644,17 @@
 <p>When we call the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute, it’s no longer <code class="docutils literal notranslate"><span class="pre">'epsg:4326'</span></code>, which means that the data has been reprojected!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Print new CRS of DC</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Print new CRS of DC</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1 (PROJ.4 string) CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc_reproject_proj4</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
 
 <span class="c1"># Example 2: Print new CRS of DC</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2 (EPSG code) CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc_reproject_epsg</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1 (PROJ.4 string) CRS: +proj=longlat +ellps=GRS80 +datum=NAD83 +no_defs +type=crs
+Example 2 (EPSG code) CRS: epsg:4269
 </pre></div>
 </div>
 </div>
@@ -718,17 +732,27 @@
 <p>Below is the original shapefile of DC that we read in above–this will serve as a reference point for comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map original DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map original DC shapefile</span>
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc</span><span class="p">],</span> <span class="s2">&quot;Washington, DC - WGS84&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_13_0.png" src="../_images/d_understand_crs_codes_13_0.png" />
 </div>
 </div>
 <p>The map above utilizes a geographic coordinate system, as evidenced by the latitude and longitude values on the axes. Another way to check is to look at the geometry of the shapefile.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check geometry values of original shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check geometry values of original shapefile</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Geometry of shapefile:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
+0    POLYGON ((-77.11980 38.93435, -77.11979 38.934...
+Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
@@ -739,7 +763,7 @@
 <p>Now, we will reproject the shapefile using a projected coordinate system. Here, we will use the Lambert Conformal Conic projection.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic</span>
@@ -754,6 +778,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
+0    POLYGON ((1106986.814 4694966.592, 1106987.032...
+Name: geometry, dtype: geometry
+</pre></div>
+</div>
+<img alt="../_images/d_understand_crs_codes_17_1.png" src="../_images/d_understand_crs_codes_17_1.png" />
+</div>
 </div>
 <p>Notice how the values on the axes changed from latitude and longitude to meters.</p>
 </div>
@@ -763,7 +795,7 @@
 <p>We can change the values for <code class="docutils literal notranslate"><span class="pre">lat_0</span></code> and <code class="docutils literal notranslate"><span class="pre">lon_0</span></code>, which refer to the latitude of origin and the central meridian, respectively. We will change those values to <code class="docutils literal notranslate"><span class="pre">38.9072</span></code> and <code class="docutils literal notranslate"><span class="pre">-77.0369</span></code>, which is the center of DC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_center</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point</span>
@@ -774,6 +806,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_19_0.png" src="../_images/d_understand_crs_codes_19_0.png" />
+</div>
 </div>
 <p>As seen in the new map above, the values on both axes have changed. The origin <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> is now in the center of DC.</p>
 </div>
@@ -783,7 +818,7 @@
 <p>Here, we will set our two standard parallels at <code class="docutils literal notranslate"><span class="pre">38.850</span></code> and <code class="docutils literal notranslate"><span class="pre">39.950</span></code> as they fall within the DC boundaries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_parallels_1</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point and standard parallels</span>
@@ -794,11 +829,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_21_0.png" src="../_images/d_understand_crs_codes_21_0.png" />
+</div>
 </div>
 <p>Nothing really appears to be different; however, these values are important. Look what happens when we assign different values–ones that don’t really make sense for mapping in DC–and compare the resulting DC map to the previous map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_parallels_2</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># # Reproject the data to Lambert Conformal Conic with specified center point and arbitrary standard parallels</span>
@@ -809,6 +847,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_23_0.png" src="../_images/d_understand_crs_codes_23_0.png" />
+</div>
 </div>
 <p>It appears DC has shrunk! Of course, that’s not the case in reality, but because map projections are inherently imperfect, choosing arbitrary parameters can make things worse. In this case, since the chosen standard parallels are relatively far from each other and from DC, all the data in between the standard parallels end up being compressed even more. For more information, check out this <a class="reference external" href="https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf">Esri publication on map projections</a>.</p>
 </div>
@@ -818,7 +859,7 @@
 <p>Let’s set a false easting value of <code class="docutils literal notranslate"><span class="pre">500000</span></code> and a false northing value of <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_false_e</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point, standard parallels, and false easting/northing</span>
@@ -829,6 +870,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_25_0.png" src="../_images/d_understand_crs_codes_25_0.png" />
+</div>
 </div>
 <p>Notice that the x-axis shifted to the left by 500,000 meters. The y-axis stayed the same because we did not use false northing. Now, the “origin” is <code class="docutils literal notranslate"><span class="pre">(500000,</span> <span class="pre">0)</span></code>.</p>
 <p>Source: <a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/Map%20coordinate%20systems/UTM%20and%20UPS.htm">Universal Transverse Mercator system, Hunter College Department of Geography and Environmental Science</a></p>
@@ -838,7 +882,7 @@
 <p>UTM is conformal. So let’s compare our custom projection to UTM Zone 18N (in which DC falls).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_utm18n</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to UTM Zone 18N</span>
@@ -849,6 +893,9 @@
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc_utm18n</span><span class="p">],</span> <span class="s2">&quot;Washington, DC - UTM Zone 18N&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d_understand_crs_codes_27_0.png" src="../_images/d_understand_crs_codes_27_0.png" />
 </div>
 </div>
 <p>Looks pretty much the same as our custom one!</p>
@@ -866,7 +913,7 @@
 <p>Not all CRSs have a corresponding <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, but we can find the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (if it exists) given a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. To do so, we can use the <code class="docutils literal notranslate"><span class="pre">to_espg()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span> <span class="nn">pyproj</span>
 
 <span class="k">def</span> <span class="nf">get_epsg</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">70</span><span class="p">):</span>
@@ -888,11 +935,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +x_0=2000000 +y_0=500000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: 26943.
+</pre></div>
+</div>
+</div>
 </div>
 <p>Success! In the example above, we were able to successfully obtain the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (in this case, <code class="docutils literal notranslate"><span class="pre">26943</span></code> for NAD83 / California zone 3) because it is exactly matched to the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. If we’re missing some information in the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string, however, we might not be able to get an exact <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code match.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set variable to the PROJ.4 string of NAD83 / California zone 3, with a few parameters missing</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set variable to the PROJ.4 string of NAD83 / California zone 3, with a few parameters missing</span>
 <span class="n">proj4_missing</span> <span class="o">=</span> <span class="s2">&quot;+proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs&quot;</span>
 
 <span class="c1"># Call function to obtain relevant EPSG code</span>
@@ -903,6 +955,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: None.
+</pre></div>
+</div>
+</div>
 </div>
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
 <div class="section" id="lowering-minimum-confidence-parameter">
@@ -910,11 +967,16 @@
 <p>We can lower the min_confidence parameter value in the <code class="docutils literal notranslate"><span class="pre">to_epsg()</span></code> function, which will cause the function to return an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code that is the closest match to the provided <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call function to obtain relevant EPSG code and lower the minimum confidence value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call function to obtain relevant EPSG code and lower the minimum confidence value</span>
 <span class="n">result_lower_confidence</span> <span class="o">=</span> <span class="n">get_epsg</span><span class="p">(</span><span class="n">proj4_missing</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># Print result</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EPSG code for </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">proj4_missing</span><span class="p">,</span> <span class="n">result_lower_confidence</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: 26943.
 </pre></div>
 </div>
 </div>

@@ -439,8 +439,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#geowombat-upsampling-example">
-     Geowombat Upsampling Example
+    <a class="reference internal nav-link" href="#geowombat-up-down-sampling-example">
+     Geowombat Up/Down Sampling Example
     </a>
    </li>
   </ul>
@@ -505,10 +505,11 @@
 <a class="reference internal image-reference" href="../_images/Raster_diff-res.jpg"><img alt="../_images/Raster_diff-res.jpg" src="../_images/Raster_diff-res.jpg" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">¶</a></p>
 </div>
+<p>We can co-register images by resampling, and often reprojecting, one image to match another.</p>
 </div>
 <div class="section" id="methods-for-resampling-explained">
-<h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">¶</a></h2>
-<p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>.</p>
+<span id="raster-resample-methods"></span><h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">¶</a></h2>
+<p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>. But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <p><strong>resampling direction</strong></p>
 <ul class="simple">
 <li><p>Upsampling - converting to higher resolution/smaller cells.</p></li>
@@ -529,7 +530,7 @@
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.enums</span> <span class="kn">import</span> <span class="n">Resampling</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -580,18 +581,33 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape before resample: (1860, 2041)
+Shape after resample: (3720, 4082)
+Transform before resample:
+ | 30.00, 0.00, 717345.00|
+| 0.00,-30.00,-2776995.00|
+| 0.00, 0.00, 1.00| 
+
+Transform after resample:
+ | 15.00, 0.00, 717345.00|
+| 0.00,-15.00,-2776995.00|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition-reminder admonition">
 <p class="admonition-title">Reminder</p>
 <p>Read up on <a class="reference internal" href="d_affine.html#d-affine-transform-matrix"><span class="std std-ref">affine transformations</span></a> to help you understand the <code class="docutils literal notranslate"><span class="pre">transform.scale</span></code> function above.</p>
 </div>
 </div>
-<div class="section" id="geowombat-upsampling-example">
-<h3>Geowombat Upsampling Example<a class="headerlink" href="#geowombat-upsampling-example" title="Permalink to this headline">¶</a></h3>
-<p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. Writing a file is a bit more intuitive too.</p>
+<div class="section" id="geowombat-up-down-sampling-example">
+<h3>Geowombat Up/Down Sampling Example<a class="headerlink" href="#geowombat-up-down-sampling-example" title="Permalink to this headline">¶</a></h3>
+<p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. We have a number of resampling methods available depending on the context <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. Writing a file is a bit more intuitive too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
  
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
 
@@ -607,6 +623,29 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 3720, x: 4082)&gt;
+dask.array&lt;open_rasterio-5d3779c5d83524d14a4bbcf537a1f23d&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1 2 3
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.786e+05 7.786e+05
+Attributes:
+    transform:          (15.0, 0.0, 717345.0, 0.0, -15.0, -2776995.0)
+    crs:                +init=epsg:32621
+    res:                (15.0, 15.0)
+    is_tiled:           1
+    nodatavals:         (0, 0, 0)
+    scales:             (1.0, 1.0, 1.0)
+    offsets:            (0.0, 0.0, 0.0)
+    filename:           ../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF
+    resampling:         bilinear
+    AREA_OR_POINT:      Area
+    data_are_separate:  0
+    data_are_stacked:   0
+</pre></div>
+</div>
+</div>
 </div>
 <p>Much…. easier….</p>
 </div>
@@ -617,11 +656,11 @@
 <p>Our example data will look at registering LandSat data with precipitation data from CHIRPS.</p>
 <div class="section" id="example-of-co-registering-rasters-with-geowombat">
 <h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">¶</a></h3>
-<p>Co-registering data is simple in geowombat, you simply need to choose an reference image to match the bounds, CRS, and cell size.</p>
-<p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999.</p>
+<p>Co-registering data is simple in geowombat, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
+<p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -641,6 +680,31 @@
         <span class="c1"># ) </span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 1860, x: 2041)&gt;
+dask.array&lt;open_rasterio-5ea1b887333ee835e34ed81f251d6116&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+Attributes: (12/13)
+    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                +init=epsg:32621
+    res:                (30.0, 30.0)
+    is_tiled:           1
+    nodatavals:         (0,)
+    scales:             (1.0,)
+    ...                 ...
+    descriptions:       (&#39;precipitation&#39;,)
+    filename:           ../data/precipitation_20200601_500m.tif
+    resampling:         bilinear
+    AREA_OR_POINT:      Area
+    data_are_separate:  0
+    data_are_stacked:   0
+</pre></div>
+</div>
+<img alt="../_images/e_raster_resample_5_1.png" src="../_images/e_raster_resample_5_1.png" />
 </div>
 </div>
 <p>Although it’s a bit hard to tell, the cell size is now 30m (see the slices of the larger original cells at the top of the image).</p>

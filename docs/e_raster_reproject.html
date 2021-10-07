@@ -434,6 +434,11 @@
    Reprojecting a Raster with Rasterio
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Reprojecting a Raster with Geowombat
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -470,7 +475,7 @@
 <p>In order to reproject on the fly we are going to open the raster using <code class="docutils literal notranslate"><span class="pre">gw.config.update()</span></code>.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -488,11 +493,109 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/130 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1%|          | 1/130 [00:00&lt;00:31,  4.06it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  7%|▋         | 9/130 [00:00&lt;00:04, 27.75it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 11%|█         | 14/130 [00:00&lt;00:03, 33.60it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▍        | 19/130 [00:00&lt;00:02, 37.34it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 24/130 [00:00&lt;00:02, 35.47it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 22%|██▏       | 29/130 [00:00&lt;00:02, 36.28it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 33/130 [00:01&lt;00:02, 32.83it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|██▊       | 37/130 [00:01&lt;00:03, 27.00it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███▎      | 43/130 [00:01&lt;00:02, 33.86it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▌      | 47/130 [00:01&lt;00:02, 28.66it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 39%|███▉      | 51/130 [00:01&lt;00:03, 25.88it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|████▏     | 55/130 [00:01&lt;00:02, 28.18it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 59/130 [00:02&lt;00:02, 24.24it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 48%|████▊     | 62/130 [00:02&lt;00:03, 21.71it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 51%|█████     | 66/130 [00:02&lt;00:02, 22.72it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|█████▎    | 69/130 [00:02&lt;00:02, 24.10it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 72/130 [00:02&lt;00:02, 22.74it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 75/130 [00:02&lt;00:02, 22.40it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 61%|██████    | 79/130 [00:02&lt;00:02, 23.94it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 63%|██████▎   | 82/130 [00:03&lt;00:02, 23.27it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 85/130 [00:03&lt;00:02, 22.15it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|███████   | 91/130 [00:03&lt;00:01, 28.95it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|███████▏  | 94/130 [00:03&lt;00:01, 25.65it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▍  | 97/130 [00:03&lt;00:01, 24.96it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 104/130 [00:03&lt;00:00, 32.39it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|████████▎ | 108/130 [00:04&lt;00:00, 28.55it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 115/130 [00:04&lt;00:00, 36.67it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 119/130 [00:04&lt;00:00, 36.50it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 97%|█████████▋| 126/130 [00:04&lt;00:00, 42.22it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 130/130 [00:04&lt;00:00, 29.39it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>Let’s take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use <code class="docutils literal notranslate"><span class="pre">.sel(band=[3,2,1])</span></code> to put them back in the right order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -502,6 +605,9 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e_raster_reproject_3_0.png" src="../_images/e_raster_reproject_3_0.png" />
 </div>
 </div>
 <p>Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra.</p>
@@ -517,7 +623,7 @@
 <p>Now let’s calculate the tranform matrix for the destination raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 
@@ -542,6 +648,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Transform:
+ | 30.00, 0.00, 717345.00|
+| 0.00,-30.00,-2776995.00|
+| 0.00, 0.00, 1.00| 
+
+Destination Transform:
+ | 33.24, 0.00,-6105300.09|
+| 0.00,-33.24,-2885952.71|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
 </div>
 <p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check <span class="math notranslate nohighlight">\(\Delta x, \Delta x\)</span>).</p>
 </div>
@@ -550,7 +669,7 @@
 <p>Ok finally!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
 
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
@@ -595,6 +714,41 @@
 <div class="figure align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Reprojecting a Raster with Geowombat<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If that all looks too hard, well you are right. Thankfully geowombat comes to the rescue once again. All we need to do is pass a <code class="docutils literal notranslate"><span class="pre">ref_crs</span></code> to the configuration manager. We can also se the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method when we open the image, by default it will be <code class="docutils literal notranslate"><span class="pre">nearest</span></code>, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="n">proj4</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">,</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 2502400.7632678417, 0.0, -5.0, -2147313.7330151177)
++proj=aea +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs=True
+nearest
+(5.0, 5.0)
+</pre></div>
+</div>
+<img alt="../_images/e_raster_reproject_9_1.png" src="../_images/e_raster_reproject_9_1.png" />
+</div>
 </div>
 </div>
 </div>
