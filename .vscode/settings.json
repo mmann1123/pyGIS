@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "/home/mmann1123/anaconda3/envs/pygisbookgw/bin/python",
-    "restructuredtext.confPath": "/home/mmann1123/Documents/github/geowombat/doc/source"
+    "restructuredtext.confPath": "/home/mmann1123/Documents/github/geowombat/doc/source",
+    "python.formatting.provider": "black"
 }

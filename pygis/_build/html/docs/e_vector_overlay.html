@@ -228,6 +228,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="e_spatial_joins.html">
+   Spatial Joins
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="e_summarize_vector.html">
    Summarizing Point Patterns
   </a>
@@ -819,7 +824,7 @@
 <p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept. <a class="footnote-reference brackets" href="#gpd-set" id="id3">1</a></p>
 <div class="figure align-default" id="union-of-all-geometries-keeps-all-data">
 <img alt="../_images/vector_union.jpg" src="../_images/vector_union.jpg" />
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">¶</a></p>
 </div>
 <p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id5">2</a></p>
 <div class="cell docutils container">
@@ -939,7 +944,7 @@ First two rows:
 <p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id6">1</a></p>
 <div class="figure align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
 <img alt="../_images/vector_intersection.jpg" src="../_images/vector_intersection.jpg" />
-<p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">¶</a></p>
 </div>
 <p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
 <div class="cell docutils container">
@@ -1051,7 +1056,7 @@ First two rows:
 <p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded. <a class="footnote-reference brackets" href="#gpd-set" id="id9">1</a></p>
 <div class="figure align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
 <img alt="../_images/vector_identity.jpg" src="../_images/vector_identity.jpg" />
-<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">¶</a></p>
 </div>
 <p>Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values.</p>
 <p>Looking at the map, we see all combined geometries except for the areas that are unique to the second dataset (watershed boundaries dataset).</p>
@@ -1164,7 +1169,7 @@ First two rows:
 <p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept. <a class="footnote-reference brackets" href="#gpd-set" id="id10">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id11">2</a></p>
 <div class="figure align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
 <img alt="../_images/vector_erase.jpg" src="../_images/vector_erase.jpg" />
-<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">¶</a></p>
 </div>
 <p>Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was “combined” with the first dataset by discarding some data (altering the geometry) from the first dataset.</p>
 <p>Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).</p>

@@ -156,6 +156,7 @@
 # e_new_vectors
 # e_vector_overlay
 # e_extraction
+# e_spatial_joins
 # e_summarize_vector
 # e_vector_merge_dissolve
 # e_interpolation

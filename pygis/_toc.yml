@@ -36,6 +36,8 @@
     - file: docs/e_new_vectors
     - file: docs/e_vector_overlay
     - file: docs/e_extraction
+    - file: docs/e_spatial_joins
+    # - file: docs/e_table_joins
     - file: docs/e_summarize_vector
     - file: docs/e_vector_merge_dissolve
     - file: docs/e_interpolation
@@ -58,3 +60,7 @@
     - file: docs/f_rs_config
     - file: docs/f_rs_band_math
     - file: docs/f_rs_extraction
+    #- file: docs/f_common_task
+    #- file: docs/g_xr_climate
+    #- file: docs/g_xr_PRISM
+    

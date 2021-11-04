@@ -164,6 +164,7 @@ print("Example 2 (EPSG code) CRS: {}".format(dc_reproject_epsg.crs))
 # | `+ellps` | Ellipsoid name |
 # | `+k_0` | Scaling factor |
 # | `+lat_0` | Latitude of origin |
+# | `+lat_1 or 2` | Standard parallels |
 # | `+lon_0` | Central meridian |
 # | `+lon_wrap` | Center longitude to use for wrapping |
 # | `+over` | Allow longitude output outside -180 to 180 range, disables wrapping |
@@ -175,6 +176,23 @@ print("Example 2 (EPSG code) CRS: {}".format(dc_reproject_epsg.crs))
 # | `+y_0` | False northing |
 # 
 # Some parameters (not listed above) are specific to certain CRSs. Be sure to always verify the parameters that are allowed for each projection. You can't always "mix and match" the `PROJ.4` parameters when creating a custom projection.
+# 
+# 
+# These parameters can be confusing. To help with this we developed some visual examples. 
+# 
+# Take for instance lambert conformal conic with the proj4 string of "+proj=lcc +lat_1=20 +lat_2=60 lon_0=-96 +datum=NAD83 +units=m". We can see that `lat_1` and `lat_2` specify the standard parallels. This is an example of a "secant" projection which touches the globe in two places in order to minimize distortion.  The central meridian `lon_0` is moved away from Greenwich England 96 degrees W to be over roughly Dallas TX. 
+# 
+# ```{figure} ../_static/d_crs/d_LambertProj_Code.png
+# :name: Visualization of lambert conformal conic Proj4 string
+# Visualization of lambert conformal conic Proj4 string
+# ```
+# 
+# We can look at another example for a UTM projection with the proj4 string of "+proj=tmerc +lon_0=-99 +x_0=500,000 units=m". This projection by comparison has a central meridian `lon_0` directly over Dallas TX which is 99 degrees W of Greenwich. This central meridan is assigned the 'false easting' `x_0` of 500,000 meters.  
+# 
+# ```{figure} ../_static/d_crs/d_MercatorProj_Code.png
+# :name: Visualization of UTM zone 14 Proj4 string
+# Visualization of UTM zone 14 Proj4 string
+# ```
 # 
 # Sources: [Cartographic projection](https://proj.org/usage/projections.html); [Using PROJ](https://proj.org/usage/quickstart.html); [Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser](https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/)
 # 

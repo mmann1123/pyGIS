@@ -1475,3 +1475,38 @@ with gw.config.update(ref_crs=proj4):
 
 plt.tight_layout(pad=1)
 #%%
+from pydap.client import open_url
+import xarray as xr
+
+# %%
+os.chdir('../temp')
+!wget "https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis.derived/surface/air.mon.mean.nc"
+#%%
+
+ds = xr.open_dataset('air.mon.mean.nc')
+#%%
+
+ds_clim = ds.groupby('time.month').mean(dim='time')
+ds_clim.air.sel(month=1).plot()
+
+#%%
+ds_anom = ds.groupby('time.month') - ds_clim
+ds_anom.air[2].plot()
+
+# %% prism
+from pydap.client import open_url
+import xarray as xr
+import pandas as pd
+#https://xray.readthedocs.io/en/v0.3.1/io.html
+remote_data = xr.open_dataset(
+    'http://iridl.ldeo.columbia.edu/SOURCES/.OSU/.PRISM/.monthly/dods',
+    decode_times=True)
+print(remote_data)
+# %%
+units, reference_date = remote_data.T.attrs['units'].split('since')
+remote_data['time'] = pd.date_range(start=reference_date, periods=remote_data.sizes['T'], freq='MS')
+
+print(remote_data)
+
+
+# %%
