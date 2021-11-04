@@ -230,6 +230,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="e_spatial_joins.html">
+   Spatial Joins
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="e_summarize_vector.html">
    Summarizing Point Patterns
   </a>
@@ -694,36 +699,50 @@ Example 2 (EPSG code) CRS: epsg:4269
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lat_0</span></code></p></td>
 <td><p>Latitude of origin</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lat_1</span> <span class="pre">or</span> <span class="pre">2</span></code></p></td>
+<td><p>Standard parallels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_0</span></code></p></td>
 <td><p>Central meridian</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_wrap</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+lon_wrap</span></code></p></td>
 <td><p>Center longitude to use for wrapping</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+over</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+over</span></code></p></td>
 <td><p>Allow longitude output outside -180 to 180 range, disables wrapping</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+pm</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+pm</span></code></p></td>
 <td><p>Alternate prime meridian (typically a city name)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+proj</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+proj</span></code></p></td>
 <td><p>Projection name</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+units</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+units</span></code></p></td>
 <td><p>meters, US survey feet, etc.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+vunits</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+vunits</span></code></p></td>
 <td><p>vertical units</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+x_0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+x_0</span></code></p></td>
 <td><p>False easting</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+y_0</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+y_0</span></code></p></td>
 <td><p>False northing</p></td>
 </tr>
 </tbody>
 </table>
 <p>Some parameters (not listed above) are specific to certain CRSs. Be sure to always verify the parameters that are allowed for each projection. You can’t always “mix and match” the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> parameters when creating a custom projection.</p>
+<p>These parameters can be confusing. To help with this we developed some visual examples.</p>
+<p>Take for instance lambert conformal conic with the proj4 string of “+proj=lcc +lat_1=20 +lat_2=60 lon_0=-96 +datum=NAD83 +units=m”. We can see that <code class="docutils literal notranslate"><span class="pre">lat_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_2</span></code> specify the standard parallels. This is an example of a “secant” projection which touches the globe in two places in order to minimize distortion.  The central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> is moved away from Greenwich England 96 degrees W to be over roughly Dallas TX.</p>
+<div class="figure align-default" id="visualization-of-lambert-conformal-conic-proj4-string">
+<img alt="../_images/d_LambertProj_Code.png" src="../_images/d_LambertProj_Code.png" />
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Visualization of lambert conformal conic Proj4 string</span><a class="headerlink" href="#visualization-of-lambert-conformal-conic-proj4-string" title="Permalink to this image">¶</a></p>
+</div>
+<p>We can look at another example for a UTM projection with the proj4 string of “+proj=tmerc +lon_0=-99 +x_0=500,000 units=m”. This projection by comparison has a central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> directly over Dallas TX which is 99 degrees W of Greenwich. This central meridan is assigned the ‘false easting’ <code class="docutils literal notranslate"><span class="pre">x_0</span></code> of 500,000 meters.</p>
+<div class="figure align-default" id="visualization-of-utm-zone-14-proj4-string">
+<img alt="../_images/d_MercatorProj_Code.png" src="../_images/d_MercatorProj_Code.png" />
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualization of UTM zone 14 Proj4 string</span><a class="headerlink" href="#visualization-of-utm-zone-14-proj4-string" title="Permalink to this image">¶</a></p>
+</div>
 <p>Sources: <a class="reference external" href="https://proj.org/usage/projections.html">Cartographic projection</a>; <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
 </div>
 <div class="section" id="creating-a-custom-crs-using-proj-4-string">

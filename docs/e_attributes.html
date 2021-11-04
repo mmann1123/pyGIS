@@ -230,6 +230,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="e_spatial_joins.html">
+   Spatial Joins
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="e_summarize_vector.html">
    Summarizing Point Patterns
   </a>
@@ -478,7 +483,7 @@
 <div class="section" id="attributes-indexing-for-vector-data">
 <h1>Attributes &amp; Indexing for Vector Data<a class="headerlink" href="#attributes-indexing-for-vector-data" title="Permalink to this headline">¶</a></h1>
 <div class="figure align-default" id="vector-properties">
-<img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">¶</a></p>
+<img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">¶</a></p>
 </div>
 <p>Each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain any geometry type (e.g. points, lines, polygon) and has a <code class="docutils literal notranslate"><span class="pre">GeoSeries.crs</span></code> attribute, which stores information on the projection (CRS stands for Coordinate Reference System). Therefore, each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> in a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> can be in a different projection, allowing you to have, for example, multiple versions of the same geometry, just in a different CRS.</p>
 <div class="admonition tip">
