@@ -20,6 +20,7 @@ dependencies:
 - census
 - geoplot
 - pip
+- netcdf4
 - pip:
   - pip-tools
   - opencv-python
@@ -31,6 +32,7 @@ dependencies:
   - geopandas
   - contextily
   - us
+  - pydap
   '> pygisbookgw.yml
 
 conda env create -f pygisbookgw.yml  
