@@ -1510,3 +1510,52 @@ print(remote_data)
 
 
 # %%
+import geopandas as gpd
+
+counties = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp")
+al_county = counties[counties["coname"] == "Alameda County"]
+
+wells = gpd.read_file("../_static/e_vector_shapefiles/sf_bay_wells_50km/sf_bay_wells_50km.shp")
+# Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects
+# op = "intersects" also counts those that fall on a cell boundary (between two cells)
+al_wells = gpd.sjoin(wells, sf_county, how = "inner", op = "intersects")
+
+
+# Reproject data to NAD83(HARN) / California Zone 3
+# https://spatialreference.org/ref/epsg/2768/
+proj = 2768
+al_county = al_county.to_crs(proj)
+al_wells = al_wells.to_crs(proj)
+
+
+# %%
+# plot county outline and add wells to axis (ax)
+base = al_county.plot(color='white', edgecolor='black')
+al_wells.plot(ax=base, marker='o', color='red', markersize=5)
+
+# %%# %%
+import pandas as pd
+import geopandas as gpd
+from shapely.geometry import Point, LineString, Polygon
+from io import StringIO 
+data = """
+ID,X,Y,Speed
+1,  -87.789,  41.976,  16
+1,  -87.482,  41.677,  17
+2,  -87.599,  41.908,  17
+2,  -87.598,  41.708,  17
+2,  -87.643,  41.675,  17
+"""
+# use StringIO to read in text chunk
+df = pd.read_table(StringIO(data), sep=',')
+
+#zip the coordinates into a point object and convert to a GeoData Frame
+points = [Point(xy) for xy in zip(df.X, df.Y)]
+points = gpd.GeoDataFrame(df, geometry=points, crs = 'EPSG:4326')
+
+lines = points.groupby(['ID'])['geometry'].apply(lambda x:  LineString(x.tolist()))
+lines = gpd.GeoDataFrame(lines, geometry='geometry', crs="EPSG:4326") 
+lines.reset_index(inplace=True)
+lines.plot(column='ID')
+
+# %%
