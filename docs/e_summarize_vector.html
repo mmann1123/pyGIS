@@ -8,7 +8,7 @@
 <meta content="geospatial, aggregate, summarize, binning, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Summarizing Point Patterns &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Point Density Measures - Point Counts &amp; Kernel Density &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -68,8 +68,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_summarize_vector.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Summarizing Point Patterns" />
-<meta property="og:description" content="Summarizing Point Patterns  Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data" />
+<meta property="og:title"       content="Point Density Measures - Point Counts &amp; Kernel Density" />
+<meta property="og:description" content="Point Density Measures - Point Counts &amp; Kernel Density  Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visual" />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -218,6 +218,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="e_buffer_neighbors.html">
+   Proximity Analysis - Buffers, Nearest Neighbor, Adjacency
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="e_vector_overlay.html">
    Vector Overlays and Joins
   </a>
@@ -234,7 +239,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Summarizing Point Patterns
+   Point Density Measures - Point Counts &amp; Kernel Density
   </a>
  </li>
  <li class="toctree-l1">
@@ -421,11 +426,6 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#count-points-in-rectangular-or-hexagonal-grid-or-by-polygon">
    Count Points in Rectangular or Hexagonal Grid or by Polygon
   </a>
@@ -495,12 +495,11 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="summarizing-point-patterns">
-<h1>Summarizing Point Patterns<a class="headerlink" href="#summarizing-point-patterns" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="point-density-measures-point-counts-kernel-density">
+<h1>Point Density Measures - Point Counts &amp; Kernel Density<a class="headerlink" href="#point-density-measures-point-counts-kernel-density" title="Permalink to this headline">¶</a></h1>
 <p>Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.</p>
 <p>This chapter will explore two summary operations that highlight concentrations of data: count points in a rectangular or hexagonal grid or by polygon and kernel density.</p>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p><strong>Setup</strong></p>
 <p>First, we will import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
@@ -544,7 +543,6 @@
 <span class="c1"># Create a column that assigns each well a number</span>
 <span class="n">wells</span><span class="p">[</span><span class="s2">&quot;Well_ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">wells</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
