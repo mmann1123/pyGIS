@@ -1559,3 +1559,101 @@ lines.reset_index(inplace=True)
 lines.plot(column='ID')
 
 # %%
+
+from shapely.geometry import Point, MultiPoint
+from shapely.ops import nearest_points
+
+orig = Point(1, 1.67)
+dest1, dest2, dest3 = Point(0, 1.45), Point(2, 2), Point(0, 2.5)
+
+# %%
+def nearest(row, geom_union, df1, df2, geom1_col='geometry', geom2_col='geometry', src_column=None):
+    """Find the nearest point and return the corresponding value from specified column."""
+
+    # Find the geometry that is closest
+    nearest = df2[geom2_col] == nearest_points(row[geom1_col], geom_union)[1]
+    # Get the corresponding value from df2 (matching is based on the geometry)
+    if src_column is None:
+        value = df2[nearest].index[0]
+    else:
+        value = df2[nearest][src_column].values[0]
+    return value
+
+orig['nearest_id'] = orig.apply(nearest, geom_union=unary_union, df1=orig, df2=dest, src_column='name', axis=1)
+
+
+
+# generate origin and destination points as geodataframe
+orig = {'name': ['Origin_1','Origin_2'], 
+     'geometry': [Point(-77.3,38.94),Point(-77.41,39.93)]}
+orig = gpd.GeoDataFrame(orig, crs="EPSG:4326")
+print(orig)
+
+dest = {'name': ['Baltimore','Washington', 'Fredrick'], 
+     'geometry': [ Point(-76.61,39.29,), Point(-77.04,38.91), Point(-77.40,39.41)]}
+dest = gpd.GeoDataFrame(dest, crs="EPSG:4326")
+print(dest)
+
+unary_union = dest.unary_union
+print(unary_union)
+#%%
+orig['nearest_id'] = orig.apply(nearest, geom_union=unary_union, df1=orig, df2=dest, src_column='name', axis=1)
+orig.head()
+
+
+# %%
+# %%
+def _nearest(row, df1, df2, geom1='geometry', geom2='geometry', df2_column=None):
+    
+    # create object usable by Shapely
+    geom_union = df2.unary_union
+
+    # Find the geometry that is closest
+    nearest = df2[geom2_col] == nearest_points(row[geom1_col], geom_union)[1]
+    # Get the corresponding value from df2 (matching is based on the geometry)
+    if df2_column is None:
+        value = df2[nearest].index[0]
+    else:
+        value = df2[nearest][df2_column].values[0]
+    return value
+
+def nearest(df1, df2, geom1_col='geometry', geom2_col='geometry', df2_column=None):
+    """Find the nearest point and return the corresponding value from specified column.
+    :param df1: Origin points
+    :type df1: geopandas.GeoDataFrame
+    :param df2: Destination points
+    :type df2: geopandas.GeoDataFrame
+    :param geom1_col: name of column holding coordinate geometry, defaults to 'geometry'
+    :type geom1_col: str, optional
+    :param geom2_col: name of column holding coordinate geometry, defaults to 'geometry'
+    :type geom2_col: str, optional
+    :param df2_column: column name to return from df2, defaults to None
+    :type df2_column: str, optional
+    :return: df1 with nearest neighbor index or df2_column appended
+    :rtype: geopandas.GeoDataFrame
+    """
+    df1['nearest_id'] = df1.apply(_nearest,  df1=df1, df2=df2, 
+                                  geom1=geom1_col, geom2=geom2_col, 
+                                  df2_column=df2_column, axis=1)
+    return df1 
+
+
+
+# generate origin and destination points as geodataframe
+orig = {'name': ['Origin_1','Origin_2'], 
+     'geometry': [Point(-77.3,38.94),Point(-77.41,39.93)]}
+orig = gpd.GeoDataFrame(orig, crs="EPSG:4326")
+print(orig)
+
+dest = {'name': ['Baltimore','Washington', 'Fredrick'], 
+     'geometry': [ Point(-76.61,39.29,), Point(-77.04,38.91), Point(-77.40,39.41)]}
+dest = gpd.GeoDataFrame(dest, crs="EPSG:4326")
+print(dest)
+
+unary_union = dest.unary_union
+print(unary_union)
+
+nearest = nearest(df1=orig, df2=dest, df2_column='name')
+nearest.head()
+
+# %%
