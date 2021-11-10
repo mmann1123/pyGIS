@@ -1,9 +1,9 @@
 # reminder compile book: 
 # conda activate pygisbookgw
 # jupyter-book build pygis
-# ghp-import -n -p -f pygis/_build/html
 # ghp-import -n -p  -c 'pygis.io' -f pygis/_build/html
 
+# old version ghp-import -n -p -f pygis/_build/html
 
 ---
 - file: docs/a_intro

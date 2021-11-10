@@ -1,0 +1,87 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+nearest = nearest(df1=orig, df2=dest, df2_column='name')
+nearest.head()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-13-861e5c41b752>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mnearest[0m [0;34m=[0m [0mnearest[0m[0;34m([0m[0mdf1[0m[0;34m=[0m[0morig[0m[0;34m,[0m [0mdf2[0m[0;34m=[0m[0mdest[0m[0;34m,[0m [0mdf2_column[0m[0;34m=[0m[0;34m'name'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mnearest[0m[0;34m.[0m[0mhead[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m<ipython-input-11-56e29422949f>[0m in [0;36mnearest[0;34m(df1, df2, geom1_col, geom2_col, df2_column)[0m
+[1;32m     31[0m     df1['nearest_id'] = df1.apply(_nearest,  df1=df1, df2=df2, 
+[1;32m     32[0m                                   [0mgeom1[0m[0;34m=[0m[0mgeom1_col[0m[0;34m,[0m [0mgeom2[0m[0;34m=[0m[0mgeom2_col[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 33[0;31m                                   df2_column=df2_column, axis=1)
+[0m[1;32m     34[0m     [0;32mreturn[0m [0mdf1[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geopandas/geodataframe.py[0m in [0;36mapply[0;34m(self, func, axis, raw, result_type, args, **kwargs)[0m
+[1;32m   1360[0m     [0;32mdef[0m [0mapply[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mfunc[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mraw[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m [0mresult_type[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0margs[0m[0;34m=[0m[0;34m([0m[0;34m)[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1361[0m         result = super().apply(
+[0;32m-> 1362[0;31m             [0mfunc[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0maxis[0m[0;34m,[0m [0mraw[0m[0;34m=[0m[0mraw[0m[0;34m,[0m [0mresult_type[0m[0;34m=[0m[0mresult_type[0m[0;34m,[0m [0margs[0m[0;34m=[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1363[0m         )
+[1;32m   1364[0m         if (
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/pandas/core/frame.py[0m in [0;36mapply[0;34m(self, func, axis, raw, result_type, args, **kwds)[0m
+[1;32m   7766[0m             [0mkwds[0m[0;34m=[0m[0mkwds[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   7767[0m         )
+[0;32m-> 7768[0;31m         [0;32mreturn[0m [0mop[0m[0;34m.[0m[0mget_result[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   7769[0m [0;34m[0m[0m
+[1;32m   7770[0m     [0;32mdef[0m [0mapplymap[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mfunc[0m[0;34m,[0m [0mna_action[0m[0;34m:[0m [0mOptional[0m[0;34m[[0m[0mstr[0m[0;34m][0m [0;34m=[0m [0;32mNone[0m[0;34m)[0m [0;34m->[0m [0mDataFrame[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/pandas/core/apply.py[0m in [0;36mget_result[0;34m(self)[0m
+[1;32m    183[0m             [0;32mreturn[0m [0mself[0m[0;34m.[0m[0mapply_raw[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    184[0m [0;34m[0m[0m
+[0;32m--> 185[0;31m         [0;32mreturn[0m [0mself[0m[0;34m.[0m[0mapply_standard[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    186[0m [0;34m[0m[0m
+[1;32m    187[0m     [0;32mdef[0m [0mapply_empty_result[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/pandas/core/apply.py[0m in [0;36mapply_standard[0;34m(self)[0m
+[1;32m    274[0m [0;34m[0m[0m
+[1;32m    275[0m     [0;32mdef[0m [0mapply_standard[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 276[0;31m         [0mresults[0m[0;34m,[0m [0mres_index[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mapply_series_generator[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    277[0m [0;34m[0m[0m
+[1;32m    278[0m         [0;31m# wrap results[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/pandas/core/apply.py[0m in [0;36mapply_series_generator[0;34m(self)[0m
+[1;32m    288[0m             [0;32mfor[0m [0mi[0m[0;34m,[0m [0mv[0m [0;32min[0m [0menumerate[0m[0;34m([0m[0mseries_gen[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    289[0m                 [0;31m# ignore SettingWithCopy here in case the user mutates[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 290[0;31m                 [0mresults[0m[0;34m[[0m[0mi[0m[0;34m][0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mf[0m[0;34m([0m[0mv[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    291[0m                 [0;32mif[0m [0misinstance[0m[0;34m([0m[0mresults[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m,[0m [0mABCSeries[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    292[0m                     [0;31m# If we have a view on v, we need to make a copy because[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/pandas/core/apply.py[0m in [0;36mf[0;34m(x)[0m
+[1;32m    108[0m [0;34m[0m[0m
+[1;32m    109[0m             [0;32mdef[0m [0mf[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 110[0;31m                 [0;32mreturn[0m [0mfunc[0m[0;34m([0m[0mx[0m[0;34m,[0m [0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    111[0m [0;34m[0m[0m
+[1;32m    112[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m<ipython-input-11-56e29422949f>[0m in [0;36m_nearest[0;34m(row, df1, df2, geom1, geom2, df2_column)[0m
+[1;32m      6[0m [0;34m[0m[0m
+[1;32m      7[0m     [0;31m# Find the geometry that is closest[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 8[0;31m     [0mnearest[0m [0;34m=[0m [0mdf2[0m[0;34m[[0m[0mgeom2_col[0m[0;34m][0m [0;34m==[0m [0mnearest_points[0m[0;34m([0m[0mrow[0m[0;34m[[0m[0mgeom1_col[0m[0;34m][0m[0;34m,[0m [0mgeom_union[0m[0;34m)[0m[0;34m[[0m[0;36m1[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      9[0m     [0;31m# Get the corresponding value from df2 (matching is based on the geometry)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m     [0;32mif[0m [0mdf2_column[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'geom2_col' is not defined
+NameError: name 'geom2_col' is not defined
+

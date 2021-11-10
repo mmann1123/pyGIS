@@ -28,13 +28,13 @@ html_meta:
 
 ----------------
 
-# Summarizing Point Patterns
+# Point Density Measures - Point Counts & Kernel Density
 
 Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.
 
 This chapter will explore two summary operations that highlight concentrations of data: count points in a rectangular or hexagonal grid or by polygon and kernel density.
 
-## Setup
+**Setup**
 
 First, we will import the necessary modules (click the + below to show code cell).
 

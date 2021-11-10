@@ -154,6 +154,7 @@
 # 
 # e_attributes
 # e_new_vectors
+# e_buffer_neighbors
 # e_vector_overlay
 # e_extraction
 # e_spatial_joins
