@@ -8,8 +8,8 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": " "
-  "keywords": " "
+  "description lang=en": "In python create buffers and find the nearest neighbor for points"
+  "keywords": "python spatial buffer neighbor"
   "property=og:locale": "en_US"
 ---
 
@@ -19,7 +19,6 @@ html_meta:
 * Do distance/proximity based analysis for points, lines, polygons
 * Create buffers
 * Get nearest neighbors
-* Calculate adjacency for polygons
 ```
 ```{admonition} Review
 * [Geospatial Vector Data](c_vectors.md)
@@ -28,8 +27,8 @@ html_meta:
 ```
 ----------------
 
-# Proximity Analysis - Buffers, Nearest Neighbor, Adjacency 
-In this chater we are going to dig into some of the most common geospatial operations. After this section you will be able to answer simple questions like "where is the nearest wendy's?", "Are there any homes within 50 yards of a highway?".
+# Proximity Analysis - Buffers, Nearest Neighbor 
+In this chapter we are going to dig into some of the most common geospatial operations. After this section you will be able to answer simple questions like "where is the nearest wendy's?", "Are there any homes within 50 yards of a highway?".
  
 
 ## Buffer Analysis

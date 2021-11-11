@@ -30,6 +30,7 @@
     - file: docs/d_raster_crs_intro
 
 - part: Accessing Data
+  chapters:
     - file: docs/d_access_osm
 
 - part: Vector Operations

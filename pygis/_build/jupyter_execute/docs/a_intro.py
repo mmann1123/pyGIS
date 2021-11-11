@@ -150,10 +150,19 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
+# :caption: Accessing Data
+# 
+# d_access_osm
+# ```
+# 
+# 
+# ```{toctree}
+# :hidden:
+# :titlesonly:
 # :caption: Vector Operations
 # 
-# e_attributes
 # e_new_vectors
+# e_attributes
 # e_buffer_neighbors
 # e_vector_overlay
 # e_extraction
