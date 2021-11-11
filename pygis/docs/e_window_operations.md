@@ -286,7 +286,7 @@ with rasterio.open(
 
 ## Window operations with `GeoWombat`
 
-We can use `GeoWombat` for window operations if we're only interested in calculating a statistic. The code to do this with `GeoWombat` is less complex and much shorter than with `rasterio`--we can simpl use the `geowombat.moving()` function.
+We can use `GeoWombat` for window operations if we're only interested in calculating a statistic. The code to do this with `GeoWombat` is less complex and much shorter than with `rasterio`--we can simply use the `geowombat.moving()` function.
 
 The `geowombat.moving()` function provides us with a few parameters that we can change:
 
