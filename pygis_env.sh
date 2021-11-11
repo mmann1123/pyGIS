@@ -21,6 +21,7 @@ dependencies:
 - geoplot
 - pip
 - netcdf4
+- osmnx
 - pip:
   - pip-tools
   - opencv-python

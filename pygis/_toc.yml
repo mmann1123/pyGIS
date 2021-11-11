@@ -28,12 +28,16 @@
     - file: docs/d_affine
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
+
+- part: Accessing Data
+    - file: docs/d_access_osm
+
 - part: Vector Operations
   chapters:
     # - file: docs/e_vector_op_intro
     #   sections:
-    - file: docs/e_attributes
     - file: docs/e_new_vectors
+    - file: docs/e_attributes
     - file: docs/e_buffer_neighbors
     - file: docs/e_vector_overlay
     - file: docs/e_extraction

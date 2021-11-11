@@ -1657,3 +1657,34 @@ nearest = nearest(df1=orig, df2=dest, df2_column='name')
 nearest.head()
 
 # %%
+import osmnx as ox
+place_name = "edgewood Washington, DC, USA"
+area = ox.geocode_to_gdf(place_name)
+
+# %%
+# Plot the area:
+area.plot()
+# %%
+# List key-value pairs for tags
+tags = {'building': True}   
+
+buildings = ox.geometries_from_place(place_name, tags)
+
+# %%
+import geopandas as gpd
+
+# Save footprints 
+buildings.to_file('/home/mmann1123/Downloads/tes.shp')  
+# %%
+buildings.filter(like='addr:', axis=1)
+#%%
+buildings.loc[:,buildings.columns.str.contains('addr:|geometry')].to_file('/home/mmann1123/Downloads/tes.shp')  
+# %%
+buildings = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
+buildings = buildings.loc[buildings.geometry.type=='Polygon']
+
+# %%
+buildings.to_file('/home/mmann1123/Downloads/tes.shp')  
+# %%
+# %%
+# %%
