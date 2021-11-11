@@ -4,11 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content=" " lang="en" name="description" xml:lang="en" />
-<meta content=" " name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="In python create buffers and find the nearest neighbor for points" lang="en" name="description" xml:lang="en" />
+<meta content="python spatial buffer neighbor" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Proximity Analysis - Buffers, Nearest Neighbor, Adjacency &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Proximity Analysis - Buffers, Nearest Neighbor &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -59,7 +59,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Vector Overlays and Joins" href="e_vector_overlay.html" />
-    <link rel="prev" title="Creating Geospatial Vector Data" href="e_new_vectors.html" />
+    <link rel="prev" title="Attributes &amp; Indexing for Vector Data" href="e_attributes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -68,8 +68,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_buffer_neighbors.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Proximity Analysis - Buffers, Nearest Neighbor, Adjacency" />
-<meta property="og:description" content="Proximity Analysis - Buffers, Nearest Neighbor, Adjacency  In this chater we are going to dig into some of the most common geospatial operations. After this sec" />
+<meta property="og:title"       content="Proximity Analysis - Buffers, Nearest Neighbor" />
+<meta property="og:description" content="Proximity Analysis - Buffers, Nearest Neighbor  In this chapter we are going to dig into some of the most common geospatial operations. After this section you w" />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -203,23 +203,35 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
+  Accessing Data
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="d_access_osm.html">
+   Accessing OSM Data in Python
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Vector Operations
  </span>
 </p>
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="e_new_vectors.html">
    Creating Geospatial Vector Data
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_attributes.html">
+   Attributes &amp; Indexing for Vector Data
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Proximity Analysis - Buffers, Nearest Neighbor, Adjacency
+   Proximity Analysis - Buffers, Nearest Neighbor
   </a>
  </li>
  <li class="toctree-l1">
@@ -466,7 +478,6 @@
 <li><p>Do distance/proximity based analysis for points, lines, polygons</p></li>
 <li><p>Create buffers</p></li>
 <li><p>Get nearest neighbors</p></li>
-<li><p>Calculate adjacency for polygons</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -478,9 +489,9 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="proximity-analysis-buffers-nearest-neighbor-adjacency">
-<h1>Proximity Analysis - Buffers, Nearest Neighbor, Adjacency<a class="headerlink" href="#proximity-analysis-buffers-nearest-neighbor-adjacency" title="Permalink to this headline">¶</a></h1>
-<p>In this chater we are going to dig into some of the most common geospatial operations. After this section you will be able to answer simple questions like “where is the nearest wendy’s?”, “Are there any homes within 50 yards of a highway?”.</p>
+<div class="section" id="proximity-analysis-buffers-nearest-neighbor">
+<h1>Proximity Analysis - Buffers, Nearest Neighbor<a class="headerlink" href="#proximity-analysis-buffers-nearest-neighbor" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we are going to dig into some of the most common geospatial operations. After this section you will be able to answer simple questions like “where is the nearest wendy’s?”, “Are there any homes within 50 yards of a highway?”.</p>
 <div class="section" id="buffer-analysis">
 <h2>Buffer Analysis<a class="headerlink" href="#buffer-analysis" title="Permalink to this headline">¶</a></h2>
 <p>First, we will import the necessary modules and create two lines (click the + below to show code cell).</p>
@@ -858,7 +869,7 @@ Coordinates of closest destination point: POINT (0 1.45)
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="e_new_vectors.html" title="previous page">Creating Geospatial Vector Data</a>
+    <a class='left-prev' id="prev-link" href="e_attributes.html" title="previous page">Attributes &amp; Indexing for Vector Data</a>
     <a class='right-next' id="next-link" href="e_vector_overlay.html" title="next page">Vector Overlays and Joins</a>
 
         </div>
