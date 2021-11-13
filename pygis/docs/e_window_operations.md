@@ -35,6 +35,36 @@ These moving windows can also be called filters or kernels. They can be of many 
 
 The filter passes through each non-edge cell in the raster. For a pass, each cell in the filter is matched with a cell from the input raster based on their location relative to the center pixel (e.g., a cell that is 1 to the left of the center pixel on the input raster is matched with the cell that is 1 to the left of the center pixel on the filter). The filter then pulls the values from the neighboring cells and the center pixel itself, performs a calculation based on the filter values, reports that resulting value back to the identical location of the original pixel, moves to the next pixel, and repeats the process.
 
+```{figure} ../_static/img/raster_sliding_window.jpg
+:name: Sliding Window Operations
+Sliding window operations move across an entire raster.
+```
+
+The filter values can essentially be any number--they can be the same across the filter or be all different. The values determine how the output is calculated (equation below assuming a `3x3` filter):
+
+$$
+    X_{w} = \sum_{i=1}^{9}X_{i}k_{i}
+$$
+
+*where:*
+
+$$
+  X_{i} = \textup{raster cell value}
+$$
+$$
+  k_{i} = \textup{kernel cell value}
+$$
+$$
+  i = \textup{index of cells in the nine kernel cell values}
+$$
+
+The values also determine *what* is calculated. For example, setting all filter values to `1` will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to `1/9` for a `3x3` filter will result in the filter outputting the average of all raster pixel values within the filter.
+
+```{figure} ../_static/img/raster_window_operations.jpg
+:name: Moving Window Operation Examples
+Example filter values for `3x3` moving windows. Different filter value combinations and arrangements can produce different outputs.
+```
+
 For more information on moving windows, see the ["Neighborhood Operations" section in this chapter on raster geoprocessing](https://saylordotorg.github.io/text_essentials-of-geographic-information-systems/s12-02-scale-of-analysis.html).
 
 ```{attention}
@@ -233,6 +263,10 @@ aggregate = aggregate / len(kernel_array)
 
 # View array storing window operation calculations
 print(aggregate)
+```
+
+```{note}
+As shown in the figure at the beginning of this chapter, we could have just set all kernel values to `1/9` to calculate the average--that way, we could skip this step. We show this method just to illustrate a simple example of performing a computation on the aggregate value.
 ```
 
 ### Non-mathematical window operations
