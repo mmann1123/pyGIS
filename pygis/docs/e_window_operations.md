@@ -71,18 +71,6 @@ For more information on moving windows, see the ["Neighborhood Operations" secti
 With window operations, the edge pixels will generally be cut out from the output because those edge pixels do not have neighboring pixels all around it. As window operations generally require a pixel to be surrounded on all four sides, we cannot perform calculations on these edge pixels. The pixels that constitute the "edge" depends on the shape of the kernel. For example, a `3x3` kernel only requires 1 neighboring pixel in each direction, so only the outer ring of pixels will be cut out from the output. A `5x5` kernel requires 2 neighboring pixels in each direction, so the two outer rings of pixels will be cut out.
 ```
 
-### Python implementation
-
-The most intuitive way to perform window operations in Python is to use a `for` loop. With this method, we would iterate through each non-edge pixel, obtain the surrounding pixel values and the center pixel value, perform some sort of calculation, report that resulting value back to the identical location of the original pixel, move to the next pixel, and repeat the process. Iterating through each pixel, however, has the potential to be extremely time and computationally intensive (there could be many, many pixels).
-
-To mitigate this limitation, instead of using a `for` loop, we can get each neighbor value simultaneously for all non-edge pixels. Another way to think of it is that instead of using a `for` loop to iterate through each pixel to get neighboring values, we can iterate through each kernel position to get the neighboring value corresponding to a certain kernel position for all non-edge pixels at once. This is what a vectorized sliding window does.
-
-The vectorized sliding window is grounded in the concept that each position in the kernel has a certain relative position or offset (e.g., one pixel to the left) from the center pixel of the kernel. This method works because each pixel in a raster is in essence a neighbor to at least one other pixel. The vectorized sliding window simply offsets itself within the raster array extent so that each pixel that falls within the vectorized sliding window is the neighbor of the same relative position (e.g., one pixel to the left) to its center pixel.
-
-A vectorized sliding window is created for each position in the kernel. The vectorized sliding window of a certain kernel position is applied over the raster and obtains--all at once--the neighboring pixel value corresponding to that kernel position for all non-edge pixels. The size of vectorized sliding window is dependent on the size of the raster and kernel but will always fall between the two.
-
-For more conceptual information on vectorized sliding windows and how they compare to iterating through each pixel, see [this article](https://opensourceoptions.com/blog/vectorize-moving-window-grid-operations-on-numpy-arrays/).
-
 ## Setup
 
 We'll explore two methods, one using `rasterio` and another using `GeoWombat`.
@@ -102,6 +90,16 @@ import matplotlib.pyplot as plt
 ```
 
 ## Window operations with `rasterio`
+
+The most intuitive way to perform window operations in Python is to use a `for` loop. With this method, we would iterate through each non-edge pixel, obtain the surrounding pixel values and the center pixel value, perform some sort of calculation, report that resulting value back to the identical location of the original pixel, move to the next pixel, and repeat the process. Iterating through each pixel, however, has the potential to be extremely time and computationally intensive (there could be many, many pixels).
+
+To mitigate this limitation, instead of using a `for` loop, we can get each neighbor value simultaneously for all non-edge pixels. Another way to think of it is that instead of using a `for` loop to iterate through each pixel to get neighboring values, we can iterate through each kernel position to get the neighboring value corresponding to a certain kernel position for all non-edge pixels at once. This is what a vectorized sliding window does.
+
+The vectorized sliding window is grounded in the concept that each position in the kernel has a certain relative position or offset (e.g., one pixel to the left) from the center pixel of the kernel. This method works because each pixel in a raster is in essence a neighbor to at least one other pixel. The vectorized sliding window simply offsets itself within the raster array extent so that each pixel that falls within the vectorized sliding window is the neighbor of the same relative position (e.g., one pixel to the left) to its center pixel.
+
+A vectorized sliding window is created for each position in the kernel. The vectorized sliding window of a certain kernel position is applied over the raster and obtains--all at once--the neighboring pixel value corresponding to that kernel position for all non-edge pixels. The size of vectorized sliding window is dependent on the size of the raster and kernel but will always fall between the two.
+
+For more conceptual information on vectorized sliding windows and how they compare to iterating through each pixel, see [this article](https://opensourceoptions.com/blog/vectorize-moving-window-grid-operations-on-numpy-arrays/).
 
 Let's create a raster.
 
@@ -153,7 +151,7 @@ plt.show()
 print(raster)
 ```
 
-## Create kernel
+### Create kernel
 
 Second, we can generate a kernel array. The array can consist of a single value or multiple values.
 
@@ -183,7 +181,7 @@ kernel_shape = kernel.shape
 kernel_array = np.ravel(kernel)
 ```
 
-## Create output arrays
+### Create output arrays
 
 Next, we will create two arrays that will store our calculations.
 
@@ -213,7 +211,7 @@ aggregate = aggregate.astype(np.float64)
 print(aggregate)
 ```
 
-## Create and implement vectorized sliding window
+### Create and implement vectorized sliding window
 
 The next step is to generate the vectorized sliding windows. The shape of the vectorized sliding windows depends on the kernel shape, so we utilize indices and slicing to obtain the extent of a vectorized sliding window for each position in the kernel.
 
@@ -283,7 +281,7 @@ window_maximum = np.maximum.reduce(sub_array_list)
 print(window_maximum)
 ```
 
-## Save output
+### Save output
 
 We can insert the processed aggregate array into the output array, with each value replacing the placeholder value at its corresponding original position in the array. Recall that because edge pixels are ignored, the edge pixels of the output array will still keep their placeholder values.
 
