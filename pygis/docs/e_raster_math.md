@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to perform mathematical operations on raster bands using rasterio."
-  "keywords": "geospatial, raster, band, math"
+  "keywords": "geospatial, python, rasterio, raster, band, math"
   "property=og:locale": "en_US"
 ---
 
@@ -18,7 +18,7 @@ html_meta:
 ----------------
 
 ```{admonition} Learning Objectives
-* Conduct mathematical operations on raster bands with `rasterio`
+* Conduct mathematical operations on raster bands with rasterio
 * Understand the requirements for successful mathematical operations
 ```
 ```{admonition} Review
@@ -32,7 +32,7 @@ Band math is useful when you want to perform a mathematical operation to each pi
 
 ## Setup
 
-To begin, we will import our modules.
+To begin, we will import our modules (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -44,15 +44,15 @@ import rasterio
 from rasterio.transform import Affine
 ```
 
-## Band Math with `rasterio`
+## Band Math with rasterio with multiple images
 
-`Rasterio` makes band math relatively straightforward since the rasters are essentially read in as `numpy` arrays, so you can perform math on the raster arrays just like any `numpy` array.
+`Rasterio` makes band math relatively straightforward since the rasters are essentially read in as numpy arrays, so you can perform math on the raster arrays just like any numpy array.
 
 ```{attention}
 Mathematical operations on rasters using `rasterio` are not spatially aware. Any mathematical operation with multiple rasters will work even if the rasters are not representing the same geographical extent. Consequently, you need to ensure that the cell size and extent represented in all rasters are the same. In other words, if you are using two rasters in a mathematical operation, they must have the same shape (same number of rows and columns).
 ```
 
-Let's generate some rasters.
+In this example we will write two raster files to the disk: `math_raster_a.tif` and `math_raster_b.tif`. We will then read then back in and do math on them. Let's generate some rasters (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -67,7 +67,7 @@ Z1 = np.abs(((X - 10) ** 2 + (Y - 10) ** 2) / 1 ** 2)
 Z2 = np.abs(((X + 10) ** 2 + (Y + 10) ** 2) / 2.5 ** 2)
 Z3 = np.abs(((X + 3) + (Y - 8) ** 2) / 3 ** 2)
 
-# Generate raster values
+# Generate raster values for two rasters
 Z_a = (Z1 - Z2)
 Z_b = (Z2 - Z3)
 
@@ -190,6 +190,50 @@ plt.show()
 print("Raster values:\n", difference_0_b)
 ```
 
-## Band Math with `GeoWombat`
+### Example: Calculating NDVI
+
+In the example below, we will read in a clipped Landsat 8, Collection 2 Level-2 image and use the band math concepts to calculate the normalized difference vegetation index (NDVI) for the image. As you may recall, NDVI is a spectral approach used to assess vegetation. The formula for NDVI is:
+
+$$
+  NDVI = \frac{NIR - Red}{NIR + Red}
+$$
+
+where `NIR` is the near-infrared band and `Red` is the red band.
+
+High NDVI values (towards 1) reflect a higher density of green vegetation, and low values (towards -1) reflect a lower density.
+
+```{code-cell} ipython3
+# Open raster (Landsat 8, Collection 2 Level-2)
+# Band 1 - Blue, Band 2 - Green, Band 3 - Red, Band 4 - Near Infrared
+# Source: https://www.usgs.gov/centers/eros/science/usgs-eros-archive-landsat-archives-landsat-8-9-olitirs-collection-2-level-2
+with rasterio.open("../data/LC08_L2SP_016040_20210317_20210328_02_T1_clip.tif", mode = "r", nodata = 0) as src:
+
+    # Get red band
+    band_red = src.read(3)
+
+    # Get NIR band
+    band_nir = src.read(4)
+
+    # Allow division by zero
+    np.seterr(divide = "ignore", invalid = "ignore")
+
+    # Calculate NDVI
+    ndvi = (band_nir.astype(float) - band_red.astype(float)) / (band_nir + band_red)
+
+# Set pixels whose values are outside the NDVI range (-1, 1) to NaN
+# Likely due to errors in the Landsat imagery
+ndvi[ndvi > 1] = np.nan
+ndvi[ndvi < -1] = np.nan
+
+# Plot raster
+plt.imshow(ndvi)
+plt.title("NDVI")
+plt.show()
+
+# Show raster values
+print("Raster values:\n", ndvi)
+```
+
+## Band Math with GeoWombat
 
 For band math with `GeoWombat`, see the chapter on [Band Math & Vegetation Indices](f_rs_band_math.md).

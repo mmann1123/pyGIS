@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to replace values in a raster using rasterio and GeoWombat."
-  "keywords": "geospatial, raster, replace, interpolation"
+  "keywords": "geospatial, python, rasterio, raster, replace, interpolation"
   "property=og:locale": "en_US"
 ---
 
@@ -18,7 +18,7 @@ html_meta:
 ----------------
 
 ```{admonition} Learning Objectives
-* Replace and interpolate values in a raster with `rasterio`
+* Replace and interpolate values in a raster with rasterio
 ```
 ```{admonition} Review
 * [Geospatial Raster Data](c_rasters.md)
@@ -32,7 +32,7 @@ We'll explore how to replace raster values with `rasterio`.
 
 ## Setup
 
-First, we will import our modules.
+First, we will import our modules (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -45,7 +45,7 @@ from rasterio.transform import Affine
 from rasterio.fill import fillnodata
 ```
 
-Next, we will generate a sample raster to be used.
+Next, we will generate a sample raster to be used (click the + below to show code cell).
 
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
@@ -82,7 +82,9 @@ with rasterio.open(
         new_dataset.write(Z, 1)
 ```
 
-## Replace values with `rasterio`
+## Replace values with rasterio
+
+We will open the example raster that we generated above.
 
 ```{code-cell} ipython3
 # Open raster and plot
@@ -103,7 +105,7 @@ raster[150, 100] = 0
 raster[150, 100]
 ```
 
-We can also change multiple pixel values by slicing.
+We can also change multiple pixel values by slicing. In this case, we replace the values in rows 99-101 and columns 6-8 with the value `0`.
 
 ```{code-cell} ipython3
 # Replace values with 0 at multiple locations
@@ -114,8 +116,8 @@ raster[99:102, 6:9]
 Finally, we can change any pixel values that are of a certain value.
 
 ```{code-cell} ipython3
-# Replace values with 0 if they equal a certain number (in this case, 13776)
-raster[raster == 13776] = 0
+# Replace values with 0 if they are greater than or equal to certain number (in this case, 13776)
+raster[raster >= 13776] = 0
 raster
 ```
 
@@ -123,14 +125,16 @@ raster
 
 Sometimes, we don't know or have an exact value to replace pixel values with. We can "fill in" those pixel values through interpolation. Recall that interpolation uses the pixel values surrounding a certain pixel to determine the value for that certain pixel.
 
-`Rasterio` provides a function `fillnodata()` that does this for us. In addition to specifying a raster, we also need to provide a mask, which tells the function which pixel values need to be filled in. The mask can either be an array of Boolean values (`True` or `False`, where `False` indicates pixels to be filled in) or numbers (where values equal to `0` indicate pixels to be filled in).
+In the following example, we will interpolate the values for the pixels that were previously set to `0`.
+
+`Rasterio` provides a function `fillnodata()` that does this for us. In addition to specifying a raster, we also need to provide a mask, which tells the function which pixel values need to be filled in. The mask can either be an array of Boolean values (`True` or `False`, where `False` indicates pixels to be filled in) or numbers (where values equal to `0` indicate pixels to be filled in and values equal to `1` indicate pixels to ignore).
 
 For more information this function, see the [function documentation](https://rasterio.readthedocs.io/en/latest/api/rasterio.fill.html).
 
-```{important} Mask must be in the same shape (number of rows and columns) as the input raster.
+```{important} Mask must be in the same shape (number of rows and columns) as that of the input raster.
 ```
 
-Below, we will interpolate the pixels whose values are equal to 0.
+Below, we will interpolate the pixels whose values were previously set to `0`.
 
 ```{code-cell} ipython3
 # Create a Boolean mask (True/False), with a value of False for pixels that equal 0
