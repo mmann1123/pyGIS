@@ -13,7 +13,7 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
-# Window Operations w. Rasterio and GeoWombat
+# Window Operations with Rasterio and GeoWombat
 
 ----------------
 
@@ -47,16 +47,12 @@ $$
 $$
 
 *where:*
+  X_{i} = raster cell value
 
-$$
-  X_{i} = \textup{raster cell value}
-$$
-$$
-  k_{i} = \textup{kernel cell value}
-$$
-$$
-  i = \textup{index of cells in the nine kernel cell values}
-$$
+  k_{i} = kernel cell value
+
+  i = index of cells in the nine kernel cell values
+
 
 The values also determine *what* is calculated. For example, setting all filter values to `1` will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to `1/9` for a `3x3` filter will result in the filter outputting the average of all raster pixel values within the filter.
 
@@ -330,8 +326,9 @@ with gw.open("../temp/window_raster.tif") as src:
 
     # Calculate local average
     output_gw = src.gw.moving(stat = 'mean', w = 5, n_jobs = 4, nodata = 0)
+    print(output_gw)
 
     # Plot raster
-    output_gw.gw.imshow(robust = True, ax = ax)
+    output_gw.sel(band=1).gw.imshow(robust = True, ax = ax)
     plt.tight_layout(pad = 1)
 ```

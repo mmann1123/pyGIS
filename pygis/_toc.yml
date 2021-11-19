@@ -50,6 +50,10 @@
     - file: docs/e_new_rasters
     - file: docs/e_raster_reproject
     - file: docs/e_raster_resample
+    - file: docs/e_raster_math
+    - file: docs/e_raster_replace_values
+    - file: docs/e_raster_rasterize
+    - file: docs/e_raster_window_operations
 
 - part: 6 - Accessing Data
   chapters:

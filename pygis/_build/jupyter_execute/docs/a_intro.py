@@ -172,6 +172,10 @@
 # e_new_rasters
 # e_raster_reproject
 # e_raster_resample
+# e_raster_math
+# e_raster_replace_values
+# e_raster_rasterize
+# e_raster_window_operations
 # ```
 # 
 # 
