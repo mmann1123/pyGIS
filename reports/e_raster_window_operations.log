@@ -1,0 +1,86 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Open file
+with gw.open("../temp/window_raster.tif") as src:
+
+    # Create plot
+    fig, ax = plt.subplots(dpi = 200)
+
+    # Calculate local average
+    output_gw = src.gw.moving(stat = 'mean', w = 5, n_jobs = 4, nodata = 0)
+
+    # Plot raster
+    output_gw.gw.imshow(robust = True, ax = ax)
+    plt.tight_layout(pad = 1)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m<ipython-input-12-a9d6d2e7f25b>[0m in [0;36m<module>[0;34m[0m
+[1;32m      9[0m [0;34m[0m[0m
+[1;32m     10[0m     [0;31m# Plot raster[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 11[0;31m     [0moutput_gw[0m[0;34m.[0m[0mgw[0m[0;34m.[0m[0mimshow[0m[0;34m([0m[0mrobust[0m [0;34m=[0m [0;32mTrue[0m[0;34m,[0m [0max[0m [0;34m=[0m [0max[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     12[0m     [0mplt[0m[0;34m.[0m[0mtight_layout[0m[0;34m([0m[0mpad[0m [0;34m=[0m [0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/core/geoxarray.py[0m in [0;36mimshow[0;34m(self, mask, nodata, flip, text_color, rot, **kwargs)[0m
+[1;32m    529[0m                   [0mtext_color[0m[0;34m=[0m[0mtext_color[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    530[0m                   [0mrot[0m[0;34m=[0m[0mrot[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 531[0;31m                   **kwargs)
+[0m[1;32m    532[0m [0;34m[0m[0m
+[1;32m    533[0m     [0;32mdef[0m [0mto_polygon[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mmask[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mconnectivity[0m[0;34m=[0m[0;36m4[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/util/plotting.py[0m in [0;36mimshow[0;34m(data, mask, nodata, flip, text_color, rot, **kwargs)[0m
+[1;32m    106[0m [0;34m[0m[0m
+[1;32m    107[0m         [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 108[0;31m             [0mplot_data[0m[0;34m.[0m[0mplot[0m[0;34m.[0m[0mimshow[0m[0;34m([0m[0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    109[0m [0;34m[0m[0m
+[1;32m    110[0m         [0max[0m[0;34m.[0m[0mxaxis[0m[0;34m.[0m[0mset_major_formatter[0m[0;34m([0m[0mmpl[0m[0;34m.[0m[0mticker[0m[0;34m.[0m[0mStrMethodFormatter[0m[0;34m([0m[0;34m'{x:,.0f}'[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/plot/plot.py[0m in [0;36mplotmethod[0;34m(_PlotMethods_obj, x, y, figsize, size, aspect, ax, row, col, col_wrap, xincrease, yincrease, add_colorbar, add_labels, vmin, vmax, cmap, colors, center, robust, extend, levels, infer_intervals, subplot_kws, cbar_ax, cbar_kwargs, xscale, yscale, xticks, yticks, xlim, ylim, norm, **kwargs)[0m
+[1;32m   1306[0m         [0;32mfor[0m [0marg[0m [0;32min[0m [0;34m[[0m[0;34m"_PlotMethods_obj"[0m[0;34m,[0m [0;34m"newplotfunc"[0m[0;34m,[0m [0;34m"kwargs"[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1307[0m             [0;32mdel[0m [0mallargs[0m[0;34m[[0m[0marg[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1308[0;31m         [0;32mreturn[0m [0mnewplotfunc[0m[0;34m([0m[0;34m**[0m[0mallargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1309[0m [0;34m[0m[0m
+[1;32m   1310[0m     [0;31m# Add to class _PlotMethods[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/plot/plot.py[0m in [0;36mnewplotfunc[0;34m(darray, x, y, figsize, size, aspect, ax, row, col, col_wrap, xincrease, yincrease, add_colorbar, add_labels, vmin, vmax, cmap, center, robust, extend, levels, infer_intervals, colors, subplot_kws, cbar_ax, cbar_kwargs, xscale, yscale, xticks, yticks, xlim, ylim, norm, **kwargs)[0m
+[1;32m   1137[0m [0;34m[0m[0m
+[1;32m   1138[0m         xlab, ylab = _infer_xy_labels(
+[0;32m-> 1139[0;31m             [0mdarray[0m[0;34m=[0m[0mdarray[0m[0;34m,[0m [0mx[0m[0;34m=[0m[0mx[0m[0;34m,[0m [0my[0m[0;34m=[0m[0my[0m[0;34m,[0m [0mimshow[0m[0;34m=[0m[0mimshow_rgb[0m[0;34m,[0m [0mrgb[0m[0;34m=[0m[0mrgb[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1140[0m         )
+[1;32m   1141[0m [0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/plot/utils.py[0m in [0;36m_infer_xy_labels[0;34m(darray, x, y, imshow, rgb)[0m
+[1;32m    373[0m [0;34m[0m[0m
+[1;32m    374[0m     [0;32mif[0m [0mimshow[0m [0;32mand[0m [0mdarray[0m[0;34m.[0m[0mndim[0m [0;34m==[0m [0;36m3[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 375[0;31m         [0;32mreturn[0m [0m_infer_xy_labels_3d[0m[0;34m([0m[0mdarray[0m[0;34m,[0m [0mx[0m[0;34m,[0m [0my[0m[0;34m,[0m [0mrgb[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    376[0m [0;34m[0m[0m
+[1;32m    377[0m     [0;32mif[0m [0mx[0m [0;32mis[0m [0;32mNone[0m [0;32mand[0m [0my[0m [0;32mis[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/plot/utils.py[0m in [0;36m_infer_xy_labels_3d[0;34m(darray, x, y, rgb)[0m
+[1;32m    335[0m     [0;32mif[0m [0mrgb[0m [0;32mis[0m [0;32mNone[0m [0;32mand[0m [0;32mnot[0m [0mcould_be_color[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    336[0m         raise ValueError(
+[0;32m--> 337[0;31m             [0;34m"A 3-dimensional array was passed to imshow(), but there is no "[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    338[0m             [0;34m"dimension that could be color.  At least one dimension must be "[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    339[0m             [0;34m"of size 3 (RGB) or 4 (RGBA), and not given as x or y."[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: A 3-dimensional array was passed to imshow(), but there is no dimension that could be color.  At least one dimension must be of size 3 (RGB) or 4 (RGBA), and not given as x or y.
+ValueError: A 3-dimensional array was passed to imshow(), but there is no dimension that could be color.  At least one dimension must be of size 3 (RGB) or 4 (RGBA), and not given as x or y.
+
