@@ -22,7 +22,7 @@
 # ## Reprojecting a Raster with Geowombat
 # Far and away the easiest way to handle raster data is by using [geowombat](https://geowombat.readthedocs.io/en/latest/index.html). Here's an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.
 # 
-# In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations.
+# In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a `ref_crs` to the configuration manager. We can also use the `resampling` method when we `open` the image, by default it will be `nearest`, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].
 
 # In[1]:
 
@@ -154,27 +154,3 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
 # :width: 400px
 # Reprojected Landsat Image
 # ```
-# 
-# ## Reprojecting a Raster with Geowombat
-# If that all looks too hard, well you are right. Thankfully geowombat comes to the rescue once again. All we need to do is pass a `ref_crs` to the configuration manager. We can also se the `resampling` method when we open the image, by default it will be `nearest`, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].
-
-# In[5]:
-
-
-import geowombat as gw
-from geowombat.data import rgbn
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots(dpi=200)
-
-proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
-
-with gw.config.update(ref_crs=proj4):
-    with gw.open(rgbn, resampling='nearest') as src:
-        print(src.transform)
-        print(src.crs)
-        print(src.resampling)
-        print(src.res)
-        src.where(src != 0).sel(band=[3,2,1]).plot.imshow(robust=True, ax=ax)
-
-plt.tight_layout(pad=1)
-

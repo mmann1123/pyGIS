@@ -111,7 +111,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Get Started
+# :caption: 0 - Get Started
 # 
 # b_intro_py
 # b_about_py
@@ -125,7 +125,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Data Types
+# :caption: 1 - Data Types
 # 
 # c_features
 # c_store_features
@@ -137,7 +137,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Nature of Coordinate Systems
+# :caption: 3 - Nature of Coordinate Systems
 # 
 # d_crs_what_is_it
 # d_understand_crs_codes
@@ -150,25 +150,16 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Accessing Data
-# 
-# d_access_osm
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: Vector Operations
+# :caption: 4 - Vector Operations
 # 
 # e_new_vectors
 # e_attributes
 # e_buffer_neighbors
 # e_vector_overlay
 # e_extraction
+# e_vector_merge_dissolve
 # e_spatial_joins
 # e_summarize_vector
-# e_vector_merge_dissolve
 # e_interpolation
 # ```
 # 
@@ -176,8 +167,9 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Raster Operations
+# :caption: 5 - Raster Operations
 # 
+# e_new_rasters
 # e_raster_reproject
 # e_raster_resample
 # ```
@@ -186,7 +178,17 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: Remote Sensing
+# :caption: 6 - Accessing Data
+# 
+# d_access_osm
+# d_access_census
+# ```
+# 
+# 
+# ```{toctree}
+# :hidden:
+# :titlesonly:
+# :caption: 7 - Remote Sensing
 # 
 # f_rs_io
 # f_rs_edit

@@ -468,9 +468,11 @@ Allocating memory at the start is more efficient than using a Python
 list and `append`, since the latter must repeatedly ask for storage
 space from the operating system.
 
-Notice that we added a legend to the plot --- a feature you will be
-asked to use in the exercises.
+Notice that we added a legend to the plot.
 
+<!-- 
+ --- a feature you will be
+asked to use in the exercises.
 ## Exercises
 
 Now we turn to exercises. It is important that you complete them before
@@ -705,4 +707,4 @@ for i in range(n):
 area_estimate = count / n
 
 print(area_estimate * 4)  # dividing by radius**2
-```
+``` -->

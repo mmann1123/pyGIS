@@ -502,9 +502,11 @@ plt.show()
 # list and `append`, since the latter must repeatedly ask for storage
 # space from the operating system.
 # 
-# Notice that we added a legend to the plot --- a feature you will be
-# asked to use in the exercises.
+# Notice that we added a legend to the plot.
 # 
+# <!-- 
+#  --- a feature you will be
+# asked to use in the exercises.
 # ## Exercises
 # 
 # Now we turn to exercises. It is important that you complete them before
@@ -525,14 +527,12 @@ plt.show()
 # standard normal.
 # 
 # In your solution, restrict your import statements to
-
-# In[22]:
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-
+# 
+# ```{code-cell} python3
+# import numpy as np
+# import matplotlib.pyplot as plt
+# ```
+# 
 # Set $T=200$ and $\alpha = 0.9$.
 # 
 # ### Exercise 2
@@ -579,23 +579,19 @@ import matplotlib.pyplot as plt
 # 
 # Here\'s an example, that prints -1 for each negative number in an array
 # and 1 for each nonnegative number
-
-# In[23]:
-
-
-numbers = [-9, 2.3, -11, 0]
-
-
-# In[24]:
-
-
-for x in numbers:
-    if x < 0:
-        print(-1)
-    else:
-        print(1)
-
-
+# 
+# ```{code-cell} python3
+# numbers = [-9, 2.3, -11, 0]
+# ```
+# 
+# ```{code-cell} python3
+# for x in numbers:
+#     if x < 0:
+#         print(-1)
+#     else:
+#         print(1)
+# ```
+# 
 # Now, write a new solution to Exercise 3 that does not use an existing
 # function to compute the absolute value.
 # 
@@ -610,13 +606,11 @@ for x in numbers:
 # The task is to compute an approximation to $\pi$ using [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method).
 # 
 # Use no imports besides
-
-# In[25]:
-
-
-import numpy as np
-
-
+# 
+# ```{code-cell} python3
+# import numpy as np
+# ```
+# 
 # Your hints are as follows:
 # 
 # -   If $U$ is a bivariate uniform random variable on the unit square
@@ -632,101 +626,91 @@ import numpy as np
 # ### Exercise 1
 # 
 # Here\'s one solution.
-
-# In[26]:
-
-
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    x[t+1] = α * x[t] + np.random.randn()
-
-plt.plot(x)
-plt.show()
-
-
+# 
+# ```{code-cell} python3
+# α = 0.9
+# T = 200
+# x = np.empty(T+1)
+# x[0] = 0
+# 
+# for t in range(T):
+#     x[t+1] = α * x[t] + np.random.randn()
+# 
+# plt.plot(x)
+# plt.show()
+# ```
+# 
 # ### Exercise 2
-
-# In[27]:
-
-
-α_values = [0.0, 0.8, 0.98]
-T = 200
-x = np.empty(T+1)
-
-for α in α_values:
-    x[0] = 0
-    for t in range(T):
-        x[t+1] = α * x[t] + np.random.randn()
-    plt.plot(x, label=f'$\\alpha = {α}$')
-
-plt.legend()
-plt.show()
-
-
+# 
+# ```{code-cell} python3
+# α_values = [0.0, 0.8, 0.98]
+# T = 200
+# x = np.empty(T+1)
+# 
+# for α in α_values:
+#     x[0] = 0
+#     for t in range(T):
+#         x[t+1] = α * x[t] + np.random.randn()
+#     plt.plot(x, label=f'$\\alpha = {α}$')
+# 
+# plt.legend()
+# plt.show()
+# ```
+# 
 # ### Exercise 3
 # 
 # Here\'s one solution:
-
-# In[28]:
-
-
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    x[t+1] = α * np.abs(x[t]) + np.random.randn()
-
-plt.plot(x)
-plt.show()
-
-
+# 
+# ```{code-cell} python3
+# α = 0.9
+# T = 200
+# x = np.empty(T+1)
+# x[0] = 0
+# 
+# for t in range(T):
+#     x[t+1] = α * np.abs(x[t]) + np.random.randn()
+# 
+# plt.plot(x)
+# plt.show()
+# ```
+# 
 # ### Exercise 4
 # 
 # Here\'s one way:
-
-# In[29]:
-
-
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    if x[t] < 0:
-        abs_x = - x[t]
-    else:
-        abs_x = x[t]
-    x[t+1] = α * abs_x + np.random.randn()
-
-plt.plot(x)
-plt.show()
-
-
+# 
+# ```{code-cell} python3
+# α = 0.9
+# T = 200
+# x = np.empty(T+1)
+# x[0] = 0
+# 
+# for t in range(T):
+#     if x[t] < 0:
+#         abs_x = - x[t]
+#     else:
+#         abs_x = x[t]
+#     x[t+1] = α * abs_x + np.random.randn()
+# 
+# plt.plot(x)
+# plt.show()
+# ```
+# 
 # Here\'s a shorter way to write the same thing:
-
-# In[30]:
-
-
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    abs_x = - x[t] if x[t] < 0 else x[t]
-    x[t+1] = α * abs_x + np.random.randn()
-
-plt.plot(x)
-plt.show()
-
-
+# 
+# ```{code-cell} python3
+# α = 0.9
+# T = 200
+# x = np.empty(T+1)
+# x[0] = 0
+# 
+# for t in range(T):
+#     abs_x = - x[t] if x[t] < 0 else x[t]
+#     x[t+1] = α * abs_x + np.random.randn()
+# 
+# plt.plot(x)
+# plt.show()
+# ```
+# 
 # ### Exercise 5
 # 
 # Consider the circle of diameter 1 embedded in the unit square.
@@ -743,20 +727,18 @@ plt.show()
 # 
 # We estimate the area by sampling bivariate uniforms and looking at the
 # fraction that falls into the circle.
-
-# In[31]:
-
-
-n = 100000
-
-count = 0
-for i in range(n):
-    u, v = np.random.uniform(), np.random.uniform()
-    d = np.sqrt((u - 0.5)**2 + (v - 0.5)**2)
-    if d < 0.5:
-        count += 1
-
-area_estimate = count / n
-
-print(area_estimate * 4)  # dividing by radius**2
-
+# 
+# ```{code-cell} python3
+# n = 100000
+# 
+# count = 0
+# for i in range(n):
+#     u, v = np.random.uniform(), np.random.uniform()
+#     d = np.sqrt((u - 0.5)**2 + (v - 0.5)**2)
+#     if d < 0.5:
+#         count += 1
+# 
+# area_estimate = count / n
+# 
+# print(area_estimate * 4)  # dividing by radius**2
+# ``` -->

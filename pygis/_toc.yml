@@ -7,7 +7,7 @@
 
 ---
 - file: docs/a_intro
-- part: Get Started
+- part: 0 - Get Started
   chapters:
     - file: docs/b_intro_py
     - file: docs/b_about_py
@@ -15,13 +15,13 @@
     - file: docs/b_conda_started
     - file: docs/b_python_by_example
     - file: docs/b_learn_more
-- part: Data Types
+- part: 1 - Data Types
   chapters:
     - file: docs/c_features
     - file: docs/c_store_features
     - file: docs/c_vectors
     - file: docs/c_rasters
-- part: Nature of Coordinate Systems
+- part: 3 - Nature of Coordinate Systems
   chapters:
     - file: docs/d_crs_what_is_it
     - file: docs/d_understand_crs_codes
@@ -29,11 +29,7 @@
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
 
-- part: Accessing Data
-  chapters:
-    - file: docs/d_access_osm
-
-- part: Vector Operations
+- part: 4 - Vector Operations
   chapters:
     # - file: docs/e_vector_op_intro
     #   sections:
@@ -42,19 +38,25 @@
     - file: docs/e_buffer_neighbors
     - file: docs/e_vector_overlay
     - file: docs/e_extraction
+    - file: docs/e_vector_merge_dissolve
     - file: docs/e_spatial_joins
     # - file: docs/e_table_joins
     - file: docs/e_summarize_vector
-    - file: docs/e_vector_merge_dissolve
     - file: docs/e_interpolation
-- part: Raster Operations
+- part: 5 - Raster Operations
   chapters:
     # - file: docs/e_raster_op_intro
     #   sections:
+    - file: docs/e_new_rasters
     - file: docs/e_raster_reproject
     - file: docs/e_raster_resample
+
+- part: 6 - Accessing Data
+  chapters:
+    - file: docs/d_access_osm
+    - file: docs/d_access_census
     
-- part: Remote Sensing
+- part: 7 - Remote Sensing
   chapters:
     # - file: docs/f_rs_intro
     #   sections:
