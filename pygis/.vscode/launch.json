@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Module ",
+            "type": "python",
+            "request": "launch",
+            "module": "geowombat",
+            "justMyCode": false
+        }
+        {
+            "name": "Python: geowombat",
+            "type": "python",
+            "request": "launch",
+            "module": "geowombat.${fileBasenameNoExtension}",
+            "justMyCode": false
+        }
+        {
+            "name": "Python: xarray",
+            "type": "python",
+            "request": "launch",
+            "module": "xarray.${fileBasenameNoExtension}",
+            "module": "geowombat.${fileBasenameNoExtension}",
+            "justMyCode": false
+        }
+    ]
+}

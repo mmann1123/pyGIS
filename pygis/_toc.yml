@@ -1,9 +1,12 @@
 # reminder compile book: 
 # conda activate pygisbookgw
+# using pygisbookgw_backup until bug #82  is merged and resolved
+
 # jupyter-book build pygis
 # ghp-import -n -p  -c 'pygis.io' -f pygis/_build/html
 
-# old version ghp-import -n -p -f pygis/_build/html
+
+# old version without new url ghp-import -n -p -f pygis/_build/html
 
 ---
 - file: docs/a_intro
@@ -15,13 +18,16 @@
     - file: docs/b_conda_started
     - file: docs/b_python_by_example
     - file: docs/b_learn_more
+    
 - part: 1 - Data Types
   chapters:
     - file: docs/c_features
     - file: docs/c_store_features
     - file: docs/c_vectors
+    - file: docs/c_new_vectors
     - file: docs/c_rasters
-- part: 3 - Nature of Coordinate Systems
+
+- part: 2 - Nature of Coordinate Systems
   chapters:
     - file: docs/d_crs_what_is_it
     - file: docs/d_understand_crs_codes
@@ -29,11 +35,10 @@
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
 
-- part: 4 - Vector Operations
+- part: 3 - Vector Operations
   chapters:
     # - file: docs/e_vector_op_intro
     #   sections:
-    - file: docs/e_new_vectors
     - file: docs/e_attributes
     - file: docs/e_buffer_neighbors
     - file: docs/e_vector_overlay
@@ -43,7 +48,7 @@
     # - file: docs/e_table_joins
     - file: docs/e_summarize_vector
     - file: docs/e_interpolation
-- part: 5 - Raster Operations
+- part: 4 - Raster Operations
   chapters:
     # - file: docs/e_raster_op_intro
     #   sections:
@@ -54,13 +59,14 @@
     - file: docs/e_raster_replace_values
     - file: docs/e_raster_rasterize
     - file: docs/e_raster_window_operations
+    
 
-- part: 6 - Accessing Data
+- part: 5 - Accessing Data
   chapters:
     - file: docs/d_access_osm
     - file: docs/d_access_census
     
-- part: 7 - Remote Sensing
+- part: 6 - Remote Sensing
   chapters:
     # - file: docs/f_rs_intro
     #   sections:
@@ -72,6 +78,8 @@
     - file: docs/f_rs_config
     - file: docs/f_rs_band_math
     - file: docs/f_rs_extraction
+    - file: docs/f_rs_ml_predict
+
     #- file: docs/f_common_task
     #- file: docs/g_xr_climate
     #- file: docs/g_xr_PRISM

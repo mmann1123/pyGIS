@@ -130,6 +130,7 @@
 # c_features
 # c_store_features
 # c_vectors
+# c_new_vectors
 # c_rasters
 # ```
 # 
@@ -137,7 +138,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: 3 - Nature of Coordinate Systems
+# :caption: 2 - Nature of Coordinate Systems
 # 
 # d_crs_what_is_it
 # d_understand_crs_codes
@@ -150,9 +151,8 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: 4 - Vector Operations
+# :caption: 3 - Vector Operations
 # 
-# e_new_vectors
 # e_attributes
 # e_buffer_neighbors
 # e_vector_overlay
@@ -167,7 +167,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: 5 - Raster Operations
+# :caption: 4 - Raster Operations
 # 
 # e_new_rasters
 # e_raster_reproject
@@ -182,7 +182,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: 6 - Accessing Data
+# :caption: 5 - Accessing Data
 # 
 # d_access_osm
 # d_access_census
@@ -192,7 +192,7 @@
 # ```{toctree}
 # :hidden:
 # :titlesonly:
-# :caption: 7 - Remote Sensing
+# :caption: 6 - Remote Sensing
 # 
 # f_rs_io
 # f_rs_edit
@@ -202,4 +202,5 @@
 # f_rs_config
 # f_rs_band_math
 # f_rs_extraction
+# f_rs_ml_predict
 # ```
