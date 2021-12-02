@@ -165,6 +165,16 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="c_new_vectors.html">
+   <!-- Leave e_new_vectors name change might mess up links  -->
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="c_new_vectors.html#creating-geospatial-vector-data">
+   Creating Geospatial Vector Data
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
    Raster Data
   </a>
@@ -172,7 +182,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  3 - Nature of Coordinate Systems
+  2 - Nature of Coordinate Systems
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -204,15 +214,10 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  4 - Vector Operations
+  3 - Vector Operations
  </span>
 </p>
 <ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_vectors.html">
-   Creating Geospatial Vector Data
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="e_attributes.html">
    Attributes &amp; Indexing for Vector Data
@@ -256,7 +261,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  5 - Raster Operations
+  4 - Raster Operations
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -298,7 +303,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  6 - Accessing Data
+  5 - Accessing Data
  </span>
 </p>
 <ul class="nav sidenav_l1">
@@ -315,7 +320,7 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  7 - Remote Sensing
+  6 - Remote Sensing
  </span>
 </p>
 <ul class="current nav sidenav_l1">
@@ -478,6 +483,11 @@
    Create Land Use Classification using Geowombat &amp; Sklearn
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatial-prediction-with-time-series-stack-using-geowombat-sklearn">
+   Spatial prediction with time series stack using Geowombat &amp; Sklearn
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -517,7 +527,7 @@
 <p>In the following example we will use Landsat data, some training data to train a sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes [‘water’,’crop’,’tree’,’developed’]. The first step is to use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> to convert these to integer based categories, which we store in a new column called ‘lc’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
 
 <span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit</span>
@@ -537,15 +547,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                                           geometry  lc
-0      water  POLYGON ((737544.502 -2795232.772, 737544.502 ...   3
-1       crop  POLYGON ((742517.658 -2798160.232, 743046.717 ...   0
-2       tree  POLYGON ((742435.360 -2801875.403, 742458.874 ...   2
-3  developed  POLYGON ((738903.667 -2811573.845, 738926.586 ...   1
-</pre></div>
-</div>
-</div>
 </div>
 <p>We are then going to generate our sklearn pipeline (<a class="reference external" href="https://medium.com/vickdata/a-simple-guide-to-scikit-learn-pipelines-4ac0d974bdcf">see simple tutorial here</a>). A pipeline simply allows us to pass a numpy array through a defined set of operations. In this case the data is passed through the following operations:</p>
 <ul class="simple">
@@ -557,7 +558,7 @@
 <p>In this example we will just fit a model. The trained pipeline can be accessed with the returned <code class="docutils literal notranslate"><span class="pre">clf</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a data pipeline</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a data pipeline</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;featurizer&#39;</span><span class="p">,</span> <span class="n">Featurizer</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span>
@@ -572,30 +573,13 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;featurizer&#39;, Featurizer()),
-                (&#39;scaler&#39;,
-                 EstimatorWrapper(copy=True, estimator=StandardScaler(),
-                                  reshapes=&#39;feature&#39;, with_mean=True,
-                                  with_std=True)),
-                (&#39;pca&#39;,
-                 EstimatorWrapper(copy=True, estimator=PCA(),
-                                  iterated_power=&#39;auto&#39;, n_components=None,
-                                  random_state=None, reshapes=&#39;feature&#39;,
-                                  svd_solver=&#39;auto&#39;, tol=0.0, whiten=False)),
-                (&#39;clf&#39;,
-                 EstimatorWrapper(estimator=GaussianNB(), priors=None,
-                                  reshapes=&#39;feature&#39;, var_smoothing=1e-09))])
-</pre></div>
-</div>
-</div>
 </div>
 <p>In order to fit and predict to our original data we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> 
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
 
@@ -608,24 +592,19 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 1, band: 1, y: 558, x: 612)&gt;
-array([[[[0, 0, 0, ..., 0, 0, 0],
-         [0, 0, 0, ..., 0, 0, 0],
-         [0, 0, 0, ..., 0, 0, 0],
-         ...,
-         [0, 0, 0, ..., 1, 1, 1],
-         [0, 0, 0, ..., 1, 1, 1],
-         [0, 0, 0, ..., 1, 1, 1]]]])
-Coordinates:
-    targ     (time, y, x) float64 dask.array&lt;chunksize=(1, 25, 612), meta=np.ndarray&gt;
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-  * x        (x) float64 7.174e+05 7.175e+05 7.176e+05 ... 7.784e+05 7.785e+05
-  * time     (time) object &#39;t1&#39;
-  * band     (band) &lt;U4 &#39;targ&#39;
+</div>
+</div>
+<div class="section" id="spatial-prediction-with-time-series-stack-using-geowombat-sklearn">
+<h2>Spatial prediction with time series stack using Geowombat &amp; Sklearn<a class="headerlink" href="#spatial-prediction-with-time-series-stack-using-geowombat-sklearn" title="Permalink to this headline">¶</a></h2>
+<p>If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> to ‘time’ and set the <code class="docutils literal notranslate"><span class="pre">time_names</span></code>.  <em>Note</em> we are just pretending we have two dates of LandSat imagery here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+   <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span> <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/f_rs_ml_predict_5_1.png" src="../_images/f_rs_ml_predict_5_1.png" />
 </div>
 </div>
 </div>

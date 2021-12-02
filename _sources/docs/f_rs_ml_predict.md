@@ -89,8 +89,8 @@ In order to fit and predict to our original data we simply use `fit_predict`.
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
-
-fig, ax = plt.subplots(dpi=200)
+plt.figure(figsize=(5, 5)) 
+fig, ax = plt.subplots(dpi=200,figsize=(10,10))
 
 from geowombat.ml import fit_predict
 
@@ -103,4 +103,13 @@ plt.tight_layout(pad=1)
 
 ```
 
+## Spatial prediction with time series stack using Geowombat & Sklearn
 
+If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set `stack_dim` to 'time' and set the `time_names`.  *Note* we are just pretending we have two dates of LandSat imagery here. 
+
+```{code-cell} ipython3
+with gw.config.update(ref_res=100):
+   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time', chunks=128) as src:
+        y = fit_predict(src, labels, pl, col='lc')
+        print(y)
+```
