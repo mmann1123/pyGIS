@@ -60,7 +60,7 @@
     <link rel="canonical" href="https://pygis.io/docs/d_crs_what_is_it.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Understanding CRS codes" href="d_understand_crs_codes.html" />
+    <link rel="next" title="Understanding a CRS: Proj4 and CRS codes" href="d_understand_crs_codes.html" />
     <link rel="prev" title="Raster Data" href="c_rasters.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -194,7 +194,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding CRS codes
+   Understanding a CRS: Proj4 and CRS codes
   </a>
  </li>
  <li class="toctree-l1">
@@ -705,9 +705,9 @@
 <div class="section" id="building-the-geographic-coordinate-system">
 <h3>Building the Geographic Coordinate System<a class="headerlink" href="#building-the-geographic-coordinate-system" title="Permalink to this headline">¶</a></h3>
 <p>A Geographic Coordinate System (GCS) is defined by the ellipsoid model and by the way this ellipsoid is aligned with the geoid (defining the datum). It is important to know which GCS is associated with a GIS file or a map document reference system. This is particularly true when the overlapping layers are tied to different datums (and therefore GCS’). This is because a location on the earth’s surface can take on different coordinate values. For example, a location recorded in an NAD 1927 GCS having a coordinate pair of 44.56698° north and 69.65939° west will register a coordinate value of 44.56704° north and 69.65888° west in a NAD83 GCS and a coordinate value of 44.37465° north and -69.65888° west in a sphere based WGS84 GCS. If the coordinate systems for these point coordinate values were not properly defined, then they could be misplaced on a map.  This is analogous to recording temperature using different units of measure (degrees Celsius, Fahrenheit and Kelvin)–each unit of measure will produce a different numeric value.</p>
-<div class="figure align-default" id="map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-amp-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005-amp-deg-longitudinal-offset-between-both-reference-systems">
+<div class="figure align-default" id="map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005deg-longitudinal-offset-between-both-reference-systems">
 <img alt="../_images/GCS_diff_coord_values.png" src="../_images/GCS_diff_coord_values.png" />
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639&amp;deg; line of latitude relative to the flagpole. Also note the 0.0005&amp;deg; longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-amp-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005-amp-deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639° line of latitude relative to the flagpole. Also note the 0.0005° longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -796,7 +796,7 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
 </div>
 <p>So if a geodesic measurement is more precise than a planar measurement, why not perform all spatial operations using geodesic geometry? In many cases, a geodesic approach to spatial operations can be perfectly acceptable and is even encouraged. The downside is in its computational requirements. It’s far more computationally efficient to compute area/distance on a plane than it is on a spheroid. This is because geodesic calculations have no simple algebraic solutions and involve approximations that may require iterative solutions. So this may be a computationally taxing approach if processing millions of line segments.</p>
 <p>Note that not all geodesic measurement implementations are equal. Some more efficient algorithms that minimize computation time may reduce precision in the process. Some of ArcMap’s functions offer the option to compute geodesic distances and areas however ArcMap does not clearly indicate how its geodesic calculations are implemented. The data analysis environment R has a package called <code class="docutils literal notranslate"><span class="pre">geosphere</span></code> that implements well defined geodesic measurement algorithms adopted from the authoritative set of  <a class="reference external" href="https://geographiclib.sourceforge.io/">GeographicLib</a> libraries.</p>
-<p><a class="reference external" href="https://mgimond.github.io/Spatial/chp09-0.html">Adapted from</a></p>
+<p><a class="reference external" href="https://mgimond.github.io/Spatial/chp09_0.html">Adapted from Manuel Gimond’s excellent “Intro to GIS and Spatial Analysis”</a> under This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</p>
 </div>
 </div>
 
@@ -826,7 +826,7 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="c_rasters.html" title="previous page">Raster Data</a>
-    <a class='right-next' id="next-link" href="d_understand_crs_codes.html" title="next page">Understanding CRS codes</a>
+    <a class='right-next' id="next-link" href="d_understand_crs_codes.html" title="next page">Understanding a CRS: Proj4 and CRS codes</a>
 
         </div>
         

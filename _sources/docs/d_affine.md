@@ -97,12 +97,19 @@ To understand how this works, let's walk through the basic transformations of $\
 
 If we multiply $x$ and $y$ by one, by setting $a,e = 1$, and zero out the effect of the other axis, by setting $b,d = 0$, we have a simple case of translation, where $x$ moves right by $c$ and $y$ up by the value of $f$:
 
+$$
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}1x+0y+c \\ 0x+1y+f \end{array} \right]
+   \end{eqnarray}
+$$
+
+
 ```{figure} ../_static/d_crs/translate_coord.png
 :name: Translate a coordinate
 Translate a coordinate
 ```
 
-We can scale $x$ and $y$ by using $a$ and $e$ and setting all other values to zero ($b,d,c,f = 0$):
+We can scale $x$ and $y$ by setting $a$ and $e$ to 0.5 (or some fraction), and setting all other values to zero ($b,d,c,f = 0$):
 
 $$
    \begin{eqnarray}

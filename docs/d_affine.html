@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Vector Coordinate Reference Systems (CRS)" href="d_vector_crs_intro.html" />
-    <link rel="prev" title="Understanding CRS codes" href="d_understand_crs_codes.html" />
+    <link rel="prev" title="Understanding a CRS: Proj4 and CRS codes" href="d_understand_crs_codes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -196,7 +196,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding CRS codes
+   Understanding a CRS: Proj4 and CRS codes
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -624,11 +624,17 @@
 </div>
 <p>To understand how this works, let’s walk through the basic transformations of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p>
 <p>If we multiply <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by one, by setting <span class="math notranslate nohighlight">\(a,e = 1\)</span>, and zero out the effect of the other axis, by setting <span class="math notranslate nohighlight">\(b,d = 0\)</span>, we have a simple case of translation, where <span class="math notranslate nohighlight">\(x\)</span> moves right by <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(y\)</span> up by the value of <span class="math notranslate nohighlight">\(f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{eqnarray}
+      \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}1x+0y+c \\ 0x+1y+f \end{array} \right]
+   \end{eqnarray}
+\end{split}\]</div>
 <div class="figure align-default" id="translate-a-coordinate">
 <img alt="../_images/translate_coord.png" src="../_images/translate_coord.png" />
 <p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">¶</a></p>
 </div>
-<p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by using <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
+<p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by setting <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> to 0.5 (or some fraction), and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
    \begin{eqnarray}
@@ -826,7 +832,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="d_understand_crs_codes.html" title="previous page">Understanding CRS codes</a>
+    <a class='left-prev' id="prev-link" href="d_understand_crs_codes.html" title="previous page">Understanding a CRS: Proj4 and CRS codes</a>
     <a class='right-next' id="next-link" href="d_vector_crs_intro.html" title="next page">Vector Coordinate Reference Systems (CRS)</a>
 
         </div>
