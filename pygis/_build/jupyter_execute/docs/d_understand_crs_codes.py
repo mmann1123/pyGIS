@@ -3,7 +3,7 @@
 
 # (d_understand_crs_codes)=
 # 
-# # Understanding CRS codes
+# # Understanding a CRS: Proj4 and CRS codes
 # ----------------
 # 
 # ```{admonition} Learning Objectives

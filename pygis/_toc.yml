@@ -17,8 +17,7 @@
     - file: docs/b_getting_started
     - file: docs/b_conda_started
     - file: docs/b_python_by_example
-    - file: docs/b_learn_more
-    
+    - file: docs/b_learn_more    
 - part: 1 - Data Types
   chapters:
     - file: docs/c_features

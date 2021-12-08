@@ -52,7 +52,7 @@ plt.show()
 
 # Note that *`Z` contains no data on its location*. Its just an array, the information stored in `x` and `y` aren't associated with it at all. This location data will often be stored in the header of file. In order to 'locate' the array on the map we will use affine transformations. 
 # 
-# Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.
+# Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points ([review affine transforms here](d_affine.md)). It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.
 # 
 # ## Describing the Array Location (Define a Projection)
 # In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale.md) and [see an example here](d_affine_trans.md).
@@ -76,7 +76,7 @@ xres = (x[-1] - x[0]) / len(x)
 xres
 
 
-# But notice that the y resolution is negative:
+# But notice that the y resolution is **negative**:
 
 # In[3]:
 
@@ -84,6 +84,10 @@ xres
 yres = (y[-1] - y[0]) / len(y)
 yres
 
+
+# We need to create our translation matrix by defining the location of the upper left hand corner. Looking back at our definitions of our coordinates `X` and `Y` we can see that they are defined with `x = np.linspace(-90, 90, 6); y = np.linspace(90, -90, 6); X, Y = np.meshgrid(x, y)`, if you run `print(X);print(Y)` you will see that the **center** of the upper left hand corner should be located at (-90,90). The **upper left hand corner** of that same cell is actually further up and to the left than (-90,90). It follows then that that corner should be shifted exactly 1/2 the resolution of the cell, both up and to the left. 
+# 
+# We can therefore define the upper left hand corner by setting $\Delta x = x[0] - xres / 2$ and $\Delta y = y[0] - yres / 2$. Remember yres is negative, so subtraction is correct.
 
 # In[4]:
 
@@ -143,7 +147,7 @@ with rasterio.open(
 # 
 # 
 # ### The Crazy Tale of the Upper Left Hand Corner
-# To help us understand what is going on it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
+# To help us understand what is going on with `transform` it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
 # 
 # We can visualize what we need to do here: 
 # 

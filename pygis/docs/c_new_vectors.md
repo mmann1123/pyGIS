@@ -76,7 +76,7 @@ Creating geopandas point objects is a snap! All we need is a coordinate pair fro
 # Coordinates of the GW department of geography in Decimal Degrees
 coordinate = [-77.04639494419096,  38.89934963421794]
 
-# Create a Shapely polygon from the coordinate-tuple list
+# Create a Shapely point from a coordinate pair
 point_coord = Point(coordinate)
 
 # create a dataframe with needed attributes and required geometry column
