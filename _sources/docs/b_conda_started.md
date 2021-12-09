@@ -74,7 +74,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to  -it osgeo/gdal:ubuntu-full-latest
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tabbed} Windows
@@ -88,7 +88,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v C:/Users/<user_name>:/home  -it osgeo/gdal:ubuntu-full-latest
+docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tabbed} Linux
@@ -101,7 +101,7 @@ sudo docker images -a
 
 # Run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my home folder to the containers home folder
-sudo docker run -v /home:/home  -it osgeo/gdal:ubuntu-full-latest
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 
@@ -147,7 +147,7 @@ docker ps -a
 # find the "CONTAINER ID" of the container that was just exited seconds ago, 
 # and replace the example ID used below
 
-# commit changes to new named image
+# commit changes to new named image (replace 12 digit container id from one listed above)
 docker commit 9c3f33afcff9 geowombat
 
 # list all available images, look for geowombat.
@@ -201,19 +201,19 @@ Let's start with command line only access. Note that this is almost exactly how 
 
 ````{tabbed} Mac
 ```
-docker run -v /Users/<user_name>:/home  -it geowombat
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it geowombat
 python
 ```
 ````
 ````{tabbed} Windows
 ```
-docker run -v C:/Users/<user_name>:/home  -it geowombat
+docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it geowombat
 python
 ```
 ````
 ````{tabbed} Linux
 ```
-sudo docker run -v /home:/home  -it geowombat
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it geowombat
 python
 ```
 ````
@@ -227,11 +227,11 @@ To do this we are going to
 ````{tabbed} Mac
 ```
 # Or if browser is  present
-sudo docker run -v /Users/<user_name>:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v C:/Users/<user_name>:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -239,11 +239,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tabbed} Windows
 ```
 # Or if browser is  present
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -252,11 +252,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tabbed} Linux
 ```
 # Iff browser is  present
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -277,7 +277,7 @@ cd ~/Desktop/
 # write a shell script called run_geowombat
 # between the ''s put whatever bash code you want
 echo '
-sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to  -it -p 8888:8888 geowombat
+sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_geowombat.sh
 
@@ -299,7 +299,7 @@ cd ~/Desktop/
 # write a shell script called run_geowombat
 # between the ''s put whatever bash code you want
 echo '
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_geowombat.sh
 
