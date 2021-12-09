@@ -74,7 +74,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v /Users/<user_name>:/home  -it osgeo/gdal:ubuntu-full-latest
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tabbed} Windows
@@ -277,7 +277,7 @@ cd ~/Desktop/
 # write a shell script called run_geowombat
 # between the ''s put whatever bash code you want
 echo '
-sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to  -it -p 8888:8888 geowombat
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_geowombat.sh
 
