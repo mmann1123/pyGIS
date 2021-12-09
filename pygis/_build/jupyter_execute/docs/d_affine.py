@@ -163,7 +163,7 @@
 # 
 # $$
 #    \begin{eqnarray}
-#    \mbox{Scale: } \left[ \begin{array}{cc|r} S_{x} \\ S_{y}  \end{array} \right] 
+#      \mbox{Scale: } \left[ \begin{array}{cc|r} S_{x} \ \ 0  \\ 0 \ \ S_{y}  \end{array} \right] 
 #    \end{eqnarray}
 # $$
 # 

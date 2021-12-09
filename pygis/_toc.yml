@@ -1,7 +1,6 @@
 # reminder compile book: 
 # conda activate pygisbookgw
-# using pygisbookgw_backup until bug #82  is merged and resolved
-
+# cd Documents/github/pyGIS/
 # jupyter-book build pygis
 # ghp-import -n -p  -c 'pygis.io' -f pygis/_build/html
 

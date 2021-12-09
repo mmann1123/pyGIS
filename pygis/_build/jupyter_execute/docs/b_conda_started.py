@@ -60,7 +60,7 @@
 # # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # # here I am linking my <user_name> home folder to the containers home folder
 # # important: update the <user_name> portion with your windows user name
-# docker run -v /Users/<user_name>:/home  -it osgeo/gdal:ubuntu-full-latest
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 # ```
 # ````
 # ````{tabbed} Windows
@@ -74,7 +74,7 @@
 # # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # # here I am linking my <user_name> home folder to the containers home folder
 # # important: update the <user_name> portion with your windows user name
-# docker run -v C:/Users/<user_name>:/home  -it osgeo/gdal:ubuntu-full-latest
+# docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 # ```
 # ````
 # ````{tabbed} Linux
@@ -87,9 +87,12 @@
 # 
 # # Run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # # here I am linking my home folder to the containers home folder
-# sudo docker run -v /home:/home  -it osgeo/gdal:ubuntu-full-latest
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 # ```
 # ````
+# ```{note}
+# You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v C:/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+# ```
 # 
 # Your command prompt in the terminal window should now say something funny like `root@b0c5ab799195:/# `. You are now INSIDE your running docker container, which is running Ubuntu linux. 
 # 
@@ -98,6 +101,7 @@
 # ```
 # uname
 # ```
+# Should return `Linux`
 # ````
 # We will need to update/upgrade the OS, install pip and a few other applications we need, pip install geowombat, and a few more python dependancies for it. We will then exit the container and save a named copy of it. 
 # 
@@ -118,6 +122,13 @@
 # 
 # #test and exit - this should print the version of geowombat installed
 # python -c "import geowombat as gw;print(gw.__version__)"
+# 
+# # Install any other modules you want via pip
+# 
+# ```
+# ````
+# ````{tabbed} Linux Container
+# ```
 # exit
 # ```
 # ````
@@ -133,10 +144,10 @@
 # # find the "CONTAINER ID" of the container that was just exited seconds ago, 
 # # and replace the example ID used below
 # 
-# # commit changes to new named image
-# docker commit 9c3f33afcff9 geowombat
+# # commit changes to new named image (replace 12 digit container id from one listed above)
+# docker commit 9c3f33afcff9 pygis
 # 
-# # list all available images, look for geowombat.
+# # list all available images, look for pygis.
 # docker images
 # ```
 # ````
@@ -149,9 +160,9 @@
 # # and replace the example ID used below
 # 
 # # commit changes to new named image
-# docker commit 9c3f33afcff9 geowombat
+# docker commit 9c3f33afcff9 pygis
 # 
-# # list all available images, look for geowombat.
+# # list all available images, look for pygis.
 # docker images
 # ```
 # ````
@@ -164,9 +175,9 @@
 # # and replace the example ID used below
 # 
 # # commit changes to new named image
-# sudo docker commit 9c3f33afcff9 geowombat
+# sudo docker commit 9c3f33afcff9 pygis
 # 
-# # list all available images, look for geowombat.
+# # list all available images, look for pygis.
 # sudo docker images
 # 
 # # if you want to stop typing "sudo" before docker run the following, and log out of your computer
@@ -174,10 +185,10 @@
 # ```
 # ```` 
 # 
-# Ok, now we are getting somewhere. We have created a new image called "geowombat" that should have everything we need to get this done! Now the problem is how to access it?!
+# Ok, now we are getting somewhere. We have created a new image called "pygis" that should have everything we need to get this done! Now the problem is how to access it?!
 # 
 # ```{note} 
-# Keep in mind if you want to make changes to the Geowombat image you will need to first run it via the command line, make your changes, and then 'commit' or save another named version (ideally with a different name)
+# Keep in mind if you want to make changes to the 'pygis' image you will need to first run it via the command line, make your changes, and then 'commit' or save another named version (ideally with a different name)
 # ```
 # 
 # ### Access your geospatial python image 
@@ -187,19 +198,19 @@
 # 
 # ````{tabbed} Mac
 # ```
-# docker run -v /Users/<user_name>:/home  -it geowombat
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 # python
 # ```
 # ````
 # ````{tabbed} Windows
 # ```
-# docker run -v C:/Users/<user_name>:/home  -it geowombat
+# docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 # python
 # ```
 # ````
 # ````{tabbed} Linux
 # ```
-# sudo docker run -v /home:/home  -it geowombat
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 # python
 # ```
 # ````
@@ -213,11 +224,11 @@
 # ````{tabbed} Mac
 # ```
 # # Or if browser is  present
-# sudo docker run -v /Users/<user_name>:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
 # # or if the jupyter notebooks doesn't launch automatically
-# sudo docker run -v C:/Users/<user_name>:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # # THEN control click on URL printed to the bottom of terminal
 # ```
@@ -225,11 +236,11 @@
 # ````{tabbed} Windows
 # ```
 # # Or if browser is  present
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
 # # or if the jupyter notebooks doesn't launch automatically
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # # THEN control click on URL printed to the bottom of terminal
 # ```
@@ -238,19 +249,21 @@
 # ````{tabbed} Linux
 # ```
 # # Iff browser is  present
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
 # # or if the jupyter notebooks doesn't launch automatically
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # # THEN control click on URL printed to the bottom of terminal
 # ```
 # ````
-# Every time you want to run geowombat you are going to `run` the docker container called `geowombat`. 
+# Every time you want to run pygis you are going to `run` the docker container called `pygis`. 
 # 
 # ```{warning}
-# **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container.
+# **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. 
+# 
+# You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home` option with docker run.
 # ```
 # 
 # To make this a little easier you can create an executable script on your desktop to run it when you want. 
@@ -260,15 +273,15 @@
 # # move to your desktop
 # cd ~/Desktop/
 # 
-# # write a shell script called run_geowombat
+# # write a shell script called run_pygis
 # # between the ''s put whatever bash code you want
 # echo '
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
-# ' > run_geowombat.sh
+# ' > run_pygis.sh
 # 
 # # allow it to be executable
-# chmod 755 run_geowombat.sh  
+# chmod 755 run_pygis.sh  
 # ```
 # ````
 # ````{tabbed} Windows
@@ -282,15 +295,15 @@
 # # move to your desktop
 # cd ~/Desktop/
 # 
-# # write a shell script called run_geowombat
+# # write a shell script called run_pygis
 # # between the ''s put whatever bash code you want
 # echo '
-# sudo docker run -v /home:/home  -it -p 8888:8888 geowombat
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
-# ' > run_geowombat.sh
+# ' > run_pygis.sh
 # 
 # # allow it to be executable
-# chmod +x run_geowombat.sh  
+# chmod +x run_pygis.sh  
 # ```
 # ````
 # 
@@ -304,7 +317,7 @@
 # cd ~/Desktop/
 # 
 # # execute it
-# ./run_geowombat.sh
+# ./run_pygis.sh
 # ```
 # ````
 # ````{tabbed} Windows
@@ -319,7 +332,7 @@
 # cd ~/Desktop/
 # 
 # # execute it
-# ./run_geowombat.sh
+# ./run_pygis.sh
 # ```
 # ````
 # 
