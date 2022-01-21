@@ -8,7 +8,7 @@
 <meta content="geospatial, overlay, join, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Vector Overlays and Joins &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Spatial Overlays and Joins &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -58,8 +58,8 @@
     <link rel="canonical" href="https://pygis.io/docs/e_vector_overlay.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Extracting Spatial Data" href="e_extraction.html" />
-    <link rel="prev" title="Proximity Analysis - Buffers, Nearest Neighbor" href="e_buffer_neighbors.html" />
+    <link rel="next" title="Spatial Joins" href="e_spatial_joins.html" />
+    <link rel="prev" title="Extracting Spatial Data" href="e_extraction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -68,8 +68,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_vector_overlay.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Vector Overlays and Joins" />
-<meta property="og:description" content="Vector Overlays and Joins  Combining two or more datasets together is a fundamental aspect of GIS. Using geopandas, we can create new geometries from existing d" />
+<meta property="og:title"       content="Spatial Overlays and Joins" />
+<meta property="og:description" content="Spatial Overlays and Joins  Combining two or more datasets together is a fundamental aspect of GIS. Using geopandas, we can create new geometries from existing " />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -227,9 +227,9 @@
    Proximity Analysis - Buffers, Nearest Neighbor
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Vector Overlays and Joins
+ <li class="toctree-l1">
+  <a class="reference internal" href="e_vector_merge_dissolve.html">
+   Merge Data &amp; Dissolve Polygons
   </a>
  </li>
  <li class="toctree-l1">
@@ -237,9 +237,9 @@
    Extracting Spatial Data
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Spatial Overlays and Joins
   </a>
  </li>
  <li class="toctree-l1">
@@ -249,7 +249,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="e_summarize_vector.html">
-   Point Density Measures - Point Counts &amp; Kernel Density
+   Point Density Measures - Counts &amp; Kernel Density
   </a>
  </li>
  <li class="toctree-l1">
@@ -567,8 +567,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="vector-overlays-and-joins">
-<h1>Vector Overlays and Joins<a class="headerlink" href="#vector-overlays-and-joins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="spatial-overlays-and-joins">
+<h1>Spatial Overlays and Joins<a class="headerlink" href="#spatial-overlays-and-joins" title="Permalink to this headline">¶</a></h1>
 <p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
 <p>In this chapter, we will focus on vector overlays, which involve combining vector data. We’ll explore five types of vector overlays and merging: union, intersection, difference (erase), identity, and spatial join.</p>
 <div class="section" id="setup">
@@ -1957,8 +1957,8 @@ First two rows:
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="e_buffer_neighbors.html" title="previous page">Proximity Analysis - Buffers, Nearest Neighbor</a>
-    <a class='right-next' id="next-link" href="e_extraction.html" title="next page">Extracting Spatial Data</a>
+    <a class='left-prev' id="prev-link" href="e_extraction.html" title="previous page">Extracting Spatial Data</a>
+    <a class='right-next' id="next-link" href="e_spatial_joins.html" title="next page">Spatial Joins</a>
 
         </div>
         
