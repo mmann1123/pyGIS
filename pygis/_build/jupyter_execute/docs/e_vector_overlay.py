@@ -14,7 +14,7 @@
 # ```
 # ----------------
 # 
-# # Vector Overlays and Joins
+# # Spatial Overlays and Joins
 # 
 # Combining two or more datasets together is a fundamental aspect of GIS. Using `geopandas`, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. [^gpd_set], [^bolstad]
 # 

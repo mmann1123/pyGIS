@@ -185,6 +185,8 @@ print('Coordinates of closest destination point:',nearest_destination)
 # In[11]:
 
 
+from shapely.ops import nearest_points
+
 def _nearest(row, df1, df2, geom1='geometry', geom2='geometry', df2_column=None):
     """Find the nearest point and return the corresponding value from specified column."""
 

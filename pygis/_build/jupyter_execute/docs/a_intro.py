@@ -155,9 +155,9 @@
 # 
 # e_attributes
 # e_buffer_neighbors
-# e_vector_overlay
-# e_extraction
 # e_vector_merge_dissolve
+# e_extraction
+# e_vector_overlay
 # e_spatial_joins
 # e_summarize_vector
 # e_interpolation

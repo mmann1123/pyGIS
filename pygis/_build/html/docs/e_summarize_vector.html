@@ -8,7 +8,7 @@
 <meta content="geospatial, aggregate, summarize, binning, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Point Density Measures - Point Counts &amp; Kernel Density &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Point Density Measures - Counts &amp; Kernel Density &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -68,8 +68,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_summarize_vector.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Point Density Measures - Point Counts &amp; Kernel Density" />
-<meta property="og:description" content="Point Density Measures - Point Counts &amp; Kernel Density  Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visual" />
+<meta property="og:title"       content="Point Density Measures - Counts &amp; Kernel Density" />
+<meta property="og:description" content="Point Density Measures - Counts &amp; Kernel Density  Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing " />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -228,8 +228,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Vector Overlays and Joins
+  <a class="reference internal" href="e_vector_merge_dissolve.html">
+   Merge Data &amp; Dissolve Polygons
   </a>
  </li>
  <li class="toctree-l1">
@@ -238,8 +238,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
+  <a class="reference internal" href="e_vector_overlay.html">
+   Spatial Overlays and Joins
   </a>
  </li>
  <li class="toctree-l1">
@@ -249,7 +249,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Point Density Measures - Point Counts &amp; Kernel Density
+   Point Density Measures - Counts &amp; Kernel Density
   </a>
  </li>
  <li class="toctree-l1">
@@ -547,8 +547,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="point-density-measures-point-counts-kernel-density">
-<h1>Point Density Measures - Point Counts &amp; Kernel Density<a class="headerlink" href="#point-density-measures-point-counts-kernel-density" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="point-density-measures-counts-kernel-density">
+<h1>Point Density Measures - Counts &amp; Kernel Density<a class="headerlink" href="#point-density-measures-counts-kernel-density" title="Permalink to this headline">¶</a></h1>
 <p>Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.</p>
 <p>This chapter will explore two summary operations that highlight concentrations of data: count points in a rectangular or hexagonal grid or by polygon and kernel density.</p>
 <p><strong>Setup</strong></p>
@@ -713,6 +713,10 @@
 <div class="section" id="method-1-group-by">
 <h3>Method 1 - Group by<a class="headerlink" href="#method-1-group-by" title="Permalink to this headline">¶</a></h3>
 <p>This method involves using spatial joins to allocate each point to the cell in which it resides. All the points within each cell are subsequently grouped together and counted.</p>
+<div class="figure align-default" id="point-density-using-groupby-and-geopandas">
+<img alt="../_images/PointDensity_Groupby.png" src="../_images/PointDensity_Groupby.png" />
+<p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">Point density using groupby and geopandas</span><a class="headerlink" href="#point-density-using-groupby-and-geopandas" title="Permalink to this image">¶</a></p>
+</div>
 <p>First, we will create a grid over the Bay Area.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

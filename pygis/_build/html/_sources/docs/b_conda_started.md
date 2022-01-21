@@ -88,7 +88,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
+docker run -v //c/User/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tabbed} Linux
@@ -105,7 +105,7 @@ sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -i
 ```
 ````
 ```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v C:/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/User/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v //c/User/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
 ```
 
 Your command prompt in the terminal window should now say something funny like `root@b0c5ab799195:/# `. You are now INSIDE your running docker container, which is running Ubuntu linux. 
@@ -141,6 +141,8 @@ python -c "import geowombat as gw;print(gw.__version__)"
 
 ```
 ````
+Now we need to exit the container and go back to your local computer command line. 
+
 ````{tabbed} Linux Container
 ```
 exit
@@ -218,7 +220,7 @@ python
 ````
 ````{tabbed} Windows
 ```
-docker run -v C:/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
+docker run -v //c/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 python
 ```
 ````
@@ -250,11 +252,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tabbed} Windows
 ```
 # Or if browser is  present
-sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+sudo docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v C:/home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+sudo docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```

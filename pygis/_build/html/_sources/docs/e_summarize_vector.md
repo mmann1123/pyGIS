@@ -28,7 +28,7 @@ html_meta:
 
 ----------------
 
-# Point Density Measures - Point Counts & Kernel Density
+# Point Density Measures - Counts & Kernel Density
 
 Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.
 
@@ -195,6 +195,11 @@ shape = "hexagon"
 ### Method 1 - Group by
 
 This method involves using spatial joins to allocate each point to the cell in which it resides. All the points within each cell are subsequently grouped together and counted.
+
+```{figure} ../_static/e_vector_shapefiles/PointDensity_Groupby.png
+:name: Point density using groupby and geopandas
+Point density using groupby and geopandas
+```
 
 First, we will create a grid over the Bay Area.
 

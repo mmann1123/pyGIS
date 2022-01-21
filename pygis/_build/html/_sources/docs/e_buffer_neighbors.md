@@ -175,6 +175,8 @@ Of course, the previous example is not really useful yet. Hence, next I show, ho
 - First we need to create a function that takes advantage of the previous function but is tailored to work with two GeoDataFrames.
 
 ```{code-cell} ipython3
+from shapely.ops import nearest_points
+
 def _nearest(row, df1, df2, geom1='geometry', geom2='geometry', df2_column=None):
     """Find the nearest point and return the corresponding value from specified column."""
 
