@@ -39,9 +39,9 @@
     #   sections:
     - file: docs/e_attributes
     - file: docs/e_buffer_neighbors
-    - file: docs/e_vector_overlay
-    - file: docs/e_extraction
     - file: docs/e_vector_merge_dissolve
+    - file: docs/e_extraction
+    - file: docs/e_vector_overlay
     - file: docs/e_spatial_joins
     # - file: docs/e_table_joins
     - file: docs/e_summarize_vector
