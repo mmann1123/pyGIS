@@ -268,7 +268,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="e_new_rasters.html">
-   Accessing &amp; Creating Rasters with Rasterio
+   Reading &amp; Writing Rasters with Rasterio
   </a>
  </li>
  <li class="toctree-l1">
@@ -567,7 +567,7 @@
 <p>The filter passes through all <em>non-edge</em> cells in the raster. During each pass of the filter, the center cell is updated based on the cells adjacent to it. In the <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter example, the center cell is updated by the eight cells that neighbor it. The filter then pulls the values from the neighboring cells and the center pixel itself, performs a calculation based on the filter values (e.g., calculates the mean), reports that resulting value back to the identical location of the original pixel, moves to the next pixel, and repeats the process.</p>
 <div class="figure align-default" id="sliding-window-operations">
 <img alt="../_images/raster_sliding_window.jpg" src="../_images/raster_sliding_window.jpg" />
-<p class="caption"><span class="caption-number">Fig. 58 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">¶</a></p>
 </div>
 <p>The filter values can essentially be any number–they can be the same across the filter or be all different. The values determine how the output is calculated (equation below assuming a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter for nine cells total in the kernel):</p>
 <div class="math notranslate nohighlight">
@@ -581,7 +581,7 @@ X_{i} = raster cell value</p>
 <p>The values also determine <em>what</em> is calculated. For example, setting all filter values to <code class="docutils literal notranslate"><span class="pre">1</span></code> will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to <code class="docutils literal notranslate"><span class="pre">1/9</span></code> for a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter will result in the filter outputting the average of all raster pixel values within the filter.</p>
 <div class="figure align-default" id="moving-window-operation-examples">
 <img alt="../_images/raster_window_operations.jpg" src="../_images/raster_window_operations.jpg" />
-<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">¶</a></p>
 </div>
 <p>For more information on moving windows, see the <a class="reference external" href="https://saylordotorg.github.io/text_essentials-of-geographic-information-systems/s12-02-scale-of-analysis.html">“Neighborhood Operations” section in this chapter on raster geoprocessing</a>.</p>
 <div class="admonition attention">

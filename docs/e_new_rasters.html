@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="geospatial, raster, reproject, crs, landsat" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Accessing &amp; Creating Rasters with Rasterio &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Reading &amp; Writing Rasters with Rasterio &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -67,8 +67,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_new_rasters.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Accessing &amp; Creating Rasters with Rasterio" />
-<meta property="og:description" content="Accessing &amp; Creating Rasters with Rasterio  In order to work with raster data we will be using rasterio and later geowombat. Behind the scenes a numpy.ndarray d" />
+<meta property="og:title"       content="Reading &amp; Writing Rasters with Rasterio" />
+<meta property="og:description" content="Reading &amp; Writing Rasters with Rasterio  In order to work with raster data we will be using rasterio and later geowombat. Behind the scenes a numpy.ndarray does" />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -265,7 +265,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Accessing &amp; Creating Rasters with Rasterio
+   Reading &amp; Writing Rasters with Rasterio
   </a>
  </li>
  <li class="toctree-l1">
@@ -525,8 +525,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="accessing-creating-rasters-with-rasterio">
-<h1>Accessing &amp; Creating Rasters with Rasterio<a class="headerlink" href="#accessing-creating-rasters-with-rasterio" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="reading-writing-rasters-with-rasterio">
+<h1>Reading &amp; Writing Rasters with Rasterio<a class="headerlink" href="#reading-writing-rasters-with-rasterio" title="Permalink to this headline">¶</a></h1>
 <p>In order to work with raster data we will be using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and later <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>. Behind the scenes a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> does all the heavy lifting. To understand how raster works it helps to construct one from scratch.</p>
 <p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
 <div class="cell docutils container">
