@@ -16,7 +16,7 @@
 # ----------------
 #  
 # 
-# # Accessing & Creating Rasters with Rasterio 
+# # Reading & Writing Rasters with Rasterio 
 # In order to work with raster data we will be using `rasterio` and later `geowombat`. Behind the scenes a `numpy.ndarray` does all the heavy lifting. To understand how raster works it helps to construct one from scratch. 
 # 
 # Here we create two `ndarray` objects one `X` spans [-90&deg;,90&deg;] longitude, and `Y` covers [-90&deg;,90&deg;] latitude.

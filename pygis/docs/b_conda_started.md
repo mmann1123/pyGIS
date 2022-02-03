@@ -57,11 +57,17 @@ https://docs.docker.com/engine/install/#server
 ```
 ````
 
+There are two ways we can do this, the [easy way](theeasyway), or the much more [detailed way](thedetailedway). Choose your poison. 
 
+---
+(theeasyway)=
 The Easy Way
 -------------------------------
 
-### Pull and Run a Linux Image ready for pygis
+---
+
+
+### Pulling a Docker Image Ready for GIS
 Now we are going to get an Ubuntu image running that already has everything installed and ready to use. We are going to pull the lastest build of our image from [my docker hub page](https://hub.docker.com/r/mmann1123/gw_pygis).
 
 First open a **terminal** or **powershell** in windows... yes powershell not terminal, type the following:
@@ -105,28 +111,14 @@ sudo docker images -a
 
 Now we can access python through jupyter notebooks ([read about jupyter notebooks here](https://coderefinery.github.io/jupyter/motivation/)). Jupyter is probably the easiest way to start your coding. 
 
+
+```{note}
+You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/Users/<user_name>/Documents` folder into the `/home` folder of your container by running `docker run -v /Users/<user_name>/Documents:/home` (mac), `docker run -v //c/User/<user>/Documents:/home` (windows), or `docker run -v /home/<user_name>/Documents:/home` (linux). To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+```
+ 
 To do this we are going to attach a local volume with `-v`, open a port with `-p` and run mmann1123/gw_pygis, once inside of the runnning linux computer we will launch jupyter notebook and set an ip address to access it using `-ip`, and we will allow administrative privileges using `--allow-root`.  After executing the code we simply need to open up the URL displayed in response.
 
-
-````{tabbed} Mac
-```
-```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/Users/<user_name>/Documents` folder into the `/home` folder of your container by running `docker run -v /Users/<user_name>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
-```
-````
-````{tabbed} Windows
-```
-```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/User/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v //c/User/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
-```
-````
-````{tabbed} Linux
-```
-```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/home/<user_name>/Documents` folder into the `/home` folder of your container by running `docker run -v /home/<user_name>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
-```
-````
-
+ 
 
 ````{tabbed} Mac
 ```
@@ -245,11 +237,12 @@ cd ~/Desktop/
 
 When you're done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type `exit` in the terminal window to exit your geowombat container.
 
-
-
+---
+(thedetailedway)=
 The More Detailed Way
 -------------------------------
 
+---
 
 ### Pull and Run a Linux Image with GDAL
 Now we are going to get an Ubuntu image running that already has GDAL installed. We are going to pull the lastest build of our image from [OSGEO's docker hub page](https://github.com/OSGeo/gdal/tree/master/gdal/docker).

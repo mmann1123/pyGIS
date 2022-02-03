@@ -17,7 +17,6 @@
 # # Setting up Python for Geospatial on Mac, Windows, and Linux
 # Geospatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn't do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast. 
 # 
-# 
 # ## Docker for Geospatial Python - GDAL Included
 # Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I'm looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: [a simple intro to Docker concepts](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined)
 # 
@@ -43,6 +42,193 @@
 # https://docs.docker.com/engine/install/#server
 # ```
 # ````
+# 
+# There are two ways we can do this, the [easy way](theeasyway), or the much more [detailed way](thedetailedway). Choose your poison. 
+# 
+# ---
+# (theeasyway)=
+# The Easy Way
+# -------------------------------
+# 
+# ---
+# 
+# 
+# ### Pulling a Docker Image Ready for GIS
+# Now we are going to get an Ubuntu image running that already has everything installed and ready to use. We are going to pull the lastest build of our image from [my docker hub page](https://hub.docker.com/r/mmann1123/gw_pygis).
+# 
+# First open a **terminal** or **powershell** in windows... yes powershell not terminal, type the following:
+# 
+# ````{tabbed} Mac
+# ```
+# # download the image
+# docker pull mmann1123/gw_pygis
+# 
+# # list your images 
+# docker images -a 
+# 
+# # you should see mmann1123/gw_pygis
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # IN POWERSHELL TERMINAL 
+# 
+# # download the image
+# docker pull mmann1123/gw_pygis
+# 
+# # list your images 
+# docker images -a 
+# 
+# # you should see mmann1123/gw_pygis
+# ```
+# ````
+# ````{tabbed} Linux
+# ```
+# # download the image
+# docker pull mmann1123/gw_pygis
+# 
+# # list your images 
+# sudo docker images -a 
+# 
+# # you should see mmann1123/gw_pygis
+# ```
+# ````
+# 
+# 
+# Now we can access python through jupyter notebooks ([read about jupyter notebooks here](https://coderefinery.github.io/jupyter/motivation/)). Jupyter is probably the easiest way to start your coding. 
+# 
+# 
+# ```{note}
+# You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/Users/<user_name>/Documents` folder into the `/home` folder of your container by running `docker run -v /Users/<user_name>/Documents:/home` (mac), `docker run -v //c/User/<user>/Documents:/home` (windows), or `docker run -v /home/<user_name>/Documents:/home` (linux). To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+# ```
+#  
+# To do this we are going to attach a local volume with `-v`, open a port with `-p` and run mmann1123/gw_pygis, once inside of the runnning linux computer we will launch jupyter notebook and set an ip address to access it using `-ip`, and we will allow administrative privileges using `--allow-root`.  After executing the code we simply need to open up the URL displayed in response.
+# 
+#  
+# 
+# ````{tabbed} Mac
+# ```
+# # Or if browser is  present
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# 
+# # or if the jupyter notebooks doesn't launch automatically
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+# # THEN control click on URL printed to the bottom of terminal
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # Or if browser is  present
+# docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# 
+# # or if the jupyter notebooks doesn't launch automatically
+# docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+# # THEN control click on URL printed to the bottom of terminal
+# ```
+# ````
+# 
+# ````{tabbed} Linux
+# ```
+# # Iff browser is  present
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# 
+# # or if the jupyter notebooks doesn't launch automatically
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+# # THEN control click on URL printed to the bottom of terminal
+# ```
+# ````
+# Every time you want to run pygis you are going to `run` the docker container called `mmann1123/gw_pygis`. 
+# 
+# ```{warning}
+# **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. 
+# 
+# You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home` option with docker run.
+# ```
+# 
+# To make this a little easier you can create an executable script on your desktop to run it when you want. 
+# 
+# ````{tabbed} Mac Bash
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # write a shell script called run_pygis
+# # between the ''s put whatever bash code you want
+# echo '
+# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# ' > run_pygis.sh
+# 
+# # allow it to be executable
+# chmod 755 run_pygis.sh  
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # Not sure yet!
+# ```
+# ````
+# 
+# ````{tabbed} Linux
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # write a shell script called run_pygis
+# # between the ''s put whatever bash code you want
+# echo '
+# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+# jupyter notebook --ip 0.0.0.0  --allow-root
+# ' > run_pygis.sh
+# 
+# # allow it to be executable
+# chmod +x run_pygis.sh  
+# ```
+# ````
+# 
+# Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.
+# 
+# To execute our run_geowombat.sh script we need to navigate to the Desktop in your local terminal, then execute the file:
+# 
+# ````{tabbed} Mac Bash
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # execute it
+# ./run_pygis.sh
+# ```
+# ````
+# ````{tabbed} Windows
+# ```
+# # Not sure yet!
+# ```
+# ````
+# 
+# ````{tabbed} Linux
+# ```
+# # move to your desktop
+# cd ~/Desktop/
+# 
+# # execute it
+# ./run_pygis.sh
+# ```
+# ````
+# 
+# When you're done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type `exit` in the terminal window to exit your geowombat container.
+# 
+# ---
+# (thedetailedway)=
+# The More Detailed Way
+# -------------------------------
+# 
+# ---
 # 
 # ### Pull and Run a Linux Image with GDAL
 # Now we are going to get an Ubuntu image running that already has GDAL installed. We are going to pull the lastest build of our image from [OSGEO's docker hub page](https://github.com/OSGeo/gdal/tree/master/gdal/docker).
@@ -90,6 +276,7 @@
 # sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
 # ```
 # ````
+# 
 # ```{note}
 # You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/User/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v //c/User/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
 # ```
@@ -226,11 +413,11 @@
 # ````{tabbed} Mac
 # ```
 # # Or if browser is  present
-# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
 # # or if the jupyter notebooks doesn't launch automatically
-# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # # THEN control click on URL printed to the bottom of terminal
 # ```
@@ -238,11 +425,11 @@
 # ````{tabbed} Windows
 # ```
 # # Or if browser is  present
-# sudo docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # 
 # # or if the jupyter notebooks doesn't launch automatically
-# sudo docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # # THEN control click on URL printed to the bottom of terminal
 # ```
@@ -278,7 +465,7 @@
 # # write a shell script called run_pygis
 # # between the ''s put whatever bash code you want
 # echo '
-# sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # ' > run_pygis.sh
 # 
@@ -300,7 +487,7 @@
 # # write a shell script called run_pygis
 # # between the ''s put whatever bash code you want
 # echo '
-# sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+# docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
 # jupyter notebook --ip 0.0.0.0  --allow-root
 # ' > run_pygis.sh
 # 

@@ -266,7 +266,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="e_new_rasters.html">
-   Accessing &amp; Creating Rasters with Rasterio
+   Reading &amp; Writing Rasters with Rasterio
   </a>
  </li>
  <li class="toctree-l1">
@@ -486,6 +486,18 @@
   <a class="reference internal nav-link" href="#rasterize-vectors-with-rasterio">
    Rasterize vectors with rasterio
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rasterize-binary-values-for-shapes">
+     Rasterize Binary Values for Shapes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rasterize-attribute-value-using-rasterio">
+     Rasterize Attribute Value using Rasterio
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -531,6 +543,7 @@
 <span class="kn">from</span> <span class="nn">rasterio</span> <span class="kn">import</span> <span class="n">features</span>
 <span class="kn">from</span> <span class="nn">rasterio.enums</span> <span class="kn">import</span> <span class="n">MergeAlg</span>
 <span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -538,12 +551,17 @@
 </div>
 <div class="section" id="rasterize-vectors-with-rasterio">
 <h2>Rasterize vectors with rasterio<a class="headerlink" href="#rasterize-vectors-with-rasterio" title="Permalink to this headline">¶</a></h2>
-<p>We’ll read in the vector file (click the + below to show code cell). We will also read in a raster file to get the raster’s metadata (e.g., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “model” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform. For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Affine Transforms</span></a>.</p>
+<p>We’ll read in the vector file of some of California’s counties. We will also read in a raster file to get the raster’s metadata (i.e., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “reference” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform (UL corner location, cell size etc). For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Affine Transforms</span></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The vector and raster should be in the same coordinate system. If not, you’ll need to re-project one of them so they are the same. To re-project vectors, see the chapter on <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understanding CRS Codes</span></a>. To re-project rasters, see the chapter on <a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reproject Rasters w. Rasterio and Geowombat</span></a>.</p>
+<p>The vector and raster <strong>must be</strong> be in the same coordinate system. If not, you’ll need to re-project one of them so they are the same. To re-project vectors, see the chapter on <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understanding CRS Codes</span></a>. To re-project rasters, see the chapter on <a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reproject Rasters w. Rasterio and Geowombat</span></a>.</p>
 </div>
-<div class="cell tag_hide-cell docutils container">
+<p>One important parameter in this function is <code class="docutils literal notranslate"><span class="pre">all_touched</span></code> which determines how zones are determined by polygons relative to the reference raster’s cell centroids. Setting it to <code class="docutils literal notranslate"><span class="pre">False</span></code> implies that membership in a zone, defined by a polygon geometry, should be defined by whether it contains the centroid of a cell. <code class="docutils literal notranslate"><span class="pre">True</span></code> includes any cell that geometry boundary intersects.</p>
+<div class="figure align-default" id="all-touched-rasterization">
+<img alt="../_images/zonal_stats.jpg" src="../_images/zonal_stats.jpg" />
+<p class="caption"><span class="caption-number">Fig. 58 </span><span class="caption-text">all_touched determines the extent of zones</span><a class="headerlink" href="#all-touched-rasterization" title="Permalink to this image">¶</a></p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in vector</span>
 <span class="n">vector</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp&quot;</span><span class="p">)</span>
@@ -557,6 +575,8 @@
 </div>
 </div>
 </div>
+<div class="section" id="rasterize-binary-values-for-shapes">
+<h3>Rasterize Binary Values for Shapes<a class="headerlink" href="#rasterize-binary-values-for-shapes" title="Permalink to this headline">¶</a></h3>
 <p>With our data loaded, we can rasterize the vector using the metadata from the raster using <code class="docutils literal notranslate"><span class="pre">rasterize()</span></code> in the <code class="docutils literal notranslate"><span class="pre">rasterio.features</span></code> module. For more information on this function, check out <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.features.html#rasterio.features.rasterize">the <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -567,7 +587,6 @@
                                 <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                 <span class="n">transform</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
                                 <span class="n">all_touched</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                                <span class="n">merge_alg</span> <span class="o">=</span> <span class="n">MergeAlg</span><span class="o">.</span><span class="n">replace</span><span class="p">,</span>
                                 <span class="n">default_value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                                 <span class="n">dtype</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 
@@ -582,8 +601,41 @@
 <img alt="../_images/e_raster_rasterize_5_0.png" src="../_images/e_raster_rasterize_5_0.png" />
 </div>
 </div>
-<p>Finally, we can save the rasterized vector out (click the + below to show code cell).</p>
-<div class="cell tag_hide-cell docutils container">
+</div>
+<div class="section" id="rasterize-attribute-value-using-rasterio">
+<h3>Rasterize Attribute Value using Rasterio<a class="headerlink" href="#rasterize-attribute-value-using-rasterio" title="Permalink to this headline">¶</a></h3>
+<p>Often we want to burn in the value of a shapefile’s attributes to the raster. We can do this by creating geometry, value pairs. In this example we take create a columns called <code class="docutils literal notranslate"><span class="pre">id</span></code> and assign the same values as the index. <code class="docutils literal notranslate"><span class="pre">id</span></code> will then be used to create our (geometry, value) pairs used for rasterization.</p>
+<p>Note we use <code class="docutils literal notranslate"><span class="pre">all_touched=True</span></code> to avoid gaps between counties, which can introduce its own problems b/c two counties can compete for the same cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a numeric unique value for each row</span>
+<span class="n">vector</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
+
+<span class="c1"># create tuples of geometry, value pairs, where value is the attribute value you want to burn</span>
+<span class="n">geom_value</span> <span class="o">=</span> <span class="p">((</span><span class="n">geom</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">geom</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vector</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">vector</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Rasterize vector using the shape and transform of the raster</span>
+<span class="n">rasterized</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">rasterize</span><span class="p">(</span><span class="n">geom_value</span><span class="p">,</span>
+                                <span class="n">out_shape</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                <span class="n">transform</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+                                <span class="n">all_touched</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                                <span class="n">fill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>   <span class="c1"># background value</span>
+                                <span class="n">merge_alg</span> <span class="o">=</span> <span class="n">MergeAlg</span><span class="o">.</span><span class="n">replace</span><span class="p">,</span>
+                                <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+
+<span class="c1"># Plot raster</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">rasterized</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e_raster_rasterize_7_0.png" src="../_images/e_raster_rasterize_7_0.png" />
+</div>
+</div>
+<p>Finally, we can save the rasterized vector out.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
         <span class="s2">&quot;../temp/rasterized_vector.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
@@ -595,6 +647,7 @@
         <span class="n">height</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">height</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
     <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rasterized</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
