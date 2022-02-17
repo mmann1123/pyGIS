@@ -10,7 +10,7 @@
 <meta content="python environment, Docker, geospatial, raster, shapefile, remote sensing" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Setting up Python for Geospatial on Mac, Windows, and Linux &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Setting up Python for Geospatial on Mac, Windows, and Linux &#8212; Python Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -92,7 +92,7 @@
   <img src="../_static/pygis.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  <h1 class="site-logo" id="site-title">Python Open Source Geospatial Programming & Remote Sensing</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -167,11 +167,6 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   <!-- Leave e_new_vectors name change might mess up links  -->
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html#creating-geospatial-vector-data">
    Creating Geospatial Vector Data
   </a>
  </li>
@@ -278,7 +273,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="e_raster_resample.html">
-   Resampling Rasters w. Rasterio and Geowombat
+   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
   </a>
  </li>
  <li class="toctree-l1">
@@ -558,22 +553,22 @@
 <h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h3>
 <p>Follow the instructions for installing Docker on your system, take your time, and make sure you understand what you are doing before you do it!</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="35924933-4412-4a25-9b4c-dd9595a39d74" name="57123d40-84b0-4e63-b5ba-4fd8c9e65c49" type="radio">
-</input><label class="tabbed-label" for="35924933-4412-4a25-9b4c-dd9595a39d74">
+<input checked="checked" id="15179e0f-e32c-4a3f-baa6-e06699b014f2" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
+</input><label class="tabbed-label" for="15179e0f-e32c-4a3f-baa6-e06699b014f2">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">mac</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
-<input id="6bbd5c85-01c2-4401-89a1-773eb688c44a" name="57123d40-84b0-4e63-b5ba-4fd8c9e65c49" type="radio">
-</input><label class="tabbed-label" for="6bbd5c85-01c2-4401-89a1-773eb688c44a">
+<input id="a1df54cc-1643-4b91-aad6-b275d723e242" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
+</input><label class="tabbed-label" for="a1df54cc-1643-4b91-aad6-b275d723e242">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">windows</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
-<input id="dc2a9bbd-2c64-4007-92e5-c067d4c3a669" name="57123d40-84b0-4e63-b5ba-4fd8c9e65c49" type="radio">
-</input><label class="tabbed-label" for="dc2a9bbd-2c64-4007-92e5-c067d4c3a669">
+<input id="30dc019d-263e-4909-9ddb-1562e98069f7" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
+</input><label class="tabbed-label" for="30dc019d-263e-4909-9ddb-1562e98069f7">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># click on your platform</span>
 <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">engine</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="c1">#server</span>
@@ -593,8 +588,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now we are going to get an Ubuntu image running that already has everything installed and ready to use. We are going to pull the lastest build of our image from <a class="reference external" href="https://hub.docker.com/r/mmann1123/gw_pygis">my docker hub page</a>.</p>
 <p>First open a <strong>terminal</strong> or <strong>powershell</strong> in windows… yes powershell not terminal, type the following:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f03d29fc-dda2-4ca9-bd3d-e3480e425bb0" name="04370b2a-bcb9-4404-8397-d9d9700b146d" type="radio">
-</input><label class="tabbed-label" for="f03d29fc-dda2-4ca9-bd3d-e3480e425bb0">
+<input checked="checked" id="b87b833d-05ee-4bc9-a1ce-0fce6ababa8b" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
+</input><label class="tabbed-label" for="b87b833d-05ee-4bc9-a1ce-0fce6ababa8b">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -606,8 +601,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3bd3dea6-617e-447d-bdf0-d05cf15b54e5" name="04370b2a-bcb9-4404-8397-d9d9700b146d" type="radio">
-</input><label class="tabbed-label" for="3bd3dea6-617e-447d-bdf0-d05cf15b54e5">
+<input id="b0abefc9-b65a-4372-aa5c-52cbc6384649" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
+</input><label class="tabbed-label" for="b0abefc9-b65a-4372-aa5c-52cbc6384649">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># IN POWERSHELL TERMINAL </span>
 
@@ -621,8 +616,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="742acd7c-569b-4311-bc23-dfccb183ac43" name="04370b2a-bcb9-4404-8397-d9d9700b146d" type="radio">
-</input><label class="tabbed-label" for="742acd7c-569b-4311-bc23-dfccb183ac43">
+<input id="e5f9f7ef-5c24-4321-aab1-14a9e4b88e70" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
+</input><label class="tabbed-label" for="e5f9f7ef-5c24-4321-aab1-14a9e4b88e70">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -642,8 +637,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To do this we are going to attach a local volume with <code class="docutils literal notranslate"><span class="pre">-v</span></code>, open a port with <code class="docutils literal notranslate"><span class="pre">-p</span></code> and run mmann1123/gw_pygis, once inside of the runnning linux computer we will launch jupyter notebook and set an ip address to access it using <code class="docutils literal notranslate"><span class="pre">-ip</span></code>, and we will allow administrative privileges using <code class="docutils literal notranslate"><span class="pre">--allow-root</span></code>.  After executing the code we simply need to open up the URL displayed in response.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="cf43dc04-4772-498d-bf9d-712513886013" name="a6eb9da1-aee4-412f-854c-5234e5f6c599" type="radio">
-</input><label class="tabbed-label" for="cf43dc04-4772-498d-bf9d-712513886013">
+<input checked="checked" id="5bd8263e-4a58-45ff-9b4c-cc8271173ab6" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
+</input><label class="tabbed-label" for="5bd8263e-4a58-45ff-9b4c-cc8271173ab6">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -656,8 +651,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cc09d1c0-90f0-429b-853a-dca7e9008005" name="a6eb9da1-aee4-412f-854c-5234e5f6c599" type="radio">
-</input><label class="tabbed-label" for="cc09d1c0-90f0-429b-853a-dca7e9008005">
+<input id="e4af28a8-d52a-418c-acbd-71450949fcf6" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
+</input><label class="tabbed-label" for="e4af28a8-d52a-418c-acbd-71450949fcf6">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">User</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -670,8 +665,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="90cd9483-d4bb-432f-9dd4-6f5f6689a0b9" name="a6eb9da1-aee4-412f-854c-5234e5f6c599" type="radio">
-</input><label class="tabbed-label" for="90cd9483-d4bb-432f-9dd4-6f5f6689a0b9">
+<input id="25319565-1367-4668-9668-d4993fa9af21" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
+</input><label class="tabbed-label" for="25319565-1367-4668-9668-d4993fa9af21">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iff browser is  present</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -693,8 +688,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To make this a little easier you can create an executable script on your desktop to run it when you want.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0d0f77f1-9266-48b4-9961-a31263202e1f" name="219a3b5e-4601-4882-8cbf-1dd34bd4bda6" type="radio">
-</input><label class="tabbed-label" for="0d0f77f1-9266-48b4-9961-a31263202e1f">
+<input checked="checked" id="18013f94-1df8-4634-8236-91465ac08f05" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
+</input><label class="tabbed-label" for="18013f94-1df8-4634-8236-91465ac08f05">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -711,15 +706,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="33152f28-8680-4340-a6a4-f1ca4e81dcf7" name="219a3b5e-4601-4882-8cbf-1dd34bd4bda6" type="radio">
-</input><label class="tabbed-label" for="33152f28-8680-4340-a6a4-f1ca4e81dcf7">
+<input id="a32f0c04-3789-4ca6-b586-8b2c8d65c9c6" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
+</input><label class="tabbed-label" for="a32f0c04-3789-4ca6-b586-8b2c8d65c9c6">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="df20ef03-752a-407b-aa15-26468f7ad0c1" name="219a3b5e-4601-4882-8cbf-1dd34bd4bda6" type="radio">
-</input><label class="tabbed-label" for="df20ef03-752a-407b-aa15-26468f7ad0c1">
+<input id="4069d727-9dba-4821-87b1-ac4f241e59a5" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
+</input><label class="tabbed-label" for="4069d727-9dba-4821-87b1-ac4f241e59a5">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -740,8 +735,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.</p>
 <p>To execute our run_geowombat.sh script we need to navigate to the Desktop in your local terminal, then execute the file:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e8c7a406-0be9-40aa-b790-b66506c58915" name="03e7127a-0f2d-4ea8-995b-cc6f85310d8e" type="radio">
-</input><label class="tabbed-label" for="e8c7a406-0be9-40aa-b790-b66506c58915">
+<input checked="checked" id="b93bd3ab-96f3-47dc-867b-629e8f9930fd" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
+</input><label class="tabbed-label" for="b93bd3ab-96f3-47dc-867b-629e8f9930fd">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -751,15 +746,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="beeb237f-2cbd-4db5-a793-a131ccb1557b" name="03e7127a-0f2d-4ea8-995b-cc6f85310d8e" type="radio">
-</input><label class="tabbed-label" for="beeb237f-2cbd-4db5-a793-a131ccb1557b">
+<input id="fbe8b2f2-599f-4d34-9752-d562b3638de0" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
+</input><label class="tabbed-label" for="fbe8b2f2-599f-4d34-9752-d562b3638de0">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="d5277e41-4f31-4bcd-a4a2-1019ac2dc564" name="03e7127a-0f2d-4ea8-995b-cc6f85310d8e" type="radio">
-</input><label class="tabbed-label" for="d5277e41-4f31-4bcd-a4a2-1019ac2dc564">
+<input id="32134b65-2c53-4397-8ca7-0d2d0064cd1e" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
+</input><label class="tabbed-label" for="32134b65-2c53-4397-8ca7-0d2d0064cd1e">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -782,8 +777,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now we are going to get an Ubuntu image running that already has GDAL installed. We are going to pull the lastest build of our image from <a class="reference external" href="https://github.com/OSGeo/gdal/tree/master/gdal/docker">OSGEO’s docker hub page</a>.</p>
 <p>First open a terminal or powershell, type the following:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d0349fe8-e7ba-4679-b4b6-7d80257af328" name="a5ce2eff-2221-4096-bd4c-606bff1e505f" type="radio">
-</input><label class="tabbed-label" for="d0349fe8-e7ba-4679-b4b6-7d80257af328">
+<input checked="checked" id="11325dc8-809d-4b43-acf9-b26efd3f9d03" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
+</input><label class="tabbed-label" for="11325dc8-809d-4b43-acf9-b26efd3f9d03">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -798,8 +793,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ddefd06e-60d9-4050-8789-9182ad143b9b" name="a5ce2eff-2221-4096-bd4c-606bff1e505f" type="radio">
-</input><label class="tabbed-label" for="ddefd06e-60d9-4050-8789-9182ad143b9b">
+<input id="bfb0da96-2faf-49de-808c-33f2b30c2348" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
+</input><label class="tabbed-label" for="bfb0da96-2faf-49de-808c-33f2b30c2348">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -814,8 +809,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b96b6563-5293-44e5-948f-198b57c979f0" name="a5ce2eff-2221-4096-bd4c-606bff1e505f" type="radio">
-</input><label class="tabbed-label" for="b96b6563-5293-44e5-948f-198b57c979f0">
+<input id="b10159c4-3c97-49d0-b3d8-1f5e8b554ce1" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
+</input><label class="tabbed-label" for="b10159c4-3c97-49d0-b3d8-1f5e8b554ce1">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -837,8 +832,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Your command prompt in the terminal window should now say something funny like <code class="docutils literal notranslate"><span class="pre">root&#64;b0c5ab799195:/#</span> </code>. You are now INSIDE your running docker container, which is running Ubuntu linux.</p>
 <p>Just to demonstrate this is really linux, let’s ask the system what OS is running:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="973861ba-3b34-478e-8909-33db17a718d1" name="611e6a38-effa-4a73-9a1f-a99a8c26d68b" type="radio">
-</input><label class="tabbed-label" for="973861ba-3b34-478e-8909-33db17a718d1">
+<input checked="checked" id="58f62b26-f310-4738-b597-d9758157445d" name="9a906759-7a49-4892-90cf-f1ee9427d204" type="radio">
+</input><label class="tabbed-label" for="58f62b26-f310-4738-b597-d9758157445d">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uname</span>
 </pre></div>
@@ -848,8 +843,8 @@ Linux Container</label><div class="tabbed-content docutils">
 </div>
 <p>We will need to update/upgrade the OS, install pip and a few other applications we need, pip install geowombat, and a few more python dependancies for it. We will then exit the container and save a named copy of it.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="12771ab2-cb41-4660-a0a7-1a05ea790dd1" name="754caffb-59af-4211-9793-0bd0682c831f" type="radio">
-</input><label class="tabbed-label" for="12771ab2-cb41-4660-a0a7-1a05ea790dd1">
+<input checked="checked" id="3a9548f8-7b3a-4bd8-aaa6-fcbc2738b8d2" name="79ecad3d-e38e-4e7a-90ac-13b563aa8f8f" type="radio">
+</input><label class="tabbed-label" for="3a9548f8-7b3a-4bd8-aaa6-fcbc2738b8d2">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update Ubuntu</span>
 <span class="n">apt</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span> 
@@ -875,8 +870,8 @@ Linux Container</label><div class="tabbed-content docutils">
 </div>
 <p>Now we need to exit the container and go back to your local computer command line.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f55ecfd1-d6c1-4dfa-89df-c2ba5381c228" name="a8c3daca-9239-48c9-ba4b-5cff036dcd4e" type="radio">
-</input><label class="tabbed-label" for="f55ecfd1-d6c1-4dfa-89df-c2ba5381c228">
+<input checked="checked" id="393b5c47-0a8f-4492-a574-e3a4c3dd601f" name="ae8dd918-09f1-4e10-884c-b3393f5058d7" type="radio">
+</input><label class="tabbed-label" for="393b5c47-0a8f-4492-a574-e3a4c3dd601f">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exit</span>
 </pre></div>
@@ -886,8 +881,8 @@ Linux Container</label><div class="tabbed-content docutils">
 <p>Note that we are now in your boring old terminal/shell, we exited Ubuntu.</p>
 <p>We now need to create a named image that includes geowombat etc. Without doing this, the next time we start the osgeo/gdal image nothing will have been saved.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="63cf291b-ca25-4edb-90ff-6157b7bf06f5" name="7f451384-edbc-4e85-a58e-777cf4aa9453" type="radio">
-</input><label class="tabbed-label" for="63cf291b-ca25-4edb-90ff-6157b7bf06f5">
+<input checked="checked" id="a33efa5c-d71e-4ace-a9f4-8235daf436d8" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
+</input><label class="tabbed-label" for="a33efa5c-d71e-4ace-a9f4-8235daf436d8">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all available containers</span>
 <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
@@ -903,8 +898,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d5fe43aa-cd32-4ba3-ba13-dbe030e60d90" name="7f451384-edbc-4e85-a58e-777cf4aa9453" type="radio">
-</input><label class="tabbed-label" for="d5fe43aa-cd32-4ba3-ba13-dbe030e60d90">
+<input id="43184359-5a67-43e4-b4c6-116fce1cfb25" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
+</input><label class="tabbed-label" for="43184359-5a67-43e4-b4c6-116fce1cfb25">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all available containers</span>
 <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
@@ -920,8 +915,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6803ed68-8abf-4199-99b7-135c3af74e09" name="7f451384-edbc-4e85-a58e-777cf4aa9453" type="radio">
-</input><label class="tabbed-label" for="6803ed68-8abf-4199-99b7-135c3af74e09">
+<input id="b28bff5e-684c-43ec-85ca-e903786736c9" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
+</input><label class="tabbed-label" for="b28bff5e-684c-43ec-85ca-e903786736c9">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># list all available containers
 sudo docker ps -a
@@ -952,24 +947,24 @@ sudo usermod -aG docker $USER
 <p>There are two ways to access this 1) through the command-line and 2) through Jupyter Notebooks.</p>
 <p>Let’s start with command line only access. Note that this is almost exactly how we ran the osgeo/gdal image, except we replaced its name with geowombat. <em>Don’t forget to replace <code class="docutils literal notranslate"><span class="pre">&lt;user_name&gt;</span></code> with your user name!</em></p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f9e8483c-1ae1-4adc-95fa-39b090c2ad1a" name="12b90228-920b-4eb7-8f1b-b29f98a46ce1" type="radio">
-</input><label class="tabbed-label" for="f9e8483c-1ae1-4adc-95fa-39b090c2ad1a">
+<input checked="checked" id="adc101ce-c5f6-4690-b1b9-dcb103ca5836" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
+</input><label class="tabbed-label" for="adc101ce-c5f6-4690-b1b9-dcb103ca5836">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
 </pre></div>
 </div>
 </div>
-<input id="969271ea-f3e4-47cc-9b71-35afeef3a394" name="12b90228-920b-4eb7-8f1b-b29f98a46ce1" type="radio">
-</input><label class="tabbed-label" for="969271ea-f3e4-47cc-9b71-35afeef3a394">
+<input id="b61cf088-bda0-491c-82fc-9eeb98a2bcb7" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
+</input><label class="tabbed-label" for="b61cf088-bda0-491c-82fc-9eeb98a2bcb7">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
 </pre></div>
 </div>
 </div>
-<input id="8770ed3e-641f-41f2-aed7-46a340cf0f8e" name="12b90228-920b-4eb7-8f1b-b29f98a46ce1" type="radio">
-</input><label class="tabbed-label" for="8770ed3e-641f-41f2-aed7-46a340cf0f8e">
+<input id="6434b1af-2cf9-4ea6-acad-f804bbec2271" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
+</input><label class="tabbed-label" for="6434b1af-2cf9-4ea6-acad-f804bbec2271">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
@@ -981,8 +976,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Alternatively, we can access python through jupyter notebooks (<a class="reference external" href="https://coderefinery.github.io/jupyter/motivation/">read about jupyter notebooks here</a>). Jupyter is probably the easiest way to start your coding.</p>
 <p>To do this we are going to</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c1d58db5-0a89-40c1-a6dd-131d6cb2b132" name="051478ce-1870-48a4-b75d-595f515cd1e4" type="radio">
-</input><label class="tabbed-label" for="c1d58db5-0a89-40c1-a6dd-131d6cb2b132">
+<input checked="checked" id="48fbcf54-fcd6-4944-9c6d-02b59a704020" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
+</input><label class="tabbed-label" for="48fbcf54-fcd6-4944-9c6d-02b59a704020">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -995,8 +990,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a1c3869f-5dad-4d33-8f31-affb891099a8" name="051478ce-1870-48a4-b75d-595f515cd1e4" type="radio">
-</input><label class="tabbed-label" for="a1c3869f-5dad-4d33-8f31-affb891099a8">
+<input id="0f38a650-af61-473f-bd74-2d82f529dea0" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
+</input><label class="tabbed-label" for="0f38a650-af61-473f-bd74-2d82f529dea0">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">User</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -1009,8 +1004,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="122be512-9858-47ba-9225-fa850a933336" name="051478ce-1870-48a4-b75d-595f515cd1e4" type="radio">
-</input><label class="tabbed-label" for="122be512-9858-47ba-9225-fa850a933336">
+<input id="782f8e40-28bc-4846-8bad-9561b74e3e7a" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
+</input><label class="tabbed-label" for="782f8e40-28bc-4846-8bad-9561b74e3e7a">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iff browser is  present</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -1032,8 +1027,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To make this a little easier you can create an executable script on your desktop to run it when you want.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="c23d8de0-dfac-4f9a-8508-7227964b887b" name="4f16548a-1ba5-4e50-a48f-915ec5113fd8" type="radio">
-</input><label class="tabbed-label" for="c23d8de0-dfac-4f9a-8508-7227964b887b">
+<input checked="checked" id="7f263c92-d067-4647-b6be-c8c1f648512a" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
+</input><label class="tabbed-label" for="7f263c92-d067-4647-b6be-c8c1f648512a">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1050,15 +1045,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4b655e2a-32c9-4ccf-ab0f-8fa010e4ef31" name="4f16548a-1ba5-4e50-a48f-915ec5113fd8" type="radio">
-</input><label class="tabbed-label" for="4b655e2a-32c9-4ccf-ab0f-8fa010e4ef31">
+<input id="705929b8-061b-4549-943c-566a1efaa09b" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
+</input><label class="tabbed-label" for="705929b8-061b-4549-943c-566a1efaa09b">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="22654c3c-acff-4bf6-86af-67d4402c6cf9" name="4f16548a-1ba5-4e50-a48f-915ec5113fd8" type="radio">
-</input><label class="tabbed-label" for="22654c3c-acff-4bf6-86af-67d4402c6cf9">
+<input id="7d226d22-e7e8-4511-b90a-b5ebbbb603eb" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
+</input><label class="tabbed-label" for="7d226d22-e7e8-4511-b90a-b5ebbbb603eb">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1079,8 +1074,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.</p>
 <p>To execute our run_geowombat.sh script we need to navigate to the Desktop, then execute the file:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="845376a8-8711-47ee-b3c5-f9ab230670ec" name="0ba53ac2-49d8-4c65-bb08-4bbcd187b4ed" type="radio">
-</input><label class="tabbed-label" for="845376a8-8711-47ee-b3c5-f9ab230670ec">
+<input checked="checked" id="9cdf4981-050d-4e42-9273-7173a561ec25" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
+</input><label class="tabbed-label" for="9cdf4981-050d-4e42-9273-7173a561ec25">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1090,15 +1085,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ca8ccfd4-bbc9-4770-884f-af9dbb085ee3" name="0ba53ac2-49d8-4c65-bb08-4bbcd187b4ed" type="radio">
-</input><label class="tabbed-label" for="ca8ccfd4-bbc9-4770-884f-af9dbb085ee3">
+<input id="2ca4b17a-67fa-490f-85ee-9ec42f80fc51" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
+</input><label class="tabbed-label" for="2ca4b17a-67fa-490f-85ee-9ec42f80fc51">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="eccaaba8-f405-48c1-ad06-1169bb606716" name="0ba53ac2-49d8-4c65-bb08-4bbcd187b4ed" type="radio">
-</input><label class="tabbed-label" for="eccaaba8-f405-48c1-ad06-1169bb606716">
+<input id="6406fc24-40df-4a5b-9b62-620db186ebe2" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
+</input><label class="tabbed-label" for="6406fc24-40df-4a5b-9b62-620db186ebe2">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>

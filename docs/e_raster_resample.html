@@ -9,7 +9,7 @@
 <meta content="Aprenda a volver a muestrear rásteres de una o varias bandas mediante rasterio y geowombat. Esto incluye la creación mediante un 'ráster de ajuste', así como la extensión y / o resolución coincidentes por separado de otro ráster. Demostramos esto usando imágenes de LandSat como ejemplos." lang="es" name="description" xml:lang="es" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Resampling Rasters w. Rasterio and Geowombat &#8212; Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Resampling &amp; Registering Rasters w. Rasterio and Geowombat &#8212; Python Open Source Geospatial Programming &amp; Remote Sensing</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -71,8 +71,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://pygis.io/docs/e_raster_resample.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Resampling Rasters w. Rasterio and Geowombat" />
-<meta property="og:description" content="Resampling Rasters w. Rasterio and Geowombat  Why is Resampling Important?  Before you begin any analysis using rater data it is critical that you have rasters " />
+<meta property="og:title"       content="Resampling &amp; Registering Rasters w. Rasterio and Geowombat" />
+<meta property="og:description" content="Resampling &amp; Registering Rasters w. Rasterio and Geowombat  Why is Resampling Important?  Before you begin any analysis using rater data it is critical that you" />
 <meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
 
 <meta name="twitter:card" content="summary" />
@@ -93,7 +93,7 @@
   <img src="../_static/pygis.png" class="logo" alt="logo">
   
   
-  <h1 class="site-logo" id="site-title">Open Source Geospatial Programming & Remote Sensing</h1>
+  <h1 class="site-logo" id="site-title">Python Open Source Geospatial Programming & Remote Sensing</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -168,11 +168,6 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   <!-- Leave e_new_vectors name change might mess up links  -->
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html#creating-geospatial-vector-data">
    Creating Geospatial Vector Data
   </a>
  </li>
@@ -279,7 +274,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Resampling Rasters w. Rasterio and Geowombat
+   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
   </a>
  </li>
  <li class="toctree-l1">
@@ -513,6 +508,11 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-of-co-registering-rasters-with-rasterio">
+     Example of Co-registering Rasters with Rasterio
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-of-co-registering-rasters-with-geowombat">
      Example of Co-registering Rasters with Geowombat
     </a>
@@ -549,8 +549,8 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="resampling-rasters-w-rasterio-and-geowombat">
-<h1>Resampling Rasters w. Rasterio and Geowombat<a class="headerlink" href="#resampling-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="resampling-registering-rasters-w-rasterio-and-geowombat">
+<h1>Resampling &amp; Registering Rasters w. Rasterio and Geowombat<a class="headerlink" href="#resampling-registering-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="why-is-resampling-important">
 <h2>Why is Resampling Important?<a class="headerlink" href="#why-is-resampling-important" title="Permalink to this headline">¶</a></h2>
 <p><em>Before you begin</em> any analysis using rater data it is critical that you have rasters that are “co-registered”. Co-registration requires that any two rasters have the same resolution, and orientation - the origins can differ but they much align. <em>In other words, co-registration requires that cell centroids align perfectly for all intersecting areas.</em> Resampling is also extremely common during reprojection operations as it often requires changing the orientation, scale or resolution of an image.</p>
@@ -716,6 +716,87 @@ Attributes:
 <h2>Co-registering Rasters (Aligning cells)<a class="headerlink" href="#co-registering-rasters-aligning-cells" title="Permalink to this headline">¶</a></h2>
 <p>One common problem is how to get raster data to align on a cell by cell basis so you can complete your analysis. We will walk through how to do this for both rasterio and geowombat. In the following example we will learn how to align rasters with different origins, resolutions, or orientations.</p>
 <p>Our example data will look at registering LandSat data with precipitation data from CHIRPS.</p>
+<div class="section" id="example-of-co-registering-rasters-with-rasterio">
+<h3>Example of Co-registering Rasters with Rasterio<a class="headerlink" href="#example-of-co-registering-rasters-with-rasterio" title="Permalink to this headline">¶</a></h3>
+<p>Co-registering data is a bit complicated with rasterio, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
+<p>The original input data LandSat data is 30 meters and will be downsampled to match <code class="docutils literal notranslate"><span class="pre">precip</span></code> which is 500m.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as 0. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="k">def</span> <span class="nf">reproj_match</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reproject a file to match the shape and projection of existing raster. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    infile : (string) path to input file to reproject</span>
+<span class="sd">    match : (string) path to raster with desired shape and projection </span>
+<span class="sd">    outfile : (string) path to output file tif</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># open input</span>
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
+        
+        <span class="c1"># open input to match</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">match</span><span class="p">)</span> <span class="k">as</span> <span class="n">match</span><span class="p">:</span>
+            <span class="n">dst_crs</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">crs</span>
+            
+            <span class="c1"># calculate the output transform matrix</span>
+            <span class="n">dst_transform</span><span class="p">,</span> <span class="n">dst_width</span><span class="p">,</span> <span class="n">dst_height</span> <span class="o">=</span> <span class="n">calculate_default_transform</span><span class="p">(</span>
+                <span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>     <span class="c1"># input CRS</span>
+                <span class="n">dst_crs</span><span class="p">,</span>     <span class="c1"># output CRS</span>
+                <span class="n">match</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>   <span class="c1"># input width</span>
+                <span class="n">match</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># input height </span>
+                <span class="o">*</span><span class="n">match</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>  <span class="c1"># unpacks input outer boundaries (left, bottom, right, top)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># set properties for output</span>
+        <span class="n">dst_kwargs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">dst_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;crs&quot;</span><span class="p">:</span> <span class="n">dst_crs</span><span class="p">,</span>
+                           <span class="s2">&quot;transform&quot;</span><span class="p">:</span> <span class="n">dst_transform</span><span class="p">,</span>
+                           <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">dst_width</span><span class="p">,</span>
+                           <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">dst_height</span><span class="p">,</span>
+                           <span class="s2">&quot;nodata&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coregistered to shape:&quot;</span><span class="p">,</span> <span class="n">dst_height</span><span class="p">,</span><span class="n">dst_width</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Affine&#39;</span><span class="p">,</span><span class="n">dst_transform</span><span class="p">)</span>
+        <span class="c1"># open output</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">dst_kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
+            <span class="c1"># iterate through bands and write using reproject function</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">reproject</span><span class="p">(</span>
+                    <span class="n">source</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                    <span class="n">destination</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                    <span class="n">src_transform</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+                    <span class="n">src_crs</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+                    <span class="n">dst_transform</span><span class="o">=</span><span class="n">dst_transform</span><span class="p">,</span>
+                    <span class="n">dst_crs</span><span class="o">=</span><span class="n">dst_crs</span><span class="p">,</span>
+                    <span class="n">resampling</span><span class="o">=</span><span class="n">Resampling</span><span class="o">.</span><span class="n">nearest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can execute out code to co-register two rasters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LS</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
+<span class="n">precip</span> <span class="o">=</span> <span class="s2">&quot;../data/precipitation_20200601_500m.tif&quot;</span>
+
+<span class="c1"># co-register LS to match precip raster</span>
+<span class="n">reproj_match</span><span class="p">(</span><span class="n">infile</span> <span class="o">=</span> <span class="n">LS</span><span class="p">,</span> 
+             <span class="n">match</span><span class="o">=</span> <span class="n">precip</span><span class="p">,</span>
+             <span class="n">outfile</span> <span class="o">=</span> <span class="s1">&#39;../temp/LS_reg_precip.tif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coregistered to shape: 136 157 
+ Affine | 0.00, 0.00,-61.49|
+| 0.00,-0.00,-0.00|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="example-of-co-registering-rasters-with-geowombat">
 <h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">¶</a></h3>
 <p>Co-registering data is simple in geowombat, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
@@ -766,7 +847,7 @@ Attributes: (12/13)
     data_are_stacked:   0
 </pre></div>
 </div>
-<img alt="../_images/e_raster_resample_5_1.png" src="../_images/e_raster_resample_5_1.png" />
+<img alt="../_images/e_raster_resample_9_1.png" src="../_images/e_raster_resample_9_1.png" />
 </div>
 </div>
 <p>Although it’s a bit hard to tell, the cell size is now 30m (see the slices of the larger original cells at the top of the image).</p>
