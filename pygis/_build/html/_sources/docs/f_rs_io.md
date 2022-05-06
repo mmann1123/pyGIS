@@ -184,7 +184,7 @@ from geowombat.data import l8_224077_20200518_B4
 # Transform the data to lat/lon
 with gw.config.update(ref_crs=4326):
 
-    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+    with gw.open(l8_224077_20200518_B4) as src:
 
         # Write the data to a VRT
         gw.to_vrt(src, 'lat_lon_file.vrt')
@@ -195,7 +195,7 @@ Write to a raster file.
 ``` python
 import geowombat as gw
 
-with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+with gw.open(l8_224077_20200518_B4) as src:
 
     # Xarray drops attributes
     attrs = src.attrs.copy()

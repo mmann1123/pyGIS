@@ -1157,7 +1157,7 @@ with gw.open([l8_224078_20200518,l8_224078_20200518]) as src:
 # %%
 import geowombat as gw
 
-with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+with gw.open(l8_224077_20200518_B4) as src:
 
     # Xarray drops attributes
     # attrs = src.attrs.copy()
@@ -2034,4 +2034,125 @@ with rasterio.open(
         height = raster.height) as dst:
     dst.write(rasterized, indexes = 1)
 
+# %%
+#%%
+
+from rasterio.warp import reproject, Resampling, calculate_default_transform
+import rasterio
+def reproj_match(infile, match, outfile):
+    """Reproject a file to match the shape and projection of existing raster. 
+    
+    Parameters
+    ----------
+    infile : (string) path to input file to reproject
+    match : (string) path to raster with desired shape and projection 
+    outfile : (string) path to output file tif
+    """
+    # open input
+    with rasterio.open(infile) as src:
+        src_transform = src.transform
+        
+        # open input to match
+        with rasterio.open(match) as match:
+            dst_crs = match.crs
+            print
+            # calculate the output transform matrix
+            dst_transform, dst_width, dst_height = calculate_default_transform(
+                src.crs,     # input CRS
+                dst_crs,     # output CRS
+                match.width,   # input width
+                match.height,  # input height 
+                *match.bounds,  # unpacks input outer boundaries (left, bottom, right, top)
+            )
+
+        # set properties for output
+        dst_kwargs = src.meta.copy()
+        dst_kwargs.update({"crs": dst_crs,
+                           "transform": dst_transform,
+                           "width": dst_width,
+                           "height": dst_height,
+                           "nodata": 0})
+        print("Coregistered to shape:", dst_height,dst_width,'\n Affine',dst_transform)
+        # open output
+        with rasterio.open(outfile, "w", **dst_kwargs) as dst:
+            # iterate through bands and write using reproject function
+            for i in range(1, src.count + 1):
+                reproject(
+                    source=rasterio.band(src, i),
+                    destination=rasterio.band(dst, i),
+                    src_transform=src.transform,
+                    src_crs=src.crs,
+                    dst_transform=dst_transform,
+                    dst_crs=dst_crs,
+                    resampling=Resampling.bilinear)
+
+LS = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+precip = "../data/precipitation_20200601_500m.tif"
+
+# co-register LS to match precip raster
+reproj_match(infile = precip, 
+             match= LS,
+             outfile = '../temp/LS_reg_precip.tif')
+# %%
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
+from geowombat.ml import fit_predict
+import geopandas as gpd
+from sklearn_xarray.preprocessing import Featurizer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.naive_bayes import GaussianNB
+le = LabelEncoder()
+labels = gpd.read_file(l8_224078_20200518_polygons)
+labels['lc'] = le.fit(labels.name).transform(labels.name)
+
+# Use a data pipeline
+pl = Pipeline([('featurizer', Featurizer()),
+                ('scaler', StandardScaler()),
+                ('pca', PCA()),
+                ('clf', GaussianNB())])
+
+import xarray as xr
+import numpy as np
+#%%
+
+with gw.open(l8_224078_20200518) as src:
+        y = fit_predict(src, labels, pl, col='lc')
+        
+#%%
+with gw.open(l8_224078_20200518) as src:
+        y = fit_predict(src, labels, pl, col='lc')
+        
+        src = xr.concat([src,y.astype(np.uint16)], 'band')
+        src.sel(band='targ', time='t1').gw.to_raster('output.tif', overwrite=True)
+
+# %%
+# import numpy as np
+
+# with gw.open(l8_224078_20200518) as src:
+#         y = fit_predict(src, labels, pl, col='lc',  targ_name='band')
+#         y = y.astype(np.uint16)
+
+#         y.attrs = src.attrs
+#         # print(src.sel(band=2).dtype)
+#         out.gw.to_raster('output.tif', overwrite=True, )
+
+# # %%
+
+# with gw.open(l8_224078_20200518) as src:
+#         y = fit_predict(src, labels, pl, col='lc',  targ_name='band')
+#         # y.attrs = src.attrs
+#         out = y.sel(band='targ', time='t1').gw.match_data(src.sel(band=1), band_names = 'targ')
+
+#         # out.gw.to_raster('output.tif', overwrite=True, )
+# # %%
+# with gw.open(l8_224078_20200518) as src:
+#     y = fit_predict(src, labels, pl, col='lc')
+#     a = src.sel(band=1)    
+#     print(a,'\n ===============')
+#     a.values = y.sel(band='targ', time='t1').values
+#     print(a)
+#     a.gw.to_raster('output.tif', overwrite=True, )
 # %%

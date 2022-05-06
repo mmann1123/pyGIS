@@ -17,7 +17,6 @@ html_meta:
 
 (f_rs_ml_predict)=
 
-
 ---------------
 ```{admonition} Learning Objectives
   - Fit and predict machine learning models to make spatial predictions
@@ -63,7 +62,6 @@ print(labels)
 ```
 We are then going to generate our sklearn pipeline ([see simple tutorial here](https://medium.com/vickdata/a-simple-guide-to-scikit-learn-pipelines-4ac0d974bdcf)). A pipeline simply allows us to pass a numpy array through a defined set of operations. In this case the data is passed through the following operations:
 
- * `Featurizer`: [Stacks](https://phausamann.github.io/sklearn-xarray/content/api/preprocessing.html?highlight=featurizer#sklearn_xarray.preprocessing.Featurizer) a numpy array for use in sklearn
  * `StandardScaler`: [Normalizes](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) all variables by removing the mean and scaling to unit variance
  * `PCA`: Calculates [Principal Components](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html?highlight=pca#sklearn.decomposition.PCA) to reduce dimensionality. 
  * `GaussianNB`: Fits a [Gaussian Naive Bayes](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html?highlight=gaussiannb#sklearn.naive_bayes.GaussianNB) model for a quick classification. 
@@ -73,14 +71,13 @@ We are then going to generate our sklearn pipeline ([see simple tutorial here](h
 ```{code-cell} ipython3
 
 # Use a data pipeline
-pl = Pipeline([('featurizer', Featurizer()),
-                ('scaler', StandardScaler()),
+pl = Pipeline([ ('scaler', StandardScaler()),
                 ('pca', PCA()),
                 ('clf', GaussianNB())])
 
 # Fit the classifier
 with gw.config.update(ref_res=100):
-    with gw.open(l8_224078_20200518, chunks=128) as src:
+    with gw.open(l8_224078_20200518) as src:
         X, clf = fit(src, labels, pl, col='lc')
 
 print(clf)
@@ -95,7 +92,7 @@ fig, ax = plt.subplots(dpi=200,figsize=(10,10))
 from geowombat.ml import fit_predict
 
 with gw.config.update(ref_res=100):
-    with gw.open(l8_224078_20200518, chunks=128) as src:
+    with gw.open(l8_224078_20200518) as src:
         y = fit_predict(src, labels, pl, col='lc')
         print(y)
         y.plot(robust=True, ax=ax)
@@ -109,7 +106,19 @@ If you have a stack of time series data it is simple to apply the same method as
 
 ```{code-cell} ipython3
 with gw.config.update(ref_res=100):
-   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time', chunks=128) as src:
+   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
         y = fit_predict(src, labels, pl, col='lc')
         print(y)
+        y.plot(robust=True, ax=ax)
+```
+
+If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:
+
+```{code-cell} ipython3
+with gw.config.update(ref_res=100):
+    with gw.open(l8_224078_20200518) as src:
+        X, clf = fit(src, labels, pl, col="lc")
+        y = predict(X, clf)
+        print(y)
+        y.plot(robust=True, ax=ax)
 ```

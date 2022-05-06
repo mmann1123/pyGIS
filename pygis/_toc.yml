@@ -4,28 +4,30 @@
 # jupyter-book build pygis
 # ghp-import -n -p  -c 'pygis.io' -f pygis/_build/html
 
+# alias buildbook and pushbook
 
 # old version without new url ghp-import -n -p -f pygis/_build/html
 
 ---
 - file: docs/a_intro
-- part: 0 - Get Started
+- part: 0 - Get Started in Geospatial Python
   chapters:
     - file: docs/b_intro_py
     - file: docs/b_about_py
     - file: docs/b_getting_started
     - file: docs/b_conda_started
     - file: docs/b_python_by_example
-    - file: docs/b_learn_more    
-- part: 1 - Data Types
+    - file: docs/b_learn_more
+
+- part: 1 - Geospatial Data Types in Python 
   chapters:
     - file: docs/c_features
     - file: docs/c_store_features
     - file: docs/c_vectors
     - file: docs/c_new_vectors
     - file: docs/c_rasters
-
-- part: 2 - Nature of Coordinate Systems
+#
+- part: 2 - Nature of Coordinate Systems in Python
   chapters:
     - file: docs/d_crs_what_is_it
     - file: docs/d_understand_crs_codes
@@ -33,7 +35,7 @@
     - file: docs/d_vector_crs_intro
     - file: docs/d_raster_crs_intro
 
-- part: 3 - Vector Operations
+- part: 3 - Vector Operations in Python 
   chapters:
     # - file: docs/e_vector_op_intro
     #   sections:
@@ -46,7 +48,8 @@
     # - file: docs/e_table_joins
     - file: docs/e_summarize_vector
     - file: docs/e_interpolation
-- part: 4 - Raster Operations
+
+- part: 4 - Raster Operations in Python
   chapters:
     # - file: docs/e_raster_op_intro
     #   sections:
@@ -59,21 +62,21 @@
     - file: docs/e_raster_window_operations
     
 
-- part: 5 - Accessing Data
+- part: 5 - Accessing OSM & Census Data in Python
   chapters:
     - file: docs/d_access_osm
     - file: docs/d_access_census
     
-- part: 6 - Remote Sensing
+- part: 6 - Remote Sensing in Python
   chapters:
     # - file: docs/f_rs_intro
     #   sections:
     - file: docs/f_rs_io
+    - file: docs/f_rs_config
     - file: docs/f_rs_edit
     - file: docs/f_rs_plot
     - file: docs/f_rs_crs
     - file: docs/f_rs_mosaic
-    - file: docs/f_rs_config
     - file: docs/f_rs_band_math
     - file: docs/f_rs_extraction
     - file: docs/f_rs_ml_predict

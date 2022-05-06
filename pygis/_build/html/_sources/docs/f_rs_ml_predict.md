@@ -80,7 +80,7 @@ pl = Pipeline([('featurizer', Featurizer()),
 
 # Fit the classifier
 with gw.config.update(ref_res=100):
-    with gw.open(l8_224078_20200518, chunks=128) as src:
+    with gw.open(l8_224078_20200518) as src:
         X, clf = fit(src, labels, pl, col='lc')
 
 print(clf)
@@ -95,7 +95,7 @@ fig, ax = plt.subplots(dpi=200,figsize=(10,10))
 from geowombat.ml import fit_predict
 
 with gw.config.update(ref_res=100):
-    with gw.open(l8_224078_20200518, chunks=128) as src:
+    with gw.open(l8_224078_20200518) as src:
         y = fit_predict(src, labels, pl, col='lc')
         print(y)
         y.plot(robust=True, ax=ax)
@@ -109,7 +109,7 @@ If you have a stack of time series data it is simple to apply the same method as
 
 ```{code-cell} ipython3
 with gw.config.update(ref_res=100):
-   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time', chunks=128) as src:
+   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
         y = fit_predict(src, labels, pl, col='lc')
         print(y)
 ```

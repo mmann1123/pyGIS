@@ -23,7 +23,7 @@ html_meta:
 * [Geospatial Vector Data](c_vectors.md)
 * [Geospatial Raster Data](c_rasters.md)
 * [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](e_new_vectors.md)
+* [Creating Geospatial Vector Data](c_new_vectors.md)
 ```
 
 ----------------

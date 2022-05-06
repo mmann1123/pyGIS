@@ -11,7 +11,7 @@
 # ```
 # ```{admonition} Review
 # * [Understanding CRS codes](d_understand_crs_codes.md)
-# * [Creating Points, Lines, Polygons](e_new_vectors.md)
+# * [Creating Points, Lines, Polygons](c_new_vectors.md)
 # ```
 # ----------------
 # 

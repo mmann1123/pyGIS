@@ -15,8 +15,7 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 (c_new_vectors)=
-(e_new_vectors)=
- <!-- Leave e_new_vectors name change might mess up links  -->
+
 ----------------
 
 ```{admonition} Learning Objectives
