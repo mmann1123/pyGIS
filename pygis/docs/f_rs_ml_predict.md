@@ -138,7 +138,7 @@ If you want to do more sophisticated model tuning using sklearn it is also possi
 with gw.config.update(ref_res=100):
     with gw.open(l8_224078_20200518) as src:
         X, clf = fit(src, labels, pl, col="lc")
-        y = predict(X, clf)
+        y = predict(src, X, clf)
         print(y)
         y.plot(robust=True, ax=ax)
 ```
@@ -151,7 +151,23 @@ In this case we are going to use our supervised classification pipeline `pl` fro
 We often also need to [hyper-parameter tune](https://scikit-learn.org/stable/modules/grid_search.html)
 our model. In this case we will see if we need to keep 1, 2, or 3 [pca](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html?highlight=pca#sklearn.decomposition.PCA) components. We might also want to experiment with whether scaling the data range impacts our perforamnce with [StandardScaler](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html?highlight=standardscaler#sklearn.preprocessing.StandardScaler) by changing whether or not variables are divided by their standard deviation. 
 
-To do hyper-parameter tuning with [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html?highlight=gridsearchcv#sklearn.model_selection.GridSearchCV) in a pipeline we need to set up the 'parameter-grid'. This part can be a little confusing. 
+To do hyper-parameter tuning with [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html?highlight=gridsearchcv#sklearn.model_selection.GridSearchCV) in a pipeline we need to set up the 'parameter-grid'. This part can be a little confusing. To help us let's isolate the `Pipeline` and `param_grid` from the example below:
+
+``` python
+pl = Pipeline([('scaler', StandardScaler()),
+               ('pca', PCA()),
+               ('clf', GaussianNB())])
+
+param_grid={
+            "scaler__with_std":[True,False]
+            "pca__n_components": [1, 2, 3]
+            })
+```
+Notice that each step in the pipeline is labeled (e.g. 'scaler', 'pca', 'clf'). To try out different parameters for each step we are going to need to reference them by name in our `param_grid` dictionary. The dictionary follows this convention:
+
+`(step_name)__(parameter_name):[value_1, value2]`
+
+So `"pca__n_components": [1, 2, 3]` says that for the `pca` step of the pipeline, we will try out tree different values for the parameter `n_components`, allowing us to choose the one that performs best at predicting our 'testing' data.
 
 ```{code-cell} ipython3
 from sklearn.model_selection import GridSearchCV, KFold
@@ -173,7 +189,7 @@ fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 with gw.config.update(ref_res=300):
     with gw.open(l8_224078_20200518) as src:
         # fit a model to get Xy used to train model
-        X, Xy, clf = fit(src, pl, labels, col="lc")
+        X, Xy, pipe = fit(src, pl, labels, col="lc")
 
         # fit cross valiation and parameter tuning
         # NOTE: must unpack * object Xy
@@ -184,8 +200,10 @@ with gw.config.update(ref_res=300):
 
         # get set tuned parameters and make the prediction
         # Note: predict(gridsearch.best_model_) not currently supported
-        clf.set_params(**gridsearch.best_params_)
-        y1 = predict(src, X, clf)
+        pipe.set_params(**gridsearch.best_params_)
+        y1 = predict(src, X, pipe)
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 ```
+
+Notice that the `gridsearch` has a few attributes of interest. This includes all the results of the kfold rounds `.cv_results_`, the best score obtained `.best_score_`, and the ideal set of parameters to use in the pipeline `.best_params_`.  This lase one `.best_params_` will be use to update our `pipe` pipeline for prediction. 
