@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to interpret and use coordinate reference codes like proj4strings, and EPSG codes. This includes defining a CRS, creating custom projections, interpreting proj4strings, with examples of false easting and northing, and changing the prime meridian."
   "description lang=fr": "Apprenez à interpréter et à utiliser des codes de référence de coordonnées tels que proj4strings et codes EPSG. Cela comprend la définition d'un CRS, la création de projections personnalisées, l'interprétation de chaînes de projection, avec des exemples de faux est et nord, et la modification du méridien principal."
   "description lang=es": "Aprenda a interpretar y utilizar códigos de referencia de coordenadas como proj4strings y códigos EPSG. Esto incluye la definición de un CRS, la creación de proyecciones personalizadas, la interpretación de cadenas de proyectos, con ejemplos de falso este y norte, y el cambio del primer meridiano."
-  "keywords": "geospatial, crs, proj4string, EPSG, coordinate reference system, projection"
+  "keywords": "spatial, crs, proj4string, EPSG, coordinate reference system, projection"
   "property=og:locale": "en_US"
 ---
 

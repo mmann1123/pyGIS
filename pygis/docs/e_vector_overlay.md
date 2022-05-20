@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to overlay and join vector data to create new geometries."
-  "keywords": "geospatial, overlay, join, vector, shapefile"
+  "keywords": "spatial, overlay, join, vector, shapefile"
   "property=og:locale": "en_US"
 ---
 
@@ -21,9 +21,9 @@ html_meta:
 * Join data based on their geographic location and explore the different join types
 ```
 ```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
+* [Spatial Vector Data](c_vectors.md)
 * [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](c_new_vectors.md)
+* [Creating Spatial Vector Data](c_new_vectors.md)
 ```
 ----------------
 

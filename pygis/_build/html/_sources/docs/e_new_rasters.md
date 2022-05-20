@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": ""
-  "keywords": "geospatial, raster, reproject, crs, landsat"
+  "keywords": "spatial, raster, reproject, crs, landsat"
   "property=og:locale": "en_US"
 ---
 
@@ -23,7 +23,7 @@ html_meta:
 ```{admonition} Review
 * [Affine transformation](d_affine.md)
 * [Raster Coordinate Reference Systems](d_raster_crs_intro.md)
-* [Geospatial Raster Data](c_rasters.md)
+* [Spatial Raster Data](c_rasters.md)
 ```
 ----------------
  
@@ -77,7 +77,7 @@ The final array `Z` still lacks a number of elements that transform it from bein
 `transform` defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for `transform` are complex and beyond the scope of the chapter, please refer to the next chapter @ [affine transforms](d_affine.md) and [raster crs](d_raster_crs_intro.md) for more info. 
 ```
 ## Writing Rasters
-To save this array along with geospatial information to a file, we call `rasterio.open()` with a path to the new file to be created, and 'w' to specify writing mode, along with the arguments above. 
+To save this array along with spatial information to a file, we call `rasterio.open()` with a path to the new file to be created, and 'w' to specify writing mode, along with the arguments above. 
 
 
 ```{code-cell} ipython3
@@ -116,7 +116,7 @@ plt.show()
 ```
 
 
-So in summary, a geospatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it.md), and number of bands. This information is typically accessed and updated via the `.profile`.
+So in summary, a spatial dataset is essentially just a `numpy.ndarray` with information about the location and resolution of the array, the [coordinate reference system](d_crs_what_is_it.md), and number of bands. This information is typically accessed and updated via the `.profile`.
 
 ```{code-cell} ipython3
 print(raster.profile)

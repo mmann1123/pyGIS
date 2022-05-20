@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand."
   "description lang=fr": "Découvrez comment installer un environnement python fonctionnel pour les données spatiales et la télédétection. Ici, nous utilisons Docker pour rendre le processus reproductible et au moins quelque peu facile à comprendre."
   "description lang=es": "Aprenda a instalar un entorno Python que funcione para datos espaciales y detección remota. Aquí utilizamos Docker para hacer que el proceso sea replicable y al menos algo fácil de entender."
-  "keywords": "python environment, Docker, geospatial, raster, shapefile, remote sensing"
+  "keywords": "python environment, Docker, spatial, raster, shapefile, remote sensing"
   "property=og:locale": "en_US"
 ---
 
@@ -21,17 +21,17 @@ html_meta:
 
 ```{admonition} Learning Objectives
 - Learn the basics of Docker
-- Pull, run, and update a container set up for geospatial modeling
+- Pull, run, and update a container set up for spatial modeling
 ```
 ```{admonition} Review
 * [A normal intro to python environments](b_getting_started)
 ```
 ----------------
 
-# Setting up Python for Geospatial on Mac, Windows, and Linux
-Geospatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn't do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast. 
+# Setting up Python for Spatial on Mac, Windows, and Linux
+Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn't do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast. 
 
-## Docker for Geospatial Python - GDAL Included
+## Docker for Spatial Python - GDAL Included
 Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I'm looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: [a simple intro to Docker concepts](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined)
 
 To get this done we will be accessing [DockerHub](https://hub.docker.com/), which allows coders like us to store their Docker images. We will be downloading an image of the Linux operating system (Ubuntu, which is "debian-based"), that already has GDAL built for us. Once we "pull" a copy of the image of this operating system we will open it as "a container". This "container" is a running instance of the "image" that we can run our applications on, and customize for our use case.  Read some more on ["images" vs "containers" etc here](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-containers-images-registries).
@@ -394,7 +394,7 @@ Ok, now we are getting somewhere. We have created a new image called "pygis" tha
 Keep in mind if you want to make changes to the 'pygis' image you will need to first run it via the command line, make your changes, and then 'commit' or save another named version (ideally with a different name)
 ```
 
-### Access your geospatial python image 
+### Access your spatial python image 
 There are two ways to access this 1) through the command-line and 2) through Jupyter Notebooks. 
 
 Let's start with command line only access. Note that this is almost exactly how we ran the osgeo/gdal image, except we replaced its name with geowombat. *Don't forget to replace `<user_name>` with your user name!*

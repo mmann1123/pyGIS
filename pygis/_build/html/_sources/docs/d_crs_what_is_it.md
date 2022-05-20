@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn the basics of coordinate reference systems (CRS) or projections, how to differentiate projected and geographic CRSs and their impact on size, shape, area, and distance."
   "description lang=fr": "Apprenez les bases des systèmes de référence de coordonnées (CRS) ou des projections, comment différencier les CRS projetés et géographiques et leur impact sur la taille, la forme, la surface et la distance."
   "description lang=es": "Aprenda los conceptos básicos de los sistemas de referencia de coordenadas (CRS) o proyecciones, cómo diferenciar los CRS proyectados y geográficos y su impacto en el tamaño, la forma, el área y la distancia."
-  "keywords": "geospatial,  crs, coordinate reference system, projection"
+  "keywords": "spatial,  crs, coordinate reference system, projection"
   "property=og:locale": "en_US"
 ---
 

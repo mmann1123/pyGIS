@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas."
-  "keywords": "python, geospatial, interpolation, vector, shapefile"
+  "keywords": "python, spatial, interpolation, vector, shapefile"
   "property=og:locale": "en_US"
 ---
  
@@ -23,9 +23,9 @@ html_meta:
 * Obtain interpolated values at specified unsampled locations
 ```
 ```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
+* [Spatial Vector Data](c_vectors.md)
 * [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](c_new_vectors.md)
+* [Creating Spatial Vector Data](c_new_vectors.md)
 * [Merge Data & Dissolve Polygons](e_vector_merge_dissolve.md)
 ```
 

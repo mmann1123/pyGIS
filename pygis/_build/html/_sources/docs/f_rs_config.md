@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to easily read in remote sensing data from a variety of sensors including LandSat, Sentinel, PlanetScope, and QuickBird, do easy reprojection and snap raster operations on-the-fly, and resampling."
   "description lang=fr": "Apprenez à lire facilement les données de télédétection à partir d'une variété de capteurs, y compris LandSat, Sentinel, PlanetScope et QuickBird, effectuez une reprojection facile et capturez des opérations raster à la volée, et rééchantillonnez."
   "description lang=es": "Aprenda a leer fácilmente los datos de teledetección de una variedad de sensores, incluidos LandSat, Sentinel, PlanetScope y QuickBird, realice operaciones de reproyección y captura de ráster sobre la marcha y remuestreo."
-  "keywords": "geospatial,raster, remote sensing, projection, resample, sentinel, landsat "
+  "keywords": "spatial,raster, remote sensing, projection, resample, sentinel, landsat "
   "property=og:locale": "en_US"
 ---
 

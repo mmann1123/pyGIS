@@ -8,10 +8,10 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": "Learn the difference between raster and vector data, manually create geospatial data, and data measurement issues"
+  "description lang=en": "Learn the difference between raster and vector data, manually create spatial data, and data measurement issues"
   "description lang=fr": "Découvrez la différence entre les données raster et vectorielles, créez manuellement des données géospatiales et les problèmes de mesure des données"
   "description lang=es": "Conozca la diferencia entre datos ráster y vectoriales, cree manualmente datos geoespaciales y problemas de medición de datos"
-  "keywords": "points, lines, polygons,raster, geospatial, attribute table"
+  "keywords": "points, lines, polygons,raster, spatial, attribute table"
   "property=og:locale": "en_US"
 ---
 
@@ -28,7 +28,7 @@ html_meta:
 --------------
 
 
-# Geospatial Data
+# Spatial Data
 
 ## Vector vs. Raster Data
 

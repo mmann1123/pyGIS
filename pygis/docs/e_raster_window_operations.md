@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to conduct moving window operations over rasters."
-  "keywords": "geospatial, python, rasterio, geowombat, raster, moving window, window operations, filter"
+  "keywords": "spatial, python, rasterio, geowombat, raster, moving window, window operations, filter"
   "property=og:locale": "en_US"
 ---
 
@@ -22,7 +22,7 @@ html_meta:
 * Conduct window operations with GeoWombat
 ```
 ```{admonition} Review
-* [Geospatial Raster Data](c_rasters.md)
+* [Spatial Raster Data](c_rasters.md)
 ```
 
 ----------------

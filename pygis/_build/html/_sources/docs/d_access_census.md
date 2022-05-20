@@ -12,7 +12,7 @@ html_meta:
   "description lang=en": "Learn how to access US Census, and American Community Survey data via python. "
   "description lang=fr": "Découvrez comment accéder aux données du recensement américain et de l'enquête communautaire américaine via python."
   "description lang=es": "Aprenda a acceder a los datos del Censo de EE. UU. Y de la Encuesta sobre la comunidad estadounidense a través de Python."
-  "keywords": "python, geospatial, census, american community survey, ACS"
+  "keywords": "python, spatial, census, american community survey, ACS"
   "property=og:locale": "en_US"
 ---
 

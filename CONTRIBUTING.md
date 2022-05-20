@@ -25,8 +25,8 @@ and "help wanted" is open to whoever wants to implement it.
 
 ## Write Documentation
 
-PyGIS - Open Source Geospatial Programming & Remote Sensing could always use more documentation, whether as part of the
-official PyGIS - Open Source Geospatial Programming & Remote Sensing docs, in docstrings, or even on the web in blog posts,
+PyGIS - Open Source Spatial Programming & Remote Sensing could always use more documentation, whether as part of the
+official PyGIS - Open Source Spatial Programming & Remote Sensing docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 ## Submit Feedback
@@ -42,7 +42,7 @@ If you are proposing a feature:
 
 ## Get Started
 
-Ready to contribute? Here's how to set up `PyGIS - Open Source Geospatial Programming & Remote Sensing` for local development.
+Ready to contribute? Here's how to set up `PyGIS - Open Source Spatial Programming & Remote Sensing` for local development.
 
 1. Fork the repo on GitHub.
 2. Clone your fork locally.
@@ -53,4 +53,4 @@ Ready to contribute? Here's how to set up `PyGIS - Open Source Geospatial Progra
 
 ## Code of Conduct
 
-Please note that the PyGIS - Open Source Geospatial Programming & Remote Sensing project is released with a [Contributor Code of Conduct](CONDUCT.md). By contributing to this project you agree to abide by its terms.
+Please note that the PyGIS - Open Source Spatial Programming & Remote Sensing project is released with a [Contributor Code of Conduct](CONDUCT.md). By contributing to this project you agree to abide by its terms.

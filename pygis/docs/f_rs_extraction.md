@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how extract pixel values from raster data like sentinel imagery, additionally extract by row and column index, extract by bound window, extract by coordinate, extract by polygon."
   "description lang=fr": "Découvrez comment extraire des valeurs de pixels à partir de données raster telles que l'imagerie sentinelle, extraire en outre par index de ligne et de colonne, extraire par fenêtre liée, extraire par coordonnées, extraire par polygone."
   "description lang=es": "Aprenda a extraer valores de píxeles de datos ráster como imágenes centinela, extraer adicionalmente por índice de fila y columna, extraer por ventana vinculada, extraer por coordenada, extraer por polígono."
-  "keywords": "geospatial,raster, extract by point, extract by polygon, extract by bounds, remote sensing"
+  "keywords": "spatial,raster, extract by point, extract by polygon, extract by bounds, remote sensing"
   "property=og:locale": "en_US"
 ---
 

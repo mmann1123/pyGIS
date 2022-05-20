@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Spatial classification and prediction models. Train and fit sklearn models on raster data including LandSat or other gridded data. "
   "description lang=fr": "Classification spatiale et modèles de prédiction. Entraînez et adaptez des modèles sklearn sur des données raster, y compris LandSat ou d'autres données maillées."
   "description lang=es": "Modelos de clasificación y predicción espacial. Entrene y ajuste modelos sklearn en datos ráster, incluido LandSat u otros datos cuadriculados."
-  "keywords": "sklearn, geospatial,raster, remote sensing, time series, landsat, sentinel"
+  "keywords": "sklearn, spatial,raster, remote sensing, time series, landsat, sentinel"
   "property=og:locale": "en_US"
 ---
 

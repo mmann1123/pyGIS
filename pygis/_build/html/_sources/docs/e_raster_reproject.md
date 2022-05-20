@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to reproject single and multi-band rasters using rasterio and geowombat. We demonstrate these using LandSat imagery as examples."
   "description lang=fr": "Apprenez à reprojeter des rasters mono et multibande à l'aide de rasterio et de geowombat. Nous les démontrons en utilisant les images LandSat comme exemples."
   "description lang=es": "Aprenda a reproyectar rásteres de una o varias bandas mediante rasterio y geowombat. Demostramos esto usando imágenes de LandSat como ejemplos."
-  "keywords": "geospatial, raster, reproject, crs, landsat"
+  "keywords": "spatial, raster, reproject, crs, landsat"
   "property=og:locale": "en_US"
 ---
 

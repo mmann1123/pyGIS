@@ -10,7 +10,7 @@
 
 ---
 - file: docs/a_intro
-- part: 0 - Get Started in Geospatial Python
+- part: 0 - Get Started in Spatial Python
   chapters:
     - file: docs/b_intro_py
     - file: docs/b_about_py
@@ -19,7 +19,7 @@
     - file: docs/b_python_by_example
     - file: docs/b_learn_more
 
-- part: 1 - Geospatial Data Types in Python 
+- part: 1 - Spatial Data Types in Python 
   chapters:
     - file: docs/c_features
     - file: docs/c_store_features

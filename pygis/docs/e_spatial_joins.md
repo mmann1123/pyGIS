@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn all about conducting spatial joins."
-  "keywords": "geospatial, spatial, join"
+  "keywords": "spatial, spatial, join"
   "property=og:locale": "en_US"
 ---
 

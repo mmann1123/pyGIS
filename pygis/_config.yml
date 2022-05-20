@@ -5,7 +5,7 @@
 
 #######################################################################################
 # Book settings
-title                       : Python Open Source Geospatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
+title                       : Python Open Source Spatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
 author                      : Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman  # The author of the book
 logo                        : pygis.png  # A path to the book logo
 sphinx:
