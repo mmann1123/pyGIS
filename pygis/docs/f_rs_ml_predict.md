@@ -38,7 +38,7 @@ html_meta:
 
 The most common task for remotely sensed data is creating land cover classification. In this tutorial we will walk you through how to train a ML model using raster data. These methods are heavily dependent on the great package [sklearn_xarray](https://phausamann.github.io/sklearn-xarray/). To understand the pipeline commands please see their [documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) and [examples](https://scikit-learn.org/stable/auto_examples/index.html#pipelines-and-composite-estimators). 
 
-### Supervised Land Classification in Python
+### Supervised Classification in Python
 In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes ['water','crop','tree','developed']. The first step is to use `LabelEncoder` to convert these to integer based categories, which we store in a new column called 'lc'.
 
 ```{code-cell} ipython3
@@ -46,7 +46,7 @@ In the following example we will use Landsat data, some training data to train a
 import geowombat as gw
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
 
-from geowombat.ml import fit
+from geowombat.ml import fit, predict, fit_predict
 import geopandas as gpd
 from sklearn_xarray.preprocessing import Featurizer
 from sklearn.pipeline import Pipeline
@@ -100,7 +100,7 @@ plt.tight_layout(pad=1)
 
 ```
 
-### Unsupervised Land Classification in Python
+### Unsupervised Classification in Python
 Unsupervised classification takes a different approach. Here we don't have to provide examples of different land cover types. Instead we rely on the algorithm to identify distinct clusters of similar data, and apply a unique label to each cluster. For instance, if we are talking about land cover water and trees are going to look very different. Water reflects more blue and absorbs all the near infrared, while trees reflect little blue and reflect lots of near infrared.  Therefore water and trees should 'cluster' together when plotted out according to their different blue and near infrared reflectances. These clusters will be assigned a unique value to each pixel, e.g. water will be assigned 1 and trees 2. Later, the end user will need to go back and assign the label to each numbered cluster, e.g. water=1, trees=2.
 
 In this example we will use [kmeans](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image. 
@@ -127,9 +127,10 @@ If you have a stack of time series data it is simple to apply the same method as
 ```{code-cell} ipython3
 with gw.config.update(ref_res=100):
    with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
-        y = fit_predict(src, labels, pl, col='lc')
+        y = fit_predict(src, pl, labels, col='lc')
         print(y)
-        y.plot(robust=True, ax=ax)
+        # plot one time period prediction
+        y.sel(time='t1').plot(robust=True, ax=ax)
 ```
 
 If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:
@@ -137,9 +138,8 @@ If you want to do more sophisticated model tuning using sklearn it is also possi
 ```{code-cell} ipython3
 with gw.config.update(ref_res=100):
     with gw.open(l8_224078_20200518) as src:
-        X, clf = fit(src, labels, pl, col="lc")
+        X, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
-        print(y)
         y.plot(robust=True, ax=ax)
 ```
 
@@ -158,10 +158,9 @@ pl = Pipeline([('scaler', StandardScaler()),
                ('pca', PCA()),
                ('clf', GaussianNB())])
 
-param_grid={
-            "scaler__with_std":[True,False]
+param_grid={"scaler__with_std":[True,False],
             "pca__n_components": [1, 2, 3]
-            })
+            }
 ```
 Notice that each step in the pipeline is labeled (e.g. 'scaler', 'pca', 'clf'). To try out different parameters for each step we are going to need to reference them by name in our `param_grid` dictionary. The dictionary follows this convention:
 
@@ -180,7 +179,7 @@ pl = Pipeline([('scaler', StandardScaler()),
 cv = CrossValidatorWrapper(KFold())
 gridsearch = GridSearchCV(pl, cv=cv, scoring='balanced_accuracy',
                     param_grid={
-                      "scaler__with_std":[True,False]
+                      "scaler__with_std":[True,False],
                       "pca__n_components": [1, 2, 3]
                       })
 
@@ -201,7 +200,7 @@ with gw.config.update(ref_res=300):
         # get set tuned parameters and make the prediction
         # Note: predict(gridsearch.best_model_) not currently supported
         pipe.set_params(**gridsearch.best_params_)
-        y1 = predict(src, X, pipe)
+        y = predict(src, X, pipe)
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 ```
