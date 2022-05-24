@@ -594,7 +594,6 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
-
 <span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">fit_predict</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">sklearn_xarray.preprocessing</span> <span class="kn">import</span> <span class="n">Featurizer</span>
@@ -623,12 +622,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># Use a data pipeline</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">GaussianNB</span><span class="p">())])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># Fit the classifier</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -641,7 +641,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>.</p>
+<p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
@@ -686,7 +686,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> to ‘time’ and set the <code class="docutils literal notranslate"><span class="pre">time_names</span></code>.  <em>Note</em> we are just pretending we have two dates of LandSat imagery here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span> <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -699,7 +701,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>

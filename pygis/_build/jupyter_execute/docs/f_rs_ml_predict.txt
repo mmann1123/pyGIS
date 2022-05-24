@@ -1,6 +1,5 @@
 import geowombat as gw
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
-
 from geowombat.ml import fit, predict, fit_predict
 import geopandas as gpd
 from sklearn_xarray.preprocessing import Featurizer
@@ -17,12 +16,13 @@ labels['lc'] = le.fit(labels.name).transform(labels.name)
 print(labels)
 
 import matplotlib.pyplot as plt
-fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Use a data pipeline
 pl = Pipeline([ ('scaler', StandardScaler()),
                 ('pca', PCA()),
                 ('clf', GaussianNB())])
+
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit the classifier
 with gw.config.update(ref_res=100):
@@ -54,12 +54,16 @@ with gw.config.update(ref_res=300):
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
+
 with gw.config.update(ref_res=100):
    with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
         y = fit_predict(src, pl, labels, col='lc')
         print(y)
         # plot one time period prediction
         y.sel(time='t1').plot(robust=True, ax=ax)
+
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=100):
     with gw.open(l8_224078_20200518) as src:
