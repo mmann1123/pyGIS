@@ -3,6 +3,13 @@
 # See the documentation for help and more options: 
 # https://jupyterbook.org/customize/config.html
 
+# reminder compile book: 
+# conda activate pygisbookgw
+# cd Documents/github/pyGIS/
+# jupyter-book build pygis
+# ghp-import -n -p  -c 'pygis.io' -f pygis/_build/html
+
+
 #######################################################################################
 # Book settings
 title                       : Python Open Source Spatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
