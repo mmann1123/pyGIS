@@ -20,6 +20,7 @@ html_meta:
 ---------------
 ```{admonition} Learning Objectives
   - Fit and predict machine learning models to make spatial predictions
+    - Use sklearn pipelines, cross-validation and hyper parameter tuning for spatial data
   - Predict landcover or continuous models 
   - Make predictions using timeseries data
 
@@ -78,7 +79,7 @@ pl = Pipeline([ ('scaler', StandardScaler()),
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit the classifier
-with gw.config.update(ref_res=100):
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
         X, Xy, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
@@ -91,7 +92,7 @@ In order to fit and predict to our original data in one step, we simply use `fit
 from geowombat.ml import fit_predict
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-with gw.config.update(ref_res=300):
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
         y = fit_predict(src, pl, labels, col='lc')
         y.plot(robust=True, ax=ax)
@@ -111,7 +112,7 @@ cl = Pipeline([ ('clf', KMeans(n_clusters=6, random_state=0))])
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit_predict unsupervised classifier
-with gw.config.update(ref_res=300):
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
         y= fit_predict(src, cl)
         y.plot(robust=True, ax=ax)
@@ -126,7 +127,7 @@ If you have a stack of time series data it is simple to apply the same method as
 ```{code-cell} ipython3
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-with gw.config.update(ref_res=100):
+with gw.config.update(ref_res=150):
    with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
         y = fit_predict(src, pl, labels, col='lc')
         print(y)
@@ -139,9 +140,9 @@ If you want to do more sophisticated model tuning using sklearn it is also possi
 ```{code-cell} ipython3
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-with gw.config.update(ref_res=100):
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
-        X, clf = fit(src, pl, labels, col="lc")
+        X, Xy, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
         y.plot(robust=True, ax=ax)
 ```
@@ -188,7 +189,7 @@ gridsearch = GridSearchCV(pl, cv=cv, scoring='balanced_accuracy',
 
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-with gw.config.update(ref_res=300):
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
         # fit a model to get Xy used to train model
         X, Xy, pipe = fit(src, pl, labels, col="lc")
