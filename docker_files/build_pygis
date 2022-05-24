@@ -21,7 +21,7 @@ RUN apt update -y && apt upgrade -y && \
 RUN pip install --upgrade pip
 RUN pip install Cython numpy  
 RUN pip install git+https://github.com/jgrss/geowombat
-RUN pip install sklearn-xarray  pip-tools rtree ipykernel sphinx graphviz numpydoc sphinx_automodapi jaxlib jax jupyter-book sphinx_sitemap
+RUN pip install sklearn-xarray ghp-import  pip-tools rtree ipykernel sphinx graphviz numpydoc sphinx_automodapi jaxlib jax jupyter-book sphinx_sitemap
 
 # sphinxcontrib.bibtex==1.0
 
