@@ -14,7 +14,7 @@
 # --------------
 # 
 # 
-# # Geospatial Data
+# # Spatial Data
 # 
 # ## Vector vs. Raster Data
 # 

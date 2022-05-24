@@ -10,8 +10,8 @@
 # * Understand the requirements for successful conversion
 # ```
 # ```{admonition} Review
-# * [Geospatial Vector Data](c_vectors.md)
-# * [Geospatial Raster Data](c_rasters.md)
+# * [Spatial Vector Data](c_vectors.md)
+# * [Spatial Raster Data](c_rasters.md)
 # * [Reproject Rasters w. Rasterio and Geowombat](e_raster_reproject.md)
 # ```
 # 

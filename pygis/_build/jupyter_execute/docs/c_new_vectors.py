@@ -6,7 +6,7 @@
 # ----------------
 # 
 # ```{admonition} Learning Objectives
-# * Create new geospatial objects (points, lines, polygons)
+# * Create new spatial objects (points, lines, polygons)
 # * Assign the correct projection or CRS
 # * Create points from a table or csv of lat and lon 
 # ```
@@ -19,7 +19,7 @@
 # ----------------
 # 
 # 
-# # Creating Geospatial Vector Data
+# # Creating Spatial Vector Data
 # We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.
 
 # In[1]:
@@ -144,7 +144,7 @@ points
 # - Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)
 # ```
 # 
-# ### Creating Geospatial lines
+# ### Creating Spatial lines
 # 
 # Following the examples above we can specify lines easily. In this case let's say we have lines tracking three people riding their bikes through town. We keep track of their unique id `ID`, their location `X,Y`, and their `Speed`, and read in the data below:
 
@@ -195,7 +195,7 @@ lines.plot(column='ID')
 # Now we can see that each line is treated separately by `ID`, and plot them using `.plot(column='ID')`.
 # 
 # 
-# ### Creating Geospatial Polygons
+# ### Creating Spatial Polygons
 # 
 # Creating a polyon in geopandas is very similiar to the other exercises. First we create a Fiona geometry object from our coordinates, add that to a dataframe with any attributes and then create a `GeoDataFrame` with an assigned coordinate reference system (CRS).
 
@@ -221,7 +221,7 @@ poly.plot()
 
 # (e_points_the_long_way)=
 # 
-# ### Creating Geospatial Points (admittedly the long way)
+# ### Creating Spatial Points (admittedly the long way)
 # 
 # 
 # Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.

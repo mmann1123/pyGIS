@@ -9,10 +9,10 @@
 # * Display kernel density estimation results and export resulting raster
 # ```
 # ```{admonition} Review
-# * [Geospatial Vector Data](c_vectors.md)
-# * [Geospatial Raster Data](c_rasters.md)
+# * [Spatial Vector Data](c_vectors.md)
+# * [Spatial Raster Data](c_rasters.md)
 # * [Attributes & Indexing for Vector Data](e_attributes.md)
-# * [Creating Geospatial Vector Data](c_new_vectors.md)
+# * [Creating Spatial Vector Data](c_new_vectors.md)
 # ```
 # 
 # ----------------
@@ -432,7 +432,7 @@ ax.set_title('Santa Clara County - Binning Well Points', fontdict = {'fontsize':
 # 
 # ### Method 1 - Display
 # 
-# This method uses `geoplot`, a high-level plotting library for geospatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
+# This method uses `geoplot`, a high-level plotting library for spatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
 
 # In[14]:
 
