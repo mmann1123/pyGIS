@@ -42,10 +42,8 @@ The most common task for remotely sensed data is creating land cover classificat
 In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes ['water','crop','tree','developed']. The first step is to use `LabelEncoder` to convert these to integer based categories, which we store in a new column called 'lc'.
 
 ```{code-cell} ipython3
-
 import geowombat as gw
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
-
 from geowombat.ml import fit, predict, fit_predict
 import geopandas as gpd
 from sklearn_xarray.preprocessing import Featurizer
@@ -71,12 +69,13 @@ We are then going to generate our sklearn pipeline ([see simple tutorial here](h
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
-fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Use a data pipeline
 pl = Pipeline([ ('scaler', StandardScaler()),
                 ('pca', PCA()),
                 ('clf', GaussianNB())])
+
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit the classifier
 with gw.config.update(ref_res=100):
@@ -86,7 +85,7 @@ with gw.config.update(ref_res=100):
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 ```
-In order to fit and predict to our original data in one step, we simply use `fit_predict`. 
+In order to fit and predict to our original data in one step, we simply use `fit_predict`:
 
 ```{code-cell} ipython3
 from geowombat.ml import fit_predict
@@ -125,6 +124,8 @@ In this case we can see that it effective labels different clusters of data, and
 If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set `stack_dim` to 'time' and set the `time_names`.  *Note* we are just pretending we have two dates of LandSat imagery here. 
 
 ```{code-cell} ipython3
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
+
 with gw.config.update(ref_res=100):
    with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
         y = fit_predict(src, pl, labels, col='lc')
@@ -136,6 +137,8 @@ with gw.config.update(ref_res=100):
 If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:
 
 ```{code-cell} ipython3
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
+
 with gw.config.update(ref_res=100):
     with gw.open(l8_224078_20200518) as src:
         X, clf = fit(src, pl, labels, col="lc")
