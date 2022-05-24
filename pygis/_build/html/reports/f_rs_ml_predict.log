@@ -1,94 +1,40 @@
 Traceback (most recent call last):
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
-    record_timing=False,
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+  File "/usr/local/lib/python3.8/dist-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
-    self._check_raise_for_error(cell, exec_reply)
-  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Use a data pipeline
-pl = Pipeline([('featurizer', Featurizer()),
-                ('scaler', StandardScaler()),
-                ('pca', PCA()),
-                ('clf', GaussianNB())])
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-# Fit the classifier
 with gw.config.update(ref_res=100):
-    with gw.open(l8_224078_20200518, chunks=128) as src:
-        X, clf = fit(src, labels, pl, col='lc')
-
-print(clf)
+    with gw.open(l8_224078_20200518) as src:
+        X, clf = fit(src, pl, labels, col="lc")
+        y = predict(src, X, clf)
+        y.plot(robust=True, ax=ax)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mTypeError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-2-e700f3d5a769>[0m in [0;36m<module>[0;34m[0m
-[1;32m      8[0m [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mconfig[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mref_res[0m[0;34m=[0m[0;36m100[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      9[0m     [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224078_20200518[0m[0;34m,[0m [0mchunks[0m[0;34m=[0m[0;36m128[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 10[0;31m         [0mX[0m[0;34m,[0m [0mclf[0m [0;34m=[0m [0mfit[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mpl[0m[0;34m,[0m [0mcol[0m[0;34m=[0m[0;34m'lc'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     11[0m [0;34m[0m[0m
-[1;32m     12[0m [0mprint[0m[0;34m([0m[0mclf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Input [0;32mIn [6][0m, in [0;36m<cell line: 3>[0;34m()[0m
+[1;32m      3[0m [38;5;28;01mwith[39;00m gw[38;5;241m.[39mconfig[38;5;241m.[39mupdate(ref_res[38;5;241m=[39m[38;5;241m100[39m):
+[1;32m      4[0m     [38;5;28;01mwith[39;00m gw[38;5;241m.[39mopen(l8_224078_20200518) [38;5;28;01mas[39;00m src:
+[0;32m----> 5[0m         X, clf [38;5;241m=[39m fit(src, pl, labels, col[38;5;241m=[39m[38;5;124m"[39m[38;5;124mlc[39m[38;5;124m"[39m)
+[1;32m      6[0m         y [38;5;241m=[39m predict(src, X, clf)
+[1;32m      7[0m         y[38;5;241m.[39mplot(robust[38;5;241m=[39m[38;5;28;01mTrue[39;00m, ax[38;5;241m=[39max)
 
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/ml/classifiers.py[0m in [0;36mfit[0;34m(self, data, labels, clf, grid_search, targ_name, targ_dim_name, col)[0m
-[1;32m    199[0m         """
-[1;32m    200[0m [0;34m[0m[0m
-[0;32m--> 201[0;31m         [0mdata[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_prepare_labels[0m[0;34m([0m[0mdata[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mcol[0m[0;34m,[0m [0mtarg_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    202[0m         [0mX[0m[0;34m,[0m [0mXna[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_prepare_predictors[0m[0;34m([0m[0mdata[0m[0;34m,[0m [0mtarg_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    203[0m         [0mclf[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_prepare_classifiers[0m[0;34m([0m[0mclf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/ml/classifiers.py[0m in [0;36m_prepare_labels[0;34m(data, labels, col, targ_name)[0m
-[1;32m     67[0m         [0mlabels[0m [0;34m=[0m [0mlabels[0m[0;34m.[0m[0mwhere[0m[0;34m([0m[0mlabels[0m [0;34m!=[0m [0;36m0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     68[0m [0;34m[0m[0m
-[0;32m---> 69[0;31m         [0mdata[0m[0;34m.[0m[0mcoords[0m[0;34m[[0m[0mtarg_name[0m[0;34m][0m [0;34m=[0m [0;34m([0m[0;34m[[0m[0;34m'time'[0m[0;34m,[0m [0;34m'y'[0m[0;34m,[0m [0;34m'x'[0m[0;34m][0m[0;34m,[0m [0mlabels[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     70[0m [0;34m[0m[0m
-[1;32m     71[0m         [0;32mreturn[0m [0mdata[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/core/coordinates.py[0m in [0;36m__setitem__[0;34m(self, key, value)[0m
-[1;32m     39[0m [0;34m[0m[0m
-[1;32m     40[0m     [0;32mdef[0m [0m__setitem__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mkey[0m[0;34m:[0m [0mHashable[0m[0;34m,[0m [0mvalue[0m[0;34m:[0m [0mAny[0m[0;34m)[0m [0;34m->[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 41[0;31m         [0mself[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0;34m{[0m[0mkey[0m[0;34m:[0m [0mvalue[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     42[0m [0;34m[0m[0m
-[1;32m     43[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/core/coordinates.py[0m in [0;36mupdate[0;34m(self, other)[0m
-[1;32m    162[0m         [0mother_vars[0m [0;34m=[0m [0mgetattr[0m[0;34m([0m[0mother[0m[0;34m,[0m [0;34m"variables"[0m[0;34m,[0m [0mother[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    163[0m         coords, indexes = merge_coords(
-[0;32m--> 164[0;31m             [0;34m[[0m[0mself[0m[0;34m.[0m[0mvariables[0m[0;34m,[0m [0mother_vars[0m[0;34m][0m[0;34m,[0m [0mpriority_arg[0m[0;34m=[0m[0;36m1[0m[0;34m,[0m [0mindexes[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0mxindexes[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    165[0m         )
-[1;32m    166[0m         [0mself[0m[0;34m.[0m[0m_update_coords[0m[0;34m([0m[0mcoords[0m[0;34m,[0m [0mindexes[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/core/merge.py[0m in [0;36mmerge_coords[0;34m(objects, compat, join, priority_arg, indexes, fill_value)[0m
-[1;32m    470[0m         [0mcoerced[0m[0;34m,[0m [0mjoin[0m[0;34m=[0m[0mjoin[0m[0;34m,[0m [0mcopy[0m[0;34m=[0m[0;32mFalse[0m[0;34m,[0m [0mindexes[0m[0;34m=[0m[0mindexes[0m[0;34m,[0m [0mfill_value[0m[0;34m=[0m[0mfill_value[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    471[0m     )
-[0;32m--> 472[0;31m     [0mcollected[0m [0;34m=[0m [0mcollect_variables_and_indexes[0m[0;34m([0m[0maligned[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    473[0m     [0mprioritized[0m [0;34m=[0m [0m_get_priority_vars_and_indexes[0m[0;34m([0m[0maligned[0m[0;34m,[0m [0mpriority_arg[0m[0;34m,[0m [0mcompat[0m[0;34m=[0m[0mcompat[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    474[0m     [0mvariables[0m[0;34m,[0m [0mout_indexes[0m [0;34m=[0m [0mmerge_collected[0m[0;34m([0m[0mcollected[0m[0;34m,[0m [0mprioritized[0m[0;34m,[0m [0mcompat[0m[0;34m=[0m[0mcompat[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/core/merge.py[0m in [0;36mcollect_variables_and_indexes[0;34m(list_of_mappings)[0m
-[1;32m    292[0m                 [0mappend_all[0m[0;34m([0m[0mcoords[0m[0;34m,[0m [0mindexes[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    293[0m [0;34m[0m[0m
-[0;32m--> 294[0;31m             [0mvariable[0m [0;34m=[0m [0mas_variable[0m[0;34m([0m[0mvariable[0m[0;34m,[0m [0mname[0m[0;34m=[0m[0mname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    295[0m             [0;32mif[0m [0mvariable[0m[0;34m.[0m[0mdims[0m [0;34m==[0m [0;34m([0m[0mname[0m[0;34m,[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    296[0m                 [0mvariable[0m [0;34m=[0m [0mvariable[0m[0;34m.[0m[0mto_index_variable[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/xarray/core/variable.py[0m in [0;36mas_variable[0;34m(obj, name)[0m
-[1;32m    120[0m         [0;32mif[0m [0misinstance[0m[0;34m([0m[0mobj[0m[0;34m[[0m[0;36m1[0m[0;34m][0m[0;34m,[0m [0mDataArray[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    121[0m             raise TypeError(
-[0;32m--> 122[0;31m                 [0;34m"Using a DataArray object to construct a variable is"[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    123[0m                 [0;34m" ambiguous, please extract the data using the .data property."[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    124[0m             )
-
-[0;31mTypeError[0m: Using a DataArray object to construct a variable is ambiguous, please extract the data using the .data property.
-TypeError: Using a DataArray object to construct a variable is ambiguous, please extract the data using the .data property.
+[0;31mValueError[0m: too many values to unpack (expected 2)
+ValueError: too many values to unpack (expected 2)
 

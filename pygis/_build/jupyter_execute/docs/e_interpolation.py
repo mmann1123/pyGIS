@@ -12,9 +12,9 @@
 # * Obtain interpolated values at specified unsampled locations
 # ```
 # ```{admonition} Review
-# * [Geospatial Vector Data](c_vectors.md)
+# * [Spatial Vector Data](c_vectors.md)
 # * [Attributes & Indexing for Vector Data](e_attributes.md)
-# * [Creating Geospatial Vector Data](c_new_vectors.md)
+# * [Creating Spatial Vector Data](c_new_vectors.md)
 # * [Merge Data & Dissolve Polygons](e_vector_merge_dissolve.md)
 # ```
 # 

@@ -4,10 +4,10 @@
 #  
 # 
 # 
-# PyGIS - Open Source Geospatial Programming & Remote Sensing 
+# PyGIS - Open Source Spatial Programming & Remote Sensing 
 # ============================
 # 
-# The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for geospatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application. 
+# The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for spatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application. 
 # 
 # ```{tableofcontents}
 # ```
@@ -105,102 +105,3 @@
 # - https://executablebooks.github.io/quantecon-mini-example/docs/python_by_example.html
 # - https://jupyterbook.org/intro.html
 # - https://www.sphinx-doc.org/en/master/ -->
-# 
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 0 - Get Started
-# 
-# b_intro_py
-# b_about_py
-# b_getting_started
-# b_conda_started
-# b_python_by_example
-# b_learn_more
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 1 - Data Types
-# 
-# c_features
-# c_store_features
-# c_vectors
-# c_new_vectors
-# c_rasters
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 2 - Nature of Coordinate Systems
-# 
-# d_crs_what_is_it
-# d_understand_crs_codes
-# d_affine
-# d_vector_crs_intro
-# d_raster_crs_intro
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 3 - Vector Operations
-# 
-# e_attributes
-# e_buffer_neighbors
-# e_vector_merge_dissolve
-# e_extraction
-# e_vector_overlay
-# e_spatial_joins
-# e_summarize_vector
-# e_interpolation
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 4 - Raster Operations
-# 
-# e_new_rasters
-# e_raster_reproject
-# e_raster_resample
-# e_raster_math
-# e_raster_replace_values
-# e_raster_rasterize
-# e_raster_window_operations
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 5 - Accessing Data
-# 
-# d_access_osm
-# d_access_census
-# ```
-# 
-# 
-# ```{toctree}
-# :hidden:
-# :titlesonly:
-# :caption: 6 - Remote Sensing
-# 
-# f_rs_io
-# f_rs_edit
-# f_rs_plot
-# f_rs_crs
-# f_rs_mosaic
-# f_rs_config
-# f_rs_band_math
-# f_rs_extraction
-# f_rs_ml_predict
-# ```

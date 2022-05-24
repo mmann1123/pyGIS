@@ -9,14 +9,14 @@
 # * Get nearest neighbors
 # ```
 # ```{admonition} Review
-# * [Geospatial Vector Data](c_vectors.md)
+# * [Spatial Vector Data](c_vectors.md)
 # * [Attributes & Indexing for Vector Data](e_attributes.md)
-# * [Creating Geospatial Vector Data](c_new_vectors.md)
+# * [Creating Spatial Vector Data](c_new_vectors.md)
 # ```
 # ----------------
 # 
 # # Proximity Analysis - Buffers, Nearest Neighbor 
-# In this chapter we are going to dig into some of the most common geospatial operations. After this section you will be able to answer simple questions like "where is the nearest wendy's?", "Are there any homes within 50 yards of a highway?".
+# In this chapter we are going to dig into some of the most common spatial operations. After this section you will be able to answer simple questions like "where is the nearest wendy's?", "Are there any homes within 50 yards of a highway?".
 #  
 # 
 # ## Buffer Analysis

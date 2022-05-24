@@ -9,7 +9,7 @@
 # * Replace and interpolate values in a raster with rasterio
 # ```
 # ```{admonition} Review
-# * [Geospatial Raster Data](c_rasters.md)
+# * [Spatial Raster Data](c_rasters.md)
 # ```
 # 
 # ----------------

@@ -10,7 +10,7 @@
 # * Conduct window operations with GeoWombat
 # ```
 # ```{admonition} Review
-# * [Geospatial Raster Data](c_rasters.md)
+# * [Spatial Raster Data](c_rasters.md)
 # ```
 # 
 # ----------------

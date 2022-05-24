@@ -33,7 +33,7 @@ html_meta:
 --------------
 
 
-# Opening Remote Sensed Images
+# Reading/Writing Remote Sensed Images
 
 GeoWombat's file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using the function `geowombat.open`. GeoWombat uses `xarray.open_rasterio` to load data into an `xarray.DataArray`. In GeoWombat, the data are always chunked, meaning the data are always loaded as Dask arrays. As with `xarray.open_rasterio`, the opened DataArrays always have at least 1 band.
 

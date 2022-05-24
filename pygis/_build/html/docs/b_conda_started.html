@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand." lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment installer un environnement python fonctionnel pour les données spatiales et la télédétection. Ici, nous utilisons Docker pour rendre le processus reproductible et au moins quelque peu facile à comprendre." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a instalar un entorno Python que funcione para datos espaciales y detección remota. Aquí utilizamos Docker para hacer que el proceso sea replicable y al menos algo fácil de entender." lang="es" name="description" xml:lang="es" />
-<meta content="python environment, Docker, geospatial, raster, shapefile, remote sensing" name="keywords" />
+<meta content="python environment, Docker, spatial, raster, shapefile, remote sensing" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Setting up Python for Geospatial on Mac, Windows, and Linux &#8212; Python Open Source Geospatial Programming &amp; Remote Sensing</title>
+    <title>Setting up Python for Spatial on Mac, Windows, and Linux &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -24,14 +25,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.c441f2ba0852f4cabcb80105e3a46ae6.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -39,46 +36,52 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://pygis.io/docs/b_conda_started.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="An Introductory Example" href="b_python_by_example.html" />
     <link rel="prev" title="Setting up a Normal Python Environment" href="b_getting_started.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://pygis.io/docs/b_conda_started.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="Setting up Python for Geospatial on Mac, Windows, and Linux" />
-<meta property="og:description" content="Setting up Python for Geospatial on Mac, Windows, and Linux  Geospatial analysis requires a pretty broad set of python modules and with it, comes a lot of depen" />
-<meta property="og:image"       content="https://pygis.io/_static/pygis.png" />
-
-<meta name="twitter:card" content="summary" />
-
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-192844775-1', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
 
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -87,32 +90,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/pygis.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Python Open Source Geospatial Programming & Remote Sensing</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/pygis.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python Open Source Spatial Programming & Remote Sensing</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Geospatial Programming &amp; Remote Sensing
+   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  0 - Get Started
+  0 - Get Started in Spatial Python
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="b_intro_py.html">
    Welcome - Let’s get started
@@ -130,7 +137,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Setting up Python for Geospatial on Mac, Windows, and Linux
+   Setting up Python for Spatial on Mac, Windows, and Linux
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,15 +151,15 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  1 - Data Types
+  1 - Spatial Data Types in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="c_features.html">
-   Geospatial Data
+   Spatial Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -162,12 +169,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_vectors.html">
-   Geospatial Vector Data
+   Spatial Vector Data
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Geospatial Vector Data
+   Creating Spatial Vector Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -176,12 +183,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  2 - Nature of Coordinate Systems
+  2 - Nature of Coordinate Systems in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="d_crs_what_is_it.html">
    What is a CRS?
@@ -208,12 +215,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  3 - Vector Operations
+  3 - Vector Operations in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="e_attributes.html">
    Attributes &amp; Indexing for Vector Data
@@ -255,12 +262,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  4 - Raster Operations
+  4 - Raster Operations in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="e_new_rasters.html">
    Reading &amp; Writing Rasters with Rasterio
@@ -297,12 +304,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  5 - Accessing Data
+  5 - Accessing OSM &amp; Census Data in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="d_access_osm.html">
    Accessing OSM Data in Python
@@ -314,15 +321,20 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  6 - Remote Sensing
+  6 - Remote Sensing in Python
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="f_rs_io.html">
-   Opening Remote Sensed Images
+   Reading/Writing Remote Sensed Images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="f_rs_config.html">
+   Configuration manager
   </a>
  </li>
  <li class="toctree-l1">
@@ -346,11 +358,6 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_config.html">
-   Configuration manager
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="f_rs_band_math.html">
    Band Math &amp; Vegetation Indices
   </a>
@@ -367,6 +374,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -413,7 +421,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -437,12 +445,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -466,17 +474,16 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i>
-            Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#docker-for-geospatial-python-gdal-included">
-   Docker for Geospatial Python - GDAL Included
+  <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
+   Docker for Spatial Python - GDAL Included
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -509,22 +516,80 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#access-your-geospatial-python-image">
-     Access your geospatial python image
+    <a class="reference internal nav-link" href="#access-your-spatial-python-image">
+     Access your spatial python image
     </a>
    </li>
   </ul>
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Setting up Python for Spatial on Mac, Windows, and Linux</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
+   Docker for Spatial Python - GDAL Included
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-docker">
+     Install Docker
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-easy-way">
+   The Easy Way
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pulling-a-docker-image-ready-for-gis">
+     Pulling a Docker Image Ready for GIS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-more-detailed-way">
+   The More Detailed Way
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pull-and-run-a-linux-image-with-gdal">
+     Pull and Run a Linux Image with GDAL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#access-your-spatial-python-image">
+     Access your spatial python image
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <hr class="docutils" id="conda-started" />
@@ -532,7 +597,7 @@
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
 <li><p>Learn the basics of Docker</p></li>
-<li><p>Pull, run, and update a container set up for geospatial modeling</p></li>
+<li><p>Pull, run, and update a container set up for spatial modeling</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -542,33 +607,33 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="setting-up-python-for-geospatial-on-mac-windows-and-linux">
-<h1>Setting up Python for Geospatial on Mac, Windows, and Linux<a class="headerlink" href="#setting-up-python-for-geospatial-on-mac-windows-and-linux" title="Permalink to this headline">¶</a></h1>
-<p>Geospatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn’t do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast.</p>
-<div class="section" id="docker-for-geospatial-python-gdal-included">
-<h2>Docker for Geospatial Python - GDAL Included<a class="headerlink" href="#docker-for-geospatial-python-gdal-included" title="Permalink to this headline">¶</a></h2>
+<div class="tex2jax_ignore mathjax_ignore section" id="setting-up-python-for-spatial-on-mac-windows-and-linux">
+<h1>Setting up Python for Spatial on Mac, Windows, and Linux<a class="headerlink" href="#setting-up-python-for-spatial-on-mac-windows-and-linux" title="Permalink to this headline">¶</a></h1>
+<p>Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn’t do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast.</p>
+<div class="section" id="docker-for-spatial-python-gdal-included">
+<h2>Docker for Spatial Python - GDAL Included<a class="headerlink" href="#docker-for-spatial-python-gdal-included" title="Permalink to this headline">¶</a></h2>
 <p>Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I’m looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined">a simple intro to Docker concepts</a></p>
 <p>To get this done we will be accessing <a class="reference external" href="https://hub.docker.com/">DockerHub</a>, which allows coders like us to store their Docker images. We will be downloading an image of the Linux operating system (Ubuntu, which is “debian-based”), that already has GDAL built for us. Once we “pull” a copy of the image of this operating system we will open it as “a container”. This “container” is a running instance of the “image” that we can run our applications on, and customize for our use case.  Read some more on <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-containers-images-registries">“images” vs “containers” etc here</a>.</p>
 <div class="section" id="install-docker">
 <h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h3>
 <p>Follow the instructions for installing Docker on your system, take your time, and make sure you understand what you are doing before you do it!</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="15179e0f-e32c-4a3f-baa6-e06699b014f2" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
-</input><label class="tabbed-label" for="15179e0f-e32c-4a3f-baa6-e06699b014f2">
+<input checked="checked" id="9b234f9e-255a-41db-b575-e720f90006c3" name="17601784-af96-4a8b-afe3-1478a1415067" type="radio">
+</input><label class="tabbed-label" for="9b234f9e-255a-41db-b575-e720f90006c3">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">mac</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
-<input id="a1df54cc-1643-4b91-aad6-b275d723e242" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
-</input><label class="tabbed-label" for="a1df54cc-1643-4b91-aad6-b275d723e242">
+<input id="0dd596f8-6d7a-47d0-b8ae-3863e09bae29" name="17601784-af96-4a8b-afe3-1478a1415067" type="radio">
+</input><label class="tabbed-label" for="0dd596f8-6d7a-47d0-b8ae-3863e09bae29">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">desktop</span><span class="o">/</span><span class="n">windows</span><span class="o">/</span><span class="n">install</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
-<input id="30dc019d-263e-4909-9ddb-1562e98069f7" name="3d90eb73-f408-4aa9-bf91-af6b79589269" type="radio">
-</input><label class="tabbed-label" for="30dc019d-263e-4909-9ddb-1562e98069f7">
+<input id="af30ed11-ad43-4a53-9894-7e622b1f1cf2" name="17601784-af96-4a8b-afe3-1478a1415067" type="radio">
+</input><label class="tabbed-label" for="af30ed11-ad43-4a53-9894-7e622b1f1cf2">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># click on your platform</span>
 <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">engine</span><span class="o">/</span><span class="n">install</span><span class="o">/</span><span class="c1">#server</span>
@@ -588,8 +653,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now we are going to get an Ubuntu image running that already has everything installed and ready to use. We are going to pull the lastest build of our image from <a class="reference external" href="https://hub.docker.com/r/mmann1123/gw_pygis">my docker hub page</a>.</p>
 <p>First open a <strong>terminal</strong> or <strong>powershell</strong> in windows… yes powershell not terminal, type the following:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b87b833d-05ee-4bc9-a1ce-0fce6ababa8b" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
-</input><label class="tabbed-label" for="b87b833d-05ee-4bc9-a1ce-0fce6ababa8b">
+<input checked="checked" id="456349f0-9d23-49dc-8798-212716d8f88c" name="6b4bdb0e-dc66-44e8-a5e7-c05d401b8a90" type="radio">
+</input><label class="tabbed-label" for="456349f0-9d23-49dc-8798-212716d8f88c">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -601,8 +666,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b0abefc9-b65a-4372-aa5c-52cbc6384649" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
-</input><label class="tabbed-label" for="b0abefc9-b65a-4372-aa5c-52cbc6384649">
+<input id="2e653572-6331-4013-b569-3f1e3fd42666" name="6b4bdb0e-dc66-44e8-a5e7-c05d401b8a90" type="radio">
+</input><label class="tabbed-label" for="2e653572-6331-4013-b569-3f1e3fd42666">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># IN POWERSHELL TERMINAL </span>
 
@@ -616,8 +681,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e5f9f7ef-5c24-4321-aab1-14a9e4b88e70" name="61e04243-fd02-4fe8-b888-c3b6a457cb62" type="radio">
-</input><label class="tabbed-label" for="e5f9f7ef-5c24-4321-aab1-14a9e4b88e70">
+<input id="90b94874-7bd4-4d3c-836b-9f6616dbae0c" name="6b4bdb0e-dc66-44e8-a5e7-c05d401b8a90" type="radio">
+</input><label class="tabbed-label" for="90b94874-7bd4-4d3c-836b-9f6616dbae0c">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -637,8 +702,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To do this we are going to attach a local volume with <code class="docutils literal notranslate"><span class="pre">-v</span></code>, open a port with <code class="docutils literal notranslate"><span class="pre">-p</span></code> and run mmann1123/gw_pygis, once inside of the runnning linux computer we will launch jupyter notebook and set an ip address to access it using <code class="docutils literal notranslate"><span class="pre">-ip</span></code>, and we will allow administrative privileges using <code class="docutils literal notranslate"><span class="pre">--allow-root</span></code>.  After executing the code we simply need to open up the URL displayed in response.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5bd8263e-4a58-45ff-9b4c-cc8271173ab6" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
-</input><label class="tabbed-label" for="5bd8263e-4a58-45ff-9b4c-cc8271173ab6">
+<input checked="checked" id="aaefc3a7-1761-4b2a-b451-bbb7e6afc0a3" name="c28820cd-f147-4976-97d9-b6b1e9390f91" type="radio">
+</input><label class="tabbed-label" for="aaefc3a7-1761-4b2a-b451-bbb7e6afc0a3">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -651,8 +716,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e4af28a8-d52a-418c-acbd-71450949fcf6" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
-</input><label class="tabbed-label" for="e4af28a8-d52a-418c-acbd-71450949fcf6">
+<input id="c7688a2a-5600-44e7-b0b7-b63b88be96fb" name="c28820cd-f147-4976-97d9-b6b1e9390f91" type="radio">
+</input><label class="tabbed-label" for="c7688a2a-5600-44e7-b0b7-b63b88be96fb">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">User</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -665,8 +730,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="25319565-1367-4668-9668-d4993fa9af21" name="c9ca407e-7560-4c54-acd8-9e27a492d3dc" type="radio">
-</input><label class="tabbed-label" for="25319565-1367-4668-9668-d4993fa9af21">
+<input id="84e822f7-c9bd-4f4f-bf63-63f0737796f7" name="c28820cd-f147-4976-97d9-b6b1e9390f91" type="radio">
+</input><label class="tabbed-label" for="84e822f7-c9bd-4f4f-bf63-63f0737796f7">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iff browser is  present</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">mmann1123</span><span class="o">/</span><span class="n">gw_pygis</span>
@@ -688,8 +753,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To make this a little easier you can create an executable script on your desktop to run it when you want.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="18013f94-1df8-4634-8236-91465ac08f05" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
-</input><label class="tabbed-label" for="18013f94-1df8-4634-8236-91465ac08f05">
+<input checked="checked" id="0e0e05b8-0923-479f-a612-af9e5786acc9" name="e1c1033b-e716-4939-b649-8ee59913d7f9" type="radio">
+</input><label class="tabbed-label" for="0e0e05b8-0923-479f-a612-af9e5786acc9">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -706,15 +771,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a32f0c04-3789-4ca6-b586-8b2c8d65c9c6" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
-</input><label class="tabbed-label" for="a32f0c04-3789-4ca6-b586-8b2c8d65c9c6">
+<input id="13fc38ac-24a7-4aff-95a5-66e711ccf97e" name="e1c1033b-e716-4939-b649-8ee59913d7f9" type="radio">
+</input><label class="tabbed-label" for="13fc38ac-24a7-4aff-95a5-66e711ccf97e">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="4069d727-9dba-4821-87b1-ac4f241e59a5" name="5be04b61-3ace-4e6d-ac58-9bf1666651ef" type="radio">
-</input><label class="tabbed-label" for="4069d727-9dba-4821-87b1-ac4f241e59a5">
+<input id="de3a5025-d559-4a7f-a1bf-ac815cc9e491" name="e1c1033b-e716-4939-b649-8ee59913d7f9" type="radio">
+</input><label class="tabbed-label" for="de3a5025-d559-4a7f-a1bf-ac815cc9e491">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -735,8 +800,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.</p>
 <p>To execute our run_geowombat.sh script we need to navigate to the Desktop in your local terminal, then execute the file:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="b93bd3ab-96f3-47dc-867b-629e8f9930fd" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
-</input><label class="tabbed-label" for="b93bd3ab-96f3-47dc-867b-629e8f9930fd">
+<input checked="checked" id="cd6deb69-f1ef-41bc-8bf7-60b1f9ff0a1b" name="32992e93-0fda-47f2-9b29-1d666fe49429" type="radio">
+</input><label class="tabbed-label" for="cd6deb69-f1ef-41bc-8bf7-60b1f9ff0a1b">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -746,15 +811,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="fbe8b2f2-599f-4d34-9752-d562b3638de0" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
-</input><label class="tabbed-label" for="fbe8b2f2-599f-4d34-9752-d562b3638de0">
+<input id="cc4b8b70-edca-4bd4-8937-602852357a6f" name="32992e93-0fda-47f2-9b29-1d666fe49429" type="radio">
+</input><label class="tabbed-label" for="cc4b8b70-edca-4bd4-8937-602852357a6f">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="32134b65-2c53-4397-8ca7-0d2d0064cd1e" name="cf949ffc-9051-4c5d-9a38-3906faf4b870" type="radio">
-</input><label class="tabbed-label" for="32134b65-2c53-4397-8ca7-0d2d0064cd1e">
+<input id="e6d08f87-21a7-4312-a83d-0822649111ed" name="32992e93-0fda-47f2-9b29-1d666fe49429" type="radio">
+</input><label class="tabbed-label" for="e6d08f87-21a7-4312-a83d-0822649111ed">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -777,8 +842,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now we are going to get an Ubuntu image running that already has GDAL installed. We are going to pull the lastest build of our image from <a class="reference external" href="https://github.com/OSGeo/gdal/tree/master/gdal/docker">OSGEO’s docker hub page</a>.</p>
 <p>First open a terminal or powershell, type the following:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="11325dc8-809d-4b43-acf9-b26efd3f9d03" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
-</input><label class="tabbed-label" for="11325dc8-809d-4b43-acf9-b26efd3f9d03">
+<input checked="checked" id="56a840fe-dff3-490d-b214-ff2e3b642623" name="056e361a-54cb-4011-90f4-51b9b1d3d3f8" type="radio">
+</input><label class="tabbed-label" for="56a840fe-dff3-490d-b214-ff2e3b642623">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -793,8 +858,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="bfb0da96-2faf-49de-808c-33f2b30c2348" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
-</input><label class="tabbed-label" for="bfb0da96-2faf-49de-808c-33f2b30c2348">
+<input id="0d2bcdd2-4835-437e-8509-e7e02c1da2d4" name="056e361a-54cb-4011-90f4-51b9b1d3d3f8" type="radio">
+</input><label class="tabbed-label" for="0d2bcdd2-4835-437e-8509-e7e02c1da2d4">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -809,8 +874,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b10159c4-3c97-49d0-b3d8-1f5e8b554ce1" name="7920cb06-71f5-43b0-a33e-fe92921bb32b" type="radio">
-</input><label class="tabbed-label" for="b10159c4-3c97-49d0-b3d8-1f5e8b554ce1">
+<input id="7e124662-ccf1-46fa-9453-1deb56a81e69" name="056e361a-54cb-4011-90f4-51b9b1d3d3f8" type="radio">
+</input><label class="tabbed-label" for="7e124662-ccf1-46fa-9453-1deb56a81e69">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the image</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">osgeo</span><span class="o">/</span><span class="n">gdal</span><span class="p">:</span><span class="n">ubuntu</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">latest</span>
@@ -832,8 +897,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Your command prompt in the terminal window should now say something funny like <code class="docutils literal notranslate"><span class="pre">root&#64;b0c5ab799195:/#</span> </code>. You are now INSIDE your running docker container, which is running Ubuntu linux.</p>
 <p>Just to demonstrate this is really linux, let’s ask the system what OS is running:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="58f62b26-f310-4738-b597-d9758157445d" name="9a906759-7a49-4892-90cf-f1ee9427d204" type="radio">
-</input><label class="tabbed-label" for="58f62b26-f310-4738-b597-d9758157445d">
+<input checked="checked" id="6802e1c1-b173-4fa5-9f81-873bf75a54bd" name="a8a6e45f-e28d-4add-816b-965c168d622c" type="radio">
+</input><label class="tabbed-label" for="6802e1c1-b173-4fa5-9f81-873bf75a54bd">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uname</span>
 </pre></div>
@@ -843,8 +908,8 @@ Linux Container</label><div class="tabbed-content docutils">
 </div>
 <p>We will need to update/upgrade the OS, install pip and a few other applications we need, pip install geowombat, and a few more python dependancies for it. We will then exit the container and save a named copy of it.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="3a9548f8-7b3a-4bd8-aaa6-fcbc2738b8d2" name="79ecad3d-e38e-4e7a-90ac-13b563aa8f8f" type="radio">
-</input><label class="tabbed-label" for="3a9548f8-7b3a-4bd8-aaa6-fcbc2738b8d2">
+<input checked="checked" id="5372fa45-7f2a-4d83-a2cb-beeba76658d3" name="f6fe4bc1-c997-4b2e-bcb4-5d3f8da780e6" type="radio">
+</input><label class="tabbed-label" for="5372fa45-7f2a-4d83-a2cb-beeba76658d3">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update Ubuntu</span>
 <span class="n">apt</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span> 
@@ -870,8 +935,8 @@ Linux Container</label><div class="tabbed-content docutils">
 </div>
 <p>Now we need to exit the container and go back to your local computer command line.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="393b5c47-0a8f-4492-a574-e3a4c3dd601f" name="ae8dd918-09f1-4e10-884c-b3393f5058d7" type="radio">
-</input><label class="tabbed-label" for="393b5c47-0a8f-4492-a574-e3a4c3dd601f">
+<input checked="checked" id="6c677f55-56ee-4dcc-9a2d-66b410e41af3" name="d124e167-8cec-4d3e-8e90-efaafa2027b1" type="radio">
+</input><label class="tabbed-label" for="6c677f55-56ee-4dcc-9a2d-66b410e41af3">
 Linux Container</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exit</span>
 </pre></div>
@@ -881,8 +946,8 @@ Linux Container</label><div class="tabbed-content docutils">
 <p>Note that we are now in your boring old terminal/shell, we exited Ubuntu.</p>
 <p>We now need to create a named image that includes geowombat etc. Without doing this, the next time we start the osgeo/gdal image nothing will have been saved.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="a33efa5c-d71e-4ace-a9f4-8235daf436d8" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
-</input><label class="tabbed-label" for="a33efa5c-d71e-4ace-a9f4-8235daf436d8">
+<input checked="checked" id="5527242c-d34b-4654-8492-cff4151a9234" name="822736e6-0dc8-4396-9046-f9253db0e495" type="radio">
+</input><label class="tabbed-label" for="5527242c-d34b-4654-8492-cff4151a9234">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all available containers</span>
 <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
@@ -898,8 +963,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="43184359-5a67-43e4-b4c6-116fce1cfb25" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
-</input><label class="tabbed-label" for="43184359-5a67-43e4-b4c6-116fce1cfb25">
+<input id="1cb82236-fd25-4ed4-b1e4-acb37438bf4b" name="822736e6-0dc8-4396-9046-f9253db0e495" type="radio">
+</input><label class="tabbed-label" for="1cb82236-fd25-4ed4-b1e4-acb37438bf4b">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list all available containers</span>
 <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
@@ -915,8 +980,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b28bff5e-684c-43ec-85ca-e903786736c9" name="9979bf8f-ab37-4f51-acad-8d50475cd7a0" type="radio">
-</input><label class="tabbed-label" for="b28bff5e-684c-43ec-85ca-e903786736c9">
+<input id="a669b753-50f7-4bc0-9324-0bacbc10cdc6" name="822736e6-0dc8-4396-9046-f9253db0e495" type="radio">
+</input><label class="tabbed-label" for="a669b753-50f7-4bc0-9324-0bacbc10cdc6">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># list all available containers
 sudo docker ps -a
@@ -942,29 +1007,29 @@ sudo usermod -aG docker $USER
 <p>Keep in mind if you want to make changes to the ‘pygis’ image you will need to first run it via the command line, make your changes, and then ‘commit’ or save another named version (ideally with a different name)</p>
 </div>
 </div>
-<div class="section" id="access-your-geospatial-python-image">
-<h3>Access your geospatial python image<a class="headerlink" href="#access-your-geospatial-python-image" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="access-your-spatial-python-image">
+<h3>Access your spatial python image<a class="headerlink" href="#access-your-spatial-python-image" title="Permalink to this headline">¶</a></h3>
 <p>There are two ways to access this 1) through the command-line and 2) through Jupyter Notebooks.</p>
 <p>Let’s start with command line only access. Note that this is almost exactly how we ran the osgeo/gdal image, except we replaced its name with geowombat. <em>Don’t forget to replace <code class="docutils literal notranslate"><span class="pre">&lt;user_name&gt;</span></code> with your user name!</em></p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="adc101ce-c5f6-4690-b1b9-dcb103ca5836" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
-</input><label class="tabbed-label" for="adc101ce-c5f6-4690-b1b9-dcb103ca5836">
+<input checked="checked" id="b9386b85-97d2-47f6-8b32-f454b9d5b0e1" name="05d80ac1-5088-44fc-b0a1-bbf8d2721351" type="radio">
+</input><label class="tabbed-label" for="b9386b85-97d2-47f6-8b32-f454b9d5b0e1">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
 </pre></div>
 </div>
 </div>
-<input id="b61cf088-bda0-491c-82fc-9eeb98a2bcb7" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
-</input><label class="tabbed-label" for="b61cf088-bda0-491c-82fc-9eeb98a2bcb7">
+<input id="e8e75f3b-b421-490f-abeb-c1766a01cbf2" name="05d80ac1-5088-44fc-b0a1-bbf8d2721351" type="radio">
+</input><label class="tabbed-label" for="e8e75f3b-b421-490f-abeb-c1766a01cbf2">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
 </pre></div>
 </div>
 </div>
-<input id="6434b1af-2cf9-4ea6-acad-f804bbec2271" name="3889a2cc-11a1-4821-8ac1-062e0c63a15d" type="radio">
-</input><label class="tabbed-label" for="6434b1af-2cf9-4ea6-acad-f804bbec2271">
+<input id="981c7e1b-1808-4a3c-96e7-120cc92bcde0" name="05d80ac1-5088-44fc-b0a1-bbf8d2721351" type="radio">
+</input><label class="tabbed-label" for="981c7e1b-1808-4a3c-96e7-120cc92bcde0">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="n">pygis</span>
 <span class="n">python</span>
@@ -976,8 +1041,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Alternatively, we can access python through jupyter notebooks (<a class="reference external" href="https://coderefinery.github.io/jupyter/motivation/">read about jupyter notebooks here</a>). Jupyter is probably the easiest way to start your coding.</p>
 <p>To do this we are going to</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="48fbcf54-fcd6-4944-9c6d-02b59a704020" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
-</input><label class="tabbed-label" for="48fbcf54-fcd6-4944-9c6d-02b59a704020">
+<input checked="checked" id="9eddc843-1d4c-40cc-b206-00ccdd89e2ed" name="00c72095-348b-4e22-baa6-de07675a8a99" type="radio">
+</input><label class="tabbed-label" for="9eddc843-1d4c-40cc-b206-00ccdd89e2ed">
 Mac</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -990,8 +1055,8 @@ Mac</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0f38a650-af61-473f-bd74-2d82f529dea0" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
-</input><label class="tabbed-label" for="0f38a650-af61-473f-bd74-2d82f529dea0">
+<input id="94fc59fb-c093-4cd6-9491-a4c9b3cd9363" name="00c72095-348b-4e22-baa6-de07675a8a99" type="radio">
+</input><label class="tabbed-label" for="94fc59fb-c093-4cd6-9491-a4c9b3cd9363">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or if browser is  present</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">//</span><span class="n">c</span><span class="o">/</span><span class="n">User</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -1004,8 +1069,8 @@ Windows</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="782f8e40-28bc-4846-8bad-9561b74e3e7a" name="ab0f4ab1-e8c2-4d89-aca5-762a1114752a" type="radio">
-</input><label class="tabbed-label" for="782f8e40-28bc-4846-8bad-9561b74e3e7a">
+<input id="654bd68c-6a09-4138-962c-0e3a71846226" name="00c72095-348b-4e22-baa6-de07675a8a99" type="radio">
+</input><label class="tabbed-label" for="654bd68c-6a09-4138-962c-0e3a71846226">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iff browser is  present</span>
 <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/&lt;</span><span class="n">user_name</span><span class="o">&gt;/</span><span class="n">path_to_folder_you_want_access_to</span><span class="p">:</span><span class="o">/</span><span class="n">home</span>  <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="n">pygis</span>
@@ -1027,8 +1092,8 @@ Linux</label><div class="tabbed-content docutils">
 </div>
 <p>To make this a little easier you can create an executable script on your desktop to run it when you want.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7f263c92-d067-4647-b6be-c8c1f648512a" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
-</input><label class="tabbed-label" for="7f263c92-d067-4647-b6be-c8c1f648512a">
+<input checked="checked" id="ae76bfc1-96ac-43c4-84a5-cd9187ed88f0" name="ef83a4b0-0e8a-4269-a5e5-1b6c654aaafd" type="radio">
+</input><label class="tabbed-label" for="ae76bfc1-96ac-43c4-84a5-cd9187ed88f0">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1045,15 +1110,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="705929b8-061b-4549-943c-566a1efaa09b" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
-</input><label class="tabbed-label" for="705929b8-061b-4549-943c-566a1efaa09b">
+<input id="faed8d69-1e79-42ff-a4f3-ff26469caf70" name="ef83a4b0-0e8a-4269-a5e5-1b6c654aaafd" type="radio">
+</input><label class="tabbed-label" for="faed8d69-1e79-42ff-a4f3-ff26469caf70">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="7d226d22-e7e8-4511-b90a-b5ebbbb603eb" name="7ac4143c-62ca-431f-abe6-20d06f327c4c" type="radio">
-</input><label class="tabbed-label" for="7d226d22-e7e8-4511-b90a-b5ebbbb603eb">
+<input id="0f23c467-d171-4f5a-8cd9-df4867b1d545" name="ef83a4b0-0e8a-4269-a5e5-1b6c654aaafd" type="radio">
+</input><label class="tabbed-label" for="0f23c467-d171-4f5a-8cd9-df4867b1d545">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1074,8 +1139,8 @@ Linux</label><div class="tabbed-content docutils">
 <p>Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.</p>
 <p>To execute our run_geowombat.sh script we need to navigate to the Desktop, then execute the file:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="9cdf4981-050d-4e42-9273-7173a561ec25" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
-</input><label class="tabbed-label" for="9cdf4981-050d-4e42-9273-7173a561ec25">
+<input checked="checked" id="54ee12a8-0efb-4299-aa33-0487507b2da4" name="fd25fdd7-aa0d-4f64-8b2d-b92f0d09e021" type="radio">
+</input><label class="tabbed-label" for="54ee12a8-0efb-4299-aa33-0487507b2da4">
 Mac Bash</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1085,15 +1150,15 @@ Mac Bash</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="2ca4b17a-67fa-490f-85ee-9ec42f80fc51" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
-</input><label class="tabbed-label" for="2ca4b17a-67fa-490f-85ee-9ec42f80fc51">
+<input id="95116901-7d70-4b92-a388-309cb69ea07a" name="fd25fdd7-aa0d-4f64-8b2d-b92f0d09e021" type="radio">
+</input><label class="tabbed-label" for="95116901-7d70-4b92-a388-309cb69ea07a">
 Windows</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure yet!</span>
 </pre></div>
 </div>
 </div>
-<input id="6406fc24-40df-4a5b-9b62-620db186ebe2" name="0364c8e2-6b4b-4333-b4d5-8f53e95b2424" type="radio">
-</input><label class="tabbed-label" for="6406fc24-40df-4a5b-9b62-620db186ebe2">
+<input id="0c3f3fb8-5ef8-4da9-972b-0f22f99230b1" name="fd25fdd7-aa0d-4f64-8b2d-b92f0d09e021" type="radio">
+</input><label class="tabbed-label" for="0c3f3fb8-5ef8-4da9-972b-0f22f99230b1">
 Linux</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># move to your desktop</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">Desktop</span><span class="o">/</span>
@@ -1131,24 +1196,34 @@ Linux</label><div class="tabbed-content docutils">
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="b_getting_started.html" title="previous page">Setting up a Normal Python Environment</a>
-    <a class='right-next' id="next-link" href="b_python_by_example.html" title="next page">An Introductory Example</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="b_getting_started.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Setting up a Normal Python Environment</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="b_python_by_example.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">An Introductory Example</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-        
-          <div class="extra_footer">
-            <div>
+    <footer class="footer">
+  <p>
+    
+      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+    
+      <div class="extra_footer">
+        <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1158,30 +1233,16 @@ Linux</label><div class="tabbed-content docutils">
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-          </div>
-      </p>
-    </div>
-  </footer>
+      </div>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
-    <!-- Google Analytics -->
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-192844775-1', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
-    
   </body>
 </html>
