@@ -41,6 +41,7 @@ Follow the instructions for installing Docker on your system, take your time, an
 
 
 ````{tab-set} 
+
 ```{tab-item} Mac
 ```python
 https://docs.docker.com/desktop/mac/install/
@@ -59,6 +60,7 @@ https://docs.docker.com/desktop/windows/install/
 https://docs.docker.com/engine/install/#server
 ```
 ```
+
 ````
 
 There are two ways we can do this, the [easy way](theeasyway), or the much more [detailed way](thedetailedway). Choose your poison. 
@@ -77,6 +79,7 @@ Now we are going to get an Ubuntu image running that already has everything inst
 First open a **terminal** or **powershell** in windows... yes powershell not terminal, type the following:
 
 ````{tab-set} 
+
 ```{tab-item} Mac
 ```
 # download the image
@@ -114,6 +117,7 @@ sudo docker images -a
 # you should see mmann1123/gw_pygis
 ```
 ```
+
 ````
 
 
@@ -129,6 +133,7 @@ To do this we are going to attach a local volume with `-v`, open a port with `-p
  
 
 ````{tab-set} 
+
 ```{tab-item} Mac
 ```
 # Or if browser is  present
@@ -167,6 +172,7 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
 ```
+
 ````
 
 Every time you want to run pygis you are going to `run` the docker container called `mmann1123/gw_pygis`. 
@@ -180,6 +186,7 @@ You can save your data in your linked volume which in these examples can be foun
 To make this a little easier you can create an executable script on your desktop to run it when you want. 
 
 ````{tab-set} 
+
 ```{tab-item} Mac Bash
 ```
 # move to your desktop
@@ -227,6 +234,7 @@ Now that we have an executable file we need to execute this, on linux at least, 
 To execute our run_geowombat.sh script we need to navigate to the Desktop in your local terminal, then execute the file:
 
 ````{tab-set} 
+
 ```{tab-item} Mac Bash
 ```
 # move to your desktop
@@ -270,6 +278,7 @@ Now we are going to get an Ubuntu image running that already has GDAL installed.
 First open a terminal or powershell, type the following:
 
 ````{tab-set} 
+
 ```{tab-item} Mac
 ```
 # download the image
@@ -323,16 +332,15 @@ You can mount a volume from your normal operating system to your linux container
 Your command prompt in the terminal window should now say something funny like `root@b0c5ab799195:/# `. You are now INSIDE your running docker container, which is running Ubuntu linux. 
 
 Just to demonstrate this is really linux, let's ask the system what OS is running:
-````{tab-set} Linux Container
+
 ```
 uname
 ```
 Should return `Linux`
-````
+
+
 We will need to update/upgrade the OS, install pip and a few other applications we need, pip install geowombat, and a few more python dependancies for it. We will then exit the container and save a named copy of it. 
 
-````{tab-set} 
-```{tab-item} Linux Container
 ```
 # update Ubuntu
 apt update -y 
@@ -351,20 +359,20 @@ pip install cython numpy retry requests opencv-python notebook
 python -c "import geowombat as gw;print(gw.__version__)"
 
 # Install any other modules you want via pip
+```
+ 
 
-```
-```
 Now we need to exit the container and go back to your local computer command line. 
 
-```{tab-item}  Linux Container
 ```
 exit
-```
 ```
 
 Note that we are now in your boring old terminal/shell, we exited Ubuntu. 
 
 We now need to create a named image that includes geowombat etc. Without doing this, the next time we start the osgeo/gdal image nothing will have been saved. 
+
+````{tab-set} 
 
 ```{tab-item} Mac 
 ```
@@ -430,23 +438,29 @@ There are two ways to access this 1) through the command-line and 2) through Jup
 
 Let's start with command line only access. Note that this is almost exactly how we ran the osgeo/gdal image, except we replaced its name with geowombat. *Don't forget to replace `<user_name>` with your user name!*
 
-````{tab-set} Mac
+````{tab-set}
+
+```{tab-item} Mac
 ```
 docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 python
 ```
-````
-````{tab-set} Windows
+```
+
+```{tab-item}  Windows
 ```
 docker run -v //c/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 python
 ```
-````
-````{tab-set} Linux
+```
+
+```{tab-item}  Linux
 ```
 sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
 python
 ```
+```
+
 ````
 Now you are at the python command prompt, start coding!
 
@@ -455,7 +469,9 @@ Alternatively, we can access python through jupyter notebooks ([read about jupyt
 
 To do this we are going to 
 
-````{tab-set} Mac
+````{tab-set} 
+
+```{tab-item} Mac
 ```
 # Or if browser is  present
 docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
@@ -466,8 +482,9 @@ docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
-````
-````{tab-set} Windows
+```
+
+```{tab-item} Windows
 ```
 # Or if browser is  present
 docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
@@ -478,9 +495,9 @@ docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it 
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
-````
+```
 
-````{tab-set} Linux
+```{tab-item} Linux
 ```
 # Iff browser is  present
 sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
@@ -491,7 +508,10 @@ sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -i
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
+```
+
 ````
+
 Every time you want to run pygis you are going to `run` the docker container called `pygis`. 
 
 ```{warning}
@@ -502,7 +522,9 @@ You can save your data in your linked volume which in these examples can be foun
 
 To make this a little easier you can create an executable script on your desktop to run it when you want. 
 
-````{tab-set} Mac Bash
+````{tab-set} 
+
+```{tab-item} Mac Bash
 ```
 # move to your desktop
 cd ~/Desktop/
@@ -517,14 +539,15 @@ jupyter notebook --ip 0.0.0.0  --allow-root
 # allow it to be executable
 chmod 755 run_pygis.sh  
 ```
-````
-````{tab-set} Windows
+```
+
+```{tab-item} Windows
 ```
 # Not sure yet!
 ```
-````
+```
 
-````{tab-set} Linux
+```{tab-item} Linux
 ```
 # move to your desktop
 cd ~/Desktop/
@@ -539,13 +562,17 @@ jupyter notebook --ip 0.0.0.0  --allow-root
 # allow it to be executable
 chmod +x run_pygis.sh  
 ```
+```
+
 ````
 
 Now that we have an executable file we need to execute this, on linux at least, the only one I can test on, we need to execute it from the command line. But its pretty easy.
 
 To execute our run_geowombat.sh script we need to navigate to the Desktop, then execute the file:
 
-````{tab-set} Mac Bash
+````{tab-set} 
+
+```{tab-item} Mac Bash
 ```
 # move to your desktop
 cd ~/Desktop/
@@ -553,14 +580,15 @@ cd ~/Desktop/
 # execute it
 ./run_pygis.sh
 ```
-````
-````{tab-set} Windows
+```
+
+```{tab-item}  Windows
 ```
 # Not sure yet!
 ```
-````
+```
 
-````{tab-set} Linux
+```{tab-item}  Linux
 ```
 # move to your desktop
 cd ~/Desktop/
@@ -568,6 +596,8 @@ cd ~/Desktop/
 # execute it
 ./run_pygis.sh
 ```
+```
+
 ````
 
 When you're done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type `exit` in the terminal window to exit your geowombat container.
