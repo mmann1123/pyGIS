@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to change, subset, and plot vector data (shapefile) attribute data. This includes an example of plotting latitude longitude data as well as subsetting (indexing) by location."
   "description lang=fr": "Apprenez à modifier, sous-ensemble et tracer des données attributaires de données vectorielles (fichier de formes). Cela inclut un exemple de traçage des données de longitude de latitude ainsi que le sous-ensemble (indexation) par emplacement."
   "description lang=es": "Aprenda a cambiar, crear subconjuntos y trazar datos de atributos de datos vectoriales (shapefile). Esto incluye un ejemplo de trazado de datos de latitud y longitud, así como subconjuntos (indexación) por ubicación."
-  "keywords": "geospatial, attribute data, subset,  shapefile"
+  "keywords": "spatial, attribute data, subset,  shapefile"
   "property=og:locale": "en_US"
 ---
 

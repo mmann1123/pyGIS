@@ -8,10 +8,10 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": "Learn the basics of coordinate reference systems (CRS) or projections for geospatial raster data. We also cover how to transform CRS using rasterio and geowombat."
+  "description lang=en": "Learn the basics of coordinate reference systems (CRS) or projections for spatial raster data. We also cover how to transform CRS using rasterio and geowombat."
   "description lang=fr": "Apprenez les bases des systèmes de référence de coordonnées (CRS) ou des projections pour les données raster géospatiales. Nous expliquons également comment transformer CRS en utilisant rasterio et geowombat."
   "description lang=es": "Aprenda los conceptos básicos de los sistemas de referencia de coordenadas (CRS) o proyecciones para datos ráster geoespaciales. También cubrimos cómo transformar CRS usando rasterio y geowombat."
-  "keywords": "geospatial, raster, affine, crs, coordinate reference system, interpolation, projection"
+  "keywords": "spatial, raster, affine, crs, coordinate reference system, interpolation, projection"
   "property=og:locale": "en_US"
 ---
 
@@ -35,7 +35,7 @@ html_meta:
 
 # Raster Coordinate Reference Systems (CRS)
 
-Raster data is very different that vector data, one of the key differences is that we don't have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new geospatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.
+Raster data is very different that vector data, one of the key differences is that we don't have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new spatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.
 
 
 ```{figure} ../_static/d_crs/warp.png

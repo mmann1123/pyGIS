@@ -8,10 +8,10 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": "Learn to the mechanics of reprojecting geospatial raster data through affine transformation. We cover topics like translate, rotate, skew and shear by learning the basic principals of matrix algebra and how it can be used to scale spatial operations."
+  "description lang=en": "Learn to the mechanics of reprojecting spatial raster data through affine transformation. We cover topics like translate, rotate, skew and shear by learning the basic principals of matrix algebra and how it can be used to scale spatial operations."
   "description lang=fr": "Apprenez aux mécanismes de reprojection de données raster géospatiales par transformation affine. Nous abordons des sujets tels que la traduction, la rotation, l'inclinaison et le cisaillement en apprenant les principes de base de l'algèbre matricielle et comment elle peut être utilisée pour mettre à l'échelle des opérations spatiales."
   "description lang=es": "Aprenda la mecánica de reproyectar datos ráster geoespaciales a través de la transformación afín. Cubrimos temas como traducir, rotar, sesgar y cortar aprendiendo los principios básicos del álgebra matricial y cómo se puede utilizar para escalar operaciones espaciales."
-  "keywords": " geospatial,raster, crs, coordinate reference system, reproject, affine, transform"
+  "keywords": " spatial,raster, crs, coordinate reference system, reproject, affine, transform"
   "property=og:locale": "en_US"
 ---
 

@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks."
   "description lang=fr": "Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques"
   "description lang=es": "Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo."
-  "keywords": "geospatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel"
+  "keywords": "spatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel"
   "property=og:locale": "en_US"
 ---
 
@@ -33,7 +33,7 @@ html_meta:
 --------------
 
 
-# Opening Remote Sensed Images
+# Reading/Writing Remote Sensed Images
 
 GeoWombat's file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using the function `geowombat.open`. GeoWombat uses `xarray.open_rasterio` to load data into an `xarray.DataArray`. In GeoWombat, the data are always chunked, meaning the data are always loaded as Dask arrays. As with `xarray.open_rasterio`, the opened DataArrays always have at least 1 band.
 
@@ -184,7 +184,7 @@ from geowombat.data import l8_224077_20200518_B4
 # Transform the data to lat/lon
 with gw.config.update(ref_crs=4326):
 
-    with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+    with gw.open(l8_224077_20200518_B4) as src:
 
         # Write the data to a VRT
         gw.to_vrt(src, 'lat_lon_file.vrt')
@@ -195,7 +195,7 @@ Write to a raster file.
 ``` python
 import geowombat as gw
 
-with gw.open(l8_224077_20200518_B4, chunks=1024) as src:
+with gw.open(l8_224077_20200518_B4) as src:
 
     # Xarray drops attributes
     attrs = src.attrs.copy()

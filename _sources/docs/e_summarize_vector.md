@@ -8,8 +8,8 @@ kernelspec:
   language: python
   name: python3
 html_meta:
-  "description lang=en": "Learn how to aggregate geospatial data to identify areas of high and low concentration."
-  "keywords": "geospatial, aggregate, summarize, binning, vector, shapefile"
+  "description lang=en": "Learn how to aggregate spatial data to identify areas of high and low concentration."
+  "keywords": "spatial, aggregate, summarize, binning, vector, shapefile"
   "property=og:locale": "en_US"
 ---
 ----------------
@@ -20,10 +20,10 @@ html_meta:
 * Display kernel density estimation results and export resulting raster
 ```
 ```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
-* [Geospatial Raster Data](c_rasters.md)
+* [Spatial Vector Data](c_vectors.md)
+* [Spatial Raster Data](c_rasters.md)
 * [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](c_new_vectors.md)
+* [Creating Spatial Vector Data](c_new_vectors.md)
 ```
 
 ----------------
@@ -423,7 +423,7 @@ We will demonstrate two ways to perform kernel density estimation. The first way
 
 ### Method 1 - Display
 
-This method uses `geoplot`, a high-level plotting library for geospatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
+This method uses `geoplot`, a high-level plotting library for spatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
 
 ```{code-cell} ipython3
 # Set projection to WGS 84 and reproject data

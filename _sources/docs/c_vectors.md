@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn to create new vector objects, assign projections or CRS, and write them to a shapefile or geojson. We also cover creating basic maps with points, lines and polygons."
   "description lang=fr": "Apprenez à créer de nouveaux objets vectoriels, à attribuer des projections ou à des CRS et à les écrire dans un fichier de formes ou un geojson. Nous couvrons également la création de cartes de base avec des points, des lignes et des polygones."
   "description lang=es": "Aprenda a crear nuevos objetos vectoriales, asigne proyecciones o CRS y escríbalos en un shapefile o geojson. También cubrimos la creación de mapas básicos con puntos, líneas y polígonos."
-  "keywords": " geospatial, shapefile, geopandas"
+  "keywords": " spatial, shapefile, geopandas"
   "property=og:locale": "en_US"
 ---
 
@@ -28,11 +28,11 @@ html_meta:
 ```
 --------------
 
-# Geospatial Vector Data 
+# Spatial Vector Data 
 
 ## Intro to GeoPandas
 
-The goal of GeoPandas is to make working with geospatial data in python easier. It combines the capabilities of pandas and shapely, providing geospatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.
+The goal of GeoPandas is to make working with spatial data in python easier. It combines the capabilities of pandas and shapely, providing spatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.
 
 ## Data Structures
 

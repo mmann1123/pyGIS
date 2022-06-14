@@ -11,7 +11,7 @@ html_meta:
   "description lang=en": "Learn how to define a projection for and reproject vector data (shapefiles, geojson) using geopandas. We use examples based on changes to proj4strings."
   "description lang=fr": "Apprenez à définir une projection et à reprojeter des données vectorielles (fichiers de formes, geojson) à l'aide de géopandas. Nous utilisons des exemples basés sur des changements apportés à proj4strings."
   "description lang=es": "Aprenda a definir una proyección y reproyectar datos vectoriales (shapefiles, geojson) usando geopandas. Usamos ejemplos basados en cambios en proj4strings."
-  "keywords": "geospatial, crs, proj4string, EPSG, coordinate reference system, projection, vector, shapefile"
+  "keywords": "spatial, crs, proj4string, EPSG, coordinate reference system, projection, vector, shapefile"
   "property=og:locale": "en_US"
 ---
 

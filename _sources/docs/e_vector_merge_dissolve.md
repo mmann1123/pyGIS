@@ -12,7 +12,7 @@ html_meta:
   "description lang=en": "Learn how to merge new data into a shapefiles attribute table, dissolve polygons by attributes, and other group-by operations in geopandas."
   "description lang=fr": "Découvrez comment fusionner de nouvelles données dans une table attributaire de fichiers de formes, dissoudre des polygones par attributs et d'autres opérations de regroupement dans les géopandas."
   "description lang=es": "Aprenda a fusionar nuevos datos en una tabla de atributos de shapefiles, disolver polígonos por atributos y otras operaciones de agrupamiento en geopandas."
-  "keywords": "python, geospatial, polygon,vector,  shapefile, dissolve by attributes, merge attributes"
+  "keywords": "python, spatial, polygon,vector,  shapefile, dissolve by attributes, merge attributes"
   "property=og:locale": "en_US"
 ---
 

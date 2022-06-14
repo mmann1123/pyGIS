@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location."
-  "keywords": "geospatial, attribute data, subset, extract, selection, vector, shapefile"
+  "keywords": "spatial, attribute data, subset, extract, selection, vector, shapefile"
   "property=og:locale": "en_US"
 ---
 
@@ -21,9 +21,9 @@ html_meta:
 * Select features by their locations
 ```
 ```{admonition} Review
-* [Geospatial Vector Data](c_vectors.md)
+* [Spatial Vector Data](c_vectors.md)
 * [Attributes & Indexing for Vector Data](e_attributes.md)
-* [Creating Geospatial Vector Data](c_new_vectors.md)
+* [Creating Spatial Vector Data](c_new_vectors.md)
 ```
 ----------------
 

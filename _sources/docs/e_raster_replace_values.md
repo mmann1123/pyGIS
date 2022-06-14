@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 html_meta:
   "description lang=en": "Learn how to replace values in a raster using rasterio and GeoWombat."
-  "keywords": "geospatial, python, rasterio, raster, replace, interpolation"
+  "keywords": "spatial, python, rasterio, raster, replace, interpolation"
   "property=og:locale": "en_US"
 ---
 
@@ -21,7 +21,7 @@ html_meta:
 * Replace and interpolate values in a raster with rasterio
 ```
 ```{admonition} Review
-* [Geospatial Raster Data](c_rasters.md)
+* [Spatial Raster Data](c_rasters.md)
 ```
 
 ----------------
