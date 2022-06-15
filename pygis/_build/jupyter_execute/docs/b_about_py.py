@@ -22,7 +22,7 @@
 # Python has experienced rapid adoption in the last decade and is now one
 # of the most commonly used programming languages.
 # 
-# Popular textbooks on Python programming include {cite}`guttag2016introduction` and {cite}`hill2016learning`.
+# Popular textbooks on Python programming include {cite}`guttag2016introduction` and {cite}`matthes2019python`.
 # 
 # ### Common Uses
 # 
@@ -128,4 +128,5 @@
 # ## Bibliography
 # 
 # ```{bibliography} ../_bibliography/references.bib
+# :style: unsrt
 # ```

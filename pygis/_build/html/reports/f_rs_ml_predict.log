@@ -1,40 +1,70 @@
 Traceback (most recent call last):
-  File "/usr/local/lib/python3.8/dist-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
-    executenb(
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1204, in execute
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 62, in just_run
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
     return future.result()
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 663, in async_execute
-    await self.async_execute_cell(
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 965, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import matplotlib.pyplot as plt
+
+# Use a data pipeline
+pl = Pipeline([ ('scaler', StandardScaler()),
+                ('pca', PCA()),
+                ('clf', GaussianNB())])
+
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
-with gw.config.update(ref_res=100):
+# Fit the classifier
+with gw.config.update(ref_res=150):
     with gw.open(l8_224078_20200518) as src:
-        X, clf = fit(src, pl, labels, col="lc")
+        X, Xy, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
         y.plot(robust=True, ax=ax)
+plt.tight_layout(pad=1)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Input [0;32mIn [6][0m, in [0;36m<cell line: 3>[0;34m()[0m
-[1;32m      3[0m [38;5;28;01mwith[39;00m gw[38;5;241m.[39mconfig[38;5;241m.[39mupdate(ref_res[38;5;241m=[39m[38;5;241m100[39m):
-[1;32m      4[0m     [38;5;28;01mwith[39;00m gw[38;5;241m.[39mopen(l8_224078_20200518) [38;5;28;01mas[39;00m src:
-[0;32m----> 5[0m         X, clf [38;5;241m=[39m fit(src, pl, labels, col[38;5;241m=[39m[38;5;124m"[39m[38;5;124mlc[39m[38;5;124m"[39m)
-[1;32m      6[0m         y [38;5;241m=[39m predict(src, X, clf)
-[1;32m      7[0m         y[38;5;241m.[39mplot(robust[38;5;241m=[39m[38;5;28;01mTrue[39;00m, ax[38;5;241m=[39max)
+[0;31mNotFittedError[0m                            Traceback (most recent call last)
+[0;32m<ipython-input-2-ecac9039c1e1>[0m in [0;36m<module>[0;34m[0m
+[1;32m     12[0m     [0;32mwith[0m [0mgw[0m[0;34m.[0m[0mopen[0m[0;34m([0m[0ml8_224078_20200518[0m[0;34m)[0m [0;32mas[0m [0msrc[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     13[0m         [0mX[0m[0;34m,[0m [0mXy[0m[0;34m,[0m [0mclf[0m [0;34m=[0m [0mfit[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0mpl[0m[0;34m,[0m [0mlabels[0m[0;34m,[0m [0mcol[0m[0;34m=[0m[0;34m"lc"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 14[0;31m         [0my[0m [0;34m=[0m [0mpredict[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0mX[0m[0;34m,[0m [0mclf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     15[0m         [0my[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mrobust[0m[0;34m=[0m[0;32mTrue[0m[0;34m,[0m [0max[0m[0;34m=[0m[0max[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     16[0m [0mplt[0m[0;34m.[0m[0mtight_layout[0m[0;34m([0m[0mpad[0m[0;34m=[0m[0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mValueError[0m: too many values to unpack (expected 2)
-ValueError: too many values to unpack (expected 2)
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/geowombat/ml/classifiers.py[0m in [0;36mpredict[0;34m(self, data, X, clf, targ_name, targ_dim_name, mask_nodataval)[0m
+[1;32m    351[0m             [0;34m>>[0m[0;34m>[0m    [0my1[0m [0;34m=[0m [0mpredict[0m[0;34m([0m[0msrc[0m[0;34m,[0m [0mX[0m[0;34m,[0m [0mclf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    352[0m         """
+[0;32m--> 353[0;31m         [0mcheck_is_fitted[0m[0;34m([0m[0mclf[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    354[0m [0;34m[0m[0m
+[1;32m    355[0m         [0;31m# try:[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/sklearn/utils/validation.py[0m in [0;36minner_f[0;34m(*args, **kwargs)[0m
+[1;32m     61[0m             [0mextra_args[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0margs[0m[0;34m)[0m [0;34m-[0m [0mlen[0m[0;34m([0m[0mall_args[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     62[0m             [0;32mif[0m [0mextra_args[0m [0;34m<=[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 63[0;31m                 [0;32mreturn[0m [0mf[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     64[0m [0;34m[0m[0m
+[1;32m     65[0m             [0;31m# extra_args > 0[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/sklearn/utils/validation.py[0m in [0;36mcheck_is_fitted[0;34m(estimator, attributes, msg, all_or_any)[0m
+[1;32m   1096[0m [0;34m[0m[0m
+[1;32m   1097[0m     [0;32mif[0m [0;32mnot[0m [0mattrs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1098[0;31m         [0;32mraise[0m [0mNotFittedError[0m[0;34m([0m[0mmsg[0m [0;34m%[0m [0;34m{[0m[0;34m'name'[0m[0;34m:[0m [0mtype[0m[0;34m([0m[0mestimator[0m[0;34m)[0m[0;34m.[0m[0m__name__[0m[0;34m}[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1099[0m [0;34m[0m[0m
+[1;32m   1100[0m [0;34m[0m[0m
+
+[0;31mNotFittedError[0m: This Pipeline instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+NotFittedError: This Pipeline instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
 

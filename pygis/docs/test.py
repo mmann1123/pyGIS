@@ -112,7 +112,6 @@ with gw.config.update(ref_res=300):
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 #%%
-
 import numpy as np
 
 x = np.linspace(-90, 90, 6)
@@ -140,22 +139,21 @@ transform = Affine.translation(x[0] - res / 2, y[0] - res / 2) * Affine.scale(re
 with rio.open(
     "../temp/new_raster.tif",
     "w",
-    driver="GTiff",
-    height=Z.shape[0],
+    driver="GTiff",  # output file type
+    height=Z.shape[0],  # shape of array
     width=Z.shape[1],
-    count=1,
-    dtype=Z.dtype,
-    crs="+proj=latlong",
-    transform=transform,
+    count=1,  # number of bands
+    dtype=Z.dtype,  # output datatype
+    crs="+proj=latlong",  # CRS
+    transform=transform,  # location and resolution of upper left cell
 ) as dst:
-
-    # check for multiband
-    if len(Z.shape) == 3:
+    # check for number of bands
+    if dst.count == 1:
+        # write single band
+        dst.write(Z, 1)
+    else:
         # write each band individually
         for band in range(len(Z)):
             # write data, band # (starting from 1)
             dst.write(Z[band], band + 1)
-    # write single band
-    else:
-        dst.write(Z, 1)
 # %%

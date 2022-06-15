@@ -193,8 +193,7 @@ Distortion is minimized along the tangent or secant lines and increases as the d
 ```{figure} ../_static/img/Cylindrical_Examples.svg
 :name: Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).
 Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).``` 
-```{figure} 
-``` 
+
 
 ### Conical Projection
 

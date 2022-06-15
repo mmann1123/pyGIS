@@ -19,7 +19,7 @@
 # ----------------
 # 
 # 
-# # Creating Spatial Vector Data
+# # Spatial Points Lines Polygons in Python
 # We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.
 
 # In[1]:

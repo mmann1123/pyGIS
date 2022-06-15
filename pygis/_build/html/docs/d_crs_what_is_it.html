@@ -12,8 +12,9 @@
 
     <title>What is a CRS? &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,20 +24,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +42,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -60,7 +60,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Understanding a CRS: Proj4 and CRS codes" href="d_understand_crs_codes.html" />
-    <link rel="prev" title="Raster Data" href="c_rasters.html" />
+    <link rel="prev" title="Raster Data in Python" href="c_rasters.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -78,7 +78,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,9 +101,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,14 +122,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -174,12 +190,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -375,112 +391,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/d_crs_what_is_it.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/d_crs_what_is_it.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_crs_what_is_it.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_crs_what_is_it.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_crs_what_is_it.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_crs_what_is_it.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_crs_what_is_it.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_crs_what_is_it.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/d_crs_what_is_it.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/d_crs_what_is_it.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#geographic-coordinate-systems">
    Geographic Coordinate Systems
@@ -554,12 +701,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>What is a CRS?</h1>
@@ -649,7 +795,8 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <hr class="docutils" id="d-crs-what-is-it" />
@@ -670,14 +817,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="what-is-a-crs">
-<h1>What is a CRS?<a class="headerlink" href="#what-is-a-crs" title="Permalink to this headline">¶</a></h1>
+<h1>What is a CRS?<a class="headerlink" href="#what-is-a-crs" title="Permalink to this headline">#</a></h1>
 <p>Implicit with any GIS data is a spatial reference system. It can consist of a simple arbitrary reference system such as a 10 m x 10 m sampling grid in a wood lot or, the boundaries of a soccer field or, it can consist of a geographic reference system, i.e. one where the spatial features are mapped to an earth based reference system. The focus of this topic is on earth reference systems which can be based on a Geographic Coordinate System (GCS) or a Project Coordinate System (PCS).</p>
 <div class="section" id="geographic-coordinate-systems">
-<h2>Geographic Coordinate Systems<a class="headerlink" href="#geographic-coordinate-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Geographic Coordinate Systems<a class="headerlink" href="#geographic-coordinate-systems" title="Permalink to this headline">#</a></h2>
 <p>A geographic coordinate system is a reference system for identifying locations on the curved surface of the earth. Locations on the earth’s surface are measured in angular units from the center of the earth relative to two planes: the plane defined by the equator and the plane defined by the prime meridian (which crosses Greenwich England). A location is therefore defined by two values: a latitudinal value and a longitudinal value.</p>
 <div class="figure align-default" id="lat-lon">
 <img alt="../_images/lat_vs_lon.png" src="../_images/lat_vs_lon.png" />
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0° degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).</span><a class="headerlink" href="#lat-lon" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Examples of latitudinal lines are shown on the left and examples of longitudinal lines are shown on the right. The 0° degree reference lines for each are shown in red (equator for latitudinal measurements and prime meridian for longitudinal measurements).</span><a class="headerlink" href="#lat-lon" title="Permalink to this image">#</a></p>
 </div>
 <p>A latitude measures the angle from the equatorial plane to the location on the earth’s surface. A longitude measures the angle between the prime meridian plane and the north-south plane that intersects the location of interest. For example The George Washington University is located at around 38.89° North and -77.04° West. In a GIS system, the North-South and East-West directions are encoded as signs. North and East are assigned a positive (<code class="docutils literal notranslate"><span class="pre">+</span></code>) sign and South and West are assigned a negative (<code class="docutils literal notranslate"><span class="pre">-</span></code>) sign. The university location is therefore encoded as +38.89° and -77.04°.</p>
 <div class="cell tag_hide-input docutils container">
@@ -699,36 +846,36 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>A GCS is defined by an <strong>ellipsoid</strong>, <strong>geoid</strong> and <strong>datum</strong>. These elements are presented next.</p>
 <div class="section" id="sphere-and-ellipsoid">
-<h3>Sphere and Ellipsoid<a class="headerlink" href="#sphere-and-ellipsoid" title="Permalink to this headline">¶</a></h3>
+<h3>Sphere and Ellipsoid<a class="headerlink" href="#sphere-and-ellipsoid" title="Permalink to this headline">#</a></h3>
 <p>Assuming that the earth is a perfect sphere greatly simplifies mathematical calculations and works well for small-scale maps (maps that show a <em>large</em> area of the earth). However, when working at larger scales, an ellipsoid representation of earth may be desired if accurate measurements are needed. An ellipsoid is defined by two radii: the semi-major axis (the equatorial radius) and the semi-minor axis (the polar radius).</p>
 <div class="figure align-default">
 <img alt="../_images/Ellipsoid.svg" src="../_images/Ellipsoid.svg" /></div>
 <p>The reason the earth has a slightly ellipsoidal shape has to do with its rotation which induces a centripetal force along the equator. This results in an equatorial axis that is roughly 21 km longer than the polar axis.</p>
 <div class="figure align-default" id="the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right">
-<img alt="../_images/Globe_0_0_center.svg" src="../_images/Globe_0_0_center.svg" /><p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).</span><a class="headerlink" href="#the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Globe_0_0_center.svg" src="../_images/Globe_0_0_center.svg" /><p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The earth can be mathematically modeled as a simple sphere (left) or an ellipsoid (right).</span><a class="headerlink" href="#the-earth-can-be-mathematically-modeled-as-a-simple-sphere-left-or-an-ellipsoid-right" title="Permalink to this image">#</a></p>
 </div>
 <p>Our estimate of these radii is quite precise thanks to satellite and computational capabilities. The semi-major axis is 6,378,137 meters and the semi-minor axis is 6,356,752 meters.</p>
 <p>Differences in distance measurements along the surfaces of an ellipsoid vs. a sphere are small but measurable (the difference can be as high as 20 km) as illustrated in the following lattice plots.</p>
 <div class="figure align-default" id="differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian">
-<img alt="../_images/Ellipsoid_vs_sphere_distances.svg" src="../_images/Ellipsoid_vs_sphere_distances.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Differences in distance measurements between the surface of a sphere and an ellipsoid. Each graphic plots the differences in distance measurements made from a single point location along the 0&amp;deg; meridian identified by the green colored box (latitude value) to various latitudinal locations along a longitude (whose value is listed in the bisque colored box). For example, the second plot from the top-left corner plot shows the differences in distance measurements made from a location at 90&amp;deg; north (along the prime meridian) to a range of latitudinal locations along the 45&amp;deg; meridian.</span><a class="headerlink" href="#differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Ellipsoid_vs_sphere_distances.svg" src="../_images/Ellipsoid_vs_sphere_distances.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Differences in distance measurements between the surface of a sphere and an ellipsoid. Each graphic plots the differences in distance measurements made from a single point location along the 0&amp;deg; meridian identified by the green colored box (latitude value) to various latitudinal locations along a longitude (whose value is listed in the bisque colored box). For example, the second plot from the top-left corner plot shows the differences in distance measurements made from a location at 90&amp;deg; north (along the prime meridian) to a range of latitudinal locations along the 45&amp;deg; meridian.</span><a class="headerlink" href="#differences-in-distance-measurements-between-the-surface-of-a-sphere-and-an-ellipsoid-each-graphic-plots-the-differences-in-distance-measurements-made-from-a-single-point-location-along-the-0-amp-deg-meridian-identified-by-the-green-colored-box-latitude-value-to-various-latitudinal-locations-along-a-longitude-whose-value-is-listed-in-the-bisque-colored-box-for-example-the-second-plot-from-the-top-left-corner-plot-shows-the-differences-in-distance-measurements-made-from-a-location-at-90-amp-deg-north-along-the-prime-meridian-to-a-range-of-latitudinal-locations-along-the-45-amp-deg-meridian" title="Permalink to this image">#</a></p>
 </div>
 </div>
 <div class="section" id="geoid">
-<h3>Geoid<a class="headerlink" href="#geoid" title="Permalink to this headline">¶</a></h3>
+<h3>Geoid<a class="headerlink" href="#geoid" title="Permalink to this headline">#</a></h3>
 <p>Representing the earth’s true shape, the <em>geoid</em>, as a mathematical model is crucial for a GIS environment. However, the earth’s shape is not a perfectly smooth surface. It has undulations resulting from changes in gravitational pull across its surface. These undulations may not be visible with the naked eye, but they are measurable and can influence locational measurements. Note that we are not including mountains and ocean bottoms in our discussion, instead we are focusing solely on the earth’s gravitational potential which can be best visualized by imagining the earth’s surface completely immersed in water and measuring the distance from the earth’s center to the water surface over the entire earth surface.</p>
 <div class="figure align-default" id="earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa">
 <img alt="../_images/Geoids_sm_NASA.jpg" src="../_images/Geoids_sm_NASA.jpg" />
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Earth’s geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)</span><a class="headerlink" href="#earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Earth’s geoid with gravitational field shown in rainbow colors. The ondulations depicted in the graphics are exaggerated for visual effects. (source- NASA)</span><a class="headerlink" href="#earth-s-geoid-with-gravitational-field-shown-in-rainbow-colors-the-ondulations-depicted-in-the-graphics-are-exaggerated-for-visual-effects-source-nasa" title="Permalink to this image">#</a></p>
 </div>
 <p>The earth’s gravitational field is dynamic and is tied to the flow of the earth’s hot and fluid core. Hence its geoid is constantly changing, albeit at a large temporal scale.The measurement and representation of the earth’s shape is at the heart of geodesy–a branch of applied mathematics.</p>
 </div>
 <div class="section" id="datum">
-<h3>Datum<a class="headerlink" href="#datum" title="Permalink to this headline">¶</a></h3>
+<h3>Datum<a class="headerlink" href="#datum" title="Permalink to this headline">#</a></h3>
 <p>So how are we to reconcile our need to work with a (simple) mathematical model of the earth’s shape with the ondulating nature of the earth’s surface (i.e. its geoid)? The solution is to align the geoid with the ellipsoid (or sphere) representation of the earth and to map the earth’s surface features onto this ellipsoid/sphere. The alignment can be local where the ellipsoid surface is closely fit to the geoid at a particular location on the earth’s surface (such as the state of Kansas) or <strong>geocentric</strong> where the ellipsoid is aligned with the center of the earth. How one chooses to align the ellipsoid to the geoid defines a <strong>datum</strong>.</p>
 <div class="section" id="local-datum">
-<h4>Local Datum<a class="headerlink" href="#local-datum" title="Permalink to this headline">¶</a></h4>
+<h4>Local Datum<a class="headerlink" href="#local-datum" title="Permalink to this headline">#</a></h4>
 <div class="figure align-default" id="a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface">
-<img alt="../_images/Datum_local.svg" src="../_images/Datum_local.svg" /><p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A local datum couples a geoid with the ellipsoid at a location on each element’s surface.</span><a class="headerlink" href="#a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Datum_local.svg" src="../_images/Datum_local.svg" /><p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">A local datum couples a geoid with the ellipsoid at a location on each element’s surface.</span><a class="headerlink" href="#a-local-datum-couples-a-geoid-with-the-ellipsoid-at-a-location-on-each-element-s-surface" title="Permalink to this image">#</a></p>
 </div>
 <p>There are many local datums to choose from, some are old while others are more recently defined. The choice of datum is largely driven by the location of interest. For example, when working in the US, a popular local datum to choose from is the North American Datum of 1927 (or NAD27 for short). NAD27 works well for the US but it’s not well suited for other parts of the world. For example, a far better local datum for Europe is the European Datum of 1950 (ED50 for short). Examples of common local datums are shown in the following table:</p>
 <table class="colwidths-auto table">
@@ -759,9 +906,9 @@ const thebe_selector_output = ".output, .cell_output"
 </table>
 </div>
 <div class="section" id="geocentric-datum">
-<h4>Geocentric Datum<a class="headerlink" href="#geocentric-datum" title="Permalink to this headline">¶</a></h4>
+<h4>Geocentric Datum<a class="headerlink" href="#geocentric-datum" title="Permalink to this headline">#</a></h4>
 <div class="figure align-default" id="a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass">
-<img alt="../_images/Datum_geocentric.svg" src="../_images/Datum_geocentric.svg" /><p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A geocentric  datum couples a geoid with the ellipsoid at each element’s center of mass.</span><a class="headerlink" href="#a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Datum_geocentric.svg" src="../_images/Datum_geocentric.svg" /><p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">A geocentric  datum couples a geoid with the ellipsoid at each element’s center of mass.</span><a class="headerlink" href="#a-geocentric-datum-couples-a-geoid-with-the-ellipsoid-at-each-element-s-center-of-mass" title="Permalink to this image">#</a></p>
 </div>
 <p>Many of the modern datums use a geocentric alignment. These include the popular World Geodetic Survey for 1984 (WGS84) and the North American Datums of 1983 (NAD83). Most of the popular geocentric datums use the WGS84 ellipsoid or the GRS80 ellipsoid. These two ellipsoids share nearly identical semi-major and semi-minor axes: 6,378,137 meters and 6,356,752 meters respectively. Examples of popular geocentric datums are shown in the following table:</p>
 <table class="colwidths-auto table">
@@ -793,19 +940,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="building-the-geographic-coordinate-system">
-<h3>Building the Geographic Coordinate System<a class="headerlink" href="#building-the-geographic-coordinate-system" title="Permalink to this headline">¶</a></h3>
+<h3>Building the Geographic Coordinate System<a class="headerlink" href="#building-the-geographic-coordinate-system" title="Permalink to this headline">#</a></h3>
 <p>A Geographic Coordinate System (GCS) is defined by the ellipsoid model and by the way this ellipsoid is aligned with the geoid (defining the datum). It is important to know which GCS is associated with a GIS file or a map document reference system. This is particularly true when the overlapping layers are tied to different datums (and therefore GCS’). This is because a location on the earth’s surface can take on different coordinate values. For example, a location recorded in an NAD 1927 GCS having a coordinate pair of 44.56698° north and 69.65939° west will register a coordinate value of 44.56704° north and 69.65888° west in a NAD83 GCS and a coordinate value of 44.37465° north and -69.65888° west in a sphere based WGS84 GCS. If the coordinate systems for these point coordinate values were not properly defined, then they could be misplaced on a map.  This is analogous to recording temperature using different units of measure (degrees Celsius, Fahrenheit and Kelvin)–each unit of measure will produce a different numeric value.</p>
 <div class="figure align-default" id="map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005deg-longitudinal-offset-between-both-reference-systems">
 <img alt="../_images/GCS_diff_coord_values.png" src="../_images/GCS_diff_coord_values.png" />
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639° line of latitude relative to the flagpole. Also note the 0.0005° longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Map of the Colby flagpole in two different geographic coordinate systems (<em>GCS NAD 1983</em> on the left and <em>GCS NAD 1927</em> on the right). Note the offset in the 44.5639° line of latitude relative to the flagpole. Also note the 0.0005° longitudinal offset between both reference systems.</span><a class="headerlink" href="#map-of-the-colby-flagpole-in-two-different-geographic-coordinate-systems-gcs-nad-1983-on-the-left-and-gcs-nad-1927-on-the-right-note-the-offset-in-the-44-5639-deg-line-of-latitude-relative-to-the-flagpole-also-note-the-0-0005deg-longitudinal-offset-between-both-reference-systems" title="Permalink to this image">#</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="projected-coordinate-systems">
-<h2>Projected Coordinate Systems<a class="headerlink" href="#projected-coordinate-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Projected Coordinate Systems<a class="headerlink" href="#projected-coordinate-systems" title="Permalink to this headline">#</a></h2>
 <p>The surface of the earth is curved but maps are flat. A projected coordinate system (PCS) is a reference system for identifying locations and measuring features on a flat (map) surface. It consists of lines that intersect at right angles, forming a grid. Projected coordinate systems (which are based on Cartesian coordinates) have an origin, an <em>x</em> axis, a <em>y</em> axis, and a linear unit of measure. Going from a GCS to a PCS requires mathematical transformations. The myriad of projection types can be aggregated into three groups: <strong>planar</strong>, <strong>cylindrical</strong> and <strong>conical</strong>.</p>
 <div class="section" id="planar-projections">
-<h3>Planar Projections<a class="headerlink" href="#planar-projections" title="Permalink to this headline">¶</a></h3>
+<h3>Planar Projections<a class="headerlink" href="#planar-projections" title="Permalink to this headline">#</a></h3>
 <p><strong>Tangent Case</strong>
 A planar projection (aka Azimuthal projection) maps the earth surface features to a flat surface that touches the earth’s surface at a point (<strong>tangent</strong> case),</p>
 <div class="figure align-default">
@@ -816,11 +963,11 @@ or along a line of tangency (a <strong>secant</strong> case).</p>
 <img alt="../_images/Planar_projection_secant.svg" src="../_images/Planar_projection_secant.svg" /></div>
 <p>This projection is often used in mapping polar regions but can be used for any location on the earth’s surface (in which case they are called oblique planar projections).</p>
 <div class="figure align-default" id="examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties">
-<img alt="../_images/Planar_Examples.svg" src="../_images/Planar_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.</span><a class="headerlink" href="#examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Planar_Examples.svg" src="../_images/Planar_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Examples of three planar projections - orthographic (left), gnomonic (center) and equidistant (right). Each covers a different spatial range (with the latter covering both northern and southern hemispheres) and each preserves a unique set of spatial properties.</span><a class="headerlink" href="#examples-of-three-planar-projections-orthographic-left-gnomonic-center-and-equidistant-right-each-covers-a-different-spatial-range-with-the-latter-covering-both-northern-and-southern-hemispheres-and-each-preserves-a-unique-set-of-spatial-properties" title="Permalink to this image">#</a></p>
 </div>
 </div>
 <div class="section" id="cylindrical-projection">
-<h3>Cylindrical Projection<a class="headerlink" href="#cylindrical-projection" title="Permalink to this headline">¶</a></h3>
+<h3>Cylindrical Projection<a class="headerlink" href="#cylindrical-projection" title="Permalink to this headline">#</a></h3>
 <p>A cylindrical map projection maps the earth surface onto a map rolled into a cylinder (which can then be flattened into a plane). The cylinder can touch the surface of the earth along a single line of tangency (a <strong>tangent</strong> case),</p>
 <div class="figure align-default">
 <img alt="../_images/Cylindrical_projection_tangent.svg" src="../_images/Cylindrical_projection_tangent.svg" /></div>
@@ -830,28 +977,28 @@ or along a line of tangency (a <strong>secant</strong> case).</p>
 <p>The cylinder can be tangent to the equator or it can be oblique. A special case is the Transverse aspect which is tangent to lines of longitude. This is a popular projection used in defining the Universal Transverse Mercator (UTM) and State Plane coordinate systems. The UTM PCS covers the entire globe and is a popular coordinate system in the US. It’s important to note that the UTM PCS is broken down into zones and therefore limits its extent to these zones that are 6° wide. For example, the State of Maine (USA) uses the UTM coordinate system (Zone 19 North) for most of its statewide GIS maps. Most USGS quad maps are also presented in a UTM coordinate system. Popular datums tied to the UTM coordinate system in the US include NAD27 and NAD83. There is also a WGS84 based UTM coordinate system.</p>
 <p>Distortion is minimized along the tangent or secant lines and increases as the distance from these lines increases.</p>
 <div class="figure align-default" id="examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape">
-<img alt="../_images/Cylindrical_Examples.svg" src="../_images/Cylindrical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).```</span><a class="headerlink" href="#examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Cylindrical_Examples.svg" src="../_images/Cylindrical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).```</span><a class="headerlink" href="#examples-of-two-cylindrical-projections-mercator-preserves-shape-but-distorts-area-and-distance-and-equal-area-preserves-area-but-distorts-shape" title="Permalink to this image">#</a></p>
 <div class="legend">
 </div>
 </div>
-</div>
-<div class="section" id="conical-projection">
-<h3>Conical Projection<a class="headerlink" href="#conical-projection" title="Permalink to this headline">¶</a></h3>
-<p>A conical map projection maps the earth surface onto a map rolled into a cone. Like the cylindrical projection, the cone can touch the surface of the earth along a single line of tangency (a <strong>tangent</strong> case),</p>
-<div class="figure align-default">
-<img alt="../_images/Conical_projection_tangent.svg" src="../_images/Conical_projection_tangent.svg" /></div>
 <p>or along two lines of tangency (a <strong>secant</strong> case).</p>
 <div class="figure align-default">
 <img alt="../_images/Conical_projection_secant.svg" src="../_images/Conical_projection_secant.svg" /></div>
 <p>Distortion is minimized along the tangent or secant lines and increases as the distance from these lines increases. When distance or area measurements are needed for the contiguous 48 states, use one of the conical projections such as Equidistant Conic (distance preserving) or Albers Equal Area Conic (area preserving).</p>
 <p>Conical projections are also popular PCS’ in European maps such as Europe Albers Equal Area Conic and Europe Lambert Conformal Conic.</p>
 <div class="figure align-default" id="examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape">
-<img alt="../_images/Conical_Examples.svg" src="../_images/Conical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).</span><a class="headerlink" href="#examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape" title="Permalink to this image">¶</a></p>
+<img alt="../_images/Conical_Examples.svg" src="../_images/Conical_Examples.svg" /><p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Examples of three conical projections - Albers equal area (preserves area), equidistant (preserves distance) and conformal (preserves shape).</span><a class="headerlink" href="#examples-of-three-conical-projections-albers-equal-area-preserves-area-equidistant-preserves-distance-and-conformal-preserves-shape" title="Permalink to this image">#</a></p>
 </div>
+</div>
+<div class="section" id="conical-projection">
+<h3>Conical Projection<a class="headerlink" href="#conical-projection" title="Permalink to this headline">#</a></h3>
+<p>A conical map projection maps the earth surface onto a map rolled into a cone. Like the cylindrical projection, the cone can touch the surface of the earth along a single line of tangency (a <strong>tangent</strong> case),</p>
+<div class="figure align-default">
+<img alt="../_images/Conical_projection_tangent.svg" src="../_images/Conical_projection_tangent.svg" /></div>
 </div>
 </div>
 <div class="section" id="spatial-properties">
-<h2>Spatial Properties<a class="headerlink" href="#spatial-properties" title="Permalink to this headline">¶</a></h2>
+<h2>Spatial Properties<a class="headerlink" href="#spatial-properties" title="Permalink to this headline">#</a></h2>
 <p>All projections distort real-world geographic features to some degree. The four spatial properties that are subject to distortion are: <strong>shape</strong>, <strong>area</strong>, <strong>distance</strong> and <strong>direction</strong>. A map that preserves shape is called conformal; one that preserves area is called equal-area; one that preserves distance is called equidistant; and one that preserves direction is called azimuthal.</p>
 <blockquote>
 <div><p>For most GIS applications (e.g. ArcGIS and QGIS), many of the built-in projections are named after the spatial properties they preserve.</p>
@@ -873,7 +1020,7 @@ or along a line of tangency (a <strong>secant</strong> case).</p>
 </div></blockquote>
 </div>
 <div class="section" id="geodesic-geometries">
-<h2>Geodesic geometries<a class="headerlink" href="#geodesic-geometries" title="Permalink to this headline">¶</a></h2>
+<h2>Geodesic geometries<a class="headerlink" href="#geodesic-geometries" title="Permalink to this headline">#</a></h2>
 <p>The reason projected coordinate systems introduce errors in their geometric measurements has to do with the nature of the projection whereby the distance between two points on a sphere or ellipsoid will be difficult to replicate on a projected coordinate system unless these points are relatively close to one another. In most cases, such errors can be tolerated if the expected level of precision is met; many other sources of error in the spatial representation of the features can often usurp any measurement errors made in a projected coordinate system. However, if the scale of analysis is small (i.e. the spatial extent covers a large proportion of the earth’s surface such as the North American continent), then the measurement errors associated with a projected coordinate system may no longer be acceptable. A way to circumvent projected coordinate system limitations is to adopt a geodesic solution.
 A <strong>geodesic distance</strong> is the shortest distance between two points on an ellipsoid (or spheroid). Likewise, a <strong>geodesic area</strong> measurement is one that is measured on an ellipsoid. Such measurements are independent of the underlying projected coordinate system. The Tissot circles presented in figures from the last section were all generated using geodesic geometry.</p>
 <p>If you are not convinced of the benefits afforded by geodesic geometry, compare the distances measured between two points located on either sides of the Atlantic in the following map. The blue dashed line represents the shortest distance between the two points on a <em>planar</em> coordinate system. The red line represents the shortest distance between the two points as measured on a <em>spheroid</em>.</p>
@@ -912,14 +1059,16 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="c_rasters.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Raster Data</p>
+            <p class="prev-next-title">Raster Data in Python</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="d_understand_crs_codes.html" title="next page">
@@ -930,16 +1079,16 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -949,16 +1098,20 @@ A <strong>geodesic distance</strong> is the shortest distance between two points
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

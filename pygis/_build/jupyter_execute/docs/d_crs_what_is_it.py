@@ -179,8 +179,7 @@ ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron,zoom = 6, reset_extent
 # ```{figure} ../_static/img/Cylindrical_Examples.svg
 # :name: Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).
 # Examples of two cylindrical projections Mercator (preserves shape but distorts area and distance) and equal-area (preserves area but distorts shape).``` 
-# ```{figure} 
-# ``` 
+# 
 # 
 # ### Conical Projection
 # 

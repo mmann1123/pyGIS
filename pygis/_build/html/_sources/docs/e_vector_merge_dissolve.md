@@ -7,7 +7,7 @@ jupytext:
     jupytext_version: 1.8.2
 kernelspec:
   display_name: 'Python 3.7.10 64-bit (''pygisbookgw'': conda)'
-  name: python371064bitpygisbookgwconda0513153e7d7b4503839be1e6673bfbb2
+  name: python3
 html_meta:
   "description lang=en": "Learn how to merge new data into a shapefiles attribute table, dissolve polygons by attributes, and other group-by operations in geopandas."
   "description lang=fr": "Découvrez comment fusionner de nouvelles données dans une table attributaire de fichiers de formes, dissoudre des polygones par attributs et d'autres opérations de regroupement dans les géopandas."
