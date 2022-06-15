@@ -68,7 +68,7 @@ Ok we have an array of data and some coordinates for each cell, but how do we cr
 3) A transform defining the coordinate of the upper left hand corner and the cell resolution
 
 ```{note}
-These topic is covered extensively in the next chapter. We will briefly introduce the topic here, but will go into the details later. For more info on transforms go [here](d_raster_crs_intro.md). For more info on coordinate references systems go [here](d_crs_what_is_it.md) or to understand CRS codes go [here](https://pygis.io/docs/d_understand_crs_codes.html).
+These topic is covered extensively in the next chapter. We will briefly introduce the topic here, but will go into the details later. For more info on transforms go [here](d_raster_crs_intro.md). For more info on coordinate references systems go [here](d_crs_what_is_it.md) or to understand CRS codes go [here](d_understand_crs_codes). To help bring it all together, read/writing rasters got to [Reading & Writing Rasters with Rasterio](e_new_rasters).
 ```
 
 Once you have those components you can write out a working spatial raster dataset in python in a few lines of code. We just need to provide the information listed above in a format that rasterio understands. 
