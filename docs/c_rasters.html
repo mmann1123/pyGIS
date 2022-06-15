@@ -678,7 +678,7 @@ title="Print to PDF"
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Please review Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Please review Affine transformation</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -738,7 +738,13 @@ title="Print to PDF"
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These topic is covered extensively in the next chapter. We will briefly introduce the topic here, but will go into the details later. For more info on transforms go <a class="reference internal" href="d_raster_crs_intro.html"><span class="doc std std-doc">here</span></a>. For more info on coordinate references systems go <a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">here</span></a> or to understand CRS codes go <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">here</span></a>. To help bring it all together, read/writing rasters got to <a class="reference internal" href="e_new_rasters.html"><span class="doc std std-doc">Reading &amp; Writing Rasters with Rasterio</span></a>.</p>
+<p>These topic is covered extensively in the next chapter. We will briefly introduce the topic here, but will go into the details later.</p>
+<ul class="simple">
+<li><p>For more info on transforms go <a class="reference internal" href="d_raster_crs_intro.html"><span class="doc std std-doc">here</span></a>.</p></li>
+<li><p>For more info on coordinate references systems go <a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">here</span></a></p></li>
+<li><p>or to understand CRS codes go <a class="reference internal" href="d_understand_crs_codes.html#d-understand-crs-codes"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>To help bring it all together, read/writing rasters go to <a class="reference internal" href="e_new_rasters.html"><span class="doc std std-doc">Reading &amp; Writing Rasters with Rasterio</span></a>.</p></li>
+</ul>
 </div>
 <p>Once you have those components you can write out a working spatial raster dataset in python in a few lines of code. We just need to provide the information listed above in a format that rasterio understands.</p>
 <div class="cell docutils container">
@@ -778,6 +784,7 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>Raster data is often ‘multiband’ (e.g. red, green, blue), so I provided code that works for both multiband and single band data.</p>
 <p>If you are storing multiband data the dimensions should be stored as (band, y, x ).</p>
+<p>Read more about this here: <a class="reference internal" href="e_new_rasters.html"><span class="doc std std-doc">Reading &amp; Writing Rasters with Rasterio</span></a></p>
 </div>
 </div>
 </div>
