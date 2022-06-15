@@ -19,14 +19,18 @@ sphinx:
   config:
     html_show_copyright: false
     html_baseurl: 'https://pygis.io' # 'https://mmann1123.github.io/pyGIS'
+    bibtex_reference_style: author_year
+    bibtex_bibfiles: "../_bibliography/references.bib"
   extra_extensions:
     - sphinx_sitemap
+    - sphinxcontrib.bibtex
+    - sphinx_inline_tabs
     #  myst_enable_extensions = ["dollarmath", "amsmath"]
 
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks           : auto  #auto, cache, off ,force
+  execute_notebooks           : cache  #auto, cache, off ,force
   exclude_patterns          : 
                               [ #'a_*',
                               #'b_*',

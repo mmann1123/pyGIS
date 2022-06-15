@@ -88,12 +88,12 @@ transform = Affine.translation(x[0] - res / 2, y[0] - res / 2) * Affine.scale(re
 with rio.open(
     "../temp/new_raster.tif",
     "w",
-    driver="GTiff",   #output file type
-    height=Z.shape[0], # shape of array
+    driver="GTiff",       # output file type
+    height=Z.shape[0],    # shape of array
     width=Z.shape[1],
-    dtype=Z.dtype,  # output datatype
+    dtype=Z.dtype,        # output datatype
     crs="+proj=latlong",  # CRS
-    transform=transform,  #location and resolution of upper left cell
+    transform=transform,  # location and resolution of upper left cell
 ) as dst:
 
     # check for multiband

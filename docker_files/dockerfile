@@ -28,9 +28,10 @@ RUN pip install sklearn-xarray ghp-import  pip-tools rtree ipykernel \
 
 RUN pip install --upgrade git+https://github.com/jgrss/geowombat && git clone https://github.com/mmann1123/pyGIS.git 
 # EXPOSE  5000
-CMD cd pyGIS && git pull && \  
-    git checkout -b testdocs && git add . && git -c user.name="mmann1123" -c user.email=mmann1123@gmail.com  commit -m "test docs" \
-    && git push --set-upstream origin testdocs && bash
+CMD cd pyGIS && git pull && bash 
+# \  
+#   git checkout -b testdocs && git add . && git -c user.name="mmann1123" -c user.email=mmann1123@gmail.com  commit -m "test docs" \
+#  && git push --set-upstream origin testdocs && bash
 #  potential webserver https://medium.com/warp9/deploying-a-static-website-in-a-docker-container-f6b7d8eed15f
 
 # jupyter-book toc migrate /pyGIS/pygis/_toc.yml -o /pyGIS/pygis/_toc.yml && jupyter-book build pygis && \
