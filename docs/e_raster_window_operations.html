@@ -10,8 +10,9 @@
 
     <title>Window Operations with Rasterio and GeoWombat &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -21,20 +22,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -42,12 +40,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -78,7 +78,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,9 +101,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,14 +122,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -174,12 +190,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -375,112 +391,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/e_raster_window_operations.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/e_raster_window_operations.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_window_operations.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_window_operations.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_raster_window_operations.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_raster_window_operations.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_window_operations.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_window_operations.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/e_raster_window_operations.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/e_raster_window_operations.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#background">
    Background
@@ -535,12 +682,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Window Operations with Rasterio and GeoWombat</h1>
@@ -611,11 +757,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="window-operations-with-rasterio-and-geowombat">
-<h1>Window Operations with Rasterio and GeoWombat<a class="headerlink" href="#window-operations-with-rasterio-and-geowombat" title="Permalink to this headline">¶</a></h1>
+<h1>Window Operations with Rasterio and GeoWombat<a class="headerlink" href="#window-operations-with-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -632,13 +779,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Moving windows or filters are often used in raster analysis. For example, they can be used to obtain the maximum value within a certain neighborhood, to smooth out values, or detect holes or edges (i.e., where pixel values that are near each other change abruptly).</p>
 <p>These moving windows can also be called filters or kernels. They can be of many different sizes and shapes (the most common is 3-cell-by-3-cell rectangular window) and can have different or the same values for each cell. The center of the filter can be called the target cell or the center pixel, and the surrounding cells are referred to as the neighbors.</p>
 <p>The filter passes through all <em>non-edge</em> cells in the raster. During each pass of the filter, the center cell is updated based on the cells adjacent to it. In the <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter example, the center cell is updated by the eight cells that neighbor it. The filter then pulls the values from the neighboring cells and the center pixel itself, performs a calculation based on the filter values (e.g., calculates the mean), reports that resulting value back to the identical location of the original pixel, moves to the next pixel, and repeats the process.</p>
 <div class="figure align-default" id="sliding-window-operations">
 <img alt="../_images/raster_sliding_window.jpg" src="../_images/raster_sliding_window.jpg" />
-<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">#</a></p>
 </div>
 <p>The filter values can essentially be any number–they can be the same across the filter or be all different. The values determine how the output is calculated (equation below assuming a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter for nine cells total in the kernel):</p>
 <div class="math notranslate nohighlight">
@@ -652,7 +799,7 @@ X_{i} = raster cell value</p>
 <p>The values also determine <em>what</em> is calculated. For example, setting all filter values to <code class="docutils literal notranslate"><span class="pre">1</span></code> will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to <code class="docutils literal notranslate"><span class="pre">1/9</span></code> for a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter will result in the filter outputting the average of all raster pixel values within the filter.</p>
 <div class="figure align-default" id="moving-window-operation-examples">
 <img alt="../_images/raster_window_operations.jpg" src="../_images/raster_window_operations.jpg" />
-<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">#</a></p>
 </div>
 <p>For more information on moving windows, see the <a class="reference external" href="https://saylordotorg.github.io/text_essentials-of-geographic-information-systems/s12-02-scale-of-analysis.html">“Neighborhood Operations” section in this chapter on raster geoprocessing</a>.</p>
 <div class="admonition attention">
@@ -661,7 +808,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>We’ll explore two methods, one using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and another using <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code>.</p>
 <p>First, we’ll import our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -679,7 +826,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="window-operations-with-rasterio">
-<h2>Window operations with rasterio<a class="headerlink" href="#window-operations-with-rasterio" title="Permalink to this headline">¶</a></h2>
+<h2>Window operations with rasterio<a class="headerlink" href="#window-operations-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>The most intuitive way to perform window operations in Python is to use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. With this method, we would iterate through each non-edge pixel, obtain the surrounding pixel values and the center pixel value, perform some sort of calculation, report that resulting value back to the identical location of the original pixel, move to the next pixel, and repeat the process. Iterating through each pixel, however, has the potential to be extremely time and computationally intensive (there could be many, many pixels).</p>
 <p>To mitigate this limitation, instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we can get each neighbor value simultaneously for all non-edge pixels. Another way to think of it is that instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate through each pixel to get neighboring values, we can iterate through each kernel position to get the neighboring value corresponding to a certain kernel position for all non-edge pixels at once. This is what a vectorized sliding window does.</p>
 <p>The vectorized sliding window is grounded in the concept that each position in the kernel has a certain relative position or offset (e.g., one pixel to the left) from the center pixel of the kernel. This method works because each pixel in a raster is in essence a neighbor to at least one other pixel. The vectorized sliding window simply offsets itself within the raster array extent so that each pixel that falls within the vectorized sliding window is the neighbor of the same relative position (e.g., one pixel to the left) to its center pixel.</p>
@@ -747,7 +894,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="create-kernel">
-<h3>Create kernel<a class="headerlink" href="#create-kernel" title="Permalink to this headline">¶</a></h3>
+<h3>Create kernel<a class="headerlink" href="#create-kernel" title="Permalink to this headline">#</a></h3>
 <p>Second, we can generate a kernel array. The array can consist of a single value or multiple values. Below, we generate a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> kernel consisting of the value <code class="docutils literal notranslate"><span class="pre">1/9</span></code>. This kernel will output the average value of the center cell and its surrounding eight neighbors.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -773,7 +920,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="create-output-arrays">
-<h3>Create output arrays<a class="headerlink" href="#create-output-arrays" title="Permalink to this headline">¶</a></h3>
+<h3>Create output arrays<a class="headerlink" href="#create-output-arrays" title="Permalink to this headline">#</a></h3>
 <p>Next, we will create two arrays that will store our calculations.</p>
 <p>The first array is the output array, which has the same shape as that of the input raster. We will initially fill the array with placeholder values. This array will be the final result that is exported and saved.</p>
 <div class="cell docutils container">
@@ -825,7 +972,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="create-vectorized-sliding-window">
-<h3>Create vectorized sliding window<a class="headerlink" href="#create-vectorized-sliding-window" title="Permalink to this headline">¶</a></h3>
+<h3>Create vectorized sliding window<a class="headerlink" href="#create-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
 <p>The next step is to generate the vectorized sliding windows. The shape of the vectorized sliding windows depends on the kernel shape, so we utilize indices and slicing to obtain the extent of a vectorized sliding window for each position in the kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -851,7 +998,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="apply-vectorized-sliding-window">
-<h3>Apply vectorized sliding window<a class="headerlink" href="#apply-vectorized-sliding-window" title="Permalink to this headline">¶</a></h3>
+<h3>Apply vectorized sliding window<a class="headerlink" href="#apply-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
 <p>Once the vectorized sliding windows are specified, we can apply them to the raster. The vectorized sliding window will get a subset of the raster array, and we can multiply all the pixel values in that subset by the corresponding value in the kernel, which is based on window’s specific kernel position.</p>
 <p>The product is then added to the array that keeps track of the running total.</p>
 <div class="cell docutils container">
@@ -907,7 +1054,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="window-operations-with-predefined-functions">
-<h3>Window operations with predefined functions<a class="headerlink" href="#window-operations-with-predefined-functions" title="Permalink to this headline">¶</a></h3>
+<h3>Window operations with predefined functions<a class="headerlink" href="#window-operations-with-predefined-functions" title="Permalink to this headline">#</a></h3>
 <p>We can also perform window operations with predefined functions, such as getting the maximum value of a pixel and its surrounding pixels. We simply take the calculations from each vectorized sliding window and get the maximum value from those calculations.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -932,7 +1079,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="save-output">
-<h3>Save output<a class="headerlink" href="#save-output" title="Permalink to this headline">¶</a></h3>
+<h3>Save output<a class="headerlink" href="#save-output" title="Permalink to this headline">#</a></h3>
 <p>We can insert the processed aggregate array into the output array, with each value replacing the placeholder value at its corresponding original position in the array. Recall that because edge pixels are ignored, the edge pixels of the output array will still keep their placeholder values.</p>
 <p>In this example, each non-edge output pixel value is the average pixel value–with pixel values drawn from the input raster–of the 8 pixels surrounding that pixel and the pixel itself.</p>
 <div class="cell docutils container">
@@ -980,7 +1127,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="section" id="window-operations-with-geowombat">
-<h2>Window operations with GeoWombat<a class="headerlink" href="#window-operations-with-geowombat" title="Permalink to this headline">¶</a></h2>
+<h2>Window operations with GeoWombat<a class="headerlink" href="#window-operations-with-geowombat" title="Permalink to this headline">#</a></h2>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> for window operations if we’re only interested in calculating a statistic. The code to do this with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> is less complex and much shorter than with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>–we can simply use the <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function provides us with a few parameters that we can specify:</p>
 <table class="colwidths-auto table">
@@ -1074,9 +1221,11 @@ Attributes: (12/14)
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="e_raster_rasterize.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1092,16 +1241,16 @@ Attributes: (12/14)
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1111,16 +1260,20 @@ Attributes: (12/14)
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

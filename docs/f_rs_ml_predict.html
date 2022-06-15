@@ -12,8 +12,9 @@
 
     <title>Spatial Prediction using ML in Python &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,20 +24,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +42,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -77,7 +77,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,9 +100,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -106,14 +121,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -173,12 +189,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -374,112 +390,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/f_rs_ml_predict.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/f_rs_ml_predict.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/f_rs_ml_predict.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/f_rs_ml_predict.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/f_rs_ml_predict.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/f_rs_ml_predict.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/f_rs_ml_predict.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/f_rs_ml_predict.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/f_rs_ml_predict.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/f_rs_ml_predict.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-land-use-classification-using-geowombat-sklearn">
    Create Land Use Classification using Geowombat &amp; Sklearn
@@ -509,12 +656,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Spatial Prediction using ML in Python</h1>
@@ -560,14 +706,19 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <hr class="docutils" id="f-rs-ml-predict" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
-<li><p>Fit and predict machine learning models to make spatial predictions</p></li>
+<li><p>Fit and predict machine learning models to make spatial predictions</p>
+<ul>
+<li><p>Use sklearn pipelines, cross-validation and hyper parameter tuning for spatial data</p></li>
+</ul>
+</li>
 <li><p>Predict landcover or continuous models</p></li>
 <li><p>Make predictions using timeseries data</p></li>
 </ul>
@@ -583,18 +734,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="spatial-prediction-using-ml-in-python">
-<h1>Spatial Prediction using ML in Python<a class="headerlink" href="#spatial-prediction-using-ml-in-python" title="Permalink to this headline">¶</a></h1>
+<h1>Spatial Prediction using ML in Python<a class="headerlink" href="#spatial-prediction-using-ml-in-python" title="Permalink to this headline">#</a></h1>
 <div class="section" id="create-land-use-classification-using-geowombat-sklearn">
-<h2>Create Land Use Classification using Geowombat &amp; Sklearn<a class="headerlink" href="#create-land-use-classification-using-geowombat-sklearn" title="Permalink to this headline">¶</a></h2>
+<h2>Create Land Use Classification using Geowombat &amp; Sklearn<a class="headerlink" href="#create-land-use-classification-using-geowombat-sklearn" title="Permalink to this headline">#</a></h2>
 <p>The most common task for remotely sensed data is creating land cover classification. In this tutorial we will walk you through how to train a ML model using raster data. These methods are heavily dependent on the great package <a class="reference external" href="https://phausamann.github.io/sklearn-xarray/">sklearn_xarray</a>. To understand the pipeline commands please see their <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">documentation</a> and <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/index.html#pipelines-and-composite-estimators">examples</a>.</p>
 <div class="section" id="supervised-classification-in-python">
-<h3>Supervised Classification in Python<a class="headerlink" href="#supervised-classification-in-python" title="Permalink to this headline">¶</a></h3>
+<h3>Supervised Classification in Python<a class="headerlink" href="#supervised-classification-in-python" title="Permalink to this headline">#</a></h3>
 <p>In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes [‘water’,’crop’,’tree’,’developed’]. The first step is to use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> to convert these to integer based categories, which we store in a new column called ‘lc’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
-
 <span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">fit_predict</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">sklearn_xarray.preprocessing</span> <span class="kn">import</span> <span class="n">Featurizer</span>
@@ -612,6 +762,15 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                                           geometry  lc
+0      water  POLYGON ((737544.502 -2795232.772, 737544.502 ...   3
+1       crop  POLYGON ((742517.658 -2798160.232, 743046.717 ...   0
+2       tree  POLYGON ((742435.360 -2801875.403, 742458.874 ...   2
+3  developed  POLYGON ((738903.667 -2811573.845, 738926.586 ...   1
+</pre></div>
+</div>
+</div>
 </div>
 <p>We are then going to generate our sklearn pipeline (<a class="reference external" href="https://medium.com/vickdata/a-simple-guide-to-scikit-learn-pipelines-4ac0d974bdcf">see simple tutorial here</a>). A pipeline simply allows us to pass a numpy array through a defined set of operations. In this case the data is passed through the following operations:</p>
 <ul class="simple">
@@ -622,16 +781,17 @@ const thebe_selector_output = ".output, .cell_output"
 <p>In this example we will fit and predict the model in two steps. The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method returns three objects, a transformed version of the original dataset <code class="docutils literal notranslate"><span class="pre">X</span></code> that can be used by sklearn, <code class="docutils literal notranslate"><span class="pre">Xy</span></code> a tuple containing the data used for training <code class="docutils literal notranslate"><span class="pre">(X,y)</span></code> where any data outside the polygons is removed, and the trained pipeline <code class="docutils literal notranslate"><span class="pre">clf</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Use a data pipeline</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span>
                 <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">GaussianNB</span><span class="p">())])</span>
 
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
 <span class="c1"># Fit the classifier</span>
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
@@ -640,14 +800,17 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_3_0.png" src="../_images/f_rs_ml_predict_3_0.png" />
 </div>
-<p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>.</p>
+</div>
+<p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
@@ -655,21 +818,24 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_5_0.png" src="../_images/f_rs_ml_predict_5_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="unsupervised-classification-in-python">
-<h3>Unsupervised Classification in Python<a class="headerlink" href="#unsupervised-classification-in-python" title="Permalink to this headline">¶</a></h3>
+<h3>Unsupervised Classification in Python<a class="headerlink" href="#unsupervised-classification-in-python" title="Permalink to this headline">#</a></h3>
 <p>Unsupervised classification takes a different approach. Here we don’t have to provide examples of different land cover types. Instead we rely on the algorithm to identify distinct clusters of similar data, and apply a unique label to each cluster. For instance, if we are talking about land cover water and trees are going to look very different. Water reflects more blue and absorbs all the near infrared, while trees reflect little blue and reflect lots of near infrared.  Therefore water and trees should ‘cluster’ together when plotted out according to their different blue and near infrared reflectances. These clusters will be assigned a unique value to each pixel, e.g. water will be assigned 1 and trees 2. Later, the end user will need to go back and assign the label to each numbered cluster, e.g. water=1, trees=2.</p>
 <p>In this example we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">kmeans</a> to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
 <span class="n">cl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># Fit_predict unsupervised classifier</span>
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span><span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
@@ -677,16 +843,21 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_7_0.png" src="../_images/f_rs_ml_predict_7_0.png" />
+</div>
 </div>
 <p>In this case we can see that it effective labels different clusters of data, and now it is up to us to determine which clusters should be categorized as water, trees, and fields etc.</p>
 </div>
 </div>
 <div class="section" id="spatial-prediction-with-time-series-stack-using-geowombat-sklearn">
-<h2>Spatial prediction with time series stack using Geowombat &amp; Sklearn<a class="headerlink" href="#spatial-prediction-with-time-series-stack-using-geowombat-sklearn" title="Permalink to this headline">¶</a></h2>
+<h2>Spatial prediction with time series stack using Geowombat &amp; Sklearn<a class="headerlink" href="#spatial-prediction-with-time-series-stack-using-geowombat-sklearn" title="Permalink to this headline">#</a></h2>
 <p>If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> to ‘time’ and set the <code class="docutils literal notranslate"><span class="pre">time_names</span></code>.  <em>Note</em> we are just pretending we have two dates of LandSat imagery here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span> <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -695,22 +866,53 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, y: 372, x: 408)&gt;
+dask.array&lt;getitem, shape=(2, 372, 408), dtype=float64, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+Coordinates:
+    band     &lt;U4 &#39;targ&#39;
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * x        (x) float64 7.174e+05 7.176e+05 7.177e+05 ... 7.783e+05 7.785e+05
+  * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
+    targ     (time, y, x) float64 nan nan nan nan nan ... nan nan nan nan nan
+Attributes:
+    transform:          (150.0, 0.0, 717345.0, 0.0, -150.0, -2776995.0)
+    crs:                +init=epsg:32621
+    res:                (150.0, 150.0)
+    is_tiled:           0
+    nodatavals:         (0, 0, 0)
+    scales:             (1.0, 1.0, 1.0)
+    offsets:            (0.0, 0.0, 0.0)
+    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC0...
+    resampling:         nearest
+    AREA_OR_POINT:      Area
+    data_are_separate:  1
+    data_are_stacked:   1
+</pre></div>
+</div>
+<img alt="../_images/f_rs_ml_predict_9_1.png" src="../_images/f_rs_ml_predict_9_1.png" />
+</div>
 </div>
 <p>If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_11_0.png" src="../_images/f_rs_ml_predict_11_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="cross-validation-and-hyperparameter-tuning-with-spatial-prediction">
-<h2>Cross-validation and Hyperparameter Tuning with Spatial Prediction<a class="headerlink" href="#cross-validation-and-hyperparameter-tuning-with-spatial-prediction" title="Permalink to this headline">¶</a></h2>
+<h2>Cross-validation and Hyperparameter Tuning with Spatial Prediction<a class="headerlink" href="#cross-validation-and-hyperparameter-tuning-with-spatial-prediction" title="Permalink to this headline">#</a></h2>
 <p>One of the most important parts of successfully building a model is a careful assessment of model performance. To do this we will leverage some of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> built in tools. One of the most common cross-validation methods is called k-fold, where you data is broken in to independent sets of training and testing data multiple times. The ability of the model - trained on the ‘training’ data - to predict the outcome of the ‘testing’ data multiple times. We can then have a measure of how well our model will work on data it has never seen before.</p>
 <p>In this case we are going to use our supervised classification pipeline <code class="docutils literal notranslate"><span class="pre">pl</span></code> from earlier. And we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html?highlight=kfold#sklearn.model_selection.KFold">kfold</a> to do <a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html">cross-validation</a>. To use <code class="docutils literal notranslate"><span class="pre">kfold</span></code> with <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> we need to use <code class="docutils literal notranslate"><span class="pre">CrossValidatorWrapper</span></code> as seen in the example below to allow it to work with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> objects.</p>
 <p>We often also need to <a class="reference external" href="https://scikit-learn.org/stable/modules/grid_search.html">hyper-parameter tune</a>
@@ -730,7 +932,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <p>So <code class="docutils literal notranslate"><span class="pre">&quot;pca__n_components&quot;:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> says that for the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step of the pipeline, we will try out tree different values for the parameter <code class="docutils literal notranslate"><span class="pre">n_components</span></code>, allowing us to choose the one that performs best at predicting our ‘testing’ data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn_xarray.model_selection</span> <span class="kn">import</span> <span class="n">CrossValidatorWrapper</span>
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
@@ -746,7 +948,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="c1"># fit a model to get Xy used to train model</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
@@ -766,6 +968,25 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.15127478, 0.17484608, 0.14793749, 0.14352918, 0.15261936,
+       0.18515682]), &#39;std_fit_time&#39;: array([0.00583673, 0.04766097, 0.00490675, 0.00348462, 0.00864314,
+       0.03577372]), &#39;mean_score_time&#39;: array([0.09150372, 0.11217704, 0.09275851, 0.09279857, 0.10127025,
+       0.11805472]), &#39;std_score_time&#39;: array([0.00606398, 0.02464995, 0.0030899 , 0.00282972, 0.01786448,
+       0.0282516 ]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+             mask=[False, False, False, False, False, False],
+       fill_value=&#39;?&#39;,
+            dtype=object), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
+             mask=[False, False, False, False, False, False],
+       fill_value=&#39;?&#39;,
+            dtype=object), &#39;params&#39;: [{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: False}], &#39;split0_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split1_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split2_test_score&#39;: array([0.75 , 0.875, 0.75 , 0.75 , 0.625, 0.5  ]), &#39;split3_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split4_test_score&#39;: array([0., 0., 0., 0., 0., 0.]), &#39;mean_test_score&#39;: array([0.75 , 0.775, 0.75 , 0.75 , 0.725, 0.7  ]), &#39;std_test_score&#39;: array([0.38729833, 0.39051248, 0.38729833, 0.38729833, 0.39051248,
+       0.4       ]), &#39;rank_test_score&#39;: array([2, 1, 2, 2, 5, 6], dtype=int32)}
+0.775
+{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}
+</pre></div>
+</div>
+<img alt="../_images/f_rs_ml_predict_13_1.png" src="../_images/f_rs_ml_predict_13_1.png" />
 </div>
 </div>
 <p>In order to create a model with the optimal parameters we need to use <code class="docutils literal notranslate"><span class="pre">gridsearch.best_params_</span></code>, which holds a dictionary of each parameter and its optimal value. To ‘use’ these values we need to update the parameters held in our returned pipeline, <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, by using the <code class="docutils literal notranslate"><span class="pre">.set_params</span></code> method. We use <code class="docutils literal notranslate"><span class="pre">**</span></code> to unpack the dictionary values, tutorial on <a class="reference external" href="https://medium.com/ml-and-automation/how-to-unpack-list-dictionary-tuple-in-python-c0705d29931c">unpacking here</a>.</p>
@@ -795,9 +1016,11 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="f_rs_extraction.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -806,16 +1029,16 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
         </div>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -825,16 +1048,20 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

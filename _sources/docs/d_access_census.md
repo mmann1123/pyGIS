@@ -7,7 +7,7 @@ jupytext:
     jupytext_version: 1.8.2
 kernelspec:
   display_name: 'Python 3.7.10 64-bit (''pygisbookgw'': conda)'
-  name: python371064bitpygisbookgwconda0513153e7d7b4503839be1e6673bfbb2
+  name: python3
 html_meta:
   "description lang=en": "Learn how to access US Census, and American Community Survey data via python. "
   "description lang=fr": "Découvrez comment accéder aux données du recensement américain et de l'enquête communautaire américaine via python."

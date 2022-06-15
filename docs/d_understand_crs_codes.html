@@ -12,8 +12,9 @@
 
     <title>Understanding a CRS: Proj4 and CRS codes &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,20 +24,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +42,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -78,7 +78,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,9 +101,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,14 +122,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -174,12 +190,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -375,112 +391,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/d_understand_crs_codes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/d_understand_crs_codes.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_understand_crs_codes.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_understand_crs_codes.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_understand_crs_codes.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_understand_crs_codes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_understand_crs_codes.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_understand_crs_codes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/d_understand_crs_codes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/d_understand_crs_codes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#intro-to-coordinate-reference-systems">
    Intro to Coordinate Reference Systems
@@ -568,12 +715,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Understanding a CRS: Proj4 and CRS codes</h1>
@@ -677,11 +823,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="understanding-a-crs-proj4-and-crs-codes">
-<span id="d-understand-crs-codes"></span><h1>Understanding a CRS: Proj4 and CRS codes<a class="headerlink" href="#understanding-a-crs-proj4-and-crs-codes" title="Permalink to this headline">¶</a></h1>
+<span id="d-understand-crs-codes"></span><h1>Understanding a CRS: Proj4 and CRS codes<a class="headerlink" href="#understanding-a-crs-proj4-and-crs-codes" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -701,7 +848,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>By: Steven Chao</p>
 <hr class="docutils" />
 <div class="section" id="intro-to-coordinate-reference-systems">
-<h2>Intro to Coordinate Reference Systems<a class="headerlink" href="#intro-to-coordinate-reference-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Intro to Coordinate Reference Systems<a class="headerlink" href="#intro-to-coordinate-reference-systems" title="Permalink to this headline">#</a></h2>
 <p>A coordinate reference system tells Python where and how to place coordinates on Earth’s surface. For a detailed lesson on projections please go <a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">here</span></a>.</p>
 <p>As you may recall, a coordinate reference system can either be a geographic coordinate system or a projected coordinate system (also known as a map projection). A geographic coordinate system consists of a datum, which consists of an ellipsoid model and how this ellipsoid is aligned with the geoid. It’s spherical in nature, and units are typically angular (latitude and longitude). A projected coordinate system is created by taking a geographic coordinate system and using math to transform a 3-D surface onto a flat, 2-D surface. Units are typically linear and are oftentimes measured in meters. For a refresher on coordinate systems, check out this <a class="reference external" href="https://youtu.be/HnWNhyxyUHg">YouTube video</a>.</p>
 <p>All map projections introduce error because they are inherently imperfect. The “best” or “perfect” projection to use is highly dependent on what needs to be mapped and where. Therefore, as you can expect, there are many projections to choose from.</p>
@@ -765,9 +912,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>It looks like Washington, DC, albeit a bit squished! Next, let’s see how we can work with CRSs in Python.</p>
 </div>
 <div class="section" id="checking-and-setting-coordinate-reference-systems-in-python">
-<h2>Checking and Setting Coordinate Reference Systems in Python<a class="headerlink" href="#checking-and-setting-coordinate-reference-systems-in-python" title="Permalink to this headline">¶</a></h2>
+<h2>Checking and Setting Coordinate Reference Systems in Python<a class="headerlink" href="#checking-and-setting-coordinate-reference-systems-in-python" title="Permalink to this headline">#</a></h2>
 <div class="section" id="checking-a-dataset-s-coordinate-reference-system">
-<h3>Checking a dataset’s coordinate reference system<a class="headerlink" href="#checking-a-dataset-s-coordinate-reference-system" title="Permalink to this headline">¶</a></h3>
+<h3>Checking a dataset’s coordinate reference system<a class="headerlink" href="#checking-a-dataset-s-coordinate-reference-system" title="Permalink to this headline">#</a></h3>
 <p>To check the dataset’s CRS (assuming it has one), use the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -785,7 +932,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>For our shapefile, the output is a dictionary with a value of <code class="docutils literal notranslate"><span class="pre">'epsg:4326'</span></code>. We’ll cover what this means in more detail later in this chapter, but just know for now that an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code is a way to reference a CRS.</p>
 </div>
 <div class="section" id="change-a-dataset-s-crs">
-<h3>Change a dataset’s CRS<a class="headerlink" href="#change-a-dataset-s-crs" title="Permalink to this headline">¶</a></h3>
+<h3>Change a dataset’s CRS<a class="headerlink" href="#change-a-dataset-s-crs" title="Permalink to this headline">#</a></h3>
 <p>To change a dataset’s CRS, we’ll need to reproject the data. Here, we will project copies of our data twice using the <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> function, once with a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string and once with an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code. Both of these values reference the same CRS (in this case, NAD83)–they are simply different ways to reference it. The projection will remain in latitude and longitude, but we will change the ellipsoid and datum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -828,11 +975,11 @@ Example 2 (EPSG code) CRS: epsg:4269
 </div>
 </div>
 <div class="section" id="proj-4-string">
-<h2>PROJ.4 String<a class="headerlink" href="#proj-4-string" title="Permalink to this headline">¶</a></h2>
+<h2>PROJ.4 String<a class="headerlink" href="#proj-4-string" title="Permalink to this headline">#</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string identifies and defines a particular CRS. The string holds the parameters (e.g., units, datum) of a given CRS.</p>
 <p>Sources: <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
 <div class="section" id="what-is-in-a-proj-4-string">
-<h3>What is in a PROJ.4 string?<a class="headerlink" href="#what-is-in-a-proj-4-string" title="Permalink to this headline">¶</a></h3>
+<h3>What is in a PROJ.4 string?<a class="headerlink" href="#what-is-in-a-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and identify each individual parameter, each parameter begins with a <code class="docutils literal notranslate"><span class="pre">+</span></code> sign. A CRS parameter is defined after the <code class="docutils literal notranslate"><span class="pre">+</span></code> sign.</p>
 <p>A few <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> parameters can be applied to most CRSs:</p>
 <table class="colwidths-auto table">
@@ -897,17 +1044,17 @@ Example 2 (EPSG code) CRS: epsg:4269
 <p>Take for instance lambert conformal conic with the proj4 string of “+proj=lcc +lat_1=20 +lat_2=60 lon_0=-96 +datum=NAD83 +units=m”. We can see that <code class="docutils literal notranslate"><span class="pre">lat_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_2</span></code> specify the standard parallels. This is an example of a “secant” projection which touches the globe in two places in order to minimize distortion.  The central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> is moved away from Greenwich England 96 degrees W to be over roughly Dallas TX.</p>
 <div class="figure align-default" id="visualization-of-lambert-conformal-conic-proj4-string">
 <img alt="../_images/d_LambertProj_Code.png" src="../_images/d_LambertProj_Code.png" />
-<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Visualization of lambert conformal conic Proj4 string</span><a class="headerlink" href="#visualization-of-lambert-conformal-conic-proj4-string" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Visualization of lambert conformal conic Proj4 string</span><a class="headerlink" href="#visualization-of-lambert-conformal-conic-proj4-string" title="Permalink to this image">#</a></p>
 </div>
 <p>We can look at another example for a UTM projection with the proj4 string of “+proj=tmerc +lon_0=-99 +x_0=500,000 units=m”. This projection by comparison has a central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> directly over Dallas TX which is 99 degrees W of Greenwich. This central meridan is assigned the ‘false easting’ <code class="docutils literal notranslate"><span class="pre">x_0</span></code> of 500,000 meters.</p>
 <div class="figure align-default" id="visualization-of-utm-zone-14-proj4-string">
 <img alt="../_images/d_MercatorProj_Code.png" src="../_images/d_MercatorProj_Code.png" />
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualization of UTM zone 14 Proj4 string</span><a class="headerlink" href="#visualization-of-utm-zone-14-proj4-string" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualization of UTM zone 14 Proj4 string</span><a class="headerlink" href="#visualization-of-utm-zone-14-proj4-string" title="Permalink to this image">#</a></p>
 </div>
 <p>Sources: <a class="reference external" href="https://proj.org/usage/projections.html">Cartographic projection</a>; <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
 </div>
 <div class="section" id="creating-a-custom-crs-using-proj-4-string">
-<h3>Creating a custom CRS using PROJ.4 string<a class="headerlink" href="#creating-a-custom-crs-using-proj-4-string" title="Permalink to this headline">¶</a></h3>
+<h3>Creating a custom CRS using PROJ.4 string<a class="headerlink" href="#creating-a-custom-crs-using-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>We can change the parameters to create a custom CRS that suits our specific needs. In this section, we will create a CRS tailored to our DC shapefile.</p>
 <p>Below is the original shapefile of DC that we read in above–this will serve as a reference point for comparison.</p>
 <div class="cell docutils container">
@@ -939,7 +1086,7 @@ Name: geometry, dtype: geometry
 </div>
 <p>Looks like latitude and longitude coordinates!</p>
 <div class="section" id="reprojecting-shapefile-to-a-projected-coordinate-system">
-<h4>Reprojecting shapefile to a projected coordinate system<a class="headerlink" href="#reprojecting-shapefile-to-a-projected-coordinate-system" title="Permalink to this headline">¶</a></h4>
+<h4>Reprojecting shapefile to a projected coordinate system<a class="headerlink" href="#reprojecting-shapefile-to-a-projected-coordinate-system" title="Permalink to this headline">#</a></h4>
 <p>Now, we will reproject the shapefile using a projected coordinate system. Here, we will use the Lambert Conformal Conic projection.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -970,7 +1117,7 @@ Name: geometry, dtype: geometry
 <p>Notice how the values on the axes changed from latitude and longitude to meters.</p>
 </div>
 <div class="section" id="setting-center-point-of-projection">
-<h4>Setting center point of projection<a class="headerlink" href="#setting-center-point-of-projection" title="Permalink to this headline">¶</a></h4>
+<h4>Setting center point of projection<a class="headerlink" href="#setting-center-point-of-projection" title="Permalink to this headline">#</a></h4>
 <p>Also notice how the DC appears to be “tilted” to the left when compared to DC mapped using the previous CRS (WGS84). That’s because the center of this projection is at the 90th meridian west (<code class="docutils literal notranslate"><span class="pre">+lon_0=-90</span></code>; negative is used to denote West) and the Equator (<code class="docutils literal notranslate"><span class="pre">+lat_0=0</span></code>; <code class="docutils literal notranslate"><span class="pre">0</span></code> is the default value when not specified in the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string).</p>
 <p>We can change the values for <code class="docutils literal notranslate"><span class="pre">lat_0</span></code> and <code class="docutils literal notranslate"><span class="pre">lon_0</span></code>, which refer to the latitude of origin and the central meridian, respectively. We will change those values to <code class="docutils literal notranslate"><span class="pre">38.9072</span></code> and <code class="docutils literal notranslate"><span class="pre">-77.0369</span></code>, which is the center of DC.</p>
 <div class="cell docutils container">
@@ -993,7 +1140,7 @@ Name: geometry, dtype: geometry
 <p>As seen in the new map above, the values on both axes have changed. The origin <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> is now in the center of DC.</p>
 </div>
 <div class="section" id="setting-and-exploring-standard-parallels">
-<h4>Setting and exploring standard parallels<a class="headerlink" href="#setting-and-exploring-standard-parallels" title="Permalink to this headline">¶</a></h4>
+<h4>Setting and exploring standard parallels<a class="headerlink" href="#setting-and-exploring-standard-parallels" title="Permalink to this headline">#</a></h4>
 <p>The <a class="reference external" href="https://proj.org/operations/projections/lcc.html"><code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string for this projection</a> has two additional parameters <code class="docutils literal notranslate"><span class="pre">lat_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_2</span></code>, which specify the first and second parallel respectively. Recall that a conic projection “intersects” a globe at what is termed the standard parallels.</p>
 <p>Here, we will set our two standard parallels at <code class="docutils literal notranslate"><span class="pre">38.850</span></code> and <code class="docutils literal notranslate"><span class="pre">39.950</span></code> as they fall within the DC boundaries.</p>
 <div class="cell docutils container">
@@ -1034,7 +1181,7 @@ Name: geometry, dtype: geometry
 <p>It appears DC has shrunk! Of course, that’s not the case in reality, but because map projections are inherently imperfect, choosing arbitrary parameters can make things worse. In this case, since the chosen standard parallels are relatively far from each other and from DC, all the data in between the standard parallels end up being compressed even more. For more information, check out this <a class="reference external" href="https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf">Esri publication on map projections</a>.</p>
 </div>
 <div class="section" id="setting-false-easting-and-false-northing">
-<h4>Setting false easting and false northing<a class="headerlink" href="#setting-false-easting-and-false-northing" title="Permalink to this headline">¶</a></h4>
+<h4>Setting false easting and false northing<a class="headerlink" href="#setting-false-easting-and-false-northing" title="Permalink to this headline">#</a></h4>
 <p>Finally, two other parameters we can change are <code class="docutils literal notranslate"><span class="pre">+x_0</span></code> and <code class="docutils literal notranslate"><span class="pre">+y_0</span></code>, which are false easting and false northing respectively. The values assigned to these parameters simply offset the axes by the respective values; they do not change or affect the projection. False easting (with a value of 500,000 m) is used in Universal Tranverse Mercator (UTM) projections so that negative coordinates are avoided to the west of the central meridian in each zone. Similarly, false northing (with a value of 10,000,000 m) is also used to avoid negative coordinates when a UTM zone is in the southern hemisphere.</p>
 <p>Let’s set a false easting value of <code class="docutils literal notranslate"><span class="pre">500000</span></code> and a false northing value of <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <div class="cell docutils container">
@@ -1058,7 +1205,7 @@ Name: geometry, dtype: geometry
 <p>Source: <a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/Map%20coordinate%20systems/UTM%20and%20UPS.htm">Universal Transverse Mercator system, Hunter College Department of Geography and Environmental Science</a></p>
 </div>
 <div class="section" id="comparing-custom-projection-to-universal-tranverse-mercator">
-<h4>Comparing custom projection to Universal Tranverse Mercator<a class="headerlink" href="#comparing-custom-projection-to-universal-tranverse-mercator" title="Permalink to this headline">¶</a></h4>
+<h4>Comparing custom projection to Universal Tranverse Mercator<a class="headerlink" href="#comparing-custom-projection-to-universal-tranverse-mercator" title="Permalink to this headline">#</a></h4>
 <p>UTM is conformal. So let’s compare our custom projection to UTM Zone 18N (in which DC falls).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1084,12 +1231,12 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <div class="section" id="epsg-codes">
-<h2>EPSG Codes<a class="headerlink" href="#epsg-codes" title="Permalink to this headline">¶</a></h2>
+<h2>EPSG Codes<a class="headerlink" href="#epsg-codes" title="Permalink to this headline">#</a></h2>
 <p>Many CRSs are assigned and can be referenced by an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, which consists of a four or five digit number. <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> stands for the European Petroleum Survey Group, a now-defunct organization that compiled this CRS dataset. <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> codes can be further explored with the <a class="reference external" href="http://www.epsg-registry.org/">EPSG Geodetic Parameter Dataset</a> or at <a class="reference external" href="https://spatialreference.org/ref/epsg/">SpatialReference.org</a>.</p>
 <p>Sources:
 <a class="reference external" href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
 <div class="section" id="obtaining-epsg-code-from-proj-4-string">
-<h3>Obtaining EPSG code from PROJ.4 string<a class="headerlink" href="#obtaining-epsg-code-from-proj-4-string" title="Permalink to this headline">¶</a></h3>
+<h3>Obtaining EPSG code from PROJ.4 string<a class="headerlink" href="#obtaining-epsg-code-from-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>Not all CRSs have a corresponding <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, but we can find the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (if it exists) given a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. To do so, we can use the <code class="docutils literal notranslate"><span class="pre">to_espg()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1143,7 +1290,7 @@ Name: geometry, dtype: geometry
 </div>
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
 <div class="section" id="lowering-minimum-confidence-parameter">
-<h4>Lowering minimum confidence parameter<a class="headerlink" href="#lowering-minimum-confidence-parameter" title="Permalink to this headline">¶</a></h4>
+<h4>Lowering minimum confidence parameter<a class="headerlink" href="#lowering-minimum-confidence-parameter" title="Permalink to this headline">#</a></h4>
 <p>We can lower the min_confidence parameter value in the <code class="docutils literal notranslate"><span class="pre">to_epsg()</span></code> function, which will cause the function to return an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code that is the closest match to the provided <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1191,9 +1338,11 @@ Name: geometry, dtype: geometry
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="d_crs_what_is_it.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1209,16 +1358,16 @@ Name: geometry, dtype: geometry
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1228,16 +1377,20 @@ Name: geometry, dtype: geometry
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

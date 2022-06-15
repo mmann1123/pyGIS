@@ -12,8 +12,9 @@
 
     <title>Raster Coordinate Reference Systems (CRS) &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,20 +24,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +42,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -80,7 +80,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -89,9 +103,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -109,14 +124,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -176,12 +192,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -377,112 +393,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/d_raster_crs_intro.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/d_raster_crs_intro.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_raster_crs_intro.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_raster_crs_intro.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_raster_crs_intro.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_raster_crs_intro.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_raster_crs_intro.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_raster_crs_intro.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/d_raster_crs_intro.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/d_raster_crs_intro.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#describing-the-array-location-define-a-projection">
    Describing the Array Location (Define a Projection)
@@ -543,12 +690,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Raster Coordinate Reference Systems (CRS)</h1>
@@ -625,7 +771,8 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <hr class="docutils" id="d-raster-crs-intro" />
@@ -647,11 +794,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="raster-coordinate-reference-systems-crs">
-<h1>Raster Coordinate Reference Systems (CRS)<a class="headerlink" href="#raster-coordinate-reference-systems-crs" title="Permalink to this headline">¶</a></h1>
+<h1>Raster Coordinate Reference Systems (CRS)<a class="headerlink" href="#raster-coordinate-reference-systems-crs" title="Permalink to this headline">#</a></h1>
 <p>Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new spatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.</p>
 <div class="figure align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
 </div>
 <p>Let’s start from the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> <code class="docutils literal notranslate"><span class="pre">Z</span></code> that we want to span from [-90°,90°] longitude, and [-90°,90°] latitude. For more detail on the construction of these arrays please refer to <a class="reference internal" href="c_rasters.html"><span class="doc std std-doc">the raster section</span></a>.</p>
 <div class="cell docutils container">
@@ -680,7 +827,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Note that <em><code class="docutils literal notranslate"><span class="pre">Z</span></code> contains no data on its location</em>. Its just an array, the information stored in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> aren’t associated with it at all. This location data will often be stored in the header of file. In order to ‘locate’ the array on the map we will use affine transformations.</p>
 <p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points (<a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">review affine transforms here</span></a>). It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.</p>
 <div class="section" id="describing-the-array-location-define-a-projection">
-<h2>Describing the Array Location (Define a Projection)<a class="headerlink" href="#describing-the-array-location-define-a-projection" title="Permalink to this headline">¶</a></h2>
+<h2>Describing the Array Location (Define a Projection)<a class="headerlink" href="#describing-the-array-location-define-a-projection" title="Permalink to this headline">#</a></h2>
 <p>In this example the coordinate reference system will be ‘+proj=latlong’, which describes an equirectangular coordinate reference system with units of decimal degrees. Although <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> seems relevant to understanding the location of cell values, <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). <span class="xref myst">Review affine transformations</span> and <span class="xref myst">see an example here</span>.</p>
 <p>The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> define the location of the upper left hand corner of our new <code class="docutils literal notranslate"><span class="pre">Z</span></code> ndarray. As a reminder the translation matrix takes the form:</p>
 <div class="math notranslate nohighlight">
@@ -798,27 +945,27 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>All this info is stored in <code class="docutils literal notranslate"><span class="pre">dst</span></code> and then written to disk with <code class="docutils literal notranslate"><span class="pre">dst.write(Z,1)</span></code>. Where <code class="docutils literal notranslate"><span class="pre">write</span></code> gets the array of data <code class="docutils literal notranslate"><span class="pre">Z</span></code> and the band location to write to, in this case band <code class="docutils literal notranslate"><span class="pre">1</span></code>. This is a bit awkward, but I believe is a carryover from GDAL which rasterio relies on heavily (like all other platforms including arcmap etc).</p>
 <div class="section" id="the-crazy-tale-of-the-upper-left-hand-corner">
-<h3>The Crazy Tale of the Upper Left Hand Corner<a class="headerlink" href="#the-crazy-tale-of-the-upper-left-hand-corner" title="Permalink to this headline">¶</a></h3>
+<h3>The Crazy Tale of the Upper Left Hand Corner<a class="headerlink" href="#the-crazy-tale-of-the-upper-left-hand-corner" title="Permalink to this headline">#</a></h3>
 <p>To help us understand what is going on with <code class="docutils literal notranslate"><span class="pre">transform</span></code> it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data <code class="docutils literal notranslate"><span class="pre">Z</span></code>. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.</p>
 <p>We can visualize what we need to do here:</p>
 <div class="figure align-default" id="example-of-using-affine-translation-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_drawing.png"><img alt="../_images/c_raster_upperleft_drawing.png" src="../_images/c_raster_upperleft_drawing.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
 </div>
 <p>Let’s walk through the math behind the scenes. Here we use our transform matrix to move our upper left hand corner which is assumed to start at the origin (0,0).</p>
 <div class="figure align-default" id="example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_transform.png"><img alt="../_images/c_raster_upperleft_transform.png" src="../_images/c_raster_upperleft_transform.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
 </div>
 <p>The final coordinate of the upper left hand corner are <span class="math notranslate nohighlight">\((x_0,y_0) = (-105,105)\)</span></p>
 </div>
 <div class="section" id="translate-is-a-map">
-<h3>Translate is a “map”<a class="headerlink" href="#translate-is-a-map" title="Permalink to this headline">¶</a></h3>
+<h3>Translate is a “map”<a class="headerlink" href="#translate-is-a-map" title="Permalink to this headline">#</a></h3>
 <p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(column_number,</span> <span class="pre">row_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
 <div class="figure align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
 <a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">#</a></p>
 </div>
 <p>Let’s start with the easiest and retrieve the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">transform</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
 <div class="cell docutils container">
@@ -860,7 +1007,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="how-transforms-works">
-<h4>How Transforms Works<a class="headerlink" href="#how-transforms-works" title="Permalink to this headline">¶</a></h4>
+<h4>How Transforms Works<a class="headerlink" href="#how-transforms-works" title="Permalink to this headline">#</a></h4>
 <p>Let’s work the example of finding the upper left coordinates of with <code class="docutils literal notranslate"><span class="pre">row=5</span></code>, <code class="docutils literal notranslate"><span class="pre">column=2</span></code>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -884,30 +1031,30 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="reproject-a-raster-the-simple-case">
-<h2>Reproject a Raster - The Simple Case<a class="headerlink" href="#reproject-a-raster-the-simple-case" title="Permalink to this headline">¶</a></h2>
+<h2>Reproject a Raster - The Simple Case<a class="headerlink" href="#reproject-a-raster-the-simple-case" title="Permalink to this headline">#</a></h2>
 <p>How then do we reproject a raster? Since <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a map of pixel locations, warping a raster then becomes as simple as knowing the <code class="docutils literal notranslate"><span class="pre">transform</span></code> of your destination based on the description of the new coordinate reference system (CRS). If you haven’t please study <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">affine transformations</span></a>.</p>
 <div class="section" id="shifting-the-prime-meridian">
-<h3>Shifting the Prime Meridian<a class="headerlink" href="#shifting-the-prime-meridian" title="Permalink to this headline">¶</a></h3>
+<h3>Shifting the Prime Meridian<a class="headerlink" href="#shifting-the-prime-meridian" title="Permalink to this headline">#</a></h3>
 <p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">proj4string</span></a>).</p>
 <p>Let’s start be looking visually at what we plan to do:</p>
 <div class="figure align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
 </div>
 <p>We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate (<span class="math notranslate nohighlight">\(x_B\)</span>, <span class="math notranslate nohighlight">\(y_B\)</span>)</p>
 <div class="figure align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster_m.png"><img alt="../_images/d_europe_translate_raster_m.png" src="../_images/d_europe_translate_raster_m.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
 </div>
 </div>
 </div>
 <div class="section" id="reproject-a-raster-the-complex-case">
-<h2>Reproject a Raster - The Complex Case<a class="headerlink" href="#reproject-a-raster-the-complex-case" title="Permalink to this headline">¶</a></h2>
+<h2>Reproject a Raster - The Complex Case<a class="headerlink" href="#reproject-a-raster-the-complex-case" title="Permalink to this headline">#</a></h2>
 <p>In many cases reprojecting a raster requires changing the number of rows or columns, or ‘warping’ (i.e. bending) an image. All of these examples create a problem, the centroids of the new projected raster don’t line up with the centroids of the original raster. Therefore they now represent locations on the ground that weren’t in the original dataset.</p>
 <p>Take for instance the case of a ‘warped’ raster image (below) which for instance occurs when you switch from a spherical CRS (like lat lon) to a projected (or flat) CRS. Notice that the centroids of the two rasters no longer over lap:</p>
 <div class="figure align-default" id="example-of-warping-an-image-during-reprojection">
 <a class="reference internal image-reference" href="../_images/d_warp.png"><img alt="../_images/d_warp.png" src="../_images/d_warp.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">#</a></p>
 </div>
 <p>In this case we have a decision to make, how will we assign values to the new warped raster? Keep in mind the values must change because they now point to different locations on the ground.  For this we have a number of ‘interpolation’ options, some simple, some complex.</p>
 <div class="admonition note">
@@ -915,20 +1062,20 @@ const thebe_selector_output = ".output, .cell_output"
 <p>What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. <a class="reference external" href="http://wiki.gis.com/wiki/index.php/Interpolation">Read more here</a></p>
 </div>
 <div class="section" id="interpolation-options">
-<span id="d-raster-crs-intro-interpolation-options"></span><h3>Interpolation Options<a class="headerlink" href="#interpolation-options" title="Permalink to this headline">¶</a></h3>
+<span id="d-raster-crs-intro-interpolation-options"></span><h3>Interpolation Options<a class="headerlink" href="#interpolation-options" title="Permalink to this headline">#</a></h3>
 <p>There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations.</p>
 <p>In the visual example below we will try to estimate the value for location <code class="docutils literal notranslate"><span class="pre">C</span></code> based on the known values at locations <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
 <div class="figure align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">#</a></p>
 </div>
 <div class="figure align-default" id="example-of-nearest-neighbor-and-bicubic-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Permalink to this image">#</a></p>
 </div>
 </div>
 <div class="section" id="choosing-the-right-interpolation-method">
-<h3>Choosing the Right Interpolation Method<a class="headerlink" href="#choosing-the-right-interpolation-method" title="Permalink to this headline">¶</a></h3>
+<h3>Choosing the Right Interpolation Method<a class="headerlink" href="#choosing-the-right-interpolation-method" title="Permalink to this headline">#</a></h3>
 <p>Choosing the correct interpolation method is important. The following table should help you to decided. Remember categorical data might include land cover classes (forest, water, etc), and continuous data is measurable for instance rainfall (values 0 to 20mm).</p>
 <table class="colwidths-auto table">
 <thead>
@@ -964,7 +1111,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="reprojecting-a-raster-with-rasterio">
-<h2>Reprojecting a Raster with Rasterio<a class="headerlink" href="#reprojecting-a-raster-with-rasterio" title="Permalink to this headline">¶</a></h2>
+<h2>Reprojecting a Raster with Rasterio<a class="headerlink" href="#reprojecting-a-raster-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>Ok enough talk already, how do we reproject a raster? Before we get into it, we need to talk some more… about <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code>. <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code> allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the <code class="docutils literal notranslate"><span class="pre">source</span></code> (src) is the original input raster, and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> (dst) is the outputed reprojected raster.</p>
 <p>First, remember that the transform matrix takes the following form:</p>
 <div class="math notranslate nohighlight">
@@ -1060,7 +1207,7 @@ Destination Transform:
 </div>
 <div class="figure align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
 </div>
 <p>Source: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data">Creating Raster Data</a></p>
 <!-- 
@@ -1142,9 +1289,11 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="d_vector_crs_intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1160,16 +1309,16 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1179,16 +1328,20 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

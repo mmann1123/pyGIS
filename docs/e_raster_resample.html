@@ -11,8 +11,9 @@
 
     <title>Resampling &amp; Registering Rasters w. Rasterio and Geowombat &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,20 +23,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -43,12 +41,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -79,7 +79,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -88,9 +102,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -108,14 +123,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -175,12 +191,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -376,112 +392,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/e_raster_resample.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/e_raster_resample.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_resample.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_resample.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_raster_resample.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_raster_resample.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_resample.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_resample.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/e_raster_resample.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/e_raster_resample.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-is-resampling-important">
    Why is Resampling Important?
@@ -528,12 +675,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Resampling & Registering Rasters w. Rasterio and Geowombat</h1>
@@ -596,7 +742,8 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <hr class="docutils" id="e-raster-reproject" />
@@ -618,27 +765,27 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="tex2jax_ignore mathjax_ignore section" id="resampling-registering-rasters-w-rasterio-and-geowombat">
-<h1>Resampling &amp; Registering Rasters w. Rasterio and Geowombat<a class="headerlink" href="#resampling-registering-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">¶</a></h1>
+<h1>Resampling &amp; Registering Rasters w. Rasterio and Geowombat<a class="headerlink" href="#resampling-registering-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
 <div class="section" id="why-is-resampling-important">
-<h2>Why is Resampling Important?<a class="headerlink" href="#why-is-resampling-important" title="Permalink to this headline">¶</a></h2>
+<h2>Why is Resampling Important?<a class="headerlink" href="#why-is-resampling-important" title="Permalink to this headline">#</a></h2>
 <p><em>Before you begin</em> any analysis using rater data it is critical that you have rasters that are “co-registered”. Co-registration requires that any two rasters have the same resolution, and orientation - the origins can differ but they much align. <em>In other words, co-registration requires that cell centroids align perfectly for all intersecting areas.</em> Resampling is also extremely common during reprojection operations as it often requires changing the orientation, scale or resolution of an image.</p>
 <p><strong>Examples of data that is <em>not</em> co-registered</strong></p>
 <div class="figure align-default" id="resampling-rasters-different-orientation">
 <a class="reference internal image-reference" href="../_images/Raster_diff-orientation.jpg"><img alt="../_images/Raster_diff-orientation.jpg" src="../_images/Raster_diff-orientation.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">Resampling rasters - different orientation</span><a class="headerlink" href="#resampling-rasters-different-orientation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">Resampling rasters - different orientation</span><a class="headerlink" href="#resampling-rasters-different-orientation" title="Permalink to this image">#</a></p>
 </div>
 <div class="figure align-default" id="resampling-rasters-different-orientation-and-origin">
 <a class="reference internal image-reference" href="../_images/Raster_diff-orientation-origin.jpg"><img alt="../_images/Raster_diff-orientation-origin.jpg" src="../_images/Raster_diff-orientation-origin.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">Resampling rasters - different orientation and origin</span><a class="headerlink" href="#resampling-rasters-different-orientation-and-origin" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">Resampling rasters - different orientation and origin</span><a class="headerlink" href="#resampling-rasters-different-orientation-and-origin" title="Permalink to this image">#</a></p>
 </div>
 <div class="figure align-default" id="resampling-rasters-different-resolution">
 <a class="reference internal image-reference" href="../_images/Raster_diff-res.jpg"><img alt="../_images/Raster_diff-res.jpg" src="../_images/Raster_diff-res.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 57 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 57 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">#</a></p>
 </div>
 <p>We can co-register images by resampling, and often reprojecting, one image to match another.</p>
 </div>
 <div class="section" id="methods-for-resampling-explained">
-<span id="raster-resample-methods"></span><h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">¶</a></h2>
+<span id="raster-resample-methods"></span><h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">#</a></h2>
 <p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>. But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <p><strong>resampling direction</strong></p>
 <ul class="simple">
@@ -647,9 +794,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </div>
 <div class="section" id="simple-up-downsampling-in-rasterio-geowombat">
-<h2>Simple Up/Downsampling in Rasterio &amp; Geowombat<a class="headerlink" href="#simple-up-downsampling-in-rasterio-geowombat" title="Permalink to this headline">¶</a></h2>
+<h2>Simple Up/Downsampling in Rasterio &amp; Geowombat<a class="headerlink" href="#simple-up-downsampling-in-rasterio-geowombat" title="Permalink to this headline">#</a></h2>
 <div class="section" id="rasterio-upsampling-example">
-<h3>Rasterio Upsampling Example<a class="headerlink" href="#rasterio-upsampling-example" title="Permalink to this headline">¶</a></h3>
+<h3>Rasterio Upsampling Example<a class="headerlink" href="#rasterio-upsampling-example" title="Permalink to this headline">#</a></h3>
 <p>Occationally you will need to resample your data by some factor, for instance you might want data upsampled to a courser resolution due to memory constraints.</p>
 <p>Here’s an example of how to generate the <code class="docutils literal notranslate"><span class="pre">data</span></code> array and the <code class="docutils literal notranslate"><span class="pre">transform</span></code> needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the <code class="docutils literal notranslate"><span class="pre">transform</span></code>, let’s review <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transformations</span></a>. Here we will update the scale values with the new resolution using <span class="math notranslate nohighlight">\(S_{y}\)</span> and <span class="math notranslate nohighlight">\(S_{x}\)</span> show below</p>
 <div class="math notranslate nohighlight">
@@ -733,7 +880,7 @@ Transform after resample:
 </div>
 </div>
 <div class="section" id="geowombat-up-down-sampling-example">
-<h3>Geowombat Up/Down Sampling Example<a class="headerlink" href="#geowombat-up-down-sampling-example" title="Permalink to this headline">¶</a></h3>
+<h3>Geowombat Up/Down Sampling Example<a class="headerlink" href="#geowombat-up-down-sampling-example" title="Permalink to this headline">#</a></h3>
 <p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. We have a number of resampling methods available depending on the context <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. Writing a file is a bit more intuitive too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -781,11 +928,11 @@ Attributes:
 </div>
 </div>
 <div class="section" id="co-registering-rasters-aligning-cells">
-<h2>Co-registering Rasters (Aligning cells)<a class="headerlink" href="#co-registering-rasters-aligning-cells" title="Permalink to this headline">¶</a></h2>
+<h2>Co-registering Rasters (Aligning cells)<a class="headerlink" href="#co-registering-rasters-aligning-cells" title="Permalink to this headline">#</a></h2>
 <p>One common problem is how to get raster data to align on a cell by cell basis so you can complete your analysis. We will walk through how to do this for both rasterio and geowombat. In the following example we will learn how to align rasters with different origins, resolutions, or orientations.</p>
 <p>Our example data will look at registering LandSat data with precipitation data from CHIRPS.</p>
 <div class="section" id="example-of-co-registering-rasters-with-rasterio">
-<h3>Example of Co-registering Rasters with Rasterio<a class="headerlink" href="#example-of-co-registering-rasters-with-rasterio" title="Permalink to this headline">¶</a></h3>
+<h3>Example of Co-registering Rasters with Rasterio<a class="headerlink" href="#example-of-co-registering-rasters-with-rasterio" title="Permalink to this headline">#</a></h3>
 <p>Co-registering data is a bit complicated with rasterio, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
 <p>The original input data LandSat data is 30 meters and will be downsampled to match <code class="docutils literal notranslate"><span class="pre">precip</span></code> which is 500m.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as 0. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
@@ -813,8 +960,8 @@ Attributes:
             <span class="n">dst_transform</span><span class="p">,</span> <span class="n">dst_width</span><span class="p">,</span> <span class="n">dst_height</span> <span class="o">=</span> <span class="n">calculate_default_transform</span><span class="p">(</span>
                 <span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>     <span class="c1"># input CRS</span>
                 <span class="n">dst_crs</span><span class="p">,</span>     <span class="c1"># output CRS</span>
-                <span class="k">match</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>   <span class="c1"># input width</span>
-                <span class="k">match</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># input height </span>
+                <span class="n">match</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>   <span class="c1"># input width</span>
+                <span class="n">match</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># input height </span>
                 <span class="o">*</span><span class="n">match</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>  <span class="c1"># unpacks input outer boundaries (left, bottom, right, top)</span>
             <span class="p">)</span>
 
@@ -866,7 +1013,7 @@ Attributes:
 </div>
 </div>
 <div class="section" id="example-of-co-registering-rasters-with-geowombat">
-<h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">¶</a></h3>
+<h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">#</a></h3>
 <p>Co-registering data is simple in geowombat, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
 <p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
@@ -949,9 +1096,11 @@ Attributes: (12/13)
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="e_raster_reproject.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -967,16 +1116,16 @@ Attributes: (12/13)
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -986,16 +1135,20 @@ Attributes: (12/13)
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

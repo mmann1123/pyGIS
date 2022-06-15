@@ -12,8 +12,9 @@
 
     <title>Merge Data &amp; Dissolve Polygons &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -23,20 +24,17 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -44,12 +42,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -78,7 +78,21 @@ const thebe_selector_output = ".output, .cell_output"
                     </script>
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -87,9 +101,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,14 +122,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a_intro.html">
-   PyGIS - Open Source Spatial Programming &amp; Remote Sensing
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   0 - Get Started in Spatial Python
  </span>
@@ -174,12 +190,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_new_vectors.html">
-   Creating Spatial Vector Data
+   Spatial Points Lines Polygons in Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data
+   Raster Data in Python
   </a>
  </li>
 </ul>
@@ -375,112 +391,243 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/docs/e_vector_merge_dissolve.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/e_vector_merge_dissolve.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/mmann1123/pyGIS"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_vector_merge_dissolve.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_vector_merge_dissolve.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_vector_merge_dissolve.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_vector_merge_dissolve.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_vector_merge_dissolve.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_vector_merge_dissolve.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/docs/e_vector_merge_dissolve.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/docs/e_vector_merge_dissolve.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -552,12 +699,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Merge Data & Dissolve Polygons</h1>
@@ -645,11 +791,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="merge-data-dissolve-polygons">
-<h1>Merge Data &amp; Dissolve Polygons<a class="headerlink" href="#merge-data-dissolve-polygons" title="Permalink to this headline">¶</a></h1>
+<h1>Merge Data &amp; Dissolve Polygons<a class="headerlink" href="#merge-data-dissolve-polygons" title="Permalink to this headline">#</a></h1>
 <p>By: Steven Chao</p>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -671,7 +818,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <hr class="docutils" />
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Dataframes are widely used in Python for manipulating data. Recall that a dataframe is essentially an Excel spreadsheet (a 2-D table of rows and columns); in fact, many of the functions that you might use in Excel can often be replicated when working with dataframes in Python!</p>
 <p>This chapter will introduce you to some of the basic operations that you can perform on dataframes. We will use these basic operations in order to calculate and map poverty rates in the Commonwealth of Virginia. We will pull data from the US Census Bureau’s <a class="reference external" href="https://www.census.gov/programs-surveys/acs">American Community Survey (ACS)</a> 2019 (see <a class="reference external" href="https://www.census.gov/data/developers/data-sets/acs-5year.html">this page</a> for the data).</p>
 <div class="cell docutils container">
@@ -688,9 +835,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="accessing-data">
-<h2>Accessing Data<a class="headerlink" href="#accessing-data" title="Permalink to this headline">¶</a></h2>
+<h2>Accessing Data<a class="headerlink" href="#accessing-data" title="Permalink to this headline">#</a></h2>
 <div class="section" id="import-census-data">
-<h3>Import census data<a class="headerlink" href="#import-census-data" title="Permalink to this headline">¶</a></h3>
+<h3>Import census data<a class="headerlink" href="#import-census-data" title="Permalink to this headline">#</a></h3>
 <p>Let’s begin by accessing and importing census data. Importing census data into Python requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -756,7 +903,7 @@ Shape:  (1907, 8)
 <p>By showing the dataframe, we can see that there are 1907 rows (therefore 1907 census tracts) and 8 columns.</p>
 </div>
 <div class="section" id="import-shapefile">
-<h3>Import Shapefile<a class="headerlink" href="#import-shapefile" title="Permalink to this headline">¶</a></h3>
+<h3>Import Shapefile<a class="headerlink" href="#import-shapefile" title="Permalink to this headline">#</a></h3>
 <p>Let’s also read into Python a shapefile of the Virginia census tracts and reproject it to the UTM Zone 17N projection. (This shapefile can be downloaded on the Census Bureau’s website on the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">Cartographic Boundary Files page</a> or the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapefiles page</a>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -800,9 +947,9 @@ The shapefile projection is: epsg:32617
 </div>
 </div>
 <div class="section" id="performing-dataframe-operations">
-<h2>Performing Dataframe Operations<a class="headerlink" href="#performing-dataframe-operations" title="Permalink to this headline">¶</a></h2>
+<h2>Performing Dataframe Operations<a class="headerlink" href="#performing-dataframe-operations" title="Permalink to this headline">#</a></h2>
 <div class="section" id="create-new-column-from-old-columns-to-get-combined-fips-code">
-<h3>Create new column from old columns to get combined FIPS code<a class="headerlink" href="#create-new-column-from-old-columns-to-get-combined-fips-code" title="Permalink to this headline">¶</a></h3>
+<h3>Create new column from old columns to get combined FIPS code<a class="headerlink" href="#create-new-column-from-old-columns-to-get-combined-fips-code" title="Permalink to this headline">#</a></h3>
 <p>To solve this problem, we can join the two dataframes together via a field or column that is common to both dataframes, which is referred to as a key.</p>
 <p>Looking at the two datasets above, it appears that the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column from <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> and the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns combined from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> could serve as the unique key for joining these two dataframes together. In their current forms, this join will not be successful, as we’ll need to merge the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> together to make it parallel to the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column from <code class="docutils literal notranslate"><span class="pre">va_tract</span></code>. We can simply add the columns together, much like math or the basic operators in Python, and assign the “sum” to a new column.</p>
 <p>To create a new column–or call an existing column in a dataframe–we can use indexing with <code class="docutils literal notranslate"><span class="pre">[]</span></code> and the column name (string). (There is a different way if you want to access columns using the index number; read more about indexing and selecting data <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">in the pandas documentation</a>.)</p>
@@ -883,7 +1030,7 @@ The shapefile projection is: epsg:32617
 </div>
 </div>
 <div class="section" id="remove-dataframe-columns-that-are-no-longer-needed">
-<h3>Remove dataframe columns that are no longer needed<a class="headerlink" href="#remove-dataframe-columns-that-are-no-longer-needed" title="Permalink to this headline">¶</a></h3>
+<h3>Remove dataframe columns that are no longer needed<a class="headerlink" href="#remove-dataframe-columns-that-are-no-longer-needed" title="Permalink to this headline">#</a></h3>
 <p>To reduce clutter, we can delete the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> since we don’t need them anymore. Remember that when we want to modify a dataframe, we must assign the modified dataframe back to the original variable (or a new one, if preferred). Otherwise, any modifications won’t be saved. An alternative to assigning the dataframe back to the variable is to simply pass <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code>. For more information, see the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">pandas help documentation on <code class="docutils literal notranslate"><span class="pre">drop</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,7 +1094,7 @@ The shapefile projection is: epsg:32617
 </div>
 </div>
 <div class="section" id="check-column-data-types">
-<h3>Check column data types<a class="headerlink" href="#check-column-data-types" title="Permalink to this headline">¶</a></h3>
+<h3>Check column data types<a class="headerlink" href="#check-column-data-types" title="Permalink to this headline">#</a></h3>
 <p>The key in both dataframe must be of the same data type. Let’s check the data type of the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns in both dataframes. If they aren’t the same, we will have to change the data type of columns to make them the same.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -993,7 +1140,7 @@ dtype: object
 <p>Looks like the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns are the same!</p>
 </div>
 <div class="section" id="merge-dataframes">
-<h3>Merge dataframes<a class="headerlink" href="#merge-dataframes" title="Permalink to this headline">¶</a></h3>
+<h3>Merge dataframes<a class="headerlink" href="#merge-dataframes" title="Permalink to this headline">#</a></h3>
 <p>Now, we are ready to merge the two dataframes together, using the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns as the primary key. We can use the <code class="docutils literal notranslate"><span class="pre">merge</span></code> method in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code> called on the <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> shapefile dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1040,7 +1187,7 @@ Shape:  (1907, 18)
 </ul>
 </div>
 <div class="section" id="subset-dataframe">
-<h3>Subset dataframe<a class="headerlink" href="#subset-dataframe" title="Permalink to this headline">¶</a></h3>
+<h3>Subset dataframe<a class="headerlink" href="#subset-dataframe" title="Permalink to this headline">#</a></h3>
 <p>Now that we merged the dataframes together, we can further clean up the dataframe and remove columns that are not needed. Instead of using the <code class="docutils literal notranslate"><span class="pre">drop</span></code> method, we can simply select the columns we want to keep and create a new dataframe with those selected columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1073,7 +1220,7 @@ Shape:  (1907, 9)
 <p>Notice how the number of columns dropped from 13 to 9.</p>
 </div>
 <div class="section" id="dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level">
-<h3>Dissolve geometries and get summarized statistics to get poverty statistics at the county level<a class="headerlink" href="#dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level" title="Permalink to this headline">¶</a></h3>
+<h3>Dissolve geometries and get summarized statistics to get poverty statistics at the county level<a class="headerlink" href="#dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level" title="Permalink to this headline">#</a></h3>
 <p>Next, we will group all the census tracts within the same county (<code class="docutils literal notranslate"><span class="pre">COUNTYFP</span></code>) and aggregate the poverty and population values for those tracts within the same county. We can use the <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> function in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>, which is the spatial version of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. We use <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> instead of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> because the former also groups and merges all the geometries (in this case, census tracts) within a given group (in this case, counties).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1105,7 +1252,7 @@ Shape:  (133, 5)
 <p>Notice that we got the number of rows down from 1907 to 133.</p>
 </div>
 <div class="section" id="perform-column-math-to-get-poverty-rates">
-<h3>Perform column math to get poverty rates<a class="headerlink" href="#perform-column-math-to-get-poverty-rates" title="Permalink to this headline">¶</a></h3>
+<h3>Perform column math to get poverty rates<a class="headerlink" href="#perform-column-math-to-get-poverty-rates" title="Permalink to this headline">#</a></h3>
 <p>We can estimate the poverty rate by dividing the sum of <code class="docutils literal notranslate"><span class="pre">C17002_002E</span></code> (ratio of income to poverty in the past 12 months, &lt; 0.50) and <code class="docutils literal notranslate"><span class="pre">C17002_003E</span></code> (ratio of income to poverty in the past 12 months, 0.50 - 0.99) by <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population).</p>
 <p>Side note: Notice that <code class="docutils literal notranslate"><span class="pre">C17002_001E</span></code> (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population). We’ll disregard this for now since the difference is not too significant.</p>
 <div class="cell docutils container">
@@ -1180,7 +1327,7 @@ Shape:  (133, 5)
 </div>
 </div>
 <div class="section" id="plotting-results">
-<h2>Plotting Results<a class="headerlink" href="#plotting-results" title="Permalink to this headline">¶</a></h2>
+<h2>Plotting Results<a class="headerlink" href="#plotting-results" title="Permalink to this headline">#</a></h2>
 <p>Finally, since we have the spatial component connected to our census data, we can plot the results!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1224,19 +1371,21 @@ Shape:  (133, 5)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python371064bitpygisbookgwconda0513153e7d7b4503839be1e6673bfbb2",
+            kernelName: "python3",
             path: "./docs"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python371064bitpygisbookgwconda0513153e7d7b4503839be1e6673bfbb2'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="e_buffer_neighbors.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1252,16 +1401,16 @@ Shape:  (133, 5)
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
-    
-      By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
-    
-      <div class="extra_footer">
-        <div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  
+    <div class="extra_footer">
+      <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1271,16 +1420,20 @@ Shape:  (133, 5)
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-      </div>
-  </p>
-</footer>
-</main>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
