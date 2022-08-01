@@ -15,7 +15,7 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
-(d_affine.md)=
+(d_affine)=
 
 
 ---------------

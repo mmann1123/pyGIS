@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# (d_affine.md)=
+# (d_affine)=
 # 
 # 
 # ---------------
