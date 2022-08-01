@@ -193,7 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -739,7 +739,7 @@ title="Print to PDF"
 </div>
 <div class="section" id="rasterize-vectors-with-rasterio">
 <h2>Rasterize vectors with rasterio<a class="headerlink" href="#rasterize-vectors-with-rasterio" title="Permalink to this headline">#</a></h2>
-<p>We’ll read in the vector file of some of California’s counties. We will also read in a raster file to get the raster’s metadata (i.e., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “reference” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform (UL corner location, cell size etc). For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Affine Transforms</span></a>.</p>
+<p>We’ll read in the vector file of some of California’s counties. We will also read in a raster file to get the raster’s metadata (i.e., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “reference” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform (UL corner location, cell size etc). For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine Transforms</span></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The vector and raster <strong>must be</strong> be in the same coordinate system. If not, you’ll need to re-project one of them so they are the same. To re-project vectors, see the chapter on <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understanding CRS Codes</span></a>. To re-project rasters, see the chapter on <a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reproject Rasters w. Rasterio and Geowombat</span></a>.</p>

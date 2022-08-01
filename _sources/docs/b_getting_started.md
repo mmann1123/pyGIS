@@ -352,3 +352,6 @@ icon.
 Save it somewhere, navigate to it from the Jupyter dashboard and then
 run as discussed above.
 
+
+## Attribution
+The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)

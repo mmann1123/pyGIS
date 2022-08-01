@@ -200,3 +200,6 @@ series on Python programming hosted by [QuantEcon](https://quantecon.org).
 
 The [full set of lectures](https://python-programming.quantecon.org/) might be
 useful as the next step of your study.
+
+## Attribution 
+The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)

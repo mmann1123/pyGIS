@@ -196,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -757,7 +757,7 @@ title="Print to PDF"
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine transformation</span></a></p></li>
 <li><p><a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Raster Coordinate Reference Systems</span></a></p></li>
 <li><p><a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reprojecting Rasters</span></a></p></li>
 <li><p><a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro-interpolation-options"><span class="std std-ref">Interpolation Methods Explained</span></a></p></li>
@@ -798,7 +798,7 @@ title="Print to PDF"
 <div class="section" id="rasterio-upsampling-example">
 <h3>Rasterio Upsampling Example<a class="headerlink" href="#rasterio-upsampling-example" title="Permalink to this headline">#</a></h3>
 <p>Occationally you will need to resample your data by some factor, for instance you might want data upsampled to a courser resolution due to memory constraints.</p>
-<p>Here’s an example of how to generate the <code class="docutils literal notranslate"><span class="pre">data</span></code> array and the <code class="docutils literal notranslate"><span class="pre">transform</span></code> needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the <code class="docutils literal notranslate"><span class="pre">transform</span></code>, let’s review <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transformations</span></a>. Here we will update the scale values with the new resolution using <span class="math notranslate nohighlight">\(S_{y}\)</span> and <span class="math notranslate nohighlight">\(S_{x}\)</span> show below</p>
+<p>Here’s an example of how to generate the <code class="docutils literal notranslate"><span class="pre">data</span></code> array and the <code class="docutils literal notranslate"><span class="pre">transform</span></code> needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the <code class="docutils literal notranslate"><span class="pre">transform</span></code>, let’s review <a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">affine transformations</span></a>. Here we will update the scale values with the new resolution using <span class="math notranslate nohighlight">\(S_{y}\)</span> and <span class="math notranslate nohighlight">\(S_{x}\)</span> show below</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
    \begin{eqnarray}
