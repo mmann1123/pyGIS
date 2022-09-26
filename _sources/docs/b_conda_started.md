@@ -81,9 +81,17 @@ pip install sklearn-xarray  pip-tools rtree ipykernel osmnx PyKrige census us
 ```
 That's it! To learn more about managing environments in conda please refer to the [docs here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
-```{Important}
-Note that every time you want to use your `spatial` environment. You will need to select it in your IDE or open a terminal window and type `conda activate spatial`, you can then launch your IDE via the command line - for instance by typing `jupyter-lab`.  
+ 
+### Working in the Spatial Environment
+
+Note that every time you want to use your `spatial` environment you will need to select it in your IDE or open a terminal window and type:
+``` bash
+conda activate spatial
 ```
+You can then launch your IDE via the command line - for instance by running [jupyter lab](https://jupyter.org/) by typing: 
+``` bash
+jupyter-lab
+```  
 
 ------------------
 

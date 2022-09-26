@@ -644,6 +644,11 @@ title="Print to PDF"
      Create an Environment Called Spatial
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-in-the-spatial-environment">
+     Working in the Spatial Environment
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -719,6 +724,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#create-an-environment-called-spatial">
      Create an Environment Called Spatial
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#working-in-the-spatial-environment">
+     Working in the Spatial Environment
     </a>
    </li>
   </ul>
@@ -834,9 +844,16 @@ conda config --set channel_priority strict
 </pre></div>
 </div>
 <p>That’s it! To learn more about managing environments in conda please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">docs here</a>.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Note that every time you want to use your <code class="docutils literal notranslate"><span class="pre">spatial</span></code> environment. You will need to select it in your IDE or open a terminal window and type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">spatial</span></code>, you can then launch your IDE via the command line - for instance by typing <code class="docutils literal notranslate"><span class="pre">jupyter-lab</span></code>.</p>
+</section>
+<section id="working-in-the-spatial-environment">
+<h3>Working in the Spatial Environment<a class="headerlink" href="#working-in-the-spatial-environment" title="Permalink to this headline">#</a></h3>
+<p>Note that every time you want to use your <code class="docutils literal notranslate"><span class="pre">spatial</span></code> environment you will need to select it in your IDE or open a terminal window and type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate spatial
+</pre></div>
+</div>
+<p>You can then launch your IDE via the command line - for instance by running <a class="reference external" href="https://jupyter.org/">jupyter lab</a> by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-lab
+</pre></div>
 </div>
 </section>
 </section>
