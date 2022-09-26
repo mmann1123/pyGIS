@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="spatial, raster, reproject, crs, landsat" name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="spatial, raster, reproject, crs, landsat" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
     <title>Reading &amp; Writing Rasters with Rasterio &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
@@ -22,7 +23,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -39,7 +40,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -711,7 +712,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="reading-writing-rasters-with-rasterio">
+<section class="tex2jax_ignore mathjax_ignore" id="reading-writing-rasters-with-rasterio">
 <h1>Reading &amp; Writing Rasters with Rasterio<a class="headerlink" href="#reading-writing-rasters-with-rasterio" title="Permalink to this headline">#</a></h1>
 <p>In order to work with raster data we will be using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and later <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>. Behind the scenes a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> does all the heavy lifting. To understand how raster works it helps to construct one from scratch.</p>
 <p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
@@ -772,7 +773,7 @@ title="Print to PDF"
 <img alt="../_images/e_new_rasters_4_0.png" src="../_images/e_new_rasters_4_0.png" />
 </div>
 </div>
-<div class="section" id="creating-raster-data">
+<section id="creating-raster-data">
 <h2>Creating Raster Data<a class="headerlink" href="#creating-raster-data" title="Permalink to this headline">#</a></h2>
 <p>The final array <code class="docutils literal notranslate"><span class="pre">Z</span></code> still lacks a number of elements that transform it from being a non-spatial <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array to a spatial one usable by <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> etc. <code class="docutils literal notranslate"><span class="pre">Rasterio</span></code> requires the following elements to write out a geotif, or spatial raster dataset:</p>
 <table class="colwidths-auto table">
@@ -821,8 +822,8 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">transform</span></code> defines the location of the upper left hand corner of the raster on the globe, and its spatial resolution. The arguments for <code class="docutils literal notranslate"><span class="pre">transform</span></code> are complex and beyond the scope of the chapter, please refer to the next chapter &#64; <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transforms</span></a> and <a class="reference internal" href="d_raster_crs_intro.html"><span class="doc std std-doc">raster crs</span></a> for more info.</p>
 </div>
-</div>
-<div class="section" id="writing-rasters">
+</section>
+<section id="writing-rasters">
 <h2>Writing Rasters<a class="headerlink" href="#writing-rasters" title="Permalink to this headline">#</a></h2>
 <p>To save this array along with spatial information to a file, we call <code class="docutils literal notranslate"><span class="pre">rasterio.open()</span></code> with a path to the new file to be created, and ‘w’ to specify writing mode, along with the arguments above.</p>
 <div class="cell docutils container">
@@ -882,8 +883,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="update-raster-metadata">
+</section>
+<section id="update-raster-metadata">
 <h2>Update Raster Metadata<a class="headerlink" href="#update-raster-metadata" title="Permalink to this headline">#</a></h2>
 <p>Notice the the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> above is missing a meaningful <code class="docutils literal notranslate"><span class="pre">nodata</span></code> value and was uncompressed. Let’s learn how to update these values. For this we can update the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> dictionary.</p>
 <div class="cell docutils container">
@@ -914,8 +915,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="rasterio-multiband-rasters">
+</section>
+<section id="rasterio-multiband-rasters">
 <h2>Rasterio Multiband Rasters<a class="headerlink" href="#rasterio-multiband-rasters" title="Permalink to this headline">#</a></h2>
 <p>Working with multiband imagery starts to get a bit tricky, especially with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> alone.</p>
 <p>Let’s start with a problematic raster file, a landsat image that stores its red, green, and blue bands in reverse order (blue, green, red), that is scaled by 100 (multiplied by 100 to store data as integers rather than float), and that is missing a meaningful nodata value.</p>
@@ -1134,8 +1135,8 @@ Coordinates:
 </div>
 <hr class="docutils" />
 <p>Credits: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html">rasterio quickstart</a></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to aggregate spatial data to identify areas of high and low concentration." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to aggregate spatial data to identify areas of high and low concentration." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, aggregate, summarize, binning, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -752,7 +753,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="point-density-measures-counts-kernel-density">
+<section class="tex2jax_ignore mathjax_ignore" id="point-density-measures-counts-kernel-density">
 <h1>Point Density Measures - Counts &amp; Kernel Density<a class="headerlink" href="#point-density-measures-counts-kernel-density" title="Permalink to this headline">#</a></h1>
 <p>Summary operations are useful for aggregating data, whether it be for analyzing overall trends or visualizing concentrations of data. Summarizing allows for effective analysis and communication of the data as compared to simply looking at or displaying points, lines, and polygons on a map.</p>
 <p>This chapter will explore two summary operations that highlight concentrations of data: count points in a rectangular or hexagonal grid or by polygon and kernel density.</p>
@@ -803,7 +804,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="count-points-in-rectangular-or-hexagonal-grid-or-by-polygon">
+<section id="count-points-in-rectangular-or-hexagonal-grid-or-by-polygon">
 <h2>Count Points in Rectangular or Hexagonal Grid or by Polygon<a class="headerlink" href="#count-points-in-rectangular-or-hexagonal-grid-or-by-polygon" title="Permalink to this headline">#</a></h2>
 <p>To summarize by grid, we create a new polygon layer consisting of a grid and overlay on another feature. We can summarize an aspect of that feature within each cell of the grid. The polygon layer commonly consists of a fishnet (rectangular cells), but using hexagons as a grid is becoming increasingly widespread.</p>
 <p>Let’s define a function that will create a grid of either rectangles or hexagons of a specified side length.</p>
@@ -915,13 +916,15 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="method-1-group-by">
+<section id="method-1-group-by">
 <h3>Method 1 - Group by<a class="headerlink" href="#method-1-group-by" title="Permalink to this headline">#</a></h3>
 <p>This method involves using spatial joins to allocate each point to the cell in which it resides. All the points within each cell are subsequently grouped together and counted.</p>
-<div class="figure align-default" id="point-density-using-groupby-and-geopandas">
+<figure class="align-default" id="point-density-using-groupby-and-geopandas">
 <img alt="../_images/PointDensity_Groupby.png" src="../_images/PointDensity_Groupby.png" />
-<p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">Point density using groupby and geopandas</span><a class="headerlink" href="#point-density-using-groupby-and-geopandas" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Point density using groupby and geopandas</span><a class="headerlink" href="#point-density-using-groupby-and-geopandas" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>First, we will create a grid over the Bay Area.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1117,8 +1120,8 @@ Number of well points in input data: 6037
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="method-2-iterate-through-each-feature">
+</section>
+<section id="method-2-iterate-through-each-feature">
 <h3>Method 2 - Iterate through each feature<a class="headerlink" href="#method-2-iterate-through-each-feature" title="Permalink to this headline">#</a></h3>
 <p>This second method is slightly more intuitive, but it can take a long time to run. We will use a subset of the input data–those that fall within Santa Clara County–to illustrate this example. We will first subset our data to Santa Clara County (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -1368,9 +1371,9 @@ Number of well points in input data: 136
 <img alt="../_images/e_summarize_vector_25_1.png" src="../_images/e_summarize_vector_25_1.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="kernel-density-estimation">
+</section>
+</section>
+<section id="kernel-density-estimation">
 <h2>Kernel Density Estimation<a class="headerlink" href="#kernel-density-estimation" title="Permalink to this headline">#</a></h2>
 <p>Kernel density estimation (KDE) visualizes concentrations points or polylines. It calculates a magnitude per unit area, providing the density estimate of features within a specified neighborhood surrounding each feature. <a class="footnote-reference brackets" href="#esri-kernel" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
 <p>A kernel function is used to fit a smooth surface to each feature. One of the most common types of kernels is the Gaussian kernel, which is a normal density function. Other types of kernel functions can be used, and the type affects the influence of surrounding points on a location’s density estimate as the points’ distances increase from that location. These kernels’ functions vary in shapes and characteristics, such as where the function peaks, how pointed the peak is, and how fast the peak is reached with distance. <a class="footnote-reference brackets" href="#esri-kernel" id="id3">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id4">2</a></p>
@@ -1382,7 +1385,7 @@ Number of well points in input data: 136
 <p class="admonition-title">Tip</p>
 <p>We are intentionally keeping the well points beyond (but within 50 km) of the Bay Area boundaries. This provides a buffer to ensure that the KDE for wells data near the boundaries is not inadvertently influenced by these artificial county boundaries. Once KDE is run, the result can be clipped to the Bay Area boundaries (which we do in the first method).</p>
 </div>
-<div class="section" id="method-1-display">
+<section id="method-1-display">
 <h3>Method 1 - Display<a class="headerlink" href="#method-1-display" title="Permalink to this headline">#</a></h3>
 <p>This method uses <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, a high-level plotting library for spatial data that complements <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. For more information on <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, check out the <a class="reference external" href="https://residentmario.github.io/geoplot/index.html">documentation</a>.</p>
 <div class="cell docutils container">
@@ -1418,8 +1421,8 @@ Number of well points in input data: 136
 <img alt="../_images/e_summarize_vector_27_2.png" src="../_images/e_summarize_vector_27_2.png" />
 </div>
 </div>
-</div>
-<div class="section" id="method-2-display-and-export-with-scikit-learn">
+</section>
+<section id="method-2-display-and-export-with-scikit-learn">
 <h3>Method 2 - Display and export with <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#method-2-display-and-export-with-scikit-learn" title="Permalink to this headline">#</a></h3>
 <p>This method uses <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> to visualize and export the KDE result. We are able to specify and change various estimator parameters. Examples include:</p>
 <ul class="simple">
@@ -1526,9 +1529,9 @@ Number of well points in input data: 136
 <dd><p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

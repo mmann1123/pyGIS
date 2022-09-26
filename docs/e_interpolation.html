@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas." lang="en" name="description" xml:lang="en" />
 <meta content="python, spatial, interpolation, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -749,7 +750,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="spatial-interpolation">
+  <section class="tex2jax_ignore mathjax_ignore" id="spatial-interpolation">
 <h1>Spatial Interpolation<a class="headerlink" href="#spatial-interpolation" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -924,7 +925,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>In the map above, the green and blue points are the rainfall points that we loaded separated into the training set and testing set, respectively.</p>
-<div class="section" id="thiessen-polygons-voronoi-diagrams">
+<section id="thiessen-polygons-voronoi-diagrams">
 <h2>Thiessen Polygons (Voronoi Diagrams)<a class="headerlink" href="#thiessen-polygons-voronoi-diagrams" title="Permalink to this headline">#</a></h2>
 <p>Thiessen polygons (also known as Voronoi diagrams) polygons allow us to perform nearest neighbor interpolation, which is perhaps the most basic type of interpolation. Thiessen polygons are be constructed around each sampled point so all the space within a specific polygon is closest in distance to that sampled point (as compared to other sampled points). Then, to perform nearest neighbor interpolation, all that space is assigned the value of that sampled point. <a class="footnote-reference brackets" href="#bolstad" id="id2">1</a></p>
 <p>We can use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html"><code class="docutils literal notranslate"><span class="pre">scipy</span></code> package</a> to create Thiessen polygons. After running the <code class="docutils literal notranslate"><span class="pre">Voronoi()</span></code> function, we can use the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> attribute to get a list of vertices, which we can subsequently use to generate polygons.</p>
@@ -1255,8 +1256,8 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 <img alt="../_images/e_interpolation_23_1.png" src="../_images/e_interpolation_23_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="k-nearest-neighbors">
+</section>
+<section id="k-nearest-neighbors">
 <h2>K-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline">#</a></h2>
 <p>KNN (also stylized as kNN) is a neighbor-based learning method that can be used for interpolation. Unlike the Thiessen polygons method, KNN looks for a specified number <code class="docutils literal notranslate"><span class="pre">K</span></code> of sampled points closest to an unknown point. The <code class="docutils literal notranslate"><span class="pre">K</span></code> known points can be used to predict the value (discrete or continuous) of the unknown point. <a class="footnote-reference brackets" href="#sk-nn" id="id4">3</a></p>
 <p>We can use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html"><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> to perform KNN analysis.</p>
@@ -1368,8 +1369,8 @@ Attribute Table: Testing Set Interpolated Values - KNN Method
 <p class="admonition-title">Tip</p>
 <p>If you are just interested in identifying the <code class="docutils literal notranslate"><span class="pre">k</span></code> nearest neighbors (no interpolation), use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><code class="docutils literal notranslate"><span class="pre">NearestNeighbors()</span></code> function</a>.</p>
 </div>
-</div>
-<div class="section" id="kriging">
+</section>
+<section id="kriging">
 <h2>Kriging<a class="headerlink" href="#kriging" title="Permalink to this headline">#</a></h2>
 <p>Kriging is a type of interpolation that uses a semivariogram, which measures spatial autocorrelation (how similar close points are in value and how this similarity changes as distance between points increases). Thus, the semivariogram determines how much influence a known point has on an unknown point as the distance between the known point and the unknown point increases. In other words, the weight of a known point on an unknown point decreases with increasing distance, and the semivariogram determines how quickly that weight tapers with increasing distance. <a class="footnote-reference brackets" href="#bolstad" id="id5">1</a>, <a class="footnote-reference brackets" href="#esri-kriging" id="id6">4</a></p>
 <p>For more information, see this <a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm">ArcGIS help guide on kriging</a>.</p>
@@ -1404,7 +1405,7 @@ Attribute Table: Testing Set Interpolated Values - KNN Method
 </div>
 </div>
 </div>
-<div class="section" id="method-1-using-pykrige">
+<section id="method-1-using-pykrige">
 <h3>Method 1 - Using <code class="docutils literal notranslate"><span class="pre">PyKrige</span></code><a class="headerlink" href="#method-1-using-pykrige" title="Permalink to this headline">#</a></h3>
 <p>The <a class="reference external" href="https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">pykrige</span></code> module</a> offers ordinary and universal kriging. It also supports various variogram models in addition to Gaussian.</p>
 <div class="cell docutils container">
@@ -1538,8 +1539,8 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </div></div><img alt="../_images/e_interpolation_34_2.png" src="../_images/e_interpolation_34_2.png" />
 </div>
 </div>
-</div>
-<div class="section" id="method-2-using-scikit-learn">
+</section>
+<section id="method-2-using-scikit-learn">
 <h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#method-2-using-scikit-learn" title="Permalink to this headline">#</a></h3>
 <p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
 <div class="cell docutils container">
@@ -1654,8 +1655,8 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
 <div class="cell docutils container">
@@ -1812,9 +1813,9 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 <dd><p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm">How Kriging works, Esri</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to reproject single and multi-band rasters using rasterio and geowombat. We demonstrate these using LandSat imagery as examples." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to reproject single and multi-band rasters using rasterio and geowombat. We demonstrate these using LandSat imagery as examples." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à reprojeter des rasters mono et multibande à l'aide de rasterio et de geowombat. Nous les démontrons en utilisant les images LandSat comme exemples." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a reproyectar rásteres de una o varias bandas mediante rasterio y geowombat. Demostramos esto usando imágenes de LandSat como ejemplos." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, raster, reproject, crs, landsat" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -705,9 +706,9 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="reproject-rasters-w-rasterio-and-geowombat">
+<section class="tex2jax_ignore mathjax_ignore" id="reproject-rasters-w-rasterio-and-geowombat">
 <h1>Reproject Rasters w. Rasterio and Geowombat<a class="headerlink" href="#reproject-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
-<div class="section" id="reprojecting-a-raster-with-geowombat">
+<section id="reprojecting-a-raster-with-geowombat">
 <h2>Reprojecting a Raster with Geowombat<a class="headerlink" href="#reprojecting-a-raster-with-geowombat" title="Permalink to this headline">#</a></h2>
 <p>Far and away the easiest way to handle raster data is by using <a class="reference external" href="https://geowombat.readthedocs.io/en/latest/index.html">geowombat</a>. Here’s an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.</p>
 <p>In order to reproject on the fly we are going to open the raster using <code class="docutils literal notranslate"><span class="pre">gw.config.update()</span></code>.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a <code class="docutils literal notranslate"><span class="pre">ref_crs</span></code> to the configuration manager. We can also use the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method when we <code class="docutils literal notranslate"><span class="pre">open</span></code> the image, by default it will be <code class="docutils literal notranslate"><span class="pre">nearest</span></code>, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
@@ -858,8 +859,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra.</p>
-</div>
-<div class="section" id="calculate-default-transform-explained">
+</section>
+<section id="calculate-default-transform-explained">
 <h2>Calculate_default_transform Explained<a class="headerlink" href="#calculate-default-transform-explained" title="Permalink to this headline">#</a></h2>
 <p>How do we reproject a raster? Before we get into it, we need to talk some more… about <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code>. <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code> allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the <code class="docutils literal notranslate"><span class="pre">source</span></code> (src) is the original input raster, and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> (dst) is the outputed reprojected raster.</p>
 <p>First, remember that the transform matrix takes the following form (<a class="reference internal" href="d_affine.html"><span class="doc std std-doc">review affine transforms here</span></a>):</p>
@@ -910,8 +911,8 @@ Destination Transform:
 </div>
 </div>
 <p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check <span class="math notranslate nohighlight">\(\Delta x, \Delta x\)</span>).</p>
-</div>
-<div class="section" id="reprojecting-a-raster-with-rasterio">
+</section>
+<section id="reprojecting-a-raster-with-rasterio">
 <h2>Reprojecting a Raster with Rasterio<a class="headerlink" href="#reprojecting-a-raster-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>Ok finally!</p>
 <div class="cell docutils container">
@@ -958,12 +959,14 @@ Destination Transform:
 </div>
 </div>
 </div>
-<div class="figure align-default" id="reprojected-landsat-image">
+<figure class="align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 54 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

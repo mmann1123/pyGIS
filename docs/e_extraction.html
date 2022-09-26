@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, attribute data, subset, extract, selection, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -737,11 +738,11 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="extracting-spatial-data">
+<section class="tex2jax_ignore mathjax_ignore" id="extracting-spatial-data">
 <h1>Extracting Spatial Data<a class="headerlink" href="#extracting-spatial-data" title="Permalink to this headline">#</a></h1>
 <p>Subsetting and extracting data is useful when we want to select or analyze a portion of the dataset based on a feature’s location, attribute, or its spatial relationship to another dataset.</p>
 <p>In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select location by attribute, and select by location.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -890,8 +891,8 @@ title="Print to PDF"
 <img alt="../_images/e_extraction_9_1.png" src="../_images/e_extraction_9_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="clip-spatial-polygons">
+</section>
+<section id="clip-spatial-polygons">
 <h2>Clip Spatial Polygons<a class="headerlink" href="#clip-spatial-polygons" title="Permalink to this headline">#</a></h2>
 <p>Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  <code class="docutils literal notranslate"><span class="pre">clip()</span></code> in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. <em>All attributes for the resulting clipped vector will be kept.</em> <a class="footnote-reference brackets" href="#gpd-clip" id="id1">1</a></p>
 <div class="admonition note">
@@ -1121,8 +1122,8 @@ title="Print to PDF"
 </div></div><img alt="../_images/e_extraction_13_1.png" src="../_images/e_extraction_13_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="select-location-by-attributes">
+</section>
+<section id="select-location-by-attributes">
 <h2>Select Location by Attributes<a class="headerlink" href="#select-location-by-attributes" title="Permalink to this headline">#</a></h2>
 <p>Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> uses the indexing and selection methods  in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, so data in a GeoDataFrame can be selected and queried in the same way a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe can. <a class="footnote-reference brackets" href="#gpd-select" id="id2">2</a>, <a class="footnote-reference brackets" href="#pd-select" id="id3">3</a>, <a class="footnote-reference brackets" href="#pd-subset" id="id4">4</a></p>
 <p>We will use use different criteria to subset the wells dataset.</p>
@@ -1514,8 +1515,8 @@ First two rows:
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="select-by-location">
+</section>
+<section id="select-by-location">
 <h2>Select by Location<a class="headerlink" href="#select-by-location" title="Permalink to this headline">#</a></h2>
 <p>Selecting by location selects features based on its relative spatial relationship with another dataset. In other words, features are selected based on their location relative to the location of another dataset.</p>
 <p>For example:</p>
@@ -1579,7 +1580,7 @@ First two rows:
 <p class="admonition-title">Note</p>
 <p>The functions for these spatial relationships will generally output a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> series with Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a <code class="docutils literal notranslate"><span class="pre">True</span></code> output will be retained).</p>
 </div>
-<div class="section" id="method-1-shapely-vector">
+<section id="method-1-shapely-vector">
 <h3>Method 1 - Shapely vector<a class="headerlink" href="#method-1-shapely-vector" title="Permalink to this headline">#</a></h3>
 <p>These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.</p>
 <div class="cell docutils container">
@@ -1697,8 +1698,8 @@ First two rows:
 </div></div><img alt="../_images/e_extraction_21_4.png" src="../_images/e_extraction_21_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="method-2-geodataframe">
+</section>
+<section id="method-2-geodataframe">
 <h3>Method 2 - GeoDataFrame<a class="headerlink" href="#method-2-geodataframe" title="Permalink to this headline">#</a></h3>
 <p>If we’re trying to select features that have a specified spatial relationship with another <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> object, it gets a little tricky. This is because the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on. <a class="footnote-reference brackets" href="#gpd-within" id="id6">6</a>, <a class="footnote-reference brackets" href="#gpd-data" id="id7">7</a></p>
 <p>As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets–or else we’ll get a warning and the output will be empty.</p>
@@ -1849,9 +1850,9 @@ First two rows:
 <dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/data_structures.html">Data Structures, GeoPandas</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

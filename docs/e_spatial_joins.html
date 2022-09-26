@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn all about conducting spatial joins." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn all about conducting spatial joins." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, spatial, join" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -837,7 +838,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-joins">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-joins">
 <h1>Spatial Joins<a class="headerlink" href="#spatial-joins" title="Permalink to this headline">#</a></h1>
 <p>To spatially join one dataset to another, attributes from the first dataset (join feature) are appended to the attributes in the second dataset (target feature) based on the relative spatial relationship between the two datasets’ geometries. <a class="footnote-reference brackets" href="#esri-join" id="id1">1</a>, <a class="footnote-reference brackets" href="#gpd-merge" id="id2">2</a></p>
 <div class="admonition note">
@@ -845,115 +846,135 @@ title="Print to PDF"
 <p>Unlike table joins by attributes, we’re not really concerned with the tables having a primary key (a column, or columns, that uniquely identifies each record in a table) to conduct a join. Instead, the relative spatial location between the features in two datasets will determine what gets joined.</p>
 </div>
 <p>This chapter will cover spatial join relationships, spatial join types, and attribute table relationships.</p>
-<div class="section" id="spatial-join-relationships">
+<section id="spatial-join-relationships">
 <h2>Spatial Join Relationships<a class="headerlink" href="#spatial-join-relationships" title="Permalink to this headline">#</a></h2>
 <p>There are multiple spatial join relationships that we can specify. Only the features that meet the specified spatial relationship criteria will be joined together. <a class="footnote-reference brackets" href="#esri-join" id="id3">1</a>, <a class="footnote-reference brackets" href="#gpd-merge" id="id4">2</a> The spatial arrangement necessary to satisfy a specified spatial relationship depends on the vector types (i.e., point, line, polygon) of the join feature and the target feature. Note that some spatial relationships are not possible for certain combinations of vector types.</p>
 <p>Below is a description of the spatial relationships available in the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> module (this list is not necessarily exhaustive). [^gpd_meerge] We also provide diagrams visualizing the spatial arrangement needed for various combinations of vector types to satisfy the spatial relationship criteria and allow for a join.</p>
-<div class="section" id="contains">
+<section id="contains">
 <h3>Contains<a class="headerlink" href="#contains" title="Permalink to this headline">#</a></h3>
 <p>One feature contains another if the geometry’s points are not to the exterior of the other’s geometry and the geometry’s interior contains at least one point of the other geometry’s interior.</p>
-<div class="figure align-default" id="id5">
+<figure class="align-default" id="id5">
 <img alt="../_images/overlay_contains.jpg" src="../_images/overlay_contains.jpg" />
-<p class="caption"><span class="caption-number">Fig. 43 </span><span class="caption-text">Spatial arrangements for <em>contains</em> for different combinations of vector types.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="crosses">
+<figcaption>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">Spatial arrangements for <em>contains</em> for different combinations of vector types.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="crosses">
 <h3>Crosses<a class="headerlink" href="#crosses" title="Permalink to this headline">#</a></h3>
 <p>The geometry’s interior <em>crosses</em> that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry.</p>
-<div class="figure align-default" id="id6">
+<figure class="align-default" id="id6">
 <img alt="../_images/overlay_crosses.jpg" src="../_images/overlay_crosses.jpg" />
-<p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">Spatial arrangements for <em>crosses</em> for different combinations of vector types.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="intersects">
+<figcaption>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Spatial arrangements for <em>crosses</em> for different combinations of vector types.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="intersects">
 <h3>Intersects<a class="headerlink" href="#intersects" title="Permalink to this headline">#</a></h3>
 <p>A feature <em>intersects</em> another if the geometry’s boundary or interior has any part in common with the other geometry.</p>
-<div class="figure align-default" id="id7">
+<figure class="align-default" id="id7">
 <img alt="../_images/overlay_intersects.jpg" src="../_images/overlay_intersects.jpg" />
-<p class="caption"><span class="caption-number">Fig. 45 </span><span class="caption-text">Spatial arrangements for <em>intersects</em> for different combinations of vector types.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="overlaps">
+<figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Spatial arrangements for <em>intersects</em> for different combinations of vector types.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="overlaps">
 <h3>Overlaps<a class="headerlink" href="#overlaps" title="Permalink to this headline">#</a></h3>
 <p>A feature <em>overlaps</em> another if the geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions.</p>
-<div class="figure align-default" id="id8">
+<figure class="align-default" id="id8">
 <img alt="../_images/overlay_overlaps.jpg" src="../_images/overlay_overlaps.jpg" />
-<p class="caption"><span class="caption-number">Fig. 46 </span><span class="caption-text">Spatial arrangements for <em>overlaps</em> for different combinations of vector types.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="touches">
+<figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Spatial arrangements for <em>overlaps</em> for different combinations of vector types.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="touches">
 <h3>Touches<a class="headerlink" href="#touches" title="Permalink to this headline">#</a></h3>
 <p>A feature <em>touches</em> another if the geometry shares at least one point with the other geometry, provided that no part of the geometry’s interior intersects with the other geometry.</p>
-<div class="figure align-default" id="id9">
+<figure class="align-default" id="id9">
 <img alt="../_images/overlay_touches.jpg" src="../_images/overlay_touches.jpg" />
-<p class="caption"><span class="caption-number">Fig. 47 </span><span class="caption-text">Spatial arrangements for <em>touches</em> for different combinations of vector types.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="within">
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Spatial arrangements for <em>touches</em> for different combinations of vector types.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="within">
 <h3>Within<a class="headerlink" href="#within" title="Permalink to this headline">#</a></h3>
 <p>A feature is <em>within</em> another if the geometry is enclosed in the other geometry (geometry’s boundary and interior intersects with the other geometry’s interior only).</p>
-<div class="figure align-default" id="id10">
+<figure class="align-default" id="id10">
 <img alt="../_images/overlay_within.jpg" src="../_images/overlay_within.jpg" />
-<p class="caption"><span class="caption-number">Fig. 48 </span><span class="caption-text">Spatial arrangements for <em>within</em> for different combinations of vector types.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="spatial-join-types">
+<figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Spatial arrangements for <em>within</em> for different combinations of vector types.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="spatial-join-types">
 <h2>Spatial Join Types<a class="headerlink" href="#spatial-join-types" title="Permalink to this headline">#</a></h2>
 <p>There are four types of spatial joins: outer join, inner join, left join, and right join. These spatial join types determine which features from both datasets are kept in the resulting output dataset.</p>
-<div class="figure align-default" id="join-types">
+<figure class="align-default" id="join-types">
 <img alt="../_images/join_types.jpg" src="../_images/join_types.jpg" />
-<p class="caption"><span class="caption-number">Fig. 49 </span><span class="caption-text">There are four types of spatial joins. These Venn diagrams depict which features from both datasets are kept when they are joined together for each join type.</span><a class="headerlink" href="#join-types" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">There are four types of spatial joins. These Venn diagrams depict which features from both datasets are kept when they are joined together for each join type.</span><a class="headerlink" href="#join-types" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Only the inner, left, and right join types are available in the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> module and are identical to those in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. <a class="footnote-reference brackets" href="#gpd-merge" id="id11">2</a></p>
-<div class="section" id="outer-join">
+<section id="outer-join">
 <h3>Outer join<a class="headerlink" href="#outer-join" title="Permalink to this headline">#</a></h3>
 <p>All features from both datasets are kept, regardless if the features meet the specified spatial relationship criteria for a join. As all attribute fields are combined, rows that do not have a match may have null values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#bolstad" id="id12">3</a></p>
-</div>
-<div class="section" id="inner-join">
+</section>
+<section id="inner-join">
 <h3>Inner join<a class="headerlink" href="#inner-join" title="Permalink to this headline">#</a></h3>
 <p>Only features from both datasets that meet the spatial relationship for the joined are kept. The geometries from the first or left dataset are used for the join. <a class="footnote-reference brackets" href="#bolstad" id="id13">3</a></p>
-</div>
-<div class="section" id="left-join">
+</section>
+<section id="left-join">
 <h3>Left join<a class="headerlink" href="#left-join" title="Permalink to this headline">#</a></h3>
 <p>All features from the first or left dataset are kept, regardless if the features meet the specified spatial relationship criteria for a join. As all attribute fields are combined, rows that do not have a match with the right dataset may have null values in the fields that originated from the right dataset.</p>
-</div>
-<div class="section" id="right-join">
+</section>
+<section id="right-join">
 <h3>Right join<a class="headerlink" href="#right-join" title="Permalink to this headline">#</a></h3>
 <p>All features from the second or right dataset are kept, regardless if the features meet the specified spatial relationship criteria for a join. As all attribute fields are combined, rows that do not have a match with the left dataset may have null values in the fields that originated from the left dataset.</p>
 <p>For more details on join types, see the <span class="xref myst">chapter on joining by attributes</span>.</p>
-</div>
-</div>
-<div class="section" id="table-relationships">
+</section>
+</section>
+<section id="table-relationships">
 <h2>Table Relationships<a class="headerlink" href="#table-relationships" title="Permalink to this headline">#</a></h2>
 <p>Table relationships, or cardinality, specify the direction of the join and the relationship between the two datasets. There are four types of table relationships: one-to-one, one-to-many, many-to-one, and many-to-many. While these relationships are not specified as a parameter in the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> module when conducting a spatial join, it is important to have a general idea of the table relationship between the two datasets. Generally, a many-to-one join and a many-to-many join should be avoided because it can create ambiguity and unpredictability when analyzing and manipulating the resulting attribute table. <a class="footnote-reference brackets" href="#bolstad" id="id14">3</a></p>
-<div class="section" id="one-to-one-relationship">
+<section id="one-to-one-relationship">
 <h3>One-to-one relationship<a class="headerlink" href="#one-to-one-relationship" title="Permalink to this headline">#</a></h3>
 <p>Each feature in one geometry is linked to one (and only one) feature in the second geometry (and vice versa). Each feature in both datasets will appear only once at most. <a class="footnote-reference brackets" href="#bolstad" id="id15">3</a></p>
-<div class="figure align-default" id="id16">
+<figure class="align-default" id="id16">
 <img alt="../_images/relationship_one_to_one.jpg" src="../_images/relationship_one_to_one.jpg" />
-<p class="caption"><span class="caption-number">Fig. 50 </span><span class="caption-text">Two joined tables have a one-to-one relationship when each feature in one geometry is linked to one (and only one) feature in the second geometry.</span><a class="headerlink" href="#id16" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="one-to-many-relationship-or-many-to-one-relationship">
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Two joined tables have a one-to-one relationship when each feature in one geometry is linked to one (and only one) feature in the second geometry.</span><a class="headerlink" href="#id16" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="one-to-many-relationship-or-many-to-one-relationship">
 <h3>One-to-many relationship or many-to-one relationship<a class="headerlink" href="#one-to-many-relationship-or-many-to-one-relationship" title="Permalink to this headline">#</a></h3>
 <p>Each feature in one geometry is linked to one or more features in the second geometry. The output geometry may see the “one” feature duplicated across multiple rows to accommodate its multiple linkages in the other dataset (the “many”). A one-to-many or many-to-one relationship can be dependent on the spatial join type (for example, if a left join results in a one-to-many relationship, then a right join will result in a many-to-one relationship). <a class="footnote-reference brackets" href="#bolstad" id="id17">3</a></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>These two table relationships—while similar—are not the same! In a one-to-many relationship, the “many” geometry is the dataset that is being joined to. Alternatively, in a many-to-one relationship, the “one” geometry is the dataset being joined to. Thus, the many-to-one relationship can result in duplicate “one” geometries and create uncertainty, which is why a many-to-one join should be avoided. <a class="footnote-reference brackets" href="#bolstad" id="id18">3</a></p>
 </div>
-<div class="figure align-default" id="one-to-many-relationship">
+<figure class="align-default" id="one-to-many-relationship">
 <img alt="../_images/relationship_one_to_many.jpg" src="../_images/relationship_one_to_many.jpg" />
-<p class="caption"><span class="caption-number">Fig. 51 </span><span class="caption-text">Two joined tables have a one-to-many relationship when each feature in one geometry is linked to one or more features in the second geometry.</span><a class="headerlink" href="#one-to-many-relationship" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="many-to-many-relationship">
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Two joined tables have a one-to-many relationship when each feature in one geometry is linked to one or more features in the second geometry.</span><a class="headerlink" href="#one-to-many-relationship" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="many-to-many-relationship">
 <h3>Many-to-many relationship<a class="headerlink" href="#many-to-many-relationship" title="Permalink to this headline">#</a></h3>
 <p>One or more features in one geometry are linked to one or more features in the second geometry. The output geometry may have multiple rows of each target and join feature to accommodate the multiple linkages, which can create ambiguity—hence why a many-to-many join should be avoided. <a class="footnote-reference brackets" href="#bolstad" id="id19">3</a></p>
-<div class="figure align-default" id="id20">
+<figure class="align-default" id="id20">
 <img alt="../_images/relationship_many_to_many.jpg" src="../_images/relationship_many_to_many.jpg" />
-<p class="caption"><span class="caption-number">Fig. 52 </span><span class="caption-text">Two joined tables have a many-to-many relationship when one or more features in one geometry are linked to one or more features in the second geometry.</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Two joined tables have a many-to-many relationship when one or more features in one geometry are linked to one or more features in the second geometry.</span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>To ensure you’re doing a one-to-one or one-to-many join, it may be helpful to envision your spatial join before performing a spatial join. Think about what geometries you will be joining to (the target feature) and what geometry or geometries from the join feature might be joined to one geometry in the target feature.</p>
@@ -970,9 +991,9 @@ title="Print to PDF"
 <dd><p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

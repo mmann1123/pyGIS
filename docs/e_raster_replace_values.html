@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to replace values in a raster using rasterio and GeoWombat." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to replace values in a raster using rasterio and GeoWombat." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, python, rasterio, raster, replace, interpolation" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -719,7 +720,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="replacing-values-w-rasterio">
+  <section class="tex2jax_ignore mathjax_ignore" id="replacing-values-w-rasterio">
 <h1>Replacing Values w. Rasterio<a class="headerlink" href="#replacing-values-w-rasterio" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -737,7 +738,7 @@ title="Print to PDF"
 <hr class="docutils" />
 <p>Imagery may sometimes have errors due to factors such as noise, distortion, or sensor errors. Some pixels may have extremely high or low values or no value at all. One way to resolve this issue is to manually replace a pixel value with another pixel value. Another option is to interpolate the pixel value based on the values of the pixel’s neighbors.</p>
 <p>We’ll explore how to replace raster values with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>First, we will import our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -789,8 +790,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="replace-values-with-rasterio">
+</section>
+<section id="replace-values-with-rasterio">
 <h2>Replace values with rasterio<a class="headerlink" href="#replace-values-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>We will open the example raster that we generated above.</p>
 <div class="cell docutils container">
@@ -808,7 +809,7 @@ title="Print to PDF"
 <img alt="../_images/e_raster_replace_values_5_0.png" src="../_images/e_raster_replace_values_5_0.png" />
 </div>
 </div>
-<div class="section" id="replace-values-with-a-specified-number">
+<section id="replace-values-with-a-specified-number">
 <h3>Replace values with a specified number<a class="headerlink" href="#replace-values-with-a-specified-number" title="Permalink to this headline">#</a></h3>
 <p>Let’s say that we want to change the pixel value at row 150, column 100 because it’s wrong. We can simply call that pixel value by its row index and column index.</p>
 <div class="cell docutils container">
@@ -869,8 +870,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="replace-values-through-interpolation">
+</section>
+<section id="replace-values-through-interpolation">
 <h3>Replace values through interpolation<a class="headerlink" href="#replace-values-through-interpolation" title="Permalink to this headline">#</a></h3>
 <p>Sometimes, we don’t know or have an exact value to replace pixel values with. We can “fill in” those pixel values through interpolation. Recall that interpolation uses the pixel values surrounding a certain pixel to determine the value for that certain pixel.</p>
 <p>In the following example, we will interpolate the values for the pixels that were previously set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
@@ -1022,13 +1023,13 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="replace-values-with-geowombat">
+</section>
+</section>
+<section id="replace-values-with-geowombat">
 <h2>Replace values with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code><a class="headerlink" href="#replace-values-with-geowombat" title="Permalink to this headline">#</a></h2>
 <p>For replacing raster values with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code>, see the chapter on <a class="reference internal" href="f_rs_edit.html"><span class="doc std std-doc">Editing Rasters and Remotely Sensed Data</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

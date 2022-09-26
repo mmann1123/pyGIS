@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn the basics of coordinate reference systems (CRS) or projections for spatial raster data. We also cover how to transform CRS using rasterio and geowombat." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn the basics of coordinate reference systems (CRS) or projections for spatial raster data. We also cover how to transform CRS using rasterio and geowombat." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez les bases des systèmes de référence de coordonnées (CRS) ou des projections pour les données raster géospatiales. Nous expliquons également comment transformer CRS en utilisant rasterio et geowombat." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda los conceptos básicos de los sistemas de referencia de coordenadas (CRS) o proyecciones para datos ráster geoespaciales. También cubrimos cómo transformar CRS usando rasterio y geowombat." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, raster, affine, crs, coordinate reference system, interpolation, projection" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -793,13 +794,15 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="raster-coordinate-reference-systems-crs">
+<section class="tex2jax_ignore mathjax_ignore" id="raster-coordinate-reference-systems-crs">
 <h1>Raster Coordinate Reference Systems (CRS)<a class="headerlink" href="#raster-coordinate-reference-systems-crs" title="Permalink to this headline">#</a></h1>
 <p>Raster data is very different that vector data, one of the key differences is that we don’t have a pair of coordinates (x,y) for each pixel in a raster. How then do we know where the raster is located in addition to what the data values are? For a new spatial raster (e.g. geotif) we need to store a few other pieces of information seperately. We need to keep track of the location of the upper left hand corner, the resolution (in both the x and y direction) and a description of the coordinate space (i.e. the CRS), amongst others.</p>
-<div class="figure align-default" id="example-of-a-warped-reprojected-image">
+<figure class="align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<p class="caption"><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Let’s start from the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> <code class="docutils literal notranslate"><span class="pre">Z</span></code> that we want to span from [-90°,90°] longitude, and [-90°,90°] latitude. For more detail on the construction of these arrays please refer to <a class="reference internal" href="c_rasters.html"><span class="doc std std-doc">the raster section</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -826,7 +829,7 @@ title="Print to PDF"
 </div>
 <p>Note that <em><code class="docutils literal notranslate"><span class="pre">Z</span></code> contains no data on its location</em>. Its just an array, the information stored in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> aren’t associated with it at all. This location data will often be stored in the header of file. In order to ‘locate’ the array on the map we will use affine transformations.</p>
 <p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points (<a class="reference internal" href="d_affine.html"><span class="doc std std-doc">review affine transforms here</span></a>). It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.</p>
-<div class="section" id="describing-the-array-location-define-a-projection">
+<section id="describing-the-array-location-define-a-projection">
 <h2>Describing the Array Location (Define a Projection)<a class="headerlink" href="#describing-the-array-location-define-a-projection" title="Permalink to this headline">#</a></h2>
 <p>In this example the coordinate reference system will be ‘+proj=latlong’, which describes an equirectangular coordinate reference system with units of decimal degrees. Although <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> seems relevant to understanding the location of cell values, <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). <span class="xref myst">Review affine transformations</span> and <span class="xref myst">see an example here</span>.</p>
 <p>The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where <span class="math notranslate nohighlight">\(\Delta x\)</span> and <span class="math notranslate nohighlight">\(\Delta y\)</span> define the location of the upper left hand corner of our new <code class="docutils literal notranslate"><span class="pre">Z</span></code> ndarray. As a reminder the translation matrix takes the form:</p>
@@ -944,29 +947,35 @@ title="Print to PDF"
 </div>
 </div>
 <p>All this info is stored in <code class="docutils literal notranslate"><span class="pre">dst</span></code> and then written to disk with <code class="docutils literal notranslate"><span class="pre">dst.write(Z,1)</span></code>. Where <code class="docutils literal notranslate"><span class="pre">write</span></code> gets the array of data <code class="docutils literal notranslate"><span class="pre">Z</span></code> and the band location to write to, in this case band <code class="docutils literal notranslate"><span class="pre">1</span></code>. This is a bit awkward, but I believe is a carryover from GDAL which rasterio relies on heavily (like all other platforms including arcmap etc).</p>
-<div class="section" id="the-crazy-tale-of-the-upper-left-hand-corner">
+<section id="the-crazy-tale-of-the-upper-left-hand-corner">
 <h3>The Crazy Tale of the Upper Left Hand Corner<a class="headerlink" href="#the-crazy-tale-of-the-upper-left-hand-corner" title="Permalink to this headline">#</a></h3>
 <p>To help us understand what is going on with <code class="docutils literal notranslate"><span class="pre">transform</span></code> it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data <code class="docutils literal notranslate"><span class="pre">Z</span></code>. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.</p>
 <p>We can visualize what we need to do here:</p>
-<div class="figure align-default" id="example-of-using-affine-translation-to-shift-the-upper-left-hand-corner">
+<figure class="align-default" id="example-of-using-affine-translation-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_drawing.png"><img alt="../_images/c_raster_upperleft_drawing.png" src="../_images/c_raster_upperleft_drawing.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Let’s walk through the math behind the scenes. Here we use our transform matrix to move our upper left hand corner which is assumed to start at the origin (0,0).</p>
-<div class="figure align-default" id="example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner">
+<figure class="align-default" id="example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner">
 <a class="reference internal image-reference" href="../_images/c_raster_upperleft_transform.png"><img alt="../_images/c_raster_upperleft_transform.png" src="../_images/c_raster_upperleft_transform.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>The final coordinate of the upper left hand corner are <span class="math notranslate nohighlight">\((x_0,y_0) = (-105,105)\)</span></p>
-</div>
-<div class="section" id="translate-is-a-map">
+</section>
+<section id="translate-is-a-map">
 <h3>Translate is a “map”<a class="headerlink" href="#translate-is-a-map" title="Permalink to this headline">#</a></h3>
 <p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(column_number,</span> <span class="pre">row_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
-<div class="figure align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
+<figure class="align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
 <a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Let’s start with the easiest and retrieve the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">transform</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1006,7 +1015,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="how-transforms-works">
+<section id="how-transforms-works">
 <h4>How Transforms Works<a class="headerlink" href="#how-transforms-works" title="Permalink to this headline">#</a></h4>
 <p>Let’s work the example of finding the upper left coordinates of with <code class="docutils literal notranslate"><span class="pre">row=5</span></code>, <code class="docutils literal notranslate"><span class="pre">column=2</span></code>:</p>
 <div class="math notranslate nohighlight">
@@ -1027,54 +1036,64 @@ title="Print to PDF"
    \end{eqnarray}
 \end{split}\]</div>
 <p>Wow, it works! Come on it’s at least a little bit cool. Depending on your definition of cool.</p>
-</div>
-</div>
-</div>
-<div class="section" id="reproject-a-raster-the-simple-case">
+</section>
+</section>
+</section>
+<section id="reproject-a-raster-the-simple-case">
 <h2>Reproject a Raster - The Simple Case<a class="headerlink" href="#reproject-a-raster-the-simple-case" title="Permalink to this headline">#</a></h2>
 <p>How then do we reproject a raster? Since <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a map of pixel locations, warping a raster then becomes as simple as knowing the <code class="docutils literal notranslate"><span class="pre">transform</span></code> of your destination based on the description of the new coordinate reference system (CRS). If you haven’t please study <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transformations</span></a>.</p>
-<div class="section" id="shifting-the-prime-meridian">
+<section id="shifting-the-prime-meridian">
 <h3>Shifting the Prime Meridian<a class="headerlink" href="#shifting-the-prime-meridian" title="Permalink to this headline">#</a></h3>
 <p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">proj4string</span></a>).</p>
 <p>Let’s start be looking visually at what we plan to do:</p>
-<div class="figure align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
+<figure class="align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate (<span class="math notranslate nohighlight">\(x_B\)</span>, <span class="math notranslate nohighlight">\(y_B\)</span>)</p>
-<div class="figure align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
+<figure class="align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_raster_m.png"><img alt="../_images/d_europe_translate_raster_m.png" src="../_images/d_europe_translate_raster_m.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="reproject-a-raster-the-complex-case">
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="reproject-a-raster-the-complex-case">
 <h2>Reproject a Raster - The Complex Case<a class="headerlink" href="#reproject-a-raster-the-complex-case" title="Permalink to this headline">#</a></h2>
 <p>In many cases reprojecting a raster requires changing the number of rows or columns, or ‘warping’ (i.e. bending) an image. All of these examples create a problem, the centroids of the new projected raster don’t line up with the centroids of the original raster. Therefore they now represent locations on the ground that weren’t in the original dataset.</p>
 <p>Take for instance the case of a ‘warped’ raster image (below) which for instance occurs when you switch from a spherical CRS (like lat lon) to a projected (or flat) CRS. Notice that the centroids of the two rasters no longer over lap:</p>
-<div class="figure align-default" id="example-of-warping-an-image-during-reprojection">
+<figure class="align-default" id="example-of-warping-an-image-during-reprojection">
 <a class="reference internal image-reference" href="../_images/d_warp.png"><img alt="../_images/d_warp.png" src="../_images/d_warp.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>In this case we have a decision to make, how will we assign values to the new warped raster? Keep in mind the values must change because they now point to different locations on the ground.  For this we have a number of ‘interpolation’ options, some simple, some complex.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>What is interpolation? Interpolation allows us to make an informed guess of a value at a new location. <a class="reference external" href="http://wiki.gis.com/wiki/index.php/Interpolation">Read more here</a></p>
 </div>
-<div class="section" id="interpolation-options">
+<section id="interpolation-options">
 <span id="d-raster-crs-intro-interpolation-options"></span><h3>Interpolation Options<a class="headerlink" href="#interpolation-options" title="Permalink to this headline">#</a></h3>
 <p>There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations.</p>
 <p>In the visual example below we will try to estimate the value for location <code class="docutils literal notranslate"><span class="pre">C</span></code> based on the known values at locations <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
-<div class="figure align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
+<figure class="align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">#</a></p>
-</div>
-<div class="figure align-default" id="example-of-nearest-neighbor-and-bicubic-interpolation">
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="example-of-nearest-neighbor-and-bicubic-interpolation">
 <a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="choosing-the-right-interpolation-method">
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="choosing-the-right-interpolation-method">
 <h3>Choosing the Right Interpolation Method<a class="headerlink" href="#choosing-the-right-interpolation-method" title="Permalink to this headline">#</a></h3>
 <p>Choosing the correct interpolation method is important. The following table should help you to decided. Remember categorical data might include land cover classes (forest, water, etc), and continuous data is measurable for instance rainfall (values 0 to 20mm).</p>
 <table class="colwidths-auto table">
@@ -1108,9 +1127,9 @@ title="Print to PDF"
 </tbody>
 </table>
 <p>For categorical data, Nearest Neighbor is your only choice, enjoy it. For continuous data, like quantity of rain, you can choose between Bilinear and Bicubic (i.e. “cubic convolution”). For most data Bilinear interpolation is fast and effective. However if you believe your data is highly non-linear, or widely spaced, you might consider using Bicubic. Some experimentation here is often informative.</p>
-</div>
-</div>
-<div class="section" id="reprojecting-a-raster-with-rasterio">
+</section>
+</section>
+<section id="reprojecting-a-raster-with-rasterio">
 <h2>Reprojecting a Raster with Rasterio<a class="headerlink" href="#reprojecting-a-raster-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>Ok enough talk already, how do we reproject a raster? Before we get into it, we need to talk some more… about <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code>. <code class="docutils literal notranslate"><span class="pre">calculate_default_transform</span></code> allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the <code class="docutils literal notranslate"><span class="pre">source</span></code> (src) is the original input raster, and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> (dst) is the outputed reprojected raster.</p>
 <p>First, remember that the transform matrix takes the following form:</p>
@@ -1205,10 +1224,12 @@ Destination Transform:
 </div>
 </div>
 </div>
-<div class="figure align-default" id="reprojected-landsat-image">
+<figure class="align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Source: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data">Creating Raster Data</a></p>
 <!-- 
 6.6 Reprojecting raster geometries
@@ -1264,8 +1285,8 @@ WGS84 	457 	465 	212505 	0.0008 	1843
 Equal-area 	467 	478 	223226 	83.2000 	1842
 Of course, the limitations of 2D Earth projections apply as much to vector as to raster data. At best we can comply with two out of three spatial properties (distance, area, direction). Therefore, the task at hand determines which projection to choose. For instance, if we are interested in a density (points per grid cell or inhabitants per grid cell) we should use an equal-area projection (see also Chapter 13).
 
-There is more to learn about CRSs. An excellent resource in this area, also implemented in R, is the website R Spatial. Chapter 6 for this free online book is recommended reading — see: rspatial.org/spatial/6-crs.html --></div>
-</div>
+There is more to learn about CRSs. An excellent resource in this area, also implemented in R, is the website R Spatial. Chapter 6 for this free online book is recommended reading — see: rspatial.org/spatial/6-crs.html --></section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to overlay and join vector data to create new geometries." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to overlay and join vector data to create new geometries." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, overlay, join, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -794,11 +795,11 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-overlays-and-joins">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-overlays-and-joins">
 <h1>Spatial Overlays and Joins<a class="headerlink" href="#spatial-overlays-and-joins" title="Permalink to this headline">#</a></h1>
 <p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
 <p>In this chapter, we will focus on vector overlays, which involve combining vector data. We’ll explore five types of vector overlays and merging: union, intersection, difference (erase), identity, and spatial join.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -913,8 +914,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="overlays">
+</section>
+<section id="overlays">
 <h2>Overlays<a class="headerlink" href="#overlays" title="Permalink to this headline">#</a></h2>
 <p>For the first four, we can use the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> function in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>. We simply change the argument for the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter to the overlay of our choosing.</p>
 <p>We will use the county boundaries and watershed boundaries shapefiles in these examples. The overlays will allow us to see what areas are only in a county, only in a watershed, or in both.</p>
@@ -1103,13 +1104,15 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
-<div class="section" id="union">
+<section id="union">
 <h3>Union<a class="headerlink" href="#union" title="Permalink to this headline">#</a></h3>
 <p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept. <a class="footnote-reference brackets" href="#gpd-set" id="id3">1</a></p>
-<div class="figure align-default" id="union-of-all-geometries-keeps-all-data">
+<figure class="align-default" id="union-of-all-geometries-keeps-all-data">
 <img alt="../_images/vector_union.jpg" src="../_images/vector_union.jpg" />
-<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id5">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1222,14 +1225,16 @@ First two rows:
 <img alt="../_images/e_vector_overlay_13_0.png" src="../_images/e_vector_overlay_13_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="intersection">
+</section>
+<section id="intersection">
 <h3>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">#</a></h3>
 <p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id6">1</a></p>
-<div class="figure align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
+<figure class="align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
 <img alt="../_images/vector_intersection.jpg" src="../_images/vector_intersection.jpg" />
-<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1334,14 +1339,16 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_15_4.png" src="../_images/e_vector_overlay_15_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="identity">
+</section>
+<section id="identity">
 <h3>Identity<a class="headerlink" href="#identity" title="Permalink to this headline">#</a></h3>
 <p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded. <a class="footnote-reference brackets" href="#gpd-set" id="id9">1</a></p>
-<div class="figure align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
+<figure class="align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
 <img alt="../_images/vector_identity.jpg" src="../_images/vector_identity.jpg" />
-<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values.</p>
 <p>Looking at the map, we see all combined geometries except for the areas that are unique to the second dataset (watershed boundaries dataset).</p>
 <div class="cell docutils container">
@@ -1447,14 +1454,16 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_17_4.png" src="../_images/e_vector_overlay_17_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="difference-erase">
+</section>
+<section id="difference-erase">
 <h3>Difference (Erase)<a class="headerlink" href="#difference-erase" title="Permalink to this headline">#</a></h3>
 <p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept. <a class="footnote-reference brackets" href="#gpd-set" id="id10">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id11">2</a></p>
-<div class="figure align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
+<figure class="align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
 <img alt="../_images/vector_erase.jpg" src="../_images/vector_erase.jpg" />
-<p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was “combined” with the first dataset by discarding some data (altering the geometry) from the first dataset.</p>
 <p>Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).</p>
 <div class="cell docutils container">
@@ -1554,11 +1563,11 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_19_4.png" src="../_images/e_vector_overlay_19_4.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="merge">
+</section>
+</section>
+<section id="merge">
 <h2>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">#</a></h2>
-<div class="section" id="spatial-join">
+<section id="spatial-join">
 <h3>Spatial Join<a class="headerlink" href="#spatial-join" title="Permalink to this headline">#</a></h3>
 <p>With spatial join, attributes from one dataset are appended to those in another dataset based on a specified relative spatial relationship. <a class="footnote-reference brackets" href="#gpd-merge" id="id12">3</a>, <a class="footnote-reference brackets" href="#esri-join" id="id13">4</a></p>
 <p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we use the <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> function. In addition to passing the datasets as arguments, and we also pass arguments for two parameters <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code>. The <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another. <a class="footnote-reference brackets" href="#gpd-merge" id="id14">3</a></p>
@@ -1743,7 +1752,7 @@ First two rows:
 <img alt="../_images/e_vector_overlay_21_5.png" src="../_images/e_vector_overlay_21_5.png" />
 </div>
 </div>
-<div class="section" id="left-join">
+<section id="left-join">
 <h4>Left Join<a class="headerlink" href="#left-join" title="Permalink to this headline">#</a></h4>
 <p>We’ll first demonstrate a left join. Notice that all features from the left dataset (wells dataset) are kept. The features that did not meet the spatial relationship criteria for a join have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values for the fields that originated from the right dataset (county boundaries dataset).</p>
 <div class="cell docutils container">
@@ -1873,8 +1882,8 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_23_4.png" src="../_images/e_vector_overlay_23_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="right-join">
+</section>
+<section id="right-join">
 <h4>Right Join<a class="headerlink" href="#right-join" title="Permalink to this headline">#</a></h4>
 <p>For a right join, all features from the right dataset (county boundaries dataset) are kept but are repeated multiple times. This is because a “new” county feature is created for every well point that falls within a county’s boundary. As a result, because wells must fall within the county boundaries for a join to occur on the county boundaries feature, there are no resulting features with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the attribute table.</p>
 <div class="admonition attention">
@@ -2008,8 +2017,8 @@ First two rows:
 </div></div><img alt="../_images/e_vector_overlay_25_4.png" src="../_images/e_vector_overlay_25_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="inner-join">
+</section>
+<section id="inner-join">
 <h4>Inner Join<a class="headerlink" href="#inner-join" title="Permalink to this headline">#</a></h4>
 <p>Finally, with an inner join, only the well locations that fall within the county boundaries are kept. These well locations have the county boundaries dataset appended to them. Because it’s an inner join, there are no resulting features with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the attribute table.</p>
 <div class="cell docutils container">
@@ -2154,10 +2163,10 @@ First two rows:
 <dd><p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm">Spatial Join (Analysis), Esri</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

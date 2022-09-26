@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to perform mathematical operations on raster bands using rasterio." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to perform mathematical operations on raster bands using rasterio." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, python, rasterio, raster, band, math" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -721,7 +722,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="band-math-w-rasterio">
+  <section class="tex2jax_ignore mathjax_ignore" id="band-math-w-rasterio">
 <h1>Band Math w. Rasterio<a class="headerlink" href="#band-math-w-rasterio" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -740,7 +741,7 @@ title="Print to PDF"
 </div>
 <hr class="docutils" />
 <p>Band math is useful when you want to perform a mathematical operation to each pixel value in a raster. You might find band math helpful for calculating NDVI or multiplying all values by a constant.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>To begin, we will import our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -754,8 +755,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="band-math-with-rasterio-with-multiple-images">
+</section>
+<section id="band-math-with-rasterio-with-multiple-images">
 <h2>Band Math with rasterio with multiple images<a class="headerlink" href="#band-math-with-rasterio-with-multiple-images" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Rasterio</span></code> makes band math relatively straightforward since the rasters are essentially read in as numpy arrays, so you can perform math on the raster arrays just like any numpy array.</p>
 <div class="admonition attention">
@@ -872,7 +873,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="example-band-math-operations">
+<section id="example-band-math-operations">
 <h3>Example band math operations<a class="headerlink" href="#example-band-math-operations" title="Permalink to this headline">#</a></h3>
 <p>We can get the difference between the two rasters.</p>
 <div class="cell docutils container">
@@ -938,8 +939,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="band-math-with-nodata-values">
+</section>
+<section id="band-math-with-nodata-values">
 <h3>Band math with NoData values<a class="headerlink" href="#band-math-with-nodata-values" title="Permalink to this headline">#</a></h3>
 <p>If a pixel has a value of <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, or <code class="docutils literal notranslate"><span class="pre">NoData</span></code> value, those pixels will automatically be ignored in any band math. The output raster will maintain the <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>, or <code class="docutils literal notranslate"><span class="pre">NoData</span></code> value at that pixel location.</p>
 <p>Not all rasters, however, use those values to signify that a pixel has no value. Some rasters might use 0 or another number to indicate no value. In that case, we have to explicitly mark that pixel to be skipped.</p>
@@ -987,8 +988,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-calculating-ndvi">
+</section>
+<section id="example-calculating-ndvi">
 <h3>Example: Calculating NDVI<a class="headerlink" href="#example-calculating-ndvi" title="Permalink to this headline">#</a></h3>
 <p>In the example below, we will read in a clipped Landsat 8, Collection 2 Level-2 image and use the band math concepts to calculate the normalized difference vegetation index (NDVI) for the image. As you may recall, NDVI is a spectral approach used to assess vegetation. The formula for NDVI is:</p>
 <div class="math notranslate nohighlight">
@@ -1045,13 +1046,13 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="band-math-with-geowombat">
+</section>
+</section>
+<section id="band-math-with-geowombat">
 <h2>Band Math with GeoWombat<a class="headerlink" href="#band-math-with-geowombat" title="Permalink to this headline">#</a></h2>
 <p>For band math with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code>, see the chapter on <a class="reference internal" href="f_rs_band_math.html"><span class="doc std std-doc">Band Math &amp; Vegetation Indices</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

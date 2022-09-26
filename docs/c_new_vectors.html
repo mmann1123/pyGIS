@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to create new vector data (shapefile), and assign a projection (CRS). This includes an example of plotting latitude longitude data stored in a .csv file." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to create new vector data (shapefile), and assign a projection (CRS). This includes an example of plotting latitude longitude data stored in a .csv file." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à modifier, sous-ensemble et tracer des données attributaires de données vectorielles (fichier de formes). Cela inclut un exemple de traçage des données de longitude de latitude ainsi que le sous-ensemble (indexation) par emplacement." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a cambiar, crear subconjuntos y trazar datos de atributos de datos vectoriales (shapefile). Esto incluye un ejemplo de trazado de datos de latitud y longitud, así como subconjuntos (indexación) por ubicación." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, attribute data, subset,  shapefile" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -750,7 +751,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-points-lines-polygons-in-python">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-points-lines-polygons-in-python">
 <h1>Spatial Points Lines Polygons in Python<a class="headerlink" href="#spatial-points-lines-polygons-in-python" title="Permalink to this headline">#</a></h1>
 <p>We often find ourselves in a situation where we need to generate new spatial data from scratch, or need to better understand how our data is constructed. This lesson will walk you through some of the most common forms of data generation.</p>
 <div class="cell docutils container">
@@ -766,7 +767,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="creating-geodataframe-geometries">
+<section id="creating-geodataframe-geometries">
 <h2>Creating GeoDataFrame Geometries<a class="headerlink" href="#creating-geodataframe-geometries" title="Permalink to this headline">#</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> object is a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> that has a column with geometry. An empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is just that, empty, essentially just like the pandas one. Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
 <div class="cell docutils container">
@@ -786,7 +787,7 @@ Index: []
 </div>
 </div>
 <p>In order to have a working spatial dataframe we need define a few things:</p>
-<div class="section" id="geodataframe-components">
+<section id="geodataframe-components">
 <h3>GeoDataFrame Components<a class="headerlink" href="#geodataframe-components" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>data: a pandas.DataFrame, dictionary, or empty list [] containing an desired attribute data. Use [] if no data is</p></li>
@@ -795,8 +796,8 @@ Index: []
 </ul>
 <p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
 <p>Now we have a geometry column in our GeoDataFrame but we don’t have any data yet.</p>
-</div>
-<div class="section" id="create-points-from-list-of-coordinates">
+</section>
+<section id="create-points-from-list-of-coordinates">
 <h3>Create Points from list of coordinates<a class="headerlink" href="#create-points-from-list-of-coordinates" title="Permalink to this headline">#</a></h3>
 <p>Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">ESPG code</span></a>.<br />
 <span class="xref myst">Click here for a more detailed explanation of this process</span></p>
@@ -855,8 +856,8 @@ Index: []
 </div>
 </div>
 <p><a class="reference external" href="https://geopandas.org/gallery/create_geopandas_from_pandas.html">adapted from geopandas</a></p>
-</div>
-<div class="section" id="creating-points-from-csv-of-latitude-and-longitude-lat-lon">
+</section>
+<section id="creating-points-from-csv-of-latitude-and-longitude-lat-lon">
 <h3>Creating Points from csv of latitude and longitude (lat, lon)<a class="headerlink" href="#creating-points-from-csv-of-latitude-and-longitude-lat-lon" title="Permalink to this headline">#</a></h3>
 <p>One of the most common data creation tasks is creating a shapefile from a list of points or a <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. Luckily getting this data into usable format is easy enough.</p>
 <p>First we have to create an example <code class="docutils literal notranslate"><span class="pre">.csv</span></code> dataset to work from:</p>
@@ -957,8 +958,8 @@ Index: []
 <li><p>Typically, like the data above, these data are stored in WGS84 lat lon, but be sure to check this, another common format is UTM coordinates (look for values around 500,000 east to west and measured in meters)</p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="creating-spatial-lines">
+</section>
+<section id="creating-spatial-lines">
 <h3>Creating Spatial lines<a class="headerlink" href="#creating-spatial-lines" title="Permalink to this headline">#</a></h3>
 <p>Following the examples above we can specify lines easily. In this case let’s say we have lines tracking three people riding their bikes through town. We keep track of their unique id <code class="docutils literal notranslate"><span class="pre">ID</span></code>, their location <code class="docutils literal notranslate"><span class="pre">X,Y</span></code>, and their <code class="docutils literal notranslate"><span class="pre">Speed</span></code>, and read in the data below:</p>
 <div class="cell docutils container">
@@ -1019,8 +1020,8 @@ Index: []
 </div>
 </div>
 <p>Now we can see that each line is treated separately by <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and plot them using <code class="docutils literal notranslate"><span class="pre">.plot(column='ID')</span></code>.</p>
-</div>
-<div class="section" id="creating-spatial-polygons">
+</section>
+<section id="creating-spatial-polygons">
 <h3>Creating Spatial Polygons<a class="headerlink" href="#creating-spatial-polygons" title="Permalink to this headline">#</a></h3>
 <p>Creating a polyon in geopandas is very similiar to the other exercises. First we create a Fiona geometry object from our coordinates, add that to a dataframe with any attributes and then create a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> with an assigned coordinate reference system (CRS).</p>
 <div class="cell docutils container">
@@ -1050,8 +1051,8 @@ Index: []
 <img alt="../_images/c_new_vectors_19_1.png" src="../_images/c_new_vectors_19_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="creating-spatial-points-admittedly-the-long-way">
+</section>
+<section id="creating-spatial-points-admittedly-the-long-way">
 <span id="e-points-the-long-way"></span><h3>Creating Spatial Points (admittedly the long way)<a class="headerlink" href="#creating-spatial-points-admittedly-the-long-way" title="Permalink to this headline">#</a></h3>
 <p>Since geopandas takes advantage of Shapely geometric objects it is possible to create a Shapefile from a scratch by passing Shapely’s geometric objects into the GeoDataFrame. This is useful as it makes it easy to convert e.g. a text file that contains coordinates into a Shapefile.</p>
 <p>Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and create a new column called geometry that will contain our Shapely objects:</p>
@@ -1234,9 +1235,9 @@ Datum: World Geodetic System 1984
 </div>
 <hr class="docutils" />
 <p><a class="reference external" href="https://automating-gis-processes.github.io/CSC18/lessons/L2/geopandas-basics.html#creating-geometries-into-a-geodataframe">Adapted from Intro to Python GIS</a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn the difference between raster and vector data, manually create spatial data, and data measurement issues" lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn the difference between raster and vector data, manually create spatial data, and data measurement issues" lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez la différence entre les données raster et vectorielles, créez manuellement des données géospatiales et les problèmes de mesure des données" lang="fr" name="description" xml:lang="fr" />
 <meta content="Conozca la diferencia entre datos ráster y vectoriales, cree manualmente datos geoespaciales y problemas de medición de datos" lang="es" name="description" xml:lang="es" />
 <meta content="points, lines, polygons,raster, spatial, attribute table" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -815,19 +816,21 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-data">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-data">
 <h1>Spatial Data<a class="headerlink" href="#spatial-data" title="Permalink to this headline">#</a></h1>
-<div class="section" id="vector-vs-raster-data">
+<section id="vector-vs-raster-data">
 <h2>Vector vs. Raster Data<a class="headerlink" href="#vector-vs-raster-data" title="Permalink to this headline">#</a></h2>
 <p>To work in a GIS environment, real world observations (objects or events that can be recorded in 2D or 3D space) need to be reduced to spatial entities. These spatial entities can be represented in a GIS as a <strong>vector data model</strong> or a <strong>raster data model</strong>.</p>
-<div class="figure align-default" id="raster-vs-vector">
+<figure class="align-default" id="raster-vs-vector">
 <img alt="../_images/vector_vs_raster.jpg" src="../_images/vector_vs_raster.jpg" />
-<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Vector and raster representations of a river feature.</span><a class="headerlink" href="#raster-vs-vector" title="Permalink to this image">#</a></p>
-</div>
-<div class="section" id="vector-data">
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Vector and raster representations of a river feature.</span><a class="headerlink" href="#raster-vs-vector" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="vector-data">
 <h3>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">#</a></h3>
 <p>Vector features can be decomposed into three different geometric primitives: <strong>points</strong>, <strong>polylines</strong> and <strong>polygons</strong>.</p>
-<div class="section" id="point">
+<section id="point">
 <h4>Point<a class="headerlink" href="#point" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -873,8 +876,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>We seem capable of interpreting such symbols as points, but there may be instances when such interpretation may be ambiguous (e.g. is a round symbol delineating the area of a round feature on the ground such as a large oil storage tank or is it representing the point location of that tank?).</p>
-</div>
-<div class="section" id="polyline">
+</section>
+<section id="polyline">
 <h4>Polyline<a class="headerlink" href="#polyline" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -897,8 +900,8 @@ title="Print to PDF"
 </div>
 <p>A polyline is composed of a sequence of two or more coordinate pairs called vertices. A vertex is defined by coordinate pairs, just like a point, but what differentiates a vertex from a point is its explicitly defined relationship with neighboring vertices. A vertex is connected to at least one other vertex.</p>
 <p>Like a point, a true line can’t be seen since it has no area. And like a point, a line is symbolized using shapes that have a color, width and style (e.g. solid, dashed, dotted, etc…). Roads and rivers are commonly stored as polylines in a GIS.</p>
-</div>
-<div class="section" id="polygon">
+</section>
+<section id="polygon">
 <h4>Polygon<a class="headerlink" href="#polygon" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -918,9 +921,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>A polygon is composed of three or more line segments whose starting and ending coordinate pairs are the same. Sometimes you will see the words <em>lattice</em> or <em>area</em> used in lieu of ‘polygon’. Polygons represent both length (i.e. the perimeter of the area) and area. They also embody the idea of an inside and an outside; in fact, the area that a polygon encloses is explicitly defined in a GIS environment. If it isn’t, then you are working with a polyline feature. If this does not seem intuitive, think of three connected lines defining a triangle: they can represent three connected road segments (thus polyline features), or they can represent the grassy strip enclosed by the connected roads (in which case an ‘inside’ is implied thus defining a polygon).</p>
-</div>
-</div>
-<div class="section" id="raster-data">
+</section>
+</section>
+<section id="raster-data">
 <h3>Raster Data<a class="headerlink" href="#raster-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -942,38 +945,42 @@ title="Print to PDF"
 <p>A raster data model uses an array of cells, or pixels, to represent real-world objects. Raster datasets are commonly used for representing and managing imagery, surface temperatures, digital elevation models, and numerous other entities.</p>
 <p>A raster can be thought of as a special case of an area object where the area is divided into a regular grid of cells. But a regularly spaced array of marked points may be a better analogy since rasters are stored as an array of values where each cell is defined by a single coordinate pair inside of most GIS environments.</p>
 <p>Implicit in a raster data model is a value associated with each cell or pixel. This is in contrast to a vector model that may or may not have a value associated with the geometric primitive.</p>
-</div>
-<div class="section" id="object-vs-field">
+</section>
+<section id="object-vs-field">
 <h3>Object vs. Field<a class="headerlink" href="#object-vs-field" title="Permalink to this headline">#</a></h3>
 <p>The traditional vector/raster perspective of our world is one that has been driven by software and data storage environments. But this perspective is not particularly helpful if one is interested in analyzing the pattern. In fact, it can mask some important properties of the entity being studied. An object vs. field view of the world proves to be more insightful even though it may seem more abstract.</p>
-<div class="section" id="object-view">
+<section id="object-view">
 <h4>Object View<a class="headerlink" href="#object-view" title="Permalink to this headline">#</a></h4>
 <p>An object view of the world treats entities as discrete objects; they need not occur at every location within a study area. Point locations of cities would be an example of an object. So would be polygonal representations of urban areas which may be non-contiguous.</p>
-</div>
-<div class="section" id="field-view">
+</section>
+<section id="field-view">
 <h4>Field View<a class="headerlink" href="#field-view" title="Permalink to this headline">#</a></h4>
 <p>A field view of the world treats entities as a scalar field. This is a mathematical concept in which a scalar is a quantity having a magnitude. It is measurable at every location within the study region. Two popular examples of a scalar field are surface elevation and surface temperature. Each represents a property that can be measured at any location.</p>
 <p>Another example of a scalar field is the presence and absence of a building. This is a binary scalar where a value of 0 is assigned to a location devoid of buildings and a value of 1 is assigned to locations having one or more buildings. A field representation of buildings may not seem intuitive, in fact, given the definition of an object view of the world in the last section, it would seem only fitting to view buildings as objects. In fact, buildings can be viewed as both field or objects. The context of the analysis is ultimately what will dictate which view to adopt. If we’re interested in studying the distribution of buildings over a study area, then an object view of the features makes sense. If, on the other hand, we are interested in identifying all locations where buildings don’t exist, then a binary field view of these entities would make sense.</p>
-</div>
-</div>
-<div class="section" id="scale">
+</section>
+</section>
+<section id="scale">
 <h3>Scale<a class="headerlink" href="#scale" title="Permalink to this headline">#</a></h3>
 <p>How one chooses to represent a real-world entity will be in large part dictated by the <strong>scale</strong> of the analysis. In a GIS, scale has a specific meaning: it’s the ratio of distance on the map to that in the real world. So a <strong>large scale</strong> map implies a relatively large ratio and thus a small extent. This is counter to the layperson’s interpretation of <em>large scale</em> which focuses on the scope or extent of a study; so a large scale analysis would imply one that covers a <em>large</em> area.</p>
 <p>The following two maps represent the same entity: the Boston region. At a small scale (e.g. 1:10,000,000), Boston and other cities may be best represented as points. At a large scale (e.g. 1:34,000), Boston may be best represented as a polygon. Note that at this large scale, roads may also be represented as polygon features instead of polylines.</p>
-<div class="figure align-default" id="boston-small-scale">
+<figure class="align-default" id="boston-small-scale">
 <img alt="../_images/Boston_small_scale.jpg" src="../_images/Boston_small_scale.jpg" />
-<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Map of the Boston area at a 1:10,000,000 scale. Note that in geography, this is considered small scale whereas in layperson terms, this extent is often referred to as a large scale (i.e. covering a large area).</span><a class="headerlink" href="#boston-small-scale" title="Permalink to this image">#</a></p>
-</div>
-<div class="figure align-default" id="boston-large-scale">
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Map of the Boston area at a 1:10,000,000 scale. Note that in geography, this is considered small scale whereas in layperson terms, this extent is often referred to as a large scale (i.e. covering a large area).</span><a class="headerlink" href="#boston-small-scale" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="boston-large-scale">
 <img alt="../_images/Boston_large_scale.jpg" src="../_images/Boston_large_scale.jpg" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Map of the Boston area at a 1:34,000 scale. Note that in geography, this is considered large scale whereas in layperson terms, this extent is often referred to as a small scale (i.e. covering a small area).</span><a class="headerlink" href="#boston-large-scale" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="attribute-tables">
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Map of the Boston area at a 1:34,000 scale. Note that in geography, this is considered large scale whereas in layperson terms, this extent is often referred to as a small scale (i.e. covering a small area).</span><a class="headerlink" href="#boston-large-scale" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="attribute-tables">
 <h3>Attribute Tables<a class="headerlink" href="#attribute-tables" title="Permalink to this headline">#</a></h3>
 <p>Non-spatial information associated with a spatial feature is referred to as an <strong>attribute</strong>. A feature on a GIS map is linked to its record in the attribute table by a unique numerical feature identifier (FID). Every feature in a layer has an identifier. It is important to understand the one-to-one or many-to-one relationship between feature, and attribute record. Because features on the map are linked to their records in the table, many GIS software will allow you to click on a map feature and see its related attributes in the table.</p>
 <p>Raster data can also have attributes only if pixels are represented using a small set of unique integer values. Raster datasets that contain attribute tables typically have cell values that represent or define a class, group, category, or membership. NOTE: not all GIS raster data formats can store attribute information; in fact most raster datasets you will work with in this course will not have attribute tables.</p>
-<div class="section" id="measurement-levels">
+<section id="measurement-levels">
 <h4>Measurement Levels<a class="headerlink" href="#measurement-levels" title="Permalink to this headline">#</a></h4>
 <p>Attribute data can be broken down into four <strong>measurement levels</strong>:</p>
 <ul class="simple">
@@ -982,9 +989,9 @@ title="Print to PDF"
 <li><p><strong>Interval</strong> data are numeric and have a linear scale, however they do not have a true zero and can therefore not be used to measure <em>relative</em> magnitudes. For example, one cannot say that 60°F is twice as warm as 30°F since when presented in degrees °C the temperature values are 15.5°C and -1.1°C respectively (and 15.5 is clearly not twice as big as -1.1).</p></li>
 <li><p><strong>Ratio</strong> scale data are interval data with a true zero such as monetary value (e.g. <span class="math notranslate nohighlight">\(1, \)</span>20, $100).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="data-type">
+</section>
+</section>
+<section id="data-type">
 <h3>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">#</a></h3>
 <p>Another way to categorize an attribute is by its <strong>data type</strong>. ArcGIS supports several data types such as <strong>integer, float, double and text</strong>. Knowing your data type and measurement level should dictate how they are stored in a GIS environment. The following table lists popular data types available in most GIS applications.</p>
 <table class="colwidths-auto table">
@@ -1044,9 +1051,9 @@ eire$x.int <- round(eire$x)
 l2 <- list(sp.text, coordinates(eire), as.character(round(eire$x.int,2)), cex=0.5 ) 
 spplot(eire, z="x.int", at= brks, col.regions =clr, col="white", sp.layout=l2)
 
-```  --></div>
-</div>
-</div>
+```  --></section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
