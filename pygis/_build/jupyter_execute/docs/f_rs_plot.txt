@@ -27,6 +27,8 @@ plt.tight_layout(pad=1)
 
 fig, ax = plt.subplots(dpi=200)
 with gw.open(l8_224078_20200518, nodata=0) as src:
+    # replace 0 with nan
+    src = src.gw.mask_nodata()
     src.sel(band=[3, 2, 1]).plot.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 
@@ -41,7 +43,7 @@ plt.tight_layout(pad=1)
 plt.savefig("rgb_plot.png", dpi=150)
 
 from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
-import os.path.basename  as basename
+from os.path  import basename
 def plot(bounds_by, ref_image=None, cmap='viridis'):
     fig, ax = plt.subplots(dpi=200)
     with gw.config.update(ref_image=ref_image):

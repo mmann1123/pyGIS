@@ -1,0 +1,35 @@
+# Specify the name that is used to seach for the data
+place_name = "Edgewood Washington, DC, USA"
+
+# import osmnx
+import osmnx as ox
+import geopandas as gpd
+
+# Get place boundary related to the place name as a geodataframe
+area = ox.geocode_to_gdf(place_name)
+
+# Check the data type
+area
+
+# Check the data type
+type(area)
+
+area.plot()
+
+# List key-value pairs for tags
+tags = {'building': True}   
+
+buildings = ox.geometries_from_place(place_name, tags)
+buildings.head()
+
+# Plot footprints 
+buildings.plot()
+
+buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
+
+buildings = buildings.loc[buildings.geometry.type=='Polygon']
+
+# Save footprints 
+buildings.to_file('../temp/edgewood_buildings.shp')  
+# Or save in a more open source format
+#buildings.to_file('../temp/edgewood_buildings.geojson', driver='GeoJSON')  

@@ -148,11 +148,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -740,7 +735,7 @@ title="Print to PDF"
 <p>Import required modules and data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import GeoWombat</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import GeoWombat</span>
 <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 
 <span class="c1"># import plotting</span>
@@ -755,7 +750,7 @@ title="Print to PDF"
 <h2>Plot a Single Band Image<a class="headerlink" href="#plot-a-single-band-image" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B2</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B2</span> 
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -766,9 +761,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_plot_3_0.png" src="../_images/f_rs_plot_3_0.png" />
-</div>
 </div>
 </section>
 <section id="plot-a-true-color-landsat-image">
@@ -776,7 +768,7 @@ title="Print to PDF"
 <p>Here we open the image, missing data is removed with <code class="docutils literal notranslate"><span class="pre">.where(src</span> <span class="pre">!=</span> <span class="pre">0)</span></code>, remember the bands in this file are stored in reverse order (blue, green, red), so we put them back into order <code class="docutils literal notranslate"><span class="pre">.sel(band=[3,</span> <span class="pre">2,</span> <span class="pre">1])</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load example data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># load example data</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
@@ -786,14 +778,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_plot_5_0.png" src="../_images/f_rs_plot_5_0.png" />
-</div>
 </div>
 <p>Note you can also set the missing data value when opening a file (assuming it is not in the raster profile), those values then need to be masked using <code class="docutils literal notranslate"><span class="pre">gw.mask_nodata()</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> updated:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load example data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># load example data</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -803,9 +792,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_plot_7_0.png" src="../_images/f_rs_plot_7_0.png" />
 </div>
 </div>
 </section>
@@ -818,7 +804,7 @@ title="Print to PDF"
 <p>Here we will look at a common false color combo to assigns the nir band to the color red. This make vegetation appear bright red.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">rgbn</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -829,9 +815,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;rgb_plot.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_plot_9_0.png" src="../_images/f_rs_plot_9_0.png" />
 </div>
 </div>
 </section>
@@ -914,7 +897,7 @@ Same idea with the intersection, using `bounds_by='intersection'`, we still need
 <p>Here we set up a more complicated plotting function for near IR ‘nir’.  Note the use of <code class="docutils literal notranslate"><span class="pre">footprint_grid</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B4</span><span class="p">,</span> <span class="n">l8_224078_20200518_B4</span>
 <span class="kn">from</span> <span class="nn">os.path</span>  <span class="kn">import</span> <span class="n">basename</span>
 <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">bounds_by</span><span class="p">,</span> <span class="n">ref_image</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
@@ -956,12 +939,9 @@ Same idea with the intersection, using `bounds_by='intersection'`, we still need
 <p>The two plots below illustrate how two images can be mosaicked. The orange grids highlight the image footprints while the black grids illustrate the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> chunks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f_rs_plot_13_0.png" src="../_images/f_rs_plot_13_0.png" />
 </div>
 </div>
 </section>

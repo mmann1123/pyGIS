@@ -6,7 +6,7 @@ parts:
   - file: docs/b_intro_py
   - file: docs/b_about_py
   - file: docs/b_getting_started
-  - file: docs/b_conda_started
+  - file: docs/b_conda_started2
   - file: docs/b_python_by_example
   - file: docs/b_learn_more
 - caption: 1 - Spatial Data Types in Python

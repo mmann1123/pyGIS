@@ -150,11 +150,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -718,7 +713,7 @@ title="Print to PDF"
 <p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -726,30 +721,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.],
-       [-90., -54., -18.,  18.,  54.,  90.]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 90.,  90.,  90.,  90.,  90.,  90.],
-       [ 54.,  54.,  54.,  54.,  54.,  54.],
-       [ 18.,  18.,  18.,  18.,  18.,  18.],
-       [-18., -18., -18., -18., -18., -18.],
-       [-54., -54., -54., -54., -54., -54.],
-       [-90., -90., -90., -90., -90., -90.]])
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
 </pre></div>
 </div>
 </div>
@@ -757,7 +732,7 @@ title="Print to PDF"
 <p>Let’s generate some data representing temperature and store it an array <code class="docutils literal notranslate"><span class="pre">Z</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">Z1</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">Z2</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -768,9 +743,6 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_new_rasters_4_0.png" src="../_images/e_new_rasters_4_0.png" />
 </div>
 </div>
 <section id="creating-raster-data">
@@ -828,7 +800,7 @@ title="Print to PDF"
 <p>To save this array along with spatial information to a file, we call <code class="docutils literal notranslate"><span class="pre">rasterio.open()</span></code> with a path to the new file to be created, and ‘w’ to specify writing mode, along with the arguments above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.transform</span> <span class="kn">import</span> <span class="n">Affine</span>
 
 <span class="n">xres</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -855,7 +827,7 @@ title="Print to PDF"
 <p>When we go to look again at our data we can read it back in using <code class="docutils literal notranslate"><span class="pre">open</span></code>. Before plotting we <code class="docutils literal notranslate"><span class="pre">raster.read(1)</span></code> the first band, which converts the data back to a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array that can be plotted in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.  Notice that we also specify the band number (in this case 1), with <code class="docutils literal notranslate"><span class="pre">.write(Z,</span> <span class="pre">1)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">raster</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">)</span>
 
@@ -865,20 +837,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_new_rasters_8_0.png" src="../_images/e_new_rasters_8_0.png" />
-</div>
 </div>
 <p>So in summary, a spatial dataset is essentially just a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with information about the location and resolution of the array, the <a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">coordinate reference system</span></a>, and number of bands. This information is typically accessed and updated via the <code class="docutils literal notranslate"><span class="pre">.profile</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">profile</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;nodata&#39;: None, &#39;width&#39;: 6, &#39;height&#39;: 6, &#39;count&#39;: 1, &#39;crs&#39;: CRS.from_epsg(4326), &#39;transform&#39;: Affine(30.0, 0.0, -105.0,
-       0.0, -30.0, 105.0), &#39;tiled&#39;: False, &#39;interleave&#39;: &#39;band&#39;}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">profile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -889,7 +852,7 @@ title="Print to PDF"
 <p>Notice the the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> above is missing a meaningful <code class="docutils literal notranslate"><span class="pre">nodata</span></code> value and was uncompressed. Let’s learn how to update these values. For this we can update the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start with the original profile</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start with the original profile</span>
 <span class="n">profile</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">profile</span>
 <span class="c1"># update values for nodata and compression type</span>
 <span class="n">profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s2">&quot;lzw&quot;</span><span class="p">)</span>
@@ -897,17 +860,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;nodata&#39;: 0, &#39;width&#39;: 6, &#39;height&#39;: 6, &#39;count&#39;: 1, &#39;crs&#39;: CRS.from_epsg(4326), &#39;transform&#39;: Affine(30.0, 0.0, -105.0,
-       0.0, -30.0, 105.0), &#39;tiled&#39;: False, &#39;interleave&#39;: &#39;band&#39;, &#39;compress&#39;: &#39;lzw&#39;}
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now we just need to write the array of data (obtained from <code class="docutils literal notranslate"><span class="pre">raster.read(1)</span></code>) out with the updated profile info. We can unpack all the dictionary values from the profile using <code class="docutils literal notranslate"><span class="pre">**profile</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">,</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">,</span> 
                   <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> 
                   <span class="o">**</span><span class="n">profile</span><span class="p">,)</span> <span class="k">as</span> <span class="n">update_dataset</span><span class="p">:</span>
     <span class="n">update_dataset</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
@@ -922,7 +879,7 @@ title="Print to PDF"
 <p>Let’s start with a problematic raster file, a landsat image that stores its red, green, and blue bands in reverse order (blue, green, red), that is scaled by 100 (multiplied by 100 to store data as integers rather than float), and that is missing a meaningful nodata value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="c1"># read in the array, band 3 first, then band 2, then band 1</span>
     <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -936,13 +893,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array shape: (3, 1860, 2041)
-{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;uint16&#39;, &#39;nodata&#39;: None, &#39;width&#39;: 2041, &#39;height&#39;: 1860, &#39;count&#39;: 3, &#39;crs&#39;: CRS.from_epsg(32621), &#39;transform&#39;: Affine(30.0, 0.0, 717345.0,
-       0.0, -30.0, -2776995.0), &#39;blockxsize&#39;: 256, &#39;blockysize&#39;: 256, &#39;tiled&#39;: True, &#39;compress&#39;: &#39;lzw&#39;, &#39;interleave&#39;: &#39;pixel&#39;}
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -951,45 +901,10 @@ title="Print to PDF"
 <p>To see what it looks like, let’s use rasterio’s <code class="docutils literal notranslate"><span class="pre">show</span></code> function which <em>sort of helps</em> when viewing multiband imagery.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  ...
-  [6672 6168 6100 ... 6028 6015 6008]
-  [6291 6457 6423 ... 6021 6001 6017]
-  [6181 6727 6747 ... 6098 6023 5991]]
-
- [[   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  ...
-  [7083 6794 6731 ... 6760 6724 6685]
-  [6951 7079 7016 ... 6699 6687 6715]
-  [6864 7286 7338 ... 6817 6732 6659]]
-
- [[   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  [   0    0    0 ...    0    0    0]
-  ...
-  [7692 7518 7513 ... 7440 7432 7415]
-  [7586 7590 7610 ... 7440 7411 7425]
-  [7576 7743 7770 ... 7464 7443 7406]]]
---------------
-</pre></div>
-</div>
-<img alt="../_images/e_new_rasters_18_2.png" src="../_images/e_new_rasters_18_2.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
 </div>
@@ -998,14 +913,9 @@ title="Print to PDF"
 <p>Let’s check what the range of values are in our raster. To do this we will use <code class="docutils literal notranslate"><span class="pre">scipy</span></code> <code class="docutils literal notranslate"><span class="pre">stats</span></code>, and <code class="docutils literal notranslate"><span class="pre">.ravel()</span></code> to convert our <code class="docutils literal notranslate"><span class="pre">n</span></code> dimension array to a <code class="docutils literal notranslate"><span class="pre">1d</span></code> array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DescribeResult(nobs=11388780, minmax=(0, 24147), mean=6095.312502656123, variance=7725568.744020711, skewness=-1.6071105370358574, kurtosis=0.9303298625510847)
 </pre></div>
 </div>
 </div>
@@ -1013,13 +923,8 @@ title="Print to PDF"
 <p>Since we currently have integer data that ranges from 0 to 24147, we should try scaling it, if we go to the documentation we would see that we need to divide all values by 100.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_arr</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">/</span> <span class="mi">100</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_arr</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">/</span> <span class="mi">100</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">scaled_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float64
 </pre></div>
 </div>
 </div>
@@ -1027,7 +932,7 @@ title="Print to PDF"
 <p>Then let’s write the data back out again with an updated profile. Notice that the datatype (<code class="docutils literal notranslate"><span class="pre">dtype</span></code>) has changed since we divided by 100.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the profile for the new raster</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the profile for the new raster</span>
 <span class="n">profile</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
 <span class="n">profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s2">&quot;lzw&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">scaled_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
@@ -1041,15 +946,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
-
-ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
-
-ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1058,20 +954,17 @@ ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
 <p>There you go! A fixed raster. Try opening it in Qgis to make sure. We can look at it now using rasterio <code class="docutils literal notranslate"><span class="pre">show</span></code>, but again it isn’t great, but better.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/LS_scaled_20200518.tif&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/LS_scaled_20200518.tif&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">show</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="n">adjust</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_new_rasters_26_0.png" src="../_images/e_new_rasters_26_0.png" />
 </div>
 </div>
 <p>To help make all of this easier and more intuitive we will be presenting the use of <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> for remote sensing applications later, <span class="xref myst">start here</span>.</p>
 <p>Just as a preview, here’s how to do this in <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
@@ -1095,51 +988,6 @@ ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
         <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;band&#39; (band: 3)&gt;
-array([&#39;blue&#39;, &#39;green&#39;, &#39;red&#39;], dtype=&#39;&lt;U5&#39;)
-Coordinates:
-  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                   | 0/50 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|███████████████████▋                                                                                                       | 8/50 [00:00&lt;00:00, 73.89it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|██████████████████████████████████████████████▎                                                                           | 19/50 [00:00&lt;00:00, 89.15it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 56%|████████████████████████████████████████████████████████████████████▎                                                     | 28/50 [00:00&lt;00:00, 85.74it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 74%|██████████████████████████████████████████████████████████████████████████████████████████▎                               | 37/50 [00:00&lt;00:00, 83.41it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 94%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋       | 47/50 [00:00&lt;00:00, 87.33it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:00&lt;00:00, 85.99it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                   | 0/14 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 57%|██████████████████████████████████████████████████████████████████████▎                                                    | 8/14 [00:00&lt;00:00, 77.32it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00&lt;00:00, 84.19it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<img alt="../_images/e_new_rasters_28_13.png" src="../_images/e_new_rasters_28_13.png" />
 </div>
 </div>
 <hr class="docutils" />

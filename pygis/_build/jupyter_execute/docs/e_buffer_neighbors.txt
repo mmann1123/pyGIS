@@ -23,6 +23,7 @@ lines = points.groupby(['ID'])['geometry'].apply(lambda x:  LineString(x.tolist(
 lines = gpd.GeoDataFrame(lines, geometry='geometry', crs="EPSG:4326") 
 lines.reset_index(inplace=True)
 
+
 # plot county outline and add wells to axis (ax)
 lines.plot(column='ID')
 
@@ -67,6 +68,8 @@ print(nearest_geoms)
 print('Coordinates of original point:',original_point)
 print('Coordinates of closest destination point:',nearest_destination)
 
+from shapely.ops import nearest_points
+
 def _nearest(row, df1, df2, geom1='geometry', geom2='geometry', df2_column=None):
     """Find the nearest point and return the corresponding value from specified column."""
 
@@ -74,7 +77,7 @@ def _nearest(row, df1, df2, geom1='geometry', geom2='geometry', df2_column=None)
     geom_union = df2.unary_union
 
     # Find the geometry that is closest
-    nearest = df2[geom2_col] == nearest_points(row[geom1_col], geom_union)[1]
+    nearest = df2[geom2] == nearest_points(row[geom1], geom_union)[1]
     # Get the corresponding value from df2 (matching is based on the geometry)
     if df2_column is None:
         value = df2[nearest].index[0]

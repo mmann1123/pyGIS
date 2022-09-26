@@ -30,14 +30,14 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks           : cache  #auto, cache, off ,force
+  execute_notebooks           : auto  #auto, cache, off ,force
   exclude_patterns          : 
                               [ #'a_*',
-                              'b_*',
-                              'c_*','d_*', #'e_vector_*', 
-                              'f_*', 
-                               'e_*',
-                               'f_*',
+                              #'b_*',
+                              #'c_*','d_*', #'e_vector_*', 
+                              #'f_*', 
+                              # 'e_*',
+                              # 'f_*',
                               #'f_rs_crs*','f_rs_mosaic*','f_rs_plot*','f_rs_config*'
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 

@@ -5,6 +5,7 @@ import rasterio
 from rasterio import features
 from rasterio.enums import MergeAlg
 from rasterio.plot import show
+import numpy as np
 
 # Read in vector
 vector = gpd.read_file(r"../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp")

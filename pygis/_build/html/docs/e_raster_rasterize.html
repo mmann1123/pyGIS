@@ -151,11 +151,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -725,7 +720,7 @@ title="Print to PDF"
 <p>We’ll begin by importing our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
@@ -754,7 +749,7 @@ title="Print to PDF"
 </figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in vector</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in vector</span>
 <span class="n">vector</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp&quot;</span><span class="p">)</span>
 
 <span class="c1"># Get list of geometries for all features in vector file</span>
@@ -771,7 +766,7 @@ title="Print to PDF"
 <p>With our data loaded, we can rasterize the vector using the metadata from the raster using <code class="docutils literal notranslate"><span class="pre">rasterize()</span></code> in the <code class="docutils literal notranslate"><span class="pre">rasterio.features</span></code> module. For more information on this function, check out <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.features.html#rasterio.features.rasterize">the <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rasterize vector using the shape and coordinate system of the raster</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rasterize vector using the shape and coordinate system of the raster</span>
 <span class="n">rasterized</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">rasterize</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span>
                                 <span class="n">out_shape</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
                                 <span class="n">fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -788,9 +783,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_rasterize_5_0.png" src="../_images/e_raster_rasterize_5_0.png" />
-</div>
 </div>
 </section>
 <section id="rasterize-attribute-value-using-rasterio">
@@ -799,7 +791,7 @@ title="Print to PDF"
 <p>Note we use <code class="docutils literal notranslate"><span class="pre">all_touched=True</span></code> to avoid gaps between counties, which can introduce its own problems b/c two counties can compete for the same cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a numeric unique value for each row</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a numeric unique value for each row</span>
 <span class="n">vector</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
 
 <span class="c1"># create tuples of geometry, value pairs, where value is the attribute value you want to burn</span>
@@ -821,14 +813,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_rasterize_7_0.png" src="../_images/e_raster_rasterize_7_0.png" />
-</div>
 </div>
 <p>Finally, we can save the rasterized vector out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
         <span class="s2">&quot;../temp/rasterized_vector.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
         <span class="n">driver</span> <span class="o">=</span> <span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
         <span class="n">transform</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>

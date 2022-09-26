@@ -1,0 +1,111 @@
+# Import modules
+import matplotlib.pyplot as plt
+import pandas as pd
+import geopandas as gpd
+from census import Census
+from us import states
+
+# Set API key
+c = Census("CENSUS API KEY HERE")
+
+#ignore this, I am just reading in my api key privately
+with open("../../../census_api.txt", "r") as f:
+    c = Census(f.read().replace('\n', ''))
+
+# Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)
+# C17002_001E: count of ratio of income to poverty in the past 12 months (total)
+# C17002_002E: count of ratio of income to poverty in the past 12 months (< 0.50)
+# C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)
+# B01003_001E: total population
+# Sources: https://api.census.gov/data/2019/acs/acs5/variables.html; https://pypi.org/project/census/
+va_census = c.acs5.state_county_tract(fields = ('NAME', 'C17002_001E', 'C17002_002E', 'C17002_003E', 'B01003_001E'),
+                                      state_fips = states.VA.fips,
+                                      county_fips = "*",
+                                      tract = "*",
+                                      year = 2017)
+
+# Create a dataframe from the census data
+va_df = pd.DataFrame(va_census)
+
+# Show the dataframe
+print(va_df.head(2))
+print('Shape: ', va_df.shape)
+
+# Access shapefile of Virginia census tracts
+va_tract = gpd.read_file("https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip")
+
+# Reproject shapefile to UTM Zone 17N
+# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/
+va_tract = va_tract.to_crs(epsg = 32617)
+
+# Print GeoDataFrame of shapefile
+print(va_tract.head(2))
+print('Shape: ', va_tract.shape)
+
+# Check shapefile projection
+print("\nThe shapefile projection is: {}".format(va_tract.crs))
+
+# Combine state, county, and tract columns together to create a new string and assign to new column
+va_df["GEOID"] = va_df["state"] + va_df["county"] + va_df["tract"]
+
+# Print head of dataframe
+va_df.head(2)
+
+# Remove columns
+va_df = va_df.drop(columns = ["state", "county", "tract"])
+
+# Show updated dataframe
+va_df.head(2)
+
+# Check column data types for census data
+print("Column data types for census data:\n{}".format(va_df.dtypes))
+
+# Check column data types for census shapefile
+print("\nColumn data types for census shapefile:\n{}".format(va_tract.dtypes))
+
+# Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html
+
+# Join the attributes of the dataframes together
+# Source: https://geopandas.org/docs/user_guide/mergingdata.html
+va_merge = va_tract.merge(va_df, on = "GEOID")
+
+# Show result
+print(va_merge.head(2))
+print('Shape: ', va_merge.shape)
+
+# Create new dataframe from select columns
+va_poverty_tract = va_merge[["STATEFP", "COUNTYFP", "TRACTCE", "GEOID", "geometry", "C17002_001E", "C17002_002E", "C17002_003E", "B01003_001E"]]
+
+# Show dataframe
+print(va_poverty_tract.head(2))
+print('Shape: ', va_poverty_tract.shape)
+
+# Dissolve and group the census tracts within each county and aggregate all the values together
+# Source: https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html
+va_poverty_county = va_poverty_tract.dissolve(by = 'COUNTYFP', aggfunc = 'sum')
+
+# Show dataframe
+print(va_poverty_county.head(2))
+print('Shape: ', va_poverty_county.shape)
+
+# Get poverty rate and store values in new column
+va_poverty_county["Poverty_Rate"] = (va_poverty_county["C17002_002E"] + va_poverty_county["C17002_003E"]) / va_poverty_county["B01003_001E"] * 100
+
+# Show dataframe
+va_poverty_county.head(2)
+
+# Create subplots
+fig, ax = plt.subplots(1, 1, figsize = (20, 10))
+
+# Plot data
+# Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html
+va_poverty_county.plot(column = "Poverty_Rate",
+                       ax = ax,
+                       cmap = "RdPu",
+                       legend = True)
+
+# Stylize plots
+plt.style.use('bmh')
+
+# Set title
+ax.set_title('Poverty Rates (%) in Virginia', fontdict = {'fontsize': '25', 'fontweight' : '3'})

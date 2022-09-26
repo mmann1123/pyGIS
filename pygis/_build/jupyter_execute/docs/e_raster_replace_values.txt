@@ -1,0 +1,78 @@
+# Import modules
+import numpy as np
+import matplotlib.pyplot as plt
+import rasterio
+from rasterio.transform import Affine
+from rasterio.fill import fillnodata
+
+# Generate mesh grid for rasters
+x = np.linspace(-90, 90, 200)
+y = np.linspace(90, -90, 200)
+X, Y = np.meshgrid(x, y)
+
+# Generate values for mesh grid
+Z1 = np.abs(((X - 10) ** 2 + (Y - 10) ** 2) / 1 ** 2)
+Z2 = np.abs(((X + 10) ** 2 + (Y + 10) ** 2) / 2.5 ** 2)
+
+# Generate raster values
+Z = (Z1 - Z2)
+
+# Set transform
+xres = (x[-1] - x[0]) / len(x)
+yres = (y[-1] - y[0]) / len(y)
+transform = Affine.translation(x[0] - xres / 2, y[0] - yres / 2) * Affine.scale(xres, yres)
+
+# Save raster
+with rasterio.open(
+        "../temp/replace_values_raster.tif",
+        mode="w",
+        driver="GTiff",
+        height=Z.shape[0],
+        width=Z.shape[1],
+        count=1,
+        dtype=Z.dtype,
+        crs="+proj=latlong",
+        transform=transform,
+) as new_dataset:
+        new_dataset.write(Z, 1)
+
+# Open raster and plot
+raster_file = rasterio.open("../temp/replace_values_raster.tif")
+raster = raster_file.read(1)
+plt.imshow(raster, cmap="BrBG")
+plt.title("Raster")
+plt.show()
+
+# Replace value with 0 at one location
+raster[150, 100] = 0
+raster[150, 100]
+
+# Replace values with 0 at multiple locations
+raster[99:102, 6:9] = 0
+raster[99:102, 6:9]
+
+# Replace values with 0 if they are greater than or equal to certain number (in this case, 13776)
+raster[raster >= 13776] = 0
+raster
+
+# Create a Boolean mask (True/False), with a value of False for pixels that equal 0
+mask_boolean = (raster != 0)
+mask_boolean
+
+# Create a value mask, with a value of 0 for pixels that equal 0
+mask_numbers = np.zeros_like(raster)
+mask_numbers[raster > 0] = 255
+mask_numbers
+
+# Fill in missing values with interpolation
+# Can use either a Boolean mask or a value mask
+fillnodata(raster, mask = mask_boolean, max_search_distance = 1000)
+
+# Print raster array
+raster
+
+# Print subset of raster around row 150, column 100
+raster[148:153, 98:103]
+
+# Print subset of raster around rows 99-101, columns 6-8]
+raster[97:104, 4:11]

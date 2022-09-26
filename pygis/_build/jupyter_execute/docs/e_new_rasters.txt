@@ -1,0 +1,122 @@
+import numpy as np
+x = np.linspace(-90, 90, 6)
+y = np.linspace(90, -90, 6)
+X, Y = np.meshgrid(x, y)
+X
+
+Y
+
+import matplotlib.pyplot as plt
+
+Z1 =  np.abs(((X - 10) ** 2 + (Y - 10) ** 2) / 1 ** 2)
+Z2 =  np.abs(((X + 10) ** 2 + (Y + 10) ** 2) / 2.5 ** 2)
+Z =  (Z1 - Z2)
+
+plt.imshow(Z)
+plt.title("Temperature")
+plt.show()
+
+import rasterio
+from rasterio.transform import Affine
+
+xres = (x[-1] - x[0]) / len(x)
+yres = (y[-1] - y[0]) / len(y)
+
+transform = Affine.translation(x[0] - xres / 2, y[0] - yres / 2) * Affine.scale(xres, yres)
+
+with rasterio.open(
+        "../temp/temperature.tif",
+        mode="w",
+        driver="GTiff",
+        height=Z.shape[0],
+        width=Z.shape[1],
+        count=1,
+        dtype=Z.dtype,
+        crs="+proj=latlong",
+        transform=transform,
+) as new_dataset:
+        new_dataset.write(Z, 1)
+
+
+import matplotlib.pyplot as plt
+
+raster = rasterio.open("../temp/temperature.tif")
+
+plt.imshow(raster.read(1), cmap="BrBG")
+plt.title("Temperature")
+plt.show()
+
+print(raster.profile)
+
+# start with the original profile
+profile = raster.profile
+# update values for nodata and compression type
+profile.update(nodata=0, compress="lzw")
+print(profile)
+
+with rasterio.open("../temp/temperature.tif", 
+                  mode="w", 
+                  **profile,) as update_dataset:
+    update_dataset.write(raster.read(1), 1)
+
+with rasterio.open(
+    "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF", mode="r", nodata=0) as src:
+    # read in the array, band 3 first, then band 2, then band 1
+    arr = src.read([3, 2, 1])
+    # the array has three bands
+    print("Array shape:", arr.shape)
+    # look at the profile, despite setting nodata=0, there still isn't a nodata value 
+    # this is because we need to update the profile and write out a new image with
+    #  nodata set
+    profile = src.profile
+    print(profile)
+
+from rasterio.plot import show
+print(arr)
+print('--------------')
+show(arr)
+
+from scipy import stats
+
+print(stats.describe(arr.ravel()))
+
+scaled_arr = arr / 100
+print(scaled_arr.dtype)
+
+# update the profile for the new raster
+profile = src.profile
+profile.update(nodata=0, compress="lzw", dtype=scaled_arr.dtype)
+
+# write out raster as RGB 
+with rasterio.open(
+    "../temp/LS_scaled_20200518.tif",
+    mode="w",
+    **profile,  # unpack the profile arguments set above
+) as new_dataset:
+    new_dataset.write(scaled_arr, [1, 2, 3])
+
+with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
+    show(src,adjust='linear')
+
+import geowombat as gw
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=200)
+
+# tell gw to read a blue green red
+with gw.config.update(sensor="bgr"):
+    with gw.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as src:
+        
+        # see that bands names, blue green red are assigned
+        print(src.band)
+
+        # remove 0 value, rearrange band order 
+        temp = src.where(src != 0).sel(band=["red", "green", "blue"])
+
+        # plot
+        temp.gw.imshow(robust=True, ax=ax)
+
+        #save to file
+        temp.gw.to_raster(
+            "../temp/LS_scaled_20200518.tif", verbose=0, n_workers=4, overwrite=True
+        )

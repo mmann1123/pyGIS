@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -746,7 +741,7 @@ title="Print to PDF"
 <p>To begin, we will import our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
@@ -766,7 +761,7 @@ title="Print to PDF"
 <p>In this example we will write two raster files to the disk: <code class="docutils literal notranslate"><span class="pre">math_raster_a.tif</span></code> and <code class="docutils literal notranslate"><span class="pre">math_raster_b.tif</span></code>. We will then read then back in and do math on them. Let’s generate some rasters (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate mesh grid for rasters</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate mesh grid for rasters</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -819,7 +814,7 @@ title="Print to PDF"
 <p>Next, we’ll view the raster values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster and plot</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster and plot</span>
 <span class="n">raster_a</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/math_raster_a.tif&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">raster_a</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;BrBG&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Raster A&quot;</span><span class="p">)</span>
@@ -830,21 +825,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_5_0.png" src="../_images/e_raster_math_5_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[13776.    8586.24  5573.76  4738.56  6080.64  9600.  ]
- [10256.64  5066.88  2054.4   1219.2   2561.28  6080.64]
- [ 8914.56  3724.8    712.32  -122.88  1219.2   4738.56]
- [ 9749.76  4560.    1547.52   712.32  2054.4   5573.76]
- [12762.24  7572.48  4560.    3724.8   5066.88  8586.24]
- [17952.   12762.24  9749.76  8914.56 10256.64 13776.  ]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster and plot</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster and plot</span>
 <span class="n">raster_b</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/math_raster_b.tif&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">raster_b</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;BrBG&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Raster B&quot;</span><span class="p">)</span>
@@ -855,30 +839,13 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_6_0.png" src="../_images/e_raster_math_6_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1886.55555556 1168.31555556  864.79555556  975.99555556 1501.91555556
-  2442.55555556]
- [1453.91555556  735.67555556  432.15555556  543.35555556 1069.27555556
-  2009.91555556]
- [1147.99555556  429.75555556  126.23555556  237.43555556  763.35555556
-  1703.99555556]
- [ 968.79555556  250.55555556  -52.96444444   58.23555556  584.15555556
-  1524.79555556]
- [ 916.31555556  198.07555556 -105.44444444    5.75555556  531.67555556
-  1472.31555556]
- [ 990.55555556  272.31555556  -31.20444444   79.99555556  605.91555556
-  1546.55555556]]
-</pre></div>
-</div>
-</div>
 </div>
 <section id="example-band-math-operations">
 <h3>Example band math operations<a class="headerlink" href="#example-band-math-operations" title="Permalink to this headline">#</a></h3>
 <p>We can get the difference between the two rasters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get difference</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get difference</span>
 <span class="n">difference_a_b</span> <span class="o">=</span> <span class="n">raster_a</span> <span class="o">-</span> <span class="n">raster_b</span>
 
 <span class="c1"># Plot raster</span>
@@ -891,29 +858,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_8_0.png" src="../_images/e_raster_math_8_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raster values:
- [[11889.44444444  7417.92444444  4708.96444444  3762.56444444
-   4578.72444444  7157.44444444]
- [ 8802.72444444  4331.20444444  1622.24444444   675.84444444
-   1492.00444444  4070.72444444]
- [ 7766.56444444  3295.04444444   586.08444444  -360.31555556
-    455.84444444  3034.56444444]
- [ 8780.96444444  4309.44444444  1600.48444444   654.08444444
-   1470.24444444  4048.96444444]
- [11845.92444444  7374.40444444  4665.44444444  3719.04444444
-   4535.20444444  7113.92444444]
- [16961.44444444 12489.92444444  9780.96444444  8834.56444444
-   9650.72444444 12229.44444444]]
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can multiply a raster by a constant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get product</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get product</span>
 <span class="n">product_a</span> <span class="o">=</span> <span class="n">raster_a</span> <span class="o">*</span> <span class="mi">2</span>
 
 <span class="c1"># Plot raster</span>
@@ -926,18 +875,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_10_0.png" src="../_images/e_raster_math_10_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raster values:
- [[27552.   17172.48 11147.52  9477.12 12161.28 19200.  ]
- [20513.28 10133.76  4108.8   2438.4   5122.56 12161.28]
- [17829.12  7449.6   1424.64  -245.76  2438.4   9477.12]
- [19499.52  9120.    3095.04  1424.64  4108.8  11147.52]
- [25524.48 15144.96  9120.    7449.6  10133.76 17172.48]
- [35904.   25524.48 19499.52 17829.12 20513.28 27552.  ]]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="band-math-with-nodata-values">
@@ -946,7 +883,7 @@ title="Print to PDF"
 <p>Not all rasters, however, use those values to signify that a pixel has no value. Some rasters might use 0 or another number to indicate no value. In that case, we have to explicitly mark that pixel to be skipped.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of first raster</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of first raster</span>
 <span class="n">raster_0</span> <span class="o">=</span> <span class="n">raster_a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Set a pixel value to 0 as an example, which will signify NoData</span>
@@ -969,24 +906,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_12_0.png" src="../_images/e_raster_math_12_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raster values:
- [[11889.444444444445 7417.924444444445 4708.964444444445
-  3762.564444444444 4578.724444444444 --]
- [8802.724444444444 4331.204444444445 1622.2444444444445
-  675.8444444444445 1492.0044444444443 4070.7244444444436]
- [7766.564444444444 3295.0444444444447 586.0844444444443
-  -360.31555555555553 455.84444444444455 3034.564444444444]
- [8780.964444444444 4309.444444444444 1600.4844444444443
-  654.0844444444443 1470.2444444444445 4048.964444444445]
- [11845.924444444445 7374.404444444444 4665.444444444444
-  3719.0444444444447 4535.204444444445 7113.924444444445]
- [16961.444444444445 12489.924444444445 9780.964444444444
-  8834.564444444444 9650.724444444444 12229.444444444445]]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="example-calculating-ndvi">
@@ -1000,7 +919,7 @@ title="Print to PDF"
 <p>High NDVI values (towards 1) reflect a higher density of green vegetation, and low values (towards -1) reflect a lower density.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster (Landsat 8, Collection 2 Level-2)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster (Landsat 8, Collection 2 Level-2)</span>
 <span class="c1"># Band 1 - Blue, Band 2 - Green, Band 3 - Red, Band 4 - Near Infrared</span>
 <span class="c1"># Source: https://www.usgs.gov/centers/eros/science/usgs-eros-archive-landsat-archives-landsat-8-9-olitirs-collection-2-level-2</span>
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L2SP_016040_20210317_20210328_02_T1_clip.tif&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">nodata</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -1029,19 +948,6 @@ title="Print to PDF"
 
 <span class="c1"># Show raster values</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raster values:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ndvi</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_raster_math_14_0.png" src="../_images/e_raster_math_14_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Raster values:
- [[0.1045768  0.08932138 0.09787864 ... 0.21016596 0.27657979 0.24717701]
- [0.07188325 0.1010677  0.1213656  ... 0.22981464 0.24469611 0.23835025]
- [0.03591049 0.14069341 0.17257186 ... 0.22467695 0.2150974  0.21510794]
- ...
- [0.27475696 0.24538079 0.24003341 ... 0.2692435  0.26424982 0.2754381 ]
- [0.28198954 0.26983464 0.25958875 ... 0.26693343 0.2685162  0.25831458]
- [0.27442722 0.28693113 0.2514506  ... 0.27998016 0.28904986 0.2745722 ]]
 </pre></div>
 </div>
 </div>

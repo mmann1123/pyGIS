@@ -11,11 +11,16 @@ from geowombat.data import l8_224078_20200518
 # Zeros are replaced with nans
 with gw.open(l8_224078_20200518, nodata=0) as src:
     print('gw.open: ',src.attrs['nodatavals'])
+    #  replace 0 with nan
+    src=src.gw.mask_nodata() 
+
 
 # Zeros are replaced with nans
 with gw.config.update(nodata=0):
   with gw.open(l8_224078_20200518) as src:
     print('gw.config',src.attrs['nodatavals'])
+    #  replace 0 with nan
+    src=src.gw.mask_nodata() 
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
@@ -23,7 +28,7 @@ from geowombat.data import l8_224078_20200518
 # Zeros are replaced with nans
 with gw.config.update(scale_factor=0.0001):
   with gw.open(l8_224078_20200518) as src:
-    src.attrs{'scales'}
+    print(src.gw.scale_factor)
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
@@ -31,3 +36,11 @@ from geowombat.data import l8_224078_20200518
 # Replace 1 with 10
 with gw.open(l8_224078_20200518) as src:
     data = src.gw.replace({1: 10})
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518
+
+# Replace 1 with 10
+with gw.open(l8_224078_20200518) as src:
+    data = src * 0.001 +80
+    print(data[0].values)

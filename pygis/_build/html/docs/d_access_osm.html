@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -756,7 +751,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: the neighborhood of Edgewood in Washington DC USA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the name that is used to seach for the data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the name that is used to seach for the data</span>
 <span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Edgewood Washington, DC, USA&quot;</span>
 </pre></div>
 </div>
@@ -767,7 +762,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Let’s also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the <code class="docutils literal notranslate"><span class="pre">ox.geocode_to_gdf</span></code> [docs](<a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)">https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)</a> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import osmnx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import osmnx</span>
 <span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
@@ -776,24 +771,11 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import osmnx</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Get place boundary related to the place name as a geodataframe</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;osmnx&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>As the name of the function already tells us, <code class="docutils literal notranslate"><span class="pre">gdf_from_place()</span></code>returns a GeoDataFrame based on the specified place name query.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
 <span class="n">area</span>
 </pre></div>
 </div>
@@ -802,7 +784,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Let’s still verify the data type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -811,7 +793,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Finally, let’s plot it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -823,7 +805,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>When fetching spesific types of geometries from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
 <span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>   
 
 <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geometries_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
@@ -835,7 +817,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We can plot the footprints quickly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot footprints </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot footprints </span>
 <span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -853,7 +835,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We need to isolate just the attributes we are interested in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -865,7 +847,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We also need to isolate the feature type we are looking for [e.g. Multipolygon, Polygon, Point]. Since here we want building footprints we are going to keep only polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -873,7 +855,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Now, finally, we can write it to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save footprints </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save footprints </span>
 <span class="n">buildings</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;../temp/edgewood_buildings.shp&#39;</span><span class="p">)</span>  
 <span class="c1"># Or save in a more open source format</span>
 <span class="c1">#buildings.to_file(&#39;../temp/edgewood_buildings.geojson&#39;, driver=&#39;GeoJSON&#39;)  </span>

@@ -15,6 +15,8 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
+
+
 (conda_started)=
 
 ----------------
@@ -25,8 +27,9 @@ html_meta:
 - Learn the basics of Docker
 - Pull, run, and update a container set up for spatial modeling
 ```
+
 ```{admonition} Review
-* [A normal intro to python environments](b_getting_started)
+* [A normal intro to python environments](b_getting_started.md)
 ```
 ----------------
 
