@@ -52,7 +52,7 @@ from sklearn.neighbors import KNeighborsRegressor
 # ```{Note} It is critical to use a 'projected' coordinate system when doing interpolation. If you keep your data in geographic lat lon distances will vary significantly as you move up and down in latitude... since interpolation depends on distance as a way of establishing relationships this would be a problem... a big one. 
 # ```
 
-# In[2]:
+# In[ ]:
 
 
 # Load data
@@ -75,7 +75,7 @@ rainfall = rainfall.to_crs(proj)
 
 # Next, we'll prepare the data for geoprocessing (click the + below to show code cell).
 
-# In[3]:
+# In[ ]:
 
 
 # Get X and Y coordinates of rainfall points
@@ -103,7 +103,7 @@ counties_dissolved = counties_dissolved.dissolve(by = "constant").reset_index(dr
 
 # We will also define a function for exporting rasters.
 
-# In[4]:
+# In[ ]:
 
 
 def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
@@ -135,7 +135,7 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
 # 
 # We will separate our rainfall dataset into two subsets: one for training and the other for testing. These subsets will be used in our KNN and kriging analyses.
 
-# In[5]:
+# In[ ]:
 
 
 # Split data into testing and training sets
@@ -153,7 +153,7 @@ min_x_rain, min_y_rain, max_x_rain, max_y_rain = rain_train_gdf.total_bounds
 
 # Let's plot our data!
 
-# In[6]:
+# In[ ]:
 
 
 # Create subplots
@@ -181,7 +181,7 @@ ax.set_title('San Francisco Bay Area - Rainfall Measurement Locations', fontdict
 # ```{attention} When creating Thiessen polygons, the sample points toward the edges of the point shapefile's extent will have infinite Voronoi regions, because not all sides of these edge points have adjacent sample points that would constrain the regions. Consequently, these infinite regions will not be exported. To mitigate this issue, we can create dummy points well beyond the extent of our datasets, which will create finite Voronoi regions for all of our actual sample points. Then, we can clip the regions to our extent shapefile (creating dummy points far away from our actual sample points will ensure the dummy points and their infinite Voronoi regions do not interfere with the sample points and their associated finite Voronoi regions after all regions are clipped).
 # ```
 
-# In[7]:
+# In[ ]:
 
 
 # Extend extent of counties feature by using buffer
@@ -237,7 +237,7 @@ tp_polys_clipped = gpd.clip(tp_polys, counties_dissolved)
 
 # A spatial join can be conducted to assign the rainfall training "values" to its associated Thiessen polygon.
 
-# In[8]:
+# In[ ]:
 
 
 # If rainfall point within the polygon, assign that rainfall value to the polygon
@@ -256,7 +256,7 @@ display(tp_polys_clipped_values.head())
 
 # A second spatial join can be conducted to assign those values from the Thiessen polygons to the points from the testing dataset (only if a test point falls within a polygon). We can subsequently get the out-of-sample r-squared value, which is calculated by using the data points that the model did not use (the testing dataset) and comparing the testing dataset's actual values to the values as predicted by the model.
 
-# In[9]:
+# In[ ]:
 
 
 # If test point is within a polygon, assign that polygon's value to the test point
@@ -279,7 +279,7 @@ display(rain_test_pred_tp.head(2))
 
 # Plotting the data, we see that each polygon has one green training point (and vice-versa). All space within one polygon is closest to the known training point (green dot) within the polygon. The testing points (blue dots) are assigned the value of the Thiessen polygon in which it falls.
 
-# In[10]:
+# In[ ]:
 
 
 # Create subplots
@@ -310,7 +310,7 @@ ax.set_title('San Francisco Bay Area - Rainfall Measurement Locations & Thiessen
 # 
 # In the example below, we demonstrate how to extract the value of one of the Thiessen polygons at a new location for which we want a predicted value. We use the `point_region` attribute to provide the index of a point's Voronoi region, and we use that index to get the region in `regions`. That provides indices of the vertices that make up the polygon, which we use to get the appropriate values in `vertices`.
 
-# In[11]:
+# In[ ]:
 
 
 # Set index for feature of interest
@@ -340,7 +340,7 @@ display(tp_poly_region_one)
 
 # Here's how that one Thiessen polygon looks.
 
-# In[12]:
+# In[ ]:
 
 
 # Create subplots
@@ -363,7 +363,7 @@ ax.set_title('San Francisco Bay Area - One Point and Thiessen Polygon', fontdict
 # 
 # We can use the [`scikit-learn` module](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) to perform KNN analysis.
 
-# In[13]:
+# In[ ]:
 
 
 # Set number of neighbors to look for
@@ -378,7 +378,7 @@ knn_regressor.fit(coords_rain_train, value_rain_train)
 
 # Now that we have created the KNN model, we can get the in-sample r-squared value. An in-sample statistic, as suggested by its name, is calculated by using the data that were used to build the model (the "training" dataset).
 
-# In[14]:
+# In[ ]:
 
 
 # Generate in-sample R^2
@@ -390,7 +390,7 @@ print("KNN in-sample r-squared: {}".format(round(in_r_squared_knn, 2)))
 # 
 # Similarily, we can also get the out-of-sample r-squared value and compare the test dataset's actual values to the values as predicted by the model.
 
-# In[15]:
+# In[ ]:
 
 
 # Generate out-of-sample R^2
@@ -425,7 +425,7 @@ display(predict_df_knn.head(2))
 # 
 # Two Python packages that can be used for kriging include `scikit-learn` and `pykrige`. The former package works best when the input data has a WGS 84 projection, so we will begin by reprojecting all of our data to that coordinate system (click the + below to show code cell).
 
-# In[16]:
+# In[ ]:
 
 
 '''
@@ -453,7 +453,7 @@ min_x_rain_wgs, min_y_rain_wgs, max_x_rain_wgs, max_y_rain_wgs = rain_train_gdf_
 # 
 # The [`pykrige` module](https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/index.html) offers ordinary and universal kriging. It also supports various variogram models in addition to Gaussian.
 
-# In[17]:
+# In[ ]:
 
 
 # Adapted from: https://geostat-framework.readthedocs.io/projects/pykrige/en/latest/examples/04_krige_geometric.html
@@ -541,7 +541,7 @@ plt.show()
 # 
 # Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
 
-# In[18]:
+# In[ ]:
 
 
 '''
@@ -568,7 +568,7 @@ Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)
 
 # Next, we can calculate our r-squared statistics and predictions.
 
-# In[19]:
+# In[ ]:
 
 
 '''
@@ -597,7 +597,7 @@ display(predict_df_sk_krig.head(2))
 
 # Model seems like a good fit! Let's export the raster.
 
-# In[20]:
+# In[ ]:
 
 
 '''
@@ -616,7 +616,7 @@ export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
 # 
 # Finally, we import the raster, mask it to the counties boundaries, and plot the data.
 
-# In[21]:
+# In[ ]:
 
 
 '''
@@ -635,7 +635,7 @@ plt.style.use('bmh')
 # 
 # Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
 
-# In[22]:
+# In[ ]:
 
 
 '''
@@ -662,7 +662,7 @@ Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)
 
 # Next, we can calculate our r-squared statistics and predictions.
 
-# In[23]:
+# In[ ]:
 
 
 '''
@@ -691,7 +691,7 @@ display(predict_df_sk_krig.head(2))
 
 # Model seems like a good fit! Let's export the raster.
 
-# In[24]:
+# In[ ]:
 
 
 '''
@@ -710,7 +710,7 @@ export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
 # 
 # Finally, we import the raster, mask it to the counties boundaries, and plot the data.
 
-# In[25]:
+# In[ ]:
 
 
 '''

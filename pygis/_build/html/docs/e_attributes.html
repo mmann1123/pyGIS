@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to change, subset, and plot vector data (shapefile) attribute data. This includes an example of plotting latitude longitude data as well as subsetting (indexing) by location." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to change, subset, and plot vector data (shapefile) attribute data. This includes an example of plotting latitude longitude data as well as subsetting (indexing) by location." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à modifier, sous-ensemble et tracer des données attributaires de données vectorielles (fichier de formes). Cela inclut un exemple de traçage des données de longitude de latitude ainsi que le sous-ensemble (indexation) par emplacement." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a cambiar, crear subconjuntos y trazar datos de atributos de datos vectoriales (shapefile). Esto incluye un ejemplo de trazado de datos de latitud y longitud, así como subconjuntos (indexación) por ubicación." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, attribute data, subset,  shapefile" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -732,17 +733,19 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="attributes-indexing-for-vector-data">
+<section class="tex2jax_ignore mathjax_ignore" id="attributes-indexing-for-vector-data">
 <h1>Attributes &amp; Indexing for Vector Data<a class="headerlink" href="#attributes-indexing-for-vector-data" title="Permalink to this headline">#</a></h1>
-<div class="figure align-default" id="vector-properties">
-<img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">#</a></p>
-</div>
+<figure class="align-default" id="vector-properties">
+<img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain any geometry type (e.g. points, lines, polygon) and has a <code class="docutils literal notranslate"><span class="pre">GeoSeries.crs</span></code> attribute, which stores information on the projection (CRS stands for Coordinate Reference System). Therefore, each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> in a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> can be in a different projection, allowing you to have, for example, multiple versions of the same geometry, just in a different CRS.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Becuase GeoPandas are so intertwined spend the time to learn more about here <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">Pandas User Guide</a></p>
 </div>
-<div class="section" id="create-new-attributes">
+<section id="create-new-attributes">
 <h2>Create New Attributes<a class="headerlink" href="#create-new-attributes" title="Permalink to this headline">#</a></h2>
 <p>One of the most basic operations is creating new attributes. Let’s say for instance we want to look at the world population in millions. We can start with an existing column of data <code class="docutils literal notranslate"><span class="pre">pop_est</span></code>. Let’s start by looking at the column names:</p>
 <div class="cell docutils container">
@@ -798,34 +801,34 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0</th>
-      <td>920938</td>
+      <td>889953.0</td>
       <td>Oceania</td>
       <td>Fiji</td>
       <td>FJI</td>
-      <td>8374.0</td>
+      <td>5496</td>
       <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
-      <td>0.920938</td>
+      <td>0.889953</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>53950935</td>
+      <td>58005463.0</td>
       <td>Africa</td>
       <td>Tanzania</td>
       <td>TZA</td>
-      <td>150600.0</td>
+      <td>63177</td>
       <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
-      <td>53.950935</td>
+      <td>58.005463</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="indexing-and-selecting-data">
+<section id="indexing-and-selecting-data">
 <h2>Indexing and Selecting Data<a class="headerlink" href="#indexing-and-selecting-data" title="Permalink to this headline">#</a></h2>
 <p>GeoPandas inherits the standard pandas methods for indexing/selecting data. This includes label based indexing with .loc and integer position based indexing with .iloc, which apply to both GeoSeries and GeoDataFrame objects. For more information on indexing/selecting, see the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html">pandas documentation</a>.</p>
-<div class="section" id="selection-by-index-position">
+<section id="selection-by-index-position">
 <h3>Selection by Index Position<a class="headerlink" href="#selection-by-index-position" title="Permalink to this headline">#</a></h3>
 <p>Pandas provides a suite of methods in order to get purely integer based indexing. The semantics follow closely Python and NumPy slicing. These are 0-based indexing. When slicing, the start bound is included, while the upper bound is excluded.  For instance <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">'fudge'</span></code> with <code class="docutils literal notranslate"><span class="pre">name[0:3]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'fud'</span></code>, where f is at 0 and g is at the 3 position with the upper bound excluded.</p>
 <div class="cell docutils container">
@@ -844,7 +847,7 @@ title="Print to PDF"
 <img alt="../_images/e_attributes_5_0.png" src="../_images/e_attributes_5_0.png" />
 </div>
 </div>
-<div class="section" id="different-choices-for-indexing">
+<section id="different-choices-for-indexing">
 <h4>Different choices for indexing<a class="headerlink" href="#different-choices-for-indexing" title="Permalink to this headline">#</a></h4>
 <p>Object selection has had a number of user-requested additions in order to
 support more explicit location based indexing.</p>
@@ -868,9 +871,9 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="subset-points-by-location">
+</section>
+</section>
+<section id="subset-points-by-location">
 <h3>Subset Points by Location<a class="headerlink" href="#subset-points-by-location" title="Permalink to this headline">#</a></h3>
 <p>In addition to the standard pandas methods, GeoPandas also provides coordinate based indexing with the cx indexer, which slices using a bounding box. Geometries in the GeoSeries or GeoDataFrame that intersect the bounding box will be returned.</p>
 <p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>. <code class="docutils literal notranslate"><span class="pre">.cx</span></code> allows you to quickly access the table’s <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, where indexing reflects <code class="docutils literal notranslate"><span class="pre">[x,y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[lon,lat]</span></code>. Here we will query points above and below 0 degrees latitude:</p>
@@ -900,9 +903,9 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 <img alt="../_images/e_attributes_8_0.png" src="../_images/e_attributes_8_0.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

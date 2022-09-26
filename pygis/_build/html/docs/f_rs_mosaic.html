@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Handle Multiple Remotely Sensed Images &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -190,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -702,10 +703,10 @@ title="Print to PDF"
 <!-- https://www.l3harrisgeospatial.com/docs/MosaicSeamless.html -->
 <!-- 
 https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-a-mosaic.htm -->
-<div class="tex2jax_ignore mathjax_ignore section" id="handle-multiple-remotely-sensed-images">
+<section class="tex2jax_ignore mathjax_ignore" id="handle-multiple-remotely-sensed-images">
 <h1>Handle Multiple Remotely Sensed Images<a class="headerlink" href="#handle-multiple-remotely-sensed-images" title="Permalink to this headline">#</a></h1>
 <p>Doing analysis over larger areas often requires the use of image mosaics (combining two or more images). Luckily for us geowombat makes this process relatively easy.</p>
-<div class="section" id="union-mosaic-of-remotely-sensed-image">
+<section id="union-mosaic-of-remotely-sensed-image">
 <h2>Union (Mosaic) of Remotely Sensed Image<a class="headerlink" href="#union-mosaic-of-remotely-sensed-image" title="Permalink to this headline">#</a></h2>
 <p>As an example let’s plot the union with <code class="docutils literal notranslate"><span class="pre">mosaic=True</span></code> of two images taken on the same day, for the overlapping portions we will use the mean pixel value by setting <code class="docutils literal notranslate"><span class="pre">overlap='mean'</span></code>, but blue band only. Alternatively we could use one of ‘mean’, ‘min’, or ‘max’.</p>
 <p>Note we rename the band name with <code class="docutils literal notranslate"><span class="pre">band_names=['blue']</span></code>.</p>
@@ -737,8 +738,8 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <img alt="../_images/f_rs_mosaic_1_0.png" src="../_images/f_rs_mosaic_1_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="intersection-of-remotely-sensed-image">
+</section>
+<section id="intersection-of-remotely-sensed-image">
 <h2>Intersection of Remotely Sensed Image<a class="headerlink" href="#intersection-of-remotely-sensed-image" title="Permalink to this headline">#</a></h2>
 <p>Same idea with the intersection, using <code class="docutils literal notranslate"><span class="pre">bounds_by='intersection'</span></code>, we still need to mosaic the two images <code class="docutils literal notranslate"><span class="pre">mosaic=True</span></code>.</p>
 <div class="cell docutils container">
@@ -759,8 +760,8 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <img alt="../_images/f_rs_mosaic_3_0.png" src="../_images/f_rs_mosaic_3_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="view-image-tile-footprints">
+</section>
+<section id="view-image-tile-footprints">
 <h2>View Image Tile Footprints<a class="headerlink" href="#view-image-tile-footprints" title="Permalink to this headline">#</a></h2>
 <p>Here we set up a more complicated plotting function for near IR ‘nir’.  Note the use of <code class="docutils literal notranslate"><span class="pre">footprint_grid</span></code>.</p>
 <div class="cell docutils container">
@@ -811,11 +812,35 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f_rs_mosaic_7_0.png" src="../_images/f_rs_mosaic_7_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">plot</span><span class="p">(</span><span class="s1">&#39;union&#39;</span><span class="p">)</span>
+
+<span class="nn">Cell In [3], line 16,</span> in <span class="ni">plot</span><span class="nt">(bounds_by, ref_image, cmap)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">srca</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">chunk_grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># Plot the image footprints</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">srca</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">footprint_grid</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># Label the image footprints</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">srca</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">footprint_grid</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File /mnt/space/miniconda3/envs/pygisbook/lib/python3.9/site-packages/geowombat/core/properties.py:828,</span> in <span class="ni">DataProperties.footprint_grid</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">826</span> <span class="sd">&quot;&quot;&quot;Get the image footprint grid.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">827</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="p">,</span> <span class="s1">&#39;_filenames&#39;</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">828</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">829</span>         <span class="s2">&quot;The DataArray object does not have a &#39;filenames&#39; attribute.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">830</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">831</span> <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw_</span>
+<span class="g g-Whitespace">    </span><span class="mi">833</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="p">,</span> <span class="s1">&#39;geometries&#39;</span><span class="p">):</span>
+
+<span class="ne">AttributeError</span>: The DataArray object does not have a &#39;filenames&#39; attribute.
+</pre></div>
+</div>
+<img alt="../_images/f_rs_mosaic_7_1.png" src="../_images/f_rs_mosaic_7_1.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

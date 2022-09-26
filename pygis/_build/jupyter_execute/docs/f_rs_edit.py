@@ -20,7 +20,7 @@
 # # Editing Rasters and Remotely Sensed Data
 # 
 # 
-# ## Setting 'no data' Values
+# ## Masking Out Certain Values
 # 
 # The `xarray.DataArray.where` function masks data by setting nans, as demonstrated by the example below.
 
@@ -35,9 +35,8 @@ with gw.open(l8_224078_20200518) as src:
     data = src.where(src != 0)
 
 
-# ## Setting 'no data' Values with Scaling
-# 
-# In GeoWombat, we use `xarray.where` and `xarray.DataArray.where` along with optional scaling in the `set_nodata` function. In this example, we set zeros as 65535 and scale all other values from a [0,10000] range to [0,1].
+# ## Setting 'no data' Values  
+# Setting missing data values, when not available in the raster profile, can be done using the [configuration manager](f_rs_config.md) or as an argument in the `open` command.
 
 # In[2]:
 
@@ -45,16 +44,42 @@ with gw.open(l8_224078_20200518) as src:
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
 
-# Set the 'no data' value and scale all other values
-with gw.open(l8_224078_20200518) as src:
-    data = src.gw.set_nodata(0, 65535, (0, 1), 'float64', scale_factor=0.0001)
+# Zeros are replaced with nans
+with gw.open(l8_224078_20200518, nodata=0) as src:
+    print('gw.open: ',src.attrs['nodatavals'])
+    #  replace 0 with nan
+    src=src.gw.mask_nodata() 
 
 
+# Zeros are replaced with nans
+with gw.config.update(nodata=0):
+  with gw.open(l8_224078_20200518) as src:
+    print('gw.config',src.attrs['nodatavals'])
+    #  replace 0 with nan
+    src=src.gw.mask_nodata() 
+
+
+# ## Rescaling Values 
+# Most remotely sensed data is stored as `int` to minimize space. We are often left to rescale the values back to floating point on the backend. This can be done in a few ways in geowombat. If the sensor you are using has a geowombat profile, please use that - refer to [configuration manager docs](f_rs_config.md). If it is not natively supported we can manually set the scaling factor using the `gw.config.update`
+
+# In[3]:
+
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518
+ 
+# Zeros are replaced with nans
+with gw.config.update(scale_factor=0.0001):
+  with gw.open(l8_224078_20200518) as src:
+    print(src.gw.scale_factor)
+
+
+#  
 # ## Replace values
 # 
 # The GeoWombat `replace` function mimics `pandas.DataFrame.replace`.
 
-# In[3]:
+# In[4]:
 
 
 import geowombat as gw
@@ -68,3 +93,19 @@ with gw.open(l8_224078_20200518) as src:
 # ```{note}    
 # The `replace` function is typically used with categorical data.
 # ```
+# 
+# ## Updating Values
+# 
+# Geowombat also accepts normal mathematical expressions such as multiplication and addition:
+
+# In[5]:
+
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518
+
+# Replace 1 with 10
+with gw.open(l8_224078_20200518) as src:
+    data = src * 0.001 +80
+    print(data[0].values)
+

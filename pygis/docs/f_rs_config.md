@@ -71,6 +71,23 @@ with gw.config.update():
         for k, v in src.gw.config.items():
             print('Keyword:', k.ljust(15), 'Value:', v)
 ```
+### Image Properties
+Certain raster properties can be set via the `config.update`. This includes setting no data values - to be masked, and pixel value scaling via `scale_factor`.
+
+```{code-cell} ipython3
+# treat 0 as missing value
+with gw.config.update(nodata=0):
+  with gw.open(l8_224078_20200518) as src:
+    print(src.attrs['nodatavals'])
+    #use src=src.gw.mask_nodata() to replace 0 with nan
+```
+
+```{code-cell} ipython3
+# multiply pixel values by 0.0001
+with gw.config.update(scale_factor=0.0001):
+  with gw.open(l8_224078_20200518) as src:
+    print(src.attrs['scales'])
+```
 
 ### Reference settings: CRS
 
@@ -81,7 +98,7 @@ import geowombat as gw
 from geowombat.data import l8_224078_20200518
 
 proj4 = "+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs "
-0
+
 # Without the manager
 with gw.open(l8_224078_20200518) as src:
     print(src.crs)

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Editing Rasters and Remotely Sensed Data &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -190,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -624,18 +625,28 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#masking-out-certain-values">
+   Masking Out Certain Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setting-no-data-values">
    Setting ‘no data’ Values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-no-data-values-with-scaling">
-   Setting ‘no data’ Values with Scaling
+  <a class="reference internal nav-link" href="#rescaling-values">
+   Rescaling Values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#replace-values">
    Replace values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updating-values">
+   Updating Values
   </a>
  </li>
 </ul>
@@ -658,18 +669,28 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#masking-out-certain-values">
+   Masking Out Certain Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setting-no-data-values">
    Setting ‘no data’ Values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-no-data-values-with-scaling">
-   Setting ‘no data’ Values with Scaling
+  <a class="reference internal nav-link" href="#rescaling-values">
+   Rescaling Values
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#replace-values">
    Replace values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updating-values">
+   Updating Values
   </a>
  </li>
 </ul>
@@ -698,10 +719,10 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="editing-rasters-and-remotely-sensed-data">
+<section class="tex2jax_ignore mathjax_ignore" id="editing-rasters-and-remotely-sensed-data">
 <h1>Editing Rasters and Remotely Sensed Data<a class="headerlink" href="#editing-rasters-and-remotely-sensed-data" title="Permalink to this headline">#</a></h1>
-<div class="section" id="setting-no-data-values">
-<h2>Setting ‘no data’ Values<a class="headerlink" href="#setting-no-data-values" title="Permalink to this headline">#</a></h2>
+<section id="masking-out-certain-values">
+<h2>Masking Out Certain Values<a class="headerlink" href="#masking-out-certain-values" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">xarray.DataArray.where</span></code> function masks data by setting nans, as demonstrated by the example below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -715,24 +736,62 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="setting-no-data-values-with-scaling">
-<h2>Setting ‘no data’ Values with Scaling<a class="headerlink" href="#setting-no-data-values-with-scaling" title="Permalink to this headline">#</a></h2>
-<p>In GeoWombat, we use <code class="docutils literal notranslate"><span class="pre">xarray.where</span></code> and <code class="docutils literal notranslate"><span class="pre">xarray.DataArray.where</span></code> along with optional scaling in the <code class="docutils literal notranslate"><span class="pre">set_nodata</span></code> function. In this example, we set zeros as 65535 and scale all other values from a [0,10000] range to [0,1].</p>
+</section>
+<section id="setting-no-data-values">
+<h2>Setting ‘no data’ Values<a class="headerlink" href="#setting-no-data-values" title="Permalink to this headline">#</a></h2>
+<p>Setting missing data values, when not available in the raster profile, can be done using the <a class="reference internal" href="f_rs_config.html"><span class="doc std std-doc">configuration manager</span></a> or as an argument in the <code class="docutils literal notranslate"><span class="pre">open</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
-<span class="c1"># Set the &#39;no data&#39; value and scale all other values</span>
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">set_nodata</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
+<span class="c1"># Zeros are replaced with nans</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gw.open: &#39;</span><span class="p">,</span><span class="n">src</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;nodatavals&#39;</span><span class="p">])</span>
+    <span class="c1">#  replace 0 with nan</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">mask_nodata</span><span class="p">()</span> 
+
+
+<span class="c1"># Zeros are replaced with nans</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gw.config&#39;</span><span class="p">,</span><span class="n">src</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;nodatavals&#39;</span><span class="p">])</span>
+    <span class="c1">#  replace 0 with nan</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">mask_nodata</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gw.open:  (0, 0, 0)
+gw.config (0, 0, 0)
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="rescaling-values">
+<h2>Rescaling Values<a class="headerlink" href="#rescaling-values" title="Permalink to this headline">#</a></h2>
+<p>Most remotely sensed data is stored as <code class="docutils literal notranslate"><span class="pre">int</span></code> to minimize space. We are often left to rescale the values back to floating point on the backend. This can be done in a few ways in geowombat. If the sensor you are using has a geowombat profile, please use that - refer to <a class="reference internal" href="f_rs_config.html"><span class="doc std std-doc">configuration manager docs</span></a>. If it is not natively supported we can manually set the scaling factor using the <code class="docutils literal notranslate"><span class="pre">gw.config.update</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+ 
+<span class="c1"># Zeros are replaced with nans</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
+  <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="replace-values">
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="replace-values">
 <h2>Replace values<a class="headerlink" href="#replace-values" title="Permalink to this headline">#</a></h2>
 <p>The GeoWombat <code class="docutils literal notranslate"><span class="pre">replace</span></code> function mimics <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame.replace</span></code>.</p>
 <div class="cell docutils container">
@@ -751,8 +810,36 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">replace</span></code> function is typically used with categorical data.</p>
 </div>
+</section>
+<section id="updating-values">
+<h2>Updating Values<a class="headerlink" href="#updating-values" title="Permalink to this headline">#</a></h2>
+<p>Geowombat also accepts normal mathematical expressions such as multiplication and addition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+
+<span class="c1"># Replace 1 with 10</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">src</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="o">+</span><span class="mi">80</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[80.    80.    80.    ... 80.    80.    80.   ]
+ [80.    80.    80.    ... 80.    80.    80.   ]
+ [80.    80.    80.    ... 80.    80.    80.   ]
+ ...
+ [87.692 87.518 87.513 ... 87.44  87.432 87.415]
+ [87.586 87.59  87.61  ... 87.44  87.411 87.425]
+ [87.576 87.743 87.77  ... 87.464 87.443 87.406]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

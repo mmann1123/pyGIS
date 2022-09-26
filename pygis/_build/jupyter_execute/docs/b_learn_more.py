@@ -132,7 +132,7 @@ x + x + x + y
 
 # We can manipulate expressions
 
-# In[5]:
+# In[ ]:
 
 
 expression = (x + y)**2
@@ -141,7 +141,7 @@ expression.expand()
 
 # solve polynomials
 
-# In[6]:
+# In[ ]:
 
 
 from sympy import solve
@@ -151,7 +151,7 @@ solve(x**2 + x + 2)
 
 # and calculate limits, derivatives and integrals
 
-# In[7]:
+# In[ ]:
 
 
 from sympy import limit, sin, diff
@@ -159,13 +159,13 @@ from sympy import limit, sin, diff
 limit(1 / x, x, 0)
 
 
-# In[8]:
+# In[ ]:
 
 
 limit(sin(x) / x, x, 0)
 
 
-# In[9]:
+# In[ ]:
 
 
 diff(sin(x), x)
@@ -187,7 +187,7 @@ diff(sin(x), x)
 # Here\'s a simple example, using some dummy data generated with Numpy\'s
 # excellent `random` functionality.
 
-# In[10]:
+# In[ ]:
 
 
 import pandas as pd
@@ -200,7 +200,7 @@ df = pd.DataFrame(data, columns=('price', 'weight'), index=dates)
 print(df)
 
 
-# In[11]:
+# In[ ]:
 
 
 df.mean()
@@ -214,3 +214,6 @@ df.mean()
 # 
 # The [full set of lectures](https://python-programming.quantecon.org/) might be
 # useful as the next step of your study.
+# 
+# ## Attribution 
+# The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)

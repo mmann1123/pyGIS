@@ -57,7 +57,7 @@ area = ox.geocode_to_gdf(place_name)
 
 # As the name of the function already tells us, `gdf_from_place()`returns a GeoDataFrame based on the specified place name query.
 
-# In[3]:
+# In[ ]:
 
 
 # Check the data type
@@ -66,7 +66,7 @@ area
 
 # Let's still verify the data type:
 
-# In[4]:
+# In[ ]:
 
 
 # Check the data type
@@ -75,7 +75,7 @@ type(area)
 
 # Finally, let's plot it.
 
-# In[5]:
+# In[ ]:
 
 
 area.plot()
@@ -88,7 +88,7 @@ area.plot()
 # 
 # When fetching spesific types of geometries from OpenStreetMap using OSMnx `geometries_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
 
-# In[6]:
+# In[ ]:
 
 
 # List key-value pairs for tags
@@ -100,7 +100,7 @@ buildings.head()
 
 # We can plot the footprints quickly.
 
-# In[7]:
+# In[ ]:
 
 
 # Plot footprints 
@@ -118,7 +118,7 @@ buildings.plot()
 # 
 # We need to isolate just the attributes we are interested in:
 
-# In[8]:
+# In[ ]:
 
 
 buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
@@ -129,7 +129,7 @@ buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
 # ```
 # We also need to isolate the feature type we are looking for [e.g. Multipolygon, Polygon, Point]. Since here we want building footprints we are going to keep only polygons.
 
-# In[9]:
+# In[ ]:
 
 
 buildings = buildings.loc[buildings.geometry.type=='Polygon']
@@ -137,7 +137,7 @@ buildings = buildings.loc[buildings.geometry.type=='Polygon']
 
 # Now, finally, we can write it to disk.
 
-# In[10]:
+# In[ ]:
 
 
 # Save footprints 

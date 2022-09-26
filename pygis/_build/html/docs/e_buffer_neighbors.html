@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="In python create buffers and find the nearest neighbor for points" lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="In python create buffers and find the nearest neighbor for points" lang="en" name="description" xml:lang="en" />
 <meta content="python spatial buffer neighbor" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -193,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -717,10 +718,10 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="proximity-analysis-buffers-nearest-neighbor">
+<section class="tex2jax_ignore mathjax_ignore" id="proximity-analysis-buffers-nearest-neighbor">
 <h1>Proximity Analysis - Buffers, Nearest Neighbor<a class="headerlink" href="#proximity-analysis-buffers-nearest-neighbor" title="Permalink to this headline">#</a></h1>
 <p>In this chapter we are going to dig into some of the most common spatial operations. After this section you will be able to answer simple questions like “where is the nearest wendy’s?”, “Are there any homes within 50 yards of a highway?”.</p>
-<div class="section" id="buffer-analysis">
+<section id="buffer-analysis">
 <h2>Buffer Analysis<a class="headerlink" href="#buffer-analysis" title="Permalink to this headline">#</a></h2>
 <p>First, we will import the necessary modules and create two lines (click the + below to show code cell).</p>
 <div class="cell docutils container">
@@ -762,7 +763,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_3_1.png" src="../_images/e_buffer_neighbors_3_1.png" />
@@ -834,7 +835,7 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_11_1.png" src="../_images/e_buffer_neighbors_11_1.png" />
@@ -872,18 +873,18 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_13_1.png" src="../_images/e_buffer_neighbors_13_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="nearest-neighbor-analysis">
+</section>
+<section id="nearest-neighbor-analysis">
 <h2>Nearest Neighbor Analysis<a class="headerlink" href="#nearest-neighbor-analysis" title="Permalink to this headline">#</a></h2>
 <p>One commonly used GIS task is to be able to find the nearest neighbor. For instance, you might have a single Point object representing your home location, and then another set of locations representing e.g. public transport stops. Then, quite typical question is <em>“which of the stops is closest one to my home?”</em> This is a typical nearest neighbor analysis, where the aim is to find the closest geometry to another geometry. <a class="footnote-reference brackets" href="#gpd-clip" id="id1">1</a></p>
 <p>In Python this kind of analysis can be done with shapely function called <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> that returns a tuple of the <a class="reference external" href="https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.nearest_points">nearest points</a> in the input geometries.</p>
-<div class="section" id="nearest-point-using-shapely">
+<section id="nearest-point-using-shapely">
 <h3>Nearest point using Shapely<a class="headerlink" href="#nearest-point-using-shapely" title="Permalink to this headline">#</a></h3>
 <p>Let’s start by testing how we can find the nearest Point using the <code class="docutils literal notranslate"><span class="pre">nearest_points</span></code> function of Shapely.</p>
 <p>Let’s create an origin Point and a few destination Points and find out the closest destination.</p>
@@ -924,7 +925,7 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;shapely.geometry.point.Point object at 0x7ff96043f750&gt;, &lt;shapely.geometry.point.Point object at 0x7ff96043fe90&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;shapely.geometry.point.Point object at 0x7fb345865910&gt;, &lt;shapely.geometry.point.Point object at 0x7fb345937df0&gt;)
 Coordinates of original point: POINT (1 1.67)
 Coordinates of closest destination point: POINT (0 1.45)
 </pre></div>
@@ -933,8 +934,8 @@ Coordinates of closest destination point: POINT (0 1.45)
 </div>
 <p>As you can see the <code class="docutils literal notranslate"><span class="pre">nearest_points</span></code> function returns a tuple of geometries where the first item is the geometry of our origin point and the second item (at index 1) is the actual nearest geometry from the destination points. Hence, the closest destination point seems to be the one located at coordinates (0, 1.45).</p>
 <p>This is the basic logic how we can find the nearest point from a set of points.</p>
-</div>
-<div class="section" id="nearest-points-using-geopandas">
+</section>
+<section id="nearest-points-using-geopandas">
 <h3>Nearest points using Geopandas<a class="headerlink" href="#nearest-points-using-geopandas" title="Permalink to this headline">#</a></h3>
 <p>Of course, the previous example is not really useful yet. Hence, next I show, how it is possible to find nearest points from a set of origin points to a set of destination points using GeoDataFrames. In this example we will recreate the previous example but use geopandas, however this data could come from any shapefile.</p>
 <ul class="simple">
@@ -1070,9 +1071,9 @@ Coordinates of closest destination point: POINT (0 1.45)
 <dd><p><a class="reference external" href="https://automating-gis-processes.github.io/2017/lessons/L3/nearest-neighbour.html">automating-gis-processes</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn to the mechanics of reprojecting spatial raster data through affine transformation. We cover topics like translate, rotate, skew and shear by learning the basic principals of matrix algebra and how it can be used to scale spatial operations." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn to the mechanics of reprojecting spatial raster data through affine transformation. We cover topics like translate, rotate, skew and shear by learning the basic principals of matrix algebra and how it can be used to scale spatial operations." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez aux mécanismes de reprojection de données raster géospatiales par transformation affine. Nous abordons des sujets tels que la traduction, la rotation, l'inclinaison et le cisaillement en apprenant les principes de base de l'algèbre matricielle et comment elle peut être utilisée pour mettre à l'échelle des opérations spatiales." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda la mecánica de reproyectar datos ráster geoespaciales a través de la transformación afín. Cubrimos temas como traducir, rotar, sesgar y cortar aprendiendo los principios básicos del álgebra matricial y cómo se puede utilizar para escalar operaciones espaciales." lang="es" name="description" xml:lang="es" />
 <meta content=" spatial,raster, crs, coordinate reference system, reproject, affine, transform" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -745,15 +746,17 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="affine-transforms">
+<section class="tex2jax_ignore mathjax_ignore" id="affine-transforms">
 <h1>Affine Transforms<a class="headerlink" href="#affine-transforms" title="Permalink to this headline">#</a></h1>
 <!-- https://docs.geotools.org/stable/userguide/tutorial/affinetransform.html -->
 <!-- https://people.cs.clemson.edu/~dhouse/courses/401/notes/affines-matrices.pdf -->
 <p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.</p>
-<div class="figure align-default" id="example-of-a-warped-reprojected-image">
+<figure class="align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>First some general properties of affine transforms:</p>
 <ul class="simple">
 <li><p><strong>Preserves</strong></p>
@@ -770,7 +773,7 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<div class="section" id="types-of-transformations">
+<section id="types-of-transformations">
 <h2>Types of Transformations<a class="headerlink" href="#types-of-transformations" title="Permalink to this headline">#</a></h2>
 <p>There are four core ways that you can manipulate an image. These are called “Transforms”:</p>
 <table class="colwidths-auto table">
@@ -804,7 +807,7 @@ title="Print to PDF"
 </tbody>
 </table>
 <p>In combination we can warp any point, or set of points (e.g. raster image) into a new projection. This is the equivalent of reprojection for vector data. In order to implement these transforms we will need to learn about the math behind <em>Affine Transforms</em>! Yeah!</p>
-<div class="section" id="simple-transform-examples">
+<section id="simple-transform-examples">
 <span id="d-affine-simple"></span><h3>Simple Transform Examples<a class="headerlink" href="#simple-transform-examples" title="Permalink to this headline">#</a></h3>
 <p>To simplify things first lets think about how to do transformations of a single point in a 2d space.</p>
 <p>For any location <span class="math notranslate nohighlight">\( \mathbf{x} = (x,y)\)</span> we can transform <span class="math notranslate nohighlight">\( \mathbf{x} \)</span> to <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> using simple linear adjustments. Here we can think of point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> as being stored as an array:</p>
@@ -833,10 +836,12 @@ title="Print to PDF"
       \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}1x+0y+c \\ 0x+1y+f \end{array} \right]
    \end{eqnarray}
 \end{split}\]</div>
-<div class="figure align-default" id="translate-a-coordinate">
+<figure class="align-default" id="translate-a-coordinate">
 <img alt="../_images/translate_coord.png" src="../_images/translate_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by setting <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> to 0.5 (or some fraction), and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -844,10 +849,12 @@ title="Print to PDF"
       \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r}ax \\ ey \end{array} \right]
    \end{eqnarray}
 \end{split}\]</div>
-<div class="figure align-default" id="scale-a-coordinate">
+<figure class="align-default" id="scale-a-coordinate">
 <img alt="../_images/scale_coord.png" src="../_images/scale_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We can rotate a point around the origin by setting <span class="math notranslate nohighlight">\(a,e = \cos\theta\)</span>, <span class="math notranslate nohighlight">\(b = -\sin\theta\)</span> and <span class="math notranslate nohighlight">\(c,f = 0\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -856,10 +863,12 @@ title="Print to PDF"
    \end{eqnarray}
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle of rotation (counterclockwise) around the origin.</p>
-<div class="figure align-default" id="rotate-a-coordinate">
+<figure class="align-default" id="rotate-a-coordinate">
 <img alt="../_images/rotate_coord.png" src="../_images/rotate_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Finally by adjusting <span class="math notranslate nohighlight">\(x\)</span> based on the value of <span class="math notranslate nohighlight">\(y\)</span> (and visa versa), we can achieve a shear transform:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -867,12 +876,14 @@ title="Print to PDF"
       \mathbf{\acute{x}}  =  \left[ \begin{array}{cc|r} x+by \\ y+dx \end{array} \right]
    \end{eqnarray}
 \end{split}\]</div>
-<div class="figure align-default" id="shear-transform-a-coordinate">
+<figure class="align-default" id="shear-transform-a-coordinate">
 <img alt="../_images/shear_coord.png" src="../_images/shear_coord.png" />
-<p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">#</a></p>
-</div>
-</div>
-<div class="section" id="transforming-matrices">
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="transforming-matrices">
 <span id="d-affine-transform-matrix"></span><h3>Transforming Matrices<a class="headerlink" href="#transforming-matrices" title="Permalink to this headline">#</a></h3>
 <p>It is often convenient to represent these equations as matrices. This allows us to easily chain together a series of operations. We can represent our transformed point <span class="math notranslate nohighlight">\(\mathbf{\acute{x}}\)</span> as follows:</p>
 <div class="math notranslate nohighlight">
@@ -946,10 +957,10 @@ title="Print to PDF"
    \mbox{Shear: }  \begin{bmatrix} 1 &amp; r_{x} &amp; 0 \\ r_{y} &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix} 
    \end{eqnarray}
 \end{split}\]</div>
-</div>
-<div class="section" id="numeric-examples">
+</section>
+<section id="numeric-examples">
 <h3>Numeric Examples<a class="headerlink" href="#numeric-examples" title="Permalink to this headline">#</a></h3>
-<div class="section" id="translate">
+<section id="translate">
 <span id="d-affine-trans"></span><h4>Translate<a class="headerlink" href="#translate" title="Permalink to this headline">#</a></h4>
 <p>Now let’s assume we have a point a at (-2,-2) for (x,y). For simplicity sake lets assume we want to move it up to the origin by adding 2 to both x and y.</p>
 <p>Let’s start by defining our point in our matrix form:</p>
@@ -976,16 +987,18 @@ title="Print to PDF"
    \end{eqnarray}
 \end{split}\]</div>
 <p>Congrats you reached (0,0), just like you always dreamed!</p>
-<div class="figure align-default" id="moving-a-point">
+<figure class="align-default" id="moving-a-point">
 <img alt="../_images/translate_ex.png" src="../_images/translate_ex.png" />
-<p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Remember the bottom row can be ignored because <span class="math notranslate nohighlight">\( \begin{bmatrix} x  \\  y \\ 1  \end{bmatrix}\)</span></p>
 </div>
-</div>
-<div class="section" id="rotate">
+</section>
+<section id="rotate">
 <h4>Rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">#</a></h4>
 <p>All the transformations follow the same procedure, let’s try rotation just to make sure that we have it figured out. Let’s rotate our point at (-2,-2) by 180 degrees around the origin:</p>
 <div class="math notranslate nohighlight">
@@ -1001,14 +1014,16 @@ title="Print to PDF"
      \begin{bmatrix} -2 \times \cos{180} + -2 \times -\sin{180} + 1 \times 0 \\ -2 \times \sin{180} + -2 \times \cos{180} + 1 \times 0 \\ 1 \times 0 + 1 \times 0 + 1 \times 1 \end{bmatrix}  =  \begin{bmatrix} 2 \\ 2 \\  1 \end{bmatrix} 
    \end{eqnarray}
 \end{split}\]</div>
-<div class="figure align-default" id="rotate-a-point">
+<figure class="align-default" id="rotate-a-point">
 <img alt="../_images/rotate_ex.png" src="../_images/rotate_ex.png" />
-<p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">#</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

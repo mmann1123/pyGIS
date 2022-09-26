@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Getting Started in Python &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -190,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -726,14 +727,14 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="getting-started-in-python">
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-in-python">
 <span id="b-about-py"></span><h1>Getting Started in Python<a class="headerlink" href="#getting-started-in-python" title="Permalink to this headline">#</a></h1>
 <blockquote>
 <div><p>“Python has gotten sufficiently weapons grade that we don’t descend
 into R anymore. Sorry, R people. I used to be one of you but we no
 longer descend into R.” – Chris Wiggins</p>
 </div></blockquote>
-<div class="section" id="what-s-python">
+<section id="what-s-python">
 <h2>What’s Python?<a class="headerlink" href="#what-s-python" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://www.python.org">Python</a> is a general-purpose programming
 language conceived in 1989 by Dutch programmer <a class="reference external" href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido van
@@ -743,7 +744,7 @@ Rossum</a>.</p>
 <p>Python has experienced rapid adoption in the last decade and is now one
 of the most commonly used programming languages.</p>
 <p>Popular textbooks on Python programming include <span id="id1">[]</span> and <span id="id2">[]</span>.</p>
-<div class="section" id="common-uses">
+<section id="common-uses">
 <h3>Common Uses<a class="headerlink" href="#common-uses" title="Permalink to this headline">#</a></h3>
 <p>Python is a general-purpose language used in almost all application domains
 such as</p>
@@ -761,14 +762,14 @@ communities.</p>
 <p>It is steadily <a class="reference external" href="https://news.efinancialcareers.com/us-en/3002556/python-replaced-excel-banking">replacing familiar tools like
 Excel</a>
 in the fields of finance and banking.</p>
-</div>
-<div class="section" id="relative-popularity">
+</section>
+<section id="relative-popularity">
 <h3>Relative Popularity<a class="headerlink" href="#relative-popularity" title="Permalink to this headline">#</a></h3>
 <p>The following chart, produced using Stack Overflow Trends, shows one
 measure of the relative popularity of Python</p>
-<div class="figure align-default">
+<figure class="align-default">
 <a class="reference internal image-reference" href="../_images/python_vs_matlab.png"><img alt="../_images/python_vs_matlab.png" src="../_images/python_vs_matlab.png" style="width: 457.2px; height: 288.0px;" /></a>
-</div>
+</figure>
 <p>The figure indicates not only that Python is widely used but also that
 adoption of Python has accelerated significantly since 2012.</p>
 <p>This is driven at least in part by uptake in the scientific
@@ -776,9 +777,9 @@ domain, particularly in rapidly growing fields like data science.</p>
 <p>For example, the popularity of <a class="reference external" href="http://pandas.pydata.org/">pandas</a>, a
 library for data analysis with Python has exploded, as seen here.</p>
 <p>(The corresponding time path for MATLAB is shown for comparison)</p>
-<div class="figure align-default">
+<figure class="align-default">
 <a class="reference internal image-reference" href="../_images/pandas_vs_matlab.png"><img alt="../_images/pandas_vs_matlab.png" src="../_images/pandas_vs_matlab.png" style="width: 474.49px; height: 287.5px;" /></a>
-</div>
+</figure>
 <p>Note that pandas takes off in 2012, which is the same year that we see
 Python’s popularity begin to spike in the first figure.</p>
 <p>Overall, it’s clear that</p>
@@ -787,16 +788,16 @@ Python’s popularity begin to spike in the first figure.</p>
 <li><p>Python is a major tool for scientific computing, accounting for a
 rapidly rising share of scientific work around the globe.</p></li>
 </ul>
-</div>
-<div class="section" id="features">
+</section>
+<section id="features">
 <h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">#</a></h3>
 <p>Python is a <a class="reference external" href="https://en.wikipedia.org/wiki/High-level_programming_language">high-level language</a>
 suitable for rapid development.</p>
 <p>It has a relatively small core language supported by many libraries.</p>
 <p>Multiple programming styles are supported (procedural, object-oriented, functional, etc.)</p>
 <p>Python is interpreted rather than compiled.</p>
-</div>
-<div class="section" id="syntax-and-design">
+</section>
+<section id="syntax-and-design">
 <h3>Syntax and Design<a class="headerlink" href="#syntax-and-design" title="Permalink to this headline">#</a></h3>
 <p>One nice feature of Python is its elegant syntax — we’ll see many
 examples later on.</p>
@@ -811,9 +812,9 @@ make Python highly expressive, allowing you to get more done with less
 code.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Namespace">Namespaces</a> improve
 productivity by cutting down on bugs and syntax errors.</p>
-</div>
-</div>
-<div class="section" id="scientific-programming">
+</section>
+</section>
+<section id="scientific-programming">
 <h2>Scientific Programming<a class="headerlink" href="#scientific-programming" title="Permalink to this headline">#</a></h2>
 <p>Python has become one of the core languages of scientific computing.</p>
 <p>It’s either the dominant player or a major player in</p>
@@ -826,11 +827,12 @@ productivity by cutting down on bugs and syntax errors.</p>
 <li><p><a class="reference external" href="https://pypi.org/project/meteorology/">meteorology</a></p></li>
 </ul>
 <p>Its popularity in economics is also beginning to rise.</p>
-</div>
-<div class="section" id="bibliography">
+</section>
+<section id="bibliography">
 <h2>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">#</a></h2>
-<span class="target" id="id3"></span></div>
-</div>
+<span class="target" id="id3"></span><p>The above lesson was pulled directly from work by <a class="reference external" href="https://python-programming.quantecon.org/about_py.html">Thomas J. Sargent &amp; John Stachurski</a></p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -168,6 +168,19 @@ with gw.open([l8_224078_20200518, l8_224078_20200518],
             stack_dim='time') as src:
     print(src)
 ```
+## Setting Missing Values 
+(f_rs_io_setting_missing_values)=
+
+Many raster files do not have the missing value set properly in their profile. Geowombat makes it easy to set or update the missing data value using `nodata` in either `gw.open` or even in `gw.config.update` if you prefer.   
+
+```{code-cell} ipython3
+fig, ax = plt.subplots(dpi=200)
+with gw.open(l8_224078_20200518, nodata=0) as src:
+    # replace 0 with nan
+    src = src.gw.mask_nodata()
+    src.sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+plt.tight_layout(pad=1)
+```
 
 ## Writing DataArrays to file
 

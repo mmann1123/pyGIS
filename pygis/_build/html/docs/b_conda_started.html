@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand." lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment installer un environnement python fonctionnel pour les données spatiales et la télédétection. Ici, nous utilisons Docker pour rendre le processus reproductible et au moins quelque peu facile à comprendre." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a instalar un entorno Python que funcione para datos espaciales y detección remota. Aquí utilizamos Docker para hacer que el proceso sea replicable y al menos algo fácil de entender." lang="es" name="description" xml:lang="es" />
 <meta content="python environment, Docker, spatial, raster, shapefile, remote sensing" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -754,14 +755,14 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="setting-up-python-for-spatial-on-mac-windows-and-linux">
+<section class="tex2jax_ignore mathjax_ignore" id="setting-up-python-for-spatial-on-mac-windows-and-linux">
 <h1>Setting up Python for Spatial on Mac, Windows, and Linux<a class="headerlink" href="#setting-up-python-for-spatial-on-mac-windows-and-linux" title="Permalink to this headline">#</a></h1>
 <p>Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn’t do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast.</p>
-<div class="section" id="docker-for-spatial-python-gdal-included">
+<section id="docker-for-spatial-python-gdal-included">
 <h2>Docker for Spatial Python - GDAL Included<a class="headerlink" href="#docker-for-spatial-python-gdal-included" title="Permalink to this headline">#</a></h2>
 <p>Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I’m looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined">a simple intro to Docker concepts</a></p>
 <p>To get this done we will be accessing <a class="reference external" href="https://hub.docker.com/">DockerHub</a>, which allows coders like us to store their Docker images. We will be downloading an image of the Linux operating system (Ubuntu, which is “debian-based”), that already has GDAL built for us. Once we “pull” a copy of the image of this operating system we will open it as “a container”. This “container” is a running instance of the “image” that we can run our applications on, and customize for our use case.  Read some more on <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-containers-images-registries">“images” vs “containers” etc here</a>.</p>
-<div class="section" id="install-docker">
+<section id="install-docker">
 <h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">#</a></h3>
 <p>Follow the instructions for installing Docker on your system, take your time, and make sure you understand what you are doing before you do it!</p>
 <div class="tab-set docutils">
@@ -784,12 +785,12 @@ title="Print to PDF"
 </div>
 <p>There are two ways we can do this, the <a class="reference internal" href="#theeasyway"><span class="std std-ref">easy way</span></a>, or the much more <a class="reference internal" href="#thedetailedway"><span class="std std-ref">detailed way</span></a>. Choose your poison.</p>
 <hr class="docutils" />
-</div>
-</div>
-<div class="section" id="the-easy-way">
+</section>
+</section>
+<section id="the-easy-way">
 <span id="theeasyway"></span><h2>The Easy Way<a class="headerlink" href="#the-easy-way" title="Permalink to this headline">#</a></h2>
 <hr class="docutils" />
-<div class="section" id="pulling-a-docker-image-ready-for-gis">
+<section id="pulling-a-docker-image-ready-for-gis">
 <h3>Pulling a Docker Image Ready for GIS<a class="headerlink" href="#pulling-a-docker-image-ready-for-gis" title="Permalink to this headline">#</a></h3>
 <p>Now we are going to get an Ubuntu image running that already has everything installed and ready to use. We are going to pull the lastest build of our image from <a class="reference external" href="https://hub.docker.com/r/mmann1123/gw_pygis">my docker hub page</a>.</p>
 <p>First open a <strong>terminal</strong> or <strong>powershell</strong> in windows… yes powershell not terminal, type the following:</p>
@@ -949,12 +950,12 @@ title="Print to PDF"
 </div>
 <p>When you’re done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type <code class="docutils literal notranslate"><span class="pre">exit</span></code> in the terminal window to exit your geowombat container.</p>
 <hr class="docutils" />
-</div>
-</div>
-<div class="section" id="the-more-detailed-way">
+</section>
+</section>
+<section id="the-more-detailed-way">
 <span id="thedetailedway"></span><h2>The More Detailed Way<a class="headerlink" href="#the-more-detailed-way" title="Permalink to this headline">#</a></h2>
 <hr class="docutils" />
-<div class="section" id="pull-and-run-a-linux-image-with-gdal">
+<section id="pull-and-run-a-linux-image-with-gdal">
 <h3>Pull and Run a Linux Image with GDAL<a class="headerlink" href="#pull-and-run-a-linux-image-with-gdal" title="Permalink to this headline">#</a></h3>
 <p>Now we are going to get an Ubuntu image running that already has GDAL installed. We are going to pull the lastest build of our image from <a class="reference external" href="https://github.com/OSGeo/gdal/tree/master/gdal/docker">OSGEO’s docker hub page</a>.</p>
 <p>First open a terminal or powershell, type the following:</p>
@@ -1105,8 +1106,8 @@ sudo usermod -aG docker $USER
 <p class="admonition-title">Note</p>
 <p>Keep in mind if you want to make changes to the ‘pygis’ image you will need to first run it via the command line, make your changes, and then ‘commit’ or save another named version (ideally with a different name)</p>
 </div>
-</div>
-<div class="section" id="access-your-spatial-python-image">
+</section>
+<section id="access-your-spatial-python-image">
 <h3>Access your spatial python image<a class="headerlink" href="#access-your-spatial-python-image" title="Permalink to this headline">#</a></h3>
 <p>There are two ways to access this 1) through the command-line and 2) through Jupyter Notebooks.</p>
 <p>Let’s start with command line only access. Note that this is almost exactly how we ran the osgeo/gdal image, except we replaced its name with geowombat. <em>Don’t forget to replace <code class="docutils literal notranslate"><span class="pre">&lt;user_name&gt;</span></code> with your user name!</em></p>
@@ -1245,9 +1246,9 @@ sudo usermod -aG docker $USER
 </div>
 </div>
 <p>When you’re done with your work inside the container, and double checked that your data is saved locally - not on the container - you can type <code class="docutils literal notranslate"><span class="pre">exit</span></code> in the terminal window to exit your geowombat container.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

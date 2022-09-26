@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>An Introductory Example &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -192,7 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -711,6 +712,11 @@ title="Print to PDF"
    Another Application
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attribution">
+   Attribution
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -816,6 +822,11 @@ title="Print to PDF"
    Another Application
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attribution">
+   Attribution
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -826,9 +837,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="an-introductory-example">
+  <section class="tex2jax_ignore mathjax_ignore" id="an-introductory-example">
 <span id="python-by-example"></span><h1>An Introductory Example<a class="headerlink" href="#an-introductory-example" title="Permalink to this headline">#</a></h1>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
 <p>We’re now ready to start learning the Python language itself.</p>
 <p>In this lecture, we will write and then pick apart small Python
@@ -837,17 +848,17 @@ programs.</p>
 structures.</p>
 <p>Deeper concepts will be covered in later lectures.</p>
 <p>You should have read the <span class="xref std std-ref">lecture</span> on getting started with Python before beginning this one.</p>
-</div>
-<div class="section" id="the-task-plotting-a-white-noise-process">
+</section>
+<section id="the-task-plotting-a-white-noise-process">
 <h2>The Task: Plotting a White Noise Process<a class="headerlink" href="#the-task-plotting-a-white-noise-process" title="Permalink to this headline">#</a></h2>
 <p>Suppose we want to simulate and plot the white noise process
 <span class="math notranslate nohighlight">\(\epsilon_0, \epsilon_1, \ldots, \epsilon_T\)</span>, where each draw
 <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is independent standard normal.</p>
 <p>In other words, we want to generate figures that look something like
 this:</p>
-<div class="figure align-default">
+<figure class="align-default">
 <img alt="../_images/test_program_1_updated.png" src="../_images/test_program_1_updated.png" />
-</div>
+</figure>
 <p>(Here <span class="math notranslate nohighlight">\(t\)</span> is on the horizontal axis and <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is on the vertical
 axis.)</p>
 <p>We’ll do this in several different ways, each time learning something
@@ -861,8 +872,8 @@ in the notebook if you run it on your own machine.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="version-1">
+</section>
+<section id="version-1">
 <h2>Version 1<a class="headerlink" href="#version-1" title="Permalink to this headline">#</a></h2>
 <p id="ourfirstprog">Here are a few lines of code that perform the task we set</p>
 <div class="cell docutils container">
@@ -881,7 +892,7 @@ in the notebook if you run it on your own machine.</p>
 </div>
 </div>
 <p>Let’s break this program down and see how it works.</p>
-<div class="section" id="imports">
+<section id="imports">
 <span id="import"></span><h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h3>
 <p>The first two lines of the program import functionality from external
 code libraries.</p>
@@ -937,15 +948,15 @@ syntax <code class="docutils literal notranslate"><span class="pre">np.attribute
 </div>
 <p>But the former method (using the short name <code class="docutils literal notranslate"><span class="pre">np</span></code>) is convenient and more
 standard.</p>
-<div class="section" id="why-so-many-imports">
+<section id="why-so-many-imports">
 <h4>Why So Many Imports?<a class="headerlink" href="#why-so-many-imports" title="Permalink to this headline">#</a></h4>
 <p>Python programs typically require several import statements.</p>
 <p>The reason is that the core language is deliberately kept small, so that
 it’s easy to learn and maintain.</p>
 <p>When you want to do something interesting with Python, you almost always
 need to import additional functionality.</p>
-</div>
-<div class="section" id="packages">
+</section>
+<section id="packages">
 <h4>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">#</a></h4>
 <p>As stated above, NumPy is a Python <em>package</em>.</p>
 <p>Packages are used by developers to organize code they wish to share.</p>
@@ -963,17 +974,17 @@ computer easily enough if you look around.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>anaconda3/lib/python3.7/site-packages/numpy
 </pre></div>
 </div>
-</div>
-<div class="section" id="subpackages">
+</section>
+<section id="subpackages">
 <h4>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h4>
 <p>Consider the line <code class="docutils literal notranslate"><span class="pre">ϵ_values</span> <span class="pre">=</span> <span class="pre">np.random.randn(100)</span></code>.</p>
 <p>Here <code class="docutils literal notranslate"><span class="pre">np</span></code> refers to the package NumPy, while <code class="docutils literal notranslate"><span class="pre">random</span></code> is a
 <strong>subpackage</strong> of NumPy.</p>
 <p>Subpackages are just packages that are subdirectories of another
 package.</p>
-</div>
-</div>
-<div class="section" id="importing-names-directly">
+</section>
+</section>
+<section id="importing-names-directly">
 <h3>Importing Names Directly<a class="headerlink" href="#importing-names-directly" title="Permalink to this headline">#</a></h3>
 <p>Recall this code that we saw above</p>
 <div class="cell docutils container">
@@ -1011,8 +1022,8 @@ package.</p>
 separated by many other lines.</p>
 <p>Then it’s harder for readers to know where <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> came from, should
 they wish to.</p>
-</div>
-<div class="section" id="random-draws">
+</section>
+<section id="random-draws">
 <h3>Random Draws<a class="headerlink" href="#random-draws" title="Permalink to this headline">#</a></h3>
 <p>Returning to our program that plots white noise, the remaining three
 lines after the import statements are</p>
@@ -1033,9 +1044,9 @@ stores them in <code class="docutils literal notranslate"><span class="pre">ϵ_v
 <p>The next two lines genererate the plot.</p>
 <p>We can and will look at various ways to configure and improve this plot
 below.</p>
-</div>
-</div>
-<div class="section" id="alternative-implementations">
+</section>
+</section>
+<section id="alternative-implementations">
 <h2>Alternative Implementations<a class="headerlink" href="#alternative-implementations" title="Permalink to this headline">#</a></h2>
 <p>Let’s try writing some alternative versions of
 <a class="reference internal" href="#ourfirstprog"><span class="std std-ref">our first program</span></a>, which
@@ -1044,7 +1055,7 @@ plotted IID draws from the normal distribution.</p>
 somewhat artificial.</p>
 <p>But they do help us illustrate some important Python syntax and
 semantics in a familiar setting.</p>
-<div class="section" id="a-version-with-a-for-loop">
+<section id="a-version-with-a-for-loop">
 <h3>A Version with a For Loop<a class="headerlink" href="#a-version-with-a-for-loop" title="Permalink to this headline">#</a></h3>
 <p>Here’s a version that illustrates <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and Python lists.</p>
 <div class="cell docutils container" id="firstloopprog">
@@ -1078,8 +1089,8 @@ new random number <span class="math notranslate nohighlight">\(\epsilon_t\)</spa
 <li><p>The last two lines generate the plot and display it to the user.</p></li>
 </ul>
 <p>Let’s study some parts of this program in more detail.</p>
-</div>
-<div class="section" id="lists">
+</section>
+<section id="lists">
 <span id="lists-ref"></span><h3>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">#</a></h3>
 <p>Consider the statement <code class="docutils literal notranslate"><span class="pre">ϵ_values</span> <span class="pre">=</span> <span class="pre">[]</span></code>, which creates an empty list.</p>
 <p>Lists are a <em>native Python data structure</em> used to group a collection of
@@ -1203,8 +1214,8 @@ element is referenced by <code class="docutils literal notranslate"><span class=
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-for-loop">
+</section>
+<section id="the-for-loop">
 <h3>The For Loop<a class="headerlink" href="#the-for-loop" title="Permalink to this headline">#</a></h3>
 <p>Now let’s consider the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop from
 <a class="reference internal" href="#firstloopprog"><span class="std std-ref">the program above</span></a>, which
@@ -1257,8 +1268,8 @@ a loop of the form</p>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">sequence</span></code> object can in fact be a very general object, as we’ll
 see soon enough.</p>
-</div>
-<div class="section" id="a-comment-on-indentation">
+</section>
+<section id="a-comment-on-indentation">
 <h3>A Comment on Indentation<a class="headerlink" href="#a-comment-on-indentation" title="Permalink to this headline">#</a></h3>
 <p>In discussing the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we explained that the code blocks being
 looped over are delimited by indentation.</p>
@@ -1287,8 +1298,8 @@ remember:</p>
 <li><p>All lines in a code block <strong>must have the same amount of indentation</strong>.</p></li>
 <li><p>The Python standard is 4 spaces, and that’s what you should use.</p></li>
 </ul>
-</div>
-<div class="section" id="while-loops">
+</section>
+<section id="while-loops">
 <h3>While Loops<a class="headerlink" href="#while-loops" title="Permalink to this headline">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is the most common technique for iteration in Python.</p>
 <p>But, for the purpose of illustration, let’s modify
@@ -1317,9 +1328,9 @@ a <code class="docutils literal notranslate"><span class="pre">while</span></cod
 <li><p>the code block for the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop is again delimited only by indentation</p></li>
 <li><p>the statement <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">+</span> <span class="pre">1</span></code> can be replaced by <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">+=</span> <span class="pre">1</span></code></p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="another-application">
+</section>
+</section>
+<section id="another-application">
 <h2>Another Application<a class="headerlink" href="#another-application" title="Permalink to this headline">#</a></h2>
 <p>Let’s do one more application before we turn to exercises.</p>
 <p>In this application, we plot the balance of a bank account over time.</p>
@@ -1360,6 +1371,10 @@ NumPy array.</p>
 list and <code class="docutils literal notranslate"><span class="pre">append</span></code>, since the latter must repeatedly ask for storage
 space from the operating system.</p>
 <p>Notice that we added a legend to the plot.</p>
+</section>
+<section id="attribution">
+<h2>Attribution<a class="headerlink" href="#attribution" title="Permalink to this headline">#</a></h2>
+<p>The above lesson was pulled directly from work by <a class="reference external" href="https://python-programming.quantecon.org/about_py.html">Thomas J. Sargent &amp; John Stachurski</a></p>
 <!-- 
  --- a feature you will be
 asked to use in the exercises.
@@ -1597,8 +1612,8 @@ for i in range(n):
 area_estimate = count / n
 
 print(area_estimate * 4)  # dividing by radius**2
-``` --></div>
-</div>
+``` --></section>
+</section>
 
     <script type="text/x-thebe-config">
     {

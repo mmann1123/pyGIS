@@ -130,3 +130,4 @@
 # ```{bibliography} ../_bibliography/references.bib
 # :style: unsrt
 # ```
+# The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)

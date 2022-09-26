@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn to create new spatial raster objects, assign projections or CRS." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn to create new spatial raster objects, assign projections or CRS." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à créer de nouveaux objets raster, à attribuer des projections ou CRS." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a crear nuevos objetos ráster, asignar proyecciones o CRS." lang="es" name="description" xml:lang="es" />
 <meta content="raster, spatial, shapefile, rasterio, numpy" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -682,7 +683,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-raster-data-in-python">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-raster-data-in-python">
 <h1>Spatial Raster Data in Python<a class="headerlink" href="#spatial-raster-data-in-python" title="Permalink to this headline">#</a></h1>
 <p>A raster data model uses an array of cells, or pixels, to represent real-world objects. Raster datasets are commonly used for representing and managing imagery, surface temperatures, digital elevation models, and numerous other entities. A raster can be thought of as a special case of an area object where the area is divided into a regular grid of cells. But a regularly spaced array of marked points may be a better analogy since rasters are stored as an array of values where each cell is defined by a single coordinate pair inside of most GIS environments. Implicit in a raster data model is a value associated with each cell or pixel. This is in contrast to a vector model that may or may not have a value associated with the geometric primitive.</p>
 <p>In order to work with raster data we will be using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and later <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>. Behind the scenes a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> does all the heavy lifting. To understand how raster works it helps to construct one from scratch.</p>
@@ -728,7 +729,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Note that <em><code class="docutils literal notranslate"><span class="pre">Z</span></code> contains no data on its location</em>. Its just an array, the information stored in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> aren’t associated with it at all. This location data will often be stored in the header of file. In order to ‘locate’ the array on the map we will use affine transformations.</p>
-<div class="section" id="assigning-spatial-data-to-an-array-in-python">
+<section id="assigning-spatial-data-to-an-array-in-python">
 <h2>Assigning spatial data to an array in python<a class="headerlink" href="#assigning-spatial-data-to-an-array-in-python" title="Permalink to this headline">#</a></h2>
 <p>Ok we have an array of data and some coordinates for each cell, but how do we create a spatial dataset from it? In order to do this we need three components:</p>
 <ol class="simple">
@@ -786,8 +787,8 @@ title="Print to PDF"
 <p>If you are storing multiband data the dimensions should be stored as (band, y, x ).</p>
 <p>Read more about this here: <a class="reference internal" href="e_new_rasters.html"><span class="doc std std-doc">Reading &amp; Writing Rasters with Rasterio</span></a></p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

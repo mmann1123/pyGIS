@@ -80,7 +80,7 @@ fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit the classifier
 with gw.config.update(ref_res=150):
-    with gw.open(l8_224078_20200518) as src:
+    with gw.open(l8_224078_20200518, nodata=0) as src:
         X, Xy, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
         y.plot(robust=True, ax=ax)
@@ -93,7 +93,7 @@ from geowombat.ml import fit_predict
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=150):
-    with gw.open(l8_224078_20200518) as src:
+    with gw.open(l8_224078_20200518, nodata=0) as src:
         y = fit_predict(src, pl, labels, col='lc')
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
@@ -113,7 +113,7 @@ fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 # Fit_predict unsupervised classifier
 with gw.config.update(ref_res=150):
-    with gw.open(l8_224078_20200518) as src:
+    with gw.open(l8_224078_20200518, nodata=0) as src:
         y= fit_predict(src, cl)
         y.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
@@ -128,7 +128,10 @@ If you have a stack of time series data it is simple to apply the same method as
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=150):
-   with gw.open([l8_224078_20200518, l8_224078_20200518], time_names=['t1', 't2'], stack_dim='time') as src:
+   with gw.open([l8_224078_20200518, l8_224078_20200518], 
+                time_names=['t1', 't2'], 
+                stack_dim='time', 
+                nodata=0) as src:
         y = fit_predict(src, pl, labels, col='lc')
         print(y)
         # plot one time period prediction
@@ -141,7 +144,7 @@ If you want to do more sophisticated model tuning using sklearn it is also possi
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=150):
-    with gw.open(l8_224078_20200518) as src:
+    with gw.open(l8_224078_20200518, nodata=0) as src:
         X, Xy, clf = fit(src, pl, labels, col="lc")
         y = predict(src, X, clf)
         y.plot(robust=True, ax=ax)
@@ -190,7 +193,7 @@ gridsearch = GridSearchCV(pl, cv=cv, scoring='balanced_accuracy',
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=150):
-    with gw.open(l8_224078_20200518) as src:
+    with gw.open(l8_224078_20200518, nodata=0) as src:
         # fit a model to get Xy used to train model
         X, Xy, pipe = fit(src, pl, labels, col="lc")
 

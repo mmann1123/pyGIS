@@ -504,6 +504,9 @@ plt.show()
 # 
 # Notice that we added a legend to the plot.
 # 
+# ## Attribution
+# The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)
+# 
 # <!-- 
 #  --- a feature you will be
 # asked to use in the exercises.

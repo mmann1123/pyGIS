@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Spatial classification and prediction models. Train and fit sklearn models on raster data including LandSat or other gridded data. " lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Spatial classification and prediction models. Train and fit sklearn models on raster data including LandSat or other gridded data. " lang="en" name="description" xml:lang="en" />
 <meta content="Classification spatiale et modèles de prédiction. Entraînez et adaptez des modèles sklearn sur des données raster, y compris LandSat ou d'autres données maillées." lang="fr" name="description" xml:lang="fr" />
 <meta content="Modelos de clasificación y predicción espacial. Entrene y ajuste modelos sklearn en datos ráster, incluido LandSat u otros datos cuadriculados." lang="es" name="description" xml:lang="es" />
 <meta content="sklearn, spatial,raster, remote sensing, time series, landsat, sentinel" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -194,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -733,12 +734,12 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-prediction-using-ml-in-python">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-prediction-using-ml-in-python">
 <h1>Spatial Prediction using ML in Python<a class="headerlink" href="#spatial-prediction-using-ml-in-python" title="Permalink to this headline">#</a></h1>
-<div class="section" id="create-land-use-classification-using-geowombat-sklearn">
+<section id="create-land-use-classification-using-geowombat-sklearn">
 <h2>Create Land Use Classification using Geowombat &amp; Sklearn<a class="headerlink" href="#create-land-use-classification-using-geowombat-sklearn" title="Permalink to this headline">#</a></h2>
 <p>The most common task for remotely sensed data is creating land cover classification. In this tutorial we will walk you through how to train a ML model using raster data. These methods are heavily dependent on the great package <a class="reference external" href="https://phausamann.github.io/sklearn-xarray/">sklearn_xarray</a>. To understand the pipeline commands please see their <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">documentation</a> and <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/index.html#pipelines-and-composite-estimators">examples</a>.</p>
-<div class="section" id="supervised-classification-in-python">
+<section id="supervised-classification-in-python">
 <h3>Supervised Classification in Python<a class="headerlink" href="#supervised-classification-in-python" title="Permalink to this headline">#</a></h3>
 <p>In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes [‘water’,’crop’,’tree’,’developed’]. The first step is to use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> to convert these to integer based categories, which we store in a new column called ‘lc’.</p>
 <div class="cell docutils container">
@@ -792,7 +793,7 @@ title="Print to PDF"
 
 <span class="c1"># Fit the classifier</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
@@ -811,7 +812,7 @@ title="Print to PDF"
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -822,8 +823,8 @@ title="Print to PDF"
 <img alt="../_images/f_rs_ml_predict_5_0.png" src="../_images/f_rs_ml_predict_5_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="unsupervised-classification-in-python">
+</section>
+<section id="unsupervised-classification-in-python">
 <h3>Unsupervised Classification in Python<a class="headerlink" href="#unsupervised-classification-in-python" title="Permalink to this headline">#</a></h3>
 <p>Unsupervised classification takes a different approach. Here we don’t have to provide examples of different land cover types. Instead we rely on the algorithm to identify distinct clusters of similar data, and apply a unique label to each cluster. For instance, if we are talking about land cover water and trees are going to look very different. Water reflects more blue and absorbs all the near infrared, while trees reflect little blue and reflect lots of near infrared.  Therefore water and trees should ‘cluster’ together when plotted out according to their different blue and near infrared reflectances. These clusters will be assigned a unique value to each pixel, e.g. water will be assigned 1 and trees 2. Later, the end user will need to go back and assign the label to each numbered cluster, e.g. water=1, trees=2.</p>
 <p>In this example we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">kmeans</a> to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image.</p>
@@ -836,7 +837,7 @@ title="Print to PDF"
 
 <span class="c1"># Fit_predict unsupervised classifier</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span><span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -848,9 +849,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>In this case we can see that it effective labels different clusters of data, and now it is up to us to determine which clusters should be categorized as water, trees, and fields etc.</p>
-</div>
-</div>
-<div class="section" id="spatial-prediction-with-time-series-stack-using-geowombat-sklearn">
+</section>
+</section>
+<section id="spatial-prediction-with-time-series-stack-using-geowombat-sklearn">
 <h2>Spatial prediction with time series stack using Geowombat &amp; Sklearn<a class="headerlink" href="#spatial-prediction-with-time-series-stack-using-geowombat-sklearn" title="Permalink to this headline">#</a></h2>
 <p>If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> to ‘time’ and set the <code class="docutils literal notranslate"><span class="pre">time_names</span></code>.  <em>Note</em> we are just pretending we have two dates of LandSat imagery here.</p>
 <div class="cell docutils container">
@@ -858,7 +859,10 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-   <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span> <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+   <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> 
+                <span class="n">time_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">],</span> 
+                <span class="n">stack_dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> 
+                <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">fit_predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;lc&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="c1"># plot one time period prediction</span>
@@ -867,27 +871,28 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, y: 372, x: 408)&gt;
-dask.array&lt;getitem, shape=(2, 372, 408), dtype=float64, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, band: 1, y: 372, x: 408)&gt;
+dask.array&lt;xarray-&lt;this-array&gt;, shape=(2, 1, 372, 408), dtype=float64, chunksize=(2, 1, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
-    band     &lt;U4 &#39;targ&#39;
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.176e+05 7.177e+05 ... 7.783e+05 7.785e+05
-  * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
-    targ     (time, y, x) float64 nan nan nan nan nan ... nan nan nan nan nan
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * time     (time) object &#39;t1&#39; &#39;t2&#39;
+    targ     (time, y, x) uint8 dask.array&lt;chunksize=(2, 256, 256), meta=np.ndarray&gt;
+  * band     (band) &lt;U4 &#39;targ&#39;
 Attributes:
-    transform:          (150.0, 0.0, 717345.0, 0.0, -150.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (150.0, 150.0)
-    is_tiled:           0
-    nodatavals:         (0, 0, 0)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC0...
-    resampling:         nearest
-    AREA_OR_POINT:      Area
-    data_are_separate:  1
-    data_are_stacked:   1
+    transform:           (150.0, 0.0, 717345.0, 0.0, -150.0, -2776995.0)
+    crs:                 32621
+    res:                 (150.0, 150.0)
+    is_tiled:            0
+    nodatavals:          (0, 0, 0)
+    _FillValue:          0
+    scales:              (1.0, 1.0, 1.0)
+    offsets:             (0.0, 0.0, 0.0)
+    filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC...
+    resampling:          nearest
+    AREA_OR_POINT:       Area
+    _data_are_separate:  1
+    _data_are_stacked:   1
 </pre></div>
 </div>
 <img alt="../_images/f_rs_ml_predict_9_1.png" src="../_images/f_rs_ml_predict_9_1.png" />
@@ -899,7 +904,7 @@ Attributes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">clf</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
@@ -910,8 +915,8 @@ Attributes:
 <img alt="../_images/f_rs_ml_predict_11_0.png" src="../_images/f_rs_ml_predict_11_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="cross-validation-and-hyperparameter-tuning-with-spatial-prediction">
+</section>
+<section id="cross-validation-and-hyperparameter-tuning-with-spatial-prediction">
 <h2>Cross-validation and Hyperparameter Tuning with Spatial Prediction<a class="headerlink" href="#cross-validation-and-hyperparameter-tuning-with-spatial-prediction" title="Permalink to this headline">#</a></h2>
 <p>One of the most important parts of successfully building a model is a careful assessment of model performance. To do this we will leverage some of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> built in tools. One of the most common cross-validation methods is called k-fold, where you data is broken in to independent sets of training and testing data multiple times. The ability of the model - trained on the ‘training’ data - to predict the outcome of the ‘testing’ data multiple times. We can then have a measure of how well our model will work on data it has never seen before.</p>
 <p>In this case we are going to use our supervised classification pipeline <code class="docutils literal notranslate"><span class="pre">pl</span></code> from earlier. And we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html?highlight=kfold#sklearn.model_selection.KFold">kfold</a> to do <a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html">cross-validation</a>. To use <code class="docutils literal notranslate"><span class="pre">kfold</span></code> with <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> we need to use <code class="docutils literal notranslate"><span class="pre">CrossValidatorWrapper</span></code> as seen in the example below to allow it to work with <code class="docutils literal notranslate"><span class="pre">xarray</span></code> objects.</p>
@@ -949,7 +954,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="c1"># fit a model to get Xy used to train model</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Xy</span><span class="p">,</span> <span class="n">pipe</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">pl</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;lc&quot;</span><span class="p">)</span>
 
@@ -970,20 +975,25 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.15127478, 0.17484608, 0.14793749, 0.14352918, 0.15261936,
-       0.18515682]), &#39;std_fit_time&#39;: array([0.00583673, 0.04766097, 0.00490675, 0.00348462, 0.00864314,
-       0.03577372]), &#39;mean_score_time&#39;: array([0.09150372, 0.11217704, 0.09275851, 0.09279857, 0.10127025,
-       0.11805472]), &#39;std_score_time&#39;: array([0.00606398, 0.02464995, 0.0030899 , 0.00282972, 0.01786448,
-       0.0282516 ]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.03548284, 0.06960211, 0.04330387, 0.03963871, 0.05971003,
+       0.04943485]), &#39;std_fit_time&#39;: array([0.00288583, 0.02184814, 0.01139546, 0.00232419, 0.01093304,
+       0.00955094]), &#39;mean_score_time&#39;: array([0.02177801, 0.04561868, 0.02363968, 0.02583528, 0.03830333,
+       0.02970495]), &#39;std_score_time&#39;: array([0.00113274, 0.01018619, 0.00077269, 0.00195587, 0.00658684,
+       0.00604977]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
              mask=[False, False, False, False, False, False],
        fill_value=&#39;?&#39;,
             dtype=object), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
              mask=[False, False, False, False, False, False],
        fill_value=&#39;?&#39;,
-            dtype=object), &#39;params&#39;: [{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: False}], &#39;split0_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split1_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split2_test_score&#39;: array([0.75 , 0.875, 0.75 , 0.75 , 0.625, 0.5  ]), &#39;split3_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split4_test_score&#39;: array([0., 0., 0., 0., 0., 0.]), &#39;mean_test_score&#39;: array([0.75 , 0.775, 0.75 , 0.75 , 0.725, 0.7  ]), &#39;std_test_score&#39;: array([0.38729833, 0.39051248, 0.38729833, 0.38729833, 0.39051248,
-       0.4       ]), &#39;rank_test_score&#39;: array([2, 1, 2, 2, 5, 6], dtype=int32)}
-0.775
-{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}
+            dtype=object), &#39;params&#39;: [{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: False}], &#39;split0_test_score&#39;: array([0.23076923, 0.38461538, 0.69230769, 0.46153846, 0.69230769,
+       0.38461538]), &#39;split1_test_score&#39;: array([1.        , 0.85714286, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;split2_test_score&#39;: array([1.        , 0.83333333, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;split3_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split4_test_score&#39;: array([1.        , 0.88888889, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;mean_test_score&#39;: array([0.84615385, 0.79279609, 0.93846154, 0.89230769, 0.93846154,
+       0.87692308]), &#39;std_test_score&#39;: array([0.30769231, 0.21192572, 0.12307692, 0.21538462, 0.12307692,
+       0.24615385]), &#39;rank_test_score&#39;: array([5, 6, 1, 3, 1, 4], dtype=int32)}
+0.9384615384615385
+{&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}
 </pre></div>
 </div>
 <img alt="../_images/f_rs_ml_predict_13_1.png" src="../_images/f_rs_ml_predict_13_1.png" />
@@ -991,8 +1001,8 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </div>
 <p>In order to create a model with the optimal parameters we need to use <code class="docutils literal notranslate"><span class="pre">gridsearch.best_params_</span></code>, which holds a dictionary of each parameter and its optimal value. To ‘use’ these values we need to update the parameters held in our returned pipeline, <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, by using the <code class="docutils literal notranslate"><span class="pre">.set_params</span></code> method. We use <code class="docutils literal notranslate"><span class="pre">**</span></code> to unpack the dictionary values, tutorial on <a class="reference external" href="https://medium.com/ml-and-automation/how-to-unpack-list-dictionary-tuple-in-python-c0705d29931c">unpacking here</a>.</p>
 <p>Notice that the <code class="docutils literal notranslate"><span class="pre">gridsearch</span></code> has a few attributes of interest. This includes all the results of the kfold rounds <code class="docutils literal notranslate"><span class="pre">.cv_results_</span></code>, the best score obtained <code class="docutils literal notranslate"><span class="pre">.best_score_</span></code>, and the ideal set of parameters to use in the pipeline <code class="docutils literal notranslate"><span class="pre">.best_params_</span></code>.  This lase one <code class="docutils literal notranslate"><span class="pre">.best_params_</span></code> will be use to update our <code class="docutils literal notranslate"><span class="pre">pipe</span></code> pipeline for prediction.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

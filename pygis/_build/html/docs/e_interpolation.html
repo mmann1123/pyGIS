@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas." lang="en" name="description" xml:lang="en" />
 <meta content="python, spatial, interpolation, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -193,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -749,7 +750,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="spatial-interpolation">
+  <section class="tex2jax_ignore mathjax_ignore" id="spatial-interpolation">
 <h1>Spatial Interpolation<a class="headerlink" href="#spatial-interpolation" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -790,6 +791,20 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">pykrige.ok</span> <span class="kn">import</span> <span class="n">OrdinaryKriging</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">rasterio.mask</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pykrige&#39;
 </pre></div>
 </div>
 </div>
@@ -916,15 +931,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Rainfall Measurement Locations&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_interpolation_11_1.png" src="../_images/e_interpolation_11_1.png" />
-</div>
 </div>
 <p>In the map above, the green and blue points are the rainfall points that we loaded separated into the training set and testing set, respectively.</p>
-<div class="section" id="thiessen-polygons-voronoi-diagrams">
+<section id="thiessen-polygons-voronoi-diagrams">
 <h2>Thiessen Polygons (Voronoi Diagrams)<a class="headerlink" href="#thiessen-polygons-voronoi-diagrams" title="Permalink to this headline">#</a></h2>
 <p>Thiessen polygons (also known as Voronoi diagrams) polygons allow us to perform nearest neighbor interpolation, which is perhaps the most basic type of interpolation. Thiessen polygons are be constructed around each sampled point so all the space within a specific polygon is closest in distance to that sampled point (as compared to other sampled points). Then, to perform nearest neighbor interpolation, all that space is assigned the value of that sampled point. <a class="footnote-reference brackets" href="#bolstad" id="id2">1</a></p>
 <p>We can use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html"><code class="docutils literal notranslate"><span class="pre">scipy</span></code> package</a> to create Thiessen polygons. After running the <code class="docutils literal notranslate"><span class="pre">Voronoi()</span></code> function, we can use the <code class="docutils literal notranslate"><span class="pre">vertices</span></code> attribute to get a list of vertices, which we can subsequently use to generate polygons.</p>
@@ -1005,61 +1014,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Thiessen Polygon Interpolated Values
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>VALUE_Thiessen</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>31</td>
-      <td>POLYGON ((-112269.760 -116571.101, -118993.986...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>30</td>
-      <td>POLYGON ((-123619.813 -116449.307, -118993.986...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>58</td>
-      <td>POLYGON ((-246788.933 78896.506, -260275.835 8...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>62</td>
-      <td>POLYGON ((-260275.835 80739.699, -260874.252 8...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>66</td>
-      <td>POLYGON ((-237973.581 88639.620, -246524.775 8...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>A second spatial join can be conducted to assign those values from the Thiessen polygons to the points from the testing dataset (only if a test point falls within a polygon). We can subsequently get the out-of-sample r-squared value, which is calculated by using the data points that the model did not use (the testing dataset) and comparing the testing dataset’s actual values to the values as predicted by the model.</p>
 <div class="cell docutils container">
@@ -1083,51 +1037,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thiessen polygon out-of-sample r-squared: 0.89
-
-Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>VALUE_Actual</th>
-      <th>VALUE_Predict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POINT (-229633.026 40063.754)</td>
-      <td>56</td>
-      <td>62</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>POINT (-273849.350 92453.689)</td>
-      <td>73</td>
-      <td>91</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Plotting the data, we see that each polygon has one green training point (and vice-versa). All space within one polygon is closest to the known training point (green dot) within the polygon. The testing points (blue dots) are assigned the value of the Thiessen polygon in which it falls.</p>
 <div class="cell docutils container">
@@ -1156,12 +1065,6 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;San Francisco Bay Area - Rainfall Measurement Locations &amp; Thiessen Polygons&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Rainfall Measurement Locations &amp; Thiessen Polygons&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_interpolation_19_1.png" src="../_images/e_interpolation_19_1.png" />
 </div>
 </div>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">vertices</span></code>, there are a few other attributes we can call if we want to further explore the polygons. These attributes will provide actual values (e.g., vertices) or provide the indices for querying other attributes. <a class="footnote-reference brackets" href="#scipy-voronoi" id="id3">2</a></p>
@@ -1194,41 +1097,6 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Thiessen Polygon Interpolated Value
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>VALUE_Predict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POLYGON ((-173793.383 -34945.420, -175342.667 ...</td>
-      <td>38</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Here’s how that one Thiessen polygon looks.</p>
 <div class="cell docutils container">
@@ -1248,15 +1116,9 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - One Point and Thiessen Polygon&#39;)
-</pre></div>
 </div>
-<img alt="../_images/e_interpolation_23_1.png" src="../_images/e_interpolation_23_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="k-nearest-neighbors">
+</section>
+<section id="k-nearest-neighbors">
 <h2>K-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Permalink to this headline">#</a></h2>
 <p>KNN (also stylized as kNN) is a neighbor-based learning method that can be used for interpolation. Unlike the Thiessen polygons method, KNN looks for a specified number <code class="docutils literal notranslate"><span class="pre">K</span></code> of sampled points closest to an unknown point. The <code class="docutils literal notranslate"><span class="pre">K</span></code> known points can be used to predict the value (discrete or continuous) of the unknown point. <a class="footnote-reference brackets" href="#sk-nn" id="id4">3</a></p>
 <p>We can use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html"><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> to perform KNN analysis.</p>
@@ -1273,11 +1135,6 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNeighborsRegressor(weights=&#39;distance&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now that we have created the KNN model, we can get the in-sample r-squared value. An in-sample statistic, as suggested by its name, is calculated by using the data that were used to build the model (the “training” dataset).</p>
 <div class="cell docutils container">
@@ -1285,11 +1142,6 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in-sample R^2</span>
 <span class="n">in_r_squared_knn</span> <span class="o">=</span> <span class="n">knn_regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">coords_rain_train</span><span class="p">,</span> <span class="n">value_rain_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN in-sample r-squared: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">in_r_squared_knn</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNN in-sample r-squared: 1.0
 </pre></div>
 </div>
 </div>
@@ -1317,59 +1169,14 @@ Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNN out-of-sample r-squared: 0.93
-
-Attribute Table: Testing Set Interpolated Values - KNN Method
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Coordinate_Pair</th>
-      <th>VALUE_Actual</th>
-      <th>VALUE_Predict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>[-229633.02624581114, 40063.75429398427]</td>
-      <td>56</td>
-      <td>55.827992</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>[-273849.3497429455, 92453.68931061402]</td>
-      <td>73</td>
-      <td>87.640078</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Out-of-sample r-squared looks pretty strong!</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you are just interested in identifying the <code class="docutils literal notranslate"><span class="pre">k</span></code> nearest neighbors (no interpolation), use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html#sklearn.neighbors.NearestNeighbors"><code class="docutils literal notranslate"><span class="pre">NearestNeighbors()</span></code> function</a>.</p>
 </div>
-</div>
-<div class="section" id="kriging">
+</section>
+<section id="kriging">
 <h2>Kriging<a class="headerlink" href="#kriging" title="Permalink to this headline">#</a></h2>
 <p>Kriging is a type of interpolation that uses a semivariogram, which measures spatial autocorrelation (how similar close points are in value and how this similarity changes as distance between points increases). Thus, the semivariogram determines how much influence a known point has on an unknown point as the distance between the known point and the unknown point increases. In other words, the weight of a known point on an unknown point decreases with increasing distance, and the semivariogram determines how quickly that weight tapers with increasing distance. <a class="footnote-reference brackets" href="#bolstad" id="id5">1</a>, <a class="footnote-reference brackets" href="#esri-kriging" id="id6">4</a></p>
 <p>For more information, see this <a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm">ArcGIS help guide on kriging</a>.</p>
@@ -1398,13 +1205,8 @@ Attribute Table: Testing Set Interpolated Values - KNN Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Set projection to WGS 84 and reproject data\nproj_wgs = 4326\ncounties_wgs = counties.to_crs(proj_wgs)\nrainfall_wgs = rainfall.to_crs(proj_wgs)\nrain_train_gdf_wgs = rain_train_gdf.to_crs(proj_wgs)\nrain_test_gdf_wgs = rain_test_gdf.to_crs(proj_wgs)\n\n# Get X and Y coordinates of rainfall points\nx_rain_wgs = rainfall_wgs[&quot;geometry&quot;].x\ny_rain_wgs = rainfall_wgs[&quot;geometry&quot;].y\n\n# Create list of XY coordinate pairs\ncoords_rain_train_wgs = [list(xy) for xy in zip(rain_train_gdf_wgs[&quot;geometry&quot;].x, rain_train_gdf_wgs[&quot;geometry&quot;].y)]\ncoords_rain_test_wgs = [list(xy) for xy in zip(rain_test_gdf_wgs[&quot;geometry&quot;].x, rain_test_gdf_wgs[&quot;geometry&quot;].y)]\n\n# Get minimum and maximum coordinate values of rainfall points\nmin_x_rain_wgs, min_y_rain_wgs, max_x_rain_wgs, max_y_rain_wgs = rain_train_gdf_wgs.total_bounds\n&#39;
-</pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="method-1-using-pykrige">
+<section id="method-1-using-pykrige">
 <h3>Method 1 - Using <code class="docutils literal notranslate"><span class="pre">PyKrige</span></code><a class="headerlink" href="#method-1-using-pykrige" title="Permalink to this headline">#</a></h3>
 <p>The <a class="reference external" href="https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">pykrige</span></code> module</a> offers ordinary and universal kriging. It also supports various variogram models in addition to Gaussian.</p>
 <div class="cell docutils container">
@@ -1491,55 +1293,9 @@ Attribute Table: Testing Set Interpolated Values - KNN Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyKrige Kriging out-of-sample r-squared: 0.99
-
-Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
-</pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>Actual_Value</th>
-      <th>VALUE_Predict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POINT (-229633.026 40063.754)</td>
-      <td>56</td>
-      <td>55.089479</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>POINT (-244809.950 1296.393)</td>
-      <td>62</td>
-      <td>61.013348</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_interpolation_34_2.png" src="../_images/e_interpolation_34_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="method-2-using-scikit-learn">
+</section>
+<section id="method-2-using-scikit-learn">
 <h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#method-2-using-scikit-learn" title="Permalink to this headline">#</a></h3>
 <p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
 <div class="cell docutils container">
@@ -1567,11 +1323,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Create a 100 by 100 cell mesh grid\n# Horizontal and vertical cell counts should be the same\nXX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]\n\n# Create 2-D array of the coordinates (paired) of each cell in the mesh grid\npositions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T\n\n# Generate Gaussian Process model (can change parameters as desired)\ngp = GaussianProcessRegressor(n_restarts_optimizer = 10)\n\n# Fit kernel density estimator to coordinates and values\ngp.fit(coords_rain_train_wgs, value_rain_train)\n\n# Evaluate the model on coordinate pairs\nZ_sk_krig = gp.predict(positions_sk_krig)\n\n# Reshape the data to fit mesh grid\nZ_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Next, we can calculate our r-squared statistics and predictions.</p>
 <div class="cell docutils container">
@@ -1601,11 +1352,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Generate in-sample R^2\nin_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)\nprint(&quot;Scikit-Learn Kriging in-sample r-squared: {}&quot;.format(round(in_r_squared_sk_krig, 2)))\n\n# Generate out-of-sample R^2\nout_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)\nprint(&quot;Scikit-Learn Kriging out-of-sample r-squared: {}&quot;.format(round(out_r_squared_sk_krig, 2)))\n\n# Predict values for testing dataset\ncoords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)\n\n# Create dictionary holding the actual and predicted values\npredict_dict_sk_krig = {&quot;Coordinate_Pair&quot;: coords_rain_test_wgs, &quot;VALUE_Actual&quot;: value_rain_test, &quot;VALUE_Predict&quot;: coords_rain_test_predict_sk_krig}\n\n# Create dataframe from dictionary\npredict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)\n\n# Display attribute table\nprint(&quot;\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method&quot;)\ndisplay(predict_df_sk_krig.head(2))\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Model seems like a good fit! Let’s export the raster.</p>
 <div class="cell docutils container">
@@ -1619,11 +1365,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 <span class="sd">                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,</span>
 <span class="sd">                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
 <span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Flip array vertically and rotate 270 degrees\nZ_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)\n\n# Export raster\nexport_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,\n                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,\n                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)\n&#39;
 </pre></div>
 </div>
 </div>
@@ -1648,14 +1389,9 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Open raster\nraster_sk = rasterio.open(&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;)\n\n# Mask raster to counties shape\nout_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)\n\n# Stylize plots\nplt.style.use(\&#39;bmh\&#39;)\n&#39;
-</pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
 <div class="cell docutils container">
@@ -1683,11 +1419,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Create a 100 by 100 cell mesh grid\n# Horizontal and vertical cell counts should be the same\nXX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]\n\n# Create 2-D array of the coordinates (paired) of each cell in the mesh grid\npositions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T\n\n# Generate Gaussian Process model (can change parameters as desired)\ngp = GaussianProcessRegressor(n_restarts_optimizer = 10)\n\n# Fit kernel density estimator to coordinates and values\ngp.fit(coords_rain_train_wgs, value_rain_train)\n\n# Evaluate the model on coordinate pairs\nZ_sk_krig = gp.predict(positions_sk_krig)\n\n# Reshape the data to fit mesh grid\nZ_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Next, we can calculate our r-squared statistics and predictions.</p>
 <div class="cell docutils container">
@@ -1717,11 +1448,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Generate in-sample R^2\nin_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)\nprint(&quot;Scikit-Learn Kriging in-sample r-squared: {}&quot;.format(round(in_r_squared_sk_krig, 2)))\n\n# Generate out-of-sample R^2\nout_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)\nprint(&quot;Scikit-Learn Kriging out-of-sample r-squared: {}&quot;.format(round(out_r_squared_sk_krig, 2)))\n\n# Predict values for testing dataset\ncoords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)\n\n# Create dictionary holding the actual and predicted values\npredict_dict_sk_krig = {&quot;Coordinate_Pair&quot;: coords_rain_test_wgs, &quot;VALUE_Actual&quot;: value_rain_test, &quot;VALUE_Predict&quot;: coords_rain_test_predict_sk_krig}\n\n# Create dataframe from dictionary\npredict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)\n\n# Display attribute table\nprint(&quot;\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method&quot;)\ndisplay(predict_df_sk_krig.head(2))\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Model seems like a good fit! Let’s export the raster.</p>
 <div class="cell docutils container">
@@ -1735,11 +1461,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 <span class="sd">                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,</span>
 <span class="sd">                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
 <span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Flip array vertically and rotate 270 degrees\nZ_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)\n\n# Export raster\nexport_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,\n                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,\n                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)\n&#39;
 </pre></div>
 </div>
 </div>
@@ -1791,11 +1512,6 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n# Open raster\nraster_sk = rasterio.open(&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;)\n\n# Mask raster to counties shape\nout_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)\n\n# Stylize plots\nplt.style.use(\&#39;bmh\&#39;)\n\n# Plot data\nfig, ax = plt.subplots(1, figsize = (10, 10))\nshow(out_image_sk, ax = ax, transform = out_transform_sk, cmap = &quot;RdPu&quot;)\nax.plot(x_rain_wgs, y_rain_wgs, \&#39;k.\&#39;, markersize = 2, alpha = 0.5)\ncounties_wgs.plot(ax = ax, color = \&#39;none\&#39;, edgecolor = \&#39;dimgray\&#39;)\nplt.gca().invert_yaxis()\n\n# Set title\nax.set_title(\&#39;San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn\&#39;, fontdict = {\&#39;fontsize\&#39;: \&#39;15\&#39;, \&#39;fontweight\&#39; : \&#39;3\&#39;})\n\n# Display plot\nplt.show()\n\n\n# Plot data\nfig, ax = plt.subplots(1, figsize = (10, 10))\nshow(out_image_sk, ax = ax, transform = out_transform_sk, cmap = &quot;RdPu&quot;)\nax.plot(x_rain_wgs, y_rain_wgs, \&#39;k.\&#39;, markersize = 2, alpha = 0.5)\ncounties_wgs.plot(ax = ax, color = \&#39;none\&#39;, edgecolor = \&#39;dimgray\&#39;)\nplt.gca().invert_yaxis()\n\n# Set title\nax.set_title(\&#39;San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn\&#39;, fontdict = {\&#39;fontsize\&#39;: \&#39;15\&#39;, \&#39;fontweight\&#39; : \&#39;3\&#39;})\n\n# Display plot\nplt.show()\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
@@ -1812,9 +1528,9 @@ Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
 <dd><p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm">How Kriging works, Esri</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

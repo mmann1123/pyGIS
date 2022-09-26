@@ -8,9 +8,22 @@ with gw.open(l8_224078_20200518) as src:
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
 
-# Set the 'no data' value and scale all other values
-with gw.open(l8_224078_20200518) as src:
-    data = src.gw.set_nodata(0, 65535, (0, 1), 'float64', scale_factor=0.0001)
+# Zeros are replaced with nans
+with gw.open(l8_224078_20200518, nodata=0) as src:
+    print('gw.open: ',src.attrs['nodatavals'])
+
+# Zeros are replaced with nans
+with gw.config.update(nodata=0):
+  with gw.open(l8_224078_20200518) as src:
+    print('gw.config',src.attrs['nodatavals'])
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518
+ 
+# Zeros are replaced with nans
+with gw.config.update(scale_factor=0.0001):
+  with gw.open(l8_224078_20200518) as src:
+    src.attrs{'scales'}
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518

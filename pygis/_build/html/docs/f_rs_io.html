@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques" lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo." lang="es" name="description" xml:lang="es" />
 <meta content="spatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -654,6 +655,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-missing-values">
+   Setting Missing Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#writing-dataarrays-to-file">
    Writing DataArrays to file
   </a>
@@ -703,6 +709,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-missing-values">
+   Setting Missing Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#writing-dataarrays-to-file">
    Writing DataArrays to file
   </a>
@@ -736,10 +747,10 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="reading-writing-remote-sensed-images">
+<section class="tex2jax_ignore mathjax_ignore" id="reading-writing-remote-sensed-images">
 <h1>Reading/Writing Remote Sensed Images<a class="headerlink" href="#reading-writing-remote-sensed-images" title="Permalink to this headline">#</a></h1>
 <p>GeoWombat’s file opening is meant to mimic Xarray and Rasterio. That is, rasters are typically opened with a context manager using the function <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code>. GeoWombat uses <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code> to load data into an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>. In GeoWombat, the data are always chunked, meaning the data are always loaded as Dask arrays. As with <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code>, the opened DataArrays always have at least 1 band.</p>
-<div class="section" id="opening-a-single-image">
+<section id="opening-a-single-image">
 <h2>Opening a single image<a class="headerlink" href="#opening-a-single-image" title="Permalink to this headline">#</a></h2>
 <p>Opening an image with default settings looks similar to <code class="docutils literal notranslate"><span class="pre">xarray.open_rasterio</span></code> and <code class="docutils literal notranslate"><span class="pre">rasterio.open</span></code>. <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code> expects a file name (<code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code>).</p>
 <div class="cell docutils container">
@@ -755,24 +766,25 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-cd30c5f7c3868320497352519d525008&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-40bb944e8c762dc4074bebfb03b46e89&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
 Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    AREA_OR_POINT:      Area
-    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
-    resampling:         nearest
-    data_are_separate:  0
-    data_are_stacked:   0
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan)
+    _FillValue:          nan
+    scales:              (1.0, 1.0, 1.0)
+    offsets:             (0.0, 0.0, 0.0)
+    AREA_OR_POINT:       Area
+    filename:            /mnt/space/miniconda3/envs/pygisbook/lib/python3.9/s...
+    resampling:          nearest
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 </div>
@@ -793,8 +805,8 @@ Attributes:
 <img alt="../_images/f_rs_io_3_0.png" src="../_images/f_rs_io_3_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="opening-multiple-bands-as-a-stack">
+</section>
+<section id="opening-multiple-bands-as-a-stack">
 <h2>Opening multiple bands as a stack<a class="headerlink" href="#opening-multiple-bands-as-a-stack" title="Permalink to this headline">#</a></h2>
 <p>Often, satellite bands will be stored in separate raster files. To open the files as one DataArray, specify a list instead of a file name.</p>
 <div class="cell docutils container">
@@ -811,21 +823,23 @@ Attributes:
 dask.array&lt;concatenate, shape=(3, 1, 1860, 2041), dtype=uint16, chunksize=(1, 1, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * time     (time) int64 1 2 3
 Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    data_are_separate:  1
-    data_are_stacked:   1
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    scales:              (1.0,)
+    offsets:             (0.0,)
+    AREA_OR_POINT:       Point
+    filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, ...
+    resampling:          nearest
+    _data_are_separate:  1
+    _data_are_stacked:   1
 </pre></div>
 </div>
 </div>
@@ -850,20 +864,22 @@ Attributes:
 dask.array&lt;concatenate, shape=(3, 1860, 2041), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
 Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    data_are_separate:  1
-    data_are_stacked:   1
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    scales:              (1.0,)
+    offsets:             (0.0,)
+    AREA_OR_POINT:       Point
+    filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, ...
+    resampling:          nearest
+    _data_are_separate:  1
+    _data_are_stacked:   1
 </pre></div>
 </div>
 </div>
@@ -900,8 +916,8 @@ Attributes:
     <span class="o">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opening-images-from-different-sensors">
+</section>
+<section id="opening-images-from-different-sensors">
 <h2>Opening images from different sensors<a class="headerlink" href="#opening-images-from-different-sensors" title="Permalink to this headline">#</a></h2>
 <p>One of many complications of using remotely sensed data is that there are so many different sensors such as LandSat, Sentinel, PlantScope etc each with their own band order and properties. Geowombat makes this much easier by providing a broad list of potential sensor configurations. <a class="reference internal" href="f_rs_config.html#f-rs-crs-sensors"><span class="std std-ref">Read in more detail about sensor configurations here.</span></a> For this section, let’s keep things simple and show you how to open a Sentinel 2 image using the configuration manager, frankly, it’s pretty easy:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">):</span>
@@ -915,8 +931,8 @@ Attributes:
         <span class="nb">print</span><span class="p">(</span><span class="n">sensor_name</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opening-multiple-bands-as-a-mosaic">
+</section>
+<section id="opening-multiple-bands-as-a-mosaic">
 <h2>Opening multiple bands as a mosaic<a class="headerlink" href="#opening-multiple-bands-as-a-mosaic" title="Permalink to this headline">#</a></h2>
 <p>When a list of files are given, GeoWombat will stack the data by default. To mosaic multiple files into the same band coordinate, use the <strong>mosaic</strong> keyword.</p>
 <div class="cell docutils container">
@@ -930,25 +946,26 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (y: 1515, x: 2006, band: 1)&gt;
-dask.array&lt;where, shape=(1515, 2006, 1), dtype=uint16, chunksize=(256, 256, 1), chunktype=numpy.ndarray&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 1515, x: 2006)&gt;
+dask.array&lt;maximum, shape=(1, 1515, 2006), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
-  * y        (y) float64 -2.767e+06 -2.767e+06 ... -2.812e+06 -2.812e+06
-  * x        (x) float64 6.94e+05 6.940e+05 6.941e+05 ... 7.541e+05 7.542e+05
   * band     (band) int64 1
+  * x        (x) float64 6.94e+05 6.94e+05 6.941e+05 ... 7.541e+05 7.542e+05
+  * y        (y) float64 -2.767e+06 -2.767e+06 ... -2.812e+06 -2.812e+06
 Attributes:
-    transform:          (30.0, 0.0, 694005.0, 0.0, -30.0, -2766615.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan,)
-    scales:             (1.0,)
-    offsets:            (0.0,)
-    AREA_OR_POINT:      Point
-    filename:           [&#39;LC08_L1TP_224077_20200518_20200518_01_RT_B2.TIF&#39;, &#39;...
-    resampling:         nearest
-    data_are_separate:  1
-    data_are_stacked:   0
+    transform:           (30.0, 0.0, 694005.0, 0.0, -30.0, -2766615.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    scales:              (1.0,)
+    offsets:             (0.0,)
+    AREA_OR_POINT:       Point
+    resampling:          nearest
+    geometries:          [&lt;shapely.geometry.polygon.Polygon object at 0x7fed1...
+    _data_are_separate:  1
+    _data_are_stacked:   0
 </pre></div>
 </div>
 </div>
@@ -969,8 +986,8 @@ Attributes:
 </div>
 </div>
 <!-- See :ref:`io` for more examples illustrating file opening. -->
-</div>
-<div class="section" id="create-a-time-series-stack">
+</section>
+<section id="create-a-time-series-stack">
 <h2>Create a Time Series Stack<a class="headerlink" href="#create-a-time-series-stack" title="Permalink to this headline">#</a></h2>
 <p>Let’s pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names <code class="docutils literal notranslate"><span class="pre">[l8_224078_20200518,</span> <span class="pre">l8_224078_20200518]</span></code>, it also helps to be specific and assign <code class="docutils literal notranslate"><span class="pre">time_names=['t1',</span> <span class="pre">'t2']</span></code>, and specify which dimension we want to stack our data along with <code class="docutils literal notranslate"><span class="pre">stack_dim='time'</span></code>.</p>
 <div class="cell docutils container">
@@ -985,31 +1002,51 @@ Attributes:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;concatenate, shape=(2, 3, 1860, 2041), dtype=uint16, chunksize=(1, 1, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;concatenate, shape=(2, 3, 1860, 2041), dtype=uint16, chunksize=(1, 3, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
 Attributes:
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    AREA_OR_POINT:      Area
-    filename:           [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC0...
-    resampling:         nearest
-    data_are_separate:  1
-    data_are_stacked:   1
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan)
+    _FillValue:          nan
+    scales:              (1.0, 1.0, 1.0)
+    offsets:             (0.0, 0.0, 0.0)
+    AREA_OR_POINT:       Area
+    filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC...
+    resampling:          nearest
+    _data_are_separate:  1
+    _data_are_stacked:   1
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="setting-missing-values">
+<h2>Setting Missing Values<a class="headerlink" href="#setting-missing-values" title="Permalink to this headline">#</a></h2>
+<p id="f-rs-io-setting-missing-values">Many raster files do not have the missing value set properly in their profile. Geowombat makes it easy to set or update the missing data value using <code class="docutils literal notranslate"><span class="pre">nodata</span></code> in either <code class="docutils literal notranslate"><span class="pre">gw.open</span></code> or even in <code class="docutils literal notranslate"><span class="pre">gw.config.update</span></code> if you prefer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="c1"># replace 0 with nan</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">mask_nodata</span><span class="p">()</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="writing-dataarrays-to-file">
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_io_17_0.png" src="../_images/f_rs_io_17_0.png" />
+</div>
+</div>
+</section>
+<section id="writing-dataarrays-to-file">
 <h2>Writing DataArrays to file<a class="headerlink" href="#writing-dataarrays-to-file" title="Permalink to this headline">#</a></h2>
 <p>GeoWombat’s I/O can be accessed through the <code class="docutils literal notranslate"><span class="pre">to_vrt</span></code> and <code class="docutils literal notranslate"><span class="pre">to_raster</span></code> functions. These functions use
 Rasterio’s <code class="docutils literal notranslate"><span class="pre">write</span></code> and Dask.array <code class="docutils literal notranslate"><span class="pre">store</span></code> functions as I/O backends. In the examples below,
@@ -1047,8 +1084,8 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
                         <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
 </pre></div>
 </div>
-<!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. --></div>
-</div>
+<!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. --></section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to access OpenStreetMap (OSM) roads, buildings, and other data via python. " lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to access OpenStreetMap (OSM) roads, buildings, and other data via python. " lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment accéder aux routes, bâtiments et autres données OpenStreetMap (OSM) via python." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a acceder a carreteras, edificios y otros datos de OpenStreetMap (OSM) a través de Python." lang="es" name="description" xml:lang="es" />
 <meta content="python open street map OSM" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -737,19 +738,19 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="accessing-osm-data-in-python">
+<section class="tex2jax_ignore mathjax_ignore" id="accessing-osm-data-in-python">
 <h1>Accessing OSM Data in Python<a class="headerlink" href="#accessing-osm-data-in-python" title="Permalink to this headline">#</a></h1>
-<div class="section" id="what-is-openstreetmap">
+<section id="what-is-openstreetmap">
 <h2>What is OpenStreetMap?<a class="headerlink" href="#what-is-openstreetmap" title="Permalink to this headline">#</a></h2>
 <p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world containing a lot of information about our environment <a class="footnote-reference brackets" href="#gpd-clip" id="id1">1</a>. It contains data for example about streets, buildings, different services, and landuse to mention a few. You can view the map at <a class="reference external" href="http://www.openstreetmap.org">www.openstreetmap.org</a>. You can also sign up as a contributor if you want to edit the map. More details about OpenStreetMap and its contents are available in the <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Main_Page">OpenStreetMap Wiki</a>.</p>
-</div>
-<div class="section" id="osmnx">
+</section>
+<section id="osmnx">
 <h2>OSMnx<a class="headerlink" href="#osmnx" title="Permalink to this headline">#</a></h2>
 <p>This week we will explore a Python module called <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a>
 that can be used to retrieve, construct, analyze, and visualize street networks from OpenStreetMap, and also retrieve data about Points of Interest such as restaurants, schools, and lots of different kind of services. It is also easy to conduct network routing based on walking, cycling or driving by combining OSMnx functionalities with a package called <a class="reference external" href="https://networkx.github.io/documentation/stable/">NetworkX</a>.</p>
 <p>To get an overview of the capabilities of the package, see an introductory video given by the lead developer of the package, Prof. Geoff Boeing: <a class="reference external" href="https://www.youtube.com/watch?v=Q0uxu25ddc4&amp;list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N">“Meet the developer: Introduction to OSMnx package by Geoff Boeing”</a>.</p>
-</div>
-<div class="section" id="download-and-visualize-openstreetmap-data-with-osmnx">
+</section>
+<section id="download-and-visualize-openstreetmap-data-with-osmnx">
 <h2>Download and visualize OpenStreetMap data with OSMnx<a class="headerlink" href="#download-and-visualize-openstreetmap-data-with-osmnx" title="Permalink to this headline">#</a></h2>
 <p>One the most useful features that OSMnx provides is an easy-to-use way of retrieving <a class="reference external" href="http://www.openstreetmap.org">OpenStreetMap</a> data (using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass API</a>).</p>
 <p>In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: the neighborhood of Edgewood in Washington DC USA.</p>
@@ -761,7 +762,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </div>
 </div>
 </div>
-<div class="section" id="osm-location-boundary">
+<section id="osm-location-boundary">
 <h3>OSM Location Boundary<a class="headerlink" href="#osm-location-boundary" title="Permalink to this headline">#</a></h3>
 <p>Let’s also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the <code class="docutils literal notranslate"><span class="pre">ox.geocode_to_gdf</span></code> [docs](<a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)">https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)</a> function.</p>
 <div class="cell docutils container">
@@ -775,6 +776,19 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import osmnx</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Get place boundary related to the place name as a geodataframe</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;osmnx&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>As the name of the function already tells us, <code class="docutils literal notranslate"><span class="pre">gdf_from_place()</span></code>returns a GeoDataFrame based on the specified place name query.</p>
 <div class="cell docutils container">
@@ -784,73 +798,12 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>bbox_north</th>
-      <th>bbox_south</th>
-      <th>bbox_east</th>
-      <th>bbox_west</th>
-      <th>place_id</th>
-      <th>osm_type</th>
-      <th>osm_id</th>
-      <th>lat</th>
-      <th>lon</th>
-      <th>display_name</th>
-      <th>class</th>
-      <th>type</th>
-      <th>importance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POLYGON ((-77.00892 38.92123, -77.00890 38.920...</td>
-      <td>38.934159</td>
-      <td>38.917008</td>
-      <td>-76.99358</td>
-      <td>-77.008915</td>
-      <td>282956700</td>
-      <td>relation</td>
-      <td>4634158</td>
-      <td>38.922613</td>
-      <td>-77.000537</td>
-      <td>Edgewood, Washington, District of Columbia, Un...</td>
-      <td>place</td>
-      <td>neighbourhood</td>
-      <td>0.47</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Let’s still verify the data type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geopandas.geodataframe.GeoDataFrame
 </pre></div>
 </div>
 </div>
@@ -862,15 +815,9 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
 </div>
-<img alt="../_images/d_access_osm_9_1.png" src="../_images/d_access_osm_9_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="osm-building-footprints">
+</section>
+<section id="osm-building-footprints">
 <h3>OSM Building footprints<a class="headerlink" href="#osm-building-footprints" title="Permalink to this headline">#</a></h3>
 <p>It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">ox.geometries_from_place</span></code> <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place">docs</a> function and plot them on top of our street network in Kamppi.</p>
 <p>When fetching spesific types of geometries from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
@@ -884,201 +831,6 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>addr:state</th>
-      <th>amenity</th>
-      <th>building</th>
-      <th>ele</th>
-      <th>gnis:county_id</th>
-      <th>gnis:county_name</th>
-      <th>gnis:created</th>
-      <th>gnis:edited</th>
-      <th>gnis:feature_id</th>
-      <th>gnis:import_uuid</th>
-      <th>...</th>
-      <th>shop</th>
-      <th>denomination</th>
-      <th>old_name</th>
-      <th>url</th>
-      <th>wikidata</th>
-      <th>office</th>
-      <th>short_name</th>
-      <th>shelter_type</th>
-      <th>ways</th>
-      <th>type</th>
-    </tr>
-    <tr>
-      <th>element_type</th>
-      <th>osmid</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">node</th>
-      <th>358955022</th>
-      <td>DC</td>
-      <td>school</td>
-      <td>yes</td>
-      <td>60</td>
-      <td>001</td>
-      <td>District of Columbia</td>
-      <td>12/18/1979</td>
-      <td>01/22/2008</td>
-      <td>2062869</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>367143640</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>56</td>
-      <td>NaN</td>
-      <td>District of Columbia</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2110453</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th rowspan="3" valign="top">way</th>
-      <th>52291432</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321503</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321504</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 55 columns</p>
-</div></div></div>
 </div>
 <p>We can plot the footprints quickly.</p>
 <div class="cell docutils container">
@@ -1088,19 +840,9 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/ipykernel/ipkernel.py:287: DeprecationWarning: `should_run_async` will not call `transform_cell` automatically in the future. Please pass the result to `transformed_cell` argument and any exception that happen during thetransform in `preprocessing_exc_tuple` in IPython 7.17 and above.
-  and should_run_async(code)
-</pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
-</div>
-<img alt="../_images/d_access_osm_13_2.png" src="../_images/d_access_osm_13_2.png" />
-</div>
-</div>
-</div>
-<div class="section" id="osm-write-features-to-shp">
+</section>
+<section id="osm-write-features-to-shp">
 <h3>OSM Write Features to .shp<a class="headerlink" href="#osm-write-features-to-shp" title="Permalink to this headline">#</a></h3>
 <p>Now let’s assume we want to access this data outside of python, or have a permanent copy of our building footprints for Edgewood.</p>
 <p>Since these objects are already <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code> it’s easy to save them to disk. We simply use <code class="docutils literal notranslate"><span class="pre">gpd.to_file</span></code> <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html">docs</a>.</p>
@@ -1112,12 +854,6 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/ipykernel/ipkernel.py:287: DeprecationWarning: `should_run_async` will not call `transform_cell` automatically in the future. Please pass the result to `transformed_cell` argument and any exception that happen during thetransform in `preprocessing_exc_tuple` in IPython 7.17 and above.
-  and should_run_async(code)
 </pre></div>
 </div>
 </div>
@@ -1144,12 +880,6 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/anaconda3/envs/pygisbookgw/lib/python3.7/site-packages/ipykernel_launcher.py:2: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
-  
-</pre></div>
-</div>
-</div>
 </div>
 <p>Sources</p>
 <hr class="footnotes docutils" />
@@ -1158,9 +888,9 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <dd><p><a class="reference external" href="https://automating-gis-processes.github.io/2017/lessons/L3/nearest-neighbour.html">automating-gis-processes</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

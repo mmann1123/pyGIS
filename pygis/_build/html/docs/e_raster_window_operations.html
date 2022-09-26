@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to conduct moving window operations over rasters." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to conduct moving window operations over rasters." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, python, rasterio, geowombat, raster, moving window, window operations, filter" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -761,7 +762,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="window-operations-with-rasterio-and-geowombat">
+  <section class="tex2jax_ignore mathjax_ignore" id="window-operations-with-rasterio-and-geowombat">
 <h1>Window Operations with Rasterio and GeoWombat<a class="headerlink" href="#window-operations-with-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -778,36 +779,40 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="background">
+<section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Moving windows or filters are often used in raster analysis. For example, they can be used to obtain the maximum value within a certain neighborhood, to smooth out values, or detect holes or edges (i.e., where pixel values that are near each other change abruptly).</p>
 <p>These moving windows can also be called filters or kernels. They can be of many different sizes and shapes (the most common is 3-cell-by-3-cell rectangular window) and can have different or the same values for each cell. The center of the filter can be called the target cell or the center pixel, and the surrounding cells are referred to as the neighbors.</p>
 <p>The filter passes through all <em>non-edge</em> cells in the raster. During each pass of the filter, the center cell is updated based on the cells adjacent to it. In the <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter example, the center cell is updated by the eight cells that neighbor it. The filter then pulls the values from the neighboring cells and the center pixel itself, performs a calculation based on the filter values (e.g., calculates the mean), reports that resulting value back to the identical location of the original pixel, moves to the next pixel, and repeats the process.</p>
-<div class="figure align-default" id="sliding-window-operations">
+<figure class="align-default" id="sliding-window-operations">
 <img alt="../_images/raster_sliding_window.jpg" src="../_images/raster_sliding_window.jpg" />
-<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>The filter values can essentially be any number–they can be the same across the filter or be all different. The values determine how the output is calculated (equation below assuming a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter for nine cells total in the kernel):</p>
 <div class="math notranslate nohighlight">
 \[
     X_{w} = \sum_{i=1}^{9}X_{i}k_{i}
 \]</div>
 <p><em>where:</em>
-X_{i} = raster cell value</p>
-<p>k_{i} = kernel cell value</p>
-<p>i = index of cells in the nine kernel cell values</p>
+<span class="math notranslate nohighlight">\(X_{i}\)</span> = raster cell value</p>
+<p><span class="math notranslate nohighlight">\(k_{i}\)</span> = kernel cell value</p>
+<p><span class="math notranslate nohighlight">\(i\)</span> = index of cells in the nine kernel cell values</p>
 <p>The values also determine <em>what</em> is calculated. For example, setting all filter values to <code class="docutils literal notranslate"><span class="pre">1</span></code> will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to <code class="docutils literal notranslate"><span class="pre">1/9</span></code> for a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter will result in the filter outputting the average of all raster pixel values within the filter.</p>
-<div class="figure align-default" id="moving-window-operation-examples">
+<figure class="align-default" id="moving-window-operation-examples">
 <img alt="../_images/raster_window_operations.jpg" src="../_images/raster_window_operations.jpg" />
-<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>For more information on moving windows, see the <a class="reference external" href="https://saylordotorg.github.io/text_essentials-of-geographic-information-systems/s12-02-scale-of-analysis.html">“Neighborhood Operations” section in this chapter on raster geoprocessing</a>.</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>With window operations, the edge pixels will generally be cut out from the output because those edge pixels do not have neighboring pixels all around it. As window operations generally require a pixel to be surrounded on all four sides, we cannot perform calculations on these edge pixels. The pixels that constitute the “edge” depends on the shape of the kernel. For example, a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> kernel only requires 1 neighboring pixel in each direction, so only the outer ring of pixels will be cut out from the output. A <code class="docutils literal notranslate"><span class="pre">5x5</span></code> kernel requires 2 neighboring pixels in each direction, so the two outer rings of pixels will be cut out.</p>
 </div>
-</div>
-<div class="section" id="setup">
+</section>
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>We’ll explore two methods, one using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and another using <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code>.</p>
 <p>First, we’ll import our modules (click the + below to show code cell).</p>
@@ -824,8 +829,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="window-operations-with-rasterio">
+</section>
+<section id="window-operations-with-rasterio">
 <h2>Window operations with rasterio<a class="headerlink" href="#window-operations-with-rasterio" title="Permalink to this headline">#</a></h2>
 <p>The most intuitive way to perform window operations in Python is to use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. With this method, we would iterate through each non-edge pixel, obtain the surrounding pixel values and the center pixel value, perform some sort of calculation, report that resulting value back to the identical location of the original pixel, move to the next pixel, and repeat the process. Iterating through each pixel, however, has the potential to be extremely time and computationally intensive (there could be many, many pixels).</p>
 <p>To mitigate this limitation, instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we can get each neighbor value simultaneously for all non-edge pixels. Another way to think of it is that instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate through each pixel to get neighboring values, we can iterate through each kernel position to get the neighboring value corresponding to a certain kernel position for all non-edge pixels at once. This is what a vectorized sliding window does.</p>
@@ -893,7 +898,7 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-<div class="section" id="create-kernel">
+<section id="create-kernel">
 <h3>Create kernel<a class="headerlink" href="#create-kernel" title="Permalink to this headline">#</a></h3>
 <p>Second, we can generate a kernel array. The array can consist of a single value or multiple values. Below, we generate a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> kernel consisting of the value <code class="docutils literal notranslate"><span class="pre">1/9</span></code>. This kernel will output the average value of the center cell and its surrounding eight neighbors.</p>
 <div class="admonition important">
@@ -918,8 +923,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="create-output-arrays">
+</section>
+<section id="create-output-arrays">
 <h3>Create output arrays<a class="headerlink" href="#create-output-arrays" title="Permalink to this headline">#</a></h3>
 <p>Next, we will create two arrays that will store our calculations.</p>
 <p>The first array is the output array, which has the same shape as that of the input raster. We will initially fill the array with placeholder values. This array will be the final result that is exported and saved.</p>
@@ -970,8 +975,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="create-vectorized-sliding-window">
+</section>
+<section id="create-vectorized-sliding-window">
 <h3>Create vectorized sliding window<a class="headerlink" href="#create-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
 <p>The next step is to generate the vectorized sliding windows. The shape of the vectorized sliding windows depends on the kernel shape, so we utilize indices and slicing to obtain the extent of a vectorized sliding window for each position in the kernel.</p>
 <div class="cell docutils container">
@@ -996,8 +1001,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="apply-vectorized-sliding-window">
+</section>
+<section id="apply-vectorized-sliding-window">
 <h3>Apply vectorized sliding window<a class="headerlink" href="#apply-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
 <p>Once the vectorized sliding windows are specified, we can apply them to the raster. The vectorized sliding window will get a subset of the raster array, and we can multiply all the pixel values in that subset by the corresponding value in the kernel, which is based on window’s specific kernel position.</p>
 <p>The product is then added to the array that keeps track of the running total.</p>
@@ -1052,8 +1057,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="window-operations-with-predefined-functions">
+</section>
+<section id="window-operations-with-predefined-functions">
 <h3>Window operations with predefined functions<a class="headerlink" href="#window-operations-with-predefined-functions" title="Permalink to this headline">#</a></h3>
 <p>We can also perform window operations with predefined functions, such as getting the maximum value of a pixel and its surrounding pixels. We simply take the calculations from each vectorized sliding window and get the maximum value from those calculations.</p>
 <div class="admonition tip">
@@ -1077,8 +1082,8 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="save-output">
+</section>
+<section id="save-output">
 <h3>Save output<a class="headerlink" href="#save-output" title="Permalink to this headline">#</a></h3>
 <p>We can insert the processed aggregate array into the output array, with each value replacing the placeholder value at its corresponding original position in the array. Recall that because edge pixels are ignored, the edge pixels of the output array will still keep their placeholder values.</p>
 <p>In this example, each non-edge output pixel value is the average pixel value–with pixel values drawn from the input raster–of the 8 pixels surrounding that pixel and the pixel itself.</p>
@@ -1124,9 +1129,9 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="window-operations-with-geowombat">
+</section>
+</section>
+<section id="window-operations-with-geowombat">
 <h2>Window operations with GeoWombat<a class="headerlink" href="#window-operations-with-geowombat" title="Permalink to this headline">#</a></h2>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> for window operations if we’re only interested in calculating a statistic. The code to do this with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> is less complex and much shorter than with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>–we can simply use the <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function provides us with a few parameters that we can specify:</p>
@@ -1171,24 +1176,26 @@ X_{i} = raster cell value</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-ebf4780c581d90fd1a920017bb13440d&#39; (band: 1, y: 6, x: 6)&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-9a26cbc466680131864105ef1cfbb869&#39; (band: 1, y: 6, x: 6)&gt;
 dask.array&lt;stack, shape=(1, 6, 6), dtype=float64, chunksize=(1, 6, 6), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
   * y        (y) float64 90.0 60.0 30.0 0.0 -30.0 -60.0
   * x        (x) float64 -90.0 -60.0 -30.0 0.0 30.0 60.0
-Attributes: (12/14)
+Attributes:
     transform:           (30.0, 0.0, -105.0, 0.0, -30.0, 105.0)
-    crs:                 +init=epsg:4326
+    crs:                 4326
     res:                 (30.0, 30.0)
     is_tiled:            0
     nodatavals:          (nan,)
+    _FillValue:          nan
     scales:              (1.0,)
-    ...                  ...
+    offsets:             (0.0,)
+    AREA_OR_POINT:       Area
     filename:            ../temp/window_raster.tif
     resampling:          nearest
-    data_are_separate:   0
-    data_are_stacked:    0
+    _data_are_separate:  0
+    _data_are_stacked:   0
     moving_stat:         mean
     moving_window_size:  5
 </pre></div>
@@ -1196,8 +1203,8 @@ Attributes: (12/14)
 <img alt="../_images/e_raster_window_operations_23_1.png" src="../_images/e_raster_window_operations_23_1.png" />
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

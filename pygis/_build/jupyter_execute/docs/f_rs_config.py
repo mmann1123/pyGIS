@@ -60,18 +60,40 @@ with gw.config.update():
             print('Keyword:', k.ljust(15), 'Value:', v)
 
 
+# ### Image Properties
+# Certain raster properties can be set via the `config.update`. This includes setting no data values - to be masked, and pixel value scaling via `scale_factor`.
+
+# In[2]:
+
+
+# treat 0 as missing value
+with gw.config.update(nodata=0):
+  with gw.open(l8_224078_20200518) as src:
+    print(src.attrs['nodatavals'])
+    #use src=src.gw.mask_nodata() to replace 0 with nan
+
+
+# In[3]:
+
+
+# multiply pixel values by 0.0001
+with gw.config.update(scale_factor=0.0001):
+  with gw.open(l8_224078_20200518) as src:
+    print(src.attrs['scales'])
+
+
 # ### Reference settings: CRS
 # 
 # Configuration keywords beginning with **ref** are the most important commands when opening rasters. For example, to transform the CRS of the data on-the-fly, use **ref_crs**. For more on Coordinate Reference Systems, see [here](f_rs_crs.md).
 
-# In[2]:
+# In[4]:
 
 
 import geowombat as gw
 from geowombat.data import l8_224078_20200518
 
 proj4 = "+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs "
-0
+
 # Without the manager
 with gw.open(l8_224078_20200518) as src:
     print(src.crs)
@@ -86,7 +108,7 @@ with gw.config.update(ref_crs=proj4):
 # 
 # It is possible to combine multiple configuration keywords. In the example below, the raster CRS is transformed from UTM to Albers Equal Area with a resampled cell size of 100m x 100m.
 
-# In[3]:
+# In[5]:
 
 
 import geowombat as gw
@@ -106,7 +128,7 @@ with gw.config.update(ref_crs=proj4, ref_res=(100, 100)):
 # 
 # To subset an image, specify bounds as a **tuple** of (left, bottom, right, top) or a rasterio **BoundingBox** object.
 
-# In[4]:
+# In[6]:
 
 
 import geowombat as gw
@@ -143,7 +165,7 @@ with gw.config.update(ref_bounds=bounds):
 # 
 # To use another image as a reference, just set **ref_image**. Then, the opened file's bounds, CRS, and cell size will be transformed to match those of the reference image.
 
-# In[5]:
+# In[7]:
 
 
 import geowombat as gw
@@ -171,7 +193,7 @@ with gw.config.update(ref_image=l8_224077_20200518_B2):
 # In the example below, the example raster comes from a Landsat image. However, only the visible (blue, green, and red) wavelengths are stored. Thus, we use 'rgb' as the sensor name. If we had a full 6-band Landsat 7 image, for example, we could use the 'l7' sensor flag.
 # ```
 
-# In[6]:
+# In[8]:
 
 
 import geowombat as gw
@@ -197,7 +219,7 @@ with gw.config.update(sensor='bgr'):
 # 
 # For a short description of the sensor, use the **sensor_names** property.
 
-# In[7]:
+# In[9]:
 
 
 with gw.open(l8_224078_20200518) as src:

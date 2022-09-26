@@ -16,7 +16,7 @@ kernelspec:
 ```{admonition} Learning Objectives
   - Visualize RGB images from remotely sensed data
   - Visualize true-color and false-color composites
-  - 
+  - View path and row of swaths
 ```
 ```{admonition} Review
 * [Data Structures](c_features.md)
@@ -62,6 +62,19 @@ from geowombat.data import l8_224078_20200518
 fig, ax = plt.subplots(dpi=200)
 with gw.open(l8_224078_20200518) as src:
     src.where(src != 0).sel(band=[3, 2, 1]).plot.imshow(robust=True, ax=ax)
+plt.tight_layout(pad=1)
+``` 
+Note you can also set the missing data value when opening a file (assuming it is not in the raster profile), those values then need to be masked using `gw.mask_nodata()` and `src` updated:
+
+
+```{code-cell} ipython3
+# load example data
+
+fig, ax = plt.subplots(dpi=200)
+with gw.open(l8_224078_20200518, nodata=0) as src:
+    # replace 0 with nan
+    src = src.gw.mask_nodata()
+    src.sel(band=[3, 2, 1]).plot.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 ``` 
 
@@ -137,7 +150,7 @@ Here we set up a more complicated plotting function for near IR 'nir'.  Note the
 
 ```{code-cell} ipython3
 from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
-
+from os.path  import basename
 def plot(bounds_by, ref_image=None, cmap='viridis'):
     fig, ax = plt.subplots(dpi=200)
     with gw.config.update(ref_image=ref_image):
@@ -145,7 +158,8 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
                         band_names=['nir'],
                         chunks=256,
                         mosaic=True,
-                        bounds_by=bounds_by) as srca:
+                        bounds_by=bounds_by,
+                        persist_filenames=True) as srca:
             # Plot the NIR band
             srca.where(srca != 0).sel(band='nir').plot.imshow(robust=True, cbar_kwargs={'label': 'DN'}, ax=ax)
             # Plot the image chunks
@@ -156,7 +170,7 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
             for row in srca.gw.footprint_grid.itertuples(index=False):
                 ax.scatter(row.geometry.centroid.x, row.geometry.centroid.y,
                             s=50, color='red', edgecolor='white', lw=1)
-                ax.annotate(row.footprint.replace('.TIF', ''),
+                ax.annotate(basename(row.footprint).replace('.TIF', ''),
                             (row.geometry.centroid.x, row.geometry.centroid.y),
                             color='black',
                             size=8,

@@ -43,7 +43,7 @@ with gw.open(rgbn) as src:
 
 # ## Transforming a CRS On-The-Fly
 # 
-# To transform the CRS, use the context manager. In this example, an proj4 code is used. See [understanding CRS codes](d_understand_crs_codes.md) for more details.
+# To transform the CRS, use the context manager. In this example, an proj4 code is used. See [understanding CRS codes](d_understand_crs_codes.md) for more details. Also note the use the `nodata` in this case the file `rgbn` doesn't have the missing data value set in its profile, so we can set it manually when opened.
 
 # In[2]:
 
@@ -54,12 +54,14 @@ fig, ax = plt.subplots(dpi=200)
 proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
 
 with gw.config.update(ref_crs=proj4):
-    with gw.open(rgbn) as src:
+    with gw.open(rgbn, nodata=0) as src:
+        # replace 0 with nan
+        src = src.gw.mask_nodata()
         print(src.transform)
         print(src.crs)
         print(src.resampling)
         print(src.res)
-        src.where(src != 0).sel(band=[3,2,1]).plot.imshow(robust=True, ax=ax)
+        src.sel(band=[3,2,1]).plot.imshow(robust=True, ax=ax)
 
 plt.tight_layout(pad=1)
 

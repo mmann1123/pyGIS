@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn to create new vector objects, assign projections or CRS, and write them to a shapefile or geojson. We also cover creating basic maps with points, lines and polygons." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn to create new vector objects, assign projections or CRS, and write them to a shapefile or geojson. We also cover creating basic maps with points, lines and polygons." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à créer de nouveaux objets vectoriels, à attribuer des projections ou à des CRS et à les écrire dans un fichier de formes ou un geojson. Nous couvrons également la création de cartes de base avec des points, des lignes et des polygones." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a crear nuevos objetos vectoriales, asigne proyecciones o CRS y escríbalos en un shapefile o geojson. También cubrimos la creación de mapas básicos con puntos, líneas y polígonos." lang="es" name="description" xml:lang="es" />
 <meta content=" spatial, shapefile, geopandas" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -716,16 +717,16 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="spatial-vector-data">
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-vector-data">
 <h1>Spatial Vector Data<a class="headerlink" href="#spatial-vector-data" title="Permalink to this headline">#</a></h1>
-<div class="section" id="intro-to-geopandas">
+<section id="intro-to-geopandas">
 <h2>Intro to GeoPandas<a class="headerlink" href="#intro-to-geopandas" title="Permalink to this headline">#</a></h2>
 <p>The goal of GeoPandas is to make working with spatial data in python easier. It combines the capabilities of pandas and shapely, providing spatial operations in pandas and a high-level interface to multiple geometries to shapely. GeoPandas enables you to easily do operations in python that would otherwise require a spatial database such as PostGIS.</p>
-</div>
-<div class="section" id="data-structures">
+</section>
+<section id="data-structures">
 <h2>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h2>
 <p>GeoPandas implements two main data structures, a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> and a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>. These are subclasses of pandas Series and DataFrame, respectively.</p>
-<div class="section" id="geoseries">
+<section id="geoseries">
 <h3>GeoSeries<a class="headerlink" href="#geoseries" title="Permalink to this headline">#</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> is essentially a vector where each entry in the vector is a set of shapes corresponding to one observation. An entry may consist of only one shape (like a single polygon) or multiple shapes that are meant to be thought of as one observation (like the many polygons that make up the State of Hawaii or a country like Indonesia).</p>
 <p>geopandas has three basic classes of geometric objects (which are actually shapely objects):</p>
@@ -783,8 +784,8 @@ dtype: geometry
 </div>
 </div>
 <p>Note that all entries in a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> need not be of the same geometric type, although certain export operations will fail if this is not the case.</p>
-</div>
-<div class="section" id="geodataframe">
+</section>
+<section id="geodataframe">
 <h3>GeoDataFrame<a class="headerlink" href="#geodataframe" title="Permalink to this headline">#</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is a tabular data structure that contains a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code>.</p>
 <p>The most important property of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is that it always has one <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> column that holds a special status. This <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> is referred to as the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame’s</span></code> “geometry”. When a spatial method is applied to a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> (or a spatial attribute like area is called), this commands will always act on the “geometry” column.</p>
@@ -831,47 +832,47 @@ dtype: geometry
   <tbody>
     <tr>
       <th>0</th>
-      <td>920938</td>
+      <td>889953.0</td>
       <td>Oceania</td>
       <td>Fiji</td>
       <td>FJI</td>
-      <td>8374.0</td>
+      <td>5496</td>
       <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>53950935</td>
+      <td>58005463.0</td>
       <td>Africa</td>
       <td>Tanzania</td>
       <td>TZA</td>
-      <td>150600.0</td>
+      <td>63177</td>
       <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>603253</td>
+      <td>603253.0</td>
       <td>Africa</td>
       <td>W. Sahara</td>
       <td>ESH</td>
-      <td>906.5</td>
+      <td>907</td>
       <td>POLYGON ((-8.66559 27.65643, -8.66512 27.58948...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>35623680</td>
+      <td>37589262.0</td>
       <td>North America</td>
       <td>Canada</td>
       <td>CAN</td>
-      <td>1674000.0</td>
+      <td>1736425</td>
       <td>MULTIPOLYGON (((-122.84000 49.00000, -122.9742...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>326625791</td>
+      <td>328239523.0</td>
       <td>North America</td>
       <td>United States of America</td>
       <td>USA</td>
-      <td>18560000.0</td>
+      <td>21433226</td>
       <td>MULTIPOLYGON (((-122.84000 49.00000, -120.0000...</td>
     </tr>
   </tbody>
@@ -885,15 +886,15 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
 </pre></div>
 </div>
 <img alt="../_images/c_vectors_6_1.png" src="../_images/c_vectors_6_1.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

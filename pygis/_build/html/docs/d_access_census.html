@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to access US Census, and American Community Survey data via python. " lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to access US Census, and American Community Survey data via python. " lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment accéder aux données du recensement américain et de l'enquête communautaire américaine via python." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a acceder a los datos del Censo de EE. UU. Y de la Encuesta sobre la comunidad estadounidense a través de Python." lang="es" name="description" xml:lang="es" />
 <meta content="python, spatial, census, american community survey, ACS" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -795,7 +796,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="accessing-census-and-acs-data-in-python">
+  <section class="tex2jax_ignore mathjax_ignore" id="accessing-census-and-acs-data-in-python">
 <h1>Accessing Census and ACS Data in Python<a class="headerlink" href="#accessing-census-and-acs-data-in-python" title="Permalink to this headline">#</a></h1>
 <p>By: Steven Chao</p>
 <hr class="docutils" />
@@ -817,7 +818,7 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>This chapter will show you how to access US  Decennial Census and American Community Survey Data (ACS). We will use these basic operations in order to calculate and map poverty rates in the Commonwealth of Virginia. We will pull data from the US Census Bureau’s <a class="reference external" href="https://www.census.gov/programs-surveys/acs">American Community Survey (ACS)</a> 2019 (see <a class="reference external" href="https://www.census.gov/data/developers/data-sets/acs-5year.html">this page</a> for the data).</p>
 <div class="cell docutils container">
@@ -831,11 +832,24 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">census</span> <span class="kn">import</span> <span class="n">Census</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">us</span> <span class="kn">import</span> <span class="n">states</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;census&#39;
+</pre></div>
 </div>
 </div>
-<div class="section" id="accessing-data">
+</div>
+</section>
+<section id="accessing-data">
 <h2>Accessing Data<a class="headerlink" href="#accessing-data" title="Permalink to this headline">#</a></h2>
-<div class="section" id="import-census-data">
+<section id="import-census-data">
 <h3>Import census data<a class="headerlink" href="#import-census-data" title="Permalink to this headline">#</a></h3>
 <p>Let’s begin by accessing and importing census data. Importing census data into Python requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
 <div class="cell tag_remove-output docutils container">
@@ -886,22 +900,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                         NAME  C17002_001E  C17002_002E  \
-0     Census Tract 60, Norfolk city, Virginia       3947.0        284.0   
-1  Census Tract 65.02, Norfolk city, Virginia       3287.0        383.0   
-
-   C17002_003E  B01003_001E state county   tract  
-0        507.0       3947.0    51    710  006000  
-1        480.0       3302.0    51    710  006502  
-Shape:  (1907, 8)
-</pre></div>
-</div>
-</div>
 </div>
 <p>By showing the dataframe, we can see that there are 1907 rows (therefore 1907 census tracts) and 8 columns.</p>
-</div>
-<div class="section" id="import-shapefile">
+</section>
+<section id="import-shapefile">
 <h3>Import Shapefile<a class="headerlink" href="#import-shapefile" title="Permalink to this headline">#</a></h3>
 <p>Let’s also read into Python a shapefile of the Virginia census tracts and reproject it to the UTM Zone 17N projection. (This shapefile can be downloaded on the Census Bureau’s website on the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">Cartographic Boundary Files page</a> or the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapefiles page</a>.)</p>
 <div class="cell docutils container">
@@ -922,32 +924,14 @@ Shape:  (1907, 8)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID    NAME             NAMELSAD  MTFCC  \
-0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
-1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
-
-  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
-0        S  2552457       0  +37.1475176  -076.5212499   
-1        S  3478916  165945  +37.1625163  -076.5527816   
-
-                                            geometry  
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...  
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...  
-Shape:  (1907, 13)
-
-The shapefile projection is: epsg:32617
-</pre></div>
-</div>
-</div>
 </div>
 <p>By printing the shapefile, we can see that the shapefile also has 1907 rows (1907 tracts). This number matches with the number of census records that we have on file. Perfect!</p>
 <p>Not so fast, though. We have a potential problem: We have the census data, and we have the shapefile of census tracts that correspond with that data, but they are stored in two separate variables (<code class="docutils literal notranslate"><span class="pre">va_df</span></code> and <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> respectively)! That makes it a bit difficult to map since these two separate datasets aren’t connected to each other.</p>
-</div>
-</div>
-<div class="section" id="performing-dataframe-operations">
+</section>
+</section>
+<section id="performing-dataframe-operations">
 <h2>Performing Dataframe Operations<a class="headerlink" href="#performing-dataframe-operations" title="Permalink to this headline">#</a></h2>
-<div class="section" id="create-new-column-from-old-columns-to-get-combined-fips-code">
+<section id="create-new-column-from-old-columns-to-get-combined-fips-code">
 <h3>Create new column from old columns to get combined FIPS code<a class="headerlink" href="#create-new-column-from-old-columns-to-get-combined-fips-code" title="Permalink to this headline">#</a></h3>
 <p>To solve this problem, we can join the two dataframes together via a field or column that is common to both dataframes, which is referred to as a key.</p>
 <p>Looking at the two datasets above, it appears that the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column from <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> and the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns combined from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> could serve as the unique key for joining these two dataframes together. In their current forms, this join will not be successful, as we’ll need to merge the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> together to make it parallel to the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column from <code class="docutils literal notranslate"><span class="pre">va_tract</span></code>. We can simply add the columns together, much like math or the basic operators in Python, and assign the “sum” to a new column.</p>
@@ -968,67 +952,9 @@ The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>NAME</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>state</th>
-      <th>county</th>
-      <th>tract</th>
-      <th>GEOID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Census Tract 60, Norfolk city, Virginia</td>
-      <td>3947.0</td>
-      <td>284.0</td>
-      <td>507.0</td>
-      <td>3947.0</td>
-      <td>51</td>
-      <td>710</td>
-      <td>006000</td>
-      <td>51710006000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Census Tract 65.02, Norfolk city, Virginia</td>
-      <td>3287.0</td>
-      <td>383.0</td>
-      <td>480.0</td>
-      <td>3302.0</td>
-      <td>51</td>
-      <td>710</td>
-      <td>006502</td>
-      <td>51710006502</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
-</div>
-<div class="section" id="remove-dataframe-columns-that-are-no-longer-needed">
+</section>
+<section id="remove-dataframe-columns-that-are-no-longer-needed">
 <h3>Remove dataframe columns that are no longer needed<a class="headerlink" href="#remove-dataframe-columns-that-are-no-longer-needed" title="Permalink to this headline">#</a></h3>
 <p>To reduce clutter, we can delete the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> since we don’t need them anymore. Remember that when we want to modify a dataframe, we must assign the modified dataframe back to the original variable (or a new one, if preferred). Otherwise, any modifications won’t be saved. An alternative to assigning the dataframe back to the variable is to simply pass <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code>. For more information, see the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">pandas help documentation on <code class="docutils literal notranslate"><span class="pre">drop</span></code></a>.</p>
 <div class="cell docutils container">
@@ -1041,58 +967,9 @@ The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>NAME</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>GEOID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Census Tract 60, Norfolk city, Virginia</td>
-      <td>3947.0</td>
-      <td>284.0</td>
-      <td>507.0</td>
-      <td>3947.0</td>
-      <td>51710006000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Census Tract 65.02, Norfolk city, Virginia</td>
-      <td>3287.0</td>
-      <td>383.0</td>
-      <td>480.0</td>
-      <td>3302.0</td>
-      <td>51710006502</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
-</div>
-<div class="section" id="check-column-data-types">
+</section>
+<section id="check-column-data-types">
 <h3>Check column data types<a class="headerlink" href="#check-column-data-types" title="Permalink to this headline">#</a></h3>
 <p>The key in both dataframe must be of the same data type. Let’s check the data type of the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns in both dataframes. If they aren’t the same, we will have to change the data type of columns to make them the same.</p>
 <div class="cell docutils container">
@@ -1107,38 +984,10 @@ The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column data types for census data:
-NAME            object
-C17002_001E    float64
-C17002_002E    float64
-C17002_003E    float64
-B01003_001E    float64
-GEOID           object
-dtype: object
-
-Column data types for census shapefile:
-STATEFP       object
-COUNTYFP      object
-TRACTCE       object
-GEOID         object
-NAME          object
-NAMELSAD      object
-MTFCC         object
-FUNCSTAT      object
-ALAND          int64
-AWATER         int64
-INTPTLAT      object
-INTPTLON      object
-geometry    geometry
-dtype: object
-</pre></div>
-</div>
-</div>
 </div>
 <p>Looks like the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns are the same!</p>
-</div>
-<div class="section" id="merge-dataframes">
+</section>
+<section id="merge-dataframes">
 <h3>Merge dataframes<a class="headerlink" href="#merge-dataframes" title="Permalink to this headline">#</a></h3>
 <p>Now, we are ready to merge the two dataframes together, using the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns as the primary key. We can use the <code class="docutils literal notranslate"><span class="pre">merge</span></code> method in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code> called on the <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> shapefile dataset.</p>
 <div class="cell docutils container">
@@ -1153,30 +1002,6 @@ dtype: object
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  NAME_x             NAMELSAD  MTFCC  \
-0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
-1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
-
-  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
-0        S  2552457       0  +37.1475176  -076.5212499   
-1        S  3478916  165945  +37.1625163  -076.5527816   
-
-                                            geometry  \
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...   
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...   
-
-                                             NAME_y  C17002_001E  C17002_002E  \
-0  Census Tract 321.32, Newport News city, Virginia       5025.0        161.0   
-1  Census Tract 322.26, Newport News city, Virginia       4167.0        736.0   
-
-   C17002_003E  B01003_001E  
-0        342.0       5079.0  
-1        559.0       4167.0  
-Shape:  (1907, 18)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Success! We still have 1907 rows, which means that all rows (or most of them) were successfully matched! Notice how the census data has been added on after the shapefile data in the dataframe.</p>
 <p>Some additional notes about joining dataframes:</p>
@@ -1184,8 +1009,8 @@ Shape:  (1907, 18)
 <li><p>the columns for the key do not need to have the same name.</p></li>
 <li><p>for this join, we had a one-to-one relationship, meaning one attribute in one dataframe matched to one (and only one) attribute in the other dataframe. Joins with a many-to-one, one-to-many, or many-to-many relationship are also possible, but in some cases, they require some special considerations. See this <a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/manage-data/tables/about-joining-and-relating-tables.htm">Esri ArcGIS help documentation on joins and relates</a> for more information.</p></li>
 </ul>
-</div>
-<div class="section" id="subset-dataframe">
+</section>
+<section id="subset-dataframe">
 <h3>Subset dataframe<a class="headerlink" href="#subset-dataframe" title="Permalink to this headline">#</a></h3>
 <p>Now that we merged the dataframes together, we can further clean up the dataframe and remove columns that are not needed. Instead of using the <code class="docutils literal notranslate"><span class="pre">drop</span></code> method, we can simply select the columns we want to keep and create a new dataframe with those selected columns.</p>
 <div class="cell docutils container">
@@ -1199,26 +1024,10 @@ Shape:  (1907, 18)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  \
-0      51      700  032132  51700032132   
-1      51      700  032226  51700032226   
-
-                                            geometry  C17002_001E  \
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...       5025.0   
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...       4167.0   
-
-   C17002_002E  C17002_003E  B01003_001E  
-0        161.0        342.0       5079.0  
-1        736.0        559.0       4167.0  
-Shape:  (1907, 9)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice how the number of columns dropped from 13 to 9.</p>
-</div>
-<div class="section" id="dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level">
+</section>
+<section id="dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level">
 <h3>Dissolve geometries and get summarized statistics to get poverty statistics at the county level<a class="headerlink" href="#dissolve-geometries-and-get-summarized-statistics-to-get-poverty-statistics-at-the-county-level" title="Permalink to this headline">#</a></h3>
 <p>Next, we will group all the census tracts within the same county (<code class="docutils literal notranslate"><span class="pre">COUNTYFP</span></code>) and aggregate the poverty and population values for those tracts within the same county. We can use the <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> function in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>, which is the spatial version of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. We use <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> instead of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> because the former also groups and merges all the geometries (in this case, census tracts) within a given group (in this case, counties).</p>
 <div class="cell docutils container">
@@ -1233,24 +1042,10 @@ Shape:  (1907, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                   geometry  C17002_001E  \
-COUNTYFP                                                                   
-001       POLYGON ((971901.668 4160101.088, 971814.409 4...      32345.0   
-003       POLYGON ((734957.267 4207640.156, 734931.249 4...      97587.0   
-
-          C17002_002E  C17002_003E  B01003_001E  
-COUNTYFP                                         
-001            2423.0       3993.0      32840.0  
-003            5276.0       4305.0     105105.0  
-Shape:  (133, 5)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice that we got the number of rows down from 1907 to 133.</p>
-</div>
-<div class="section" id="perform-column-math-to-get-poverty-rates">
+</section>
+<section id="perform-column-math-to-get-poverty-rates">
 <h3>Perform column math to get poverty rates<a class="headerlink" href="#perform-column-math-to-get-poverty-rates" title="Permalink to this headline">#</a></h3>
 <p>We can estimate the poverty rate by dividing the sum of <code class="docutils literal notranslate"><span class="pre">C17002_002E</span></code> (ratio of income to poverty in the past 12 months, &lt; 0.50) and <code class="docutils literal notranslate"><span class="pre">C17002_003E</span></code> (ratio of income to poverty in the past 12 months, 0.50 - 0.99) by <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population).</p>
 <p>Side note: Notice that <code class="docutils literal notranslate"><span class="pre">C17002_001E</span></code> (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population). We’ll disregard this for now since the difference is not too significant.</p>
@@ -1264,68 +1059,10 @@ Shape:  (133, 5)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>Poverty_Rate</th>
-    </tr>
-    <tr>
-      <th>COUNTYFP</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>001</th>
-      <td>POLYGON ((971901.668 4160101.088, 971814.409 4...</td>
-      <td>32345.0</td>
-      <td>2423.0</td>
-      <td>3993.0</td>
-      <td>32840.0</td>
-      <td>19.537150</td>
-    </tr>
-    <tr>
-      <th>003</th>
-      <td>POLYGON ((734957.267 4207640.156, 734931.249 4...</td>
-      <td>97587.0</td>
-      <td>5276.0</td>
-      <td>4305.0</td>
-      <td>105105.0</td>
-      <td>9.115646</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="plotting-results">
+</section>
+</section>
+<section id="plotting-results">
 <h2>Plotting Results<a class="headerlink" href="#plotting-results" title="Permalink to this headline">#</a></h2>
 <p>Finally, since we have the spatial component connected to our census data, we can plot the results!</p>
 <div class="cell docutils container">
@@ -1348,15 +1085,9 @@ Shape:  (133, 5)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Poverty Rates (%) in Virginia&#39;)
-</pre></div>
 </div>
-<img alt="../_images/d_access_census_28_1.png" src="../_images/d_access_census_28_1.png" />
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

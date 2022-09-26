@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to resample single and multi-band rasters using rasterio and geowombat. This includes creating using a 'snap raster' as well as seperately matching extent and or resolution of another raster. We demonstrate these using LandSat imagery as examples." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to resample single and multi-band rasters using rasterio and geowombat. This includes creating using a 'snap raster' as well as seperately matching extent and or resolution of another raster. We demonstrate these using LandSat imagery as examples." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à rééchantillonner des rasters mono et multicanaux à l'aide de rasterio et geowombat. Cela inclut la création à l'aide d'un « raster d'accrochage » ainsi que la correspondance séparée de l'étendue et/ou de la résolution d'un autre raster. Nous les démontrons en utilisant les images LandSat comme exemples." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a volver a muestrear rásteres de una o varias bandas mediante rasterio y geowombat. Esto incluye la creación mediante un 'ráster de ajuste', así como la extensión y / o resolución coincidentes por separado de otro ráster. Demostramos esto usando imágenes de LandSat como ejemplos." lang="es" name="description" xml:lang="es" />
 <meta content="en_US" property="og:locale" />
@@ -24,7 +25,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -41,7 +42,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -196,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -757,34 +758,40 @@ title="Print to PDF"
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine transformation</span></a></p></li>
+<li><p><a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">Affine transformation</span></a></p></li>
 <li><p><a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Raster Coordinate Reference Systems</span></a></p></li>
 <li><p><a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reprojecting Rasters</span></a></p></li>
 <li><p><a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro-interpolation-options"><span class="std std-ref">Interpolation Methods Explained</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="resampling-registering-rasters-w-rasterio-and-geowombat">
+<section class="tex2jax_ignore mathjax_ignore" id="resampling-registering-rasters-w-rasterio-and-geowombat">
 <h1>Resampling &amp; Registering Rasters w. Rasterio and Geowombat<a class="headerlink" href="#resampling-registering-rasters-w-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
-<div class="section" id="why-is-resampling-important">
+<section id="why-is-resampling-important">
 <h2>Why is Resampling Important?<a class="headerlink" href="#why-is-resampling-important" title="Permalink to this headline">#</a></h2>
 <p><em>Before you begin</em> any analysis using rater data it is critical that you have rasters that are “co-registered”. Co-registration requires that any two rasters have the same resolution, and orientation - the origins can differ but they much align. <em>In other words, co-registration requires that cell centroids align perfectly for all intersecting areas.</em> Resampling is also extremely common during reprojection operations as it often requires changing the orientation, scale or resolution of an image.</p>
 <p><strong>Examples of data that is <em>not</em> co-registered</strong></p>
-<div class="figure align-default" id="resampling-rasters-different-orientation">
+<figure class="align-default" id="resampling-rasters-different-orientation">
 <a class="reference internal image-reference" href="../_images/Raster_diff-orientation.jpg"><img alt="../_images/Raster_diff-orientation.jpg" src="../_images/Raster_diff-orientation.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">Resampling rasters - different orientation</span><a class="headerlink" href="#resampling-rasters-different-orientation" title="Permalink to this image">#</a></p>
-</div>
-<div class="figure align-default" id="resampling-rasters-different-orientation-and-origin">
+<figcaption>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Resampling rasters - different orientation</span><a class="headerlink" href="#resampling-rasters-different-orientation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="resampling-rasters-different-orientation-and-origin">
 <a class="reference internal image-reference" href="../_images/Raster_diff-orientation-origin.jpg"><img alt="../_images/Raster_diff-orientation-origin.jpg" src="../_images/Raster_diff-orientation-origin.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">Resampling rasters - different orientation and origin</span><a class="headerlink" href="#resampling-rasters-different-orientation-and-origin" title="Permalink to this image">#</a></p>
-</div>
-<div class="figure align-default" id="resampling-rasters-different-resolution">
+<figcaption>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Resampling rasters - different orientation and origin</span><a class="headerlink" href="#resampling-rasters-different-orientation-and-origin" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="resampling-rasters-different-resolution">
 <a class="reference internal image-reference" href="../_images/Raster_diff-res.jpg"><img alt="../_images/Raster_diff-res.jpg" src="../_images/Raster_diff-res.jpg" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 57 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Resampling rasters - different resolution</span><a class="headerlink" href="#resampling-rasters-different-resolution" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We can co-register images by resampling, and often reprojecting, one image to match another.</p>
-</div>
-<div class="section" id="methods-for-resampling-explained">
+</section>
+<section id="methods-for-resampling-explained">
 <span id="raster-resample-methods"></span><h2>Methods for Resampling Explained<a class="headerlink" href="#methods-for-resampling-explained" title="Permalink to this headline">#</a></h2>
 <p>There are <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling">a number of methods</a> to resample data, but they often take the form of “nearest neighbor”, “bilinear”, and “cubic convolusion” - these interpolation methods <span class="xref myst">are explained here in some detail</span>. But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <p><strong>resampling direction</strong></p>
@@ -792,13 +799,13 @@ title="Print to PDF"
 <li><p>Upsampling - converting to higher resolution/smaller cells.</p></li>
 <li><p>Downsampling - converting to lower resolution/larger cell sizes.</p></li>
 </ul>
-</div>
-<div class="section" id="simple-up-downsampling-in-rasterio-geowombat">
+</section>
+<section id="simple-up-downsampling-in-rasterio-geowombat">
 <h2>Simple Up/Downsampling in Rasterio &amp; Geowombat<a class="headerlink" href="#simple-up-downsampling-in-rasterio-geowombat" title="Permalink to this headline">#</a></h2>
-<div class="section" id="rasterio-upsampling-example">
+<section id="rasterio-upsampling-example">
 <h3>Rasterio Upsampling Example<a class="headerlink" href="#rasterio-upsampling-example" title="Permalink to this headline">#</a></h3>
 <p>Occationally you will need to resample your data by some factor, for instance you might want data upsampled to a courser resolution due to memory constraints.</p>
-<p>Here’s an example of how to generate the <code class="docutils literal notranslate"><span class="pre">data</span></code> array and the <code class="docutils literal notranslate"><span class="pre">transform</span></code> needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the <code class="docutils literal notranslate"><span class="pre">transform</span></code>, let’s review <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">affine transformations</span></a>. Here we will update the scale values with the new resolution using <span class="math notranslate nohighlight">\(S_{y}\)</span> and <span class="math notranslate nohighlight">\(S_{x}\)</span> show below</p>
+<p>Here’s an example of how to generate the <code class="docutils literal notranslate"><span class="pre">data</span></code> array and the <code class="docutils literal notranslate"><span class="pre">transform</span></code> needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the <code class="docutils literal notranslate"><span class="pre">transform</span></code>, let’s review <a class="reference internal" href="d_affine.html#d-affine"><span class="std std-ref">affine transformations</span></a>. Here we will update the scale values with the new resolution using <span class="math notranslate nohighlight">\(S_{y}\)</span> and <span class="math notranslate nohighlight">\(S_{x}\)</span> show below</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
    \begin{eqnarray}
@@ -878,8 +885,8 @@ Transform after resample:
 <p class="admonition-title">Reminder</p>
 <p>Read up on <a class="reference internal" href="d_affine.html#d-affine-transform-matrix"><span class="std std-ref">affine transformations</span></a> to help you understand the <code class="docutils literal notranslate"><span class="pre">transform.scale</span></code> function above.</p>
 </div>
-</div>
-<div class="section" id="geowombat-up-down-sampling-example">
+</section>
+<section id="geowombat-up-down-sampling-example">
 <h3>Geowombat Up/Down Sampling Example<a class="headerlink" href="#geowombat-up-down-sampling-example" title="Permalink to this headline">#</a></h3>
 <p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. We have a number of resampling methods available depending on the context <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. Writing a file is a bit more intuitive too.</p>
 <div class="cell docutils container">
@@ -902,36 +909,37 @@ Transform after resample:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 3720, x: 4082)&gt;
-dask.array&lt;open_rasterio-5d3779c5d83524d14a4bbcf537a1f23d&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(1, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-ffcd6009c406dd4eb1c29e58399e618e&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.786e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
 Attributes:
-    transform:          (15.0, 0.0, 717345.0, 0.0, -15.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (15.0, 15.0)
-    is_tiled:           1
-    nodatavals:         (0, 0, 0)
-    scales:             (1.0, 1.0, 1.0)
-    offsets:            (0.0, 0.0, 0.0)
-    filename:           ../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF
-    resampling:         bilinear
-    AREA_OR_POINT:      Area
-    data_are_separate:  0
-    data_are_stacked:   0
+    transform:           (15.0, 0.0, 717345.0, 0.0, -15.0, -2776995.0)
+    crs:                 32621
+    res:                 (15.0, 15.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan)
+    _FillValue:          nan
+    scales:              (1.0, 1.0, 1.0)
+    offsets:             (0.0, 0.0, 0.0)
+    filename:            ../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF
+    resampling:          bilinear
+    AREA_OR_POINT:       Area
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 </div>
 </div>
 <p>Much…. easier….</p>
-</div>
-</div>
-<div class="section" id="co-registering-rasters-aligning-cells">
+</section>
+</section>
+<section id="co-registering-rasters-aligning-cells">
 <h2>Co-registering Rasters (Aligning cells)<a class="headerlink" href="#co-registering-rasters-aligning-cells" title="Permalink to this headline">#</a></h2>
 <p>One common problem is how to get raster data to align on a cell by cell basis so you can complete your analysis. We will walk through how to do this for both rasterio and geowombat. In the following example we will learn how to align rasters with different origins, resolutions, or orientations.</p>
 <p>Our example data will look at registering LandSat data with precipitation data from CHIRPS.</p>
-<div class="section" id="example-of-co-registering-rasters-with-rasterio">
+<section id="example-of-co-registering-rasters-with-rasterio">
 <h3>Example of Co-registering Rasters with Rasterio<a class="headerlink" href="#example-of-co-registering-rasters-with-rasterio" title="Permalink to this headline">#</a></h3>
 <p>Co-registering data is a bit complicated with rasterio, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
 <p>The original input data LandSat data is 30 meters and will be downsampled to match <code class="docutils literal notranslate"><span class="pre">precip</span></code> which is 500m.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as 0. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
@@ -960,8 +968,8 @@ Attributes:
             <span class="n">dst_transform</span><span class="p">,</span> <span class="n">dst_width</span><span class="p">,</span> <span class="n">dst_height</span> <span class="o">=</span> <span class="n">calculate_default_transform</span><span class="p">(</span>
                 <span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>     <span class="c1"># input CRS</span>
                 <span class="n">dst_crs</span><span class="p">,</span>     <span class="c1"># output CRS</span>
-                <span class="n">match</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>   <span class="c1"># input width</span>
-                <span class="n">match</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># input height </span>
+                <span class="k">match</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>   <span class="c1"># input width</span>
+                <span class="k">match</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>  <span class="c1"># input height </span>
                 <span class="o">*</span><span class="n">match</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span>  <span class="c1"># unpacks input outer boundaries (left, bottom, right, top)</span>
             <span class="p">)</span>
 
@@ -1011,8 +1019,8 @@ Attributes:
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-of-co-registering-rasters-with-geowombat">
+</section>
+<section id="example-of-co-registering-rasters-with-geowombat">
 <h3>Example of Co-registering Rasters with Geowombat<a class="headerlink" href="#example-of-co-registering-rasters-with-geowombat" title="Permalink to this headline">#</a></h3>
 <p>Co-registering data is simple in geowombat, you simply need to choose an “reference image” to match the bounds, CRS, and cell size.</p>
 <p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
@@ -1041,25 +1049,26 @@ Attributes:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-5ea1b887333ee835e34ed81f251d6116&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-5bcd7dd376d3242a5c3a76b61c701688&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
-  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
-Attributes: (12/13)
-    transform:          (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
-    crs:                +init=epsg:32621
-    res:                (30.0, 30.0)
-    is_tiled:           1
-    nodatavals:         (0,)
-    scales:             (1.0,)
-    ...                 ...
-    descriptions:       (&#39;precipitation&#39;,)
-    filename:           ../data/precipitation_20200601_500m.tif
-    resampling:         bilinear
-    AREA_OR_POINT:      Area
-    data_are_separate:  0
-    data_are_stacked:   0
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+Attributes:
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (-9999,)
+    _FillValue:          -9999
+    scales:              (1.0,)
+    offsets:             (0.0,)
+    descriptions:        (&#39;precipitation&#39;,)
+    filename:            ../data/precipitation_20200601_500m.tif
+    resampling:          bilinear
+    AREA_OR_POINT:       Area
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 <img alt="../_images/e_raster_resample_9_1.png" src="../_images/e_raster_resample_9_1.png" />
@@ -1070,9 +1079,9 @@ Attributes: (12/13)
 <p class="admonition-title">Note</p>
 <p>Also note that geowombat’s built in <code class="docutils literal notranslate"><span class="pre">.imshow</span></code> functionality doesn’t currently work for single band images. To get an image we have to extract a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> that has the shape <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1860,</span> <span class="pre">2041)</span></code>. Where <code class="docutils literal notranslate"><span class="pre">(1,.,.)</span></code> is the band, so to get a 2d array we select <code class="docutils literal notranslate"><span class="pre">data[0]</span></code>. We also avoid missing values (-9999).</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

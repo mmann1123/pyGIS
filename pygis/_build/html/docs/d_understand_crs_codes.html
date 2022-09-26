@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to interpret and use coordinate reference codes like proj4strings, and EPSG codes. This includes defining a CRS, creating custom projections, interpreting proj4strings, with examples of false easting and northing, and changing the prime meridian." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to interpret and use coordinate reference codes like proj4strings, and EPSG codes. This includes defining a CRS, creating custom projections, interpreting proj4strings, with examples of false easting and northing, and changing the prime meridian." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à interpréter et à utiliser des codes de référence de coordonnées tels que proj4strings et codes EPSG. Cela comprend la définition d'un CRS, la création de projections personnalisées, l'interprétation de chaînes de projection, avec des exemples de faux est et nord, et la modification du méridien principal." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a interpretar y utilizar códigos de referencia de coordenadas como proj4strings y códigos EPSG. Esto incluye la definición de un CRS, la creación de proyecciones personalizadas, la interpretación de cadenas de proyectos, con ejemplos de falso este y norte, y el cambio del primer meridiano." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, crs, proj4string, EPSG, coordinate reference system, projection" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -827,7 +828,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="understanding-a-crs-proj4-and-crs-codes">
+  <section class="tex2jax_ignore mathjax_ignore" id="understanding-a-crs-proj4-and-crs-codes">
 <span id="d-understand-crs-codes"></span><h1>Understanding a CRS: Proj4 and CRS codes<a class="headerlink" href="#understanding-a-crs-proj4-and-crs-codes" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -847,7 +848,7 @@ title="Print to PDF"
 <hr class="docutils" />
 <p>By: Steven Chao</p>
 <hr class="docutils" />
-<div class="section" id="intro-to-coordinate-reference-systems">
+<section id="intro-to-coordinate-reference-systems">
 <h2>Intro to Coordinate Reference Systems<a class="headerlink" href="#intro-to-coordinate-reference-systems" title="Permalink to this headline">#</a></h2>
 <p>A coordinate reference system tells Python where and how to place coordinates on Earth’s surface. For a detailed lesson on projections please go <a class="reference internal" href="d_crs_what_is_it.html#d-crs-what-is-it"><span class="std std-ref">here</span></a>.</p>
 <p>As you may recall, a coordinate reference system can either be a geographic coordinate system or a projected coordinate system (also known as a map projection). A geographic coordinate system consists of a datum, which consists of an ellipsoid model and how this ellipsoid is aligned with the geoid. It’s spherical in nature, and units are typically angular (latitude and longitude). A projected coordinate system is created by taking a geographic coordinate system and using math to transform a 3-D surface onto a flat, 2-D surface. Units are typically linear and are oftentimes measured in meters. For a refresher on coordinate systems, check out this <a class="reference external" href="https://youtu.be/HnWNhyxyUHg">YouTube video</a>.</p>
@@ -910,10 +911,10 @@ title="Print to PDF"
 </div>
 </div>
 <p>It looks like Washington, DC, albeit a bit squished! Next, let’s see how we can work with CRSs in Python.</p>
-</div>
-<div class="section" id="checking-and-setting-coordinate-reference-systems-in-python">
+</section>
+<section id="checking-and-setting-coordinate-reference-systems-in-python">
 <h2>Checking and Setting Coordinate Reference Systems in Python<a class="headerlink" href="#checking-and-setting-coordinate-reference-systems-in-python" title="Permalink to this headline">#</a></h2>
-<div class="section" id="checking-a-dataset-s-coordinate-reference-system">
+<section id="checking-a-dataset-s-coordinate-reference-system">
 <h3>Checking a dataset’s coordinate reference system<a class="headerlink" href="#checking-a-dataset-s-coordinate-reference-system" title="Permalink to this headline">#</a></h3>
 <p>To check the dataset’s CRS (assuming it has one), use the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute.</p>
 <div class="cell docutils container">
@@ -930,8 +931,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>For our shapefile, the output is a dictionary with a value of <code class="docutils literal notranslate"><span class="pre">'epsg:4326'</span></code>. We’ll cover what this means in more detail later in this chapter, but just know for now that an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code is a way to reference a CRS.</p>
-</div>
-<div class="section" id="change-a-dataset-s-crs">
+</section>
+<section id="change-a-dataset-s-crs">
 <h3>Change a dataset’s CRS<a class="headerlink" href="#change-a-dataset-s-crs" title="Permalink to this headline">#</a></h3>
 <p>To change a dataset’s CRS, we’ll need to reproject the data. Here, we will project copies of our data twice using the <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> function, once with a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string and once with an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code. Both of these values reference the same CRS (in this case, NAD83)–they are simply different ways to reference it. The projection will remain in latitude and longitude, but we will change the ellipsoid and datum.</p>
 <div class="cell docutils container">
@@ -972,13 +973,13 @@ Example 2 (EPSG code) CRS: epsg:4269
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="proj-4-string">
+</section>
+</section>
+<section id="proj-4-string">
 <h2>PROJ.4 String<a class="headerlink" href="#proj-4-string" title="Permalink to this headline">#</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string identifies and defines a particular CRS. The string holds the parameters (e.g., units, datum) of a given CRS.</p>
 <p>Sources: <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
-<div class="section" id="what-is-in-a-proj-4-string">
+<section id="what-is-in-a-proj-4-string">
 <h3>What is in a PROJ.4 string?<a class="headerlink" href="#what-is-in-a-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>Multiple parameters are needed in the string to describe a CRS. To separate the parameters in the string and identify each individual parameter, each parameter begins with a <code class="docutils literal notranslate"><span class="pre">+</span></code> sign. A CRS parameter is defined after the <code class="docutils literal notranslate"><span class="pre">+</span></code> sign.</p>
 <p>A few <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> parameters can be applied to most CRSs:</p>
@@ -1042,18 +1043,22 @@ Example 2 (EPSG code) CRS: epsg:4269
 <p>Some parameters (not listed above) are specific to certain CRSs. Be sure to always verify the parameters that are allowed for each projection. You can’t always “mix and match” the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> parameters when creating a custom projection.</p>
 <p>These parameters can be confusing. To help with this we developed some visual examples.</p>
 <p>Take for instance lambert conformal conic with the proj4 string of “+proj=lcc +lat_1=20 +lat_2=60 lon_0=-96 +datum=NAD83 +units=m”. We can see that <code class="docutils literal notranslate"><span class="pre">lat_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_2</span></code> specify the standard parallels. This is an example of a “secant” projection which touches the globe in two places in order to minimize distortion.  The central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> is moved away from Greenwich England 96 degrees W to be over roughly Dallas TX.</p>
-<div class="figure align-default" id="visualization-of-lambert-conformal-conic-proj4-string">
+<figure class="align-default" id="visualization-of-lambert-conformal-conic-proj4-string">
 <img alt="../_images/d_LambertProj_Code.png" src="../_images/d_LambertProj_Code.png" />
-<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Visualization of lambert conformal conic Proj4 string</span><a class="headerlink" href="#visualization-of-lambert-conformal-conic-proj4-string" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Visualization of lambert conformal conic Proj4 string</span><a class="headerlink" href="#visualization-of-lambert-conformal-conic-proj4-string" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>We can look at another example for a UTM projection with the proj4 string of “+proj=tmerc +lon_0=-99 +x_0=500,000 units=m”. This projection by comparison has a central meridian <code class="docutils literal notranslate"><span class="pre">lon_0</span></code> directly over Dallas TX which is 99 degrees W of Greenwich. This central meridan is assigned the ‘false easting’ <code class="docutils literal notranslate"><span class="pre">x_0</span></code> of 500,000 meters.</p>
-<div class="figure align-default" id="visualization-of-utm-zone-14-proj4-string">
+<figure class="align-default" id="visualization-of-utm-zone-14-proj4-string">
 <img alt="../_images/d_MercatorProj_Code.png" src="../_images/d_MercatorProj_Code.png" />
-<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualization of UTM zone 14 Proj4 string</span><a class="headerlink" href="#visualization-of-utm-zone-14-proj4-string" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualization of UTM zone 14 Proj4 string</span><a class="headerlink" href="#visualization-of-utm-zone-14-proj4-string" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Sources: <a class="reference external" href="https://proj.org/usage/projections.html">Cartographic projection</a>; <a class="reference external" href="https://proj.org/usage/quickstart.html">Using PROJ</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
-</div>
-<div class="section" id="creating-a-custom-crs-using-proj-4-string">
+</section>
+<section id="creating-a-custom-crs-using-proj-4-string">
 <h3>Creating a custom CRS using PROJ.4 string<a class="headerlink" href="#creating-a-custom-crs-using-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>We can change the parameters to create a custom CRS that suits our specific needs. In this section, we will create a CRS tailored to our DC shapefile.</p>
 <p>Below is the original shapefile of DC that we read in above–this will serve as a reference point for comparison.</p>
@@ -1085,7 +1090,7 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>Looks like latitude and longitude coordinates!</p>
-<div class="section" id="reprojecting-shapefile-to-a-projected-coordinate-system">
+<section id="reprojecting-shapefile-to-a-projected-coordinate-system">
 <h4>Reprojecting shapefile to a projected coordinate system<a class="headerlink" href="#reprojecting-shapefile-to-a-projected-coordinate-system" title="Permalink to this headline">#</a></h4>
 <p>Now, we will reproject the shapefile using a projected coordinate system. Here, we will use the Lambert Conformal Conic projection.</p>
 <div class="cell docutils container">
@@ -1107,7 +1112,7 @@ Name: geometry, dtype: geometry
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
-0    POLYGON ((1106986.814 4694966.592, 1106987.032...
+0    POLYGON ((1106986.814 4694966.592, 1106987.033...
 Name: geometry, dtype: geometry
 </pre></div>
 </div>
@@ -1115,8 +1120,8 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>Notice how the values on the axes changed from latitude and longitude to meters.</p>
-</div>
-<div class="section" id="setting-center-point-of-projection">
+</section>
+<section id="setting-center-point-of-projection">
 <h4>Setting center point of projection<a class="headerlink" href="#setting-center-point-of-projection" title="Permalink to this headline">#</a></h4>
 <p>Also notice how the DC appears to be “tilted” to the left when compared to DC mapped using the previous CRS (WGS84). That’s because the center of this projection is at the 90th meridian west (<code class="docutils literal notranslate"><span class="pre">+lon_0=-90</span></code>; negative is used to denote West) and the Equator (<code class="docutils literal notranslate"><span class="pre">+lat_0=0</span></code>; <code class="docutils literal notranslate"><span class="pre">0</span></code> is the default value when not specified in the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string).</p>
 <p>We can change the values for <code class="docutils literal notranslate"><span class="pre">lat_0</span></code> and <code class="docutils literal notranslate"><span class="pre">lon_0</span></code>, which refer to the latitude of origin and the central meridian, respectively. We will change those values to <code class="docutils literal notranslate"><span class="pre">38.9072</span></code> and <code class="docutils literal notranslate"><span class="pre">-77.0369</span></code>, which is the center of DC.</p>
@@ -1138,8 +1143,8 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>As seen in the new map above, the values on both axes have changed. The origin <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> is now in the center of DC.</p>
-</div>
-<div class="section" id="setting-and-exploring-standard-parallels">
+</section>
+<section id="setting-and-exploring-standard-parallels">
 <h4>Setting and exploring standard parallels<a class="headerlink" href="#setting-and-exploring-standard-parallels" title="Permalink to this headline">#</a></h4>
 <p>The <a class="reference external" href="https://proj.org/operations/projections/lcc.html"><code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string for this projection</a> has two additional parameters <code class="docutils literal notranslate"><span class="pre">lat_1</span></code> and <code class="docutils literal notranslate"><span class="pre">lat_2</span></code>, which specify the first and second parallel respectively. Recall that a conic projection “intersects” a globe at what is termed the standard parallels.</p>
 <p>Here, we will set our two standard parallels at <code class="docutils literal notranslate"><span class="pre">38.850</span></code> and <code class="docutils literal notranslate"><span class="pre">39.950</span></code> as they fall within the DC boundaries.</p>
@@ -1179,8 +1184,8 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>It appears DC has shrunk! Of course, that’s not the case in reality, but because map projections are inherently imperfect, choosing arbitrary parameters can make things worse. In this case, since the chosen standard parallels are relatively far from each other and from DC, all the data in between the standard parallels end up being compressed even more. For more information, check out this <a class="reference external" href="https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf">Esri publication on map projections</a>.</p>
-</div>
-<div class="section" id="setting-false-easting-and-false-northing">
+</section>
+<section id="setting-false-easting-and-false-northing">
 <h4>Setting false easting and false northing<a class="headerlink" href="#setting-false-easting-and-false-northing" title="Permalink to this headline">#</a></h4>
 <p>Finally, two other parameters we can change are <code class="docutils literal notranslate"><span class="pre">+x_0</span></code> and <code class="docutils literal notranslate"><span class="pre">+y_0</span></code>, which are false easting and false northing respectively. The values assigned to these parameters simply offset the axes by the respective values; they do not change or affect the projection. False easting (with a value of 500,000 m) is used in Universal Tranverse Mercator (UTM) projections so that negative coordinates are avoided to the west of the central meridian in each zone. Similarly, false northing (with a value of 10,000,000 m) is also used to avoid negative coordinates when a UTM zone is in the southern hemisphere.</p>
 <p>Let’s set a false easting value of <code class="docutils literal notranslate"><span class="pre">500000</span></code> and a false northing value of <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
@@ -1203,8 +1208,8 @@ Name: geometry, dtype: geometry
 </div>
 <p>Notice that the x-axis shifted to the left by 500,000 meters. The y-axis stayed the same because we did not use false northing. Now, the “origin” is <code class="docutils literal notranslate"><span class="pre">(500000,</span> <span class="pre">0)</span></code>.</p>
 <p>Source: <a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/Map%20coordinate%20systems/UTM%20and%20UPS.htm">Universal Transverse Mercator system, Hunter College Department of Geography and Environmental Science</a></p>
-</div>
-<div class="section" id="comparing-custom-projection-to-universal-tranverse-mercator">
+</section>
+<section id="comparing-custom-projection-to-universal-tranverse-mercator">
 <h4>Comparing custom projection to Universal Tranverse Mercator<a class="headerlink" href="#comparing-custom-projection-to-universal-tranverse-mercator" title="Permalink to this headline">#</a></h4>
 <p>UTM is conformal. So let’s compare our custom projection to UTM Zone 18N (in which DC falls).</p>
 <div class="cell docutils container">
@@ -1227,15 +1232,15 @@ Name: geometry, dtype: geometry
 </div>
 <p>Looks pretty much the same as our custom one!</p>
 <p>Source: <a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/universal-transverse-mercator.htm">Universal Transverse Mercator, Esri</a></p>
-</div>
-</div>
-</div>
-<div class="section" id="epsg-codes">
+</section>
+</section>
+</section>
+<section id="epsg-codes">
 <h2>EPSG Codes<a class="headerlink" href="#epsg-codes" title="Permalink to this headline">#</a></h2>
 <p>Many CRSs are assigned and can be referenced by an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, which consists of a four or five digit number. <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> stands for the European Petroleum Survey Group, a now-defunct organization that compiled this CRS dataset. <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> codes can be further explored with the <a class="reference external" href="http://www.epsg-registry.org/">EPSG Geodetic Parameter Dataset</a> or at <a class="reference external" href="https://spatialreference.org/ref/epsg/">SpatialReference.org</a>.</p>
 <p>Sources:
 <a class="reference external" href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara</a>; <a class="reference external" href="https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/">Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser</a></p>
-<div class="section" id="obtaining-epsg-code-from-proj-4-string">
+<section id="obtaining-epsg-code-from-proj-4-string">
 <h3>Obtaining EPSG code from PROJ.4 string<a class="headerlink" href="#obtaining-epsg-code-from-proj-4-string" title="Permalink to this headline">#</a></h3>
 <p>Not all CRSs have a corresponding <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, but we can find the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (if it exists) given a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. To do so, we can use the <code class="docutils literal notranslate"><span class="pre">to_espg()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
 <div class="cell docutils container">
@@ -1289,7 +1294,7 @@ Name: geometry, dtype: geometry
 </div>
 </div>
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
-<div class="section" id="lowering-minimum-confidence-parameter">
+<section id="lowering-minimum-confidence-parameter">
 <h4>Lowering minimum confidence parameter<a class="headerlink" href="#lowering-minimum-confidence-parameter" title="Permalink to this headline">#</a></h4>
 <p>We can lower the min_confidence parameter value in the <code class="docutils literal notranslate"><span class="pre">to_epsg()</span></code> function, which will cause the function to return an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code that is the closest match to the provided <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string.</p>
 <div class="cell docutils container">
@@ -1311,10 +1316,10 @@ Name: geometry, dtype: geometry
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
 <p>To get the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string from an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, we can <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.crs.html">use the <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> module</a>.</p>
 <p>Sources: <a class="reference external" href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf">Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara</a>; <a class="reference external" href="https://mgimond.github.io/Spatial/chp09-0.html">Chapter 9: Coordinate Systems, Manuel Gimond</a>; <a class="reference external" href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/coordinate-systems-difference/">Coordinate Systems: What’s the Difference?, Esri</a>; <a class="reference external" href="https://automating-gis-processes.github.io/CSC18/lessons/L2/projections.html">Map projections, Henrikki Tenkanen</a>; <a class="reference external" href="https://autogis-site.readthedocs.io/en/stable/notebooks/L2/projections.html">Map projections, Henrikki Tenkanen &amp; Vuokko Heikinheimo</a></p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

@@ -8,7 +8,7 @@
 # ```{admonition} Learning Objectives
 #   - Visualize RGB images from remotely sensed data
 #   - Visualize true-color and false-color composites
-#   - 
+#   - View path and row of swaths
 # ```
 # ```{admonition} Review
 # * [Data Structures](c_features.md)
@@ -63,6 +63,21 @@ with gw.open(l8_224078_20200518) as src:
 plt.tight_layout(pad=1)
 
 
+# Note you can also set the missing data value when opening a file (assuming it is not in the raster profile), those values then need to be masked using `gw.mask_nodata()` and `src` updated:
+
+# In[4]:
+
+
+# load example data
+
+fig, ax = plt.subplots(dpi=200)
+with gw.open(l8_224078_20200518, nodata=0) as src:
+    # replace 0 with nan
+    src = src.gw.mask_nodata()
+    src.sel(band=[3, 2, 1]).plot.imshow(robust=True, ax=ax)
+plt.tight_layout(pad=1)
+
+
 # ## Plot False Color Composites 
 # We can use the red, green, and blue channels to show different parts of the spectrum. This allows us for instance to "see" near-infrared (nir). Moreover certain combinations of bands allow us to better identify vegetation, urban environments, water, etc. There are many false colored composites that can be used to highlight different features. 
 # 
@@ -71,7 +86,7 @@ plt.tight_layout(pad=1)
 # ### Color Infrared (vegetation)
 # Here we will look at a common false color combo to assigns the nir band to the color red. This make vegetation appear bright red.
 
-# In[4]:
+# In[5]:
 
 
 from geowombat.data import rgbn
@@ -135,11 +150,11 @@ plt.savefig("rgb_plot.png", dpi=150)
 # ## Plot LandSat Tile Footprints
 # Here we set up a more complicated plotting function for near IR 'nir'.  Note the use of `footprint_grid`.
 
-# In[5]:
+# In[6]:
 
 
 from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
-
+from os.path  import basename
 def plot(bounds_by, ref_image=None, cmap='viridis'):
     fig, ax = plt.subplots(dpi=200)
     with gw.config.update(ref_image=ref_image):
@@ -147,7 +162,8 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
                         band_names=['nir'],
                         chunks=256,
                         mosaic=True,
-                        bounds_by=bounds_by) as srca:
+                        bounds_by=bounds_by,
+                        persist_filenames=True) as srca:
             # Plot the NIR band
             srca.where(srca != 0).sel(band='nir').plot.imshow(robust=True, cbar_kwargs={'label': 'DN'}, ax=ax)
             # Plot the image chunks
@@ -158,7 +174,7 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
             for row in srca.gw.footprint_grid.itertuples(index=False):
                 ax.scatter(row.geometry.centroid.x, row.geometry.centroid.y,
                             s=50, color='red', edgecolor='white', lw=1)
-                ax.annotate(row.footprint.replace('.TIF', ''),
+                ax.annotate(basename(row.footprint).replace('.TIF', ''),
                             (row.geometry.centroid.x, row.geometry.centroid.y),
                             color='black',
                             size=8,
@@ -176,7 +192,7 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
 
 # The two plots below illustrate how two images can be mosaicked. The orange grids highlight the image footprints while the black grids illustrate the ``DataArray`` chunks.
 
-# In[6]:
+# In[7]:
 
 
 plot('union')

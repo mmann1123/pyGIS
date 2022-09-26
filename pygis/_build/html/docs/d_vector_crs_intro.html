@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to define a projection for and reproject vector data (shapefiles, geojson) using geopandas. We use examples based on changes to proj4strings." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to define a projection for and reproject vector data (shapefiles, geojson) using geopandas. We use examples based on changes to proj4strings." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à définir une projection et à reprojeter des données vectorielles (fichiers de formes, geojson) à l'aide de géopandas. Nous utilisons des exemples basés sur des changements apportés à proj4strings." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a definir una proyección y reproyectar datos vectoriales (shapefiles, geojson) usando geopandas. Usamos ejemplos basados en cambios en proj4strings." lang="es" name="description" xml:lang="es" />
 <meta content="spatial, crs, proj4string, EPSG, coordinate reference system, projection, vector, shapefile" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -197,7 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -695,17 +696,19 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="vector-coordinate-reference-systems-crs">
+<section class="tex2jax_ignore mathjax_ignore" id="vector-coordinate-reference-systems-crs">
 <h1>Vector Coordinate Reference Systems (CRS)<a class="headerlink" href="#vector-coordinate-reference-systems-crs" title="Permalink to this headline">#</a></h1>
 <p>When it comes to coordinate reference systems points, lines and polygons are convenient because each point or node has an assigned coordinate pair (x,y). The only trick then is to know how those coordinates relate to the coordinate space, or location on the ground.</p>
-<div class="section" id="define-a-projection-for-points-lines-polygons">
+<section id="define-a-projection-for-points-lines-polygons">
 <h2>Define a Projection for Points, Lines, Polygons<a class="headerlink" href="#define-a-projection-for-points-lines-polygons" title="Permalink to this headline">#</a></h2>
 <p>When a point, line or polyon is created each point or node has two coordinates <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. The location of these two points on the ground will change wildly between projections. The coordinate pair (0,0) might mean a location just off shore from Ghana with WGS84 LatLon, or in the middle of the Pacific ocean in another.</p>
 <p>Let’s take a look at the example of a polygon with coordinates (0,45),(5,45),(5,40),(0,40) below. In the left pane we can see that, although we have the polygon’s node coordinates, we don’t know where they are located! This is because no coordinate reference system has been assigned to it. Could be in outer space for all we know. On the right, we can see that we have assigned it WGS84 geographic lat lon i.e. <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>. Suddenly the coordinates make sense, because we know how they relate to locations on the ground.</p>
-<div class="figure align-default" id="example-of-assigning-a-coordinate-reference-system">
+<figure class="align-default" id="example-of-assigning-a-coordinate-reference-system">
 <a class="reference internal image-reference" href="../_images/d_crs_assigned.png"><img alt="../_images/d_crs_assigned.png" src="../_images/d_crs_assigned.png" style="width: 700px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of assigning a coordinate reference system</span><a class="headerlink" href="#example-of-assigning-a-coordinate-reference-system" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of assigning a coordinate reference system</span><a class="headerlink" href="#example-of-assigning-a-coordinate-reference-system" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Every time we create vector data (or receive it from someone else), we need to make sure that a projection is assigned to it.</p>
 <p>The following demonstrates how to</p>
 <div class="cell docutils container">
@@ -736,15 +739,17 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>Take a moment to review proj4 string and EPSG codes <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">here</span></a></p>
 </div>
-</div>
-<div class="section" id="reproject-points-lines-polygons">
+</section>
+<section id="reproject-points-lines-polygons">
 <h2>Reproject Points, Lines, Polygons<a class="headerlink" href="#reproject-points-lines-polygons" title="Permalink to this headline">#</a></h2>
 <p>Once a projection is assigned we often have to ‘reproject’ it to another one. Reprojection entails using a set of formulas to convert (x,y) stored in latitude and longitude into another coordinate space. This entails a two step process.</p>
 <p>Looking at the example below, we will move from Sinosoidal to Hobo-Dyer. The first step however is to use the “inverse equation” to convert coordinate pairs from Sinosoidal back to lat lon, and the use the forward equation to convert lat lon into the Hobo-Dyer coordinate space.</p>
-<div class="figure align-default" id="reprojecting-vectors-with-inverse-and-forward-equations">
+<figure class="align-default" id="reprojecting-vectors-with-inverse-and-forward-equations">
 <a class="reference internal image-reference" href="../_images/d_reprojection_example.jpg"><img alt="../_images/d_reprojection_example.jpg" src="../_images/d_reprojection_example.jpg" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 26 </span><span class="caption-text">Reprojecting vectors with inverse and forward equations</span><a class="headerlink" href="#reprojecting-vectors-with-inverse-and-forward-equations" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reprojecting vectors with inverse and forward equations</span><a class="headerlink" href="#reprojecting-vectors-with-inverse-and-forward-equations" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <!-- Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to reproject data. -->
 <p>These ‘forward’ and ‘inverse’ equations can be simple or complex. To make things easy to understand lets look at the example of reprojecting from proj4 code <code class="docutils literal notranslate"><span class="pre">+proj=longlat</span> <span class="pre">+datum=WGS84</span></code> to <code class="docutils literal notranslate"><span class="pre">+proj=longlat</span> <span class="pre">+datum=WGS84</span> <span class="pre">+lon_0=-10</span></code>, where <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> just moves the prime meridian 10 degrees west (west is negative). Because we are already in latitude and longitude we can ignore the ‘inverse’ equation and just look at the ‘forward’ equation.</p>
 <p>In this case the ‘forward’ equation is very simple:</p>
@@ -757,10 +762,12 @@ x = x + 10
 y = y
 \]</div>
 <p>As result the polygon remains in the same location, but in the ‘new’ projection longitude values are now all 10 degrees higher.</p>
-<div class="figure align-default" id="reprojecting-by-moving-the-prime-meridian-west">
+<figure class="align-default" id="reprojecting-by-moving-the-prime-meridian-west">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_vector.png"><img alt="../_images/d_europe_translate_vector.png" src="../_images/d_europe_translate_vector.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Reprojecting by moving the prime meridian west</span><a class="headerlink" href="#reprojecting-by-moving-the-prime-meridian-west" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Reprojecting by moving the prime meridian west</span><a class="headerlink" href="#reprojecting-by-moving-the-prime-meridian-west" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Most ‘forward’ and ‘inverse’ equations are non-linear and more complex. Take for instance the Gall-Peters forward projection equations are shown below:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -835,8 +842,8 @@ FIGURE 5.5: Illustrations of affine transformations: shift, scale and rotate.
 
 Finally, the newly created geometries can replace the old ones with the st_set_geometry() function:
 
-nz_scale_sf = st_set_geometry(nz, nz_scale) --></div>
-</div>
+nz_scale_sf = st_set_geometry(nz, nz_scale) --></section>
+</section>
 
     <script type="text/x-thebe-config">
     {

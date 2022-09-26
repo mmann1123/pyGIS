@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, attribute data, subset, extract, selection, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -193,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -737,11 +738,11 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="extracting-spatial-data">
+<section class="tex2jax_ignore mathjax_ignore" id="extracting-spatial-data">
 <h1>Extracting Spatial Data<a class="headerlink" href="#extracting-spatial-data" title="Permalink to this headline">#</a></h1>
 <p>Subsetting and extracting data is useful when we want to select or analyze a portion of the dataset based on a feature’s location, attribute, or its spatial relationship to another dataset.</p>
 <p>In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select location by attribute, and select by location.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -890,8 +891,8 @@ title="Print to PDF"
 <img alt="../_images/e_extraction_9_1.png" src="../_images/e_extraction_9_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="clip-spatial-polygons">
+</section>
+<section id="clip-spatial-polygons">
 <h2>Clip Spatial Polygons<a class="headerlink" href="#clip-spatial-polygons" title="Permalink to this headline">#</a></h2>
 <p>Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  <code class="docutils literal notranslate"><span class="pre">clip()</span></code> in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. <em>All attributes for the resulting clipped vector will be kept.</em> <a class="footnote-reference brackets" href="#gpd-clip" id="id1">1</a></p>
 <div class="admonition note">
@@ -913,6 +914,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/mnt/space/miniconda3/envs/pygisbook/lib/python3.9/site-packages/geopandas/tools/clip.py:66: FutureWarning: In a future version, `df.iloc[:, i] = newvals` will attempt to set the values inplace instead of always setting a new array. To retain the old behavior, use either `df[df.columns[i]] = newvals` or, if columns are non-unique, `df.isetitem(i, newvals)`
+  clipped.loc[
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -937,53 +942,53 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>MULTIPOLYGON (((1836501.066 656512.837, 183649...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Marin County</td>
-      <td>MULTIPOLYGON (((1822277.787 655539.623, 182231...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Napa County</td>
-      <td>POLYGON ((1860171.549 724651.231, 1860170.736 ...</td>
+      <th>8</th>
+      <td>Sonoma County</td>
+      <td>POLYGON ((1813605.098 736060.762, 1813555.586 ...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>San Francisco County</td>
-      <td>MULTIPOLYGON (((1834364.295 641524.540, 183435...</td>
+      <td>MULTIPOLYGON (((1834350.912 641735.721, 183437...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Marin County</td>
+      <td>MULTIPOLYGON (((1830505.126 653828.366, 183051...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Napa County</td>
+      <td>POLYGON ((1860170.736 724644.473, 1860169.835 ...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>San Mateo County</td>
-      <td>MULTIPOLYGON (((1850042.437 615031.357, 185003...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Santa Clara County</td>
-      <td>MULTIPOLYGON (((1858733.082 607586.450, 185874...</td>
+      <td>MULTIPOLYGON (((1850037.244 614954.640, 185085...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Solano County</td>
-      <td>MULTIPOLYGON (((1875491.908 673077.900, 187549...</td>
+      <td>MULTIPOLYGON (((1875491.252 673069.363, 187548...</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>Sonoma County</td>
-      <td>POLYGON ((1813621.641 736108.000, 1813605.098 ...</td>
+      <th>1</th>
+      <td>Contra Costa County</td>
+      <td>MULTIPOLYGON (((1836498.140 656511.674, 183649...</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860073.077 612066.462, 185990...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Santa Clara County</td>
+      <td>MULTIPOLYGON (((1858743.389 607583.832, 185874...</td>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../_images/e_extraction_11_1.png" src="../_images/e_extraction_11_1.png" />
+</div></div><img alt="../_images/e_extraction_11_2.png" src="../_images/e_extraction_11_2.png" />
 </div>
 </div>
 <p>We can clip any vector type. Next, we will clip the wells point data to our created rectangle polygon.</p>
@@ -1028,44 +1033,44 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th>2</th>
-      <td>Flag City Well 3</td>
-      <td>Unknown</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1922067.711 679380.918)</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Flag City Well 1</td>
-      <td>Unknown</td>
-      <td>Single Well</td>
-      <td>170</td>
-      <td>POINT (1922680.537 679641.516)</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Flag City Well 2</td>
-      <td>Unknown</td>
-      <td>Single Well</td>
-      <td>180</td>
-      <td>POINT (1921777.555 679393.668)</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>W-041</td>
+      <th>994</th>
+      <td>SSWD 47</td>
       <td>Other</td>
       <td>Single Well</td>
-      <td>256</td>
-      <td>POINT (1919777.393 713390.175)</td>
+      <td>350</td>
+      <td>POINT (1925783.386 732796.136)</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>W-042</td>
+      <th>95</th>
+      <td>SSWD 69</td>
       <td>Other</td>
       <td>Single Well</td>
-      <td>245</td>
-      <td>POINT (1917586.004 713468.595)</td>
+      <td>425</td>
+      <td>POINT (1921709.808 732832.127)</td>
+    </tr>
+    <tr>
+      <th>2158</th>
+      <td>MW12A</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>285</td>
+      <td>POINT (1921726.124 732861.723)</td>
+    </tr>
+    <tr>
+      <th>2155</th>
+      <td>MW12E</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>1005</td>
+      <td>POINT (1921726.124 732861.723)</td>
+    </tr>
+    <tr>
+      <th>2154</th>
+      <td>MW12C</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>615</td>
+      <td>POINT (1921726.124 732861.723)</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1076,44 +1081,44 @@ title="Print to PDF"
       <td>...</td>
     </tr>
     <tr>
-      <th>6029</th>
-      <td>None</td>
-      <td>Unknown</td>
-      <td>Unknown</td>
-      <td>465</td>
-      <td>POINT (1848120.290 703766.303)</td>
+      <th>1616</th>
+      <td>MW-4C</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>820</td>
+      <td>POINT (1918390.228 635230.531)</td>
     </tr>
     <tr>
-      <th>6030</th>
+      <th>1606</th>
+      <td>MW-4A</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>505</td>
+      <td>POINT (1918390.228 635230.531)</td>
+    </tr>
+    <tr>
+      <th>5071</th>
       <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1907552.324 635281.368)</td>
+    </tr>
+    <tr>
+      <th>5222</th>
+      <td>09N09W28N001M</td>
       <td>Irrigation</td>
-      <td>Unknown</td>
-      <td>51</td>
-      <td>POINT (1842158.280 695286.242)</td>
-    </tr>
-    <tr>
-      <th>6031</th>
-      <td>None</td>
-      <td>Unknown</td>
-      <td>Unknown</td>
-      <td>315</td>
-      <td>POINT (1848812.488 704308.579)</td>
-    </tr>
-    <tr>
-      <th>6032</th>
-      <td>GV FARM</td>
-      <td>Residential</td>
       <td>Single Well</td>
-      <td>67</td>
-      <td>POINT (1855297.377 693189.634)</td>
+      <td>53</td>
+      <td>POINT (1793563.601 734808.898)</td>
     </tr>
     <tr>
-      <th>6033</th>
-      <td>None</td>
-      <td>Residential</td>
-      <td>Unknown</td>
-      <td>76</td>
-      <td>POINT (1841755.238 707939.225)</td>
+      <th>1727</th>
+      <td>AVAA-12</td>
+      <td>Irrigation</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1804172.745 735379.942)</td>
     </tr>
   </tbody>
 </table>
@@ -1121,8 +1126,8 @@ title="Print to PDF"
 </div></div><img alt="../_images/e_extraction_13_1.png" src="../_images/e_extraction_13_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="select-location-by-attributes">
+</section>
+<section id="select-location-by-attributes">
 <h2>Select Location by Attributes<a class="headerlink" href="#select-location-by-attributes" title="Permalink to this headline">#</a></h2>
 <p>Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> uses the indexing and selection methods  in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, so data in a GeoDataFrame can be selected and queried in the same way a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe can. <a class="footnote-reference brackets" href="#gpd-select" id="id2">2</a>, <a class="footnote-reference brackets" href="#pd-select" id="id3">3</a>, <a class="footnote-reference brackets" href="#pd-subset" id="id4">4</a></p>
 <p>We will use use different criteria to subset the wells dataset.</p>
@@ -1514,8 +1519,8 @@ First two rows:
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="select-by-location">
+</section>
+<section id="select-by-location">
 <h2>Select by Location<a class="headerlink" href="#select-by-location" title="Permalink to this headline">#</a></h2>
 <p>Selecting by location selects features based on its relative spatial relationship with another dataset. In other words, features are selected based on their location relative to the location of another dataset.</p>
 <p>For example:</p>
@@ -1579,7 +1584,7 @@ First two rows:
 <p class="admonition-title">Note</p>
 <p>The functions for these spatial relationships will generally output a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> series with Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a <code class="docutils literal notranslate"><span class="pre">True</span></code> output will be retained).</p>
 </div>
-<div class="section" id="method-1-shapely-vector">
+<section id="method-1-shapely-vector">
 <h3>Method 1 - Shapely vector<a class="headerlink" href="#method-1-shapely-vector" title="Permalink to this headline">#</a></h3>
 <p>These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.</p>
 <div class="cell docutils container">
@@ -1697,8 +1702,8 @@ First two rows:
 </div></div><img alt="../_images/e_extraction_21_4.png" src="../_images/e_extraction_21_4.png" />
 </div>
 </div>
-</div>
-<div class="section" id="method-2-geodataframe">
+</section>
+<section id="method-2-geodataframe">
 <h3>Method 2 - GeoDataFrame<a class="headerlink" href="#method-2-geodataframe" title="Permalink to this headline">#</a></h3>
 <p>If we’re trying to select features that have a specified spatial relationship with another <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> object, it gets a little tricky. This is because the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on. <a class="footnote-reference brackets" href="#gpd-within" id="id6">6</a>, <a class="footnote-reference brackets" href="#gpd-data" id="id7">7</a></p>
 <p>As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets–or else we’ll get a warning and the output will be empty.</p>
@@ -1849,9 +1854,9 @@ First two rows:
 <dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/data_structures.html">Data Structures, GeoPandas</a></p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

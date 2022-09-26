@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how to convert vector shapefiles into raster files using rasterio." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how to convert vector shapefiles into raster files using rasterio." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, python, rasterio, raster, vector, shapefile, rasterize" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
@@ -23,7 +24,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -40,7 +41,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -193,7 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -699,7 +700,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="rasterize-vectors-w-rasterio">
+  <section class="tex2jax_ignore mathjax_ignore" id="rasterize-vectors-w-rasterio">
 <h1>Rasterize Vectors w. Rasterio<a class="headerlink" href="#rasterize-vectors-w-rasterio" title="Permalink to this headline">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -719,7 +720,7 @@ title="Print to PDF"
 </div>
 <hr class="docutils" />
 <p>Rasterizing vectors can be helpful if you want to incorporate vector data (i.e., point, line, or polygon) in your raster analysis. The process is essentially what the name suggests: We take a vector and convert it into pixels. This can be done with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>.</p>
-<div class="section" id="setup">
+<section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <p>We’ll begin by importing our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
@@ -736,19 +737,21 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="rasterize-vectors-with-rasterio">
+</section>
+<section id="rasterize-vectors-with-rasterio">
 <h2>Rasterize vectors with rasterio<a class="headerlink" href="#rasterize-vectors-with-rasterio" title="Permalink to this headline">#</a></h2>
-<p>We’ll read in the vector file of some of California’s counties. We will also read in a raster file to get the raster’s metadata (i.e., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “reference” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform (UL corner location, cell size etc). For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html#d-affine-md"><span class="std std-ref">Affine Transforms</span></a>.</p>
+<p>We’ll read in the vector file of some of California’s counties. We will also read in a raster file to get the raster’s metadata (i.e., coordinate system) so that we can apply those parameters to the vector file. In other words, the raster will serve as a “reference” for the the rasterization of the vector. In particular, we are going to match the shape (number of rows and columns) and the transform (UL corner location, cell size etc). For a refresher on transforms, please see the chapter on <a class="reference internal" href="d_affine.html"><span class="doc std std-doc">Affine Transforms</span></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The vector and raster <strong>must be</strong> be in the same coordinate system. If not, you’ll need to re-project one of them so they are the same. To re-project vectors, see the chapter on <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">Understanding CRS Codes</span></a>. To re-project rasters, see the chapter on <a class="reference internal" href="e_raster_reproject.html"><span class="doc std std-doc">Reproject Rasters w. Rasterio and Geowombat</span></a>.</p>
 </div>
 <p>One important parameter in this function is <code class="docutils literal notranslate"><span class="pre">all_touched</span></code> which determines how zones are determined by polygons relative to the reference raster’s cell centroids. Setting it to <code class="docutils literal notranslate"><span class="pre">False</span></code> implies that membership in a zone, defined by a polygon geometry, should be defined by whether it contains the centroid of a cell. <code class="docutils literal notranslate"><span class="pre">True</span></code> includes any cell that geometry boundary intersects.</p>
-<div class="figure align-default" id="all-touched-rasterization">
+<figure class="align-default" id="all-touched-rasterization">
 <img alt="../_images/zonal_stats.jpg" src="../_images/zonal_stats.jpg" />
-<p class="caption"><span class="caption-number">Fig. 58 </span><span class="caption-text">all_touched determines the extent of zones</span><a class="headerlink" href="#all-touched-rasterization" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">all_touched determines the extent of zones</span><a class="headerlink" href="#all-touched-rasterization" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in vector</span>
@@ -763,7 +766,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="section" id="rasterize-binary-values-for-shapes">
+<section id="rasterize-binary-values-for-shapes">
 <h3>Rasterize Binary Values for Shapes<a class="headerlink" href="#rasterize-binary-values-for-shapes" title="Permalink to this headline">#</a></h3>
 <p>With our data loaded, we can rasterize the vector using the metadata from the raster using <code class="docutils literal notranslate"><span class="pre">rasterize()</span></code> in the <code class="docutils literal notranslate"><span class="pre">rasterio.features</span></code> module. For more information on this function, check out <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/api/rasterio.features.html#rasterio.features.rasterize">the <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> documentation</a>.</p>
 <div class="cell docutils container">
@@ -789,8 +792,8 @@ title="Print to PDF"
 <img alt="../_images/e_raster_rasterize_5_0.png" src="../_images/e_raster_rasterize_5_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="rasterize-attribute-value-using-rasterio">
+</section>
+<section id="rasterize-attribute-value-using-rasterio">
 <h3>Rasterize Attribute Value using Rasterio<a class="headerlink" href="#rasterize-attribute-value-using-rasterio" title="Permalink to this headline">#</a></h3>
 <p>Often we want to burn in the value of a shapefile’s attributes to the raster. We can do this by creating geometry, value pairs. In this example we take create a columns called <code class="docutils literal notranslate"><span class="pre">id</span></code> and assign the same values as the index. <code class="docutils literal notranslate"><span class="pre">id</span></code> will then be used to create our (geometry, value) pairs used for rasterization.</p>
 <p>Note we use <code class="docutils literal notranslate"><span class="pre">all_touched=True</span></code> to avoid gaps between counties, which can introduce its own problems b/c two counties can compete for the same cell.</p>
@@ -838,9 +841,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

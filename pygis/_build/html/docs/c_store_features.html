@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Data Storage Formats &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +38,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -190,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -758,11 +759,11 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="data-storage-formats">
+<section class="tex2jax_ignore mathjax_ignore" id="data-storage-formats">
 <h1>Data Storage Formats<a class="headerlink" href="#data-storage-formats" title="Permalink to this headline">#</a></h1>
-<div class="section" id="vector-data-file-formats">
+<section id="vector-data-file-formats">
 <h2>Vector Data File Formats<a class="headerlink" href="#vector-data-file-formats" title="Permalink to this headline">#</a></h2>
-<div class="section" id="geojson">
+<section id="geojson">
 <h3>GeoJSON<a class="headerlink" href="#geojson" title="Permalink to this headline">#</a></h3>
 <p>GeoJSON is an open standard format designed for representing simple geographical features, along with their non-spatial attributes. It is based on the JSON format. The features include points, line strings, polygons, and multi-part collections of these types. One of it’s primary advantages is that it is human readible and stores all the relevant data in a single text file. As result however, these files can get very large when storing complex geometries.</p>
 <p>Here’s a simple example of a FeatureCollection that includes a point, line and polygon <code class="docutils literal notranslate"><span class="pre">geometry</span></code> with some attributes stored as <code class="docutils literal notranslate"><span class="pre">properties</span></code>:</p>
@@ -801,12 +802,12 @@ title="Print to PDF"
      <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="geopackage">
+</section>
+<section id="geopackage">
 <h3>GeoPackage<a class="headerlink" href="#geopackage" title="Permalink to this headline">#</a></h3>
 <p>This is a relatively new data format that follows <a class="reference external" href="https://en.wikipedia.org/wiki/Open_format">open format standards</a> (i.e. it is non-proprietary). It’s built on top of SQLite (a self-contained relational database). Its one big advantage over many other vector formats is its compactness–coordinate value, metadata, attribute table, projection information, etc…, are all stored in a <em>single</em> file which facilitates portability. Its filename usually ends in <code class="docutils literal notranslate"><span class="pre">.gpkg</span></code>. Applications such as QGIS (2.12 and up), R and ArcGIS will recognize this format (ArcGIS version 10.2.2 and above will read the file from ArcCatalog but requires a script to create a GeoPackage).</p>
-</div>
-<div class="section" id="shapefile">
+</section>
+<section id="shapefile">
 <h3>Shapefile<a class="headerlink" href="#shapefile" title="Permalink to this headline">#</a></h3>
 <p>A <strong>shapefile</strong> is a file-based data format native to ArcView 3.x software (a much older version of ArcMap). Conceptually, a shapefile is a feature class–it stores a collection of features that have the same geometry type (point, line, or polygon), the same attributes, and a common spatial extent.</p>
 <p>Despite what its name may imply, a “single” shapefile is actually composed of at least three files, and as many as eight. Each file that makes up a “shapefile” has a common filename but different extension type.</p>
@@ -844,37 +845,39 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="file-geodatabase">
+</section>
+<section id="file-geodatabase">
 <h3>File Geodatabase<a class="headerlink" href="#file-geodatabase" title="Permalink to this headline">#</a></h3>
 <p>A <strong>file geodatabase</strong> is a relational database storage format. It’s a far more complex data structure than the shapefile and consists of a <strong>.gdb</strong> folder housing dozens of files. Its complexity renders it more versatile allowing it to store multiple feature classes and enabling topological definitions (i.e. allowing the user to define rules that govern the way different feature classes relate to one another). An example of the contents of a geodatabase is shown in the following figure.</p>
-<div class="figure align-default" id="geodatabase">
+<figure class="align-default" id="geodatabase">
 <img alt="../_images/geodatabase.jpg" src="../_images/geodatabase.jpg" />
-</div>
-</div>
-</div>
-<div class="section" id="raster-data-file-formats">
+</figure>
+</section>
+</section>
+<section id="raster-data-file-formats">
 <h2>Raster Data File Formats<a class="headerlink" href="#raster-data-file-formats" title="Permalink to this headline">#</a></h2>
 <p>Rasters are in part defined by their pixel depth. Pixel depth defines the range of distinct values the raster can store. For example, a 1-bit raster can only store 2 distinct values: 0 and 1.</p>
-<div class="figure align-default" id="pixel-depth">
+<figure class="align-default" id="pixel-depth">
 <img alt="../_images/raster_storage.png" src="../_images/raster_storage.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Pixel depth allows for a wider range of values but also take up more space</span><a class="headerlink" href="#pixel-depth" title="Permalink to this image">#</a></p>
-</div>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Pixel depth allows for a wider range of values but also take up more space</span><a class="headerlink" href="#pixel-depth" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>There is a wide range of raster file formats used in the GIS world. Some of the most popular ones are listed below.</p>
-<div class="section" id="imagine">
+<section id="imagine">
 <h3>Imagine<a class="headerlink" href="#imagine" title="Permalink to this headline">#</a></h3>
 <p>The <strong>Imagine</strong> file format was originally created by an image processing software company called ERDAS. This file format consists of a single <strong>.img</strong> file. This is a simpler file format than the shapefile. It is sometimes accompanied by an .xml file which usually stores metadata information about the raster layer.</p>
-</div>
-<div class="section" id="geotiff">
+</section>
+<section id="geotiff">
 <h3>GeoTiff<a class="headerlink" href="#geotiff" title="Permalink to this headline">#</a></h3>
 <p>A popular public domain raster data format is the <strong>GeoTIFF</strong> format. If maximum portability and platform independence is important, this file format may be a good choice.</p>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>File Geodatabase<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>A raster file can also be stored in a file geodatabase alongside vector files. Geodatabases have the benefit of defining image mosaic structures thus allowing the user to create “stitched” images from multiple image files stored in the geodatabase. Also, processing very large raster files can be computationally more efficient when stored in a file geodatabase as opposed to an Imagine or GeoTiff file format.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

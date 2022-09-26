@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta content="Learn how extract pixel values from raster data like sentinel imagery, additionally extract by row and column index, extract by bound window, extract by coordinate, extract by polygon." lang="en" name="description" xml:lang="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Learn how extract pixel values from raster data like sentinel imagery, additionally extract by row and column index, extract by bound window, extract by coordinate, extract by polygon." lang="en" name="description" xml:lang="en" />
 <meta content="Découvrez comment extraire des valeurs de pixels à partir de données raster telles que l'imagerie sentinelle, extraire en outre par index de ligne et de colonne, extraire par fenêtre liée, extraire par coordonnées, extraire par polygone." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a extraer valores de píxeles de datos ráster como imágenes centinela, extraer adicionalmente por índice de fila y columna, extraer por ventana vinculada, extraer por coordenada, extraer por polígono." lang="es" name="description" xml:lang="es" />
 <meta content="spatial,raster, extract by point, extract by polygon, extract by bounds, remote sensing" name="keywords" />
@@ -25,7 +26,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,7 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
@@ -195,7 +196,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="c_rasters.html">
-   Raster Data in Python
+   Spatial Raster Data in Python
   </a>
  </li>
 </ul>
@@ -741,10 +742,10 @@ title="Print to PDF"
 </ul>
 </div>
 <hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="raster-data-extraction">
+<section class="tex2jax_ignore mathjax_ignore" id="raster-data-extraction">
 <h1>Raster Data Extraction<a class="headerlink" href="#raster-data-extraction" title="Permalink to this headline">#</a></h1>
 <p>Raster data is often of little use unless we can extract and summarize the data. For instance, extracting raster to points by coordinates allows us to pass data to machine learning models for land cover classification or cloud masking.</p>
-<div class="section" id="subsetting-rasters">
+<section id="subsetting-rasters">
 <h2>Subsetting rasters<a class="headerlink" href="#subsetting-rasters" title="Permalink to this headline">#</a></h2>
 <p>We can subset sections of the data array in a number of ways. In this case we will create a slice based on row and column location to subset LandSat data using a <code class="docutils literal notranslate"><span class="pre">rasterio.window.Window</span></code>.</p>
 <p>Either a <code class="docutils literal notranslate"><span class="pre">rasterio.window.Window</span></code> object or tuple can be used with <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code>.</p>
@@ -767,21 +768,22 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;array-c1686f70048cb766e2fe94fb3c34fb6d&#39; (band: 3, y: 100, x: 100)&gt;
-dask.array&lt;array, shape=(3, 100, 100), dtype=float32, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;array-444557cdb992603699462903d82d3616&#39; (band: 3, y: 100,
+                                                            x: 100)&gt;
+dask.array&lt;array, shape=(3, 100, 100), dtype=float32, chunksize=(3, 64, 64), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
   * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.05e+06 2.05e+06
   * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.935e+05 7.935e+05
 Attributes:
-    transform:          | 5.00, 0.00, 792988.00|\n| 0.00,-5.00, 2050382.00|\n...
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan, nan)
-    offsets:            (0.0, 0.0, 0.0, 0.0)
-    data_are_separate:  0
-    data_are_stacked:   0
+    transform:           | 5.00, 0.00, 792988.00|\n| 0.00,-5.00, 2050382.00|\...
+    crs:                 +init=epsg:32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan, nan)
+    offsets:             (0.0, 0.0, 0.0, 0.0)
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 </div>
@@ -812,8 +814,8 @@ Attributes:
         <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="extracting-data-by-coordinates">
+</section>
+<section id="extracting-data-by-coordinates">
 <h2>Extracting data by coordinates<a class="headerlink" href="#extracting-data-by-coordinates" title="Permalink to this headline">#</a></h2>
 <p>To extract values at a coordinate pair, translate the coordinates into array indices. For extraction by geometry, for instance with a shapefile, see <a class="reference internal" href="#f-rs-extraction-point"><span class="std std-ref">extract by point geometry</span></a>.</p>
 <div class="cell docutils container">
@@ -866,8 +868,8 @@ Attributes:
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="extracting-data-with-point-geometry">
+</section>
+<section id="extracting-data-with-point-geometry">
 <span id="f-rs-extraction-point"></span><h2>Extracting data with point geometry<a class="headerlink" href="#extracting-data-with-point-geometry" title="Permalink to this headline">#</a></h2>
 <p>In the example below, ‘l8_224078_20200518_points’ is a <a class="reference external" href="https://www.geopackage.org/">GeoPackage</a> of point locations, and the output <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html?highlight=geodataframe#geopandas.GeoDataFrame">GeoPandas GeoDataFrame</a>. To extract the raster values at the point locations, use <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code>.</p>
 <div class="cell docutils container">
@@ -962,8 +964,8 @@ epsg:4326
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="extracting-time-series-images-by-point-geometry">
+</section>
+<section id="extracting-time-series-images-by-point-geometry">
 <h2>Extracting time series images by point geometry<a class="headerlink" href="#extracting-time-series-images-by-point-geometry" title="Permalink to this headline">#</a></h2>
 <p>We can also easily extract a time series of raster images. Extracted pixel values are provided in ‘wide’ format with appropriate labels, for instance the column ‘t2_blue’ would be the blue band for the second time period</p>
 <div class="cell docutils container">
@@ -1002,8 +1004,8 @@ epsg:4326
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="extracting-data-by-polygon-geometry">
+</section>
+<section id="extracting-data-by-polygon-geometry">
 <h2>Extracting data by polygon geometry<a class="headerlink" href="#extracting-data-by-polygon-geometry" title="Permalink to this headline">#</a></h2>
 <p>To extract values within polygons, use the same <code class="docutils literal notranslate"><span class="pre">geowombat.extract</span></code> function.</p>
 <div class="cell docutils container">
@@ -1051,7 +1053,7 @@ epsg:4326
 </div>
 </div>
 </div>
-<div class="section" id="calculate-mean-pixel-value-by-polygon">
+<section id="calculate-mean-pixel-value-by-polygon">
 <h3>Calculate mean pixel value by polygon<a class="headerlink" href="#calculate-mean-pixel-value-by-polygon" title="Permalink to this headline">#</a></h3>
 <p>It is simple then to calculate the mean value of pixels within each polygon by using the polygon <code class="docutils literal notranslate"><span class="pre">id</span></code> column and pandas groupby function. You can easily calculate other statistics like min, max, median etc.</p>
 <div class="cell docutils container">
@@ -1079,9 +1081,9 @@ id
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
