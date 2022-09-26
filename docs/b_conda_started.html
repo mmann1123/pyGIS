@@ -630,6 +630,23 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anaconda">
+   Anaconda
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-anaconda">
+     Install Anaconda
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-environment-called-spatial">
+     Create an Environment Called Spatial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
    Docker for Spatial Python - GDAL Included
   </a>
@@ -690,6 +707,23 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anaconda">
+   Anaconda
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-anaconda">
+     Install Anaconda
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-environment-called-spatial">
+     Create an Environment Called Spatial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
    Docker for Spatial Python - GDAL Included
   </a>
@@ -744,6 +778,8 @@ title="Print to PDF"
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
+<li><p>Learn basics of anaconda</p></li>
+<li><p>Set up a working environment for spatial modeling</p></li>
 <li><p>Learn the basics of Docker</p></li>
 <li><p>Pull, run, and update a container set up for spatial modeling</p></li>
 </ul>
@@ -751,13 +787,59 @@ title="Print to PDF"
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="b_getting_started.html#b-getting-started"><span class="std std-ref">A normal intro to python environments</span></a></p></li>
+<li><p><a class="reference internal" href="b_getting_started.html"><span class="doc std std-doc">A normal intro to python environments</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="setting-up-python-for-spatial-on-mac-windows-and-linux">
 <h1>Setting up Python for Spatial on Mac, Windows, and Linux<a class="headerlink" href="#setting-up-python-for-spatial-on-mac-windows-and-linux" title="Permalink to this headline">#</a></h1>
 <p>Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn’t do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast.</p>
+<section id="anaconda">
+<h2>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">#</a></h2>
+<section id="install-anaconda">
+<h3>Install Anaconda<a class="headerlink" href="#install-anaconda" title="Permalink to this headline">#</a></h3>
+<p>Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install Anaconda or Minicoda:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.anaconda.com/products/distribution">Anaconda</a></p></li>
+<li><p><a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">miniconda</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Miniconda maybe the the prefered option for most users.</p>
+</div>
+<p>Hit yes and make sure to run the <code class="docutils literal notranslate"><span class="pre">init</span></code> script if prompted.</p>
+</section>
+<section id="create-an-environment-called-spatial">
+<h3>Create an Environment Called Spatial<a class="headerlink" href="#create-an-environment-called-spatial" title="Permalink to this headline">#</a></h3>
+<p>First thing we need to do is create a conda environment. Think of this as a sandbox for installing a new version of python with only a few chosen modules.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">terminal</span></code> on a mac/linux or open <code class="docutils literal notranslate"><span class="pre">anaconda</span> <span class="pre">command</span> <span class="pre">prompt</span></code> or <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">prompt</span></code> in windows. Then run the following to create an environment called <code class="docutils literal notranslate"><span class="pre">spatial</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n spatial <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+</pre></div>
+</div>
+<p>Now that we have created the environment, let’s jump in it! After which you should see <code class="docutils literal notranslate"><span class="pre">(spatial)</span></code> on the left hand side of your terminal.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate spatial
+</pre></div>
+</div>
+<p>To avoid conflicting dependencies let’s add the channel called <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> (a user maintained list of python modules) and set it to only search there, by setting priority to <code class="docutils literal notranslate"><span class="pre">strict</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels conda-forge
+conda config --set channel_priority strict
+</pre></div>
+</div>
+<p>Now let’s install most of the modules we will need in this book:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install geowombat geopandas rasterio matplotlib pandas
+</pre></div>
+</div>
+<p>Now install those that aren’t available through conda’s channels:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install sklearn-xarray  pip-tools rtree ipykernel osmnx PyKrige census us
+</pre></div>
+</div>
+<p>That’s it! To learn more about managing environments in conda please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">docs here</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Note that every time you want to use your <code class="docutils literal notranslate"><span class="pre">spatial</span></code> environment. You will need to select it in your IDE or open a terminal window and type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">spatial</span></code>, you can then launch your IDE via the command line.</p>
+</div>
+</section>
+</section>
 <section id="docker-for-spatial-python-gdal-included">
 <h2>Docker for Spatial Python - GDAL Included<a class="headerlink" href="#docker-for-spatial-python-gdal-included" title="Permalink to this headline">#</a></h2>
 <p>Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I’m looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined">a simple intro to Docker concepts</a></p>

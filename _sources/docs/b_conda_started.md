@@ -15,6 +15,8 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
+
+
 (conda_started)=
 
 ----------------
@@ -25,8 +27,9 @@ html_meta:
 - Learn the basics of Docker
 - Pull, run, and update a container set up for spatial modeling
 ```
+
 ```{admonition} Review
-* [A normal intro to python environments](b_getting_started)
+* [A normal intro to python environments](b_getting_started.md)
 ```
 ----------------
 
@@ -36,14 +39,14 @@ Spatial analysis requires a pretty broad set of python modules and with it, come
 
 ## Anaconda 
 ### Install Anaconda
-Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install:
+Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install Anaconda or Minicoda:
 
 - [Anaconda](https://www.anaconda.com/products/distribution)
-
-Alternatively, if you don't have much free space in your computer:
-
 - [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
+```{Note}
+Miniconda maybe the the prefered option for most users. 
+```
 Hit yes and make sure to run the `init` script if prompted. 
 
 ### Create an Environment Called Spatial
