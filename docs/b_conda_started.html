@@ -630,8 +630,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#anaconda">
-   Anaconda
+  <a class="reference internal nav-link" href="#method-1-anaconda">
+   Method 1 - Anaconda
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -647,8 +647,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
-   Docker for Spatial Python - GDAL Included
+  <a class="reference internal nav-link" href="#method-2-docker-for-spatial-python-gdal-included">
+   Method 2 - Docker for Spatial Python - GDAL Included
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -707,8 +707,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#anaconda">
-   Anaconda
+  <a class="reference internal nav-link" href="#method-1-anaconda">
+   Method 1 - Anaconda
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -724,8 +724,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#docker-for-spatial-python-gdal-included">
-   Docker for Spatial Python - GDAL Included
+  <a class="reference internal nav-link" href="#method-2-docker-for-spatial-python-gdal-included">
+   Method 2 - Docker for Spatial Python - GDAL Included
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -794,8 +794,8 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="setting-up-python-for-spatial-on-mac-windows-and-linux">
 <h1>Setting up Python for Spatial on Mac, Windows, and Linux<a class="headerlink" href="#setting-up-python-for-spatial-on-mac-windows-and-linux" title="Permalink to this headline">#</a></h1>
 <p>Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn’t do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast.</p>
-<section id="anaconda">
-<h2>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">#</a></h2>
+<section id="method-1-anaconda">
+<h2>Method 1 - Anaconda<a class="headerlink" href="#method-1-anaconda" title="Permalink to this headline">#</a></h2>
 <section id="install-anaconda">
 <h3>Install Anaconda<a class="headerlink" href="#install-anaconda" title="Permalink to this headline">#</a></h3>
 <p>Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install Anaconda or Minicoda:</p>
@@ -826,7 +826,7 @@ conda config --set channel_priority strict
 </pre></div>
 </div>
 <p>Now let’s install most of the modules we will need in this book:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install geowombat geopandas rasterio matplotlib pandas
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install geowombat geopandas rasterio matplotlib pandas jupyterlab
 </pre></div>
 </div>
 <p>Now install those that aren’t available through conda’s channels:</p>
@@ -836,12 +836,13 @@ conda config --set channel_priority strict
 <p>That’s it! To learn more about managing environments in conda please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">docs here</a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Note that every time you want to use your <code class="docutils literal notranslate"><span class="pre">spatial</span></code> environment. You will need to select it in your IDE or open a terminal window and type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">spatial</span></code>, you can then launch your IDE via the command line.</p>
+<p>Note that every time you want to use your <code class="docutils literal notranslate"><span class="pre">spatial</span></code> environment. You will need to select it in your IDE or open a terminal window and type <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">spatial</span></code>, you can then launch your IDE via the command line - for instance by typing <code class="docutils literal notranslate"><span class="pre">jupyter-lab</span></code>.</p>
 </div>
 </section>
 </section>
-<section id="docker-for-spatial-python-gdal-included">
-<h2>Docker for Spatial Python - GDAL Included<a class="headerlink" href="#docker-for-spatial-python-gdal-included" title="Permalink to this headline">#</a></h2>
+<hr class="docutils" />
+<section id="method-2-docker-for-spatial-python-gdal-included">
+<h2>Method 2 - Docker for Spatial Python - GDAL Included<a class="headerlink" href="#method-2-docker-for-spatial-python-gdal-included" title="Permalink to this headline">#</a></h2>
 <p>Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I’m looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined">a simple intro to Docker concepts</a></p>
 <p>To get this done we will be accessing <a class="reference external" href="https://hub.docker.com/">DockerHub</a>, which allows coders like us to store their Docker images. We will be downloading an image of the Linux operating system (Ubuntu, which is “debian-based”), that already has GDAL built for us. Once we “pull” a copy of the image of this operating system we will open it as “a container”. This “container” is a running instance of the “image” that we can run our applications on, and customize for our use case.  Read some more on <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-containers-images-registries">“images” vs “containers” etc here</a>.</p>
 <section id="install-docker">
