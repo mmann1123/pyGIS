@@ -47,11 +47,11 @@ $$
 $$
 
 *where:*
-  X_{i} = raster cell value
+  $X_{i}$ = raster cell value
 
-  k_{i} = kernel cell value
+  $k_{i}$ = kernel cell value
 
-  i = index of cells in the nine kernel cell values
+  $i$ = index of cells in the nine kernel cell values
 
 
 The values also determine *what* is calculated. For example, setting all filter values to `1` will result in the filter outputting the sum of all raster pixel values within the filter. Setting all filter values to `1/9` for a `3x3` filter will result in the filter outputting the average of all raster pixel values within the filter.
