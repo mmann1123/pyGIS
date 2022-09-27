@@ -1077,11 +1077,9 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
     <span class="n">src</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
 
     <span class="c1"># Write the data to a GeoTiff</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
-                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                        <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
-                        <span class="n">n_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>    <span class="c1"># number of thread workers sent to ``dask.compute``</span>
-                        <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
+                <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
+                <span class="p">)</span>   
 </pre></div>
 </div>
 <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. --></section>

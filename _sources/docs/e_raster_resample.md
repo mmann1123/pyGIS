@@ -145,7 +145,7 @@ with gw.config.update(ref_res=15):
         print(src)
         
         # to write out simply:
-        # src.gw.to_raster(
+        # src.gw.save(
         #     "../temp/LC08_20200518_15m.tif",
         #     overwrite=True,
         # ) 
@@ -246,7 +246,7 @@ with gw.config.update(ref_image=LS):
         ax.imshow(src.data[0])
         
         # to write out simply:
-        # src.gw.to_raster(
+        # src.gw.save(
         #     "../temp/precip_20200601_30m.tif",
         #     overwrite=True,
         # ) 

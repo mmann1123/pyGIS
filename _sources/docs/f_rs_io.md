@@ -219,11 +219,9 @@ with gw.open(l8_224077_20200518_B4) as src:
     src.attrs = attrs
 
     # Write the data to a GeoTiff
-    src.gw.to_raster('output.tif',
-                        verbose=1,
-                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
-                        n_threads=2,    # number of thread workers sent to ``dask.compute``
-                        n_chunks=200)   # number of window chunks to send as concurrent futures
+    src.gw.save('output.tif',
+                n_workers=4,    # number of process workers sent to ``concurrent.futures``
+                )   
 ```
 
 <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. -->
