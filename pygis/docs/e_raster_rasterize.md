@@ -126,6 +126,7 @@ Finally, we can save the rasterized vector out.
 with rasterio.open(
         "../temp/rasterized_vector.tif", "w",
         driver = "GTiff",
+        crs = raster.crs,
         transform = raster.transform,
         dtype = rasterio.uint8,
         count = 1,
