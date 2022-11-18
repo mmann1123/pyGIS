@@ -11,3 +11,7 @@ census
 us
 geoplot
 osmnx
+sphinx
+sphinx_sitemap
+sphinxcontrib.bibtex
+sphinx_inline_tabs
