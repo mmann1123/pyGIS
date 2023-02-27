@@ -113,7 +113,7 @@ Now we can access python through jupyter notebooks ([read about jupyter notebook
 
 
 ```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/Users/<user_name>/Documents` folder into the `/home` folder of your container by running `docker run -v /Users/<user_name>/Documents:/home` (mac), `docker run -v //c/User/<user>/Documents:/home` (windows), or `docker run -v /home/<user_name>/Documents:/home` (linux). To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `/Users/<user_name>/Documents` folder into the `/home/<user_name>` folder of your container by running `docker run -v /Users/<user_name>/Documents:/home/<user_name>` (mac), `docker run -v //c/User/<user>/Documents:/home/<user_name>` (windows), or `docker run -v /home/<user_name>/Documents:/home/<user_name>` (linux). To access your documents folder from within you container just `cd` into it e.g. `cd /home/<user_name>`. 
 ```
  
 To do this we are going to attach a local volume with `-v`, open a port with `-p` and run mmann1123/gw_pygis, once inside of the runnning linux computer we will launch jupyter notebook and set an ip address to access it using `-ip`, and we will allow administrative privileges using `--allow-root`.  After executing the code we simply need to open up the URL displayed in response.
@@ -123,11 +123,11 @@ To do this we are going to attach a local volume with `-v`, open a port with `-p
 ````{tab} Mac
 ```
 # Or if browser is  present
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -135,11 +135,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tab} Windows
 ```
 # Or if browser is  present
-docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -148,11 +148,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tab} Linux
 ```
 # Iff browser is  present
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -162,7 +162,7 @@ Every time you want to run pygis you are going to `run` the docker container cal
 ```{warning}
 **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. 
 
-You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home` option with docker run.
+You can save your data in your linked volume which in these examples can be found by typing `cd /home/<user_name>` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>` option with docker run.
 ```
 
 To make this a little easier you can create an executable script on your desktop to run it when you want. 
@@ -175,7 +175,7 @@ cd ~/Desktop/
 # write a shell script called run_pygis
 # between the ''s put whatever bash code you want
 echo '
-sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+sudo docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_pygis.sh
 
@@ -197,7 +197,7 @@ cd ~/Desktop/
 # write a shell script called run_pygis
 # between the ''s put whatever bash code you want
 echo '
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 mmann1123/gw_pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 mmann1123/gw_pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_pygis.sh
 
@@ -260,7 +260,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tab} Windows
@@ -274,7 +274,7 @@ docker images -a
 # run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my <user_name> home folder to the containers home folder
 # important: update the <user_name> portion with your windows user name
-docker run -v //c/User/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
+docker run -v //c/User/Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 ````{tab} Linux
@@ -287,12 +287,12 @@ sudo docker images -a
 
 # Run osgeo/gdal image, but link my volume /your_folder_to_share_with_image:/location_on_container_to_access_it
 # here I am linking my home folder to the containers home folder
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it osgeo/gdal:ubuntu-full-latest
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it osgeo/gdal:ubuntu-full-latest
 ```
 ````
 
 ```{note}
-You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/User/<user>/Documents` folder into the `/home` folder of your container by running `docker run -v //c/User/<user>/Documents:/home`. To access your documents folder from within you container just `cd` into it e.g. `cd /home`. 
+You can mount a volume from your normal operating system to your linux container using the `-v` option of `docker run`. In the above case you can connect your `C:/User/<user>/Documents` folder into the `/home/<user_name>` folder of your container by running `docker run -v //c/User/<user>/Documents:/home/<user_name>`. To access your documents folder from within you container just `cd` into it e.g. `cd /home/<user_name>`. 
 ```
 
 Your command prompt in the terminal window should now say something funny like `root@b0c5ab799195:/# `. You are now INSIDE your running docker container, which is running Ubuntu linux. 
@@ -401,19 +401,19 @@ Let's start with command line only access. Note that this is almost exactly how 
 
 ````{tab} Mac
 ```
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it pygis
 python
 ```
 ````
 ````{tab} Windows
 ```
-docker run -v //c/Users/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
+docker run -v //c/Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it pygis
 python
 ```
 ````
 ````{tab} Linux
 ```
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it pygis
 python
 ```
 ````
@@ -427,11 +427,11 @@ To do this we are going to
 ````{tab} Mac
 ```
 # Or if browser is  present
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -439,11 +439,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tab} Windows
 ```
 # Or if browser is  present
-docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v //c/User/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -452,11 +452,11 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 ````{tab} Linux
 ```
 # Iff browser is  present
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 
 # or if the jupyter notebooks doesn't launch automatically
-sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+sudo docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 # THEN control click on URL printed to the bottom of terminal
 ```
@@ -466,7 +466,7 @@ Every time you want to run pygis you are going to `run` the docker container cal
 ```{warning}
 **When working in your container make sure to store all your data outside of the container!** This is kind of like a school computer, where every time you log out, all the changes you made are deleted. 
 
-You can save your data in your linked volume which in these examples can be found by typing `cd /home/` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home` option with docker run.
+You can save your data in your linked volume which in these examples can be found by typing `cd /home/<user_name>` while inside your container. The connected folder was defined with the `-v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>` option with docker run.
 ```
 
 To make this a little easier you can create an executable script on your desktop to run it when you want. 
@@ -479,7 +479,7 @@ cd ~/Desktop/
 # write a shell script called run_pygis
 # between the ''s put whatever bash code you want
 echo '
-docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v /Users/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_pygis.sh
 
@@ -501,7 +501,7 @@ cd ~/Desktop/
 # write a shell script called run_pygis
 # between the ''s put whatever bash code you want
 echo '
-docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home  -it -p 8888:8888 pygis
+docker run -v /home/<user_name>/path_to_folder_you_want_access_to:/home/<user_name>  -it -p 8888:8888 pygis
 jupyter notebook --ip 0.0.0.0  --allow-root
 ' > run_pygis.sh
 
