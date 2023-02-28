@@ -67,15 +67,13 @@ const thebe_selector_output = ".output, .cell_output"
 
     <!-- Google Analytics -->
     
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ZDC6C7GLDY"></script>
 <script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-192844775-1', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-ZDC6C7GLDY');
+                </script>
 
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
@@ -970,11 +968,11 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.02463131, 0.03409662, 0.03016915, 0.06447763, 0.0711071 ,
-       0.02159019]), &#39;std_fit_time&#39;: array([0.00627849, 0.01270509, 0.01360892, 0.00237593, 0.00361241,
-       0.00146935]), &#39;mean_score_time&#39;: array([0.01492052, 0.01914248, 0.02169619, 0.04682274, 0.03767824,
-       0.01248355]), &#39;std_score_time&#39;: array([0.00394439, 0.01105345, 0.00824731, 0.00162991, 0.01075294,
-       0.00067378]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.02436471, 0.02947164, 0.03141246, 0.01724434, 0.03922877,
+       0.05711131]), &#39;std_fit_time&#39;: array([0.01111153, 0.01603664, 0.01620678, 0.00016363, 0.02186552,
+       0.01952925]), &#39;mean_score_time&#39;: array([0.01584816, 0.01340699, 0.01833482, 0.0105989 , 0.02672124,
+       0.03049974]), &#39;std_score_time&#39;: array([0.00682868, 0.00334744, 0.01147429, 0.00013982, 0.01334514,
+       0.01286764]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
              mask=[False, False, False, False, False, False],
        fill_value=&#39;?&#39;,
             dtype=object), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
