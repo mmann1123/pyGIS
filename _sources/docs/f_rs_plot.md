@@ -30,6 +30,8 @@ kernelspec:
 Import required modules and data.
 
 ```{code-cell} ipython3
+import os
+
 # Import GeoWombat
 import geowombat as gw
 

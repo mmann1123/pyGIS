@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -1176,24 +1171,24 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-ebf4780c581d90fd1a920017bb13440d&#39; (band: 1, y: 6, x: 6)&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-b989c5a2bec88870820e3e9bdcfd59d8&#39; (band: 1, y: 6, x: 6)&gt;
 dask.array&lt;stack, shape=(1, 6, 6), dtype=float64, chunksize=(1, 6, 6), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
   * y        (y) float64 90.0 60.0 30.0 0.0 -30.0 -60.0
   * x        (x) float64 -90.0 -60.0 -30.0 0.0 30.0 60.0
-Attributes: (12/14)
+Attributes: (12/15)
     transform:           (30.0, 0.0, -105.0, 0.0, -30.0, 105.0)
-    crs:                 +init=epsg:4326
+    crs:                 4326
     res:                 (30.0, 30.0)
     is_tiled:            0
     nodatavals:          (nan,)
-    scales:              (1.0,)
+    _FillValue:          nan
     ...                  ...
     filename:            ../temp/window_raster.tif
     resampling:          nearest
-    data_are_separate:   0
-    data_are_stacked:    0
+    _data_are_separate:  0
+    _data_are_stacked:   0
     moving_stat:         mean
     moving_window_size:  5
 </pre></div>
@@ -1216,7 +1211,7 @@ Attributes: (12/14)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

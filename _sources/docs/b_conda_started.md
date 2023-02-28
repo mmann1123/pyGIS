@@ -37,16 +37,16 @@ html_meta:
 Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn't do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast. 
 
 
-## Method 1 - Anaconda 
+## Anaconda 
 ### Install Anaconda
-Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install Anaconda or Minicoda:
+Anaconda is a package manager that makes handling dependencies much easier.  Before you begin install:
 
 - [Anaconda](https://www.anaconda.com/products/distribution)
+
+Alternatively, if you don't have much free space in your computer (or if think anaconda is bloated- which is ):
+
 - [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
-```{Note}
-Miniconda maybe the the prefered option for most users. 
-```
 Hit yes and make sure to run the `init` script if prompted. 
 
 ### Create an Environment Called Spatial
@@ -72,7 +72,7 @@ conda config --set channel_priority strict
 Now let's install most of the modules we will need in this book:
 
 ``` bash
-conda install geowombat geopandas rasterio matplotlib pandas jupyterlab
+conda install geowombat geopandas rasterio matplotlib pandas
 ```
 Now install those that aren't available through conda's channels:
 
@@ -81,22 +81,14 @@ pip install sklearn-xarray  pip-tools rtree ipykernel osmnx PyKrige census us
 ```
 That's it! To learn more about managing environments in conda please refer to the [docs here](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html).
 
- 
-### Working in the Spatial Environment
-
-Note that every time you want to use your `spatial` environment you will need to select it in your IDE or open a terminal window and type:
-``` bash
-conda activate spatial
+```{Important}
+Note that every time you want to use your `spatial` environment. You will need to select it in your IDE or open a terminal window and type `conda activate spatial`, you can then launch your IDE via the command line. 
 ```
-You can then launch your IDE via the command line - for instance by running [jupyter lab](https://jupyter.org/) by typing: 
-``` bash
-jupyter-lab
-```  
-
-------------------
 
 
-## Method 2 - Docker for Spatial Python - GDAL Included
+
+
+## Docker for Spatial Python - GDAL Included
 Docker allows us to essentially package and share operating systems with specific modifications. Importantly for us this includes libraries and dependencies that are difficult to install otherwise (I'm looking at you GDAL). Before we start you should familiarize yourself with the basic concepts behind Docker, please read the following: [a simple intro to Docker concepts](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-defined)
 
 To get this done we will be accessing [DockerHub](https://hub.docker.com/), which allows coders like us to store their Docker images. We will be downloading an image of the Linux operating system (Ubuntu, which is "debian-based"), that already has GDAL built for us. Once we "pull" a copy of the image of this operating system we will open it as "a container". This "container" is a running instance of the "image" that we can run our applications on, and customize for our use case.  Read some more on ["images" vs "containers" etc here](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/container-docker-introduction/docker-containers-images-registries).

@@ -155,11 +155,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -763,45 +758,45 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 4, y: 403, x: 515)&gt;
-dask.array&lt;open_rasterio-b3d223d294244e0149d01d15b4a9c936&lt;this-array&gt;, shape=(4, 403, 515), dtype=uint8, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-e6027924f902ae2b465f7c581474bbb2&lt;this-array&gt;, shape=(4, 403, 515), dtype=uint8, chunksize=(4, 64, 64), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3 4
-  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
   * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
-Attributes: (12/13)
-    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0, 1.0)
-    ...                 ...
-    AREA_OR_POINT:      Area
-    DataType:           Generic
-    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
-    resampling:         nearest
-    data_are_separate:  0
-    data_are_stacked:   0
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+Attributes: (12/14)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan, nan)
+    _FillValue:          nan
+    ...                  ...
+    AREA_OR_POINT:       Area
+    DataType:            Generic
+    filename:            /home/mmann1123/miniconda3/envs/pygis2/lib/python3.1...
+    resampling:          nearest
+    _data_are_separate:  0
+    _data_are_stacked:   0
 &lt;xarray.DataArray (band: 1, y: 403, x: 515)&gt;
-dask.array&lt;broadcast_to, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+dask.array&lt;where, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
 Coordinates:
-  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
   * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
   * band     (band) &lt;U3 &#39;evi&#39;
-Attributes: (12/17)
-    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         None
-    scales:             (1.0,)
-    ...                 ...
-    data_are_separate:  0
-    data_are_stacked:   0
-    pre-scaling:        0.0001
-    sensor:             rgbn
-    vi:                 evi
-    drange:             (0, 1)
+Attributes: (12/18)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    ...                  ...
+    _data_are_separate:  0
+    _data_are_stacked:   0
+    pre-scaling:         0.0001
+    sensor:              rgbn
+    vi:                  evi
+    drange:              (0, 1)
 </pre></div>
 </div>
 </div>
@@ -860,25 +855,25 @@ Attributes: (12/17)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 403, x: 515)&gt;
-dask.array&lt;broadcast_to, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+dask.array&lt;where, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
 Coordinates:
-  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
-  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
   * band     (band) &lt;U9 &#39;norm-diff&#39;
-Attributes: (12/17)
-    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         None
-    scales:             (1.0,)
-    ...                 ...
-    resampling:         nearest
-    data_are_separate:  0
-    data_are_stacked:   0
-    pre-scaling:        1.0
-    vi:                 norm-diff
-    drange:             (-1, 1)
+  * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+Attributes: (12/18)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    ...                  ...
+    resampling:          nearest
+    _data_are_separate:  0
+    _data_are_stacked:   0
+    pre-scaling:         1.0
+    vi:                  norm-diff
+    drange:              (-1, 1)
 </pre></div>
 </div>
 </div>
@@ -902,25 +897,25 @@ Attributes: (12/17)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 403, x: 515)&gt;
-dask.array&lt;astype, shape=(3, 403, 515), dtype=float64, chunksize=(3, 64, 64), chunktype=numpy.ndarray&gt;
+dask.array&lt;transpose, shape=(3, 403, 515), dtype=float64, chunksize=(3, 64, 64), chunktype=numpy.ndarray&gt;
 Coordinates:
-  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
   * x        (x) float64 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
   * band     (band) &lt;U10 &#39;brightness&#39; &#39;greenness&#39; &#39;wetness&#39;
-Attributes: (12/14)
-    transform:          (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-    crs:                +init=epsg:32618
-    res:                (5.0, 5.0)
-    is_tiled:           1
-    nodatavals:         (nan, nan, nan, nan)
-    scales:             (1.0, 1.0, 1.0, 1.0)
-    ...                 ...
-    DataType:           Generic
-    sensor:             Quickbird with 4 (visible + NIR) bands
-    filename:           /home/mmann1123/anaconda3/envs/pygisbookgw/lib/python...
-    resampling:         nearest
-    data_are_separate:  0
-    data_are_stacked:   0
+Attributes: (12/15)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan, nan)
+    _FillValue:          nan
+    ...                  ...
+    DataType:            Generic
+    sensor:              Quickbird with 4 (visible + NIR) bands
+    filename:            /home/mmann1123/miniconda3/envs/pygis2/lib/python3.1...
+    resampling:          nearest
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 <img alt="../_images/f_rs_band_math_11_1.png" src="../_images/f_rs_band_math_11_1.png" />
@@ -947,7 +942,7 @@ Attributes: (12/14)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

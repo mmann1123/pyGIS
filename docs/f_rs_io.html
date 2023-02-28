@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -766,22 +761,22 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-40bb944e8c762dc4074bebfb03b46e89&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-b94ee70c316f454ae87db25641fd6b40&lt;this-array&gt;, shape=(3, 1860, 2041), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-Attributes:
+Attributes: (12/13)
     transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (nan, nan, nan)
     _FillValue:          nan
-    scales:              (1.0, 1.0, 1.0)
+    ...                  ...
     offsets:             (0.0, 0.0, 0.0)
     AREA_OR_POINT:       Area
-    filename:            /mnt/space/miniconda3/envs/pygisbook/lib/python3.9/s...
+    filename:            /home/mmann1123/miniconda3/envs/pygis2/lib/python3.1...
     resampling:          nearest
     _data_are_separate:  0
     _data_are_stacked:   0
@@ -826,14 +821,14 @@ Coordinates:
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * time     (time) int64 1 2 3
-Attributes:
+Attributes: (12/13)
     transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (nan,)
     _FillValue:          nan
-    scales:              (1.0,)
+    ...                  ...
     offsets:             (0.0,)
     AREA_OR_POINT:       Point
     filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, ...
@@ -866,14 +861,14 @@ Coordinates:
   * band     (band) int64 1 2 3
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-Attributes:
+Attributes: (12/13)
     transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (nan,)
     _FillValue:          nan
-    scales:              (1.0,)
+    ...                  ...
     offsets:             (0.0,)
     AREA_OR_POINT:       Point
     filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT_B2.TIF&#39;, ...
@@ -952,18 +947,18 @@ Coordinates:
   * band     (band) int64 1
   * x        (x) float64 6.94e+05 6.94e+05 6.941e+05 ... 7.541e+05 7.542e+05
   * y        (y) float64 -2.767e+06 -2.767e+06 ... -2.812e+06 -2.812e+06
-Attributes:
+Attributes: (12/13)
     transform:           (30.0, 0.0, 694005.0, 0.0, -30.0, -2766615.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (nan,)
     _FillValue:          nan
-    scales:              (1.0,)
+    ...                  ...
     offsets:             (0.0,)
     AREA_OR_POINT:       Point
     resampling:          nearest
-    geometries:          [&lt;shapely.geometry.polygon.Polygon object at 0x7efe1...
+    geometries:          [&lt;POLYGON ((754185 -2812065, 754185 -2766615, 694005...
     _data_are_separate:  1
     _data_are_stacked:   0
 </pre></div>
@@ -1008,14 +1003,14 @@ Coordinates:
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
   * time     (time) &lt;U2 &#39;t1&#39; &#39;t2&#39;
-Attributes:
+Attributes: (12/13)
     transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (nan, nan, nan)
     _FillValue:          nan
-    scales:              (1.0, 1.0, 1.0)
+    ...                  ...
     offsets:             (0.0, 0.0, 0.0)
     AREA_OR_POINT:       Area
     filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC...
@@ -1077,9 +1072,11 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
     <span class="n">src</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
 
     <span class="c1"># Write the data to a GeoTiff</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
-                <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
-                <span class="p">)</span>   
+    <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">&#39;output.tif&#39;</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>    <span class="c1"># number of process workers sent to ``concurrent.futures``</span>
+                        <span class="n">n_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>    <span class="c1"># number of thread workers sent to ``dask.compute``</span>
+                        <span class="n">n_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>   <span class="c1"># number of window chunks to send as concurrent futures</span>
 </pre></div>
 </div>
 <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. --></section>
@@ -1097,7 +1094,7 @@ Rasterio’s <code class="docutils literal notranslate"><span class="pre">write<
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

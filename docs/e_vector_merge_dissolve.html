@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -830,6 +825,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">census</span> <span class="kn">import</span> <span class="n">Census</span>
 <span class="kn">from</span> <span class="nn">us</span> <span class="kn">import</span> <span class="n">states</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 </div>
 </div>
@@ -851,8 +847,7 @@ title="Print to PDF"
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ignore this, I am just reading in my api key privately</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../../../census_api.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;census_api_key&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -938,7 +933,7 @@ Shape:  (1907, 8)
 1  POLYGON ((893470.562 4123469.385, 893542.722 4...  
 Shape:  (1907, 13)
 
-The shapefile projection is: epsg:32617
+The shapefile projection is: EPSG:32617
 </pre></div>
 </div>
 </div>
@@ -1236,10 +1231,14 @@ Shape:  (1907, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/geopandas/geodataframe.py:1676: FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated. In a future version, numeric_only will default to False. Either specify numeric_only or select only columns which should be valid for the function.
+  aggregated_data = data.groupby(**groupby_kwargs).agg(aggfunc)
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                   geometry  C17002_001E  \
 COUNTYFP                                                                   
-001       POLYGON ((971901.668 4160101.088, 971814.409 4...      32345.0   
-003       POLYGON ((734957.267 4207640.156, 734931.249 4...      97587.0   
+001       POLYGON ((971814.409 4160130.005, 971664.507 4...      32345.0   
+003       POLYGON ((722871.236 4189239.708, 722813.526 4...      97587.0   
 
           C17002_002E  C17002_003E  B01003_001E  
 COUNTYFP                                         
@@ -1305,7 +1304,7 @@ Shape:  (133, 5)
   <tbody>
     <tr>
       <th>001</th>
-      <td>POLYGON ((971901.668 4160101.088, 971814.409 4...</td>
+      <td>POLYGON ((971814.409 4160130.005, 971664.507 4...</td>
       <td>32345.0</td>
       <td>2423.0</td>
       <td>3993.0</td>
@@ -1314,7 +1313,7 @@ Shape:  (133, 5)
     </tr>
     <tr>
       <th>003</th>
-      <td>POLYGON ((734957.267 4207640.156, 734931.249 4...</td>
+      <td>POLYGON ((722871.236 4189239.708, 722813.526 4...</td>
       <td>97587.0</td>
       <td>5276.0</td>
       <td>4305.0</td>
@@ -1372,7 +1371,7 @@ Shape:  (133, 5)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

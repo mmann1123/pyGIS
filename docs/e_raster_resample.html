@@ -154,11 +154,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -900,7 +895,7 @@ Transform after resample:
         <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
         
         <span class="c1"># to write out simply:</span>
-        <span class="c1"># src.gw.save(</span>
+        <span class="c1"># src.gw.to_raster(</span>
         <span class="c1">#     &quot;../temp/LC08_20200518_15m.tif&quot;,</span>
         <span class="c1">#     overwrite=True,</span>
         <span class="c1"># ) </span>
@@ -909,19 +904,19 @@ Transform after resample:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 3720, x: 4082)&gt;
-dask.array&lt;open_rasterio-ffcd6009c406dd4eb1c29e58399e618e&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-fce82e0c9b41237083c46d6b342d4b6f&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1 2 3
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.786e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-Attributes:
+Attributes: (12/13)
     transform:           (15.0, 0.0, 717345.0, 0.0, -15.0, -2776995.0)
     crs:                 32621
     res:                 (15.0, 15.0)
     is_tiled:            1
     nodatavals:          (nan, nan, nan)
     _FillValue:          nan
-    scales:              (1.0, 1.0, 1.0)
+    ...                  ...
     offsets:             (0.0, 0.0, 0.0)
     filename:            ../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF
     resampling:          bilinear
@@ -948,7 +943,7 @@ Attributes:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="k">def</span> <span class="nf">reproj_match</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reproject a file to match the shape and projection of existing raster. </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reproject a file to match the shape and projection of existing raster. </span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1040,7 +1035,7 @@ Attributes:
         <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         
         <span class="c1"># to write out simply:</span>
-        <span class="c1"># src.gw.save(</span>
+        <span class="c1"># src.gw.to_raster(</span>
         <span class="c1">#     &quot;../temp/precip_20200601_30m.tif&quot;,</span>
         <span class="c1">#     overwrite=True,</span>
         <span class="c1"># ) </span>
@@ -1049,20 +1044,19 @@ Attributes:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 1860, x: 2041)&gt;
-dask.array&lt;open_rasterio-5bcd7dd376d3242a5c3a76b61c701688&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
+dask.array&lt;open_rasterio-ae6b5b512ae9b65591428c8b69d0f146&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
   * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
   * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
-Attributes:
+Attributes: (12/14)
     transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
     crs:                 32621
     res:                 (30.0, 30.0)
     is_tiled:            1
     nodatavals:          (-9999,)
     _FillValue:          -9999
-    scales:              (1.0,)
-    offsets:             (0.0,)
+    ...                  ...
     descriptions:        (&#39;precipitation&#39;,)
     filename:            ../data/precipitation_20200601_500m.tif
     resampling:          bilinear
@@ -1095,7 +1089,7 @@ Attributes:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

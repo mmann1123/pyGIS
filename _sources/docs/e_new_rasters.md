@@ -237,8 +237,8 @@ with gw.config.update(sensor="bgr"):
         temp.gw.imshow(robust=True, ax=ax)
 
         #save to file
-        temp.gw.save(
-            "../temp/LS_scaled_20200518.tif",  n_workers=4, overwrite=True
+        temp.gw.to_raster(
+            "../temp/LS_scaled_20200518.tif", verbose=0, n_workers=4, overwrite=True
         )
 ```
 

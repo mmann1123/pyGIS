@@ -45,7 +45,7 @@ import rasterio
 from rasterio import features
 from rasterio.enums import MergeAlg
 from rasterio.plot import show
-import numpy as np
+from numpy import int16
 ```
 
 ## Rasterize vectors with rasterio
@@ -112,7 +112,7 @@ rasterized = features.rasterize(geom_value,
                                 all_touched = True,
                                 fill = -5,   # background value
                                 merge_alg = MergeAlg.replace,
-                                dtype = np.int16)
+                                dtype = int16)
 
 # Plot raster
 fig, ax = plt.subplots(1, figsize = (10, 10))
@@ -126,6 +126,7 @@ Finally, we can save the rasterized vector out.
 with rasterio.open(
         "../temp/rasterized_vector.tif", "w",
         driver = "GTiff",
+        crs = raster.crs,
         transform = raster.transform,
         dtype = rasterio.uint8,
         count = 1,

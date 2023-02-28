@@ -152,11 +152,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -879,14 +874,14 @@ Coordinates:
   * time     (time) object &#39;t1&#39; &#39;t2&#39;
     targ     (time, y, x) uint8 dask.array&lt;chunksize=(2, 256, 256), meta=np.ndarray&gt;
   * band     (band) &lt;U4 &#39;targ&#39;
-Attributes:
+Attributes: (12/13)
     transform:           (150.0, 0.0, 717345.0, 0.0, -150.0, -2776995.0)
     crs:                 32621
     res:                 (150.0, 150.0)
     is_tiled:            0
     nodatavals:          (0, 0, 0)
     _FillValue:          0
-    scales:              (1.0, 1.0, 1.0)
+    ...                  ...
     offsets:             (0.0, 0.0, 0.0)
     filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC...
     resampling:          nearest
@@ -975,11 +970,11 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.04131784, 0.05457497, 0.04556055, 0.07788253, 0.08900013,
-       0.06347976]), &#39;std_fit_time&#39;: array([0.00237688, 0.03187747, 0.00723595, 0.01967898, 0.01434664,
-       0.0090616 ]), &#39;mean_score_time&#39;: array([0.02872868, 0.02489176, 0.02872968, 0.05358005, 0.05736141,
-       0.04330297]), &#39;std_score_time&#39;: array([0.00677632, 0.0014899 , 0.00392562, 0.0118462 , 0.00422911,
-       0.01173206]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.02463131, 0.03409662, 0.03016915, 0.06447763, 0.0711071 ,
+       0.02159019]), &#39;std_fit_time&#39;: array([0.00627849, 0.01270509, 0.01360892, 0.00237593, 0.00361241,
+       0.00146935]), &#39;mean_score_time&#39;: array([0.01492052, 0.01914248, 0.02169619, 0.04682274, 0.03767824,
+       0.01248355]), &#39;std_score_time&#39;: array([0.00394439, 0.01105345, 0.00824731, 0.00162991, 0.01075294,
+       0.00067378]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
              mask=[False, False, False, False, False, False],
        fill_value=&#39;?&#39;,
             dtype=object), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
@@ -1016,7 +1011,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -874,7 +869,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="k">def</span> <span class="nf">map_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Function superimposes all the data on a map and sets a title for the map.&#39;&#39;&#39;</span>    
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function superimposes all the data on a map and sets a title for the map.&#39;&#39;&#39;</span>    
     
     <span class="c1"># Create subplots</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -925,7 +920,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CRS: epsg:4326
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CRS: EPSG:4326
 </pre></div>
 </div>
 </div>
@@ -968,7 +963,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1 (PROJ.4 string) CRS: +proj=longlat +ellps=GRS80 +datum=NAD83 +no_defs +type=crs
-Example 2 (EPSG code) CRS: epsg:4269
+Example 2 (EPSG code) CRS: EPSG:4269
 </pre></div>
 </div>
 </div>
@@ -1112,7 +1107,7 @@ Name: geometry, dtype: geometry
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
-0    POLYGON ((1106986.814 4694966.592, 1106987.032...
+0    POLYGON ((1106986.814 4694966.592, 1106987.033...
 Name: geometry, dtype: geometry
 </pre></div>
 </div>
@@ -1249,7 +1244,7 @@ Name: geometry, dtype: geometry
 <span class="kn">import</span> <span class="nn">pyproj</span>
 
 <span class="k">def</span> <span class="nf">get_epsg</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">70</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Function takes a PROJ.4 string and optional minimum confidence level as inputs and outputs the relevant EPSG code, if one exists. Source: https://geopandas.org/docs/user_guide/projections.html&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function takes a PROJ.4 string and optional minimum confidence level as inputs and outputs the relevant EPSG code, if one exists. Source: https://geopandas.org/docs/user_guide/projections.html&#39;&#39;&#39;</span>
     
     <span class="c1"># Get relevant EPSG at the specified minimum confidence level</span>
     <span class="k">return</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">CRS</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">)</span><span class="o">.</span><span class="n">to_epsg</span><span class="p">(</span><span class="n">min_confidence</span> <span class="o">=</span> <span class="n">min_confidence</span><span class="p">)</span>
@@ -1333,7 +1328,7 @@ Name: geometry, dtype: geometry
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

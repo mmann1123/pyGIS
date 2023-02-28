@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -758,25 +753,25 @@ title="Print to PDF"
 
 <span class="c1"># open in &#39;write&#39; mode, unpack profile info to dst</span>
 <span class="k">with</span> <span class="n">rio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-   <span class="s2">&quot;../temp/new_raster.tif&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;w&quot;</span><span class="p">,</span>
-   <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>         <span class="c1"># output file type</span>
-   <span class="n">height</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>      <span class="c1"># shape of array</span>
-   <span class="n">width</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-   <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                <span class="c1"># number of bands</span>
-   <span class="n">dtype</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>          <span class="c1"># output datatype</span>
-   <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;+proj=latlong&quot;</span><span class="p">,</span>    <span class="c1"># CRS</span>
-   <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>    <span class="c1"># location and resolution of upper left cell</span>
+    <span class="s2">&quot;../temp/new_raster.tif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>         <span class="c1"># output file type</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>      <span class="c1"># shape of array</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                <span class="c1"># number of bands</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">Z</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>          <span class="c1"># output datatype</span>
+    <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;+proj=latlong&quot;</span><span class="p">,</span>    <span class="c1"># CRS</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>    <span class="c1"># location and resolution of upper left cell</span>
 <span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
-   <span class="c1"># check for number of bands</span>
-   <span class="k">if</span> <span class="n">dst</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-       <span class="c1"># write single band</span>
-       <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-   <span class="k">else</span><span class="p">:</span>
-       <span class="c1"># write each band individually</span>
-       <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Z</span><span class="p">)):</span>
-           <span class="c1"># write data, band # (starting from 1)</span>
-           <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">band</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># check for number of bands</span>
+    <span class="k">if</span> <span class="n">dst</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># write single band</span>
+        <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># write each band individually</span>
+        <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Z</span><span class="p">)):</span>
+            <span class="c1"># write data, band # (starting from 1)</span>
+            <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">band</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -802,7 +797,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

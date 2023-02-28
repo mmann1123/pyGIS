@@ -150,11 +150,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -755,7 +750,7 @@ excellent <a class="reference external" href="http://www.numpy.org/">NumPy</a> l
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.04891256782214e-16
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.853229343548264e-16
 </pre></div>
 </div>
 </div>
@@ -948,6 +943,10 @@ excellent <code class="docutils literal notranslate"><span class="pre">random</s
 2011-01-01  0.015696 -2.242685
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_284118/1073533825.py:5: UserWarning: Parsing dates in DD/MM/YYYY format when dayfirst=False (the default) was specified. This may lead to inconsistently parsed dates! Specify a format to ensure consistent parsing.
+  dates = pd.date_range(&#39;28/12/2010&#39;, periods=5)
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -990,7 +989,7 @@ useful as the next step of your study.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

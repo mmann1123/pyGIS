@@ -151,11 +151,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -732,7 +727,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">rasterio</span> <span class="kn">import</span> <span class="n">features</span>
 <span class="kn">from</span> <span class="nn">rasterio.enums</span> <span class="kn">import</span> <span class="n">MergeAlg</span>
 <span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">int16</span>
 </pre></div>
 </div>
 </div>
@@ -812,7 +807,7 @@ title="Print to PDF"
                                 <span class="n">all_touched</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                                 <span class="n">fill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>   <span class="c1"># background value</span>
                                 <span class="n">merge_alg</span> <span class="o">=</span> <span class="n">MergeAlg</span><span class="o">.</span><span class="n">replace</span><span class="p">,</span>
-                                <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+                                <span class="n">dtype</span> <span class="o">=</span> <span class="n">int16</span><span class="p">)</span>
 
 <span class="c1"># Plot raster</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -831,6 +826,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
         <span class="s2">&quot;../temp/rasterized_vector.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
         <span class="n">driver</span> <span class="o">=</span> <span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
+        <span class="n">crs</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
         <span class="n">transform</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -857,7 +853,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

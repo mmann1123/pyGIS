@@ -151,11 +151,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -805,7 +800,7 @@ title="Print to PDF"
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Display the first and last five rows of attribute table.&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Display the first and last five rows of attribute table.&#39;&#39;&#39;</span>
 
     <span class="c1"># Print title</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attribute Table: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
@@ -823,7 +818,7 @@ title="Print to PDF"
 
 
 <span class="k">def</span> <span class="nf">plot_df</span><span class="p">(</span><span class="n">result_name</span><span class="p">,</span> <span class="n">result_df</span><span class="p">,</span> <span class="n">result_geom_type</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Plot the result on a map and add the outlines of the original shapefiles.&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Plot the result on a map and add the outlines of the original shapefiles.&#39;&#39;&#39;</span>
 
     <span class="c1"># Create subplots</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -938,49 +933,49 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>MULTIPOLYGON (((1836501.066 656512.837, 183649...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Marin County</td>
-      <td>MULTIPOLYGON (((1822277.787 655539.623, 182231...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Napa County</td>
-      <td>POLYGON ((1860171.549 724651.231, 1860170.736 ...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>San Francisco County</td>
-      <td>MULTIPOLYGON (((1834364.295 641524.540, 183435...</td>
+      <th>6</th>
+      <td>Santa Clara County</td>
+      <td>MULTIPOLYGON (((1858743.389 607583.832, 185874...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>San Mateo County</td>
-      <td>MULTIPOLYGON (((1850042.437 615031.357, 185003...</td>
+      <td>MULTIPOLYGON (((1850037.244 614954.640, 185085...</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>Santa Clara County</td>
-      <td>MULTIPOLYGON (((1858733.082 607586.450, 185874...</td>
+      <th>0</th>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860073.077 612066.462, 185990...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Francisco County</td>
+      <td>MULTIPOLYGON (((1834350.912 641735.721, 183437...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Contra Costa County</td>
+      <td>MULTIPOLYGON (((1836498.140 656511.674, 183649...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Marin County</td>
+      <td>MULTIPOLYGON (((1830505.126 653828.366, 183051...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Solano County</td>
-      <td>MULTIPOLYGON (((1875491.908 673077.900, 187549...</td>
+      <td>MULTIPOLYGON (((1875491.252 673069.363, 187548...</td>
     </tr>
     <tr>
       <th>8</th>
       <td>Sonoma County</td>
-      <td>POLYGON ((1813621.641 736108.000, 1813605.098 ...</td>
+      <td>POLYGON ((1813605.098 736060.762, 1813555.586 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Napa County</td>
+      <td>POLYGON ((1860170.736 724644.473, 1860169.835 ...</td>
     </tr>
   </tbody>
 </table>
@@ -1029,44 +1024,44 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th>2</th>
-      <td>Flag City Well 3</td>
+      <th>4764</th>
+      <td>NaN</td>
       <td>Unknown</td>
-      <td>Single Well</td>
+      <td>Unknown</td>
       <td>0</td>
-      <td>POINT (1922067.711 679380.918)</td>
+      <td>POINT (1928106.578 619294.408)</td>
     </tr>
     <tr>
-      <th>14</th>
-      <td>Flag City Well 1</td>
+      <th>4733</th>
+      <td>NaN</td>
       <td>Unknown</td>
-      <td>Single Well</td>
-      <td>170</td>
-      <td>POINT (1922680.537 679641.516)</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Flag City Well 2</td>
       <td>Unknown</td>
-      <td>Single Well</td>
-      <td>180</td>
-      <td>POINT (1921777.555 679393.668)</td>
+      <td>0</td>
+      <td>POINT (1927444.679 619366.782)</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>W-041</td>
-      <td>Other</td>
-      <td>Single Well</td>
-      <td>256</td>
-      <td>POINT (1919777.393 713390.175)</td>
+      <th>4391</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1927051.274 621834.123)</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>W-042</td>
-      <td>Other</td>
-      <td>Single Well</td>
-      <td>245</td>
-      <td>POINT (1917586.004 713468.595)</td>
+      <th>4554</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
+    </tr>
+    <tr>
+      <th>4553</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1077,44 +1072,44 @@ title="Print to PDF"
       <td>...</td>
     </tr>
     <tr>
-      <th>6029</th>
-      <td>None</td>
+      <th>5669</th>
+      <td>NaN</td>
       <td>Unknown</td>
       <td>Unknown</td>
-      <td>465</td>
-      <td>POINT (1848120.290 703766.303)</td>
+      <td>200</td>
+      <td>POINT (1824748.040 729726.154)</td>
     </tr>
     <tr>
-      <th>6030</th>
-      <td>None</td>
-      <td>Irrigation</td>
+      <th>4077</th>
+      <td>NaN</td>
+      <td>Residential</td>
       <td>Unknown</td>
-      <td>51</td>
-      <td>POINT (1842158.280 695286.242)</td>
+      <td>175</td>
+      <td>POINT (1823812.719 730423.625)</td>
     </tr>
     <tr>
-      <th>6031</th>
-      <td>None</td>
+      <th>4076</th>
+      <td>NaN</td>
+      <td>Residential</td>
       <td>Unknown</td>
-      <td>Unknown</td>
-      <td>315</td>
-      <td>POINT (1848812.488 704308.579)</td>
+      <td>210</td>
+      <td>POINT (1823821.913 730445.634)</td>
     </tr>
     <tr>
-      <th>6032</th>
-      <td>GV FARM</td>
+      <th>1365</th>
+      <td>202</td>
       <td>Residential</td>
       <td>Single Well</td>
-      <td>67</td>
-      <td>POINT (1855297.377 693189.634)</td>
+      <td>280</td>
+      <td>POINT (1830194.589 731335.971)</td>
     </tr>
     <tr>
-      <th>6033</th>
-      <td>None</td>
+      <th>5626</th>
+      <td>NaN</td>
       <td>Residential</td>
       <td>Unknown</td>
-      <td>76</td>
-      <td>POINT (1841755.238 707939.225)</td>
+      <td>130</td>
+      <td>POINT (1824114.227 731871.693)</td>
     </tr>
   </tbody>
 </table>
@@ -1450,7 +1445,7 @@ First two rows:
   <tbody>
     <tr>
       <th>137</th>
-      <td>None</td>
+      <td>NaN</td>
       <td>Residential</td>
       <td>Unknown</td>
       <td>78</td>
@@ -1458,7 +1453,7 @@ First two rows:
     </tr>
     <tr>
       <th>138</th>
-      <td>None</td>
+      <td>NaN</td>
       <td>Residential</td>
       <td>Unknown</td>
       <td>80</td>
@@ -1505,7 +1500,7 @@ First two rows:
     </tr>
     <tr>
       <th>6033</th>
-      <td>None</td>
+      <td>NaN</td>
       <td>Residential</td>
       <td>Unknown</td>
       <td>76</td>
@@ -1687,7 +1682,7 @@ First two rows:
     </tr>
     <tr>
       <th>6033</th>
-      <td>None</td>
+      <td>NaN</td>
       <td>Residential</td>
       <td>Unknown</td>
       <td>76</td>
@@ -1866,7 +1861,7 @@ First two rows:
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

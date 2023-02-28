@@ -153,11 +153,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -822,7 +817,8 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Keyword: with_config     Value: True
 Keyword: ignore_warnings Value: False
 Keyword: sensor          Value: None
-Keyword: scale_factor    Value: 1.0
+Keyword: scale_factor    Value: None
+Keyword: offset          Value: None
 Keyword: nodata          Value: None
 Keyword: ref_image       Value: None
 Keyword: ref_bounds      Value: None
@@ -902,9 +898,7 @@ Keyword: nasa_earthdata_code Value: None
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32621
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+proj=aea +lat_0=-32 +lon_0=-60 +lat_1=-5 +lat_2=-42 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs +type=crs
++proj=aea +lat_0=-32 +lon_0=-60 +lat_1=-5 +lat_2=-42 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs +type=crs
 </pre></div>
 </div>
 </div>
@@ -1203,7 +1197,7 @@ mcd43a4        : MODIS Nadir BRDF-Adjusted Reflectance Daily 500m with 7 bands
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

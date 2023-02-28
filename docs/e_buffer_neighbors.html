@@ -151,11 +151,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started.html">
-   Setting up Python for Spatial on Mac, Windows, and Linux
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="b_python_by_example.html">
    An Introductory Example
   </a>
@@ -763,7 +758,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_3_1.png" src="../_images/e_buffer_neighbors_3_1.png" />
@@ -835,7 +830,7 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_11_1.png" src="../_images/e_buffer_neighbors_11_1.png" />
@@ -873,7 +868,7 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <img alt="../_images/e_buffer_neighbors_13_1.png" src="../_images/e_buffer_neighbors_13_1.png" />
@@ -925,7 +920,7 @@ dtype: geometry
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;shapely.geometry.point.Point object at 0x7ff96043f750&gt;, &lt;shapely.geometry.point.Point object at 0x7ff96043fe90&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;POINT (1 1.67)&gt;, &lt;POINT (0 1.45)&gt;)
 Coordinates of original point: POINT (1 1.67)
 Coordinates of closest destination point: POINT (0 1.45)
 </pre></div>
@@ -946,7 +941,7 @@ Coordinates of closest destination point: POINT (0 1.45)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
 
 <span class="k">def</span> <span class="nf">_nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
 
     <span class="c1"># create object usable by Shapely</span>
     <span class="n">geom_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
@@ -961,7 +956,7 @@ Coordinates of closest destination point: POINT (0 1.45)
     <span class="k">return</span> <span class="n">value</span>
 
 <span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.</span>
 <span class="sd">    :param df1: Origin points</span>
 <span class="sd">    :type df1: geopandas.GeoDataFrame</span>
 <span class="sd">    :param df2: Destination points</span>
@@ -1013,8 +1008,8 @@ Coordinates of closest destination point: POINT (0 1.45)
 <p>Okay now we are ready to use our function and find closest Points (taking the value from id column) from df2 to df1 centroids</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nearest</span> <span class="o">=</span> <span class="n">nearest</span><span class="p">(</span><span class="n">df1</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
-<span class="n">nearest</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">near</span> <span class="o">=</span> <span class="n">nearest</span><span class="p">(</span><span class="n">df1</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+<span class="n">near</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1087,7 +1082,7 @@ Coordinates of closest destination point: POINT (0 1.45)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true
