@@ -721,7 +721,7 @@ title="Print to PDF"
 <p>First, we will import the necessary modules and create two lines (click the + below to show code cell).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Polygon</span>
@@ -752,10 +752,16 @@ title="Print to PDF"
 <p>Let’s take a look at the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot county outline and add wells to axis (ax)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot county outline and add wells to axis (ax)</span>
 <span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/e_buffer_neighbors_3_1.png" src="../_images/e_buffer_neighbors_3_1.png" />
 </div>
 </div>
 <div class="admonition important">
@@ -765,10 +771,15 @@ title="Print to PDF"
 <p>Although it is not clearly stated the <code class="docutils literal notranslate"><span class="pre">distance</span></code> parameter is measured in the linear unit of the projection. So before we get started we need to make sure to use <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> to convert to a projected coordinate system.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot county outline and add wells to axis (ax)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot county outline and add wells to axis (ax)</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">3857</span><span class="p">)</span>
 <span class="c1"># check the linear unit name in `unit_name`.</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">axis_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Axis(name=Easting, abbrev=X, direction=east, unit_auth_code=EPSG, unit_code=9001, unit_name=metre), Axis(name=Northing, abbrev=Y, direction=north, unit_auth_code=EPSG, unit_code=9001, unit_name=metre)]
 </pre></div>
 </div>
 </div>
@@ -776,20 +787,35 @@ title="Print to PDF"
 <p>Starting from two lines we can start playing around with the buffer function. You can read the docs for the buffer function, unfortunately is split between two docs <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.buffer.html">geopandas</a> and <a class="reference external" href="https://shapely.readthedocs.io/en/latest/manual.html#object.buffer">shapely</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buf</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buf</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">bp</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POLYGON ((-9737657.488 5113325.388, -9737601.7...
+1    POLYGON ((-9750364.761 5117342.850, -9750369.3...
+dtype: geometry
+</pre></div>
+</div>
+<img alt="../_images/e_buffer_neighbors_7_1.png" src="../_images/e_buffer_neighbors_7_1.png" />
+</div>
 </div>
 <p>Notice that we now have to polygon GEOMETRIES. This no longer has the line attributes associated with it. If we want to add back the attribute data we need to replace the original geometry column with new buffer geometry values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">line_buffer</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_buffer</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">line_buffer</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">buf</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">line_buffer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ID                                           geometry
+0   1  POLYGON ((-9737657.488 5113325.388, -9737601.7...
+1   2  POLYGON ((-9750364.761 5117342.850, -9750369.3...
 </pre></div>
 </div>
 </div>
@@ -797,11 +823,17 @@ title="Print to PDF"
 <p>There are a number of other parameters available to use, namely <code class="docutils literal notranslate"><span class="pre">cap_style</span></code>, and <code class="docutils literal notranslate"><span class="pre">single_sided</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buf</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">cap_style</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buf</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">cap_style</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">bp</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/e_buffer_neighbors_11_1.png" src="../_images/e_buffer_neighbors_11_1.png" />
 </div>
 </div>
 <table class="colwidths-auto table" id="cap-style">
@@ -826,7 +858,7 @@ title="Print to PDF"
 <p>We can also create left or right side buffers. Use negative distances for left, and positive values for right.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buf_right</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">single_sided</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buf_right</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">single_sided</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">bp</span> <span class="o">=</span> <span class="n">buf_right</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
 <span class="n">buf_left</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1500</span><span class="p">,</span> <span class="n">single_sided</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -834,6 +866,12 @@ title="Print to PDF"
 <span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/e_buffer_neighbors_13_1.png" src="../_images/e_buffer_neighbors_13_1.png" />
 </div>
 </div>
 </section>
@@ -847,7 +885,7 @@ title="Print to PDF"
 <p>Let’s create an origin Point and a few destination Points and find out the closest destination.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">MultiPoint</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">MultiPoint</span>
 <span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
 
 <span class="n">orig</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.67</span><span class="p">)</span>
@@ -859,8 +897,13 @@ title="Print to PDF"
 <p>To be able to find out the closest destination point from the origin, we need to create a MultiPoint object from the destination points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">destinations</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">destinations</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">dest1</span><span class="p">,</span> <span class="n">dest2</span><span class="p">,</span> <span class="n">dest3</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">destinations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MULTIPOINT (0 1.45, 2 2, 0 2.5)
 </pre></div>
 </div>
 </div>
@@ -868,11 +911,18 @@ title="Print to PDF"
 <p>Okey, now we can see that all the destination points are represented as a single MultiPoint object. Now we can find out the nearest destination point by using <code class="docutils literal notranslate"><span class="pre">nearest_points()</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nearest_geoms</span> <span class="o">=</span> <span class="n">nearest_points</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">destinations</span><span class="p">)</span>
 <span class="n">original_point</span><span class="p">,</span> <span class="n">nearest_destination</span> <span class="o">=</span> <span class="n">nearest_geoms</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nearest_geoms</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coordinates of original point:&#39;</span><span class="p">,</span><span class="n">original_point</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coordinates of closest destination point:&#39;</span><span class="p">,</span><span class="n">nearest_destination</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;POINT (1 1.67)&gt;, &lt;POINT (0 1.45)&gt;)
+Coordinates of original point: POINT (1 1.67)
+Coordinates of closest destination point: POINT (0 1.45)
 </pre></div>
 </div>
 </div>
@@ -888,10 +938,10 @@ title="Print to PDF"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">nearest_points</span>
 
 <span class="k">def</span> <span class="nf">_nearest</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.&quot;&quot;&quot;</span>
 
     <span class="c1"># create object usable by Shapely</span>
     <span class="n">geom_union</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">unary_union</span>
@@ -906,7 +956,7 @@ title="Print to PDF"
     <span class="k">return</span> <span class="n">value</span>
 
 <span class="k">def</span> <span class="nf">nearest</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">geom1_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">geom2_col</span><span class="o">=</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the nearest point and return the corresponding value from specified column.</span>
 <span class="sd">    :param df1: Origin points</span>
 <span class="sd">    :type df1: geopandas.GeoDataFrame</span>
 <span class="sd">    :param df2: Destination points</span>
@@ -930,7 +980,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate origin and destination points as geodataframe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate origin and destination points as geodataframe</span>
 <span class="n">orig</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Origin_1&#39;</span><span class="p">,</span><span class="s1">&#39;Origin_2&#39;</span><span class="p">],</span> 
      <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.3</span><span class="p">,</span><span class="mf">38.94</span><span class="p">),</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.41</span><span class="p">,</span><span class="mf">39.93</span><span class="p">)]}</span>
 <span class="n">orig</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
@@ -943,15 +993,66 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       name                    geometry
+0  Origin_1  POINT (-77.30000 38.94000)
+1  Origin_2  POINT (-77.41000 39.93000)
+         name                    geometry
+0   Baltimore  POINT (-76.61000 39.29000)
+1  Washington  POINT (-77.04000 38.91000)
+2    Fredrick  POINT (-77.40000 39.41000)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Okay now we are ready to use our function and find closest Points (taking the value from id column) from df2 to df1 centroids</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nearest</span> <span class="o">=</span> <span class="n">nearest</span><span class="p">(</span><span class="n">df1</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
-<span class="n">nearest</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">near</span> <span class="o">=</span> <span class="n">nearest</span><span class="p">(</span><span class="n">df1</span><span class="o">=</span><span class="n">orig</span><span class="p">,</span> <span class="n">df2</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span> <span class="n">df2_column</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+<span class="n">near</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>geometry</th>
+      <th>nearest_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Origin_1</td>
+      <td>POINT (-77.30000 38.94000)</td>
+      <td>Washington</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Origin_2</td>
+      <td>POINT (-77.41000 39.93000)</td>
+      <td>Fredrick</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>That’s it! Now we found the closest point for each centroid and got the <code class="docutils literal notranslate"><span class="pre">index</span></code> value or column name from our addresses into the <code class="docutils literal notranslate"><span class="pre">df1</span></code> GeoDataFrame.</p>
 <div class="admonition note">
@@ -981,7 +1082,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

@@ -246,7 +246,7 @@
 # 
 # $$
 #    \begin{eqnarray}
-#       \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix}   \begin{bmatrix} 1 & 0 & 2 \\  0 & 1 & 2 \\ 0 & 0 & 1 \end{bmatrix}  =
+#         \begin{bmatrix} 1 & 0 & 2 \\  0 & 1 & 2 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix}  =
 #       \begin{bmatrix} -2 \times 1 + -2 \times 0 + 1 \times 2  \\  -2 \times 0 + -2 \times 1 + 1 \times 2 \\ -2 \times 0 + -2 \times 0 + 1 \times 1  \end{bmatrix} = 
 #       \begin{bmatrix} 0  \\  0 \\ 1  \end{bmatrix}
 #    \end{eqnarray}
@@ -270,8 +270,8 @@
 # 
 # $$
 #    \begin{eqnarray}
-#      \begin{bmatrix} -2 \\ -2 \\  1 \end{bmatrix} 
-#      \begin{bmatrix} \cos{180} & -\sin{180} & 0 \\  \sin{180} & \cos{180} & 0 \\ 0 & 0 & 1 \end{bmatrix}  =
+#      \begin{bmatrix} \cos{180} & -\sin{180} & 0 \\  \sin{180} & \cos{180} & 0 \\ 0 & 0 & 1 \end{bmatrix} 
+#      \begin{bmatrix} -2 \\ -2 \\  1 \end{bmatrix}  =
 #    \end{eqnarray}
 # $$
 # $$

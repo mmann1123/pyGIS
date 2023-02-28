@@ -437,7 +437,7 @@ fig, ax = plt.subplots(1, 1, figsize = (10, 10))
 # Plot data
 counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
 wells_wgs.plot(ax = ax, marker = 'o', color = 'dimgray', markersize = 3)
-gplt.kdeplot(wells_wgs, cmap = "RdPu", shade = True, clip = counties_wgs, thresh = 0, ax = ax, alpha = 0.5)
+gplt.kdeplot(wells_wgs,ax=ax,shade = True,cmap = "RdPu",alpha = 0.5) 
 
 # Set title
 ax.set_title('San Francisco Bay Area - Kernel Density Estimation for Wells', fontdict = {'fontsize': '15', 'fontweight' : '3'})

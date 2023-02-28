@@ -143,7 +143,7 @@ All this info is stored in `dst` and then written to disk with `dst.write(Z,1)`.
 
 
 ### The Crazy Tale of the Upper Left Hand Corner
-To help us understand what is going on with `transform` it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 25 degrees.
+To help us understand what is going on with `transform` it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data `Z`. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 30 degrees.
 
 We can visualize what we need to do here: 
 
@@ -192,12 +192,12 @@ Let's work the example of finding the upper left coordinates of with `row=5`, `c
 
 $$
    \begin{eqnarray}
-      \begin{bmatrix} 5 \\ 2 \\ 1 \end{bmatrix}   
       \begin{bmatrix} 
           30 & 0 & -105 \\  
           0 & -30 & 105 \\ 
           0 & 0 & 1 
-      \end{bmatrix}  =
+      \end{bmatrix}  
+      \begin{bmatrix} 5 \\ 2 \\ 1 \end{bmatrix}   =
       \begin{bmatrix} 
           5 \times 30 + 2 \times 0 + 1 \times -105  \\  
           5 \times 0 + 2 \times -30 + 1 \times 105 \\ 

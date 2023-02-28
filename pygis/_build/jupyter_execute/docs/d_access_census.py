@@ -32,6 +32,7 @@ import pandas as pd
 import geopandas as gpd
 from census import Census
 from us import states
+import os
 
 
 # ## Accessing Data
@@ -40,26 +41,25 @@ from us import states
 # 
 # Let's begin by accessing and importing census data. Importing census data into Python requires a Census API key. A key can be obtained from [Census API Key](http://api.census.gov/data/key_signup.html).  **It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.**
 
-# In[ ]:
+# In[2]:
 
 
 # Set API key
 c = Census("CENSUS API KEY HERE")
 
 
-# In[ ]:
+# In[3]:
 
 
 #ignore this, I am just reading in my api key privately
-with open("../../../census_api.txt", "r") as f:
-    c = Census(f.read().replace('\n', ''))
+c = Census(os.environ.get('census_api_key'))
 
 
 # With the Census API key set, we will access the census data at the tract level for the Commonwealth of Virginia from the 2019 ACS, specifically the `ratio of income to poverty in the past 12 months` (`C17002_001E`, total; `C17002_002E`, < 0.50; and `C17002_003E`, 0.50 - 0.99) variables and the `total population` (`B01003_001E`) variable. For more information on why these variables are used, refer to the US Census Bureau's [article on how the Census Bureau measures poverty](https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html) and the [list of variables found in ACS](https://api.census.gov/data/2019/acs/acs5/variables.html).
 # 
 # The `census` package provides us with some easy convenience methods that allow us to obtain data for a wide variety of geographies. The FIPS code for Virginia is 51, but if needed, we can also use the `us` library to help us figure out the relevant FIPS code.
 
-# In[ ]:
+# In[4]:
 
 
 # Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)
@@ -77,7 +77,7 @@ va_census = c.acs5.state_county_tract(fields = ('NAME', 'C17002_001E', 'C17002_0
 
 # Now that we have accessed the data and assigned it to a variable, we can read the data into a dataframe using the `pandas` library.
 
-# In[ ]:
+# In[5]:
 
 
 # Create a dataframe from the census data
@@ -94,7 +94,7 @@ print('Shape: ', va_df.shape)
 # 
 # Let's also read into Python a shapefile of the Virginia census tracts and reproject it to the UTM Zone 17N projection. (This shapefile can be downloaded on the Census Bureau's website on the [Cartographic Boundary Files page](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) or the [TIGER/Line Shapefiles page](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html).)
 
-# In[ ]:
+# In[6]:
 
 
 # Access shapefile of Virginia census tracts
@@ -126,7 +126,7 @@ print("\nThe shapefile projection is: {}".format(va_tract.crs))
 # 
 # To create a new column--or call an existing column in a dataframe--we can use indexing with `[]` and the column name (string). (There is a different way if you want to access columns using the index number; read more about indexing and selecting data [in the pandas documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html).)
 
-# In[ ]:
+# In[7]:
 
 
 # Combine state, county, and tract columns together to create a new string and assign to new column
@@ -135,7 +135,7 @@ va_df["GEOID"] = va_df["state"] + va_df["county"] + va_df["tract"]
 
 # Printing out the first rew rows of the dataframe, we can see that the new column `GEOID` has been created with the values from the three columns combined.
 
-# In[ ]:
+# In[8]:
 
 
 # Print head of dataframe
@@ -146,7 +146,7 @@ va_df.head(2)
 # 
 # To reduce clutter, we can delete the `state`, `county`, and `tract` columns from `va_df` since we don't need them anymore. Remember that when we want to modify a dataframe, we must assign the modified dataframe back to the original variable (or a new one, if preferred). Otherwise, any modifications won't be saved. An alternative to assigning the dataframe back to the variable is to simply pass `inplace = True`. For more information, see the [pandas help documentation on `drop`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html).
 
-# In[ ]:
+# In[9]:
 
 
 # Remove columns
@@ -160,7 +160,7 @@ va_df.head(2)
 # 
 # The key in both dataframe must be of the same data type. Let's check the data type of the `GEOID` columns in both dataframes. If they aren't the same, we will have to change the data type of columns to make them the same.
 
-# In[ ]:
+# In[10]:
 
 
 # Check column data types for census data
@@ -178,7 +178,7 @@ print("\nColumn data types for census shapefile:\n{}".format(va_tract.dtypes))
 # 
 # Now, we are ready to merge the two dataframes together, using the `GEOID` columns as the primary key. We can use the `merge` method in `GeoPandas` called on the `va_tract` shapefile dataset.
 
-# In[ ]:
+# In[11]:
 
 
 # Join the attributes of the dataframes together
@@ -200,7 +200,7 @@ print('Shape: ', va_merge.shape)
 # 
 # Now that we merged the dataframes together, we can further clean up the dataframe and remove columns that are not needed. Instead of using the `drop` method, we can simply select the columns we want to keep and create a new dataframe with those selected columns.
 
-# In[ ]:
+# In[12]:
 
 
 # Create new dataframe from select columns
@@ -217,7 +217,7 @@ print('Shape: ', va_poverty_tract.shape)
 # 
 # Next, we will group all the census tracts within the same county (`COUNTYFP`) and aggregate the poverty and population values for those tracts within the same county. We can use the `dissolve` function in `GeoPandas`, which is the spatial version of `groupby` in `pandas`. We use `dissolve` instead of `groupby` because the former also groups and merges all the geometries (in this case, census tracts) within a given group (in this case, counties).
 
-# In[ ]:
+# In[13]:
 
 
 # Dissolve and group the census tracts within each county and aggregate all the values together
@@ -237,7 +237,7 @@ print('Shape: ', va_poverty_county.shape)
 # 
 # Side note: Notice that `C17002_001E` (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with `B01003_001E` (total population). We'll disregard this for now since the difference is not too significant.
 
-# In[ ]:
+# In[14]:
 
 
 # Get poverty rate and store values in new column
@@ -251,7 +251,7 @@ va_poverty_county.head(2)
 # 
 # Finally, since we have the spatial component connected to our census data, we can plot the results!
 
-# In[ ]:
+# In[15]:
 
 
 # Create subplots

@@ -809,7 +809,7 @@ title="Print to PDF"
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.enums</span> <span class="kn">import</span> <span class="n">Resampling</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -860,6 +860,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape before resample: (1860, 2041)
+Shape after resample: (3720, 4082)
+Transform before resample:
+ | 30.00, 0.00, 717345.00|
+| 0.00,-30.00,-2776995.00|
+| 0.00, 0.00, 1.00| 
+
+Transform after resample:
+ | 15.00, 0.00, 717345.00|
+| 0.00,-15.00,-2776995.00|
+| 0.00, 0.00, 1.00|
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition-reminder admonition">
 <p class="admonition-title">Reminder</p>
@@ -871,7 +886,7 @@ title="Print to PDF"
 <p>As always the easiest way to deal with resampling is by deploying geowombat. It’s like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with <code class="docutils literal notranslate"><span class="pre">ref_res</span></code>, and the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method in the open statement. We have a number of resampling methods available depending on the context <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. Writing a file is a bit more intuitive too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
  
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
 
@@ -884,6 +899,30 @@ title="Print to PDF"
         <span class="c1">#     &quot;../temp/LC08_20200518_15m.tif&quot;,</span>
         <span class="c1">#     overwrite=True,</span>
         <span class="c1"># ) </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 3, y: 3720, x: 4082)&gt;
+dask.array&lt;open_rasterio-fce82e0c9b41237083c46d6b342d4b6f&lt;this-array&gt;, shape=(3, 3720, 4082), dtype=uint16, chunksize=(3, 256, 256), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1 2 3
+  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.786e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+Attributes: (12/13)
+    transform:           (15.0, 0.0, 717345.0, 0.0, -15.0, -2776995.0)
+    crs:                 32621
+    res:                 (15.0, 15.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan)
+    _FillValue:          nan
+    ...                  ...
+    offsets:             (0.0, 0.0, 0.0)
+    filename:            ../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF
+    resampling:          bilinear
+    AREA_OR_POINT:       Area
+    _data_are_separate:  0
+    _data_are_stacked:   0
 </pre></div>
 </div>
 </div>
@@ -901,10 +940,10 @@ title="Print to PDF"
 <p>The original input data LandSat data is 30 meters and will be downsampled to match <code class="docutils literal notranslate"><span class="pre">precip</span></code> which is 500m.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as 0. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="k">def</span> <span class="nf">reproj_match</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reproject a file to match the shape and projection of existing raster. </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reproject a file to match the shape and projection of existing raster. </span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -956,13 +995,21 @@ title="Print to PDF"
 <p>Now we can execute out code to co-register two rasters</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LS</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LS</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
 <span class="n">precip</span> <span class="o">=</span> <span class="s2">&quot;../data/precipitation_20200601_500m.tif&quot;</span>
 
 <span class="c1"># co-register LS to match precip raster</span>
 <span class="n">reproj_match</span><span class="p">(</span><span class="n">infile</span> <span class="o">=</span> <span class="n">LS</span><span class="p">,</span> 
              <span class="n">match</span><span class="o">=</span> <span class="n">precip</span><span class="p">,</span>
              <span class="n">outfile</span> <span class="o">=</span> <span class="s1">&#39;../temp/LS_reg_precip.tif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coregistered to shape: 136 157 
+ Affine | 0.00, 0.00,-61.49|
+| 0.00,-0.00,-0.00|
+| 0.00, 0.00, 1.00|
 </pre></div>
 </div>
 </div>
@@ -974,7 +1021,7 @@ title="Print to PDF"
 <p>The original input data <code class="docutils literal notranslate"><span class="pre">precip</span></code> is currently 500m but will be upsampled to 30m as seen in <code class="docutils literal notranslate"><span class="pre">print(src)</span></code>.  Also note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> to avoid missing values stored as -9999. Note we can choose a number of <code class="docutils literal notranslate"><span class="pre">resampling</span></code> techniques <a class="reference internal" href="#raster-resample-methods"><span class="std std-ref">listed above</span></a>. For more detail on resampling go to <a class="reference internal" href="d_raster_crs_intro.html#d-raster-crs-intro"><span class="std std-ref">Introduction to Raster CRS</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -994,6 +1041,31 @@ title="Print to PDF"
         <span class="c1"># ) </span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 1, y: 1860, x: 2041)&gt;
+dask.array&lt;open_rasterio-ae6b5b512ae9b65591428c8b69d0f146&lt;this-array&gt;, shape=(1, 1860, 2041), dtype=float32, chunksize=(1, 135, 157), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1
+  * x        (x) float64 7.174e+05 7.174e+05 7.174e+05 ... 7.785e+05 7.786e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+Attributes: (12/14)
+    transform:           (30.0, 0.0, 717345.0, 0.0, -30.0, -2776995.0)
+    crs:                 32621
+    res:                 (30.0, 30.0)
+    is_tiled:            1
+    nodatavals:          (-9999,)
+    _FillValue:          -9999
+    ...                  ...
+    descriptions:        (&#39;precipitation&#39;,)
+    filename:            ../data/precipitation_20200601_500m.tif
+    resampling:          bilinear
+    AREA_OR_POINT:       Area
+    _data_are_separate:  0
+    _data_are_stacked:   0
+</pre></div>
+</div>
+<img alt="../_images/e_raster_resample_9_1.png" src="../_images/e_raster_resample_9_1.png" />
 </div>
 </div>
 <p>Although it’s a bit hard to tell, the cell size is now 30m (see the slices of the larger original cells at the top of the image).</p>
@@ -1017,7 +1089,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

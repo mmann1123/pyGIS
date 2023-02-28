@@ -79,7 +79,7 @@ These topic is covered extensively in the next chapter. We will briefly introduc
 Once you have those components you can write out a working spatial raster dataset in python in a few lines of code. We just need to provide the information listed above in a format that rasterio understands. 
 
 
- ```{code-cell} ipython3
+```{code-cell} ipython3
 from rasterio.transform import Affine
 import rasterio as rio
 

@@ -47,7 +47,7 @@ from sklearn.neighbors import KernelDensity
 
 # We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data (click the + below to show code cell).
 
-# In[ ]:
+# In[2]:
 
 
 # Load data
@@ -77,7 +77,7 @@ wells["Well_ID"] = np.arange(wells.shape[0])
 # 
 # Let's define a function that will create a grid of either rectangles or hexagons of a specified side length.
 
-# In[ ]:
+# In[3]:
 
 
 def create_grid(feature, shape, side_length):
@@ -173,7 +173,7 @@ def create_grid(feature, shape, side_length):
 # 
 # To begin, we will set some global parameters for both examples.
 
-# In[ ]:
+# In[4]:
 
 
 # Set side length for cells in grid
@@ -196,7 +196,7 @@ shape = "hexagon"
 # 
 # First, we will create a grid over the Bay Area.
 
-# In[ ]:
+# In[5]:
 
 
 # Create grid
@@ -216,7 +216,7 @@ ax.set_title('San Francisco Bay Area - Boundaries, Wells, and Grids', fontdict =
 
 # Next, we will conduct a spatial join for each well point, essentially assigning it to a cell. We can add a field with a value of `1`, group all the wells in a cell, and aggregate **(sum)** all those `1` values to get the total number of wells in a cell.
 
-# In[ ]:
+# In[6]:
 
 
 # Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects
@@ -252,7 +252,7 @@ display(bay_area_grid)
 
 # We can plot the data to see how it looks.
 
-# In[ ]:
+# In[7]:
 
 
 # Create subplots
@@ -269,7 +269,7 @@ ax.set_title('San Francisco Bay Area - Binning Well Points', fontdict = {'fontsi
 
 # The advantage of this method is that it is pretty fast. To verify that all points have been counted once, we can check the aggregate of all the point sums for each cell.
 
-# In[ ]:
+# In[8]:
 
 
 # Check total number of well points counted and compare to number of well points in input data
@@ -280,7 +280,7 @@ print("Total number of well points counted: {}\nNumber of well points in input d
 # 
 # This second method is slightly more intuitive, but it can take a long time to run. We will use a subset of the input data--those that fall within Santa Clara County--to illustrate this example. We will first subset our data to Santa Clara County (click the + below to show code cell).
 
-# In[ ]:
+# In[9]:
 
 
 # Select the Santa Clara County boundary
@@ -292,7 +292,7 @@ sc_county_wells = wells[wells.within(sc_county.geometry.values[0])]
 
 # Next, we will create a grid over Santa Clara County.
 
-# In[ ]:
+# In[10]:
 
 
 # Create grid
@@ -312,7 +312,7 @@ ax.set_title('Santa Clara County - Boundaries, Wells, and Grids', fontdict = {'f
 
 # We iterate through each cell in the grid and set a counter for each cell. We iterate through each well point and see if it is within (or intersects) the cell. If it is, the counter is increased by 1, and the feature is "discarded" so that it won't be counted again (resolving the issue of a point falling on the boundary between two cells).
 
-# In[ ]:
+# In[11]:
 
 
 # Create empty list used to hold count values for each grid
@@ -389,7 +389,7 @@ display(sc_county_grid)
 
 # We can check to make sure all well points in Santa Clara County were counted.
 
-# In[ ]:
+# In[12]:
 
 
 # Check total number of well points counted and compare to number of well points in input data
@@ -398,7 +398,7 @@ print("Total number of well points counted: {}\nNumber of well points in input d
 
 # Finally, we can plot the data.
 
-# In[ ]:
+# In[13]:
 
 
 # Create subplots
@@ -434,7 +434,7 @@ ax.set_title('Santa Clara County - Binning Well Points', fontdict = {'fontsize':
 # 
 # This method uses `geoplot`, a high-level plotting library for spatial data that complements `matplotlib`. For more information on `geoplot`, check out the [documentation](https://residentmario.github.io/geoplot/index.html).
 
-# In[ ]:
+# In[14]:
 
 
 # Set projection to WGS 84 and reproject data
@@ -448,7 +448,7 @@ fig, ax = plt.subplots(1, 1, figsize = (10, 10))
 # Plot data
 counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
 wells_wgs.plot(ax = ax, marker = 'o', color = 'dimgray', markersize = 3)
-gplt.kdeplot(wells_wgs, cmap = "RdPu", shade = True, clip = counties_wgs, thresh = 0, ax = ax, alpha = 0.5)
+gplt.kdeplot(wells_wgs,ax=ax,shade = True,cmap = "RdPu",alpha = 0.5) 
 
 # Set title
 ax.set_title('San Francisco Bay Area - Kernel Density Estimation for Wells', fontdict = {'fontsize': '15', 'fontweight' : '3'})
@@ -463,7 +463,7 @@ ax.set_title('San Francisco Bay Area - Kernel Density Estimation for Wells', fon
 # 
 # For further reading, check out the [`scikit-learn` documentation](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity) and the [associated example](https://scikit-learn.org/stable/auto_examples/neighbors/plot_species_kde.html#sphx-glr-auto-examples-neighbors-plot-species-kde-py).
 
-# In[ ]:
+# In[15]:
 
 
 # Get X and Y coordinates of well points
@@ -506,7 +506,7 @@ plt.show()
 
 # We can export the raster if necessary.
 
-# In[ ]:
+# In[16]:
 
 
 def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
@@ -537,7 +537,7 @@ def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
             new_dataset.write(Z_export, 1)
 
 
-# In[ ]:
+# In[17]:
 
 
 # Export raster

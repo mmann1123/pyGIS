@@ -24,6 +24,8 @@
 # In[1]:
 
 
+import os
+
 # Import GeoWombat
 import geowombat as gw
 

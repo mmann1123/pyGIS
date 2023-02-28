@@ -742,7 +742,7 @@ title="Print to PDF"
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -758,7 +758,7 @@ title="Print to PDF"
 </div>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
 
 <span class="c1"># County boundaries</span>
 <span class="c1"># Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640</span>
@@ -781,7 +781,7 @@ title="Print to PDF"
 <p>We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use <a class="reference external" href="http://bboxfinder.com/">bbox finder</a> to generate custom bounding boxes and obtain their coordinates (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list of coordinate pairs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list of coordinate pairs</span>
 <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1790787</span><span class="p">,</span> <span class="mi">736108</span><span class="p">],</span> <span class="p">[</span><span class="mi">1929652</span><span class="p">,</span> <span class="mi">736108</span><span class="p">],</span> <span class="p">[</span><span class="mi">1929652</span><span class="p">,</span> <span class="mi">598414</span><span class="p">],</span> <span class="p">[</span><span class="mi">1790787</span><span class="p">,</span> <span class="mi">598414</span><span class="p">]]</span>
 
 <span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
@@ -799,8 +799,8 @@ title="Print to PDF"
 <p>We’ll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Display the first and last five rows of attribute table.&#39;&#39;&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Display the first and last five rows of attribute table.&#39;&#39;&#39;</span>
 
     <span class="c1"># Print title</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attribute Table: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
@@ -818,7 +818,7 @@ title="Print to PDF"
 
 
 <span class="k">def</span> <span class="nf">plot_df</span><span class="p">(</span><span class="n">result_name</span><span class="p">,</span> <span class="n">result_df</span><span class="p">,</span> <span class="n">result_geom_type</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Plot the result on a map and add the outlines of the original shapefiles.&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Plot the result on a map and add the outlines of the original shapefiles.&#39;&#39;&#39;</span>
 
     <span class="c1"># Create subplots</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -863,7 +863,7 @@ title="Print to PDF"
 <p>Let’s take a look at what our input data looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Plot data</span>
@@ -879,6 +879,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area&#39;)
+</pre></div>
+</div>
+<img alt="../_images/e_extraction_9_1.png" src="../_images/e_extraction_9_1.png" />
+</div>
 </div>
 </section>
 <section id="clip-spatial-polygons">
@@ -891,7 +897,7 @@ title="Print to PDF"
 <p>We will first clip the Bay Area counties polygon to our created rectangle polygon.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
 <span class="n">clip_counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
 
 <span class="c1"># Display attribute table</span>
@@ -902,11 +908,84 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>coname</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>Santa Clara County</td>
+      <td>MULTIPOLYGON (((1858743.389 607583.832, 185874...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>San Mateo County</td>
+      <td>MULTIPOLYGON (((1850037.244 614954.640, 185085...</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860073.077 612066.462, 185990...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Francisco County</td>
+      <td>MULTIPOLYGON (((1834350.912 641735.721, 183437...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Contra Costa County</td>
+      <td>MULTIPOLYGON (((1836498.140 656511.674, 183649...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Marin County</td>
+      <td>MULTIPOLYGON (((1830505.126 653828.366, 183051...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Solano County</td>
+      <td>MULTIPOLYGON (((1875491.252 673069.363, 187548...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Sonoma County</td>
+      <td>POLYGON ((1813605.098 736060.762, 1813555.586 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Napa County</td>
+      <td>POLYGON ((1860170.736 724644.473, 1860169.835 ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/e_extraction_11_1.png" src="../_images/e_extraction_11_1.png" />
+</div>
 </div>
 <p>We can clip any vector type. Next, we will clip the wells point data to our created rectangle polygon.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
 <span class="n">clip_wells</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
 
 <span class="c1"># Display attribute table</span>
@@ -917,6 +996,126 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4764</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1928106.578 619294.408)</td>
+    </tr>
+    <tr>
+      <th>4733</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1927444.679 619366.782)</td>
+    </tr>
+    <tr>
+      <th>4391</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1927051.274 621834.123)</td>
+    </tr>
+    <tr>
+      <th>4554</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
+    </tr>
+    <tr>
+      <th>4553</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5669</th>
+      <td>NaN</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>200</td>
+      <td>POINT (1824748.040 729726.154)</td>
+    </tr>
+    <tr>
+      <th>4077</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>175</td>
+      <td>POINT (1823812.719 730423.625)</td>
+    </tr>
+    <tr>
+      <th>4076</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>210</td>
+      <td>POINT (1823821.913 730445.634)</td>
+    </tr>
+    <tr>
+      <th>1365</th>
+      <td>202</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>280</td>
+      <td>POINT (1830194.589 731335.971)</td>
+    </tr>
+    <tr>
+      <th>5626</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>130</td>
+      <td>POINT (1824114.227 731871.693)</td>
+    </tr>
+  </tbody>
+</table>
+<p>2013 rows × 5 columns</p>
+</div></div><img alt="../_images/e_extraction_13_1.png" src="../_images/e_extraction_13_1.png" />
+</div>
 </div>
 </section>
 <section id="select-location-by-attributes">
@@ -925,16 +1124,62 @@ title="Print to PDF"
 <p>We will use use different criteria to subset the wells dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display attribute table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display attribute table</span>
 <span class="n">display</span><span class="p">(</span><span class="n">wells</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2400064-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1968290.923 592019.918)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2400099-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1969113.543 595876.691)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>The criteria can use a variety of operators, including comparison and logical operators.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply</span>
 <span class="n">wells_public</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[(</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_USE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Public Supply&quot;</span><span class="p">)]</span>
 
 <span class="c1"># Display first two and last two rows of attribute table</span>
@@ -942,10 +1187,110 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply
+
+Table shape (rows, columns): (33, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2400064-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1968290.923 592019.918)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2400099-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1969113.543 595876.691)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3368</th>
+      <td>Aptos Creek PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>713</td>
+      <td>POINT (1875127.938 553764.966)</td>
+    </tr>
+    <tr>
+      <th>3369</th>
+      <td>Country Club PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>495</td>
+      <td>POINT (1877219.818 552137.819)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft</span>
 <span class="n">wells_public_deep</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[(</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_USE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Public Supply&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_DEPTH&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)]</span>
 
 <span class="c1"># Display first two and last two rows of attribute table</span>
@@ -953,10 +1298,110 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft
+
+Table shape (rows, columns): (24, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>919</th>
+      <td>Granite Way PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>670</td>
+      <td>POINT (1875403.340 554078.279)</td>
+    </tr>
+    <tr>
+      <th>1082</th>
+      <td>Aptos Jr. High 2 PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>590</td>
+      <td>POINT (1876872.389 553821.138)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3368</th>
+      <td>Aptos Creek PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>713</td>
+      <td>POINT (1875127.938 553764.966)</td>
+    </tr>
+    <tr>
+      <th>3369</th>
+      <td>Country Club PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>495</td>
+      <td>POINT (1877219.818 552137.819)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft OR are residential</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft OR are residential</span>
 <span class="n">wells_public_deep_residential</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[((</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_USE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Public Supply&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_DEPTH&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">&quot;WELL_USE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Residential&quot;</span><span class="p">)]</span>
 
 <span class="c1"># Display first two and last two rows of attribute table</span>
@@ -964,6 +1409,106 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential
+
+Table shape (rows, columns): (725, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>137</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>78</td>
+      <td>POINT (1886296.744 730378.969)</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>80</td>
+      <td>POINT (1877320.295 730464.652)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6032</th>
+      <td>GV FARM</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>67</td>
+      <td>POINT (1855297.377 693189.634)</td>
+    </tr>
+    <tr>
+      <th>6033</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>76</td>
+      <td>POINT (1841755.238 707939.225)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="select-by-location">
@@ -1035,7 +1580,7 @@ title="Print to PDF"
 <p>These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that fall within Shapely rectangle</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that fall within Shapely rectangle</span>
 <span class="n">wells_within_rect_shapely</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[</span><span class="n">wells</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly_shapely</span><span class="p">)]</span>
 
 <span class="c1"># Display first two and last two rows of attribute table</span>
@@ -1046,6 +1591,107 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells within a User-Defined Rectangle
+
+Table shape (rows, columns): (2013, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Flag City Well 3</td>
+      <td>Unknown</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1922067.711 679380.918)</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Flag City Well 1</td>
+      <td>Unknown</td>
+      <td>Single Well</td>
+      <td>170</td>
+      <td>POINT (1922680.537 679641.516)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6032</th>
+      <td>GV FARM</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>67</td>
+      <td>POINT (1855297.377 693189.634)</td>
+    </tr>
+    <tr>
+      <th>6033</th>
+      <td>NaN</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>76</td>
+      <td>POINT (1841755.238 707939.225)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/e_extraction_21_4.png" src="../_images/e_extraction_21_4.png" />
+</div>
 </div>
 </section>
 <section id="method-2-geodataframe">
@@ -1055,7 +1701,7 @@ title="Print to PDF"
 <p>Because each record in a GeoDataFrame has a geometry column that stores that record’s geometry as a <code class="docutils literal notranslate"><span class="pre">shapely</span></code> object, we can call this object if we want to check a bunch of features against one extent (with one geometry). <a class="footnote-reference brackets" href="#gpd-within" id="id8">6</a>, <a class="footnote-reference brackets" href="#gpd-data" id="id9">7</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
 <span class="n">sc_county</span> <span class="o">=</span> <span class="n">counties</span><span class="p">[</span><span class="n">counties</span><span class="p">[</span><span class="s2">&quot;coname&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Santa Clara County&quot;</span><span class="p">]</span>
 
 <span class="c1"># Subset the GeoDataFrame by checking which wells are within Santa Clara County&#39;s Shapely object</span>
@@ -1068,6 +1714,107 @@ title="Print to PDF"
 <span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">&quot;San Francisco Bay Area Wells within Santa Clara County&quot;</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">wells_within_sc_shapely</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">sc_county</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells within Santa Clara County
+
+Table shape (rows, columns): (136, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>980</th>
+      <td>CalFire Pacheco No 2</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1924674.853 557296.117)</td>
+    </tr>
+    <tr>
+      <th>1020</th>
+      <td>05S02W35R002</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>80</td>
+      <td>POINT (1863211.218 606236.916)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5962</th>
+      <td>07S01W25L001</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>404</td>
+      <td>POINT (1873814.137 589052.339)</td>
+    </tr>
+    <tr>
+      <th>6036</th>
+      <td>06S02W34B006</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>152</td>
+      <td>POINT (1861394.207 597916.983)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/e_extraction_23_4.png" src="../_images/e_extraction_23_4.png" />
 </div>
 </div>
 <div class="admonition tip">
@@ -1114,7 +1861,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

@@ -739,7 +739,7 @@ title="Print to PDF"
 <p>In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes [‘water’,’crop’,’tree’,’developed’]. The first step is to use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> to convert these to integer based categories, which we store in a new column called ‘lc’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
 <span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">fit_predict</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
@@ -758,6 +758,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                                           geometry  lc
+0      water  POLYGON ((737544.502 -2795232.772, 737544.502 ...   3
+1       crop  POLYGON ((742517.658 -2798160.232, 743046.717 ...   0
+2       tree  POLYGON ((742435.360 -2801875.403, 742458.874 ...   2
+3  developed  POLYGON ((738903.667 -2811573.845, 738926.586 ...   1
+</pre></div>
+</div>
+</div>
 </div>
 <p>We are then going to generate our sklearn pipeline (<a class="reference external" href="https://medium.com/vickdata/a-simple-guide-to-scikit-learn-pipelines-4ac0d974bdcf">see simple tutorial here</a>). A pipeline simply allows us to pass a numpy array through a defined set of operations. In this case the data is passed through the following operations:</p>
 <ul class="simple">
@@ -768,7 +777,7 @@ title="Print to PDF"
 <p>In this example we will fit and predict the model in two steps. The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method returns three objects, a transformed version of the original dataset <code class="docutils literal notranslate"><span class="pre">X</span></code> that can be used by sklearn, <code class="docutils literal notranslate"><span class="pre">Xy</span></code> a tuple containing the data used for training <code class="docutils literal notranslate"><span class="pre">(X,y)</span></code> where any data outside the polygons is removed, and the trained pipeline <code class="docutils literal notranslate"><span class="pre">clf</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Use a data pipeline</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
@@ -787,11 +796,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_3_0.png" src="../_images/f_rs_ml_predict_3_0.png" />
+</div>
 </div>
 <p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
@@ -802,6 +814,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_5_0.png" src="../_images/f_rs_ml_predict_5_0.png" />
+</div>
 </div>
 </section>
 <section id="unsupervised-classification-in-python">
@@ -810,7 +825,7 @@ title="Print to PDF"
 <p>In this example we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">kmeans</a> to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
 <span class="n">cl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -824,6 +839,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_7_0.png" src="../_images/f_rs_ml_predict_7_0.png" />
+</div>
 </div>
 <p>In this case we can see that it effective labels different clusters of data, and now it is up to us to determine which clusters should be categorized as water, trees, and fields etc.</p>
 </section>
@@ -833,7 +851,7 @@ title="Print to PDF"
 <p>If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set <code class="docutils literal notranslate"><span class="pre">stack_dim</span></code> to ‘time’ and set the <code class="docutils literal notranslate"><span class="pre">time_names</span></code>.  <em>Note</em> we are just pretending we have two dates of LandSat imagery here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
    <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">([</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518</span><span class="p">],</span> 
@@ -847,11 +865,38 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (time: 2, band: 1, y: 372, x: 408)&gt;
+dask.array&lt;xarray-&lt;this-array&gt;, shape=(2, 1, 372, 408), dtype=float64, chunksize=(2, 1, 256, 256), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * x        (x) float64 7.174e+05 7.176e+05 7.177e+05 ... 7.783e+05 7.785e+05
+  * y        (y) float64 -2.777e+06 -2.777e+06 ... -2.833e+06 -2.833e+06
+  * time     (time) object &#39;t1&#39; &#39;t2&#39;
+    targ     (time, y, x) uint8 dask.array&lt;chunksize=(2, 256, 256), meta=np.ndarray&gt;
+  * band     (band) &lt;U4 &#39;targ&#39;
+Attributes: (12/13)
+    transform:           (150.0, 0.0, 717345.0, 0.0, -150.0, -2776995.0)
+    crs:                 32621
+    res:                 (150.0, 150.0)
+    is_tiled:            0
+    nodatavals:          (0, 0, 0)
+    _FillValue:          0
+    ...                  ...
+    offsets:             (0.0, 0.0, 0.0)
+    filename:            [&#39;LC08_L1TP_224078_20200518_20200518_01_RT.TIF&#39;, &#39;LC...
+    resampling:          nearest
+    AREA_OR_POINT:       Area
+    _data_are_separate:  1
+    _data_are_stacked:   1
+</pre></div>
+</div>
+<img alt="../_images/f_rs_ml_predict_9_1.png" src="../_images/f_rs_ml_predict_9_1.png" />
+</div>
 </div>
 <p>If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -860,6 +905,9 @@ title="Print to PDF"
         <span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f_rs_ml_predict_11_0.png" src="../_images/f_rs_ml_predict_11_0.png" />
 </div>
 </div>
 </section>
@@ -884,7 +932,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <p>So <code class="docutils literal notranslate"><span class="pre">&quot;pca__n_components&quot;:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> says that for the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step of the pipeline, we will try out tree different values for the parameter <code class="docutils literal notranslate"><span class="pre">n_components</span></code>, allowing us to choose the one that performs best at predicting our ‘testing’ data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn_xarray.model_selection</span> <span class="kn">import</span> <span class="n">CrossValidatorWrapper</span>
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
@@ -921,6 +969,30 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.02463131, 0.03409662, 0.03016915, 0.06447763, 0.0711071 ,
+       0.02159019]), &#39;std_fit_time&#39;: array([0.00627849, 0.01270509, 0.01360892, 0.00237593, 0.00361241,
+       0.00146935]), &#39;mean_score_time&#39;: array([0.01492052, 0.01914248, 0.02169619, 0.04682274, 0.03767824,
+       0.01248355]), &#39;std_score_time&#39;: array([0.00394439, 0.01105345, 0.00824731, 0.00162991, 0.01075294,
+       0.00067378]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+             mask=[False, False, False, False, False, False],
+       fill_value=&#39;?&#39;,
+            dtype=object), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
+             mask=[False, False, False, False, False, False],
+       fill_value=&#39;?&#39;,
+            dtype=object), &#39;params&#39;: [{&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 1, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: False}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: True}, {&#39;pca__n_components&#39;: 3, &#39;scaler__with_std&#39;: False}], &#39;split0_test_score&#39;: array([0.23076923, 0.38461538, 0.69230769, 0.46153846, 0.69230769,
+       0.38461538]), &#39;split1_test_score&#39;: array([1.        , 0.85714286, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;split2_test_score&#39;: array([1.        , 0.83333333, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;split3_test_score&#39;: array([1., 1., 1., 1., 1., 1.]), &#39;split4_test_score&#39;: array([1.        , 0.88888889, 1.        , 1.        , 1.        ,
+       1.        ]), &#39;mean_test_score&#39;: array([0.84615385, 0.79279609, 0.93846154, 0.89230769, 0.93846154,
+       0.87692308]), &#39;std_test_score&#39;: array([0.30769231, 0.21192572, 0.12307692, 0.21538462, 0.12307692,
+       0.24615385]), &#39;rank_test_score&#39;: array([5, 6, 1, 3, 1, 4], dtype=int32)}
+0.9384615384615385
+{&#39;pca__n_components&#39;: 2, &#39;scaler__with_std&#39;: True}
+</pre></div>
+</div>
+<img alt="../_images/f_rs_ml_predict_13_1.png" src="../_images/f_rs_ml_predict_13_1.png" />
+</div>
 </div>
 <p>In order to create a model with the optimal parameters we need to use <code class="docutils literal notranslate"><span class="pre">gridsearch.best_params_</span></code>, which holds a dictionary of each parameter and its optimal value. To ‘use’ these values we need to update the parameters held in our returned pipeline, <code class="docutils literal notranslate"><span class="pre">pipe</span></code>, by using the <code class="docutils literal notranslate"><span class="pre">.set_params</span></code> method. We use <code class="docutils literal notranslate"><span class="pre">**</span></code> to unpack the dictionary values, tutorial on <a class="reference external" href="https://medium.com/ml-and-automation/how-to-unpack-list-dictionary-tuple-in-python-c0705d29931c">unpacking here</a>.</p>
 <p>Notice that the <code class="docutils literal notranslate"><span class="pre">gridsearch</span></code> has a few attributes of interest. This includes all the results of the kfold rounds <code class="docutils literal notranslate"><span class="pre">.cv_results_</span></code>, the best score obtained <code class="docutils literal notranslate"><span class="pre">.best_score_</span></code>, and the ideal set of parameters to use in the pipeline <code class="docutils literal notranslate"><span class="pre">.best_params_</span></code>.  This lase one <code class="docutils literal notranslate"><span class="pre">.best_params_</span></code> will be use to update our <code class="docutils literal notranslate"><span class="pre">pipe</span></code> pipeline for prediction.</p>
@@ -939,7 +1011,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./docs"
         },
         predefinedOutput: true

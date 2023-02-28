@@ -45,6 +45,7 @@ import pandas as pd
 import geopandas as gpd
 from census import Census
 from us import states
+import os
 ```
 
 
@@ -63,8 +64,7 @@ c = Census("CENSUS API KEY HERE")
 ```{code-cell} ipython3
 :tags: ["hide-cell"]
 #ignore this, I am just reading in my api key privately
-with open("../../../census_api.txt", "r") as f:
-    c = Census(f.read().replace('\n', ''))
+c = Census(os.environ.get('census_api_key'))
 ```
 
 With the Census API key set, we will access the census data at the tract level for the Commonwealth of Virginia from the 2019 ACS, specifically the `ratio of income to poverty in the past 12 months` (`C17002_001E`, total; `C17002_002E`, < 0.50; and `C17002_003E`, 0.50 - 0.99) variables and the `total population` (`B01003_001E`) variable. For more information on why these variables are used, refer to the US Census Bureau's [article on how the Census Bureau measures poverty](https://www.census.gov/topics/income-poverty/poverty/guidance/poverty-measures.html) and the [list of variables found in ACS](https://api.census.gov/data/2019/acs/acs5/variables.html).

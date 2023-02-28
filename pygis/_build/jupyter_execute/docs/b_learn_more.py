@@ -132,7 +132,7 @@ x + x + x + y
 
 # We can manipulate expressions
 
-# In[ ]:
+# In[5]:
 
 
 expression = (x + y)**2
@@ -141,7 +141,7 @@ expression.expand()
 
 # solve polynomials
 
-# In[ ]:
+# In[6]:
 
 
 from sympy import solve
@@ -151,7 +151,7 @@ solve(x**2 + x + 2)
 
 # and calculate limits, derivatives and integrals
 
-# In[ ]:
+# In[7]:
 
 
 from sympy import limit, sin, diff
@@ -159,13 +159,13 @@ from sympy import limit, sin, diff
 limit(1 / x, x, 0)
 
 
-# In[ ]:
+# In[8]:
 
 
 limit(sin(x) / x, x, 0)
 
 
-# In[ ]:
+# In[9]:
 
 
 diff(sin(x), x)
@@ -187,7 +187,7 @@ diff(sin(x), x)
 # Here\'s a simple example, using some dummy data generated with Numpy\'s
 # excellent `random` functionality.
 
-# In[ ]:
+# In[10]:
 
 
 import pandas as pd
@@ -200,7 +200,7 @@ df = pd.DataFrame(data, columns=('price', 'weight'), index=dates)
 print(df)
 
 
-# In[ ]:
+# In[11]:
 
 
 df.mean()

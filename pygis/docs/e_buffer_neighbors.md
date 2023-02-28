@@ -230,8 +230,8 @@ print(dest)
 Okay now we are ready to use our function and find closest Points (taking the value from id column) from df2 to df1 centroids
 
 ```{code-cell} ipython3
-nearest = nearest(df1=orig, df2=dest, df2_column='name')
-nearest.head()
+near = nearest(df1=orig, df2=dest, df2_column='name')
+near.head()
 ```
 
 That's it! Now we found the closest point for each centroid and got the `index` value or column name from our addresses into the `df1` GeoDataFrame.

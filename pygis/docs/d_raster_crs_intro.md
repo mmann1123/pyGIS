@@ -192,12 +192,12 @@ Let's work the example of finding the upper left coordinates of with `row=5`, `c
 
 $$
    \begin{eqnarray}
-      \begin{bmatrix} 5 \\ 2 \\ 1 \end{bmatrix}   
       \begin{bmatrix} 
           30 & 0 & -105 \\  
           0 & -30 & 105 \\ 
           0 & 0 & 1 
-      \end{bmatrix}  =
+      \end{bmatrix}  
+      \begin{bmatrix} 5 \\ 2 \\ 1 \end{bmatrix}   =
       \begin{bmatrix} 
           5 \times 30 + 2 \times 0 + 1 \times -105  \\  
           5 \times 0 + 2 \times -30 + 1 \times 105 \\ 
