@@ -68,15 +68,13 @@ const thebe_selector_output = ".output, .cell_output"
 
     <!-- Google Analytics -->
     
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
 <script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-192844775-1', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MQPNBR6XWJ');
+                </script>
 
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
@@ -1131,7 +1129,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_284461/2776310115.py:2: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_331798/2776310115.py:2: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
   buildings.to_file(&#39;../temp/edgewood_buildings.shp&#39;)
 </pre></div>
 </div>

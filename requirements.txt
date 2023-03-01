@@ -19,4 +19,5 @@ sphinx_inline_tabs
 pykrige
 us
 numpy_groupies
+pydata-sphinx-theme
 sklearn-xarray@git+https://github.com/jgrss/sklearn-xarray.git

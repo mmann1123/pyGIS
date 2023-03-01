@@ -21,6 +21,8 @@ sphinx:
     html_baseurl: 'https://pygis.io' # 'https://mmann1123.github.io/pyGIS'
     bibtex_reference_style: author_year
     bibtex_bibfiles: reference.bib
+    # templates_path:
+      # - _templates
   extra_extensions:
     - sphinx_sitemap
     - sphinxcontrib.bibtex
@@ -61,7 +63,7 @@ html:
   use_issues_button:            true
   home_page_in_navbar:          true
   use_repository_button:        true
-  google_analytics_id       :  'UA-192844775-1'  # A GA id that can be used to track book views.
+  google_analytics_id       :  'G-MQPNBR6XWJ' #  'UA-192844775-1' # A GA id that can be used to track book views.
   extra_footer              :  
   extra_footer: |
         <div>
@@ -73,6 +75,9 @@ html:
         <div>
         <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
         </div>
+ 
+
+
 # Will be displayed underneath the footer. width=150" height="70"
 
 #######################################################################################
@@ -83,4 +88,13 @@ latex:
   latex_documents:
     targetname:                 book.tex
 
-  
+ # inserted into _templates/_layout.html  
+# <!-- Google tag (gtag.js) -->
+# <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDC6C7GLDY"></script>
+# <script>
+#   window.dataLayer = window.dataLayer || [];
+#   function gtag(){dataLayer.push(arguments);}
+#   gtag('js', new Date());
+
+#   gtag('config', 'G-ZDC6C7GLDY');
+# </script>

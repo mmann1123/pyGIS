@@ -68,15 +68,13 @@ const thebe_selector_output = ".output, .cell_output"
 
     <!-- Google Analytics -->
     
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
 <script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-192844775-1', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MQPNBR6XWJ');
+                </script>
 
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
@@ -1171,7 +1169,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-b989c5a2bec88870820e3e9bdcfd59d8&#39; (band: 1, y: 6, x: 6)&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-cb2fbd1730f0e6bb9d4bea1d62fdaf12&#39; (band: 1, y: 6, x: 6)&gt;
 dask.array&lt;stack, shape=(1, 6, 6), dtype=float64, chunksize=(1, 6, 6), chunktype=numpy.ndarray&gt;
 Coordinates:
   * band     (band) int64 1
