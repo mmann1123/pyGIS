@@ -8,9 +8,6 @@ with gw.config.update(ref_crs=proj4):
     
         src.gw.to_raster(
             "../temp/LC08_20200518_aea.tif",
-            verbose=0,
-            n_workers=4,  # number of process workers 
-            n_threads=2,  # number of thread workers ``dask.compute``
             overwrite=True,
         ) 
 

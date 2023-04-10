@@ -116,5 +116,5 @@ dest = {'name': ['Baltimore','Washington', 'Fredrick'],
 dest = gpd.GeoDataFrame(dest, crs="EPSG:4326")
 print(dest)
 
-nearest = nearest(df1=orig, df2=dest, df2_column='name')
-nearest.head()
+near = nearest(df1=orig, df2=dest, df2_column='name')
+near.head()

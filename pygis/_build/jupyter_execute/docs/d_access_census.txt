@@ -4,13 +4,13 @@ import pandas as pd
 import geopandas as gpd
 from census import Census
 from us import states
+import os
 
 # Set API key
 c = Census("CENSUS API KEY HERE")
 
 #ignore this, I am just reading in my api key privately
-with open("../../../census_api.txt", "r") as f:
-    c = Census(f.read().replace('\n', ''))
+c = Census(os.environ.get('census_api_key'))
 
 # Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)
 # C17002_001E: count of ratio of income to poverty in the past 12 months (total)

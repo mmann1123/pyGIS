@@ -133,7 +133,7 @@ newdata
 from fiona.crs import from_epsg
 
 # Set the GeoDataFrame's coordinate system to WGS84
-newdata.crs = from_epsg(code = 4326)
+newdata.crs = from_epsg(4326)
 
 # Let's see how the crs definition looks like
 newdata.crs

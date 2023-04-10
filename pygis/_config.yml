@@ -18,7 +18,7 @@ logo                        : pygis.png  # A path to the book logo
 sphinx:
   config:
     html_show_copyright: false
-    html_baseurl: 'https://pygis.io' # 'https://mmann1123.github.io/pyGIS'
+    html_baseurl: 'https://pygis.io/' #    must have / after last character 'https://mmann1123.github.io/pyGIS/'
     bibtex_reference_style: author_year
     bibtex_bibfiles: reference.bib
     # templates_path:
@@ -32,7 +32,7 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks           : auto  #auto, cache, off ,force
+  execute_notebooks           : off  #auto, cache, off ,force
   exclude_patterns          : 
                               [ #'a_*',
                               #'b_*',
@@ -75,10 +75,12 @@ html:
         <div>
         <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
         </div>
+    
+  # Will be displayed underneath the footer. width=150" height="70"
  
-  baseurl: 'https://pygis.io/docs/'   # for sitemap  https://sphinx-sitemap.readthedocs.io/en/latest/search-optimization.html
+  baseurl: "https://pygis.io/"   # for sitemap  https://sphinx-sitemap.readthedocs.io/en/latest/search-optimization.html
 
-# Will be displayed underneath the footer. width=150" height="70"
+ 
 
 #######################################################################################
 # Launch button settings

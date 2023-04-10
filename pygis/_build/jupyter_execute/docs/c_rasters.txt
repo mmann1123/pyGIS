@@ -22,22 +22,22 @@ transform = Affine.translation(x[0] - res / 2, y[0] - res / 2) * Affine.scale(re
 
 # open in 'write' mode, unpack profile info to dst
 with rio.open(
-   "../temp/new_raster.tif",
-   "w",
-   driver="GTiff",         # output file type
-   height=Z.shape[0],      # shape of array
-   width=Z.shape[1],
-   count=1,                # number of bands
-   dtype=Z.dtype,          # output datatype
-   crs="+proj=latlong",    # CRS
-   transform=transform,    # location and resolution of upper left cell
+    "../temp/new_raster.tif",
+    "w",
+    driver="GTiff",         # output file type
+    height=Z.shape[0],      # shape of array
+    width=Z.shape[1],
+    count=1,                # number of bands
+    dtype=Z.dtype,          # output datatype
+    crs="+proj=latlong",    # CRS
+    transform=transform,    # location and resolution of upper left cell
 ) as dst:
-   # check for number of bands
-   if dst.count == 1:
-       # write single band
-       dst.write(Z, 1)
-   else:
-       # write each band individually
-       for band in range(len(Z)):
-           # write data, band # (starting from 1)
-           dst.write(Z[band], band + 1)
+    # check for number of bands
+    if dst.count == 1:
+        # write single band
+        dst.write(Z, 1)
+    else:
+        # write each band individually
+        for band in range(len(Z)):
+            # write data, band # (starting from 1)
+            dst.write(Z[band], band + 1)
