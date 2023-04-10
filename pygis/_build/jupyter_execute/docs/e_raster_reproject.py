@@ -10,16 +10,18 @@
 # - Reproject a raster with geowombat
 # 
 # ```
+# 
 # ```{admonition} Review
 # * [Affine transformation](d_affine.md)
 # * [Raster Coordinate Reference Systems](d_raster_crs_intro.md)
 # ```
+# 
 # ----------------
 # 
 # # Reproject Rasters w. Rasterio and Geowombat
 # 
-# 
 # ## Reprojecting a Raster with Geowombat
+# 
 # Far and away the easiest way to handle raster data is by using [geowombat](https://geowombat.readthedocs.io/en/latest/index.html). Here's an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.
 # 
 # In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a `ref_crs` to the configuration manager. We can also use the `resampling` method when we `open` the image, by default it will be `nearest`, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].
@@ -37,9 +39,6 @@ with gw.config.update(ref_crs=proj4):
     
         src.gw.to_raster(
             "../temp/LC08_20200518_aea.tif",
-            verbose=0,
-            n_workers=4,  # number of process workers 
-            n_threads=2,  # number of thread workers ``dask.compute``
             overwrite=True,
         ) 
 
@@ -59,16 +58,16 @@ with gw.open(image) as src:
     plt.tight_layout(pad=1)
 
 
-# Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra. 
+# Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra.
 # 
 # ## Calculate_default_transform Explained
 # 
-# How do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster. 
+# How do we reproject a raster? Before we get into it, we need to talk some more... about `calculate_default_transform`. `calculate_default_transform` allows us to generate the transform matrix required for the new reprojected raster based on the characteristics of the original and the desired output CRS. Note that the `source` (src) is the original input raster, and the `destination` (dst) is the outputed reprojected raster.
 # 
 # First, remember that the transform matrix takes the following form ([review affine transforms here](d_affine.md)):
 # 
 # $$
-#     \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix} 
+#     \mbox{Transform} =  \begin{bmatrix} xres & 0 & \Delta x \\ 0 & yres & \Delta y \\ 0 & 0 & 1 \end{bmatrix}
 # $$
 # 
 # Now let's calculate the tranform matrix for the destination raster:
@@ -102,7 +101,7 @@ print("Destination Transform:\n", dst_transform)
 
 # Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check $\Delta x, \Delta x$).
 # 
-# ## Reprojecting a Raster with Rasterio 
+# ## Reprojecting a Raster with Rasterio
 # 
 # Ok finally!
 

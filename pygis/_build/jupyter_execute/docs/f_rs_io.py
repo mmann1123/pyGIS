@@ -3,8 +3,8 @@
 
 # (f_rs_io)=
 # 
-# 
 # ---------------
+# 
 # ```{admonition} Learning Objectives
 #   - How to open multiple common remotely sensed image types
 #   - Handle RGB, BGR, LandSat, PlanetScope images and other sensor types
@@ -12,12 +12,13 @@
 #   - Create a time series stack
 #   - Write files to disk
 # ```
+# 
 # ```{admonition} Review
 # * [Data Structures](c_features.md)
 # * [Raster Data ](c_rasters.md)
 # ```
-# --------------
 # 
+# --------------
 # 
 # # Reading/Writing Remote Sensed Images
 # 
@@ -98,9 +99,10 @@ with gw.open(
 plt.tight_layout(pad=1)
 
 
-# ```{note} 
+# ```{note}
 # If time names are not specified with ``stack_dim`` = 'time', GeoWombat will attempt to parse dates from the file names. This could incur significant overhead when the file list is long. Therefore, it is good practice to specify the time names.
 # ```
+# 
 # Overhead required to parse file names
 # 
 # ```python
@@ -114,7 +116,9 @@ plt.tight_layout(pad=1)
 # with gw.open(long_file_list, time_names=my_time_names, stack_dim='time') as src:
 #     ...
 # ```
+# 
 # ## Opening images from different sensors
+# 
 # One of many complications of using remotely sensed data is that there are so many different sensors such as LandSat, Sentinel, PlantScope etc each with their own band order and properties. Geowombat makes this much easier by providing a broad list of potential sensor configurations. [Read in more detail about sensor configurations here.](f_rs_crs_sensors) For this section, let's keep things simple and show you how to open a Sentinel 2 image using the configuration manager, frankly, it's pretty easy:
 # 
 # ``` python
@@ -160,6 +164,7 @@ plt.tight_layout(pad=1)
 # <!-- See :ref:`io` for more examples illustrating file opening. -->
 # 
 # ## Create a Time Series Stack
+# 
 # Let's pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names `[l8_224078_20200518, l8_224078_20200518]`, it also helps to be specific and assign `time_names=['t1', 't2']`, and specify which dimension we want to stack our data along with `stack_dim='time'`.
 
 # In[8]:
@@ -172,7 +177,8 @@ with gw.open([l8_224078_20200518, l8_224078_20200518],
     print(src)
 
 
-# ## Setting Missing Values 
+# ## Setting Missing Values
+# 
 # (f_rs_io_setting_missing_values)=
 # 
 # Many raster files do not have the missing value set properly in their profile. Geowombat makes it easy to set or update the missing data value using `nodata` in either `gw.open` or even in `gw.config.update` if you prefer.
@@ -195,7 +201,6 @@ plt.tight_layout(pad=1)
 # ``src`` is an ``xarray.DataArray`` with the necessary transform information to write to an image file.
 # 
 # Write to a VRT file.
-# 
 # 
 # ``` python
 # from geowombat.data import l8_224077_20200518_B4
@@ -228,7 +233,6 @@ plt.tight_layout(pad=1)
 #     src.gw.to_raster('output.tif',
 #                         verbose=1,
 #                         n_workers=4,    # number of process workers sent to ``concurrent.futures``
-#                         n_threads=2,    # number of thread workers sent to ``dask.compute``
 #                         n_chunks=200)   # number of window chunks to send as concurrent futures
 # ```
 # 
