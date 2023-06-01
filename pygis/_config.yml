@@ -21,6 +21,8 @@ sphinx:
     html_baseurl: 'https://pygis.io/' #    must have / after last character 'https://mmann1123.github.io/pyGIS/'
     bibtex_reference_style: author_year
     bibtex_bibfiles: reference.bib
+    language: en
+
     # templates_path:
       # - _templates
   extra_extensions:
