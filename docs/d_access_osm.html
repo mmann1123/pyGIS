@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Accessing Census and ACS Data in Python" href="d_access_census.html" />
     <link rel="prev" title="Window Operations with Rasterio and GeoWombat" href="e_raster_window_operations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -749,7 +749,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: the neighborhood of Edgewood in Washington DC USA.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the name that is used to seach for the data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the name that is used to seach for the data</span>
 <span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Edgewood Washington, DC, USA&quot;</span>
 </pre></div>
 </div>
@@ -760,7 +760,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Let’s also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the <code class="docutils literal notranslate"><span class="pre">ox.geocode_to_gdf</span></code> [docs](<a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)">https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)</a> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import osmnx</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import osmnx</span>
 <span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
@@ -773,78 +773,17 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>As the name of the function already tells us, <code class="docutils literal notranslate"><span class="pre">gdf_from_place()</span></code>returns a GeoDataFrame based on the specified place name query.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
 <span class="n">area</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>bbox_north</th>
-      <th>bbox_south</th>
-      <th>bbox_east</th>
-      <th>bbox_west</th>
-      <th>place_id</th>
-      <th>osm_type</th>
-      <th>osm_id</th>
-      <th>lat</th>
-      <th>lon</th>
-      <th>display_name</th>
-      <th>class</th>
-      <th>type</th>
-      <th>importance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POLYGON ((-77.00892 38.92123, -77.00890 38.920...</td>
-      <td>38.934159</td>
-      <td>38.917008</td>
-      <td>-76.99358</td>
-      <td>-77.008915</td>
-      <td>282956700</td>
-      <td>relation</td>
-      <td>4634158</td>
-      <td>38.922613</td>
-      <td>-77.000537</td>
-      <td>Edgewood, Washington, District of Columbia, Un...</td>
-      <td>place</td>
-      <td>neighbourhood</td>
-      <td>0.47</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Let’s still verify the data type:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geopandas.geodataframe.GeoDataFrame
 </pre></div>
 </div>
 </div>
@@ -852,15 +791,9 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Finally, let’s plot it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/d_access_osm_9_1.png" src="../_images/d_access_osm_9_1.png" />
 </div>
 </div>
 </section>
@@ -870,7 +803,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>When fetching spesific types of geometries from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
 <span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>   
 
 <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geometries_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
@@ -878,215 +811,14 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>addr:state</th>
-      <th>amenity</th>
-      <th>building</th>
-      <th>ele</th>
-      <th>gnis:county_id</th>
-      <th>gnis:county_name</th>
-      <th>gnis:created</th>
-      <th>gnis:edited</th>
-      <th>gnis:feature_id</th>
-      <th>gnis:import_uuid</th>
-      <th>...</th>
-      <th>shop</th>
-      <th>denomination</th>
-      <th>old_name</th>
-      <th>url</th>
-      <th>wikidata</th>
-      <th>office</th>
-      <th>short_name</th>
-      <th>shelter_type</th>
-      <th>ways</th>
-      <th>type</th>
-    </tr>
-    <tr>
-      <th>element_type</th>
-      <th>osmid</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">node</th>
-      <th>358955022</th>
-      <td>DC</td>
-      <td>school</td>
-      <td>yes</td>
-      <td>60</td>
-      <td>001</td>
-      <td>District of Columbia</td>
-      <td>12/18/1979</td>
-      <td>01/22/2008</td>
-      <td>2062869</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>367143640</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>56</td>
-      <td>NaN</td>
-      <td>District of Columbia</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2110453</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th rowspan="3" valign="top">way</th>
-      <th>52291432</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321503</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321504</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 55 columns</p>
-</div></div></div>
 </div>
 <p>We can plot the footprints quickly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot footprints </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot footprints </span>
 <span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/d_access_osm_13_1.png" src="../_images/d_access_osm_13_1.png" />
 </div>
 </div>
 </section>
@@ -1101,7 +833,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We need to isolate just the attributes we are interested in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1113,7 +845,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We also need to isolate the feature type we are looking for [e.g. Multipolygon, Polygon, Point]. Since here we want building footprints we are going to keep only polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1121,16 +853,10 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>Now, finally, we can write it to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save footprints </span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save footprints </span>
 <span class="n">buildings</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;../temp/edgewood_buildings.shp&#39;</span><span class="p">)</span>  
 <span class="c1"># Or save in a more open source format</span>
 <span class="c1">#buildings.to_file(&#39;../temp/edgewood_buildings.geojson&#39;, driver=&#39;GeoJSON&#39;)  </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_356440/2776310115.py:2: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
-  buildings.to_file(&#39;../temp/edgewood_buildings.shp&#39;)
 </pre></div>
 </div>
 </div>

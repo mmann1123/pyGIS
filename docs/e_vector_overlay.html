@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -61,7 +61,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Spatial Joins" href="e_spatial_joins.html" />
     <link rel="prev" title="Extracting Spatial Data" href="e_extraction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -797,7 +797,7 @@ title="Print to PDF"
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -811,7 +811,7 @@ title="Print to PDF"
 </div>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
 
 <span class="c1"># County boundaries</span>
 <span class="c1"># Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640</span>
@@ -840,7 +840,7 @@ title="Print to PDF"
 <p>We’ll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Display the first and last two rows of attribute table.&#39;&#39;&#39;</span>
 
     <span class="c1"># Print title</span>
@@ -915,7 +915,7 @@ title="Print to PDF"
 <p>Let’s briefly examine the attribute table of our shapefiles and plot the data so that we know what we’re working with.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Plot data</span>
@@ -930,172 +930,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area County and Watershed Boundaries&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_vector_overlay_7_1.png" src="../_images/e_vector_overlay_7_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print attribute table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print attribute table</span>
 <span class="n">display</span><span class="p">(</span><span class="n">counties</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>MULTIPOLYGON (((1836501.066 656512.837, 183649...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Marin County</td>
-      <td>MULTIPOLYGON (((1830493.060 653832.167, 183050...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Napa County</td>
-      <td>POLYGON ((1860171.549 724651.231, 1860170.736 ...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>San Francisco County</td>
-      <td>MULTIPOLYGON (((1779231.793 635380.766, 177918...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>San Mateo County</td>
-      <td>MULTIPOLYGON (((1836712.268 569216.860, 183671...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Santa Clara County</td>
-      <td>MULTIPOLYGON (((1858733.082 607586.450, 185874...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Solano County</td>
-      <td>MULTIPOLYGON (((1875491.908 673077.900, 187549...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print attribute table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print attribute table</span>
 <span class="n">display</span><span class="p">(</span><span class="n">watersheds</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>RUSSIAN</td>
-      <td>POLYGON ((1772952.612 823099.656, 1775209.737 ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>UPPER_PUTAH</td>
-      <td>POLYGON ((1825517.283 769282.042, 1826065.366 ...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>GUALALA-SALMON</td>
-      <td>POLYGON ((1747656.800 769294.908, 1748144.659 ...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>SAN_PABLO_BAY</td>
-      <td>POLYGON ((1815758.957 741414.318, 1816340.883 ...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>BODEGA_BAY</td>
-      <td>POLYGON ((1778048.116 714367.855, 1780284.096 ...</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>TOMALES-DRAKE_BAYS</td>
-      <td>POLYGON ((1783925.368 698933.179, 1784977.305 ...</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>SAN_FRANCISCO_BAY</td>
-      <td>POLYGON ((1856614.017 653898.716, 1856857.793 ...</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>POLYGON ((1826732.900 640369.438, 1827321.624 ...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>COYOTE</td>
-      <td>POLYGON ((1875229.662 619208.108, 1875664.986 ...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <section id="union">
 <h3>Union<a class="headerlink" href="#union" title="Permalink to this headline">#</a></h3>
@@ -1109,7 +959,7 @@ title="Print to PDF"
 <p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id5">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get union</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get union</span>
 <span class="n">union_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">watersheds</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;union&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1117,109 +967,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Union
-
-Table shape (rows, columns): (46, 3)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_357706/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
-  union_result = gpd.overlay(counties, watersheds, how = &#39;union&#39;)
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>POLYGON ((1844333.772 657330.481, 1844341.139 ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>44</th>
-      <td>NaN</td>
-      <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>MULTIPOLYGON (((1853776.327 587836.804, 185377...</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>NaN</td>
-      <td>COYOTE</td>
-      <td>MULTIPOLYGON (((1915414.106 583617.325, 191566...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Next, we can map the data, filling in the areas with color that have been retained. As the plot shows, no data was removed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot overlay</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot overlay</span>
 <span class="n">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span> <span class="o">=</span> <span class="s2">&quot;Union&quot;</span><span class="p">,</span> <span class="n">overlay_result</span> <span class="o">=</span> <span class="n">union_result</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_vector_overlay_13_0.png" src="../_images/e_vector_overlay_13_0.png" />
 </div>
 </div>
 </section>
@@ -1235,7 +990,7 @@ First two rows:
 <p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get intersection</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get intersection</span>
 <span class="n">intersection_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">watersheds</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;intersection&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1245,95 +1000,6 @@ First two rows:
 <span class="n">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span> <span class="o">=</span> <span class="s2">&quot;Intersection&quot;</span><span class="p">,</span> <span class="n">overlay_result</span> <span class="o">=</span> <span class="n">intersection_result</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Intersection
-
-Table shape (rows, columns): (28, 3)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>POLYGON ((1844333.772 657330.481, 1844341.139 ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>26</th>
-      <td>Santa Clara County</td>
-      <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>MULTIPOLYGON (((1855603.246 585515.731, 185557...</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>Sonoma County</td>
-      <td>GUALALA-SALMON</td>
-      <td>MULTIPOLYGON (((1770288.265 719971.781, 177026...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_15_4.png" src="../_images/e_vector_overlay_15_4.png" />
 </div>
 </div>
 </section>
@@ -1350,7 +1016,7 @@ First two rows:
 <p>Looking at the map, we see all combined geometries except for the areas that are unique to the second dataset (watershed boundaries dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get identity</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get identity</span>
 <span class="n">identity_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">watersheds</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;identity&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1360,99 +1026,6 @@ First two rows:
 <span class="n">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span> <span class="o">=</span> <span class="s2">&quot;Identity&quot;</span><span class="p">,</span> <span class="n">overlay_result</span> <span class="o">=</span> <span class="n">identity_result</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Identity
-
-Table shape (rows, columns): (37, 3)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_357706/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
-  identity_result = gpd.overlay(counties, watersheds, how = &#39;identity&#39;)
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>POLYGON ((1844333.772 657330.481, 1844341.139 ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>CUNAME</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>35</th>
-      <td>Solano County</td>
-      <td>NaN</td>
-      <td>MULTIPOLYGON (((1879889.331 727073.884, 188002...</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>Sonoma County</td>
-      <td>NaN</td>
-      <td>MULTIPOLYGON (((1804663.401 758088.289, 180471...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_17_5.png" src="../_images/e_vector_overlay_17_5.png" />
 </div>
 </div>
 </section>
@@ -1469,7 +1042,7 @@ First two rows:
 <p>Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get difference</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get difference</span>
 <span class="n">difference_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">watersheds</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;difference&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1479,93 +1052,6 @@ First two rows:
 <span class="n">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span> <span class="o">=</span> <span class="s2">&quot;Difference&quot;</span><span class="p">,</span> <span class="n">overlay_result</span> <span class="o">=</span> <span class="n">difference_result</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Difference
-
-Table shape (rows, columns): (9, 2)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_357706/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
-  difference_result = gpd.overlay(counties, watersheds, how = &#39;difference&#39;)
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1913838.781 610713.920, 191389...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Contra Costa County</td>
-      <td>MULTIPOLYGON (((1867018.499 674101.332, 186722...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>7</th>
-      <td>Solano County</td>
-      <td>MULTIPOLYGON (((1879889.331 727073.884, 188002...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1804663.401 758088.289, 180471...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_19_5.png" src="../_images/e_vector_overlay_19_5.png" />
 </div>
 </div>
 </section>
@@ -1634,7 +1120,7 @@ First two rows:
 <p>We’ll illustrate this geoprocessing using the county boundaries shapefile and the well locations shapefile. Let’s quickly examine the wells attribute table and plot both datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print head and tail of attribute table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print head and tail of attribute table</span>
 <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;San Francisco Bay Area and Surrounding Area Wells&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells</span><span class="p">)</span>
 
 <span class="c1"># Create subplots</span>
@@ -1652,117 +1138,13 @@ First two rows:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area and Surrounding Area Wells
-
-Table shape (rows, columns): (6037, 5)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2400064-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1968290.923 592019.918)</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2400099-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1969113.543 595876.691)</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>6035</th>
-      <td>NaN</td>
-      <td>Unknown</td>
-      <td>Unknown</td>
-      <td>0</td>
-      <td>POINT (1960933.648 610295.428)</td>
-    </tr>
-    <tr>
-      <th>6036</th>
-      <td>06S02W34B006</td>
-      <td>Observation</td>
-      <td>Single Well</td>
-      <td>152</td>
-      <td>POINT (1861394.207 597916.983)</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area County Boundaries and Well Locations&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_vector_overlay_21_5.png" src="../_images/e_vector_overlay_21_5.png" />
-</div>
 </div>
 <section id="left-join">
 <h4>Left Join<a class="headerlink" href="#left-join" title="Permalink to this headline">#</a></h4>
 <p>We’ll first demonstrate a left join. Notice that all features from the left dataset (wells dataset) are kept. The features that did not meet the spatial relationship criteria for a join have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values for the fields that originated from the right dataset (county boundaries dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
 <span class="n">left_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1772,123 +1154,6 @@ First two rows:
 <span class="n">plot_merge</span><span class="p">(</span><span class="n">merge_type</span> <span class="o">=</span> <span class="s2">&quot;Left Join&quot;</span><span class="p">,</span> <span class="n">merge_result</span> <span class="o">=</span> <span class="n">left_join_result</span><span class="p">,</span> <span class="n">merge_vector</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Left Join
-
-Table shape (rows, columns): (6037, 7)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2400064-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1968290.923 592019.918)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2400099-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1969113.543 595876.691)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>6035</th>
-      <td>NaN</td>
-      <td>Unknown</td>
-      <td>Unknown</td>
-      <td>0</td>
-      <td>POINT (1960933.648 610295.428)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6036</th>
-      <td>06S02W34B006</td>
-      <td>Observation</td>
-      <td>Single Well</td>
-      <td>152</td>
-      <td>POINT (1861394.207 597916.983)</td>
-      <td>6.0</td>
-      <td>Santa Clara County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_23_5.png" src="../_images/e_vector_overlay_23_5.png" />
 </div>
 </div>
 </section>
@@ -1901,7 +1166,7 @@ First two rows:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
 <span class="n">right_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -1912,123 +1177,6 @@ First two rows:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Right Join
-
-Table shape (rows, columns): (1337, 7)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index_left</th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>824</td>
-      <td>3S/2E 30D 2</td>
-      <td>Observation</td>
-      <td>Single Well</td>
-      <td>44</td>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>670</td>
-      <td>3S/2E 19D 8</td>
-      <td>Observation</td>
-      <td>Part of a nested/multi-completion well</td>
-      <td>260</td>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index_left</th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>8</th>
-      <td>1697</td>
-      <td>AVCA-01</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>100</td>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>3508</td>
-      <td>11N10W08P001M</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>30</td>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_25_5.png" src="../_images/e_vector_overlay_25_5.png" />
-</div>
 </div>
 </section>
 <section id="inner-join">
@@ -2036,7 +1184,7 @@ First two rows:
 <p>Finally, with an inner join, only the well locations that fall within the county boundaries are kept. These well locations have the county boundaries dataset appended to them. Because it’s an inner join, there are no resulting features with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the attribute table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
 <span class="n">inner_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
@@ -2046,123 +1194,6 @@ First two rows:
 <span class="n">plot_merge</span><span class="p">(</span><span class="n">merge_type</span> <span class="o">=</span> <span class="s2">&quot;Inner Join&quot;</span><span class="p">,</span> <span class="n">merge_result</span> <span class="o">=</span> <span class="n">inner_join_result</span><span class="p">,</span> <span class="n">merge_vector</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Inner Join
-
-Table shape (rows, columns): (1337, 7)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>128</th>
-      <td>NaN</td>
-      <td>Stockwatering</td>
-      <td>Unknown</td>
-      <td>40</td>
-      <td>POINT (1882982.865 701605.988)</td>
-      <td>7</td>
-      <td>Solano County</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>NaN</td>
-      <td>Irrigation</td>
-      <td>Unknown</td>
-      <td>240</td>
-      <td>POINT (1884096.112 699303.331)</td>
-      <td>7</td>
-      <td>Solano County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1759</th>
-      <td>T2S/R5W-06M01</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>275</td>
-      <td>POINT (1827410.559 644648.215)</td>
-      <td>4</td>
-      <td>San Francisco County</td>
-    </tr>
-    <tr>
-      <th>2316</th>
-      <td>Kirkham MW130</td>
-      <td>Observation</td>
-      <td>Part of a nested/multi-completion well</td>
-      <td>130</td>
-      <td>POINT (1823285.838 641661.323)</td>
-      <td>4</td>
-      <td>San Francisco County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_27_5.png" src="../_images/e_vector_overlay_27_5.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />

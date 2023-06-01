@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -61,7 +61,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Spatial Interpolation" href="e_interpolation.html" />
     <link rel="prev" title="Spatial Joins" href="e_spatial_joins.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
@@ -754,7 +754,7 @@ title="Print to PDF"
 <p>First, we will import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">geoplot</span> <span class="k">as</span> <span class="nn">gplt</span>
 <span class="kn">import</span> <span class="nn">math</span>
@@ -774,7 +774,7 @@ title="Print to PDF"
 <p>We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
 
 <span class="c1"># County boundaries</span>
 <span class="c1"># Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640</span>
@@ -803,7 +803,7 @@ title="Print to PDF"
 <p>Let’s define a function that will create a grid of either rectangles or hexagons of a specified side length.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_grid</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">side_length</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_grid</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">side_length</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Create a grid consisting of either rectangles or hexagons with a specified side length that covers the extent of input feature.&#39;&#39;&#39;</span>
 
     <span class="c1"># Slightly displace the minimum and maximum values of the feature extent by creating a buffer</span>
@@ -898,7 +898,7 @@ title="Print to PDF"
 <p>To begin, we will set some global parameters for both examples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set side length for cells in grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set side length for cells in grid</span>
 <span class="c1"># This is dependent on projection chosen as length is in units specified in projection</span>
 <span class="n">side_length</span> <span class="o">=</span> <span class="mi">5000</span>
 
@@ -921,7 +921,7 @@ title="Print to PDF"
 <p>First, we will create a grid over the Bay Area.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create grid</span>
 <span class="n">bay_area_grid</span> <span class="o">=</span> <span class="n">create_grid</span><span class="p">(</span><span class="n">feature</span> <span class="o">=</span> <span class="n">wells</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">,</span> <span class="n">side_length</span> <span class="o">=</span> <span class="n">side_length</span><span class="p">)</span>
 
 <span class="c1"># Create subplots</span>
@@ -937,17 +937,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Boundaries, Wells, and Grids&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_summarize_vector_9_1.png" src="../_images/e_summarize_vector_9_1.png" />
-</div>
 </div>
 <p>Next, we will conduct a spatial join for each well point, essentially assigning it to a cell. We can add a field with a value of <code class="docutils literal notranslate"><span class="pre">1</span></code>, group all the wells in a cell, and aggregate <strong>(sum)</strong> all those <code class="docutils literal notranslate"><span class="pre">1</span></code> values to get the total number of wells in a cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects</span>
 <span class="c1"># op = &quot;intersects&quot; also counts those that fall on a cell boundary (between two cells)</span>
 <span class="c1"># op = &quot;within&quot; will not count those fall on a cell boundary</span>
 <span class="n">wells_cell</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">bay_area_grid</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
@@ -979,110 +973,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>Grid_ID</th>
-      <th>Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POLYGON ((1724272.398 497763.821, 1721772.398 ...</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>POLYGON ((1724272.398 506424.075, 1721772.398 ...</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>POLYGON ((1724272.398 515084.329, 1721772.398 ...</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>POLYGON ((1724272.398 523744.583, 1721772.398 ...</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>POLYGON ((1724272.398 532404.837, 1721772.398 ...</td>
-      <td>4</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1381</th>
-      <td>POLYGON ((1986772.398 787882.331, 1984272.398 ...</td>
-      <td>1381</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1382</th>
-      <td>POLYGON ((1986772.398 796542.585, 1984272.398 ...</td>
-      <td>1382</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1383</th>
-      <td>POLYGON ((1986772.398 805202.839, 1984272.398 ...</td>
-      <td>1383</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1384</th>
-      <td>POLYGON ((1986772.398 813863.093, 1984272.398 ...</td>
-      <td>1384</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1385</th>
-      <td>POLYGON ((1986772.398 822523.347, 1984272.398 ...</td>
-      <td>1385</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>1386 rows × 3 columns</p>
-</div></div></div>
 </div>
 <p>We can plot the data to see how it looks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Plot data</span>
@@ -1095,24 +990,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Binning Well Points&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_summarize_vector_13_1.png" src="../_images/e_summarize_vector_13_1.png" />
-</div>
 </div>
 <p>The advantage of this method is that it is pretty fast. To verify that all points have been counted once, we can check the aggregate of all the point sums for each cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of well points counted: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Number of well points in input data: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">bay_area_grid</span><span class="o">.</span><span class="n">Count</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wells</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of well points counted: 6037
-Number of well points in input data: 6037
 </pre></div>
 </div>
 </div>
@@ -1123,7 +1006,7 @@ Number of well points in input data: 6037
 <p>This second method is slightly more intuitive, but it can take a long time to run. We will use a subset of the input data–those that fall within Santa Clara County–to illustrate this example. We will first subset our data to Santa Clara County (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
 <span class="n">sc_county</span> <span class="o">=</span> <span class="n">counties</span><span class="p">[</span><span class="n">counties</span><span class="p">[</span><span class="s2">&quot;coname&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Santa Clara County&quot;</span><span class="p">]</span>
 
 <span class="c1"># Subset the GeoDataFrame by checking which wells are within Santa Clara County</span>
@@ -1135,7 +1018,7 @@ Number of well points in input data: 6037
 <p>Next, we will create a grid over Santa Clara County.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create grid</span>
 <span class="n">sc_county_grid</span> <span class="o">=</span> <span class="n">create_grid</span><span class="p">(</span><span class="n">feature</span> <span class="o">=</span> <span class="n">sc_county_wells</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">,</span> <span class="n">side_length</span> <span class="o">=</span> <span class="n">side_length</span><span class="p">)</span>
 
 <span class="c1"># Create subplots</span>
@@ -1151,17 +1034,11 @@ Number of well points in input data: 6037
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Santa Clara County - Boundaries, Wells, and Grids&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_summarize_vector_19_1.png" src="../_images/e_summarize_vector_19_1.png" />
-</div>
 </div>
 <p>We iterate through each cell in the grid and set a counter for each cell. We iterate through each well point and see if it is within (or intersects) the cell. If it is, the counter is increased by 1, and the feature is “discarded” so that it won’t be counted again (resolving the issue of a point falling on the boundary between two cells).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty list used to hold count values for each grid</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty list used to hold count values for each grid</span>
 <span class="n">counts_list</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Create empty list to hold index of points that have already been matched to a grid</span>
@@ -1234,113 +1111,12 @@ Number of well points in input data: 6037
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>Grid_ID</th>
-      <th>Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>POLYGON ((1859618.426 548178.942, 1857118.426 ...</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>POLYGON ((1859618.426 556839.196, 1857118.426 ...</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>POLYGON ((1859618.426 565499.450, 1857118.426 ...</td>
-      <td>2</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>POLYGON ((1859618.426 574159.704, 1857118.426 ...</td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>POLYGON ((1859618.426 582819.958, 1857118.426 ...</td>
-      <td>4</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>88</th>
-      <td>POLYGON ((1934618.426 574159.704, 1932118.426 ...</td>
-      <td>88</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>89</th>
-      <td>POLYGON ((1934618.426 582819.958, 1932118.426 ...</td>
-      <td>89</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>90</th>
-      <td>POLYGON ((1934618.426 591480.212, 1932118.426 ...</td>
-      <td>90</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>91</th>
-      <td>POLYGON ((1934618.426 600140.466, 1932118.426 ...</td>
-      <td>91</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>92</th>
-      <td>POLYGON ((1934618.426 608800.720, 1932118.426 ...</td>
-      <td>92</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>93 rows × 3 columns</p>
-</div></div></div>
 </div>
 <p>We can check to make sure all well points in Santa Clara County were counted.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of well points counted: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Number of well points in input data: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">counts_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sc_county_wells</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of well points counted: 136
-Number of well points in input data: 136
 </pre></div>
 </div>
 </div>
@@ -1348,7 +1124,7 @@ Number of well points in input data: 136
 <p>Finally, we can plot the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Plot data</span>
@@ -1360,12 +1136,6 @@ Number of well points in input data: 136
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Santa Clara County - Binning Well Points&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Santa Clara County - Binning Well Points&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_summarize_vector_25_1.png" src="../_images/e_summarize_vector_25_1.png" />
 </div>
 </div>
 </section>
@@ -1387,7 +1157,7 @@ Number of well points in input data: 136
 <p>This method uses <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, a high-level plotting library for spatial data that complements <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. For more information on <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, check out the <a class="reference external" href="https://residentmario.github.io/geoplot/index.html">documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set projection to WGS 84 and reproject data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set projection to WGS 84 and reproject data</span>
 <span class="n">proj_wgs</span> <span class="o">=</span> <span class="mi">4326</span>
 <span class="n">counties_wgs</span> <span class="o">=</span> <span class="n">counties</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
 <span class="n">wells_wgs</span> <span class="o">=</span> <span class="n">wells</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
@@ -1405,20 +1175,6 @@ Number of well points in input data: 136
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/geoplot/geoplot.py:1310: FutureWarning: 
-
-`shade` is now deprecated in favor of `fill`; setting `fill=True`.
-This will become an error in seaborn v0.14.0; please update your code.
-
-  sns.kdeplot(
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Kernel Density Estimation for Wells&#39;)
-</pre></div>
-</div>
-<img alt="../_images/e_summarize_vector_27_2.png" src="../_images/e_summarize_vector_27_2.png" />
-</div>
 </div>
 </section>
 <section id="method-2-display-and-export-with-scikit-learn">
@@ -1432,7 +1188,7 @@ This will become an error in seaborn v0.14.0; please update your code.
 <p>For further reading, check out the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html#sklearn.neighbors.KernelDensity"><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> documentation</a> and the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_species_kde.html#sphx-glr-auto-examples-neighbors-plot-species-kde-py">associated example</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and Y coordinates of well points</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and Y coordinates of well points</span>
 <span class="n">x_sk</span> <span class="o">=</span> <span class="n">wells_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
 <span class="n">y_sk</span> <span class="o">=</span> <span class="n">wells_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
 
@@ -1471,14 +1227,11 @@ This will become an error in seaborn v0.14.0; please update your code.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e_summarize_vector_29_0.png" src="../_images/e_summarize_vector_29_0.png" />
-</div>
 </div>
 <p>We can export the raster if necessary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">export_kde_raster</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">export_kde_raster</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Export and save a kernel density raster.&#39;&#39;&#39;</span>
 
     <span class="c1"># Flip array vertically and rotate 270 degrees</span>
@@ -1510,7 +1263,7 @@ This will become an error in seaborn v0.14.0; please update your code.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export raster</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export raster</span>
 <span class="n">export_kde_raster</span><span class="p">(</span><span class="n">Z</span> <span class="o">=</span> <span class="n">Z_sk</span><span class="p">,</span> <span class="n">XX</span> <span class="o">=</span> <span class="n">XX_sk</span><span class="p">,</span> <span class="n">YY</span> <span class="o">=</span> <span class="n">YY_sk</span><span class="p">,</span>
                   <span class="n">min_x</span> <span class="o">=</span> <span class="n">min_x_sk</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="n">max_x_sk</span><span class="p">,</span> <span class="n">min_y</span> <span class="o">=</span> <span class="n">min_y_sk</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="n">max_y_sk</span><span class="p">,</span>
                   <span class="n">proj</span> <span class="o">=</span> <span class="n">proj_wgs</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;../temp/bay-area-wells_kde_sklearn.tif&quot;</span><span class="p">)</span>
