@@ -8,7 +8,7 @@ kernelspec:
   language: python
   name: python3
 ---
-
+ 
 (python_by_example)=
 
 # An Introductory Example
@@ -27,6 +27,22 @@ Deeper concepts will be covered in later lectures.
 
 You should have read the {ref}`lecture <getting_started>` on getting started with Python before beginning this one.
 
+## Understanding Data Structures
+
+In computer science, data structures are a way of organizing and storing data to perform operations efficiently. In Python, data structures come in various types, such as lists, tuples, sets, dictionaries, and more. Each data structure has its own characteristics and use cases.
+
+For example, lists are mutable sequences of elements, and you can add, remove, or modify elements easily. Dictionaries, on the other hand, use key-value pairs to store data, making it easy to retrieve values based on their corresponding keys.
+
+Throughout this course, we'll use data structures to represent and manipulate data in various Python programs.
+
+## Indentation in Python
+
+In Python, indentation is crucial for defining the structure of the code. Unlike many other programming languages that use braces ({}) to delimit code blocks, Python uses indentation. The number of spaces or tabs at the beginning of a line determines which code block the line belongs to.
+
+For example, in a `for` loop or `if` statement, the indented block of code represents what will be executed if the condition is met. Indentation must be consistent and usually follows the standard of four spaces.
+
+Now that we have an understanding of data structures and indentation, let's move on to writing some Python code examples.
+
 ## The Task: Plotting a White Noise Process
 
 Suppose we want to simulate and plot the white noise process
@@ -36,8 +52,13 @@ $\epsilon_t$ is independent standard normal.
 In other words, we want to generate figures that look something like
 this:
 
+
 ```{figure} /_static/lecture_specific/python_by_example/test_program_1_updated.png
+:name: white_noise_plot
+:alt: White Noise Process Plot 
+:caption: White Noise Process Plot
 ```
+
 
 (Here $t$ is on the horizontal axis and $\epsilon_t$ is on the vertical
 axis.)
@@ -193,7 +214,7 @@ plt.show()
 The first line generates 100 (quasi) independent standard normals and
 stores them in `ϵ_values`.
 
-The next two lines genererate the plot.
+The next two lines generate the plot.
 
 We can and will look at various ways to configure and improve this plot
 below.
@@ -209,6 +230,7 @@ somewhat artificial.
 
 But they do help us illustrate some important Python syntax and
 semantics in a familiar setting.
+
 
 ### A Version with a For Loop
 
@@ -472,242 +494,3 @@ Notice that we added a legend to the plot.
 
 ## Attribution
 The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)
-
-<!-- 
- --- a feature you will be
-asked to use in the exercises.
-## Exercises
-
-Now we turn to exercises. It is important that you complete them before
-continuing, since they present new concepts we will need.
-
-### Exercise 1
-
-Your first task is to simulate and plot the correlated time series
-
-$$
-x_{t+1} = \alpha \, x_t + \epsilon_{t+1}
-\quad \text{where} \quad
-x_0 = 0
-\quad \text{and} \quad t = 0,\ldots,T
-$$
-
-The sequence of shocks $\{\epsilon_t\}$ is assumed to be IID and
-standard normal.
-
-In your solution, restrict your import statements to
-
-```{code-cell} python3
-import numpy as np
-import matplotlib.pyplot as plt
-```
-
-Set $T=200$ and $\alpha = 0.9$.
-
-### Exercise 2
-
-Starting with your solution to exercise 2, plot three simulated time
-series, one for each of the cases $\alpha=0$, $\alpha=0.8$ and
-$\alpha=0.98$.
-
-Use a `for` loop to step through the $\alpha$ values.
-
-If you can, add a legend, to help distinguish between the three time
-series.
-
-Hints:
-
--   If you call the `plot()` function multiple times before calling
-    `show()`, all of the lines you produce will end up on the same
-    figure.
--   For the legend, noted that the expression `'foo' + str(42)`
-    evaluates to `'foo42'`.
-
-### Exercise 3
-
-Similar to the previous exercises, plot the time series
-
-$$
-x_{t+1} = \alpha \, |x_t| + \epsilon_{t+1}
-\quad \text{where} \quad
-x_0 = 0
-\quad \text{and} \quad t = 0,\ldots,T
-$$
-
-Use $T=200$, $\alpha = 0.9$ and $\{\epsilon_t\}$ as before.
-
-Search online for a function that can be used to compute the absolute
-value $|x_t|$.
-
-### Exercise 4
-
-One important aspect of essentially all programming languages is
-branching and conditions.
-
-In Python, conditions are usually implemented with if--else syntax.
-
-Here\'s an example, that prints -1 for each negative number in an array
-and 1 for each nonnegative number
-
-```{code-cell} python3
-numbers = [-9, 2.3, -11, 0]
-```
-
-```{code-cell} python3
-for x in numbers:
-    if x < 0:
-        print(-1)
-    else:
-        print(1)
-```
-
-Now, write a new solution to Exercise 3 that does not use an existing
-function to compute the absolute value.
-
-Replace this existing function with an if--else condition.
-
-(pbe_ex3)=
-
-### Exercise 5
-
-Here\'s a harder exercise, that takes some thought and planning.
-
-The task is to compute an approximation to $\pi$ using [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method).
-
-Use no imports besides
-
-```{code-cell} python3
-import numpy as np
-```
-
-Your hints are as follows:
-
--   If $U$ is a bivariate uniform random variable on the unit square
-    $(0, 1)^2$, then the probability that $U$ lies in a subset $B$ of
-    $(0,1)^2$ is equal to the area of $B$.
--   If $U_1,\ldots,U_n$ are IID copies of $U$, then, as $n$ gets large,
-    the fraction that falls in $B$, converges to the probability of
-    landing in $B$.
--   For a circle, $area = \pi * radius^2$.
-
-## Solutions
-
-### Exercise 1
-
-Here\'s one solution.
-
-```{code-cell} python3
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    x[t+1] = α * x[t] + np.random.randn()
-
-plt.plot(x)
-plt.show()
-```
-
-### Exercise 2
-
-```{code-cell} python3
-α_values = [0.0, 0.8, 0.98]
-T = 200
-x = np.empty(T+1)
-
-for α in α_values:
-    x[0] = 0
-    for t in range(T):
-        x[t+1] = α * x[t] + np.random.randn()
-    plt.plot(x, label=f'$\\alpha = {α}$')
-
-plt.legend()
-plt.show()
-```
-
-### Exercise 3
-
-Here\'s one solution:
-
-```{code-cell} python3
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    x[t+1] = α * np.abs(x[t]) + np.random.randn()
-
-plt.plot(x)
-plt.show()
-```
-
-### Exercise 4
-
-Here\'s one way:
-
-```{code-cell} python3
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    if x[t] < 0:
-        abs_x = - x[t]
-    else:
-        abs_x = x[t]
-    x[t+1] = α * abs_x + np.random.randn()
-
-plt.plot(x)
-plt.show()
-```
-
-Here\'s a shorter way to write the same thing:
-
-```{code-cell} python3
-α = 0.9
-T = 200
-x = np.empty(T+1)
-x[0] = 0
-
-for t in range(T):
-    abs_x = - x[t] if x[t] < 0 else x[t]
-    x[t+1] = α * abs_x + np.random.randn()
-
-plt.plot(x)
-plt.show()
-```
-
-### Exercise 5
-
-Consider the circle of diameter 1 embedded in the unit square.
-
-Let $A$ be its area and let $r=1/2$ be its radius.
-
-If we know $\pi$ then we can compute $A$ via $A = \pi r^2$.
-
-But here the point is to compute $\pi$, which we can do by
-$\pi = A / r^2$.
-
-Summary: If we can estimate the area of a circle with diameter 1, then
-dividing by $r^2 = (1/2)^2 = 1/4$ gives an estimate of $\pi$.
-
-We estimate the area by sampling bivariate uniforms and looking at the
-fraction that falls into the circle.
-
-```{code-cell} python3
-n = 100000
-
-count = 0
-for i in range(n):
-    u, v = np.random.uniform(), np.random.uniform()
-    d = np.sqrt((u - 0.5)**2 + (v - 0.5)**2)
-    if d < 0.5:
-        count += 1
-
-area_estimate = count / n
-
-print(area_estimate * 4)  # dividing by radius**2
-``` -->

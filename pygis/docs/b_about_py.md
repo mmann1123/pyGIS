@@ -30,7 +30,16 @@ Python is free and open source, with development coordinated through the
 Python has experienced rapid adoption in the last decade and is now one
 of the most commonly used programming languages.
 
-Popular textbooks on Python programming include {cite}`guttag2016introduction` and {cite}`matthes2019python`.
+Popular textbooks on Python programming include:
+
+Introduction to Computation and Programming Using Python, Second Edition
+With Application to Understanding Data
+By John V. Guttag 
+
+Python Crash Course, 3rd Edition
+A Hands-On, Project-Based Introduction to Programming
+by Eric Matthes
+
 
 ### Common Uses
 
@@ -60,6 +69,9 @@ measure of the relative popularity of Python
 
 ```{figure} /_static/lecture_specific/about_py/python_vs_matlab.png
 :scale: 72%
+:name: python_vs_matlab
+:alt: plot showing increasing popularity of python relative to matlab
+:caption: Python's increasing popularity over time. 
 ```
 
 The figure indicates not only that Python is widely used but also that
@@ -75,6 +87,9 @@ library for data analysis with Python has exploded, as seen here.
 
 ```{figure} /_static/lecture_specific/about_py/pandas_vs_matlab.png
 :scale: 23%
+:name: pandas_vs_matlab
+:alt: plot showing increasing popularity of pandas relative to matlab
+:caption: Pandas increasing popularity over time. 
 ```
 
 Note that pandas takes off in 2012, which is the same year that we see
@@ -91,7 +106,7 @@ Overall, it\'s clear that
 Python is a [high-level language](https://en.wikipedia.org/wiki/High-level_programming_language)
 suitable for rapid development.
 
-It has a relatively small core language supported by many libraries.
+It has a relatively small core language supported by many libraries. For instance run the following [The Zen of Python (poem)](https://www.online-python.com/4MW2mnxufk) online.
 
 Multiple programming styles are supported (procedural, object-oriented, functional, etc.)
 
