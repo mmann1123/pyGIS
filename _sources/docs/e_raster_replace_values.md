@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to replace values in a raster using rasterio and GeoWombat."
-  "keywords": "spatial, python, rasterio, raster, replace, interpolation"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to replace values in a raster using rasterio and GeoWombat."
+    "keywords": "spatial, python, rasterio, raster, replace, interpolation"
+    "property=og:locale": "en_US"
 ---
 
 # Replacing Values w. Rasterio

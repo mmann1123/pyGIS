@@ -1,10 +1,13 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 <meta content="Learn how to define a projection for and reproject vector data (shapefiles, geojson) using geopandas. We use examples based on changes to proj4strings." lang="en" name="description" xml:lang="en" />
 <meta content="Apprenez à définir une projection et à reprojeter des données vectorielles (fichiers de formes, geojson) à l'aide de géopandas. Nous utilisons des exemples basés sur des changements apportés à proj4strings." lang="fr" name="description" xml:lang="fr" />
 <meta content="Aprenda a definir una proyección y reproyectar datos vectoriales (shapefiles, geojson) usando geopandas. Usamos ejemplos basados en cambios en proj4strings." lang="es" name="description" xml:lang="es" />
@@ -12,45 +15,60 @@
 <meta content="en_US" property="og:locale" />
 
     <title>Vector Coordinate Reference Systems (CRS) &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -59,70 +77,94 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/d_vector_crs_intro';</script>
     <link rel="canonical" href="https://pygis.io/docs/d_vector_crs_intro.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Raster Coordinate Reference Systems (CRS)" href="d_raster_crs_intro.html" />
     <link rel="prev" title="Affine Transforms" href="d_affine.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MQPNBR6XWJ');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/pygis.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Open Source Spatial Programming & Remote Sensing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -131,548 +173,291 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  0 - Get Started in Spatial Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="b_intro_py.html">
-   Welcome - Let’s get started
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_about_py.html">
-   Getting Started in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_getting_started.html">
-   Setting up a Normal Python Environment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_python_by_example.html">
-   An Introductory Example
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_learn_more.html">
-   Learn More
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  1 - Spatial Data Types in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="c_features.html">
-   Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_store_features.html">
-   Data Storage Formats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_vectors.html">
-   Spatial Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html">
-   Spatial Points Lines Polygons in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Spatial Raster Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  2 - Nature of Coordinate Systems in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_crs_what_is_it.html">
-   What is a CRS?
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding a CRS: Proj4 and CRS codes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_affine.html">
-   Affine Transforms
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Vector Coordinate Reference Systems (CRS)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster Coordinate Reference Systems (CRS)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  3 - Vector Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_buffer_neighbors.html">
-   Proximity Analysis - Buffers, Nearest Neighbor
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Spatial Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_spatial_joins.html">
-   Spatial Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Point Density Measures - Counts &amp; Kernel Density
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_interpolation.html">
-   Spatial Interpolation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  4 - Raster Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_rasters.html">
-   Reading &amp; Writing Rasters with Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_resample.html">
-   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_math.html">
-   Band Math w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_replace_values.html">
-   Replacing Values w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_rasterize.html">
-   Rasterize Vectors w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_window_operations.html">
-   Window Operations with Rasterio and GeoWombat
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  5 - Accessing OSM &amp; Census Data in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_osm.html">
-   Accessing OSM Data in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_census.html">
-   Accessing Census and ACS Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  6 - Remote Sensing in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_io.html">
-   Reading/Writing Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_config.html">
-   Configuration manager
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_edit.html">
-   Editing Rasters and Remotely Sensed Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_plot.html">
-   Plot Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_crs.html">
-   Remote Sensing Coordinate Reference Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_mosaic.html">
-   Handle Multiple Remotely Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_band_math.html">
-   Band Math &amp; Vegetation Indices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_extraction.html">
-   Raster Data Extraction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_ml_predict.html">
-   Spatial Prediction using ML in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/d_vector_crs_intro.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_vector_crs_intro.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_vector_crs_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/d_vector_crs_intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_vector_crs_intro.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_vector_crs_intro.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/docs/d_vector_crs_intro.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../_sources/docs/d_vector_crs_intro.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#define-a-projection-for-points-lines-polygons">
-   Define a Projection for Points, Lines, Polygons
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reproject-points-lines-polygons">
-   Reproject Points, Lines, Polygons
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Vector Coordinate Reference Systems (CRS)</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#define-a-projection-for-points-lines-polygons">
-   Define a Projection for Points, Lines, Polygons
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reproject-points-lines-polygons">
-   Reproject Points, Lines, Polygons
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vector Coordinate Reference Systems (CRS)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-projection-for-points-lines-polygons">Define a Projection for Points, Lines, Polygons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproject-points-lines-polygons">Reproject Points, Lines, Polygons</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <hr class="docutils" id="d-vector-crs-intro" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -690,23 +475,23 @@ title="Print to PDF"
 </div>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="vector-coordinate-reference-systems-crs">
-<h1>Vector Coordinate Reference Systems (CRS)<a class="headerlink" href="#vector-coordinate-reference-systems-crs" title="Permalink to this headline">#</a></h1>
+<h1>Vector Coordinate Reference Systems (CRS)<a class="headerlink" href="#vector-coordinate-reference-systems-crs" title="Permalink to this heading">#</a></h1>
 <p>When it comes to coordinate reference systems points, lines and polygons are convenient because each point or node has an assigned coordinate pair (x,y). The only trick then is to know how those coordinates relate to the coordinate space, or location on the ground.</p>
 <section id="define-a-projection-for-points-lines-polygons">
-<h2>Define a Projection for Points, Lines, Polygons<a class="headerlink" href="#define-a-projection-for-points-lines-polygons" title="Permalink to this headline">#</a></h2>
+<h2>Define a Projection for Points, Lines, Polygons<a class="headerlink" href="#define-a-projection-for-points-lines-polygons" title="Permalink to this heading">#</a></h2>
 <p>When a point, line or polyon is created each point or node has two coordinates <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. The location of these two points on the ground will change wildly between projections. The coordinate pair (0,0) might mean a location just off shore from Ghana with WGS84 LatLon, or in the middle of the Pacific ocean in another.</p>
 <p>Let’s take a look at the example of a polygon with coordinates (0,45),(5,45),(5,40),(0,40) below. In the left pane we can see that, although we have the polygon’s node coordinates, we don’t know where they are located! This is because no coordinate reference system has been assigned to it. Could be in outer space for all we know. On the right, we can see that we have assigned it WGS84 geographic lat lon i.e. <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code>. Suddenly the coordinates make sense, because we know how they relate to locations on the ground.</p>
 <figure class="align-default" id="example-of-assigning-a-coordinate-reference-system">
 <a class="reference internal image-reference" href="../_images/d_crs_assigned.png"><img alt="../_images/d_crs_assigned.png" src="../_images/d_crs_assigned.png" style="width: 700px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Example of assigning a coordinate reference system</span><a class="headerlink" href="#example-of-assigning-a-coordinate-reference-system" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Example of assigning a coordinate reference system</span><a class="headerlink" href="#example-of-assigning-a-coordinate-reference-system" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Every time we create vector data (or receive it from someone else), we need to make sure that a projection is assigned to it.</p>
 <p>The following demonstrates how to</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>  
@@ -724,6 +509,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/cb1d1667a17786fb794444fa5eac9c90a7fce3ea9f757d0c8cb10d87cdaea9a6.png" src="../_images/cb1d1667a17786fb794444fa5eac9c90a7fce3ea9f757d0c8cb10d87cdaea9a6.png" />
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -731,13 +519,13 @@ title="Print to PDF"
 </div>
 </section>
 <section id="reproject-points-lines-polygons">
-<h2>Reproject Points, Lines, Polygons<a class="headerlink" href="#reproject-points-lines-polygons" title="Permalink to this headline">#</a></h2>
+<h2>Reproject Points, Lines, Polygons<a class="headerlink" href="#reproject-points-lines-polygons" title="Permalink to this heading">#</a></h2>
 <p>Once a projection is assigned we often have to ‘reproject’ it to another one. Reprojection entails using a set of formulas to convert (x,y) stored in latitude and longitude into another coordinate space. This entails a two step process.</p>
 <p>Looking at the example below, we will move from Sinosoidal to Hobo-Dyer. The first step however is to use the “inverse equation” to convert coordinate pairs from Sinosoidal back to lat lon, and the use the forward equation to convert lat lon into the Hobo-Dyer coordinate space.</p>
 <figure class="align-default" id="reprojecting-vectors-with-inverse-and-forward-equations">
 <a class="reference internal image-reference" href="../_images/d_reprojection_example.jpg"><img alt="../_images/d_reprojection_example.jpg" src="../_images/d_reprojection_example.jpg" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Reprojecting vectors with inverse and forward equations</span><a class="headerlink" href="#reprojecting-vectors-with-inverse-and-forward-equations" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Reprojecting vectors with inverse and forward equations</span><a class="headerlink" href="#reprojecting-vectors-with-inverse-and-forward-equations" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <!-- Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In this case it is used to move and reshape vector data (point, lines, polygons). In this case we will learn how affine transforms are used to reproject data. -->
@@ -755,7 +543,7 @@ y = y
 <figure class="align-default" id="reprojecting-by-moving-the-prime-meridian-west">
 <a class="reference internal image-reference" href="../_images/d_europe_translate_vector.png"><img alt="../_images/d_europe_translate_vector.png" src="../_images/d_europe_translate_vector.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Reprojecting by moving the prime meridian west</span><a class="headerlink" href="#reprojecting-by-moving-the-prime-meridian-west" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Reprojecting by moving the prime meridian west</span><a class="headerlink" href="#reprojecting-by-moving-the-prime-meridian-west" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Most ‘forward’ and ‘inverse’ equations are non-linear and more complex. Take for instance the Gall-Peters forward projection equations are shown below:</p>
@@ -771,7 +559,7 @@ y={\frac {R\sin \varphi }{\cos 45^{\circ }}}
 <p>Refering back to our previous example, let’s use geopandas to move the prime meridian 10 degrees west:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproject the data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reproject the data</span>
 <span class="n">gdf_square_10w</span> <span class="o">=</span> <span class="n">gdf_square</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;+proj=longlat +datum=WGS84 +lon_0=-10&quot;</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -781,6 +569,9 @@ y={\frac {R\sin \varphi }{\cos 45^{\circ }}}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d5045ef4ee12c217b7fab2d07550ba23e5bd27b347d52b65acb634d95b127cbe.png" src="../_images/d5045ef4ee12c217b7fab2d07550ba23e5bd27b347d52b65acb634d95b127cbe.png" />
 </div>
 </div>
 <p>Note the shift in coordinates along x by 10 degrees west.</p>
@@ -852,38 +643,86 @@ nz_scale_sf = st_set_geometry(nz, nz_scale) --></section>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="d_affine.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Affine Transforms</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="d_affine.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Affine Transforms</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="d_raster_crs_intro.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="d_raster_crs_intro.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Raster Coordinate Reference Systems (CRS)</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-projection-for-points-lines-polygons">Define a Projection for Points, Lines, Polygons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproject-points-lines-polygons">Reproject Points, Lines, Polygons</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
   
-    <div class="extra_footer">
-      <div>
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -893,20 +732,22 @@ nz_scale_sf = st_set_geometry(nz, nz_scale) --></section>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-    </div>
-</p>
-        </footer>
-    </div>
-    
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

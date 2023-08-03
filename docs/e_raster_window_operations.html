@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 <meta content="Learn how to conduct moving window operations over rasters." lang="en" name="description" xml:lang="en" />
 <meta content="spatial, python, rasterio, geowombat, raster, moving window, window operations, filter" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
     <title>Window Operations with Rasterio and GeoWombat &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,70 +75,94 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/e_raster_window_operations';</script>
     <link rel="canonical" href="https://pygis.io/docs/e_raster_window_operations.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Accessing OSM Data in Python" href="d_access_osm.html" />
     <link rel="prev" title="Rasterize Vectors w. Rasterio" href="e_raster_rasterize.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MQPNBR6XWJ');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/pygis.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Open Source Spatial Programming & Remote Sensing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,634 +171,303 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  0 - Get Started in Spatial Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="b_intro_py.html">
-   Welcome - Let’s get started
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_about_py.html">
-   Getting Started in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_getting_started.html">
-   Setting up a Normal Python Environment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_python_by_example.html">
-   An Introductory Example
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_learn_more.html">
-   Learn More
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  1 - Spatial Data Types in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="c_features.html">
-   Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_store_features.html">
-   Data Storage Formats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_vectors.html">
-   Spatial Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html">
-   Spatial Points Lines Polygons in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Spatial Raster Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  2 - Nature of Coordinate Systems in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_crs_what_is_it.html">
-   What is a CRS?
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding a CRS: Proj4 and CRS codes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_affine.html">
-   Affine Transforms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_vector_crs_intro.html">
-   Vector Coordinate Reference Systems (CRS)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster Coordinate Reference Systems (CRS)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  3 - Vector Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_buffer_neighbors.html">
-   Proximity Analysis - Buffers, Nearest Neighbor
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Spatial Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_spatial_joins.html">
-   Spatial Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Point Density Measures - Counts &amp; Kernel Density
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_interpolation.html">
-   Spatial Interpolation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  4 - Raster Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_rasters.html">
-   Reading &amp; Writing Rasters with Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_resample.html">
-   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_math.html">
-   Band Math w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_replace_values.html">
-   Replacing Values w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_rasterize.html">
-   Rasterize Vectors w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Window Operations with Rasterio and GeoWombat
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Window Operations with Rasterio and GeoWombat</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  5 - Accessing OSM &amp; Census Data in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_osm.html">
-   Accessing OSM Data in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_census.html">
-   Accessing Census and ACS Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  6 - Remote Sensing in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_io.html">
-   Reading/Writing Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_config.html">
-   Configuration manager
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_edit.html">
-   Editing Rasters and Remotely Sensed Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_plot.html">
-   Plot Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_crs.html">
-   Remote Sensing Coordinate Reference Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_mosaic.html">
-   Handle Multiple Remotely Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_band_math.html">
-   Band Math &amp; Vegetation Indices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_extraction.html">
-   Raster Data Extraction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_ml_predict.html">
-   Spatial Prediction using ML in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_raster_window_operations.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_window_operations.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_window_operations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/e_raster_window_operations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_raster_window_operations.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_raster_window_operations.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/docs/e_raster_window_operations.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../_sources/docs/e_raster_window_operations.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#window-operations-with-rasterio">
-   Window operations with rasterio
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-kernel">
-     Create kernel
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-arrays">
-     Create output arrays
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-vectorized-sliding-window">
-     Create vectorized sliding window
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#apply-vectorized-sliding-window">
-     Apply vectorized sliding window
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#window-operations-with-predefined-functions">
-     Window operations with predefined functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#save-output">
-     Save output
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#window-operations-with-geowombat">
-   Window operations with GeoWombat
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Window Operations with Rasterio and GeoWombat</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#window-operations-with-rasterio">
-   Window operations with rasterio
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-kernel">
-     Create kernel
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-output-arrays">
-     Create output arrays
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#create-vectorized-sliding-window">
-     Create vectorized sliding window
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#apply-vectorized-sliding-window">
-     Apply vectorized sliding window
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#window-operations-with-predefined-functions">
-     Window operations with predefined functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#save-output">
-     Save output
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#window-operations-with-geowombat">
-   Window operations with GeoWombat
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Window Operations with Rasterio and GeoWombat</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-rasterio">Window operations with rasterio</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-kernel">Create kernel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-arrays">Create output arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vectorized-sliding-window">Create vectorized sliding window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-vectorized-sliding-window">Apply vectorized sliding window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-predefined-functions">Window operations with predefined functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-output">Save output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-geowombat">Window operations with GeoWombat</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="window-operations-with-rasterio-and-geowombat">
-<h1>Window Operations with Rasterio and GeoWombat<a class="headerlink" href="#window-operations-with-rasterio-and-geowombat" title="Permalink to this headline">#</a></h1>
+<h1>Window Operations with Rasterio and GeoWombat<a class="headerlink" href="#window-operations-with-rasterio-and-geowombat" title="Permalink to this heading">#</a></h1>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -773,14 +484,14 @@ title="Print to PDF"
 </div>
 <hr class="docutils" />
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
 <p>Moving windows or filters are often used in raster analysis. For example, they can be used to obtain the maximum value within a certain neighborhood, to smooth out values, or detect holes or edges (i.e., where pixel values that are near each other change abruptly).</p>
 <p>These moving windows can also be called filters or kernels. They can be of many different sizes and shapes (the most common is 3-cell-by-3-cell rectangular window) and can have different or the same values for each cell. The center of the filter can be called the target cell or the center pixel, and the surrounding cells are referred to as the neighbors.</p>
 <p>The filter passes through all <em>non-edge</em> cells in the raster. During each pass of the filter, the center cell is updated based on the cells adjacent to it. In the <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter example, the center cell is updated by the eight cells that neighbor it. The filter then pulls the values from the neighboring cells and the center pixel itself, performs a calculation based on the filter values (e.g., calculates the mean), reports that resulting value back to the identical location of the original pixel, moves to the next pixel, and repeats the process.</p>
 <figure class="align-default" id="sliding-window-operations">
 <img alt="../_images/raster_sliding_window.jpg" src="../_images/raster_sliding_window.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Sliding window operations move across an entire raster.</span><a class="headerlink" href="#sliding-window-operations" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The filter values can essentially be any number–they can be the same across the filter or be all different. The values determine how the output is calculated (equation below assuming a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> filter for nine cells total in the kernel):</p>
@@ -796,7 +507,7 @@ title="Print to PDF"
 <figure class="align-default" id="moving-window-operation-examples">
 <img alt="../_images/raster_window_operations.jpg" src="../_images/raster_window_operations.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Example filter values for <code class="docutils literal notranslate"><span class="pre">3x3</span></code> moving windows. Different filter value combinations and arrangements can produce different outputs.</span><a class="headerlink" href="#moving-window-operation-examples" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For more information on moving windows, see the <a class="reference external" href="https://saylordotorg.github.io/text_essentials-of-geographic-information-systems/s12-02-scale-of-analysis.html">“Neighborhood Operations” section in this chapter on raster geoprocessing</a>.</p>
@@ -806,12 +517,17 @@ title="Print to PDF"
 </div>
 </section>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
 <p>We’ll explore two methods, one using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and another using <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code>.</p>
 <p>First, we’ll import our modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
@@ -821,10 +537,17 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 </section>
 <section id="window-operations-with-rasterio">
-<h2>Window operations with rasterio<a class="headerlink" href="#window-operations-with-rasterio" title="Permalink to this headline">#</a></h2>
+<h2>Window operations with rasterio<a class="headerlink" href="#window-operations-with-rasterio" title="Permalink to this heading">#</a></h2>
 <p>The most intuitive way to perform window operations in Python is to use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. With this method, we would iterate through each non-edge pixel, obtain the surrounding pixel values and the center pixel value, perform some sort of calculation, report that resulting value back to the identical location of the original pixel, move to the next pixel, and repeat the process. Iterating through each pixel, however, has the potential to be extremely time and computationally intensive (there could be many, many pixels).</p>
 <p>To mitigate this limitation, instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we can get each neighbor value simultaneously for all non-edge pixels. Another way to think of it is that instead of using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate through each pixel to get neighboring values, we can iterate through each kernel position to get the neighboring value corresponding to a certain kernel position for all non-edge pixels at once. This is what a vectorized sliding window does.</p>
 <p>The vectorized sliding window is grounded in the concept that each position in the kernel has a certain relative position or offset (e.g., one pixel to the left) from the center pixel of the kernel. This method works because each pixel in a raster is in essence a neighbor to at least one other pixel. The vectorized sliding window simply offsets itself within the raster array extent so that each pixel that falls within the vectorized sliding window is the neighbor of the same relative position (e.g., one pixel to the left) to its center pixel.</p>
@@ -832,8 +555,13 @@ title="Print to PDF"
 <p>For more conceptual information on vectorized sliding windows and how they compare to iterating through each pixel, see <a class="reference external" href="https://opensourceoptions.com/blog/vectorize-moving-window-grid-operations-on-numpy-arrays/">this article</a>.</p>
 <p>Let’s create a raster (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate mesh grid for rasters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate mesh grid for rasters</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -879,9 +607,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1737196467508c070175a8f6e82eb0191b5beaa5b7cec7ec318418f6900fbb24.png" src="../_images/1737196467508c070175a8f6e82eb0191b5beaa5b7cec7ec318418f6900fbb24.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[13776.    8586.24  5573.76  4738.56  6080.64  9600.  ]
+ [10256.64  5066.88  2054.4   1219.2   2561.28  6080.64]
+ [ 8914.56  3724.8    712.32  -122.88  1219.2   4738.56]
+ [ 9749.76  4560.    1547.52   712.32  2054.4   5573.76]
+ [12762.24  7572.48  4560.    3724.8   5066.88  8586.24]
+ [17952.   12762.24  9749.76  8914.56 10256.64 13776.  ]]
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 <section id="create-kernel">
-<h3>Create kernel<a class="headerlink" href="#create-kernel" title="Permalink to this headline">#</a></h3>
+<h3>Create kernel<a class="headerlink" href="#create-kernel" title="Permalink to this heading">#</a></h3>
 <p>Second, we can generate a kernel array. The array can consist of a single value or multiple values. Below, we generate a <code class="docutils literal notranslate"><span class="pre">3x3</span></code> kernel consisting of the value <code class="docutils literal notranslate"><span class="pre">1/9</span></code>. This kernel will output the average value of the center cell and its surrounding eight neighbors.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -893,7 +633,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a kernel to calculate the average</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a kernel to calculate the average</span>
 <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
 
 <span class="c1"># Get kernel shape</span>
@@ -907,12 +647,12 @@ title="Print to PDF"
 </div>
 </section>
 <section id="create-output-arrays">
-<h3>Create output arrays<a class="headerlink" href="#create-output-arrays" title="Permalink to this headline">#</a></h3>
+<h3>Create output arrays<a class="headerlink" href="#create-output-arrays" title="Permalink to this heading">#</a></h3>
 <p>Next, we will create two arrays that will store our calculations.</p>
 <p>The first array is the output array, which has the same shape as that of the input raster. We will initially fill the array with placeholder values. This array will be the final result that is exported and saved.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create raster array with placeholder values in shape of raster</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create raster array with placeholder values in shape of raster</span>
 <span class="n">output_rio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span>
 
 <span class="c1"># Set array data type</span>
@@ -923,11 +663,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-9999. -9999. -9999. -9999. -9999. -9999.]
+ [-9999. -9999. -9999. -9999. -9999. -9999.]
+ [-9999. -9999. -9999. -9999. -9999. -9999.]
+ [-9999. -9999. -9999. -9999. -9999. -9999.]
+ [-9999. -9999. -9999. -9999. -9999. -9999.]
+ [-9999. -9999. -9999. -9999. -9999. -9999.]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>The second array, initially filled with <code class="docutils literal notranslate"><span class="pre">0</span></code>s, will hold the pixel value as calculated from the vectorized sliding windows (e.g., mean). Since we are not performing calculations on any edge pixels, the shape of this array is slightly smaller than that of the input raster and also dependent on the shape of the kernel. This array will be inserted into and replace the non-edge placeholder values in the output array (which we just created).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create raster array used to store window operation calculations for each pixel (excluding boundary pixels)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create raster array used to store window operation calculations for each pixel (excluding boundary pixels)</span>
 <span class="n">aggregate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">kernel_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">raster</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">kernel_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Set array data type</span>
@@ -938,14 +688,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="create-vectorized-sliding-window">
-<h3>Create vectorized sliding window<a class="headerlink" href="#create-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
+<h3>Create vectorized sliding window<a class="headerlink" href="#create-vectorized-sliding-window" title="Permalink to this heading">#</a></h3>
 <p>The next step is to generate the vectorized sliding windows. The shape of the vectorized sliding windows depends on the kernel shape, so we utilize indices and slicing to obtain the extent of a vectorized sliding window for each position in the kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate row index pairs for slicing</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate row index pairs for slicing</span>
 <span class="n">pairs_x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">kernel_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="kc">None</span><span class="p">]))</span>
 
 <span class="c1"># Generate column index pairs for slicing</span>
@@ -959,15 +717,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((None, -2), (None, -2)), ((None, -2), (1, -1)), ((None, -2), (2, None)), ((1, -1), (None, -2)), ((1, -1), (1, -1)), ((1, -1), (2, None)), ((2, None), (None, -2)), ((2, None), (1, -1)), ((2, None), (2, None))]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="apply-vectorized-sliding-window">
-<h3>Apply vectorized sliding window<a class="headerlink" href="#apply-vectorized-sliding-window" title="Permalink to this headline">#</a></h3>
+<h3>Apply vectorized sliding window<a class="headerlink" href="#apply-vectorized-sliding-window" title="Permalink to this heading">#</a></h3>
 <p>Once the vectorized sliding windows are specified, we can apply them to the raster. The vectorized sliding window will get a subset of the raster array, and we can multiply all the pixel values in that subset by the corresponding value in the kernel, which is based on window’s specific kernel position.</p>
 <p>The product is then added to the array that keeps track of the running total.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty list to store each window operation calculation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty list to store each window operation calculation</span>
 <span class="n">sub_array_list</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Iterate through the combined pairs (which give extent of a sliding window)</span>
@@ -987,11 +750,19 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[6518.4  3505.92 2670.72 4012.8 ]
+ [5176.32 2163.84 1328.64 2670.72]
+ [6011.52 2999.04 2163.84 3505.92]
+ [9024.   6011.52 5176.32 6518.4 ]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Once we get the aggregate of all windows, we can perform additional computations. In this case, we multiply all values by <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get average value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get average value</span>
 <span class="n">aggregate</span> <span class="o">=</span> <span class="n">aggregate</span> <span class="o">*</span> <span class="mi">2</span>
 
 <span class="c1"># View array storing window operation calculations</span>
@@ -999,10 +770,18 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[13036.8   7011.84  5341.44  8025.6 ]
+ [10352.64  4327.68  2657.28  5341.44]
+ [12023.04  5998.08  4327.68  7011.84]
+ [18048.   12023.04 10352.64 13036.8 ]]
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="window-operations-with-predefined-functions">
-<h3>Window operations with predefined functions<a class="headerlink" href="#window-operations-with-predefined-functions" title="Permalink to this headline">#</a></h3>
+<h3>Window operations with predefined functions<a class="headerlink" href="#window-operations-with-predefined-functions" title="Permalink to this heading">#</a></h3>
 <p>We can also perform window operations with predefined functions, such as getting the maximum value of a pixel and its surrounding pixels. We simply take the calculations from each vectorized sliding window and get the maximum value from those calculations.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1010,21 +789,29 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get maximum value</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get maximum value</span>
 <span class="n">window_maximum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">sub_array_list</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">window_maximum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1530.66666667  954.02666667  675.62666667 1066.66666667]
+ [1139.62666667  562.98666667  284.58666667  675.62666667]
+ [1418.02666667  841.38666667  562.98666667  954.02666667]
+ [1994.66666667 1418.02666667 1139.62666667 1530.66666667]]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="save-output">
-<h3>Save output<a class="headerlink" href="#save-output" title="Permalink to this headline">#</a></h3>
+<h3>Save output<a class="headerlink" href="#save-output" title="Permalink to this heading">#</a></h3>
 <p>We can insert the processed aggregate array into the output array, with each value replacing the placeholder value at its corresponding original position in the array. Recall that because edge pixels are ignored, the edge pixels of the output array will still keep their placeholder values.</p>
 <p>In this example, each non-edge output pixel value is the average pixel value–with pixel values drawn from the input raster–of the 8 pixels surrounding that pixel and the pixel itself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use kernel shape to determine the row and column index extent of the calculated array</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use kernel shape to determine the row and column index extent of the calculated array</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">kernel_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">kernel_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 
@@ -1036,11 +823,26 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-9999.   -9999.   -9999.   -9999.   -9999.   -9999.  ]
+ [-9999.   13036.8   7011.84  5341.44  8025.6  -9999.  ]
+ [-9999.   10352.64  4327.68  2657.28  5341.44 -9999.  ]
+ [-9999.   12023.04  5998.08  4327.68  7011.84 -9999.  ]
+ [-9999.   18048.   12023.04 10352.64 13036.8  -9999.  ]
+ [-9999.   -9999.   -9999.   -9999.   -9999.   -9999.  ]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Finally, we can export the raster (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export raster</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export raster</span>
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
         <span class="s2">&quot;../temp/raster_window_3x3_average.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
         <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
@@ -1053,45 +855,46 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
 </section>
 <section id="window-operations-with-geowombat">
-<h2>Window operations with GeoWombat<a class="headerlink" href="#window-operations-with-geowombat" title="Permalink to this headline">#</a></h2>
+<h2>Window operations with GeoWombat<a class="headerlink" href="#window-operations-with-geowombat" title="Permalink to this heading">#</a></h2>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> for window operations if we’re only interested in calculating a statistic. The code to do this with <code class="docutils literal notranslate"><span class="pre">GeoWombat</span></code> is less complex and much shorter than with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code>–we can simply use the <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">geowombat.moving()</span></code> function provides us with a few parameters that we can specify:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Parameter</p></th>
-<th class="text-align:right head"><p>Description</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Parameter</p></th>
+<th class="head text-right"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">stat</span></code></p></td>
-<td class="text-align:right"><p>statistic calculated (options: mean, standard deviation, variance, minimum, maximum, percentile)</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">stat</span></code></p></td>
+<td class="text-right"><p>statistic calculated (options: mean, standard deviation, variance, minimum, maximum, percentile)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">perc</span></code></p></td>
-<td class="text-align:right"><p>percentile used for window operation if <code class="docutils literal notranslate"><span class="pre">stat</span> <span class="pre">=</span> <span class="pre">perc</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">perc</span></code></p></td>
+<td class="text-right"><p>percentile used for window operation if <code class="docutils literal notranslate"><span class="pre">stat</span> <span class="pre">=</span> <span class="pre">perc</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
-<td class="text-align:right"><p>moving window size in pixels</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">w</span></code></p></td>
+<td class="text-right"><p>moving window size in pixels</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">nodata</span></code></p></td>
-<td class="text-align:right"><p>value that will be ignored in calculations</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">nodata</span></code></p></td>
+<td class="text-right"><p>value that will be ignored in calculations</p></td>
 </tr>
 </tbody>
 </table>
 <p>For more information this function, see the <a class="reference external" href="https://geowombat.readthedocs.io/en/latest/moving.html">function documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open file</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open file</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/window_raster.tif&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
 
     <span class="c1"># Create plot</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
 
     <span class="c1"># Calculate local average</span>
-    <span class="n">output_gw</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">moving</span><span class="p">(</span><span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nodata</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">output_gw</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">moving</span><span class="p">(</span><span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>  <span class="n">nodata</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output_gw</span><span class="p">)</span>
 
     <span class="c1"># Plot raster</span>
@@ -1099,6 +902,31 @@ title="Print to PDF"
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stack-05da572d39ab1c1d0b12800e82f3b09f&#39; (band: 1, y: 6, x: 6)&gt;
+dask.array&lt;stack, shape=(1, 6, 6), dtype=float64, chunksize=(1, 6, 6), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 1
+  * y        (y) float64 90.0 60.0 30.0 0.0 -30.0 -60.0
+  * x        (x) float64 -90.0 -60.0 -30.0 0.0 30.0 60.0
+Attributes: (12/15)
+    transform:           (30.0, 0.0, -105.0, 0.0, -30.0, 105.0)
+    crs:                 4326
+    res:                 (30.0, 30.0)
+    is_tiled:            0
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    ...                  ...
+    filename:            ../temp/window_raster.tif
+    resampling:          nearest
+    _data_are_separate:  0
+    _data_are_stacked:   0
+    moving_stat:         mean
+    moving_window_size:  5
+</pre></div>
+</div>
+<img alt="../_images/6ef6b8709470cd7934387e928d26c42311eab90187233b669de0512a95d22e11.png" src="../_images/6ef6b8709470cd7934387e928d26c42311eab90187233b669de0512a95d22e11.png" />
 </div>
 </div>
 </section>
@@ -1124,38 +952,96 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="e_raster_rasterize.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Rasterize Vectors w. Rasterio</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="e_raster_rasterize.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Rasterize Vectors w. Rasterio</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="d_access_osm.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="d_access_osm.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Accessing OSM Data in Python</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-rasterio">Window operations with rasterio</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-kernel">Create kernel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-output-arrays">Create output arrays</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-vectorized-sliding-window">Create vectorized sliding window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-vectorized-sliding-window">Apply vectorized sliding window</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-predefined-functions">Window operations with predefined functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-output">Save output</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#window-operations-with-geowombat">Window operations with GeoWombat</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
   
-    <div class="extra_footer">
-      <div>
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1165,20 +1051,22 @@ title="Print to PDF"
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-    </div>
-</p>
-        </footer>
-    </div>
-    
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

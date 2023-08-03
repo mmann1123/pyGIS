@@ -1,123 +1,165 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 <meta content="spatial, raster, reproject, crs, landsat" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
     <title>Reading &amp; Writing Rasters with Rasterio &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script src="../_static/tabs.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/e_new_rasters';</script>
     <link rel="canonical" href="https://pygis.io/docs/e_new_rasters.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reproject Rasters w. Rasterio and Geowombat" href="e_raster_reproject.html" />
     <link rel="prev" title="Spatial Interpolation" href="e_interpolation.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MQPNBR6XWJ');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/pygis.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Open Source Spatial Programming & Remote Sensing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -126,568 +168,293 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  0 - Get Started in Spatial Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="b_intro_py.html">
-   Welcome - Let’s get started
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_about_py.html">
-   Getting Started in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_getting_started.html">
-   Setting up a Normal Python Environment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_python_by_example.html">
-   An Introductory Example
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_learn_more.html">
-   Learn More
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  1 - Spatial Data Types in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="c_features.html">
-   Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_store_features.html">
-   Data Storage Formats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_vectors.html">
-   Spatial Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html">
-   Spatial Points Lines Polygons in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Spatial Raster Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  2 - Nature of Coordinate Systems in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_crs_what_is_it.html">
-   What is a CRS?
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding a CRS: Proj4 and CRS codes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_affine.html">
-   Affine Transforms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_vector_crs_intro.html">
-   Vector Coordinate Reference Systems (CRS)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster Coordinate Reference Systems (CRS)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  3 - Vector Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_buffer_neighbors.html">
-   Proximity Analysis - Buffers, Nearest Neighbor
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_overlay.html">
-   Spatial Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_spatial_joins.html">
-   Spatial Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Point Density Measures - Counts &amp; Kernel Density
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_interpolation.html">
-   Spatial Interpolation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  4 - Raster Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Reading &amp; Writing Rasters with Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_resample.html">
-   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_math.html">
-   Band Math w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_replace_values.html">
-   Replacing Values w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_rasterize.html">
-   Rasterize Vectors w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_window_operations.html">
-   Window Operations with Rasterio and GeoWombat
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  5 - Accessing OSM &amp; Census Data in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_osm.html">
-   Accessing OSM Data in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_census.html">
-   Accessing Census and ACS Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  6 - Remote Sensing in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_io.html">
-   Reading/Writing Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_config.html">
-   Configuration manager
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_edit.html">
-   Editing Rasters and Remotely Sensed Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_plot.html">
-   Plot Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_crs.html">
-   Remote Sensing Coordinate Reference Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_mosaic.html">
-   Handle Multiple Remotely Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_band_math.html">
-   Band Math &amp; Vegetation Indices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_extraction.html">
-   Raster Data Extraction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_ml_predict.html">
-   Spatial Prediction using ML in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_new_rasters.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_new_rasters.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_new_rasters.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/e_new_rasters.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_new_rasters.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_new_rasters.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/docs/e_new_rasters.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../_sources/docs/e_new_rasters.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-raster-data">
-   Creating Raster Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#writing-rasters">
-   Writing Rasters
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#update-raster-metadata">
-   Update Raster Metadata
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rasterio-multiband-rasters">
-   Rasterio Multiband Rasters
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Reading & Writing Rasters with Rasterio</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-raster-data">
-   Creating Raster Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#writing-rasters">
-   Writing Rasters
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#update-raster-metadata">
-   Update Raster Metadata
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rasterio-multiband-rasters">
-   Rasterio Multiband Rasters
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reading & Writing Rasters with Rasterio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-raster-data">Creating Raster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-rasters">Writing Rasters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-raster-metadata">Update Raster Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rasterio-multiband-rasters">Rasterio Multiband Rasters</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <hr class="docutils" id="e-raster-reproject" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -706,12 +473,12 @@ title="Print to PDF"
 </div>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="reading-writing-rasters-with-rasterio">
-<h1>Reading &amp; Writing Rasters with Rasterio<a class="headerlink" href="#reading-writing-rasters-with-rasterio" title="Permalink to this headline">#</a></h1>
+<h1>Reading &amp; Writing Rasters with Rasterio<a class="headerlink" href="#reading-writing-rasters-with-rasterio" title="Permalink to this heading">#</a></h1>
 <p>In order to work with raster data we will be using <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> and later <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>. Behind the scenes a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> does all the heavy lifting. To understand how raster works it helps to construct one from scratch.</p>
 <p>Here we create two <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects one <code class="docutils literal notranslate"><span class="pre">X</span></code> spans [-90°,90°] longitude, and <code class="docutils literal notranslate"><span class="pre">Y</span></code> covers [-90°,90°] latitude.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -719,10 +486,30 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-90., -54., -18.,  18.,  54.,  90.],
+       [-90., -54., -18.,  18.,  54.,  90.],
+       [-90., -54., -18.,  18.,  54.,  90.],
+       [-90., -54., -18.,  18.,  54.,  90.],
+       [-90., -54., -18.,  18.,  54.,  90.],
+       [-90., -54., -18.,  18.,  54.,  90.]])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 90.,  90.,  90.,  90.,  90.,  90.],
+       [ 54.,  54.,  54.,  54.,  54.,  54.],
+       [ 18.,  18.,  18.,  18.,  18.,  18.],
+       [-18., -18., -18., -18., -18., -18.],
+       [-54., -54., -54., -54., -54., -54.],
+       [-90., -90., -90., -90., -90., -90.]])
 </pre></div>
 </div>
 </div>
@@ -730,7 +517,7 @@ title="Print to PDF"
 <p>Let’s generate some data representing temperature and store it an array <code class="docutils literal notranslate"><span class="pre">Z</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">Z1</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">Z2</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(((</span><span class="n">X</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.5</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -742,49 +529,52 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02782962422afce2f35f2b6a18825e5b456313656ba66248f91289ab9e1faddd.png" src="../_images/02782962422afce2f35f2b6a18825e5b456313656ba66248f91289ab9e1faddd.png" />
+</div>
 </div>
 <section id="creating-raster-data">
-<h2>Creating Raster Data<a class="headerlink" href="#creating-raster-data" title="Permalink to this headline">#</a></h2>
+<h2>Creating Raster Data<a class="headerlink" href="#creating-raster-data" title="Permalink to this heading">#</a></h2>
 <p>The final array <code class="docutils literal notranslate"><span class="pre">Z</span></code> still lacks a number of elements that transform it from being a non-spatial <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array to a spatial one usable by <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> etc. <code class="docutils literal notranslate"><span class="pre">Rasterio</span></code> requires the following elements to write out a geotif, or spatial raster dataset:</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Parameters</p></th>
-<th class="text-align:right head"><p>Description</p></th>
-<th class="text-align:right head"><p>Argument</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Parameters</p></th>
+<th class="head text-right"><p>Description</p></th>
+<th class="head text-right"><p>Argument</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>driver</p></td>
-<td class="text-align:right"><p>the name of the desired format driver</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">'GTiff'</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p>driver</p></td>
+<td class="text-right"><p>the name of the desired format driver</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">'GTiff'</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>width</p></td>
-<td class="text-align:right"><p>the number of columns of the dataset</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Z.shape[1]</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p>width</p></td>
+<td class="text-right"><p>the number of columns of the dataset</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Z.shape[1]</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>height</p></td>
-<td class="text-align:right"><p>the number of rows of the dataset</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Z.shape[0]</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p>height</p></td>
+<td class="text-right"><p>the number of rows of the dataset</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Z.shape[0]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>count</p></td>
-<td class="text-align:right"><p>a count of the dataset bands</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p>count</p></td>
+<td class="text-right"><p>a count of the dataset bands</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>dtype</p></td>
-<td class="text-align:right"><p>the data type of the dataset</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Z.dtype</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p>dtype</p></td>
+<td class="text-right"><p>the data type of the dataset</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Z.dtype</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>crs</p></td>
-<td class="text-align:right"><p>a coordinate reference system identifier or description</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">'+proj=latlong'</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p>crs</p></td>
+<td class="text-right"><p>a coordinate reference system identifier or description</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">'+proj=latlong'</span></code></p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>transform</p></td>
-<td class="text-align:right"><p>an affine transformation matrix</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Affine.translation(x[0]</span> <span class="pre">-</span> <span class="pre">xres</span> <span class="pre">/</span> <span class="pre">2,</span> <span class="pre">y[0]</span> <span class="pre">-</span> <span class="pre">yres</span> <span class="pre">/</span> <span class="pre">2)</span> <span class="pre">*</span> <span class="pre">Affine.scale(xres,</span> <span class="pre">yres)</span></code></p></td>
+<tr class="row-even"><td class="text-left"><p>transform</p></td>
+<td class="text-right"><p>an affine transformation matrix</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Affine.translation(x[0]</span> <span class="pre">-</span> <span class="pre">xres</span> <span class="pre">/</span> <span class="pre">2,</span> <span class="pre">y[0]</span> <span class="pre">-</span> <span class="pre">yres</span> <span class="pre">/</span> <span class="pre">2)</span> <span class="pre">*</span> <span class="pre">Affine.scale(xres,</span> <span class="pre">yres)</span></code></p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>nodata</p></td>
-<td class="text-align:right"><p>a “nodata” value</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">-9999</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p>nodata</p></td>
+<td class="text-right"><p>a “nodata” value</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">-9999</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -794,11 +584,11 @@ title="Print to PDF"
 </div>
 </section>
 <section id="writing-rasters">
-<h2>Writing Rasters<a class="headerlink" href="#writing-rasters" title="Permalink to this headline">#</a></h2>
+<h2>Writing Rasters<a class="headerlink" href="#writing-rasters" title="Permalink to this heading">#</a></h2>
 <p>To save this array along with spatial information to a file, we call <code class="docutils literal notranslate"><span class="pre">rasterio.open()</span></code> with a path to the new file to be created, and ‘w’ to specify writing mode, along with the arguments above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.transform</span> <span class="kn">import</span> <span class="n">Affine</span>
 
 <span class="n">xres</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -825,7 +615,7 @@ title="Print to PDF"
 <p>When we go to look again at our data we can read it back in using <code class="docutils literal notranslate"><span class="pre">open</span></code>. Before plotting we <code class="docutils literal notranslate"><span class="pre">raster.read(1)</span></code> the first band, which converts the data back to a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array that can be plotted in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.  Notice that we also specify the band number (in this case 1), with <code class="docutils literal notranslate"><span class="pre">.write(Z,</span> <span class="pre">1)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">raster</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">)</span>
 
@@ -835,22 +625,31 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/b5719b1ac8e3c6bd74d86eca1667f6cee957ac507593dcef476990428185a69e.png" src="../_images/b5719b1ac8e3c6bd74d86eca1667f6cee957ac507593dcef476990428185a69e.png" />
+</div>
 </div>
 <p>So in summary, a spatial dataset is essentially just a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> with information about the location and resolution of the array, the <a class="reference internal" href="d_crs_what_is_it.html"><span class="doc std std-doc">coordinate reference system</span></a>, and number of bands. This information is typically accessed and updated via the <code class="docutils literal notranslate"><span class="pre">.profile</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">profile</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">profile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;nodata&#39;: None, &#39;width&#39;: 6, &#39;height&#39;: 6, &#39;count&#39;: 1, &#39;crs&#39;: CRS.from_epsg(4326), &#39;transform&#39;: Affine(30.0, 0.0, -105.0,
+       0.0, -30.0, 105.0), &#39;blockysize&#39;: 6, &#39;tiled&#39;: False, &#39;interleave&#39;: &#39;band&#39;}
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="update-raster-metadata">
-<h2>Update Raster Metadata<a class="headerlink" href="#update-raster-metadata" title="Permalink to this headline">#</a></h2>
+<h2>Update Raster Metadata<a class="headerlink" href="#update-raster-metadata" title="Permalink to this heading">#</a></h2>
 <p>Notice the the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> above is missing a meaningful <code class="docutils literal notranslate"><span class="pre">nodata</span></code> value and was uncompressed. Let’s learn how to update these values. For this we can update the <code class="docutils literal notranslate"><span class="pre">.profile</span></code> dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># start with the original profile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start with the original profile</span>
 <span class="n">profile</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">profile</span>
 <span class="c1"># update values for nodata and compression type</span>
 <span class="n">profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s2">&quot;lzw&quot;</span><span class="p">)</span>
@@ -858,11 +657,17 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;float64&#39;, &#39;nodata&#39;: 0, &#39;width&#39;: 6, &#39;height&#39;: 6, &#39;count&#39;: 1, &#39;crs&#39;: CRS.from_epsg(4326), &#39;transform&#39;: Affine(30.0, 0.0, -105.0,
+       0.0, -30.0, 105.0), &#39;blockysize&#39;: 6, &#39;tiled&#39;: False, &#39;interleave&#39;: &#39;band&#39;, &#39;compress&#39;: &#39;lzw&#39;}
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now we just need to write the array of data (obtained from <code class="docutils literal notranslate"><span class="pre">raster.read(1)</span></code>) out with the updated profile info. We can unpack all the dictionary values from the profile using <code class="docutils literal notranslate"><span class="pre">**profile</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/temperature.tif&quot;</span><span class="p">,</span> 
                   <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> 
                   <span class="o">**</span><span class="n">profile</span><span class="p">,)</span> <span class="k">as</span> <span class="n">update_dataset</span><span class="p">:</span>
     <span class="n">update_dataset</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raster</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
@@ -872,12 +677,12 @@ title="Print to PDF"
 </div>
 </section>
 <section id="rasterio-multiband-rasters">
-<h2>Rasterio Multiband Rasters<a class="headerlink" href="#rasterio-multiband-rasters" title="Permalink to this headline">#</a></h2>
+<h2>Rasterio Multiband Rasters<a class="headerlink" href="#rasterio-multiband-rasters" title="Permalink to this heading">#</a></h2>
 <p>Working with multiband imagery starts to get a bit tricky, especially with <code class="docutils literal notranslate"><span class="pre">rasterio</span></code> alone.</p>
 <p>Let’s start with a problematic raster file, a landsat image that stores its red, green, and blue bands in reverse order (blue, green, red), that is scaled by 100 (multiplied by 100 to store data as integers rather than float), and that is missing a meaningful nodata value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="c1"># read in the array, band 3 first, then band 2, then band 1</span>
     <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -891,6 +696,13 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array shape: (3, 1860, 2041)
+{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;uint16&#39;, &#39;nodata&#39;: None, &#39;width&#39;: 2041, &#39;height&#39;: 1860, &#39;count&#39;: 3, &#39;crs&#39;: CRS.from_epsg(32621), &#39;transform&#39;: Affine(30.0, 0.0, 717345.0,
+       0.0, -30.0, -2776995.0), &#39;blockxsize&#39;: 256, &#39;blockysize&#39;: 256, &#39;tiled&#39;: True, &#39;compress&#39;: &#39;lzw&#39;, &#39;interleave&#39;: &#39;pixel&#39;}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -899,10 +711,45 @@ title="Print to PDF"
 <p>To see what it looks like, let’s use rasterio’s <code class="docutils literal notranslate"><span class="pre">show</span></code> function which <em>sort of helps</em> when viewing multiband imagery.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------&#39;</span><span class="p">)</span>
 <span class="n">show</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  ...
+  [6672 6168 6100 ... 6028 6015 6008]
+  [6291 6457 6423 ... 6021 6001 6017]
+  [6181 6727 6747 ... 6098 6023 5991]]
+
+ [[   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  ...
+  [7083 6794 6731 ... 6760 6724 6685]
+  [6951 7079 7016 ... 6699 6687 6715]
+  [6864 7286 7338 ... 6817 6732 6659]]
+
+ [[   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  [   0    0    0 ...    0    0    0]
+  ...
+  [7692 7518 7513 ... 7440 7432 7415]
+  [7586 7590 7610 ... 7440 7411 7425]
+  [7576 7743 7770 ... 7464 7443 7406]]]
+--------------
+</pre></div>
+</div>
+<img alt="../_images/54a49c8ba028c4c45c6841dff701676fbfe1540cd59de12109255241aa424e18.png" src="../_images/54a49c8ba028c4c45c6841dff701676fbfe1540cd59de12109255241aa424e18.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 </div>
@@ -911,9 +758,14 @@ title="Print to PDF"
 <p>Let’s check what the range of values are in our raster. To do this we will use <code class="docutils literal notranslate"><span class="pre">scipy</span></code> <code class="docutils literal notranslate"><span class="pre">stats</span></code>, and <code class="docutils literal notranslate"><span class="pre">.ravel()</span></code> to convert our <code class="docutils literal notranslate"><span class="pre">n</span></code> dimension array to a <code class="docutils literal notranslate"><span class="pre">1d</span></code> array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DescribeResult(nobs=11388780, minmax=(0, 24147), mean=6095.312502656123, variance=7725568.744020711, skewness=-1.6071105370358574, kurtosis=0.9303298625510847)
 </pre></div>
 </div>
 </div>
@@ -921,8 +773,13 @@ title="Print to PDF"
 <p>Since we currently have integer data that ranges from 0 to 24147, we should try scaling it, if we go to the documentation we would see that we need to divide all values by 100.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_arr</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">/</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_arr</span> <span class="o">=</span> <span class="n">arr</span> <span class="o">/</span> <span class="mi">100</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">scaled_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float64
 </pre></div>
 </div>
 </div>
@@ -930,7 +787,7 @@ title="Print to PDF"
 <p>Then let’s write the data back out again with an updated profile. Notice that the datatype (<code class="docutils literal notranslate"><span class="pre">dtype</span></code>) has changed since we divided by 100.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the profile for the new raster</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># update the profile for the new raster</span>
 <span class="n">profile</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
 <span class="n">profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s2">&quot;lzw&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">scaled_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
@@ -944,6 +801,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
+
+ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
+
+ERROR 10: Pointer &#39;hObject&#39; is NULL in &#39;GDALGetMetadata&#39;.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -952,17 +818,20 @@ title="Print to PDF"
 <p>There you go! A fixed raster. Try opening it in Qgis to make sure. We can look at it now using rasterio <code class="docutils literal notranslate"><span class="pre">show</span></code>, but again it isn’t great, but better.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/LS_scaled_20200518.tif&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/LS_scaled_20200518.tif&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">show</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="n">adjust</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5757f60b00fa97fb02335799741fcea7081c59bc88b74ce43481741472523b13.png" src="../_images/5757f60b00fa97fb02335799741fcea7081c59bc88b74ce43481741472523b13.png" />
 </div>
 </div>
 <p>To help make all of this easier and more intuitive we will be presenting the use of <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> for remote sensing applications later, <span class="xref myst">start here</span>.</p>
 <p>Just as a preview, here’s how to do this in <code class="docutils literal notranslate"><span class="pre">geowombat</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
@@ -986,6 +855,52 @@ title="Print to PDF"
         <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;band&#39; (band: 3)&gt;
+array([&#39;blue&#39;, &#39;green&#39;, &#39;red&#39;], dtype=&#39;&lt;U5&#39;)
+Coordinates:
+  * band     (band) &lt;U5 &#39;blue&#39; &#39;green&#39; &#39;red&#39;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                                        | 0/50 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█████████████████████████▉                                                                                                                      | 9/50 [00:00&lt;00:00, 87.63it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 44%|██████████████████████████████████████████████████████████████▍                                                                               | 22/50 [00:00&lt;00:00, 111.34it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|██████████████████████████████████████████████████████████████████████████████████████████████████████▏                                       | 36/50 [00:00&lt;00:00, 120.43it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏  | 49/50 [00:00&lt;00:00, 123.42it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:00&lt;00:00, 118.35it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                                        | 0/14 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00&lt;00:00, 139.39it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 14/14 [00:00&lt;00:00, 138.61it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="../_images/514df6ca874e0c8644651ecc447d70195adff0fd2a9b54ae800bd62af8f1df00.png" src="../_images/514df6ca874e0c8644651ecc447d70195adff0fd2a9b54ae800bd62af8f1df00.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -1013,38 +928,88 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="e_interpolation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Spatial Interpolation</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="e_interpolation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Spatial Interpolation</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="e_raster_reproject.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="e_raster_reproject.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Reproject Rasters w. Rasterio and Geowombat</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-raster-data">Creating Raster Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-rasters">Writing Rasters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-raster-metadata">Update Raster Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rasterio-multiband-rasters">Rasterio Multiband Rasters</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
   
-    <div class="extra_footer">
-      <div>
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -1054,20 +1019,22 @@ title="Print to PDF"
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
 
-    </div>
-</p>
-        </footer>
-    </div>
-    
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

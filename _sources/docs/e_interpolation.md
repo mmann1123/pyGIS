@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas."
-  "keywords": "python, spatial, interpolation, vector, shapefile"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to interpolate spatial data using python. Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas."
+    "keywords": "python, spatial, interpolation, vector, shapefile"
+    "property=og:locale": "en_US"
 ---
  
 

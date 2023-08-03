@@ -11,10 +11,7 @@ kernelspec:
 
 # Learn More
 
-We're about ready to wrap up this brief course on Python for scientific
-computing.
-
-In this last lecture we give some pointers to the major scientific libraries
+In this last introductory section we give some pointers to the major scientific libraries
 and suggestions for further reading.
 
 
@@ -93,18 +90,24 @@ Example 2D plot with embedded LaTeX annotations
 
 ```{figure} /_static/lecture_specific/about_py/qs.png
 :scale: 55%
+:alt: Image three histograms demonstrating different distributions
+ Histogram plot
 ```
 
 Example contour plot
 
 ```{figure} /_static/lecture_specific/about_py/bn_density1.png
 :scale: 55%
+:alt: Image of a contour plot indicating 3 dimensions of data
+ Contour plot
 ```
 
 Example 3D plot
 
 ```{figure} /_static/lecture_specific/about_py/career_vf.png
 :scale: 80%
+:alt: Image of a 3D plot with a surface
+ 3D plot
 ```
 
 More examples can be found in the [Matplotlib thumbnail

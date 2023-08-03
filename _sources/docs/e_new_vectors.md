@@ -70,7 +70,7 @@ Now we have a geometry column in our GeoDataFrame but we don’t have any data y
 
 ### Create Points from list of coordinates
 Creating geopandas point objects is a snap! All we need is a coordinate pair from which we generate a Shapely point geometry object, we then create a dictionary that holds that geometry and any attributes we want, and a coordinate reference system. In this case we use a [ESPG code](d_understand_crs_codes.md).   
-[Click here for a more detailed explanation of this process](e_points_the_long_way.md)
+[Click here for a more detailed explanation of this process](e_points_the_long_way)
 
 ```{code-cell} ipython3
 # Coordinates of the GW department of geography in Decimal Degrees
