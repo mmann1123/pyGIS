@@ -26,3 +26,9 @@ We welcome and recognize all contributions. You can see a list of current contri
 ## Credits
 
 This project is created using the excellent open source [Jupyter Book project](https://jupyterbook.org/) and the [executablebooks/cookiecutter-jupyter-book template](https://github.com/executablebooks/cookiecutter-jupyter-book).
+
+## Reference & Citation
+
+Michael Mann, Steven Chao, Christophe Van Neste, Roger Lew, & Mark Isken. (2023). mmann1123/pyGIS: Clearer Satellites (v1.2.1). Zenodo. https://doi.org/10.5281/zenodo.8215141
+
+<a href="https://zenodo.org/badge/latestdoi/344683467"><img src="https://zenodo.org/badge/344683467.svg" alt="DOI"></a>
