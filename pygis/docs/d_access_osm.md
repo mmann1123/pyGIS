@@ -84,16 +84,16 @@ area.plot()
 ```
 ### OSM Building footprints
 
-It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let's download the buildings with `ox.geometries_from_place` [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place) function and plot them on top of our street network in Kamppi. 
+It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let's download the buildings with `ox.features_from_place` [docs](https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.features.features_from_place) function and plot them on top of our street network in Kamppi. 
 
 
-When fetching spesific types of geometries from OpenStreetMap using OSMnx `geometries_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
+When fetching spesific types of features from OpenStreetMap using OSMnx `features_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
 
 ```{code-cell} ipython3
 # List key-value pairs for tags
 tags = {'building': True}   
 
-buildings = ox.geometries_from_place(place_name, tags)
+buildings = ox.features_from_place(place_name, tags)
 buildings.head()
 ```
 We can plot the footprints quickly.
