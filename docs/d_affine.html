@@ -491,9 +491,6 @@ document.write(`
 <p>Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points. It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to distort raster data, for instance satellite imagery, to fit a new projection or CRS.</p>
 <figure class="align-default" id="example-of-a-warped-reprojected-image">
 <img alt="../_images/warp.png" src="../_images/warp.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Example of a warped (reprojected) image</span><a class="headerlink" href="#example-of-a-warped-reprojected-image" title="Permalink to this image">#</a></p>
-</figcaption>
 </figure>
 <p>First some general properties of affine transforms:</p>
 <ul class="simple">
@@ -577,7 +574,7 @@ document.write(`
 <figure class="align-default" id="translate-a-coordinate">
 <img alt="../_images/translate_coord.png" src="../_images/translate_coord.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Translate a coordinate</span><a class="headerlink" href="#translate-a-coordinate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can scale <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> by setting <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(e\)</span> to 0.5 (or some fraction), and setting all other values to zero (<span class="math notranslate nohighlight">\(b,d,c,f = 0\)</span>):</p>
@@ -590,7 +587,7 @@ document.write(`
 <figure class="align-default" id="scale-a-coordinate">
 <img alt="../_images/scale_coord.png" src="../_images/scale_coord.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Scale a coordinate</span><a class="headerlink" href="#scale-a-coordinate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can rotate a point around the origin by setting <span class="math notranslate nohighlight">\(a,e = \cos\theta\)</span>, <span class="math notranslate nohighlight">\(b = -\sin\theta\)</span> and <span class="math notranslate nohighlight">\(c,f = 0\)</span>:</p>
@@ -604,7 +601,7 @@ document.write(`
 <figure class="align-default" id="rotate-a-coordinate">
 <img alt="../_images/rotate_coord.png" src="../_images/rotate_coord.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Rotate a coordinate</span><a class="headerlink" href="#rotate-a-coordinate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Finally by adjusting <span class="math notranslate nohighlight">\(x\)</span> based on the value of <span class="math notranslate nohighlight">\(y\)</span> (and visa versa), we can achieve a shear transform:</p>
@@ -617,7 +614,7 @@ document.write(`
 <figure class="align-default" id="shear-transform-a-coordinate">
 <img alt="../_images/shear_coord.png" src="../_images/shear_coord.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Shear transform a coordinate</span><a class="headerlink" href="#shear-transform-a-coordinate" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -728,7 +725,7 @@ document.write(`
 <figure class="align-default" id="moving-a-point">
 <img alt="../_images/translate_ex.png" src="../_images/translate_ex.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Moving a point</span><a class="headerlink" href="#moving-a-point" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -755,7 +752,7 @@ document.write(`
 <figure class="align-default" id="rotate-a-point">
 <img alt="../_images/rotate_ex.png" src="../_images/rotate_ex.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Rotate a point</span><a class="headerlink" href="#rotate-a-point" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -879,6 +876,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

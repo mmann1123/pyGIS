@@ -491,13 +491,15 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span><span class="p">]</span>
-<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span>
-                <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span>
-                <span class="n">mosaic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">overlap</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
-                <span class="n">bounds_by</span><span class="o">=</span><span class="s1">&#39;union&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+     <span class="p">[</span><span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span><span class="p">],</span>
+     <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span>
+     <span class="n">mosaic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+     <span class="n">bounds_by</span><span class="o">=</span><span class="s1">&#39;union&#39;</span>
+ <span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+     <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+ 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -507,7 +509,7 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<img alt="../_images/10e9431a2ad888cfb9560ea14bc1e3a633927f365029c6d71a119f5c4ea74d48.png" src="../_images/10e9431a2ad888cfb9560ea14bc1e3a633927f365029c6d71a119f5c4ea74d48.png" />
+<img alt="../_images/4718d4fe975e5b348d1a88dda42bf07e6a56726351880cbb7dee31185204dc87.png" src="../_images/4718d4fe975e5b348d1a88dda42bf07e6a56726351880cbb7dee31185204dc87.png" />
 </div>
 </div>
 </section>
@@ -521,7 +523,7 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span>
                 <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span>
                 <span class="n">mosaic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">overlap</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+                <span class="n">overlap</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">,</span>
                 <span class="n">bounds_by</span><span class="o">=</span><span class="s1">&#39;intersection&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -529,7 +531,7 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/70f9e3f2ea0cd56f24aadf4e98a81224879d0805804221fa74c14cc5f09e1303.png" src="../_images/70f9e3f2ea0cd56f24aadf4e98a81224879d0805804221fa74c14cc5f09e1303.png" />
+<img alt="../_images/3f4daed901dc3e4b240a6a7144f9e5092c478d69d126456fe2b62530524a45da.png" src="../_images/3f4daed901dc3e4b240a6a7144f9e5092c478d69d126456fe2b62530524a45da.png" />
 </div>
 </div>
 </section>
@@ -643,6 +645,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

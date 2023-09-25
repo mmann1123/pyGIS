@@ -701,9 +701,9 @@ your code.</p>
 <p>On that page, you’ll see the following code</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 
 <span class="c1"># Fixing random state for reproducibility</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
@@ -721,9 +721,6 @@ your code.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/037f017b6f9e39e08f0dcfafe0aff1962d9d553607a62f9f55aaf181b04a5596.png" src="../_images/037f017b6f9e39e08f0dcfafe0aff1962d9d553607a62f9f55aaf181b04a5596.png" />
 </div>
 </div>
 <p>Don’t worry about the details for now — let’s just run it and see
@@ -838,30 +835,16 @@ run as discussed above.</p>
 <p>Running code in Google Colab is similar to Jupyter Notebooks. You can create code cells and execute them using Shift+Enter or by clicking the “Play” button in the top left of each cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, Google Colab!&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Google Colab!
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, Google Colab!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic Python code example</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic Python code example</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Count: 0
-Count: 1
-Count: 2
-Count: 3
-Count: 4
 </pre></div>
 </div>
 </div>
@@ -889,19 +872,7 @@ Count: 4
 <p>Most popular Python libraries come pre-installed in Google Colab. However, if you need to install additional libraries, you can use the pip package manager directly in a code cell:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (2.0.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (from pandas) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (from pandas) (2023.3)
-Requirement already satisfied: tzdata&gt;=2022.1 in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (from pandas) (2023.3)
-Requirement already satisfied: numpy&gt;=1.20.3 in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (from pandas) (1.25.1)
-Requirement already satisfied: six&gt;=1.5 in /home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install pandas
 </pre></div>
 </div>
 </div>
@@ -1061,6 +1032,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

@@ -439,7 +439,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-image-coordinate-reference-system-properties">View Image Coordinate Reference System &amp; Properties</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-a-crs-on-the-fly">Transforming a CRS On-The-Fly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-a-crs-reprojection">Transforming a CRS (Reprojection)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-the-cell-size">Resampling the Cell Size</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations-outside-context-manager">Transformations Outside Context Manager</a></li>
 </ul>
@@ -459,7 +459,7 @@ document.write(`
 <ul class="simple">
 <li><p>Reproject remotely sensed data (change CRS)</p></li>
 <li><p>Reproject on-the-fly</p></li>
-<li><p>Understand resampling options</p></li>
+<li><p>Compare resampling options</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -508,12 +508,17 @@ nearest
 </div>
 </div>
 </section>
-<section id="transforming-a-crs-on-the-fly">
-<h2>Transforming a CRS On-The-Fly<a class="headerlink" href="#transforming-a-crs-on-the-fly" title="Permalink to this heading">#</a></h2>
-<p>To transform the CRS, use the context manager. In this example, an proj4 code is used. See <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">understanding CRS codes</span></a> for more details. Also note the use the <code class="docutils literal notranslate"><span class="pre">nodata</span></code> in this case the file <code class="docutils literal notranslate"><span class="pre">rgbn</span></code> doesn’t have the missing data value set in its profile, so we can set it manually when opened.</p>
+<section id="transforming-a-crs-reprojection">
+<h2>Transforming a CRS (Reprojection)<a class="headerlink" href="#transforming-a-crs-reprojection" title="Permalink to this heading">#</a></h2>
+<p>To transform the CRS, use the context manager. In this example, a <code class="docutils literal notranslate"><span class="pre">proj4</span></code> code is used. See <a class="reference internal" href="d_understand_crs_codes.html"><span class="doc std std-doc">understanding CRS codes</span></a> for more details. We can pass the desired CRS as a <code class="docutils literal notranslate"><span class="pre">proj4</span></code> string, an EPSG code, or in authority:code <code class="docutils literal notranslate"><span class="pre">EPSG:4326</span></code> or <code class="docutils literal notranslate"><span class="pre">ESRI:53018</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note the use of <code class="docutils literal notranslate"><span class="pre">nodata</span></code> in this case the file <code class="docutils literal notranslate"><span class="pre">rgbn</span></code> doesn’t have the missing data value set in its profile, so we can set it manually when opened.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
@@ -542,10 +547,10 @@ nearest
 <img alt="../_images/7da35d6f71e6e9aab14f1bb2a2f154c24db59553f348451c398275f56118d3ad.png" src="../_images/7da35d6f71e6e9aab14f1bb2a2f154c24db59553f348451c398275f56118d3ad.png" />
 </div>
 </div>
-<p>Other formats supported by rasterio, (e.g., PROJ4 strings) can be used.</p>
+<p>Other formats supported by rasterio, (e.g., PROJ4 strings) can be used. Here, we use a PROJ4 string to transform the CRS to a equal area projection.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="n">proj4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="mi">32618</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
@@ -555,8 +560,8 @@ nearest
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 2502400.7632678417, 0.0, -5.0, -2147313.7330151177)
-+proj=aea +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +type=crs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+32618
 nearest
 (5.0, 5.0)
 </pre></div>
@@ -566,6 +571,12 @@ nearest
 </section>
 <section id="resampling-the-cell-size">
 <h2>Resampling the Cell Size<a class="headerlink" href="#resampling-the-cell-size" title="Permalink to this heading">#</a></h2>
+<p>Resampling cell size refers to the process of changing the spatial resolution of raster data. This can be done by either increasing or decreasing the size of the grid cells that make up the raster. There are different methods for resampling:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nearest</span></code>: Uses the value of the closest cell to assign a value to the output cell.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bilinear</span></code>: Uses the weighted average of the four nearest cells to determine the output cell value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cubic</span></code>: Uses the weighted average of 16 nearest cells to determine the output value.</p></li>
+</ul>
 <p>The resampling algorithm can be specified in the <code class="docutils literal notranslate"><span class="pre">geowombat.open</span></code> function. Here, we use cubic convolution resampling to warp the data to EPSG code 31972 (a UTM projection).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -615,11 +626,7 @@ cubic
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">resampling</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
     <span class="n">src_tr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">transform_crs</span><span class="p">(</span><span class="n">proj4</span><span class="p">,</span> <span class="n">dst_res</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">src_tr</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
@@ -629,65 +636,10 @@ cubic
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
-32618
-nearest
-(5.0, 5.0)
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10.0, 0.0, 2502400.7632678417, 0.0, -10.0, -2147313.7330151177)
 +proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +type=crs
 bilinear
 (10, 10)
-</pre></div>
-</div>
-</div>
-</div>
-<p>For more help we can read through the docs a bit.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">,</span> <span class="n">resampling</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">help</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">transform_crs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method transform_crs in module geowombat.core.geoxarray:
-
-transform_crs(dst_crs=None, dst_res=None, dst_width=None, dst_height=None, dst_bounds=None, src_nodata=None, dst_nodata=None, coords_only=False, resampling=&#39;nearest&#39;, warp_mem_limit=512, num_threads=1) -&gt; xarray.core.dataarray.DataArray method of geowombat.core.geoxarray.GeoWombatAccessor instance
-    Transforms an ``xarray.DataArray`` to a new coordinate reference
-    system.
-    
-    Args:
-        dst_crs (Optional[CRS | int | dict | str]): The destination CRS.
-        dst_res (Optional[tuple]): The destination resolution.
-        dst_width (Optional[int]): The destination width. Cannot be used with ``dst_res``.
-        dst_height (Optional[int]): The destination height. Cannot be used with ``dst_res``.
-        dst_bounds (Optional[BoundingBox | tuple]): The destination bounds, as a ``rasterio.coords.BoundingBox``
-            or as a tuple of (left, bottom, right, top).
-        src_nodata (Optional[int | float]): The source nodata value. Pixels with this value will not be used for
-            interpolation. If not set, it will default to the nodata value of the source image if a masked ndarray
-            or rasterio band, if available.
-        dst_nodata (Optional[int | float]): The nodata value used to initialize the destination; it will remain in
-            all areas not covered by the reprojected source. Defaults to the nodata value of the destination
-            image (if set), the value of src_nodata, or 0 (GDAL default).
-        coords_only (Optional[bool]): Whether to return transformed coordinates. If ``coords_only`` = ``True`` then
-            the array is not warped and the size is unchanged. It also avoids in-memory computations.
-        resampling (Optional[str]): The resampling method if ``filename`` is a ``list``.
-            Choices are [&#39;average&#39;, &#39;bilinear&#39;, &#39;cubic&#39;, &#39;cubic_spline&#39;, &#39;gauss&#39;, &#39;lanczos&#39;, &#39;max&#39;, &#39;med&#39;, &#39;min&#39;, &#39;mode&#39;, &#39;nearest&#39;].
-        warp_mem_limit (Optional[int]): The warp memory limit.
-        num_threads (Optional[int]): The number of parallel threads.
-    
-    Returns:
-        ``xarray.DataArray``
-    
-    Example:
-        &gt;&gt;&gt; import geowombat as gw
-        &gt;&gt;&gt;
-        &gt;&gt;&gt; with gw.open(&#39;image.tif&#39;) as src:
-        &gt;&gt;&gt;     dst = src.gw.transform_crs(4326)
-
-None
 </pre></div>
 </div>
 </div>
@@ -763,7 +715,7 @@ None
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-image-coordinate-reference-system-properties">View Image Coordinate Reference System &amp; Properties</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-a-crs-on-the-fly">Transforming a CRS On-The-Fly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-a-crs-reprojection">Transforming a CRS (Reprojection)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-the-cell-size">Resampling the Cell Size</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations-outside-context-manager">Transformations Outside Context Manager</a></li>
 </ul>
@@ -805,6 +757,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

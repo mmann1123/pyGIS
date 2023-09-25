@@ -484,7 +484,7 @@ document.write(`
 <h1>Attributes &amp; Indexing for Vector Data<a class="headerlink" href="#attributes-indexing-for-vector-data" title="Permalink to this heading">#</a></h1>
 <figure class="align-default" id="vector-properties">
 <img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" /><figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain any geometry type (e.g. points, lines, polygon) and has a <code class="docutils literal notranslate"><span class="pre">GeoSeries.crs</span></code> attribute, which stores information on the projection (CRS stands for Coordinate Reference System). Therefore, each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> in a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> can be in a different projection, allowing you to have, for example, multiple versions of the same geometry, just in a different CRS.</p>
@@ -497,18 +497,9 @@ document.write(`
 <p>One of the most basic operations is creating new attributes. Let’s say for instance we want to look at the world population in millions. We can start with an existing column of data <code class="docutils literal notranslate"><span class="pre">pop_est</span></code>. Let’s start by looking at the column names:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
 <span class="n">world</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_50360/3391729379.py:2: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
-  world = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_lowres&#39;))
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;pop_est&#39;, &#39;continent&#39;, &#39;name&#39;, &#39;iso_a3&#39;, &#39;gdp_md_est&#39;, &#39;geometry&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -516,63 +507,11 @@ document.write(`
 <p>We can then do basic operations on the basis of column names. Here we create a new column <code class="docutils literal notranslate"><span class="pre">m_pop_est</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;m_pop_est&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;m_pop_est&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
 <span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pop_est</th>
-      <th>continent</th>
-      <th>name</th>
-      <th>iso_a3</th>
-      <th>gdp_md_est</th>
-      <th>geometry</th>
-      <th>m_pop_est</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>889953.0</td>
-      <td>Oceania</td>
-      <td>Fiji</td>
-      <td>FJI</td>
-      <td>5496</td>
-      <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
-      <td>0.889953</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>58005463.0</td>
-      <td>Africa</td>
-      <td>Tanzania</td>
-      <td>TZA</td>
-      <td>63177</td>
-      <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
-      <td>58.005463</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -584,7 +523,7 @@ document.write(`
 <p>Pandas provides a suite of methods in order to get purely integer based indexing. The semantics follow closely Python and NumPy slicing. These are 0-based indexing. When slicing, the start bound is included, while the upper bound is excluded.  For instance <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">'fudge'</span></code> with <code class="docutils literal notranslate"><span class="pre">name[0:3]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'fud'</span></code>, where f is at 0 and g is at the 3 position with the upper bound excluded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
 
 <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
@@ -593,13 +532,6 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_50360/3284935177.py:4: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_cities&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
-  world = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_cities&#39;))
-</pre></div>
-</div>
-<img alt="../_images/61f54a50e2900a080cdb3d4ddc0cd3230319a28bf9a5475af9ce0f5fe7d9108f.png" src="../_images/61f54a50e2900a080cdb3d4ddc0cd3230319a28bf9a5475af9ce0f5fe7d9108f.png" />
 </div>
 </div>
 <section id="different-choices-for-indexing">
@@ -634,36 +566,22 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 <p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>. <code class="docutils literal notranslate"><span class="pre">.cx</span></code> allows you to quickly access the table’s <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, where indexing reflects <code class="docutils literal notranslate"><span class="pre">[x,y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[lon,lat]</span></code>. Here we will query points above and below 0 degrees latitude:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
 <span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
 <span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_50360/3889621795.py:1: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_cities&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
-  world = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_cities&#39;))
-</pre></div>
-</div>
-<img alt="../_images/c85b42ace4db466a71768c0bb2305f4f005b26ceda4b0a343fce75926ca569e5.png" src="../_images/c85b42ace4db466a71768c0bb2305f4f005b26ceda4b0a343fce75926ca569e5.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
 <span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
 <span class="n">southern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_50360/1870997234.py:1: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_cities&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
-  world = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_cities&#39;))
-</pre></div>
-</div>
-<img alt="../_images/1d536922ed0566186b6c763de787a45a052ccc2fae48bee77006beb4e53aed5e.png" src="../_images/1d536922ed0566186b6c763de787a45a052ccc2fae48bee77006beb4e53aed5e.png" />
 </div>
 </div>
 </section>
@@ -785,6 +703,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

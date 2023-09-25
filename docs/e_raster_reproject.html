@@ -482,8 +482,8 @@ document.write(`
 <p>Far and away the easiest way to handle raster data is by using <a class="reference external" href="https://geowombat.readthedocs.io/en/latest/index.html">geowombat</a>. Here’s an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.</p>
 <p>In order to reproject on the fly we are going to open the raster using <code class="docutils literal notranslate"><span class="pre">gw.config.update()</span></code>.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a <code class="docutils literal notranslate"><span class="pre">ref_crs</span></code> to the configuration manager. We can also use the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method when we <code class="docutils literal notranslate"><span class="pre">open</span></code> the image, by default it will be <code class="docutils literal notranslate"><span class="pre">nearest</span></code>, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -498,152 +498,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                                        | 0/50 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|█████▊                                                                                                                                          | 2/50 [00:00&lt;00:02, 17.68it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|███████████████████████                                                                                                                         | 8/50 [00:00&lt;00:01, 38.30it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 26%|█████████████████████████████████████▏                                                                                                         | 13/50 [00:00&lt;00:00, 41.48it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|█████████████████████████████████████████████████████████▏                                                                                     | 20/50 [00:00&lt;00:00, 49.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|███████████████████████████████████████████████████████████████████████▌                                                                       | 25/50 [00:00&lt;00:00, 39.46it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|████████████████████████████████████████████████████████████████████████████████████████▋                                                      | 31/50 [00:00&lt;00:00, 44.06it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 72%|██████████████████████████████████████████████████████████████████████████████████████████████████████▉                                        | 36/50 [00:00&lt;00:00, 36.44it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                            | 40/50 [00:01&lt;00:00, 30.95it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 44/50 [00:01&lt;00:00, 30.18it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎     | 48/50 [00:01&lt;00:00, 24.66it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:01&lt;00:00, 30.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                                        | 0/50 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|█████▊                                                                                                                                          | 2/50 [00:00&lt;00:02, 17.71it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|██████████████▍                                                                                                                                 | 5/50 [00:00&lt;00:02, 21.44it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 16%|███████████████████████                                                                                                                         | 8/50 [00:00&lt;00:02, 19.11it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|████████████████████████████▌                                                                                                                  | 10/50 [00:00&lt;00:02, 17.51it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 24%|██████████████████████████████████▎                                                                                                            | 12/50 [00:00&lt;00:02, 14.96it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 28%|████████████████████████████████████████                                                                                                       | 14/50 [00:00&lt;00:02, 15.54it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 34%|████████████████████████████████████████████████▌                                                                                              | 17/50 [00:00&lt;00:01, 17.56it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|██████████████████████████████████████████████████████▎                                                                                        | 19/50 [00:01&lt;00:01, 15.84it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|████████████████████████████████████████████████████████████                                                                                   | 21/50 [00:01&lt;00:01, 15.54it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|█████████████████████████████████████████████████████████████████▊                                                                             | 23/50 [00:01&lt;00:01, 15.34it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|███████████████████████████████████████████████████████████████████████▌                                                                       | 25/50 [00:01&lt;00:01, 14.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 56%|████████████████████████████████████████████████████████████████████████████████                                                               | 28/50 [00:01&lt;00:01, 17.81it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|████████████████████████████████████████████████████████████████████████████████████████▋                                                      | 31/50 [00:01&lt;00:01, 17.64it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 66%|██████████████████████████████████████████████████████████████████████████████████████████████▍                                                | 33/50 [00:02&lt;00:01, 15.63it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|████████████████████████████████████████████████████████████████████████████████████████████████████                                           | 35/50 [00:02&lt;00:00, 15.06it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 76%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                                  | 38/50 [00:02&lt;00:00, 17.50it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                    | 43/50 [00:02&lt;00:00, 22.88it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌           | 46/50 [00:02&lt;00:00, 19.79it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 98%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏  | 49/50 [00:02&lt;00:00, 20.09it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:02&lt;00:00, 17.95it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                                                                        | 0/30 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|████████████████████████                                                                                                                        | 5/30 [00:00&lt;00:00, 44.89it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███████████████████████████████████████████████▋                                                                                               | 10/30 [00:00&lt;00:00, 27.83it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 53%|████████████████████████████████████████████████████████████████████████████▎                                                                  | 16/30 [00:00&lt;00:00, 37.92it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|████████████████████████████████████████████████████████████████████████████████████████████████████                                           | 21/30 [00:00&lt;00:00, 39.04it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 93%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍         | 28/30 [00:00&lt;00:00, 47.07it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 30/30 [00:00&lt;00:00, 42.52it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <p>Let’s take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use <code class="docutils literal notranslate"><span class="pre">.sel(band=[3,2,1])</span></code> to put them back in the right order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -653,9 +512,6 @@ document.write(`
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/c7838481657cc7d3d6ef6a0e00995fdea5ba9b0a2e42943e30e7ba7c263c3cf5.png" src="../_images/c7838481657cc7d3d6ef6a0e00995fdea5ba9b0a2e42943e30e7ba7c263c3cf5.png" />
 </div>
 </div>
 <p>Too easy? Want something more complex? Try the same thing with Rasterio. Yes, there will be a little matrix algebra.</p>
@@ -671,7 +527,7 @@ document.write(`
 <p>Now let’s calculate the tranform matrix for the destination raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
 <span class="kn">from</span> <span class="nn">rasterio.warp</span> <span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 
@@ -696,19 +552,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Transform:
- | 30.00, 0.00, 717345.00|
-| 0.00,-30.00,-2776995.00|
-| 0.00, 0.00, 1.00| 
-
-Destination Transform:
- | 33.24, 0.00,-6105300.09|
-| 0.00,-33.24,-2885952.71|
-| 0.00, 0.00, 1.00|
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check <span class="math notranslate nohighlight">\(\Delta x, \Delta x\)</span>).</p>
 </section>
@@ -717,7 +560,7 @@ Destination Transform:
 <p>Ok finally!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
 
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
@@ -762,7 +605,7 @@ Destination Transform:
 <figure class="align-default" id="reprojected-landsat-image">
 <a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Reprojected Landsat Image</span><a class="headerlink" href="#reprojected-landsat-image" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -877,6 +720,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

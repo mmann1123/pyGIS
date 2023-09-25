@@ -492,7 +492,7 @@ document.write(`
 <p>Let’s begin by importing the necessary modules:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules first</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary modules first</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Polygon</span>
@@ -508,16 +508,9 @@ document.write(`
 <p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> object is a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> that has a geometry column, storing spatial data like points, lines, and polygons. Let’s create an empty <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> and a new column named ‘geometry’ that will hold our Shapely geometric objects:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty geopandas GeoDataFrame</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty geopandas GeoDataFrame</span>
 <span class="n">newdata</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">newdata</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Empty GeoDataFrame
-Columns: []
-Index: []
 </pre></div>
 </div>
 </div>
@@ -535,7 +528,7 @@ Index: []
 <p>You can find a more detailed explanation of this process <a class="reference internal" href="#e-points-the-long-way"><span class="std std-ref">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates of the GW department of geography in Decimal Degrees</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coordinates of the GW department of geography in Decimal Degrees</span>
 <span class="n">coordinate</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">77.04639494419096</span><span class="p">,</span>  <span class="mf">38.89934963421794</span><span class="p">]</span>
 
 <span class="c1"># Create a Shapely point from a coordinate pair</span>
@@ -552,17 +545,11 @@ Index: []
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/be0b6ed9cf201298fb216987804db7547e52b6b8d30fdc83fd79798e4bcfd168.png" src="../_images/be0b6ed9cf201298fb216987804db7547e52b6b8d30fdc83fd79798e4bcfd168.png" />
-</div>
 </div>
 <p>We can similarly process a set of points stored in a pandas dataframe.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of attributes and coordinates</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of attributes and coordinates</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;City&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">,</span> <span class="s1">&#39;Brasilia&#39;</span><span class="p">,</span> <span class="s1">&#39;Santiago&#39;</span><span class="p">,</span> <span class="s1">&#39;Bogota&#39;</span><span class="p">,</span> <span class="s1">&#39;Caracas&#39;</span><span class="p">],</span>
      <span class="s1">&#39;Country&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">,</span> <span class="s1">&#39;Chile&#39;</span><span class="p">,</span> <span class="s1">&#39;Colombia&#39;</span><span class="p">,</span> <span class="s1">&#39;Venezuela&#39;</span><span class="p">],</span>
@@ -580,12 +567,6 @@ Index: []
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/b325bc9a3537377960e798ccc8cf9cc457a306e13ee915d23c1a1c169f96c21b.png" src="../_images/b325bc9a3537377960e798ccc8cf9cc457a306e13ee915d23c1a1c169f96c21b.png" />
-</div>
 </div>
 <p>The examples provided here demonstrate the creation of spatial points from coordinate data. This kind of spatial data generation is crucial in various fields like urban planning, environmental studies, transportation and logistics, where location-specific data is often pivotal.</p>
 <p><a class="reference external" href="https://geopandas.org/gallery/create_geopandas_from_pandas.html">Adapted from Geopandas</a></p>
@@ -595,7 +576,7 @@ Index: []
 <p>A frequent requirement in spatial data analysis is creating geometric data from a CSV file, especially when dealing with large datasets or when the data is exported from a different system. Here, we create a CSV file that lists the corners of a rectangle outlining Washington DC, then read the file into a GeoDataFrame and convert the longitude and latitude data into spatial points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># create an outline of Washington DC and write to CSV</span>
 <span class="n">path_to_csv</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../temp/points.csv&#39;</span>
 <span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Corner&#39;</span><span class="p">:[</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">],</span>
@@ -610,7 +591,7 @@ Index: []
 <p>We can then read the CSV file, convert the lat/lon values into a list of Shapely Point objects using `gpd.points_from_xy()``, and create a GeoDataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read the point data in </span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># read the point data in </span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_to_csv</span><span class="p">)</span>
 
 <span class="c1"># Create a geodataframe from the data using and &#39;EPSG&#39; code to assign WGS84 coordinate reference system</span>
@@ -619,68 +600,6 @@ Index: []
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>Corner</th>
-      <th>lon</th>
-      <th>lat</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>N</td>
-      <td>-77.041283</td>
-      <td>38.995707</td>
-      <td>POINT (-77.04128 38.99571)</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>E</td>
-      <td>-77.116814</td>
-      <td>38.936713</td>
-      <td>POINT (-77.11681 38.93671)</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2</td>
-      <td>S</td>
-      <td>-77.018967</td>
-      <td>38.807611</td>
-      <td>POINT (-77.01897 38.80761)</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3</td>
-      <td>W</td>
-      <td>-77.041283</td>
-      <td>38.995707</td>
-      <td>POINT (-77.04128 38.99571)</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>In this case <code class="docutils literal notranslate"><span class="pre">points_from_xy()</span></code> was used to transform lat and lon into a list of <code class="docutils literal notranslate"><span class="pre">shapely.Point</span></code> objects. This then is used as the geometry for the GeoDataFrame. (<code class="docutils literal notranslate"><span class="pre">points_from_xy()</span></code> is simply an enhanced wrapper for <code class="docutils literal notranslate"><span class="pre">[Point(x,</span> <span class="pre">y)</span> <span class="pre">for</span> <span class="pre">x,</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">zip(df.lon,</span> <span class="pre">df.lat)]</span></code>)</p>
 <p>This is a powerful approach to efficiently convert geographical coordinates stored in CSV format into a spatial format that Python libraries can operate on.</p>
@@ -697,7 +616,7 @@ Index: []
 <p>Creating lines from points often represents trajectories or paths in spatial data. For example, this could represent the movement of people, animals, or vehicles. In this case, we represent three bike riders’ paths, where each rider’s unique <code class="docutils literal notranslate"><span class="pre">ID</span></code>, their <code class="docutils literal notranslate"><span class="pre">X,Y</span></code> locations, and their <code class="docutils literal notranslate"><span class="pre">Speed</span></code> are tracked.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span> 
 <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">ID,X,Y,Speed</span>
 <span class="s2">1,  -87.789,  41.976,  16</span>
@@ -718,25 +637,19 @@ Index: []
 <p>First, we convert these data to points, but we notice that points cannot accurately represent the trajectories as they ignore the connection between subsequent locations of each rider.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#zip the coordinates into a point object and convert to a GeoData Frame</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#zip the coordinates into a point object and convert to a GeoData Frame</span>
 <span class="n">points</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Y</span><span class="p">)]</span>
 <span class="n">geo_df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
 <span class="n">geo_df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/47468985c820ee6ba1913976d3b22d8ab1d705a40c57038a69543c160da6a071.png" src="../_images/47468985c820ee6ba1913976d3b22d8ab1d705a40c57038a69543c160da6a071.png" />
-</div>
 </div>
 <p>While the plot above provides the individual points for each rider, it fails to show the movement paths. Therefore, we should treat these data as lines to clearly illustrate each rider’s path.</p>
 <p>To achieve this, we will group  using <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code> the data by the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of each rider and convert the points to <code class="docutils literal notranslate"><span class="pre">LineString</span></code> objects. So here we <code class="docutils literal notranslate"><span class="pre">.groupby(['ID'])</span></code>, for each <code class="docutils literal notranslate"><span class="pre">ID</span></code> group we convert the values to a list, and store it in a Fiona <code class="docutils literal notranslate"><span class="pre">LineString</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># treat each `ID` group of points as a line</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># treat each `ID` group of points as a line</span>
 <span class="n">lines</span> <span class="o">=</span> <span class="n">geo_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;ID&#39;</span><span class="p">])[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">LineString</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
 
 <span class="c1"># store as a GeodataFrame and add &#39;ID&#39; as a column (currently stored as the &#39;index&#39;)</span>
@@ -745,12 +658,6 @@ Index: []
 <span class="n">lines</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;ID&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/6ded03efba21b0cb6d5bec6cdcdce49608481801b80ae92232940314949d181d.png" src="../_images/6ded03efba21b0cb6d5bec6cdcdce49608481801b80ae92232940314949d181d.png" />
 </div>
 </div>
 <p>As a result, we see that each rider’s path is treated separately and illustrated by a distinct line. Now we can see that each line is treated separately by <code class="docutils literal notranslate"><span class="pre">ID</span></code>, and plot them using <code class="docutils literal notranslate"><span class="pre">.plot(column='ID')</span></code>.</p>
@@ -964,6 +871,7 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
 </div>
+<div>[![DOI](https://zenodo.org/badge/344683467.svg)](https://zenodo.org/badge/latestdoi/344683467)</div>
 
 </div>
   </div>

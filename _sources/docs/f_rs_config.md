@@ -22,7 +22,7 @@ myst:
 ```{admonition} Learning Objectives
 - Reproject remotely sensed data (change CRS)
 - Reproject on-the-fly
-- Understand resampling options
+- Compare resampling options
 ```
 ```{admonition} Review
 * [What is a CRS](d_crs_what_is_it.md)
