@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to perform mathematical operations on raster bands using rasterio."
-  "keywords": "spatial, python, rasterio, raster, band, math"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to perform mathematical operations on raster bands using rasterio."
+    "keywords": "spatial, python, rasterio, raster, band, math"
+    "property=og:locale": "en_US"
 ---
 
 # Band Math w. Rasterio

@@ -15,7 +15,6 @@ html_meta:
   "property=og:locale": "en_US"
 ---
 
-(d_raster_crs_intro)=
 
 
 To Do:

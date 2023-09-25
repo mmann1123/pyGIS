@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to conduct moving window operations over rasters."
-  "keywords": "spatial, python, rasterio, geowombat, raster, moving window, window operations, filter"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to conduct moving window operations over rasters."
+    "keywords": "spatial, python, rasterio, geowombat, raster, moving window, window operations, filter"
+    "property=og:locale": "en_US"
 ---
 
 # Window Operations with Rasterio and GeoWombat
@@ -325,7 +326,7 @@ with gw.open("../temp/window_raster.tif") as src:
     fig, ax = plt.subplots(dpi = 200)
 
     # Calculate local average
-    output_gw = src.gw.moving(stat = 'mean', w = 5, n_jobs = 4, nodata = 0)
+    output_gw = src.gw.moving(stat = 'mean', w = 5,  nodata = 0)
     print(output_gw)
 
     # Plot raster

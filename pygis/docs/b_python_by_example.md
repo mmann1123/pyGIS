@@ -25,8 +25,6 @@ structures.
 
 Deeper concepts will be covered in later lectures.
 
-You should have read the {ref}`lecture <getting_started>` on getting started with Python before beginning this one.
-
 ## Understanding Data Structures
 
 In computer science, data structures are a way of organizing and storing data to perform operations efficiently. In Python, data structures come in various types, such as lists, tuples, sets, dictionaries, and more. Each data structure has its own characteristics and use cases.
@@ -56,7 +54,7 @@ this:
 ```{figure} /_static/lecture_specific/python_by_example/test_program_1_updated.png
 :name: white_noise_plot
 :alt: White Noise Process Plot 
-:caption: White Noise Process Plot
+ White Noise Process Plot
 ```
 
 

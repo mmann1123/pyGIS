@@ -7,11 +7,15 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to aggregate spatial data to identify areas of high and low concentration."
-  "keywords": "spatial, aggregate, summarize, binning, vector, shapefile"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to aggregate spatial data to identify areas of high and low concentration."
+    "keywords": "spatial, aggregate, summarize, binning, vector, shapefile"
+    "property=og:locale": "en_US"
 ---
+
+(e_summarize_vector)=
+
 ----------------
 
 ```{admonition} Learning Objectives

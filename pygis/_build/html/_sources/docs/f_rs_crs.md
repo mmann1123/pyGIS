@@ -17,7 +17,7 @@ kernelspec:
 ```{admonition} Learning Objectives
 - Reproject remotely sensed data (change CRS)
 - Reproject on-the-fly
-- Understand resampling options
+- Compare resampling options
 ```
 ```{admonition} Review
 * [What is a CRS](d_crs_what_is_it.md)
@@ -47,13 +47,18 @@ with gw.open(rgbn) as src:
     print(src.gw.cellx, src.gw.celly)
 ```
 
-## Transforming a CRS On-The-Fly
+## Transforming a CRS (Reprojection)
 
-To transform the CRS, use the context manager. In this example, an proj4 code is used. See [understanding CRS codes](d_understand_crs_codes.md) for more details. Also note the use the `nodata` in this case the file `rgbn` doesn't have the missing data value set in its profile, so we can set it manually when opened. 
+To transform the CRS, use the context manager. In this example, a `proj4` code is used. See [understanding CRS codes](d_understand_crs_codes.md) for more details. We can pass the desired CRS as a `proj4` string, an EPSG code, or in authority:code `EPSG:4326` or `ESRI:53018`.
+
+```{note}
+Note the use of `nodata` in this case the file `rgbn` doesn't have the missing data value set in its profile, so we can set it manually when opened. 
+```
 
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
+
 fig, ax = plt.subplots(dpi=200)
 
 proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
@@ -71,10 +76,11 @@ with gw.config.update(ref_crs=proj4):
 plt.tight_layout(pad=1)
 ```
 
-Other formats supported by rasterio, (e.g., PROJ4 strings) can be used.
+Other formats supported by rasterio, (e.g., PROJ4 strings) can be used. Here, we use a PROJ4 string to transform the CRS to a equal area projection.
 
 ```{code-cell} ipython3
-with gw.config.update(ref_crs=proj4):
+
+with gw.config.update(ref_crs=32618):
     with gw.open(rgbn) as src:
         print(src.transform)
         print(src.crs)
@@ -83,6 +89,12 @@ with gw.config.update(ref_crs=proj4):
 ```
 
 ## Resampling the Cell Size
+
+Resampling cell size refers to the process of changing the spatial resolution of raster data. This can be done by either increasing or decreasing the size of the grid cells that make up the raster. There are different methods for resampling:
+
+- `nearest`: Uses the value of the closest cell to assign a value to the output cell.
+- `bilinear`: Uses the weighted average of the four nearest cells to determine the output cell value.
+- `cubic`: Uses the weighted average of 16 nearest cells to determine the output value.
 
 The resampling algorithm can be specified in the `geowombat.open` function. Here, we use cubic convolution resampling to warp the data to EPSG code 31972 (a UTM projection).
 
@@ -112,20 +124,10 @@ To transform an `xarray.DataArray` outside of a configuration context, use the `
 
 ```{code-cell} ipython3
 with gw.open(rgbn) as src:
-    print(src.transform)
-    print(src.crs)
-    print(src.resampling)
-    print(src.res)
-    print('')
+
     src_tr = src.gw.transform_crs(proj4, dst_res=(10, 10), resampling='bilinear')
     print(src_tr.transform)
     print(src_tr.crs)
     print(src_tr.resampling)
     print(src_tr.res)
-```
-For more help we can read through the docs a bit. 
-
-```{code-cell} ipython3
-with gw.open(rgbn, resampling='cubic') as src:
-    print(help(src.gw.transform_crs))
 ```

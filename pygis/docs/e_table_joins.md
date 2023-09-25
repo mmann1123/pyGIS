@@ -7,12 +7,14 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn all about how to join two tables by their attribute values."
-  "keywords": "table, attribute, join"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn all about how to join two tables by their attribute values."
+    "keywords": "table, attribute, join"
+    "property=og:locale": "en_US"
 ---
 
+(e_table_joins)=
 
 ----------------
 ```{admonition} Learning Objectives

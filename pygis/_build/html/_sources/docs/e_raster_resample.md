@@ -7,11 +7,12 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to resample single and multi-band rasters using rasterio and geowombat. This includes creating using a 'snap raster' as well as seperately matching extent and or resolution of another raster. We demonstrate these using LandSat imagery as examples."
-  "description lang=fr": "Apprenez à rééchantillonner des rasters mono et multicanaux à l'aide de rasterio et geowombat. Cela inclut la création à l'aide d'un « raster d'accrochage » ainsi que la correspondance séparée de l'étendue et/ou de la résolution d'un autre raster. Nous les démontrons en utilisant les images LandSat comme exemples."
-  "description lang=es": "Aprenda a volver a muestrear rásteres de una o varias bandas mediante rasterio y geowombat. Esto incluye la creación mediante un 'ráster de ajuste', así como la extensión y / o resolución coincidentes por separado de otro ráster. Demostramos esto usando imágenes de LandSat como ejemplos."
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to resample single and multi-band rasters using rasterio and geowombat. This includes creating using a 'snap raster' as well as seperately matching extent and or resolution of another raster. We demonstrate these using LandSat imagery as examples."
+    "description lang=fr": "Apprenez à rééchantillonner des rasters mono et multicanaux à l'aide de rasterio et geowombat. Cela inclut la création à l'aide d'un « raster d'accrochage » ainsi que la correspondance séparée de l'étendue et/ou de la résolution d'un autre raster. Nous les démontrons en utilisant les images LandSat comme exemples."
+    "description lang=es": "Aprenda a volver a muestrear rásteres de una o varias bandas mediante rasterio y geowombat. Esto incluye la creación mediante un 'ráster de ajuste', así como la extensión y / o resolución coincidentes por separado de otro ráster. Demostramos esto usando imágenes de LandSat como ejemplos."
+    "property=og:locale": "en_US"
 ---
 
 (e_raster_reproject)=
@@ -57,7 +58,7 @@ We can co-register images by resampling, and often reprojecting, one image to ma
 
 (raster_resample_methods)=
 ## Methods for Resampling Explained
-There are [a number of methods](https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling) to resample data, but they often take the form of "nearest neighbor", "bilinear", and "cubic convolusion" - these interpolation methods [are explained here in some detail](d_raster_crs_intro_interpolation_options.md). But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’]. 
+There are [a number of methods](https://rasterio.readthedocs.io/en/latest/api/rasterio.enums.html#rasterio.enums.Resampling) to resample data, but they often take the form of "nearest neighbor", "bilinear", and "cubic convolusion" - these interpolation methods [are explained here in some detail](d_raster_crs_intro_interpolation_options). But there are a number of other including: [‘average’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’]. 
 
 **resampling direction**
 - Upsampling - converting to higher resolution/smaller cells. 

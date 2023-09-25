@@ -110,7 +110,7 @@ in a Jupyter notebook
 ```{figure} /_static/lecture_specific/getting_started/jp_demo.png
 :scale: 50%
 :name: jp_demo
-
+:alt: A Jupyter notebook viewed in the browser
 A Jupyter notebook viewed in the browser
 ```
 
@@ -136,6 +136,8 @@ If you use the second option, you will see something like this
 
 ```{figure} /_static/lecture_specific/getting_started/starting_nb.png
 :scale: 50%
+:alt: image of an empty terminal window
+Terminal window
 ```
 
 The output tells us the notebook is running at `http://localhost:8888/`
@@ -152,6 +154,8 @@ looks something like this
 
 ```{figure} /_static/lecture_specific/getting_started/nb.png
 :scale: 50%
+:alt: image of a web browser with a jupyter notebook file browser
+ Jupyter notebook file browser
 ```
 
 What you see here is called the Jupyter *dashboard*.
@@ -166,6 +170,9 @@ Here\'s what shows up on our machine:
 
 ```{figure} /_static/lecture_specific/getting_started/nb2.png
 :scale: 50%
+:alt: image of a jupyter notebook cell
+ Jupyter notebook cell
+
 ```
 
 The notebook displays an *active cell*, into which you can type Python
@@ -190,6 +197,8 @@ instead of the usual `Enter`.
 
 ```{figure} /_static/lecture_specific/getting_started/nb3.png
 :scale: 50%
+:alt: image of a jupyter notebook cell with a green border and executed cells
+ Running a cell
 ```
 
 (Note: There are also menu and button options for running code in a cell
@@ -289,6 +298,8 @@ For example, here we type `np.ran` and hit Tab
 
 ```{figure} /_static/lecture_specific/getting_started/nb6.png
 :scale: 50%
+:alt: image of a jupyter notebook cell demonstrating tab completion
+ Tab completion in a notebook
 ```
 
 Jupyter offers up the two possible completions, `random` and `rank`.
@@ -306,6 +317,8 @@ Documentation appears in a split window of the browser, like so
 
 ```{figure} /_static/lecture_specific/getting_started/nb6a.png
 :scale: 50%
+:alt: image of a jupyter notebook cell demonstrating on-line help
+ On-line help in a notebook
 ```
 
 Clicking on the top right of the lower split closes the on-line help.
@@ -320,6 +333,8 @@ code
 
 ```{figure} /_static/lecture_specific/getting_started/nb7.png
 :scale: 50%
+:alt: image of a jupyter notebook cell demonstrating markdown using latex equations
+ Markdown in a notebook
 ```
 
 Next we `Esc` to enter command mode and then type `m` to indicate that
@@ -333,7 +348,10 @@ Now we `Shift+Enter` to produce this
 
 ```{figure} /_static/lecture_specific/getting_started/nb8.png
 :scale: 50%
+:alt: image of a jupyter notebook cell demonstrating markdown rendered using latex equations
+ Markdown rendered in a notebook
 ```
+
 
 ### Sharing Notebooks
 
@@ -353,5 +371,74 @@ Save it somewhere, navigate to it from the Jupyter dashboard and then
 run as discussed above.
 
 
+Sure! Let's add a section using Myst Markdown to explain how to access and use Google Colab.
+
+ 
+
+## Using Google Colab
+
+### Overview
+
+Google Colab is a cloud-based Jupyter notebook environment provided by Google. It allows you to write and execute Python code, similar to Jupyter Notebooks, but without the need for local installations. Google Colab provides free access to computing resources, including GPUs and TPUs, which can be beneficial for resource-intensive tasks.
+
+### Accessing Google Colab
+
+To access Google Colab, follow these steps:
+
+1. Open a web browser and navigate to [Google Colab](https://colab.research.google.com/).
+2. Sign in to your Google account or create one if you don't have it already.
+
+### Creating a New Colab Notebook
+
+Once you are signed in, you can create a new Colab notebook:
+
+1. Click on the "NEW NOTEBOOK" button on the left sidebar or go to "File" > "New notebook."
+
+### Running Code in Colab
+
+Running code in Google Colab is similar to Jupyter Notebooks. You can create code cells and execute them using Shift+Enter or by clicking the "Play" button in the top left of each cell.
+
+```{code-cell} ipython3
+print("Hello, Google Colab!")
+```
+
+```{code-cell} ipython3
+# Basic Python code example
+for i in range(5):
+    print("Count:", i)
+```
+
+### Saving and Sharing Your Colab Notebook
+
+Google Colab automatically saves your notebook in your Google Drive. To save a copy to your local machine or share the notebook with others, go to "File" > "Download" or "File" > "Share."
+
+### GPU and TPU Support
+
+Google Colab provides free access to GPUs and TPUs (Tensor Processing Units) to accelerate computations. To use GPU or TPU, go to "Runtime" > "Change runtime type" and select the desired hardware accelerator.
+
+## Accessing External Data
+
+You can access external data from Google Drive, GitHub, or other online sources directly from a Colab notebook. For instance, you can mount your Google Drive and access files using the following code:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
+
+## Installing Additional Libraries
+
+Most popular Python libraries come pre-installed in Google Colab. However, if you need to install additional libraries, you can use the pip package manager directly in a code cell:
+
+```{code-cell} ipython3
+!pip install pandas
+```
+
+## Limitations
+
+While Google Colab is a powerful tool, it does have some limitations. Colab sessions may disconnect after a period of inactivity, and resources like GPU/TPU availability might be limited during peak usage.
+
+**Importantly** some libraries used in this textbook, for instance `geowombat` are not easily installed on google colabs.  
+
+
 ## Attribution
-The above lesson was pulled directly from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)
+The above lesson was pulled and adapted from work by [Thomas J. Sargent & John Stachurski](https://python-programming.quantecon.org/about_py.html)

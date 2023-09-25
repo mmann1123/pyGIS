@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn all about conducting spatial joins."
-  "keywords": "spatial, spatial, join"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn all about conducting spatial joins."
+    "keywords": "spatial, spatial, join"
+    "property=og:locale": "en_US"
 ---
 
 
@@ -119,7 +120,7 @@ All features from the first or left dataset are kept, regardless if the features
 
 All features from the second or right dataset are kept, regardless if the features meet the specified spatial relationship criteria for a join. As all attribute fields are combined, rows that do not have a match with the left dataset may have null values in the fields that originated from the left dataset.
 
-For more details on join types, see the [chapter on joining by attributes](e_table_joins.md).
+For more details on join types, see the [chapter on joining by attributes](e_table_joins).
 
 ## Table Relationships
 

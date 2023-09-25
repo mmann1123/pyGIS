@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn to create new spatial raster objects, assign projections or CRS."
-  "description lang=fr": "Apprenez à créer de nouveaux objets raster, à attribuer des projections ou CRS."
-  "description lang=es": "Aprenda a crear nuevos objetos ráster, asignar proyecciones o CRS."
-  "keywords": "raster, spatial, shapefile, rasterio, numpy"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn to create new spatial raster objects, assign projections or CRS."
+    "description lang=fr": "Apprenez à créer de nouveaux objets raster, à attribuer des projections ou CRS."
+    "description lang=es": "Aprenda a crear nuevos objetos ráster, asignar proyecciones o CRS."
+    "keywords": "raster, spatial, shapefile, rasterio, numpy"
+    "property=og:locale": "en_US"
 ---
 
 (c_rasters)=

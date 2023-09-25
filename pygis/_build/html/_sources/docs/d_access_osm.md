@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to access OpenStreetMap (OSM) roads, buildings, and other data via python. "
-  "description lang=fr": "Découvrez comment accéder aux routes, bâtiments et autres données OpenStreetMap (OSM) via python."
-  "description lang=es": "Aprenda a acceder a carreteras, edificios y otros datos de OpenStreetMap (OSM) a través de Python."
-  "keywords": "python open street map OSM"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to access OpenStreetMap (OSM) roads, buildings, and other data via python. "
+    "description lang=fr": "Découvrez comment accéder aux routes, bâtiments et autres données OpenStreetMap (OSM) via python."
+    "description lang=es": "Aprenda a acceder a carreteras, edificios y otros datos de OpenStreetMap (OSM) a través de Python."
+    "keywords": "python open street map OSM"
+    "property=og:locale": "en_US"
 ---
 
 <!-- (d_access_osm)= -->

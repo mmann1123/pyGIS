@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Introducing PyGIS an open source book on spatial programming. We cover how to handle points, lines and polygons, including shapefiles, handling remote sensing imagery, and other raster data."
-  "description lang=fr": "Présentation de PyGIS, un livre open source sur la programmation géospatiale. Nous expliquons comment gérer les points, les lignes et les polygones, y compris les fichiers de formes, la gestion des images de télédétection et d'autres données raster."
-  "description lang=es": "Presentamos PyGIS, un libro de código abierto sobre programación geoespacial. Cubrimos cómo manejar puntos, líneas y polígonos, incluidos los shapefiles, el manejo de imágenes de detección remota y otros datos ráster."
-  "keywords": "Shapefiles, points, lines, polygons,raster, Remote Sensing"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+      "description lang=en": "Introducing PyGIS an open source book on spatial programming. We cover how to handle points, lines and polygons, including shapefiles, handling remote sensing imagery, and other raster data."
+    "description lang=fr": "Présentation de PyGIS, un livre open source sur la programmation géospatiale. Nous expliquons comment gérer les points, les lignes et les polygones, y compris les fichiers de formes, la gestion des images de télédétection et d'autres données raster."
+    "description lang=es": "Presentamos PyGIS, un libro de código abierto sobre programación geoespacial. Cubrimos cómo manejar puntos, líneas y polígonos, incluidos los shapefiles, el manejo de imágenes de detección remota y otros datos ráster."
+    "keywords": "Shapefiles, points, lines, polygons,raster, Remote Sensing"
+    "property=og:locale": "en_US"
 ---
  
 

@@ -8,12 +8,13 @@ jupytext:
 kernelspec:
   display_name: 'Python 3.7.10 64-bit (''pygisbookgw'': conda)'
   name: python3
-html_meta:
-  "description lang=en": "Learn how to access US Census, and American Community Survey data via python. "
-  "description lang=fr": "Découvrez comment accéder aux données du recensement américain et de l'enquête communautaire américaine via python."
-  "description lang=es": "Aprenda a acceder a los datos del Censo de EE. UU. Y de la Encuesta sobre la comunidad estadounidense a través de Python."
-  "keywords": "python, spatial, census, american community survey, ACS"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to access US Census, and American Community Survey data via python. "
+    "description lang=fr": "Découvrez comment accéder aux données du recensement américain et de l'enquête communautaire américaine via python."
+    "description lang=es": "Aprenda a acceder a los datos del Censo de EE. UU. Y de la Encuesta sobre la comunidad estadounidense a través de Python."
+    "keywords": "python, spatial, census, american community survey, ACS"
+    "property=og:locale": "en_US"
 ---
 
 # Accessing Census and ACS Data in Python

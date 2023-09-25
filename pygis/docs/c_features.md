@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn the difference between raster and vector data, manually create spatial data, and data measurement issues"
-  "description lang=fr": "Découvrez la différence entre les données raster et vectorielles, créez manuellement des données géospatiales et les problèmes de mesure des données"
-  "description lang=es": "Conozca la diferencia entre datos ráster y vectoriales, cree manualmente datos geoespaciales y problemas de medición de datos"
-  "keywords": "points, lines, polygons,raster, spatial, attribute table"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn the difference between raster and vector data, manually create spatial data, and data measurement issues"
+    "description lang=fr": "Découvrez la différence entre les données raster et vectorielles, créez manuellement des données géospatiales et les problèmes de mesure des données"
+    "description lang=es": "Conozca la diferencia entre datos ráster y vectoriales, cree manualmente datos geoespaciales y problemas de medición de datos"
+    "keywords": "points, lines, polygons,raster, spatial, attribute table"
+    "property=og:locale": "en_US"
 ---
 
 (c_features)=
@@ -35,7 +36,7 @@ To work in a GIS environment, real world observations (objects or events that ca
 ```{figure} ../_static/img/vector_vs_raster.jpg
 :name: raster_vs_vector
 :alt: Vector and raster representations of a river feature.
-Vector and raster representations of a river feature. 
+ Vector and raster representations of a river feature.
 ```
 
 ### Vector Data
@@ -49,7 +50,6 @@ For each of these examples, we'll be using a Python dictionary to form the basis
 In this example, we're using the `geopandas` and `shapely` libraries to create a GeoDataFrame that contains point data. Try copying and running this code snippet below to demonstrate.
 
 ```{code-cell} ipython3
-:class: dropdown
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
@@ -127,6 +127,7 @@ gdf.plot(ax=ax)
 plt.show()
 ```
 
+(c_raster_data_intro)=
 
 ### Raster Data
 Raster data models use a grid of cells, also known as pixels, to represent real-world objects. These data models are often used to represent and manage a variety of entities such as imagery, surface temperatures, digital elevation models, and more.
@@ -234,31 +235,3 @@ Attributes can also be categorized by their **data type**. ArcGIS supports sever
 | Text | Up to 64,000 characters | Letters and words |
 
 While it's possible to store whole numbers as a float or double, doing so increases storage space, which can impact performance for large datasets. Furthermore, storing a float as an integer could lead to significant data loss, as the system would round off decimal numbers to the nearest whole number. For example, the float values 0.2, 0.01, 0.34, 0.1, and 0.876 would be converted to 0, 0, 0, 0, and 1 as integers.
-
-
-<!-- This can have a significant impact on a map as shown in the following example.
-
-```{r echo=FALSE, fig.cap = "Map of data represented as decimal (float) values.",  fig.height=3}
-
-library(spdep)
-library(maptools)
-library(RColorBrewer)
-fn     <- system.file("etc/shapes/eire.shp", package = "spdep")[1] 
-prj    <- CRS("+proj=utm +zone=30 +units=km") 
-eire   <- readShapeSpatial(fn, ID = "names", proj4string = prj) 
-eire$x <- log(eire$INCOME) / max(log(eire$INCOME)) 
-brks   <- seq(0.5,1.0, .1) 
-brks[6] <- 1.00001 
-clr     <- brewer.pal(5,"Greens")
-l1 <- list(sp.text, coordinates(eire), as.character(round(eire$x,2)), cex=0.5 ) 
-spplot(eire, z="x", at= brks, col.regions =clr, col="white", sp.layout=l1)
-
-```
-
-
-```{r echo=FALSE, fig.cap = "Map of same data represented as integers instead of float.", fig.height=3}
-eire$x.int <- round(eire$x) 
-l2 <- list(sp.text, coordinates(eire), as.character(round(eire$x.int,2)), cex=0.5 ) 
-spplot(eire, z="x.int", at= brks, col.regions =clr, col="white", sp.layout=l2)
-
-```  -->

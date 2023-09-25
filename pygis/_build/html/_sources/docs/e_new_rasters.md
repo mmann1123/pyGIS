@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": ""
-  "keywords": "spatial, raster, reproject, crs, landsat"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": ""
+    "keywords": "spatial, raster, reproject, crs, landsat"
+    "property=og:locale": "en_US"
 ---
 
 (e_raster_reproject)=
@@ -213,7 +214,7 @@ with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
     show(src,adjust='linear')
 ```
 
-To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro.md).
+To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro).
 
 Just as a preview, here's how to do this in `geowombat`. 
 

@@ -1072,3 +1072,98 @@ fig, ax = plt.subplots(dpi=200)
 plot('union')
 
 # %%
+
+import geowombat as gw
+from geowombat.data import rgbn
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=150)
+
+# with gw.config.update(sensor='rgbn'):
+with gw.open(rgbn, band_names=['red','green','blue','nir']) as ds:
+    add_nir_red = ds.sel(band='nir') + ds.sel(band='red')
+    add_nir_red.plot(robust=True, ax=ax)
+    print(add_nir_red)
+plt.tight_layout(pad=1)
+# %%
+fig, (ax1, ax2) = plt.subplots(dpi=150, ncols=2)
+
+with gw.config.update(sensor='rgbn', scale_factor=0.0001):
+    with gw.open(rgbn) as ds:
+        ds.sel(band=['blue', 'green', 'red']).plot.imshow(robust=True, ax=ax1)
+        evi = ds.gw.evi()
+        evi.plot(robust=True, ax=ax2)
+
+# Remove the legend from ax2
+ax2.legend().set_visible(False)
+
+plt.tight_layout(pad=1)
+plt.show()
+
+ fig, ax = plt.subplots(dpi=150)
+
+with gw.config.update(sensor='rgbn', scale_factor=0.0001):
+    with gw.open(rgbn) as ds:
+        ds.sel(band=['blue', 'green', 'red']).plot.imshow(robust=True)
+plt.tight_layout(pad=1)
+
+# %%
+fig, ax = plt.subplots(dpi=150)
+
+with gw.config.update(sensor='qb', scale_factor=0.0001):
+    with gw.open(rgbn) as ds:
+        tcap = ds.gw.tasseled_cap()
+        print('bands', tcap.band.values)
+        tcap.sel(band='wetness').plot(robust=True, ax=ax)
+        print(tcap)
+plt.tight_layout(pad=1)
+# %%
+
+import geowombat as gw
+from geowombat.data import rgbn
+import matplotlib.pyplot as plt
+# two figures with shared axes
+fig, (ax1, ax2) = plt.subplots(dpi=150, ncols=2, sharey=True)
+
+with gw.config.update(ref_crs=32618):
+    with gw.open(rgbn, nodata=0) as src:
+        # replace 0 with nan
+        src = src.gw.mask_nodata()
+        print(src.transform)
+        print(src.crs)
+        print(src.resampling)
+        print(src.res)
+        src.sel(band=[3,2,1]).plot.imshow( ax=ax1)
+plt.tight_layout(pad=1)
+
+proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
+
+with gw.config.update(ref_crs=proj4):
+    with gw.open(rgbn) as src:
+        print(src.transform)
+        print(src.crs)
+        print(src.resampling)
+        print(src.res)
+        src.sel(band=[3,2,1]).plot.imshow( ax=ax2)
+
+plt.tight_layout(pad=1)
+
+# %%
+import matplotlib.pyplot as plt
+import geowombat as gw
+from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
+fig, ax = plt.subplots(dpi=200)
+
+filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
+
+with gw.open(
+     filenames,
+     band_names=['blue'],
+     mosaic=True,
+     bounds_by='union'
+ ) as src:
+     src.where(src != 0).sel(band='blue').gw.imshow(robust=True, ax=ax)
+ 
+
+plt.tight_layout(pad=1)
+# %%

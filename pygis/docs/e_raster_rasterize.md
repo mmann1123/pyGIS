@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to convert vector shapefiles into raster files using rasterio."
-  "keywords": "spatial, python, rasterio, raster, vector, shapefile, rasterize"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to convert vector shapefiles into raster files using rasterio."
+    "keywords": "spatial, python, rasterio, raster, vector, shapefile, rasterize"
+    "property=og:locale": "en_US"
 ---
 
 # Rasterize Vectors w. Rasterio

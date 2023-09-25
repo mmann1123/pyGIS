@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand."
-  "description lang=fr": "Découvrez comment installer un environnement python fonctionnel pour les données spatiales et la télédétection. Ici, nous utilisons Docker pour rendre le processus reproductible et au moins quelque peu facile à comprendre."
-  "description lang=es": "Aprenda a instalar un entorno Python que funcione para datos espaciales y detección remota. Aquí utilizamos Docker para hacer que el proceso sea replicable y al menos algo fácil de entender."
-  "keywords": "python environment, Docker, spatial, raster, shapefile, remote sensing"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+      "description lang=en": "Learn how install a working python environment for spatial data and remote sensing. Here we utilize Docker to make the process replicable and at least somewhat easy to understand."
+    "description lang=fr": "Découvrez comment installer un environnement python fonctionnel pour les données spatiales et la télédétection. Ici, nous utilisons Docker pour rendre le processus reproductible et au moins quelque peu facile à comprendre."
+    "description lang=es": "Aprenda a instalar un entorno Python que funcione para datos espaciales y detección remota. Aquí utilizamos Docker para hacer que el proceso sea replicable y al menos algo fácil de entender."
+    "keywords": "python environment, Docker, spatial, raster, shapefile, remote sensing"
+    "property=og:locale": "en_US"
 ---
 
 (conda_started)=
@@ -27,6 +28,7 @@ html_meta:
 * [A normal intro to python environments](b_getting_started)
 ```
 ----------------
+
 
 # Setting up Python for Spatial on Mac, Windows, and Linux
 Spatial analysis requires a pretty broad set of python modules and with it, comes a lot of dependencies. And to be honest, the only thing Python doesn't do well with, is dependencies. Luckily we have a few tricks up our sleeves to help you get to work fast. 

@@ -71,7 +71,7 @@ measure of the relative popularity of Python
 :scale: 72%
 :name: python_vs_matlab
 :alt: plot showing increasing popularity of python relative to matlab
-:caption: Python's increasing popularity over time. 
+ Python's increasing popularity over time. 
 ```
 
 The figure indicates not only that Python is widely used but also that
@@ -89,7 +89,7 @@ library for data analysis with Python has exploded, as seen here.
 :scale: 23%
 :name: pandas_vs_matlab
 :alt: plot showing increasing popularity of pandas relative to matlab
-:caption: Pandas increasing popularity over time. 
+ Pandas increasing popularity over time. 
 ```
 
 Note that pandas takes off in 2012, which is the same year that we see

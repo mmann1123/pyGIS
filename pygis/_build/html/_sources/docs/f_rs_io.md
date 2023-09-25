@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks."
-  "description lang=fr": "Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques"
-  "description lang=es": "Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo."
-  "keywords": "spatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to easily read and write remote sensing data from a variety of sensors, mosaic images, or create time series stacks."
+    "description lang=fr": "Apprenez à lire et à écrire facilement des données de télédétection à partir d'une variété de capteurs, d'images mosaïques ou de créer des piles de séries chronologiques"
+    "description lang=es": "Aprenda a leer y escribir fácilmente datos de teledetección de una variedad de sensores, imágenes de mosaico o crear pilas de series de tiempo."
+    "keywords": "spatial,raster, remote sensing, read, write, mosaic, time series, landsat, sentinel"
+    "property=og:locale": "en_US"
 ---
 
 (f_rs_io)=
@@ -20,11 +21,11 @@ html_meta:
 ---------------
 
 ```{admonition} Learning Objectives
-  - How to open multiple common remotely sensed image types
-  - Handle RGB, BGR, LandSat, PlanetScope images and other sensor types
-  - Mosaic multiple remotely sensed images
-  - Create a time series stack
-  - Write files to disk
+- Open multiple common remotely sensed image types.
+- Handle RGB, BGR, LandSat, PlanetScope images, and other sensor types.
+- Mosaic multiple remotely sensed images.
+- Create a time series stack.
+- Write files to disk.
 ```
 
 ```{admonition} Review

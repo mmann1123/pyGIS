@@ -7,12 +7,13 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn the basics of coordinate reference systems (CRS) or projections for spatial raster data. We also cover how to transform CRS using rasterio and geowombat."
-  "description lang=fr": "Apprenez les bases des systèmes de référence de coordonnées (CRS) ou des projections pour les données raster géospatiales. Nous expliquons également comment transformer CRS en utilisant rasterio et geowombat."
-  "description lang=es": "Aprenda los conceptos básicos de los sistemas de referencia de coordenadas (CRS) o proyecciones para datos ráster geoespaciales. También cubrimos cómo transformar CRS usando rasterio y geowombat."
-  "keywords": "spatial, raster, affine, crs, coordinate reference system, interpolation, projection"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn the basics of coordinate reference systems (CRS) or projections for spatial raster data. We also cover how to transform CRS using rasterio and geowombat."
+    "description lang=fr": "Apprenez les bases des systèmes de référence de coordonnées (CRS) ou des projections pour les données raster géospatiales. Nous expliquons également comment transformer CRS en utilisant rasterio et geowombat."
+    "description lang=es": "Aprenda los conceptos básicos de los sistemas de referencia de coordenadas (CRS) o proyecciones para datos ráster geoespaciales. También cubrimos cómo transformar CRS usando rasterio y geowombat."
+    "keywords": "spatial, raster, affine, crs, coordinate reference system, interpolation, projection"
+    "property=og:locale": "en_US"
 ---
 
 (d_raster_crs_intro)=
@@ -67,7 +68,7 @@ Note that *`Z` contains no data on its location*. Its just an array, the informa
 Affine transformations allows us to use simple systems of linear equations to manipulate any point or set of points ([review affine transforms here](d_affine.md)). It allows us to move, stretch, or even rotate a point or set of points. In the case of GIS, it is used to move raster data, a satellite image, to the correct location in the CRS coordinate space.
 
 ## Describing the Array Location (Define a Projection)
-In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale.md) and [see an example here](d_affine_trans.md).
+In this example the coordinate reference system will be '+proj=latlong', which describes an equirectangular coordinate reference system with units of decimal degrees. Although `X` and `Y` seems relevant to understanding the location of cell values, `rasterio` instead uses affine transformations instead. Affine transforms uses matrix algebra to describe where a cell is located (translation) and what its resolution is (scale). [Review affine transformations](d_affine_trans_scale) and [see an example here](d_affine_trans).
 
 The affine transformation matrix can be computed from the matrix product of a translation (moving N,S,E,W) and a scaling (resolution). First, we start with translation where $\Delta x$ and $\Delta y$ define the location of the upper left hand corner of our new `Z` ndarray. As a reminder the translation matrix takes the form:
 

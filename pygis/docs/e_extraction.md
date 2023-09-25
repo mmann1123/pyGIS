@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location."
-  "keywords": "spatial, attribute data, subset, extract, selection, vector, shapefile"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location"
+    "keywords": "spatial, attribute data, subset, extract, selection, vector, shapefile"
+    "property=og:locale": "en_US"
 ---
 
 ----------------

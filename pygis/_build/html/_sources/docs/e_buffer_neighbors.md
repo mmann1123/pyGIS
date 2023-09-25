@@ -7,10 +7,11 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
-html_meta:
-  "description lang=en": "In python create buffers and find the nearest neighbor for points"
-  "keywords": "python spatial buffer neighbor"
-  "property=og:locale": "en_US"
+myst:
+  html_meta:
+    "description lang=en": "In python create buffers and find the nearest neighbor for points"
+    "keywords": "python spatial buffer neighbor"
+    "property=og:locale": "en_US"
 ---
 
 ----------------

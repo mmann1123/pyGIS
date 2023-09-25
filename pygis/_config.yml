@@ -34,15 +34,15 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks           : off  #auto, cache, off ,force
+  execute_notebooks         : auto  #auto, cache, off ,force
   exclude_patterns          : 
-                              [ #'a_*',
-                              #'b_*',
-                              #'c_*','d_*', #'e_vector_*', 
-                              #'f_*', 
-                              # 'e_*',
+                              [ 
+                                'a_*',
+                              'b_*',
+                              'c_*',
+                              'd_*', 
+                               'e_*',
                               # 'f_*',
-                              #'f_rs_crs*','f_rs_mosaic*','f_rs_plot*','f_rs_config*'
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 
   #'e_attributes*','e_extraction*','e_new_vectors*','e_raster_op_intro*','e_raster_reproject*',
@@ -76,6 +76,9 @@ html:
         </div>
         <div>
         <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+        </div><br><br>
+        <div>
+        <a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
         </div>
     
   # Will be displayed underneath the footer. width=150" height="70"
