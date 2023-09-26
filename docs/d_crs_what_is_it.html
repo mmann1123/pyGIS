@@ -509,7 +509,7 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
 <span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
 <span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
@@ -521,6 +521,15 @@ document.write(`
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_45483/3807820498.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_cities&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+  cities = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_cities&#39;))
+/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/geopandas/plotting.py:695: UserWarning: The GeoDataFrame you are attempting to plot is empty. Nothing has been displayed.
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/6fa264583708d807f5bf6ae3ae39236055a0cb7b7776a6ada70d8e9958a238e9.png" src="../_images/6fa264583708d807f5bf6ae3ae39236055a0cb7b7776a6ada70d8e9958a238e9.png" />
+</div>
 </div>
 <p>A GCS is defined by an <strong>ellipsoid</strong>, <strong>geoid</strong> and <strong>datum</strong>. These elements are presented next.</p>
 <section id="sphere-and-ellipsoid">
