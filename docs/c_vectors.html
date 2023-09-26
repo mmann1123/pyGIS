@@ -14,7 +14,7 @@
 <meta content=" spatial, shapefile, geopandas" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Working with Spatial Vector Data using GeoPandas &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Spatial Vector Data using GeoPandas &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -184,7 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Spatial Vector Data using GeoPandas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
 </ul>
@@ -433,7 +433,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Working with Spatial Vector Data using GeoPandas</h1>
+    <h1>Spatial Vector Data using GeoPandas</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -446,6 +446,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-in-geopandas">Data Structures in GeoPandas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geoseries">GeoSeries</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geodataframe">GeoDataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reprojecting-geodataframes">Reprojecting GeoDataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subsetting-a-region-from-the-world-dataset">Subsetting a Region from the World Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-european-countries">Example: Extracting European Countries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note:</a></li>
 </ul>
 </li>
 </ul>
@@ -475,8 +481,8 @@ document.write(`
 </ul>
 </div>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="working-with-spatial-vector-data-using-geopandas">
-<h1>Working with Spatial Vector Data using GeoPandas<a class="headerlink" href="#working-with-spatial-vector-data-using-geopandas" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="spatial-vector-data-using-geopandas">
+<h1>Spatial Vector Data using GeoPandas<a class="headerlink" href="#spatial-vector-data-using-geopandas" title="Permalink to this heading">#</a></h1>
 <p>Previously, we explored the fundamentals of spatial data structures <a class="reference internal" href="c_features.html"><span class="doc std std-doc">here</span></a>. Now, we will delve deeper into the manipulation of spatial vector data, using the GeoPandas library. GeoPandas serves as an essential tool for working with geospatial data in Python, seamlessly blending the data manipulation capabilities of pandas with the geometric data analysis power of shapely. As a result, GeoPandas provides a high-level interface for intricate geospatial operations, effectively bypassing the need for a specialized spatial database like PostGIS.</p>
 <section id="data-structures-in-geopandas">
 <h2>Data Structures in GeoPandas<a class="headerlink" href="#data-structures-in-geopandas" title="Permalink to this heading">#</a></h2>
@@ -492,26 +498,58 @@ document.write(`
 </ul>
 <p>Here are examples of each type:</p>
 <p>The first example creates a GeoSeries of Points. This might be used to represent individual locations on a map. For instance, you could use a Point for each location where a sample was collected, or to mark the location of cities or other points of interest.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Point GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Point GeoSeries</span>
 <span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
 <span class="n">s</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POINT (1.00000 1.00000)
+1    POINT (2.00000 2.00000)
+2    POINT (3.00000 3.00000)
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
 <p>The next example creates a GeoSeries of Lines. Lines could be used to represent the path of a moving object, the route of a road or river, or the border between different regions. The example creates a single line that connects three points.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line GeoSeries</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
 <span class="n">l</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">LineString</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
 <span class="n">l</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    LINESTRING (-77.03687 38.90719, -76.61219 39.2...
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
 <p>The last example creates a GeoSeries of Polygons. A Polygon might represent a bounded area, such as the outline of a lake, the footprint of a building, or the boundaries of a country. In this example, the polygon represents an area defined by three points (a triangle).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Polygon GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Polygon GeoSeries</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
 <span class="n">p</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POLYGON ((-77.03687 38.90719, -76.61219 39.290...
+dtype: geometry
+</pre></div>
+</div>
+</div>
 </div>
 <p>While a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain different types of geometric objects, not all operations will be possible if the GeoSeries is mixed. Certain methods require all objects in the GeoSeries to be of the same geometric type.</p>
 </section>
@@ -525,19 +563,185 @@ document.write(`
 <p>While a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> may contain multiple columns with geometric (shapely) objects, only one column can be considered the active geometry at a time. To switch the active geometry column, you can use the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.set_geometry()</span></code> method.</p>
 </div>
 <p>Here is an example of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> using the ‘naturalearth_lowres’ dataset. This dataset represents a simplified global country boundary map, which can be useful for global scale visualizations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a GeoDataFrame</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a GeoDataFrame</span>
 <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
 
 <span class="c1"># Preview the data</span>
 <span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_43064/1922793051.py:2: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+  world = geopandas.read_file(geopandas.datasets.get_path(&#39;naturalearth_lowres&#39;))
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pop_est</th>
+      <th>continent</th>
+      <th>name</th>
+      <th>iso_a3</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>889953.0</td>
+      <td>Oceania</td>
+      <td>Fiji</td>
+      <td>FJI</td>
+      <td>5496</td>
+      <td>MULTIPOLYGON (((180.00000 -16.06713, 180.00000...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>58005463.0</td>
+      <td>Africa</td>
+      <td>Tanzania</td>
+      <td>TZA</td>
+      <td>63177</td>
+      <td>POLYGON ((33.90371 -0.95000, 34.07262 -1.05982...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>603253.0</td>
+      <td>Africa</td>
+      <td>W. Sahara</td>
+      <td>ESH</td>
+      <td>907</td>
+      <td>POLYGON ((-8.66559 27.65643, -8.66512 27.58948...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>37589262.0</td>
+      <td>North America</td>
+      <td>Canada</td>
+      <td>CAN</td>
+      <td>1736425</td>
+      <td>MULTIPOLYGON (((-122.84000 49.00000, -122.9742...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>328239523.0</td>
+      <td>North America</td>
+      <td>United States of America</td>
+      <td>USA</td>
+      <td>21433226</td>
+      <td>MULTIPOLYGON (((-122.84000 49.00000, -120.0000...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p>And now let’s create a simple plot from this <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the GeoDataFrame</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the GeoDataFrame</span>
 <span class="n">world</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/38726d6ca012913aad72a6834527bb7a2f5cb03b29da982a2852386c8e4f6209.png" src="../_images/38726d6ca012913aad72a6834527bb7a2f5cb03b29da982a2852386c8e4f6209.png" />
+</div>
+</div>
 <p>The resulting plot shows the geographic locations of all countries in the ‘naturalearth_lowres’ dataset.</p>
+</section>
+</section>
+<section id="reprojecting-geodataframes">
+<h2>Reprojecting GeoDataFrames<a class="headerlink" href="#reprojecting-geodataframes" title="Permalink to this heading">#</a></h2>
+<p>Geopandas makes it straightforward to reproject your data. In this section, we will reproject the world dataset to a projection that’s suitable for Europe.</p>
+<p>First, let’s identify the current projection of our data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epsg:4326
+</pre></div>
+</div>
+</div>
+</div>
+<p>To reproject the dataset, you can use the <code class="docutils literal notranslate"><span class="pre">to_crs</span></code> function. We will use the EPSG code 3035, which is suitable for Europe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reproject to EPSG 3035 (ETRS89 / LAEA Europe)</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3035</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can confirm that the dataset’s CRS has been updated:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">world</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epsg:3035
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it! Now, your world dataset is in a projection that is appropriate for visualizing Europe.</p>
+</section>
+<section id="subsetting-a-region-from-the-world-dataset">
+<h2>Subsetting a Region from the World Dataset<a class="headerlink" href="#subsetting-a-region-from-the-world-dataset" title="Permalink to this heading">#</a></h2>
+<p>In many cases, you may only be interested in a specific region rather than the entire world dataset. Subsetting or clipping the data to your region of interest makes the dataset easier to manage and speeds up processing time.</p>
+<section id="example-extracting-european-countries">
+<h3>Example: Extracting European Countries<a class="headerlink" href="#example-extracting-european-countries" title="Permalink to this heading">#</a></h3>
+<p>Here’s how you can subset the data to include only European countries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter the dataset to include only European countries</span>
+<span class="n">europe</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;continent&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Europe&#39;</span><span class="p">]</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">europe</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/e0b345ad614266becfd904bd2c2d79f90cb4372ea7c82f760fdeb97b402769c1.png" src="../_images/e0b345ad614266becfd904bd2c2d79f90cb4372ea7c82f760fdeb97b402769c1.png" />
+</div>
+</div>
+<p>This will produce a plot of all countries in Europe, based on the world dataset.</p>
+</section>
+<section id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Make sure to always check the Coordinate Reference System (CRS) when subsetting geographical data to ensure that the data is compatible.</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -612,6 +816,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-in-geopandas">Data Structures in GeoPandas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geoseries">GeoSeries</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geodataframe">GeoDataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reprojecting-geodataframes">Reprojecting GeoDataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subsetting-a-region-from-the-world-dataset">Subsetting a Region from the World Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-european-countries">Example: Extracting European Countries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note:</a></li>
 </ul>
 </li>
 </ul>
