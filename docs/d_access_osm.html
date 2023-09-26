@@ -14,7 +14,7 @@
 <meta content="python open street map OSM" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Accessing OSM Data in Python &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Accessing OpenStreetMap Data in Python &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -219,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing OpenStreetMap Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
@@ -433,7 +433,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Accessing OSM Data in Python</h1>
+    <h1>Accessing OpenStreetMap Data in Python</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -443,14 +443,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-openstreetmap">What is OpenStreetMap?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osmnx">OSMnx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-and-visualize-openstreetmap-data-with-osmnx">Download and visualize OpenStreetMap data with OSMnx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-location-boundary">OSM Location Boundary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-building-footprints">OSM Building footprints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-write-features-to-shp">OSM Write Features to .shp</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-study-area">Define Study Area</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocode-place-boundary">Geocode Place Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-osm-building-footprints">Download OSM Building Footprints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-buildings-to-shapefile">Save Buildings to Shapefile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -478,100 +477,176 @@ document.write(`
 </ul>
 </div>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="accessing-osm-data-in-python">
-<h1>Accessing OSM Data in Python<a class="headerlink" href="#accessing-osm-data-in-python" title="Permalink to this heading">#</a></h1>
-<section id="what-is-openstreetmap">
-<h2>What is OpenStreetMap?<a class="headerlink" href="#what-is-openstreetmap" title="Permalink to this heading">#</a></h2>
-<p>OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world containing a lot of information about our environment <a class="footnote-reference brackets" href="#gpd-clip" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. It contains data for example about streets, buildings, different services, and landuse to mention a few. You can view the map at <a class="reference external" href="http://www.openstreetmap.org">www.openstreetmap.org</a>. You can also sign up as a contributor if you want to edit the map. More details about OpenStreetMap and its contents are available in the <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Main_Page">OpenStreetMap Wiki</a>.</p>
-</section>
+<section class="tex2jax_ignore mathjax_ignore" id="accessing-openstreetmap-data-in-python">
+<h1>Accessing OpenStreetMap Data in Python<a class="headerlink" href="#accessing-openstreetmap-data-in-python" title="Permalink to this heading">#</a></h1>
+<p>OpenStreetMap (OSM) is an open collaborative project to create a free editable map of the world. In this tutorial, we will use the Python module OSMnx to access OSM data.</p>
 <section id="osmnx">
 <h2>OSMnx<a class="headerlink" href="#osmnx" title="Permalink to this heading">#</a></h2>
 <p>This week we will explore a Python module called <a class="reference external" href="https://github.com/gboeing/osmnx">OSMnx</a>
 that can be used to retrieve, construct, analyze, and visualize street networks from OpenStreetMap, and also retrieve data about Points of Interest such as restaurants, schools, and lots of different kind of services. It is also easy to conduct network routing based on walking, cycling or driving by combining OSMnx functionalities with a package called <a class="reference external" href="https://networkx.github.io/documentation/stable/">NetworkX</a>.</p>
 <p>To get an overview of the capabilities of the package, see an introductory video given by the lead developer of the package, Prof. Geoff Boeing: <a class="reference external" href="https://www.youtube.com/watch?v=Q0uxu25ddc4&amp;list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N">“Meet the developer: Introduction to OSMnx package by Geoff Boeing”</a>.</p>
-</section>
-<section id="download-and-visualize-openstreetmap-data-with-osmnx">
-<h2>Download and visualize OpenStreetMap data with OSMnx<a class="headerlink" href="#download-and-visualize-openstreetmap-data-with-osmnx" title="Permalink to this heading">#</a></h2>
 <p>One the most useful features that OSMnx provides is an easy-to-use way of retrieving <a class="reference external" href="http://www.openstreetmap.org">OpenStreetMap</a> data (using <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OverPass API</a>).</p>
-<p>In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: the neighborhood of Edgewood in Washington DC USA.</p>
+</section>
+<section id="import-modules">
+<h2>Import Modules<a class="headerlink" href="#import-modules" title="Permalink to this heading">#</a></h2>
+<p>We import OSMnx, which provides functions to retrieve OSM data. We also import Geopandas to handle the geographic data frames we will create.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the name that is used to seach for the data</span>
-<span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Edgewood Washington, DC, USA&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="osm-location-boundary">
-<h3>OSM Location Boundary<a class="headerlink" href="#osm-location-boundary" title="Permalink to this heading">#</a></h3>
-<p>Let’s also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the <code class="docutils literal notranslate"><span class="pre">ox.geocode_to_gdf</span></code> [docs](<a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)">https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf)</a> function.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import osmnx</span>
-<span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">osmnx</span> <span class="k">as</span> <span class="nn">ox</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-
-<span class="c1"># Get place boundary related to the place name as a geodataframe</span>
-<span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geocode_to_gdf</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>As the name of the function already tells us, <code class="docutils literal notranslate"><span class="pre">gdf_from_place()</span></code>returns a GeoDataFrame based on the specified place name query.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
-<span class="n">area</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s still verify the data type:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the data type</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Finally, let’s plot it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="osm-building-footprints">
-<h3>OSM Building footprints<a class="headerlink" href="#osm-building-footprints" title="Permalink to this heading">#</a></h3>
-<p>It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">ox.geometries_from_place</span></code> <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place">docs</a> function and plot them on top of our street network in Kamppi.</p>
-<p>When fetching spesific types of geometries from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
+<section id="define-study-area">
+<h2>Define Study Area<a class="headerlink" href="#define-study-area" title="Permalink to this heading">#</a></h2>
+<p>We specify the place name string for the area we want to access data for - the Edgewood neighborhood in Washington DC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
-<span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>   
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">place_name</span> <span class="o">=</span> <span class="s2">&quot;Edgewood, Washington, DC, USA&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geocode-place-boundary">
+<h2>Geocode Place Boundary<a class="headerlink" href="#geocode-place-boundary" title="Permalink to this heading">#</a></h2>
+<p>Geocoding takes a place name and looks up its geographic boundary. OSMnx provides the <code class="docutils literal notranslate"><span class="pre">geocode_to_gdf()</span></code> function to geocode place names to GeoDataFrames.</p>
+<p>When we pass our place name string to <code class="docutils literal notranslate"><span class="pre">geocode_to_gdf()</span></code>, it queries the Nominatim geocoder to find the OSM boundary for that location. The function returns a GeoDataFrame containing the boundary polygon coordinates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geocode_to_gdf</span><span class="p">(</span><span class="n">place_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We print the area GeoDataFrame to inspect it. We see it contains the polygon geometry along with some metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                            geometry  bbox_north  bbox_south  \
+0  POLYGON ((-77.00892 38.92123, -77.00890 38.920...   38.934159   38.917008   
 
+   bbox_east  bbox_west  place_id  osm_type   osm_id        lat        lon  \
+0  -76.99358 -77.008915   4165385  relation  4634158  38.922613 -77.000537   
+
+   class           type  place_rank  importance    addresstype      name  \
+0  place  neighbourhood          20    0.315802  neighbourhood  Edgewood   
+
+                                        display_name  
+0  Edgewood, Washington, District of Columbia, Un...  
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visualize the neighborhood boundary, we plot the geocoded polygon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/f5df5ae17b602a8bb685f32c3e2bd602fa5f17bf3e2496fd3a34de5ad23e6f6c.png" src="../_images/f5df5ae17b602a8bb685f32c3e2bd602fa5f17bf3e2496fd3a34de5ad23e6f6c.png" />
+</div>
+</div>
+</section>
+<section id="download-osm-building-footprints">
+<h2>Download OSM Building Footprints<a class="headerlink" href="#download-osm-building-footprints" title="Permalink to this heading">#</a></h2>
+<p>Now that we have the study area boundary, we can download building footprints within this region from OSM using OSMnx’s <code class="docutils literal notranslate"><span class="pre">geometries_from_place()</span></code> function <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place">docs</a> .</p>
+<p>We pass the function our place name to get <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a> in that area. We also specify the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code> so it only returns building polygon geometries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geometries_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
-<span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_39202/2683763484.py:2: UserWarning: The `geometries` module and `geometries_from_X` functions have been renamed the `features` module and `features_from_X` functions. Use these instead. The `geometries` module and function names are deprecated and will be removed in a future release.
+  buildings = ox.geometries_from_place(place_name, tags)
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can plot the footprints quickly.</p>
+<p>Printing the GeoDataFrame shows the building polygons and their OSM metadata.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot footprints </span>
-<span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                       addr:state amenity building  ele gnis:county_id  \
+element_type osmid                                                       
+node         358955022         DC  school      yes   60            001   
+             367143640         DC     NaN      yes   56            NaN   
+way          52291432         NaN     NaN      yes  NaN            NaN   
+             55321503         NaN     NaN      yes  NaN            NaN   
+             55321504          DC     NaN      yes  NaN            NaN   
+
+                            gnis:county_name gnis:created gnis:edited  \
+element_type osmid                                                      
+node         358955022  District of Columbia   12/18/1979  01/22/2008   
+             367143640  District of Columbia          NaN         NaN   
+way          52291432                    NaN          NaN         NaN   
+             55321503                    NaN          NaN         NaN   
+             55321504                    NaN          NaN         NaN   
+
+                       gnis:feature_id                      gnis:import_uuid  \
+element_type osmid                                                             
+node         358955022         2062869  57871b70-0100-4405-bb30-88b2e001a944   
+             367143640         2110453  57871b70-0100-4405-bb30-88b2e001a944   
+way          52291432              NaN                                   NaN   
+             55321503              NaN                                   NaN   
+             55321504              NaN                                   NaN   
+
+                        ... construction:building drive_in open_air operator  \
+element_type osmid      ...                                                    
+node         358955022  ...                   NaN      NaN      NaN      NaN   
+             367143640  ...                   NaN      NaN      NaN      NaN   
+way          52291432   ...                   NaN      NaN      NaN      NaN   
+             55321503   ...                   NaN      NaN      NaN      NaN   
+             55321504   ...                   NaN      NaN      NaN      NaN   
+
+                       screen roof:shape shelter_type start_date ways type  
+element_type osmid                                                          
+node         358955022    NaN        NaN          NaN        NaN  NaN  NaN  
+             367143640    NaN        NaN          NaN        NaN  NaN  NaN  
+way          52291432     NaN        NaN          NaN        NaN  NaN  NaN  
+             55321503     NaN        NaN          NaN        NaN  NaN  NaN  
+             55321504     NaN        NaN          NaN        NaN  NaN  NaN  
+
+[5 rows x 66 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot the retrieved buildings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/7f1e9c016096a22427fff550829c8fcd968af41719a66495428fa75d5b3e13ab.png" src="../_images/7f1e9c016096a22427fff550829c8fcd968af41719a66495428fa75d5b3e13ab.png" />
 </div>
 </div>
 </section>
-<section id="osm-write-features-to-shp">
-<h3>OSM Write Features to .shp<a class="headerlink" href="#osm-write-features-to-shp" title="Permalink to this heading">#</a></h3>
-<p>Now let’s assume we want to access this data outside of python, or have a permanent copy of our building footprints for Edgewood.</p>
+<section id="save-buildings-to-shapefile">
+<h2>Save Buildings to Shapefile<a class="headerlink" href="#save-buildings-to-shapefile" title="Permalink to this heading">#</a></h2>
 <p>Since these objects are already <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code> it’s easy to save them to disk. We simply use <code class="docutils literal notranslate"><span class="pre">gpd.to_file</span></code> <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html">docs</a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -580,7 +655,7 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We need to isolate just the attributes we are interested in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span>  <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">buildings</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;addr:|geometry&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -592,29 +667,23 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <p>We also need to isolate the feature type we are looking for [e.g. Multipolygon, Polygon, Point]. Since here we want building footprints we are going to keep only polygons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span> <span class="o">=</span> <span class="n">buildings</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">buildings</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;Polygon&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now, finally, we can write it to disk.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save footprints </span>
-<span class="n">buildings</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;../temp/edgewood_buildings.shp&#39;</span><span class="p">)</span>  
-<span class="c1"># Or save in a more open source format</span>
-<span class="c1">#buildings.to_file(&#39;../temp/edgewood_buildings.geojson&#39;, driver=&#39;GeoJSON&#39;)  </span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buildings</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;../temp/edgewood_buildings.shp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<p>Sources</p>
-<hr class="footnotes docutils" />
-<aside class="footnote brackets" id="gpd-clip" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p><a class="reference external" href="https://automating-gis-processes.github.io/2017/lessons/L3/nearest-neighbour.html">automating-gis-processes</a></p>
-</aside>
+<p>The shapefile can now be opened in any GIS software.</p>
 </section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Overpass_API">OpenStreetMap Overpass API</a></p></li>
+<li><p><a class="reference external" href="https://osmnx.readthedocs.io/en/stable/">OSMnx documentation</a></p></li>
+<li><p><a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">OSM building tags</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -685,14 +754,13 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-openstreetmap">What is OpenStreetMap?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osmnx">OSMnx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-and-visualize-openstreetmap-data-with-osmnx">Download and visualize OpenStreetMap data with OSMnx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-location-boundary">OSM Location Boundary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-building-footprints">OSM Building footprints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osm-write-features-to-shp">OSM Write Features to .shp</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-study-area">Define Study Area</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocode-place-boundary">Geocode Place Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-osm-building-footprints">Download OSM Building Footprints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-buildings-to-shapefile">Save Buildings to Shapefile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

@@ -80,7 +80,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Reading/Writing Remote Sensed Images" href="f_rs_io.html" />
-    <link rel="prev" title="Accessing OSM Data in Python" href="d_access_osm.html" />
+    <link rel="prev" title="Accessing OpenStreetMap Data in Python" href="d_access_osm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -219,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OpenStreetMap Data in Python</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Census and ACS Data in Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
@@ -498,13 +498,13 @@ document.write(`
 <p>This chapter will show you how to access US  Decennial Census and American Community Survey Data (ACS). We will use these basic operations in order to calculate and map poverty rates in the Commonwealth of Virginia. We will pull data from the US Census Bureau’s <a class="reference external" href="https://www.census.gov/programs-surveys/acs">American Community Survey (ACS)</a> 2019 (see <a class="reference external" href="https://www.census.gov/data/developers/data-sets/acs-5year.html">this page</a> for the data).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Import modules
-import matplotlib.pyplot as plt
-import pandas as pd
-import geopandas as gpd
-from census import Census
-from us import states
-import os
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">from</span> <span class="nn">census</span> <span class="kn">import</span> <span class="n">Census</span>
+<span class="kn">from</span> <span class="nn">us</span> <span class="kn">import</span> <span class="n">states</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 </div>
 </div>
@@ -517,8 +517,8 @@ import os
 <p>Let’s begin by accessing and importing census data. Importing census data into Python requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Set API key
-c = Census(&quot;CENSUS API KEY HERE&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set API key</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="s2">&quot;CENSUS API KEY HERE&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -530,8 +530,8 @@ c = Census(&quot;CENSUS API KEY HERE&quot;)
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ignore this, I am just reading in my api key privately
-c = Census(os.environ.get(&#39;census_api_key&#39;))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ignore this, I am just reading in my api key privately</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;census_api_key&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -541,17 +541,17 @@ c = Census(os.environ.get(&#39;census_api_key&#39;))
 <p>The <code class="docutils literal notranslate"><span class="pre">census</span></code> package provides us with some easy convenience methods that allow us to obtain data for a wide variety of geographies. The FIPS code for Virginia is 51, but if needed, we can also use the <code class="docutils literal notranslate"><span class="pre">us</span></code> library to help us figure out the relevant FIPS code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)
-# C17002_001E: count of ratio of income to poverty in the past 12 months (total)
-# C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)
-# C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)
-# B01003_001E: total population
-# Sources: https://api.census.gov/data/2019/acs/acs5/variables.html; https://pypi.org/project/census/
-va_census = c.acs5.state_county_tract(fields = (&#39;NAME&#39;, &#39;C17002_001E&#39;, &#39;C17002_002E&#39;, &#39;C17002_003E&#39;, &#39;B01003_001E&#39;),
-                                      state_fips = states.VA.fips,
-                                      county_fips = &quot;*&quot;,
-                                      tract = &quot;*&quot;,
-                                      year = 2017)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)</span>
+<span class="c1"># C17002_001E: count of ratio of income to poverty in the past 12 months (total)</span>
+<span class="c1"># C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)</span>
+<span class="c1"># C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)</span>
+<span class="c1"># B01003_001E: total population</span>
+<span class="c1"># Sources: https://api.census.gov/data/2019/acs/acs5/variables.html; https://pypi.org/project/census/</span>
+<span class="n">va_census</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">acs5</span><span class="o">.</span><span class="n">state_county_tract</span><span class="p">(</span><span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_001E&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_002E&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_003E&#39;</span><span class="p">,</span> <span class="s1">&#39;B01003_001E&#39;</span><span class="p">),</span>
+                                      <span class="n">state_fips</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">VA</span><span class="o">.</span><span class="n">fips</span><span class="p">,</span>
+                                      <span class="n">county_fips</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+                                      <span class="n">tract</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+                                      <span class="n">year</span> <span class="o">=</span> <span class="mi">2017</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -559,12 +559,24 @@ va_census = c.acs5.state_county_tract(fields = (&#39;NAME&#39;, &#39;C17002_001E
 <p>Now that we have accessed the data and assigned it to a variable, we can read the data into a dataframe using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create a dataframe from the census data
-va_df = pd.DataFrame(va_census)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dataframe from the census data</span>
+<span class="n">va_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">va_census</span><span class="p">)</span>
 
-# Show the dataframe
-print(va_df.head(2))
-print(&#39;Shape: &#39;, va_df.shape)
+<span class="c1"># Show the dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                         NAME  C17002_001E  C17002_002E  \
+0     Census Tract 60, Norfolk city, Virginia       3947.0        284.0   
+1  Census Tract 65.02, Norfolk city, Virginia       3287.0        383.0   
+
+   C17002_003E  B01003_001E state county   tract  
+0        507.0       3947.0    51    710  006000  
+1        480.0       3302.0    51    710  006502  
+Shape:  (1907, 8)
 </pre></div>
 </div>
 </div>
@@ -576,19 +588,37 @@ print(&#39;Shape: &#39;, va_df.shape)
 <p>Let’s also read into Python a shapefile of the Virginia census tracts and reproject it to the UTM Zone 17N projection. (This shapefile can be downloaded on the Census Bureau’s website on the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">Cartographic Boundary Files page</a> or the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapefiles page</a>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Access shapefile of Virginia census tracts
-va_tract = gpd.read_file(&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access shapefile of Virginia census tracts</span>
+<span class="n">va_tract</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;</span><span class="p">)</span>
 
-# Reproject shapefile to UTM Zone 17N
-# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/
-va_tract = va_tract.to_crs(epsg = 32617)
+<span class="c1"># Reproject shapefile to UTM Zone 17N</span>
+<span class="c1"># https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/</span>
+<span class="n">va_tract</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">32617</span><span class="p">)</span>
 
-# Print GeoDataFrame of shapefile
-print(va_tract.head(2))
-print(&#39;Shape: &#39;, va_tract.shape)
+<span class="c1"># Print GeoDataFrame of shapefile</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
-# Check shapefile projection
-print(&quot;\nThe shapefile projection is: {}&quot;.format(va_tract.crs))
+<span class="c1"># Check shapefile projection</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The shapefile projection is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID    NAME             NAMELSAD  MTFCC  \
+0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
+1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
+
+  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
+0        S  2552457       0  +37.1475176  -076.5212499   
+1        S  3478916  165945  +37.1625163  -076.5527816   
+
+                                            geometry  
+0  POLYGON ((897174.191 4119897.084, 897174.811 4...  
+1  POLYGON ((893470.562 4123469.385, 893542.722 4...  
+Shape:  (1907, 13)
+
+The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
@@ -606,8 +636,8 @@ print(&quot;\nThe shapefile projection is: {}&quot;.format(va_tract.crs))
 <p>To create a new column–or call an existing column in a dataframe–we can use indexing with <code class="docutils literal notranslate"><span class="pre">[]</span></code> and the column name (string). (There is a different way if you want to access columns using the index number; read more about indexing and selecting data <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">in the pandas documentation</a>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Combine state, county, and tract columns together to create a new string and assign to new column
-va_df[&quot;GEOID&quot;] = va_df[&quot;state&quot;] + va_df[&quot;county&quot;] + va_df[&quot;tract&quot;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine state, county, and tract columns together to create a new string and assign to new column</span>
+<span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;GEOID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;county&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;tract&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -615,11 +645,69 @@ va_df[&quot;GEOID&quot;] = va_df[&quot;state&quot;] + va_df[&quot;county&quot;] 
 <p>Printing out the first rew rows of the dataframe, we can see that the new column <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> has been created with the values from the three columns combined.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Print head of dataframe
-va_df.head(2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print head of dataframe</span>
+<span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NAME</th>
+      <th>C17002_001E</th>
+      <th>C17002_002E</th>
+      <th>C17002_003E</th>
+      <th>B01003_001E</th>
+      <th>state</th>
+      <th>county</th>
+      <th>tract</th>
+      <th>GEOID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Census Tract 60, Norfolk city, Virginia</td>
+      <td>3947.0</td>
+      <td>284.0</td>
+      <td>507.0</td>
+      <td>3947.0</td>
+      <td>51</td>
+      <td>710</td>
+      <td>006000</td>
+      <td>51710006000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Census Tract 65.02, Norfolk city, Virginia</td>
+      <td>3287.0</td>
+      <td>383.0</td>
+      <td>480.0</td>
+      <td>3302.0</td>
+      <td>51</td>
+      <td>710</td>
+      <td>006502</td>
+      <td>51710006502</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="remove-dataframe-columns-that-are-no-longer-needed">
@@ -627,14 +715,63 @@ va_df.head(2)
 <p>To reduce clutter, we can delete the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> since we don’t need them anymore. Remember that when we want to modify a dataframe, we must assign the modified dataframe back to the original variable (or a new one, if preferred). Otherwise, any modifications won’t be saved. An alternative to assigning the dataframe back to the variable is to simply pass <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code>. For more information, see the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">pandas help documentation on <code class="docutils literal notranslate"><span class="pre">drop</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Remove columns
-va_df = va_df.drop(columns = [&quot;state&quot;, &quot;county&quot;, &quot;tract&quot;])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove columns</span>
+<span class="n">va_df</span> <span class="o">=</span> <span class="n">va_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="s2">&quot;tract&quot;</span><span class="p">])</span>
 
-# Show updated dataframe
-va_df.head(2)
+<span class="c1"># Show updated dataframe</span>
+<span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NAME</th>
+      <th>C17002_001E</th>
+      <th>C17002_002E</th>
+      <th>C17002_003E</th>
+      <th>B01003_001E</th>
+      <th>GEOID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Census Tract 60, Norfolk city, Virginia</td>
+      <td>3947.0</td>
+      <td>284.0</td>
+      <td>507.0</td>
+      <td>3947.0</td>
+      <td>51710006000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Census Tract 65.02, Norfolk city, Virginia</td>
+      <td>3287.0</td>
+      <td>383.0</td>
+      <td>480.0</td>
+      <td>3302.0</td>
+      <td>51710006502</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="check-column-data-types">
@@ -642,13 +779,41 @@ va_df.head(2)
 <p>The key in both dataframe must be of the same data type. Let’s check the data type of the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns in both dataframes. If they aren’t the same, we will have to change the data type of columns to make them the same.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Check column data types for census data
-print(&quot;Column data types for census data:\n{}&quot;.format(va_df.dtypes))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check column data types for census data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column data types for census data:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
 
-# Check column data types for census shapefile
-print(&quot;\nColumn data types for census shapefile:\n{}&quot;.format(va_tract.dtypes))
+<span class="c1"># Check column data types for census shapefile</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Column data types for census shapefile:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
 
-# Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html
+<span class="c1"># Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column data types for census data:
+NAME            object
+C17002_001E    float64
+C17002_002E    float64
+C17002_003E    float64
+B01003_001E    float64
+GEOID           object
+dtype: object
+
+Column data types for census shapefile:
+STATEFP       object
+COUNTYFP      object
+TRACTCE       object
+GEOID         object
+NAME          object
+NAMELSAD      object
+MTFCC         object
+FUNCSTAT      object
+ALAND          int64
+AWATER         int64
+INTPTLAT      object
+INTPTLON      object
+geometry    geometry
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -660,13 +825,37 @@ print(&quot;\nColumn data types for census shapefile:\n{}&quot;.format(va_tract.
 <p>Now, we are ready to merge the two dataframes together, using the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns as the primary key. We can use the <code class="docutils literal notranslate"><span class="pre">merge</span></code> method in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code> called on the <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> shapefile dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Join the attributes of the dataframes together
-# Source: https://geopandas.org/docs/user_guide/mergingdata.html
-va_merge = va_tract.merge(va_df, on = &quot;GEOID&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Join the attributes of the dataframes together</span>
+<span class="c1"># Source: https://geopandas.org/docs/user_guide/mergingdata.html</span>
+<span class="n">va_merge</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">va_df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;GEOID&quot;</span><span class="p">)</span>
 
-# Show result
-print(va_merge.head(2))
-print(&#39;Shape: &#39;, va_merge.shape)
+<span class="c1"># Show result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">va_merge</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_merge</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  NAME_x             NAMELSAD  MTFCC  \
+0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
+1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
+
+  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
+0        S  2552457       0  +37.1475176  -076.5212499   
+1        S  3478916  165945  +37.1625163  -076.5527816   
+
+                                            geometry  \
+0  POLYGON ((897174.191 4119897.084, 897174.811 4...   
+1  POLYGON ((893470.562 4123469.385, 893542.722 4...   
+
+                                             NAME_y  C17002_001E  C17002_002E  \
+0  Census Tract 321.32, Newport News city, Virginia       5025.0        161.0   
+1  Census Tract 322.26, Newport News city, Virginia       4167.0        736.0   
+
+   C17002_003E  B01003_001E  
+0        342.0       5079.0  
+1        559.0       4167.0  
+Shape:  (1907, 18)
 </pre></div>
 </div>
 </div>
@@ -683,12 +872,28 @@ print(&#39;Shape: &#39;, va_merge.shape)
 <p>Now that we merged the dataframes together, we can further clean up the dataframe and remove columns that are not needed. Instead of using the <code class="docutils literal notranslate"><span class="pre">drop</span></code> method, we can simply select the columns we want to keep and create a new dataframe with those selected columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create new dataframe from select columns
-va_poverty_tract = va_merge[[&quot;STATEFP&quot;, &quot;COUNTYFP&quot;, &quot;TRACTCE&quot;, &quot;GEOID&quot;, &quot;geometry&quot;, &quot;C17002_001E&quot;, &quot;C17002_002E&quot;, &quot;C17002_003E&quot;, &quot;B01003_001E&quot;]]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create new dataframe from select columns</span>
+<span class="n">va_poverty_tract</span> <span class="o">=</span> <span class="n">va_merge</span><span class="p">[[</span><span class="s2">&quot;STATEFP&quot;</span><span class="p">,</span> <span class="s2">&quot;COUNTYFP&quot;</span><span class="p">,</span> <span class="s2">&quot;TRACTCE&quot;</span><span class="p">,</span> <span class="s2">&quot;GEOID&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_002E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_003E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01003_001E&quot;</span><span class="p">]]</span>
 
-# Show dataframe
-print(va_poverty_tract.head(2))
-print(&#39;Shape: &#39;, va_poverty_tract.shape)
+<span class="c1"># Show dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  \
+0      51      700  032132  51700032132   
+1      51      700  032226  51700032226   
+
+                                            geometry  C17002_001E  \
+0  POLYGON ((897174.191 4119897.084, 897174.811 4...       5025.0   
+1  POLYGON ((893470.562 4123469.385, 893542.722 4...       4167.0   
+
+   C17002_002E  C17002_003E  B01003_001E  
+0        161.0        342.0       5079.0  
+1        736.0        559.0       4167.0  
+Shape:  (1907, 9)
 </pre></div>
 </div>
 </div>
@@ -700,13 +905,42 @@ print(&#39;Shape: &#39;, va_poverty_tract.shape)
 <p>Next, we will group all the census tracts within the same county (<code class="docutils literal notranslate"><span class="pre">COUNTYFP</span></code>) and aggregate the poverty and population values for those tracts within the same county. We can use the <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> function in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>, which is the spatial version of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. We use <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> instead of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> because the former also groups and merges all the geometries (in this case, census tracts) within a given group (in this case, counties).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Dissolve and group the census tracts within each county and aggregate all the values together
-# Source: https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html
-va_poverty_county = va_poverty_tract.dissolve(by = &#39;COUNTYFP&#39;, aggfunc = &#39;sum&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dissolve and group the census tracts within each county and aggregate all the values together</span>
+<span class="c1"># Source: https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html</span>
+<span class="n">va_poverty_county</span> <span class="o">=</span> <span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;COUNTYFP&#39;</span><span class="p">,</span> <span class="n">aggfunc</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">)</span>
 
-# Show dataframe
-print(va_poverty_county.head(2))
-print(&#39;Shape: &#39;, va_poverty_county.shape)
+<span class="c1"># Show dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_county</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                   geometry  \
+COUNTYFP                                                      
+001       POLYGON ((971814.409 4160130.005, 971664.507 4...   
+003       POLYGON ((722871.236 4189239.708, 722813.526 4...   
+
+                                               STATEFP  \
+COUNTYFP                                                 
+001                           515151515151515151515151   
+003       51515151515151515151515151515151515151515151   
+
+                                                    TRACTCE  \
+COUNTYFP                                                      
+001       0902009802009801000904000903000908009902000906...   
+003       0113030112010112020102020102010104010104020113...   
+
+                                                      GEOID  C17002_001E  \
+COUNTYFP                                                                   
+001       5100109020051001980200510019801005100109040051...      32345.0   
+003       5100301130351003011201510030112025100301020251...      97587.0   
+
+          C17002_002E  C17002_003E  B01003_001E  
+COUNTYFP                                         
+001            2423.0       3993.0      32840.0  
+003            5276.0       4305.0     105105.0  
+Shape:  (133, 8)
 </pre></div>
 </div>
 </div>
@@ -719,14 +953,84 @@ print(&#39;Shape: &#39;, va_poverty_county.shape)
 <p>Side note: Notice that <code class="docutils literal notranslate"><span class="pre">C17002_001E</span></code> (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population). We’ll disregard this for now since the difference is not too significant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Get poverty rate and store values in new column
-va_poverty_county[&quot;Poverty_Rate&quot;] = (va_poverty_county[&quot;C17002_002E&quot;] + va_poverty_county[&quot;C17002_003E&quot;]) / va_poverty_county[&quot;B01003_001E&quot;] * 100
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get poverty rate and store values in new column</span>
+<span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_002E&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_003E&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;B01003_001E&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
 
-# Show dataframe
-va_poverty_county.head(2)
+<span class="c1"># Show dataframe</span>
+<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>STATEFP</th>
+      <th>TRACTCE</th>
+      <th>GEOID</th>
+      <th>C17002_001E</th>
+      <th>C17002_002E</th>
+      <th>C17002_003E</th>
+      <th>B01003_001E</th>
+      <th>Poverty_Rate</th>
+    </tr>
+    <tr>
+      <th>COUNTYFP</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>001</th>
+      <td>POLYGON ((971814.409 4160130.005, 971664.507 4...</td>
+      <td>515151515151515151515151</td>
+      <td>0902009802009801000904000903000908009902000906...</td>
+      <td>5100109020051001980200510019801005100109040051...</td>
+      <td>32345.0</td>
+      <td>2423.0</td>
+      <td>3993.0</td>
+      <td>32840.0</td>
+      <td>19.537150</td>
+    </tr>
+    <tr>
+      <th>003</th>
+      <td>POLYGON ((722871.236 4189239.708, 722813.526 4...</td>
+      <td>51515151515151515151515151515151515151515151</td>
+      <td>0113030112010112020102020102010104010104020113...</td>
+      <td>5100301130351003011201510030112025100301020251...</td>
+      <td>97587.0</td>
+      <td>5276.0</td>
+      <td>4305.0</td>
+      <td>105105.0</td>
+      <td>9.115646</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -735,23 +1039,29 @@ va_poverty_county.head(2)
 <p>Finally, since we have the spatial component connected to our census data, we can plot the results!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create subplots
-fig, ax = plt.subplots(1, 1, figsize = (20, 10))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
-# Plot data
-# Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html
-va_poverty_county.plot(column = &quot;Poverty_Rate&quot;,
-                       ax = ax,
-                       cmap = &quot;RdPu&quot;,
-                       legend = True)
+<span class="c1"># Plot data</span>
+<span class="c1"># Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html</span>
+<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">,</span>
+                       <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span>
+                       <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;RdPu&quot;</span><span class="p">,</span>
+                       <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
-# Stylize plots
-plt.style.use(&#39;bmh&#39;)
+<span class="c1"># Stylize plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>
 
-# Set title
-ax.set_title(&#39;Poverty Rates (%) in Virginia&#39;, fontdict = {&#39;fontsize&#39;: &#39;25&#39;, &#39;fontweight&#39; : &#39;3&#39;})
+<span class="c1"># Set title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Poverty Rates (%) in Virginia&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;25&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Poverty Rates (%) in Virginia&#39;)
+</pre></div>
+</div>
+<img alt="../_images/abbf9d37d4a165e067cd87adfcc7a3948fd03bac49b9acf879b9319b7ddb4f85.png" src="../_images/abbf9d37d4a165e067cd87adfcc7a3948fd03bac49b9acf879b9319b7ddb4f85.png" />
 </div>
 </div>
 </section>
@@ -794,7 +1104,7 @@ ax.set_title(&#39;Poverty Rates (%) in Virginia&#39;, fontdict = {&#39;fontsize&
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Accessing OSM Data in Python</p>
+        <p class="prev-next-title">Accessing OpenStreetMap Data in Python</p>
       </div>
     </a>
     <a class="right-next"
