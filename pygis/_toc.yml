@@ -57,3 +57,7 @@ parts:
   - file: docs/f_rs_band_math
   - file: docs/f_rs_extraction
   - file: docs/f_rs_ml_predict
+- caption: Hire pygis.io
+  chapters:
+  - file: docs/g_hire
+

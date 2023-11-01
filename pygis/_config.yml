@@ -34,7 +34,7 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks         : auto  #auto, cache, off ,force
+  execute_notebooks         : force  #auto, cache, off ,force
   exclude_patterns          : 
                               [ 
                                 'a_*',
