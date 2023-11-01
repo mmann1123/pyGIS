@@ -19,6 +19,7 @@ myst:
 <!-- (d_access_osm)= -->
 
 ----------------
+
 ```{admonition} Learning Objectives
 - Download and utilize OpenStreetMap data
 ```
@@ -28,9 +29,11 @@ myst:
 ```
 ----------------
 
-# Accessing OpenStreetMap Data in Python
+# Accessing OSM Data in Python
 
-OpenStreetMap (OSM) is an open collaborative project to create a free editable map of the world. In this tutorial, we will use the Python module OSMnx to access OSM data.
+## What is OpenStreetMap?
+
+OpenStreetMap (OSM) is a global collaborative (crowd-sourced) dataset and project that aims at creating a free editable map of the world containing a lot of information about our environment [^gpd_clip]. It contains data for example about streets, buildings, different services, and landuse to mention a few. You can view the map at www.openstreetmap.org. You can also sign up as a contributor if you want to edit the map. More details about OpenStreetMap and its contents are available in the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page).
 
 ## OSMnx
 
@@ -39,72 +42,70 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 
 To get an overview of the capabilities of the package, see an introductory video given by the lead developer of the package, Prof. Geoff Boeing: ["Meet the developer: Introduction to OSMnx package by Geoff Boeing"](https://www.youtube.com/watch?v=Q0uxu25ddc4&list=PLs9D4XVqc6dCAhhvhZB7aHGD8fCeCC_6N).
 
+## Download and visualize OpenStreetMap data with OSMnx
+
 One the most useful features that OSMnx provides is an easy-to-use way of retrieving [OpenStreetMap](http://www.openstreetmap.org) data (using [OverPass API](http://wiki.openstreetmap.org/wiki/Overpass_API)).
 
-
-## Import Modules
-
-We import OSMnx, which provides functions to retrieve OSM data. We also import Geopandas to handle the geographic data frames we will create.
+In this tutorial, we will learn how to download and visualize OSM data covering a specified area of interest: the neighborhood of Edgewood in Washington DC USA.
 
 ```{code-cell} ipython3
+# Specify the name that is used to seach for the data
+place_name = "Edgewood Washington, DC, USA"
+```
+
+### OSM Location Boundary
+
+Let's also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the `ox.geocode_to_gdf` [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf) function.
+
+```{code-cell} ipython3
+# import osmnx
 import osmnx as ox
 import geopandas as gpd
-```
 
-## Define Study Area
-
-We specify the place name string for the area we want to access data for - the Edgewood neighborhood in Washington DC.
-
-```{code-cell} ipython3
-place_name = "Edgewood, Washington, DC, USA"
-```
-
-## Geocode Place Boundary
-
-Geocoding takes a place name and looks up its geographic boundary. OSMnx provides the `geocode_to_gdf()` function to geocode place names to GeoDataFrames.
-
-When we pass our place name string to `geocode_to_gdf()`, it queries the Nominatim geocoder to find the OSM boundary for that location. The function returns a GeoDataFrame containing the boundary polygon coordinates.
-
-```{code-cell} ipython3
+# Get place boundary related to the place name as a geodataframe
 area = ox.geocode_to_gdf(place_name)
 ```
 
-We print the area GeoDataFrame to inspect it. We see it contains the polygon geometry along with some metadata.
+As the name of the function already tells us, `gdf_from_place()`returns a GeoDataFrame based on the specified place name query.
 
 ```{code-cell} ipython3
-print(area.head())
+# Check the data type
+area
 ```
+Let's still verify the data type: 
 
-To visualize the neighborhood boundary, we plot the geocoded polygon.
+```{code-cell} ipython3
+# Check the data type
+type(area)
+```
+Finally, let's plot it. 
 
 ```{code-cell} ipython3
 area.plot()
 ```
+### OSM Building footprints
 
-## Download OSM Building Footprints
+It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let's download the buildings with `ox.geometries_from_place` [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place) function and plot them on top of our street network in Kamppi. 
 
-Now that we have the study area boundary, we can download building footprints within this region from OSM using OSMnx's `geometries_from_place()` function [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place) .
 
-We pass the function our place name to get [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings) in that area. We also specify the tag `building=yes` so it only returns building polygon geometries.
+When fetching spesific types of geometries from OpenStreetMap using OSMnx `geometries_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
 
 ```{code-cell} ipython3
-tags = {'building': True}
+# List key-value pairs for tags
+tags = {'building': True}   
+
 buildings = ox.geometries_from_place(place_name, tags)
+buildings.head()
 ```
-
-Printing the GeoDataFrame shows the building polygons and their OSM metadata.
+We can plot the footprints quickly.
 
 ```{code-cell} ipython3
-print(buildings.head())
+# Plot footprints 
+buildings.plot()
 ```
 
-We can plot the retrieved buildings.
-
-```{code-cell} ipython3
-buildings.plot() 
-```
-
-## Save Buildings to Shapefile
+### OSM Write Features to .shp
+Now let's assume we want to access this data outside of python, or have a permanent copy of our building footprints for Edgewood. 
 
 Since these objects are already `geopandas.GeoDataFrame` it's easy to save them to disk. We simply use `gpd.to_file` [docs](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html).
 
@@ -113,7 +114,6 @@ We can't write OSM GeoDataFrames directly to disk because they contain field typ
 ```
 
 We need to isolate just the attributes we are interested in:
-
 ```{code-cell} ipython3
 buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
 ```
@@ -127,16 +127,15 @@ We also need to isolate the feature type we are looking for [e.g. Multipolygon, 
 buildings = buildings.loc[buildings.geometry.type=='Polygon']
 ```
 
-```python
-buildings.to_file('../temp/edgewood_buildings.shp')
+Now, finally, we can write it to disk. 
+
+```{code-cell} ipython3
+# Save footprints 
+buildings.to_file('../temp/edgewood_buildings.shp')  
+# Or save in a more open source format
+#buildings.to_file('../temp/edgewood_buildings.geojson', driver='GeoJSON')  
 ```
 
-The shapefile can now be opened in any GIS software.
 
-## References
-
-- [OpenStreetMap Overpass API](http://wiki.openstreetmap.org/wiki/Overpass_API)
-- [OSMnx documentation](https://osmnx.readthedocs.io/en/stable/)
-- [OSM building tags](https://wiki.openstreetmap.org/wiki/Buildings)
-
- 
+Sources
+[^gpd_clip]: [automating-gis-processes](https://automating-gis-processes.github.io/2017/lessons/L3/nearest-neighbour.html)

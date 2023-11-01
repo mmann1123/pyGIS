@@ -1,0 +1,134 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import geowombat as gw
+from geowombat.data import rgbn
+
+with gw.open(rgbn) as src:
+    print(src.transform)
+    print(src.gw.transform)
+    print(src.crs)
+    print(src.resampling)
+    print(src.res)
+    print(src.gw.cellx, src.gw.celly)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyboardInterrupt[0m                         Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeowombat[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgw[39;00m
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mgeowombat[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m rgbn
+[1;32m      4[0m [38;5;28;01mwith[39;00m gw[38;5;241m.[39mopen(rgbn) [38;5;28;01mas[39;00m src:
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geowombat/__init__.py:5[0m
+[1;32m      2[0m __version__ [38;5;241m=[39m [38;5;124m'[39m[38;5;124m2.1.3[39m[38;5;124m'[39m
+[1;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m config
+[0;32m----> 5[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mimport[39;00m [38;5;28mopen[39m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mimport[39;00m load
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m [38;5;28;01mimport[39;00m series
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geowombat/core/__init__.py:7[0m
+[1;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mio[39;00m [38;5;28;01mimport[39;00m to_netcdf
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mio[39;00m [38;5;28;01mimport[39;00m to_vrt
+[0;32m----> 7[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01msops[39;00m [38;5;28;01mimport[39;00m SpatialOperations
+[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mconversion[39;00m [38;5;28;01mimport[39;00m Converters
+[1;32m      9[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mutil[39;00m [38;5;28;01mimport[39;00m MapProcesses
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geowombat/core/sops.py:21[0m
+[1;32m     18[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m [38;5;28;01mimport[39;00m _client_dummy, _cluster_dummy
+[1;32m     20[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m---> 21[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstats[39;00m [38;5;28;01mimport[39;00m mode [38;5;28;01mas[39;00m sci_mode
+[1;32m     22[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mspatial[39;00m [38;5;28;01mimport[39;00m cKDTree
+[1;32m     23[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/stats/__init__.py:485[0m
+[1;32m      1[0m [38;5;124;03m"""[39;00m
+[1;32m      2[0m [38;5;124;03m.. _statsrefmanual:[39;00m
+[1;32m      3[0m 
+[0;32m   (...)[0m
+[1;32m    480[0m 
+[1;32m    481[0m [38;5;124;03m"""[39;00m
+[1;32m    483[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_warnings_errors[39;00m [38;5;28;01mimport[39;00m (ConstantInputWarning, NearConstantInputWarning,
+[1;32m    484[0m                                DegenerateDataWarning, FitError)
+[0;32m--> 485[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_stats_py[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m    486[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_variation[39;00m [38;5;28;01mimport[39;00m variation
+[1;32m    487[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mdistributions[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/stats/_stats_py.py:46[0m
+[1;32m     44[0m [38;5;28;01mimport[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mspecial[39;00m [38;5;28;01mas[39;00m [38;5;21;01mspecial[39;00m
+[1;32m     45[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m linalg
+[0;32m---> 46[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m distributions
+[1;32m     47[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m _mstats_basic [38;5;28;01mas[39;00m mstats_basic
+[1;32m     48[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_stats_mstats_common[39;00m [38;5;28;01mimport[39;00m (_find_repeats, linregress, theilslopes,
+[1;32m     49[0m                                    siegelslopes)
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/stats/distributions.py:8[0m
+[1;32m      1[0m [38;5;66;03m#[39;00m
+[1;32m      2[0m [38;5;66;03m# Author:  Travis Oliphant  2002-2011 with contributions from[39;00m
+[1;32m      3[0m [38;5;66;03m#          SciPy Developers 2004-2011[39;00m
+[0;32m   (...)[0m
+[1;32m      6[0m [38;5;66;03m#       instead of `git blame -Lxxx,+x`.[39;00m
+[1;32m      7[0m [38;5;66;03m#[39;00m
+[0;32m----> 8[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_distn_infrastructure[39;00m [38;5;28;01mimport[39;00m (rv_discrete, rv_continuous, rv_frozen)
+[1;32m     10[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m _continuous_distns
+[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m _discrete_distns
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/stats/_distn_infrastructure.py:25[0m
+[1;32m     22[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m optimize
+[1;32m     24[0m [38;5;66;03m# for functions of continuous distributions (e.g. moments, entropy, cdf)[39;00m
+[0;32m---> 25[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m integrate
+[1;32m     27[0m [38;5;66;03m# to approximate the pdf of a continuous distribution given its cdf[39;00m
+[1;32m     28[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_lib[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_finite_differences[39;00m [38;5;28;01mimport[39;00m _derivative
+
+File [0;32m<frozen importlib._bootstrap>:1075[0m, in [0;36m_handle_fromlist[0;34m(module, fromlist, import_, recursive)[0m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/__init__.py:200[0m, in [0;36m__getattr__[0;34m(name)[0m
+[1;32m    198[0m [38;5;28;01mdef[39;00m [38;5;21m__getattr__[39m(name):
+[1;32m    199[0m     [38;5;28;01mif[39;00m name [38;5;129;01min[39;00m submodules:
+[0;32m--> 200[0m         [38;5;28;01mreturn[39;00m [43m_importlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[38;5;124;43mf[39;49m[38;5;124;43m'[39;49m[38;5;124;43mscipy.[39;49m[38;5;132;43;01m{[39;49;00m[43mname[49m[38;5;132;43;01m}[39;49;00m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m    201[0m     [38;5;28;01melse[39;00m:
+[1;32m    202[0m         [38;5;28;01mtry[39;00m:
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    124[0m             [38;5;28;01mbreak[39;00m
+[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/scipy/integrate/__init__.py:93[0m
+[1;32m     91[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_quadrature[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m     92[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_odepack_py[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[0;32m---> 93[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_quadpack_py[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m     94[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_ode[39;00m [38;5;28;01mimport[39;00m [38;5;241m*[39m
+[1;32m     95[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_bvp[39;00m [38;5;28;01mimport[39;00m solve_bvp
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1006[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:688[0m, in [0;36m_load_unlocked[0;34m(spec)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:879[0m, in [0;36mexec_module[0;34m(self, module)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:1012[0m, in [0;36mget_code[0;34m(self, fullname)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:672[0m, in [0;36m_compile_bytecode[0;34m(data, name, bytecode_path, source_path)[0m
+
+[0;31mKeyboardInterrupt[0m: 
+KeyboardInterrupt: 
+

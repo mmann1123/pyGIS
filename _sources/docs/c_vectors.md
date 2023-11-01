@@ -29,7 +29,7 @@ myst:
 ```
 ---
 
-# Spatial Vector Data using GeoPandas 
+# Working with Spatial Vector Data using GeoPandas 
 
 Previously, we explored the fundamentals of spatial data structures [here](c_features.md). Now, we will delve deeper into the manipulation of spatial vector data, using the GeoPandas library. GeoPandas serves as an essential tool for working with geospatial data in Python, seamlessly blending the data manipulation capabilities of pandas with the geometric data analysis power of shapely. As a result, GeoPandas provides a high-level interface for intricate geospatial operations, effectively bypassing the need for a specialized spatial database like PostGIS.
 
@@ -51,7 +51,7 @@ Here are examples of each type:
 
 The first example creates a GeoSeries of Points. This might be used to represent individual locations on a map. For instance, you could use a Point for each location where a sample was collected, or to mark the location of cities or other points of interest.
 
-```{code-cell} ipython3
+```python
 # Point GeoSeries
 import geopandas
 from shapely.geometry import Point
@@ -61,7 +61,7 @@ s
 
 The next example creates a GeoSeries of Lines. Lines could be used to represent the path of a moving object, the route of a road or river, or the border between different regions. The example creates a single line that connects three points.
 
-```{code-cell} ipython3
+```python
 # Line GeoSeries
 from shapely.geometry import LineString
 l = geopandas.GeoSeries([LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
@@ -70,7 +70,7 @@ l
 
 The last example creates a GeoSeries of Polygons. A Polygon might represent a bounded area, such as the outline of a lake, the footprint of a building, or the boundaries of a country. In this example, the polygon represents an area defined by three points (a triangle).
 
-```{code-cell} ipython3
+```python
 # Polygon GeoSeries
 from shapely.geometry import Polygon
 p = geopandas.GeoSeries([Polygon([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
@@ -93,7 +93,7 @@ While a `GeoDataFrame` may contain multiple columns with geometric (shapely) obj
 
 Here is an example of a `GeoDataFrame` using the 'naturalearth_lowres' dataset. This dataset represents a simplified global country boundary map, which can be useful for global scale visualizations:
 
-```{code-cell} ipython3
+```python
 # Load a GeoDataFrame
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 
@@ -103,58 +103,9 @@ world.head()
 
 And now let's create a simple plot from this `GeoDataFrame`:
 
-```{code-cell} ipython3
+```python
 # Plot the GeoDataFrame
 world.plot()
 ```
 
 The resulting plot shows the geographic locations of all countries in the 'naturalearth_lowres' dataset.
-
-## Reprojecting GeoDataFrames
-
-Geopandas makes it straightforward to reproject your data. In this section, we will reproject the world dataset to a projection that's suitable for Europe.
-
-First, let's identify the current projection of our data.
-
-```{code-cell} ipython3
-print(world.crs)
-```
-
-To reproject the dataset, you can use the `to_crs` function. We will use the EPSG code 3035, which is suitable for Europe.
-
-```{code-cell} ipython3
-# Reproject to EPSG 3035 (ETRS89 / LAEA Europe)
-world = world.to_crs(epsg=3035)
-```
-
-You can confirm that the dataset's CRS has been updated:
-
-```{code-cell} ipython3
-print(world.crs)
-```
-
-That's it! Now, your world dataset is in a projection that is appropriate for visualizing Europe.
-
-## Subsetting a Region from the World Dataset
-
-In many cases, you may only be interested in a specific region rather than the entire world dataset. Subsetting or clipping the data to your region of interest makes the dataset easier to manage and speeds up processing time.
-
-### Example: Extracting European Countries
-
-Here's how you can subset the data to include only European countries.
-
-```{code-cell} ipython3
-# Filter the dataset to include only European countries
-europe = world[world['continent'] == 'Europe']
-
-# Plot the data
-europe.plot()
-```
-
-This will produce a plot of all countries in Europe, based on the world dataset.
-
-### Note:
-
-- Make sure to always check the Coordinate Reference System (CRS) when subsetting geographical data to ensure that the data is compatible.
-
-
