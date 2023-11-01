@@ -42,7 +42,7 @@ poly = gpd.GeoDataFrame(df, geometry=ply_coord, crs ="EPSG:4326")
 poly.plot()
 
 import pandas as pd
-# create an outline of Washington DC and write to csv
+# create an outline of Washington DC and write to CSV
 path_to_csv = r'../temp/points.csv'
 points = {'Corner':['N','E','S','W'],
           'lon': [-77.0412826538086, -77.11681365966797, -77.01896667480469, -77.0412826538086], 
@@ -84,62 +84,3 @@ lines = geo_df.groupby(['ID'])['geometry'].apply(lambda x:  LineString(x.tolist(
 lines = gpd.GeoDataFrame(lines, geometry='geometry', crs="EPSG:4326") 
 lines.reset_index(inplace=True)
 lines.plot(column='ID')
-
-# list of coordindate pairs
-coordinates = [[ -77.0412826538086, 38.99570671505043 ], [ -77.11681365966797, 38.936713143230044 ], [ -77.01896667480469, 38.807610542357594],
-               [-76.90910339355469,  38.892636142310295]]           
-
-# Create a Shapely polygon from the coordinate-tuple list
-ply_coord = Polygon(coordinates)
-
-# create a dictionary with needed attributes and required geometry column
-df = {'Attribute': ['name1'], 'geometry': ply_coord}
-
-# Convert shapely object to a geodataframe 
-poly = gpd.GeoDataFrame(df, geometry='geometry', crs ="EPSG:4326")
-
-# Let's see what we have
-poly.plot()
-
-# Create an empty geopandas GeoDataFrame
-newdata = gpd.GeoDataFrame()
-# Create a new column called 'geometry' to the GeoDataFrame
-newdata['geometry'] = None
-
-print(newdata)
-
-# Coordinates of the GW department of geography in Decimal Degrees
-coordinates = (-77.04639494419096,  38.89934963421794)
-
-# Create a Shapely polygon from the coordinate-tuple list
-point = Point(coordinates)
-
-# Let's see what we have
-point
-
-# Insert the polygon into 'geometry' -column at index 0
-newdata.loc[0, 'geometry'] = point
-
-# Let's see what we have now
-newdata
-
-# Add a new column and insert data
-newdata.loc[0, 'Location'] = 'GWU Geography'
-
-# Let's check the data
-newdata
-
-# Import specific function 'from_epsg' from fiona module
-from fiona.crs import from_epsg
-
-# Set the GeoDataFrame's coordinate system to WGS84
-newdata.crs = from_epsg(4326)
-
-# Let's see how the crs definition looks like
-newdata.crs
-
-# Determine the output path for the Shapefile
-outfp = r"../temp/gwu_geog.shp"
-
-# Write the data into that Shapefile
-newdata.to_file(outfp)

@@ -19,13 +19,22 @@ for x, y, label in zip(gdf.geometry.x, gdf.geometry.y, gdf.name):
     ax.annotate(label, xy=(x, y), xytext=(3, 3), textcoords="offset points")
 plt.show()
 
-from shapely.geometry import LineString
+# Import required modules
+from shapely.geometry import LineString, Point
+import geopandas as gpd
+import matplotlib.pyplot as plt
 
+# Define a dictionary with names and geometry (LineString)
 d = {'name': ['Washington\n(38.90, -77.03)' ], 
      'geometry': [LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])]}
+
+# Create a GeoDataFrame using the dictionary
 gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
+
+# Plot the GeoDataFrame
 fig, ax = plt.subplots(figsize=(12, 6))
 gdf.plot(ax=ax)
+plt.show()
 
 from shapely.geometry import Polygon
 
@@ -44,3 +53,15 @@ fig = plt.figure(figsize=(8,6))
 plt.imshow(X)
 plt.title("Plot 2D array")
 plt.show()
+
+import rasterio
+from rasterio.plot import show
+import matplotlib.pyplot as plt
+
+# Open a web location with a demo raster dataset
+url = 'https://github.com/mapbox/rasterio/raw/master/tests/data/RGB.byte.tif'
+with rasterio.open(url) as src:
+    fig, ax = plt.subplots(figsize=(10,10))
+    show(src.read(), ax=ax, transform=src.transform)
+    plt.show()
+

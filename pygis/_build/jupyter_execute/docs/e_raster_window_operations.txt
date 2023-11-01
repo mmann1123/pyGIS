@@ -145,7 +145,7 @@ with gw.open("../temp/window_raster.tif") as src:
     fig, ax = plt.subplots(dpi = 200)
 
     # Calculate local average
-    output_gw = src.gw.moving(stat = 'mean', w = 5, n_jobs = 4, nodata = 0)
+    output_gw = src.gw.moving(stat = 'mean', w = 5,  nodata = 0)
     print(output_gw)
 
     # Plot raster

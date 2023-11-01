@@ -230,6 +230,7 @@ with gw.config.update(sensor='bgr'):
         df = src.gw.extract(l8_224078_20200518_polygons,
                             band_names=src.band.values.tolist())
         # use pandas groupby to calc pixel mean  
-        df = df.groupby('id').mean()
+        df.drop(columns=['geometry'], inplace=True)
+        df = df.groupby(['id', 'name']).mean()
     print(df)
 

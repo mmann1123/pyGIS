@@ -12,8 +12,8 @@
 # 
 # ```
 # ```{admonition} Review
-# * [Opening Remotely Sensed Data](f_rs_io.md)
-# * [Raster Operations](e_raster_op_intro.md)
+# * [Opening Remotely Sensed Data](f_rs_io)
+# * [Raster Operations](e_raster_op_intro)
 # ```
 # ----------------
 # <!-- https://www.l3harrisgeospatial.com/docs/MosaicSeamless.html -->
@@ -42,13 +42,15 @@ import matplotlib.patheffects as pe
 from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
 
 fig, ax = plt.subplots(dpi=200)
-filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
-with gw.open(filenames,
-                band_names=['blue'],
-                mosaic=True,
-                overlap = 'mean',
-                bounds_by='union') as src:
-    src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
+
+with gw.open(
+     [l8_224077_20200518_B2, l8_224078_20200518_B2],
+     band_names=['blue'],
+     mosaic=True,
+     bounds_by='union'
+ ) as src:
+     src.where(src != 0).sel(band='blue').gw.imshow(robust=True, ax=ax)
+ 
 plt.tight_layout(pad=1)
 
 
@@ -63,7 +65,7 @@ filenames = [l8_224077_20200518_B2, l8_224078_20200518_B2]
 with gw.open(filenames,
                 band_names=['blue'],
                 mosaic=True,
-                overlap='mean',
+                overlap='max',
                 bounds_by='intersection') as src:
     src.where(src != 0).sel(band='blue').plot.imshow(robust=True, ax=ax)
 plt.tight_layout(pad=1)

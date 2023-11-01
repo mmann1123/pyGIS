@@ -6,11 +6,11 @@
 # ---------------
 # 
 # ```{admonition} Learning Objectives
-#   - How to open multiple common remotely sensed image types
-#   - Handle RGB, BGR, LandSat, PlanetScope images and other sensor types
-#   - Mosaic multiple remotely sensed images
-#   - Create a time series stack
-#   - Write files to disk
+# - Open multiple common remotely sensed image types.
+# - Handle RGB, BGR, LandSat, PlanetScope images, and other sensor types.
+# - Mosaic multiple remotely sensed images.
+# - Create a time series stack.
+# - Write files to disk.
 # ```
 # 
 # ```{admonition} Review

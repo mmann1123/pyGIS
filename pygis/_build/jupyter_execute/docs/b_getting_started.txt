@@ -16,3 +16,11 @@ ax = plt.subplot(111, projection='polar')
 ax.bar(θ, radii, width=width, bottom=0.0, color=colors, alpha=0.5)
 
 plt.show()
+
+print("Hello, Google Colab!")
+
+# Basic Python code example
+for i in range(5):
+    print("Count:", i)
+
+!pip install pandas

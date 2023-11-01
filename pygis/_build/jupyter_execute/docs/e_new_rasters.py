@@ -233,7 +233,7 @@ with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
     show(src,adjust='linear')
 
 
-# To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro.md).
+# To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro).
 # 
 # Just as a preview, here's how to do this in `geowombat`.
 

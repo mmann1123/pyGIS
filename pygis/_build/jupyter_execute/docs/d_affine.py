@@ -27,7 +27,6 @@
 # 
 # ```{figure} ../_static/d_crs/warp.png
 # :name: Example of a warped (reprojected) image
-# Example of a warped (reprojected) image
 # ```
 # 
 # First some general properties of affine transforms:

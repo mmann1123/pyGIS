@@ -37,11 +37,11 @@ execute:
   execute_notebooks         : force  #auto, cache, off ,force
   exclude_patterns          : 
                               [ 
-                                'a_*',
-                              'b_*',
-                              'c_*',
-                              'd_*', 
-                               'e_*',
+                              #   'a_*',
+                              # 'b_*',
+                              # 'c_*',
+                              # 'd_*', 
+                              #  'e_*',
                               # 'f_*',
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 

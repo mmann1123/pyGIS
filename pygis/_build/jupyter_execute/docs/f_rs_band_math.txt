@@ -3,6 +3,26 @@ from geowombat.data import rgbn
 import matplotlib.pyplot as plt
 
 
+fig, ax = plt.subplots(dpi=150)
+
+with gw.open(rgbn, band_names=['red','green','blue','nir']) as ds:
+    add_nir_red = ds.sel(band='nir') + ds.sel(band='red')
+    add_nir_red.plot(robust=True, ax=ax)
+    print(add_nir_red)
+plt.tight_layout(pad=1)
+
+import geowombat as gw
+from geowombat.data import rgbn
+import matplotlib.pyplot as plt
+
+
+fig, ax = plt.subplots(dpi=150)
+
+with gw.config.update(sensor='rgbn', scale_factor=0.0001):
+    with gw.open(rgbn) as ds:
+        ds.sel(band=['blue', 'green', 'red']).plot.imshow(robust=True)
+plt.tight_layout(pad=1)
+
 with gw.open(rgbn) as ds:
     print(ds)
     evi = ds.gw.evi(sensor='rgbn', scale_factor=0.0001)
@@ -12,8 +32,9 @@ fig, ax = plt.subplots(dpi=150)
 
 with gw.config.update(sensor='rgbn', scale_factor=0.0001):
     with gw.open(rgbn) as ds:
+        ds.sel(band=['blue', 'green', 'red']).plot.imshow(robust=True)
         evi = ds.gw.evi()
-        evi.plot(robust=True, ax=ax)
+        evi.plot(robust=True)
 plt.tight_layout(pad=1)
 
 fig, ax = plt.subplots(dpi=150)
@@ -24,17 +45,20 @@ with gw.config.update(sensor='rgbn', scale_factor=0.0001):
         evi2.plot(robust=True, ax=ax)
 plt.tight_layout(pad=1)
 
+fig, ax = plt.subplots(dpi=150)
+
 with gw.config.update(sensor='rgbn'):
     with gw.open(rgbn) as ds:
-        d = ds.gw.norm_diff('red', 'nir')
-        print(d)
+        ndvi = ds.gw.norm_diff('red', 'nir')
+        ndvi.plot(robust=True)
+plt.tight_layout(pad=1)
 
 fig, ax = plt.subplots(dpi=150)
 
 with gw.config.update(sensor='qb', scale_factor=0.0001):
     with gw.open(rgbn) as ds:
         tcap = ds.gw.tasseled_cap()
+        print('bands', tcap.band.values)
         tcap.sel(band='wetness').plot(robust=True, ax=ax)
-        print(tcap)
 plt.tight_layout(pad=1)
 
