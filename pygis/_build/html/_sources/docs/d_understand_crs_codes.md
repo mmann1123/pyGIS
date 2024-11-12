@@ -337,7 +337,7 @@ Source: [Universal Transverse Mercator, Esri](https://desktop.arcgis.com/en/arcm
 
 ## EPSG Codes
 
-Many CRSs are assigned and can be referenced by an `EPSG` code, which consists of a four or five digit number. `EPSG` stands for the European Petroleum Survey Group, a now-defunct organization that compiled this CRS dataset. `EPSG` codes can be further explored with the [EPSG Geodetic Parameter Dataset](http://www.epsg-registry.org/) or at [SpatialReference.org](https://spatialreference.org/ref/epsg/).
+Many CRSs are assigned and can be referenced by an `EPSG` code, which consists of a four or five digit number. `EPSG` stands for the European Petroleum Survey Group, a now-defunct organization that compiled this CRS dataset. `EPSG` codes can be further explored with the [EPSG Geodetic Parameter Dataset](https://epsg.org/) or at [SpatialReference.org](https://spatialreference.org/ref/epsg/).
 
 Sources:
 [Overview of Coordinate Reference Systems (CRS) in R, University of California, Santa Barbara](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf); [Lesson 4. Understand EPSG, WKT and Other CRS Definition Styles, Leah Wasser](https://www.earthdatascience.org/courses/use-data-open-source-python/intro-vector-data-python/spatial-data-vector-shapefiles/epsg-proj4-coordinate-reference-system-formats-python/)

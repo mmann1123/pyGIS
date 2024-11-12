@@ -83,10 +83,10 @@ area.plot()
 
 # ### OSM Building footprints
 # 
-# It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let's download the buildings with `ox.geometries_from_place` [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place) function and plot them on top of our street network in Kamppi. 
+# It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let's download the buildings with `ox.features_from_place` [docs](https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.features.features_from_place) function and plot them on top of our street network in Kamppi. 
 # 
 # 
-# When fetching spesific types of geometries from OpenStreetMap using OSMnx `geometries_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
+# When fetching spesific types of features from OpenStreetMap using OSMnx `features_from_place` we also need to specify the correct tags. For getting [all types of buildings](https://wiki.openstreetmap.org/wiki/Buildings), we can use the tag `building=yes`.
 
 # In[6]:
 
@@ -94,13 +94,13 @@ area.plot()
 # List key-value pairs for tags
 tags = {'building': True}   
 
-buildings = ox.geometries_from_place(place_name, tags)
+buildings = ox.features_from_place(place_name, tags)
 buildings.head()
 
 
 # We can plot the footprints quickly.
 
-# In[7]:
+# In[ ]:
 
 
 # Plot footprints 
@@ -118,7 +118,7 @@ buildings.plot()
 # 
 # We need to isolate just the attributes we are interested in:
 
-# In[8]:
+# In[ ]:
 
 
 buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
@@ -129,7 +129,7 @@ buildings  = buildings.loc[:,buildings.columns.str.contains('addr:|geometry')]
 # ```
 # We also need to isolate the feature type we are looking for [e.g. Multipolygon, Polygon, Point]. Since here we want building footprints we are going to keep only polygons.
 
-# In[9]:
+# In[ ]:
 
 
 buildings = buildings.loc[buildings.geometry.type=='Polygon']
@@ -137,7 +137,7 @@ buildings = buildings.loc[buildings.geometry.type=='Polygon']
 
 # Now, finally, we can write it to disk.
 
-# In[10]:
+# In[ ]:
 
 
 # Save footprints 

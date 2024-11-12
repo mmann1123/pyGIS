@@ -154,7 +154,7 @@ from rasterio.plot import show
 import matplotlib.pyplot as plt
 
 # Open a web location with a demo raster dataset
-url = 'https://github.com/mapbox/rasterio/raw/master/tests/data/RGB.byte.tif'
+url = 'https://github.com/rasterio/rasterio/raw/main/tests/data/RGB.byte.tif'
 with rasterio.open(url) as src:
     fig, ax = plt.subplots(figsize=(10,10))
     show(src.read(), ax=ax, transform=src.transform)

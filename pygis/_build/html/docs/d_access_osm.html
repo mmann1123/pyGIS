@@ -878,213 +878,31 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 </section>
 <section id="osm-building-footprints">
 <h3>OSM Building footprints<a class="headerlink" href="#osm-building-footprints" title="Permalink to this headline">#</a></h3>
-<p>It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">ox.geometries_from_place</span></code> <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geometries_from_place#osmnx.geometries.geometries_from_place">docs</a> function and plot them on top of our street network in Kamppi.</p>
-<p>When fetching spesific types of geometries from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">geometries_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
+<p>It is also possible to retrieve other types of OSM data features with OSMnx such as buildings or points of interest (POIs). Let’s download the buildings with <code class="docutils literal notranslate"><span class="pre">ox.features_from_place</span></code> <a class="reference external" href="https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.features.features_from_place">docs</a> function and plot them on top of our street network in Kamppi.</p>
+<p>When fetching spesific types of features from OpenStreetMap using OSMnx <code class="docutils literal notranslate"><span class="pre">features_from_place</span></code> we also need to specify the correct tags. For getting <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Buildings">all types of buildings</a>, we can use the tag <code class="docutils literal notranslate"><span class="pre">building=yes</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List key-value pairs for tags</span>
 <span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>   
 
-<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">geometries_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+<span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
 <span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># List key-value pairs for tags</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;building&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>   
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">buildings</span> <span class="o">=</span> <span class="n">ox</span><span class="o">.</span><span class="n">features_from_place</span><span class="p">(</span><span class="n">place_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">buildings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>addr:state</th>
-      <th>amenity</th>
-      <th>building</th>
-      <th>ele</th>
-      <th>gnis:county_id</th>
-      <th>gnis:county_name</th>
-      <th>gnis:created</th>
-      <th>gnis:edited</th>
-      <th>gnis:feature_id</th>
-      <th>gnis:import_uuid</th>
-      <th>...</th>
-      <th>shop</th>
-      <th>denomination</th>
-      <th>old_name</th>
-      <th>url</th>
-      <th>wikidata</th>
-      <th>office</th>
-      <th>short_name</th>
-      <th>shelter_type</th>
-      <th>ways</th>
-      <th>type</th>
-    </tr>
-    <tr>
-      <th>element_type</th>
-      <th>osmid</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">node</th>
-      <th>358955022</th>
-      <td>DC</td>
-      <td>school</td>
-      <td>yes</td>
-      <td>60</td>
-      <td>001</td>
-      <td>District of Columbia</td>
-      <td>12/18/1979</td>
-      <td>01/22/2008</td>
-      <td>2062869</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>367143640</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>56</td>
-      <td>NaN</td>
-      <td>District of Columbia</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2110453</td>
-      <td>57871b70-0100-4405-bb30-88b2e001a944</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th rowspan="3" valign="top">way</th>
-      <th>52291432</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321503</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>55321504</th>
-      <td>DC</td>
-      <td>NaN</td>
-      <td>yes</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 55 columns</p>
-</div></div></div>
+<span class="ne">AttributeError</span>: module &#39;osmnx&#39; has no attribute &#39;features_from_place&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>We can plot the footprints quickly.</p>
 <div class="cell docutils container">
@@ -1093,12 +911,6 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <span class="n">buildings</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-<img alt="../_images/d_access_osm_13_1.png" src="../_images/d_access_osm_13_1.png" />
 </div>
 </div>
 </section>
@@ -1137,12 +949,6 @@ that can be used to retrieve, construct, analyze, and visualize street networks 
 <span class="n">buildings</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s1">&#39;../temp/edgewood_buildings.shp&#39;</span><span class="p">)</span>  
 <span class="c1"># Or save in a more open source format</span>
 <span class="c1">#buildings.to_file(&#39;../temp/edgewood_buildings.geojson&#39;, driver=&#39;GeoJSON&#39;)  </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_132906/2776310115.py:2: UserWarning: Column names longer than 10 characters will be truncated when saved to ESRI Shapefile.
-  buildings.to_file(&#39;../temp/edgewood_buildings.shp&#39;)
 </pre></div>
 </div>
 </div>
