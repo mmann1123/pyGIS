@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(dpi=200)
+
+image = "../temp/LC08_20200518_aea.tif"
+with gw.open(image) as src:
+    src.where(src != 0).sel(band=[3, 2, 1]).gw.imshow(robust=True, ax=ax)
+    plt.tight_layout(pad=1)
+
+------------------
+
+
+ImportError: cannot import name 'backend_agg' from 'matplotlib.backends' (unknown location)
+
