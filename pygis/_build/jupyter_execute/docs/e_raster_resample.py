@@ -124,7 +124,7 @@ with rasterio.open(image) as dataset:
 # ### Geowombat Up/Down Sampling Example
 # As always the easiest way to deal with resampling is by deploying geowombat. It's like a swiss army knife for kicking raster butt. Here we just need to set the desired resolution with `ref_res`, and the `resampling` method in the open statement. We have a number of resampling methods available depending on the context [listed above](raster_resample_methods). Writing a file is a bit more intuitive too.
 
-# In[2]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -155,7 +155,7 @@ with gw.config.update(ref_res=15):
 # 
 # The original input data LandSat data is 30 meters and will be downsampled to match `precip` which is 500m.  Also note the use of `nodata` to avoid missing values stored as 0. Note we can choose a number of `resampling` techniques [listed above](raster_resample_methods). For more detail on resampling go to [Introduction to Raster CRS](d_raster_crs_intro).
 
-# In[3]:
+# In[ ]:
 
 
 from rasterio.warp import reproject, Resampling, calculate_default_transform
@@ -210,7 +210,7 @@ def reproj_match(infile, match, outfile):
 
 # Now we can execute out code to co-register two rasters
 
-# In[4]:
+# In[ ]:
 
 
 LS = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
@@ -227,7 +227,7 @@ reproj_match(infile = LS,
 # 
 # The original input data `precip` is currently 500m but will be upsampled to 30m as seen in `print(src)`.  Also note the use of `nodata` to avoid missing values stored as -9999. Note we can choose a number of `resampling` techniques [listed above](raster_resample_methods). For more detail on resampling go to [Introduction to Raster CRS](d_raster_crs_intro).
 
-# In[5]:
+# In[ ]:
 
 
 import geowombat as gw

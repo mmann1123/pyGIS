@@ -57,7 +57,7 @@ plt.tight_layout(pad=1)
 # ## Intersection of Remotely Sensed Image
 # Same idea with the intersection, using `bounds_by='intersection'`, we still need to mosaic the two images `mosaic=True`.
 
-# In[2]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200)

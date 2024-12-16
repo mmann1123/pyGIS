@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 myst:
   html_meta:
-      "description lang=en": "Introducing PyGIS an open source book on spatial programming. We cover how to handle points, lines and polygons, including shapefiles, handling remote sensing imagery, and other raster data."
+    "description lang=en": "Introducing PyGIS an open source book on spatial programming. We cover how to handle points, lines and polygons including shapefiles, handling remote sensing imagery, and other raster data."
     "description lang=es": "Presentamos PyGIS, un libro de código abierto sobre programación geoespacial. Cubrimos cómo manejar puntos, líneas y polígonos, incluidos los shapefiles, el manejo de imágenes de detección remota y otros datos ráster."
     "keywords": "Shapefiles, points, lines, polygons,raster, Remote Sensing"
     "property=og:locale": "en_US"

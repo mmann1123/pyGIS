@@ -1,0 +1,112 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import geowombat as gw
+
+proj4 = "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
+image = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
+
+with gw.config.update(ref_crs=proj4):
+    with gw.open(image, resampling="nearest") as src:
+    
+        src.gw.to_raster(
+            "../temp/LC08_20200518_aea.tif",
+            overwrite=True,
+        ) 
+------------------
+
+----- stderr -----
+/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[1], line 9[0m
+[1;32m      6[0m [38;5;28;01mwith[39;00m gw[38;5;241m.[39mconfig[38;5;241m.[39mupdate(ref_crs[38;5;241m=[39mproj4):
+[1;32m      7[0m     [38;5;28;01mwith[39;00m gw[38;5;241m.[39mopen(image, resampling[38;5;241m=[39m[38;5;124m"[39m[38;5;124mnearest[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m src:
+[0;32m----> 9[0m         [43msrc[49m[38;5;241;43m.[39;49m[43mgw[49m[38;5;241;43m.[39;49m[43mto_raster[49m[43m([49m
+[1;32m     10[0m [43m            [49m[38;5;124;43m"[39;49m[38;5;124;43m../temp/LC08_20200518_aea.tif[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     11[0m [43m            [49m[43moverwrite[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m     12[0m [43m        [49m[43m)[49m 
+
+File [0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/geowombat/core/geoxarray.py:917[0m, in [0;36mGeoWombatAccessor.to_raster[0;34m(self, filename, readxsize, readysize, separate, out_block_type, keep_blocks, verbose, overwrite, gdal_cache, scheduler, n_jobs, n_workers, n_threads, n_chunks, overviews, resampling, driver, nodata, blockxsize, blockysize, tags, **kwargs)[0m
+[1;32m    914[0m [38;5;28;01mif[39;00m [38;5;124m'[39m[38;5;124mdtype[39m[38;5;124m'[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m kwargs:
+[1;32m    915[0m     kwargs[[38;5;124m'[39m[38;5;124mdtype[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_obj[38;5;241m.[39mdata[38;5;241m.[39mdtype[38;5;241m.[39mname
+[0;32m--> 917[0m [43mto_raster[49m[43m([49m
+[1;32m    918[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_obj[49m[43m,[49m
+[1;32m    919[0m [43m    [49m[43mfilename[49m[43m,[49m
+[1;32m    920[0m [43m    [49m[43mreadxsize[49m[38;5;241;43m=[39;49m[43mreadxsize[49m[43m,[49m
+[1;32m    921[0m [43m    [49m[43mreadysize[49m[38;5;241;43m=[39;49m[43mreadysize[49m[43m,[49m
+[1;32m    922[0m [43m    [49m[43mseparate[49m[38;5;241;43m=[39;49m[43mseparate[49m[43m,[49m
+[1;32m    923[0m [43m    [49m[43mout_block_type[49m[38;5;241;43m=[39;49m[43mout_block_type[49m[43m,[49m
+[1;32m    924[0m [43m    [49m[43mkeep_blocks[49m[38;5;241;43m=[39;49m[43mkeep_blocks[49m[43m,[49m
+[1;32m    925[0m [43m    [49m[43mverbose[49m[38;5;241;43m=[39;49m[43mverbose[49m[43m,[49m
+[1;32m    926[0m [43m    [49m[43moverwrite[49m[38;5;241;43m=[39;49m[43moverwrite[49m[43m,[49m
+[1;32m    927[0m [43m    [49m[43mgdal_cache[49m[38;5;241;43m=[39;49m[43mgdal_cache[49m[43m,[49m
+[1;32m    928[0m [43m    [49m[43mscheduler[49m[38;5;241;43m=[39;49m[43mscheduler[49m[43m,[49m
+[1;32m    929[0m [43m    [49m[43mn_jobs[49m[38;5;241;43m=[39;49m[43mn_jobs[49m[43m,[49m
+[1;32m    930[0m [43m    [49m[43mn_workers[49m[38;5;241;43m=[39;49m[43mn_workers[49m[43m,[49m
+[1;32m    931[0m [43m    [49m[43mn_threads[49m[38;5;241;43m=[39;49m[43mn_threads[49m[43m,[49m
+[1;32m    932[0m [43m    [49m[43mn_chunks[49m[38;5;241;43m=[39;49m[43mn_chunks[49m[43m,[49m
+[1;32m    933[0m [43m    [49m[43moverviews[49m[38;5;241;43m=[39;49m[43moverviews[49m[43m,[49m
+[1;32m    934[0m [43m    [49m[43mresampling[49m[38;5;241;43m=[39;49m[43mresampling[49m[43m,[49m
+[1;32m    935[0m [43m    [49m[43mtags[49m[38;5;241;43m=[39;49m[43mtags[49m[43m,[49m
+[1;32m    936[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m,[49m
+[1;32m    937[0m [43m[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/geowombat/core/io.py:1087[0m, in [0;36mto_raster[0;34m(data, filename, readxsize, readysize, separate, out_block_type, keep_blocks, verbose, overwrite, gdal_cache, scheduler, n_jobs, n_workers, n_threads, n_chunks, padding, tags, tqdm_kwargs, **kwargs)[0m
+[1;32m   1084[0m [38;5;28;01mif[39;00m verbose [38;5;241m>[39m [38;5;241m0[39m:
+[1;32m   1085[0m     logger[38;5;241m.[39minfo([38;5;124m"[39m[38;5;124m  Creating the file ...[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m)
+[0;32m-> 1087[0m [38;5;28;01mwith[39;00m [43mrio[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[43mmode[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mw[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m [38;5;28;01mas[39;00m rio_dst:
+[1;32m   1088[0m     [38;5;28;01mif[39;00m tags:
+[1;32m   1089[0m         rio_dst[38;5;241m.[39mupdate_tags([38;5;241m*[39m[38;5;241m*[39mtags)
+
+File [0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/rasterio/env.py:444[0m, in [0;36mensure_env_with_credentials.<locals>.wrapper[0;34m(*args, **kwds)[0m
+[1;32m    441[0m     session [38;5;241m=[39m DummySession()
+[1;32m    443[0m [38;5;28;01mwith[39;00m env_ctor(session[38;5;241m=[39msession):
+[0;32m--> 444[0m     [38;5;28;01mreturn[39;00m [43mf[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+
+File [0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/rasterio/__init__.py:314[0m, in [0;36mopen[0;34m(fp, mode, driver, width, height, count, crs, transform, dtype, nodata, sharing, **kwargs)[0m
+[1;32m    312[0m writer [38;5;241m=[39m get_writer_for_driver(driver)
+[1;32m    313[0m [38;5;28;01mif[39;00m writer [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m--> 314[0m     dataset [38;5;241m=[39m [43mwriter[49m[43m([49m
+[1;32m    315[0m [43m        [49m[43mpath[49m[43m,[49m
+[1;32m    316[0m [43m        [49m[43mmode[49m[43m,[49m
+[1;32m    317[0m [43m        [49m[43mdriver[49m[38;5;241;43m=[39;49m[43mdriver[49m[43m,[49m
+[1;32m    318[0m [43m        [49m[43mwidth[49m[38;5;241;43m=[39;49m[43mwidth[49m[43m,[49m
+[1;32m    319[0m [43m        [49m[43mheight[49m[38;5;241;43m=[39;49m[43mheight[49m[43m,[49m
+[1;32m    320[0m [43m        [49m[43mcount[49m[38;5;241;43m=[39;49m[43mcount[49m[43m,[49m
+[1;32m    321[0m [43m        [49m[43mcrs[49m[38;5;241;43m=[39;49m[43mcrs[49m[43m,[49m
+[1;32m    322[0m [43m        [49m[43mtransform[49m[38;5;241;43m=[39;49m[43mtransform[49m[43m,[49m
+[1;32m    323[0m [43m        [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mdtype[49m[43m,[49m
+[1;32m    324[0m [43m        [49m[43mnodata[49m[38;5;241;43m=[39;49m[43mnodata[49m[43m,[49m
+[1;32m    325[0m [43m        [49m[43msharing[49m[38;5;241;43m=[39;49m[43msharing[49m[43m,[49m
+[1;32m    326[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m
+[1;32m    327[0m [43m    [49m[43m)[49m
+[1;32m    328[0m [38;5;28;01melse[39;00m:
+[1;32m    329[0m     [38;5;28;01mraise[39;00m DriverCapabilityError(
+[1;32m    330[0m         [38;5;124m"[39m[38;5;124mWriter does not exist for driver: [39m[38;5;132;01m%s[39;00m[38;5;124m"[39m [38;5;241m%[39m [38;5;28mstr[39m(driver)
+[1;32m    331[0m     )
+
+File [0;32mrasterio/_io.pyx:1461[0m, in [0;36mrasterio._io.DatasetWriterBase.__init__[0;34m()[0m
+
+[0;31mValueError[0m: Given nodata value, nan, is beyond the valid range of its data type, uint16.
+

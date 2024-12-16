@@ -47,7 +47,7 @@ import matplotlib.pyplot as plt
 
 # Calculate a new band adding the `red` and `nir` bands, returning an `Xarray.DataArray`.
 
-# In[2]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=150)
@@ -74,7 +74,7 @@ plt.tight_layout(pad=1)
 # 
 # Let's start by looking at the original image in true color.
 
-# In[3]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -92,7 +92,7 @@ plt.tight_layout(pad=1)
 
 # Calculate a vegetation index, returning an `Xarray.DataArray`.
 
-# In[4]:
+# In[ ]:
 
 
 with gw.open(rgbn) as ds:
@@ -103,7 +103,7 @@ with gw.open(rgbn) as ds:
 
 # Or use the configuration context to set parameters.
 
-# In[5]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=150)
@@ -121,7 +121,7 @@ plt.tight_layout(pad=1)
 # 
 # This allows us to extend EVI calculations back in time using AVHRR, and avoids some problems with the blue band which tends to be noisy.
 
-# In[6]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=150)
@@ -138,7 +138,7 @@ plt.tight_layout(pad=1)
 # 
 # We can calculate it using the generic `norm_diff` function for any two-band combination.
 
-# In[7]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=150)
@@ -153,7 +153,7 @@ plt.tight_layout(pad=1)
 # ### Tasseled Cap Transformations
 # Tasseled cap tranform uses a linear equation to try to differentiate different components of the spectrum that are of interest for vegetation dynamics such as phenological stages. The output includes three bands including `brightness`, `greeness` for vegetation, and `wetness` as an idicator of soil and canopy moisture. Use `.sel(band='wetness')` to select them individually.
 
-# In[8]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=150)

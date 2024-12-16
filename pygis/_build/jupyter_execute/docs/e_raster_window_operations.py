@@ -87,7 +87,7 @@ import matplotlib.pyplot as plt
 # 
 # Let's create a raster (click the + below to show code cell).
 
-# In[2]:
+# In[ ]:
 
 
 # Generate mesh grid for rasters
@@ -146,7 +146,7 @@ print(raster)
 # To create a non-rectangular shape, simply add `0`s in the kernel positions to be ignored.
 # ```
 
-# In[3]:
+# In[ ]:
 
 
 # Create a kernel to calculate the average
@@ -165,7 +165,7 @@ kernel_array = np.ravel(kernel)
 # 
 # The first array is the output array, which has the same shape as that of the input raster. We will initially fill the array with placeholder values. This array will be the final result that is exported and saved.
 
-# In[4]:
+# In[ ]:
 
 
 # Create raster array with placeholder values in shape of raster
@@ -180,7 +180,7 @@ print(output_rio)
 
 # The second array, initially filled with `0`s, will hold the pixel value as calculated from the vectorized sliding windows (e.g., mean). Since we are not performing calculations on any edge pixels, the shape of this array is slightly smaller than that of the input raster and also dependent on the shape of the kernel. This array will be inserted into and replace the non-edge placeholder values in the output array (which we just created).
 
-# In[5]:
+# In[ ]:
 
 
 # Create raster array used to store window operation calculations for each pixel (excluding boundary pixels)
@@ -197,7 +197,7 @@ print(aggregate)
 # 
 # The next step is to generate the vectorized sliding windows. The shape of the vectorized sliding windows depends on the kernel shape, so we utilize indices and slicing to obtain the extent of a vectorized sliding window for each position in the kernel.
 
-# In[6]:
+# In[ ]:
 
 
 # Generate row index pairs for slicing
@@ -219,7 +219,7 @@ print(combos)
 # 
 # The product is then added to the array that keeps track of the running total.
 
-# In[7]:
+# In[ ]:
 
 
 # Create empty list to store each window operation calculation
@@ -243,7 +243,7 @@ print(aggregate)
 
 # Once we get the aggregate of all windows, we can perform additional computations. In this case, we multiply all values by `2`.
 
-# In[8]:
+# In[ ]:
 
 
 # Get average value
@@ -261,7 +261,7 @@ print(aggregate)
 # To get the maximum or minimum value of a pixel and its surrounding neighbors, the kernel should be filled with values of `1` so that the pixel values don't change.
 # ```
 
-# In[9]:
+# In[ ]:
 
 
 # Get maximum value
@@ -275,7 +275,7 @@ print(window_maximum)
 # 
 # In this example, each non-edge output pixel value is the average pixel value--with pixel values drawn from the input raster--of the 8 pixels surrounding that pixel and the pixel itself.
 
-# In[10]:
+# In[ ]:
 
 
 # Use kernel shape to determine the row and column index extent of the calculated array
@@ -291,7 +291,7 @@ print(output_rio)
 
 # Finally, we can export the raster (click the + below to show code cell).
 
-# In[11]:
+# In[ ]:
 
 
 # Export raster
@@ -321,7 +321,7 @@ with rasterio.open(
 # 
 # For more information this function, see the [function documentation](https://geowombat.readthedocs.io/en/latest/moving.html).
 
-# In[12]:
+# In[ ]:
 
 
 # Open file

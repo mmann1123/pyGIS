@@ -1167,3 +1167,41 @@ with gw.open(
 
 plt.tight_layout(pad=1)
 # %%
+
+import geowombat as gw
+from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
+from geowombat.ml import fit, predict, fit_predict
+import geopandas as gpd
+from sklearn_xarray.preprocessing import Featurizer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.naive_bayes import GaussianNB
+import matplotlib.pyplot as plt
+
+le = LabelEncoder()
+
+# The labels are string names, so here we convert them to integers
+labels = gpd.read_file(l8_224078_20200518_polygons)
+labels['lc'] = le.fit(labels.name).transform(labels.name)
+print(labels)
+
+pl = Pipeline([('scaler', StandardScaler()),
+               ('pca', PCA()),
+               ('clf', GaussianNB())])
+
+param_grid={"scaler__with_std":[True,False],
+            "pca__n_components": [1, 2, 3]
+            }
+fig, ax = plt.subplots(dpi=200,figsize=(5,5))
+
+with gw.config.update(ref_res=150):
+   with gw.open([l8_224078_20200518, l8_224078_20200518], 
+                # time_names=['t1', 't2'], 
+                stack_dim='band', 
+                nodata=0) as src:
+        y = fit_predict(src, pl, labels, col='lc')
+        print(y)
+        # plot one time period prediction
+        y.plot(robust=True, ax=ax)
+# %%

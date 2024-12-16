@@ -57,7 +57,7 @@ print(labels)
 # 
 #  In this example we will fit and predict the model in two steps. The `fit` method returns three objects, a transformed version of the original dataset `X` that can be used by sklearn, `Xy` a tuple containing the data used for training `(X,y)` where any data outside the polygons is removed, and the trained pipeline `clf` object.
 
-# In[2]:
+# In[ ]:
 
 
 import matplotlib.pyplot as plt
@@ -80,7 +80,7 @@ plt.tight_layout(pad=1)
 
 # In order to fit and predict to our original data in one step, we simply use `fit_predict`:
 
-# In[3]:
+# In[ ]:
 
 
 from geowombat.ml import fit_predict
@@ -98,7 +98,7 @@ plt.tight_layout(pad=1)
 # 
 # In this example we will use [kmeans](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image.
 
-# In[4]:
+# In[ ]:
 
 
 from sklearn.cluster import KMeans
@@ -120,7 +120,7 @@ plt.tight_layout(pad=1)
 # 
 # If you have a stack of time series data it is simple to apply the same method as we described previously, except we need to open multiple images, set `stack_dim` to 'time' and set the `time_names`.  *Note* we are just pretending we have two dates of LandSat imagery here.
 
-# In[5]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
@@ -138,7 +138,7 @@ with gw.config.update(ref_res=150):
 
 # If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:
 
-# In[6]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200,figsize=(5,5))
@@ -175,7 +175,7 @@ with gw.config.update(ref_res=150):
 # 
 # So `"pca__n_components": [1, 2, 3]` says that for the `pca` step of the pipeline, we will try out tree different values for the parameter `n_components`, allowing us to choose the one that performs best at predicting our 'testing' data.
 
-# In[7]:
+# In[ ]:
 
 
 from sklearn.model_selection import GridSearchCV, KFold
@@ -216,4 +216,29 @@ plt.tight_layout(pad=1)
 
 # In order to create a model with the optimal parameters we need to use `gridsearch.best_params_`, which holds a dictionary of each parameter and its optimal value. To 'use' these values we need to update the parameters held in our returned pipeline, `pipe`, by using the `.set_params` method. We use `**` to unpack the dictionary values, tutorial on [unpacking here](https://medium.com/ml-and-automation/how-to-unpack-list-dictionary-tuple-in-python-c0705d29931c).
 # 
-# Notice that the `gridsearch` has a few attributes of interest. This includes all the results of the kfold rounds `.cv_results_`, the best score obtained `.best_score_`, and the ideal set of parameters to use in the pipeline `.best_params_`.  This lase one `.best_params_` will be use to update our `pipe` pipeline for prediction.
+# Notice that the `gridsearch` has a few attributes of interest. This includes all the results of the kfold rounds `.cv_results_`, the best score obtained `.best_score_`, and the ideal set of parameters to use in the pipeline `.best_params_`.  This lase one `.best_params_` will be use to update our `pipe` pipeline for prediction. 
+# 
+# ## Handling Missing Data
+# 
+# Missing data can be a real problem when working with remote sensing data. In the case of Landsat data, missing data is often represented by a value of 0. Or perhaps you already have masked missing data values as `np.nan`. 
+# 
+# This can be a problem when using sklearn models *that expect all data to be present*. To handle this we can use the `nodata` value in `gewombat.open()` and `SimpleImputer` from sklearn in our pipeline. 
+# 
+# If we had a dataset that had 0s as missing data we could use the following to mask out 0s and replace with `np.nan`, then we can pass that data to our pipeline, that replaces `np.nan` with the mean of the column. 
+# 
+# ``` python
+# from sklearn.impute import SimpleImputer
+# 
+# classifier = Pipeline(
+#     [
+#         ("remove_nan", SimpleImputer(missing_values=np.nan, strategy="mean")),
+#         ("clf", KMeans(n_clusters=6, random_state=0)),
+#     ]
+# )
+# 
+# with gw.open(files, 
+#              band_names=[band_name],
+#              time_names = dates,nodata=-9999  ) as ds:
+#     ds = ds.gw.mask_nodata()
+#     y = fit_predict(ds, classifier)
+# ```

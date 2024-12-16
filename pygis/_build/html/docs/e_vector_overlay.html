@@ -1,121 +1,184 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="Learn how to overlay and join vector data to create new geometries." lang="en" name="description" xml:lang="en" />
+<meta content="spatial, overlay, join, vector, shapefile" name="keywords" />
+<meta content="en_US" property="og:locale" />
 
     <title>Spatial Overlays and Joins &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script src="../_static/tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/e_vector_overlay';</script>
     <link rel="canonical" href="https://pygis.io/docs/e_vector_overlay.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Spatial Joins" href="e_spatial_joins.html" />
     <link rel="prev" title="Extracting Spatial Data" href="e_extraction.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MQPNBR6XWJ');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/pygis.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Python Open Source Spatial Programming & Remote Sensing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -124,667 +187,304 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  0 - Get Started in Spatial Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="b_intro_py.html">
-   Welcome - Let’s get started
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_about_py.html">
-   Getting Started in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_getting_started.html">
-   Setting up a Normal Python Environment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_conda_started2.html">
-   Geospatial Environment Installation Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_python_by_example.html">
-   An Introductory Example
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="b_learn_more.html">
-   Learn More
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  1 - Spatial Data Types in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="c_features.html">
-   Spatial Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_store_features.html">
-   Data Storage Formats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_vectors.html">
-   Working with Spatial Vector Data using GeoPandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_new_vectors.html">
-   Manipulating Spatial Objects: Points, Lines, Polygons in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="c_rasters.html">
-   Spatial Raster Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  2 - Nature of Coordinate Systems in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_crs_what_is_it.html">
-   What is a CRS?
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_understand_crs_codes.html">
-   Understanding a CRS: Proj4 and CRS codes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_affine.html">
-   Affine Transforms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_vector_crs_intro.html">
-   Vector Coordinate Reference Systems (CRS)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_raster_crs_intro.html">
-   Raster Coordinate Reference Systems (CRS)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  3 - Vector Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_attributes.html">
-   Attributes &amp; Indexing for Vector Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_buffer_neighbors.html">
-   Proximity Analysis - Buffers, Nearest Neighbor
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_vector_merge_dissolve.html">
-   Merge Data &amp; Dissolve Polygons
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_extraction.html">
-   Extracting Spatial Data
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Spatial Overlays and Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_spatial_joins.html">
-   Spatial Joins
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_summarize_vector.html">
-   Point Density Measures - Counts &amp; Kernel Density
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_interpolation.html">
-   Spatial Interpolation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  4 - Raster Operations in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="e_new_rasters.html">
-   Reading &amp; Writing Rasters with Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_reproject.html">
-   Reproject Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_resample.html">
-   Resampling &amp; Registering Rasters w. Rasterio and Geowombat
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_math.html">
-   Band Math w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_replace_values.html">
-   Replacing Values w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_rasterize.html">
-   Rasterize Vectors w. Rasterio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e_raster_window_operations.html">
-   Window Operations with Rasterio and GeoWombat
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  5 - Accessing OSM &amp; Census Data in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_osm.html">
-   Accessing OSM Data in Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="d_access_census.html">
-   Accessing Census and ACS Data in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  6 - Remote Sensing in Python
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_io.html">
-   Reading/Writing Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_config.html">
-   Configuration manager
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_edit.html">
-   Editing Rasters and Remotely Sensed Data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_plot.html">
-   Plot Remote Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_crs.html">
-   Remote Sensing Coordinate Reference Systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_mosaic.html">
-   Handle Multiple Remotely Sensed Images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_band_math.html">
-   Band Math &amp; Vegetation Indices
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_extraction.html">
-   Raster Data Extraction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="f_rs_ml_predict.html">
-   Spatial Prediction using ML in Python
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Hire pygis.io
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="g_hire.html">
-   Pygis.io Consultancy
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/mmann1123/pyGIS/main?urlpath=tree/./pygis/docs/e_vector_overlay.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_vector_overlay.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_vector_overlay.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/e_vector_overlay.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_vector_overlay.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_vector_overlay.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Edit this page"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
-  </span>
-<span class="headerbtn__text-container">suggest edit</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/docs/e_vector_overlay.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download notebook file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="../_sources/docs/e_vector_overlay.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overlays">
-   Overlays
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#union">
-     Union
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#intersection">
-     Intersection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identity">
-     Identity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#difference-erase">
-     Difference (Erase)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#merge">
-   Merge
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spatial-join">
-     Spatial Join
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#left-join">
-       Left Join
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#right-join">
-       Right Join
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#inner-join">
-       Inner Join
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Spatial Overlays and Joins</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overlays">
-   Overlays
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#union">
-     Union
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#intersection">
-     Intersection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identity">
-     Identity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#difference-erase">
-     Difference (Erase)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#merge">
-   Merge
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spatial-join">
-     Spatial Join
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#left-join">
-       Left Join
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#right-join">
-       Right Join
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#inner-join">
-       Inner Join
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spatial Overlays and Joins</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overlays">Overlays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersection">Intersection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-erase">Difference (Erase)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">Merge</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-join">Spatial Join</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#left-join">Left Join</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#right-join">Right Join</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-join">Inner Join</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
@@ -796,20 +496,25 @@ title="Print to PDF"
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="c_vectors.html"><span class="doc std std-doc">Spatial Vector Data</span></a></p></li>
-<li><p><a class="reference internal" href="e_attributes.html"><span class="doc std std-doc">Attributes &amp; Indexing for Vector Data</span></a></p></li>
-<li><p><a class="reference internal" href="c_new_vectors.html"><span class="doc std std-doc">Creating Spatial Vector Data</span></a></p></li>
+<li><p><a class="reference internal" href="c_vectors.html"><span class="std std-doc">Spatial Vector Data</span></a></p></li>
+<li><p><a class="reference internal" href="e_attributes.html"><span class="std std-doc">Attributes &amp; Indexing for Vector Data</span></a></p></li>
+<li><p><a class="reference internal" href="c_new_vectors.html"><span class="std std-doc">Creating Spatial Vector Data</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="spatial-overlays-and-joins">
-<h1>Spatial Overlays and Joins<a class="headerlink" href="#spatial-overlays-and-joins" title="Permalink to this headline">#</a></h1>
-<p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id1">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id2">2</a></p>
+<h1>Spatial Overlays and Joins<a class="headerlink" href="#spatial-overlays-and-joins" title="Link to this heading">#</a></h1>
+<p>Combining two or more datasets together is a fundamental aspect of GIS. Using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we can create new geometries from existing datasets by overlaying them on top of each other, identifying where they do and do not overlap, and deciding what parts we want to extract from these overlays. For each of these new shapes, the attribute data from the existing constituent datasets are also combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p>In this chapter, we will focus on vector overlays, which involve combining vector data. We’ll explore five types of vector overlays and merging: union, intersection, difference (erase), identity, and spatial join.</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p>First, let’s import the necessary modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
@@ -817,6 +522,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <p>To illustrate these geoprocessing tools, we will utilize shapefiles of San Francisco Bay Area county boundaries, Bay Area watershed boundaries, and wells within the Bay Area and the surrounding 50 km. We will load in the data and reproject the data (click the + below to show code cell).</p>
 <div class="admonition important">
@@ -824,6 +530,11 @@ title="Print to PDF"
 <p>All the data must have the same coordinate system in order for extraction to work correctly.</p>
 </div>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
 
@@ -850,9 +561,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <p>We’ll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Display the first and last two rows of attribute table.&#39;&#39;&#39;</span>
@@ -920,10 +637,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
 <section id="overlays">
-<h2>Overlays<a class="headerlink" href="#overlays" title="Permalink to this headline">#</a></h2>
+<h2>Overlays<a class="headerlink" href="#overlays" title="Link to this heading">#</a></h2>
 <p>For the first four, we can use the <code class="docutils literal notranslate"><span class="pre">overlay</span></code> function in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>. We simply change the argument for the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter to the overlay of our choosing.</p>
 <p>We will use the county boundaries and watershed boundaries shapefiles in these examples. The overlays will allow us to see what areas are only in a county, only in a watershed, or in both.</p>
 <p>Let’s briefly examine the attribute table of our shapefiles and plot the data so that we know what we’re working with.</p>
@@ -948,7 +666,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area County and Watershed Boundaries&#39;)
 </pre></div>
 </div>
-<img alt="../_images/e_vector_overlay_7_1.png" src="../_images/e_vector_overlay_7_1.png" />
+<img alt="../_images/4eeb1052571a72072559adc05b394ce8b5186342ce807f49f11d039687bc6ef0.png" src="../_images/4eeb1052571a72072559adc05b394ce8b5186342ce807f49f11d039687bc6ef0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -995,7 +713,7 @@ title="Print to PDF"
     <tr>
       <th>2</th>
       <td>Marin County</td>
-      <td>MULTIPOLYGON (((1830493.060 653832.167, 183050...</td>
+      <td>MULTIPOLYGON (((1830493.06 653832.167, 1830505...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1010,17 +728,17 @@ title="Print to PDF"
     <tr>
       <th>5</th>
       <td>San Mateo County</td>
-      <td>MULTIPOLYGON (((1836712.268 569216.860, 183671...</td>
+      <td>MULTIPOLYGON (((1836712.268 569216.86, 1836717...</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Santa Clara County</td>
-      <td>MULTIPOLYGON (((1858733.082 607586.450, 185874...</td>
+      <td>MULTIPOLYGON (((1858733.082 607586.45, 1858743...</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Solano County</td>
-      <td>MULTIPOLYGON (((1875491.908 673077.900, 187549...</td>
+      <td>MULTIPOLYGON (((1875491.908 673077.9, 1875491....</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1075,7 +793,7 @@ title="Print to PDF"
     <tr>
       <th>2</th>
       <td>GUALALA-SALMON</td>
-      <td>POLYGON ((1747656.800 769294.908, 1748144.659 ...</td>
+      <td>POLYGON ((1747656.8 769294.908, 1748144.659 76...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1100,7 +818,7 @@ title="Print to PDF"
     <tr>
       <th>7</th>
       <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>POLYGON ((1826732.900 640369.438, 1827321.624 ...</td>
+      <td>POLYGON ((1826732.9 640369.438, 1827321.624 63...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1112,15 +830,15 @@ title="Print to PDF"
 </div></div></div>
 </div>
 <section id="union">
-<h3>Union<a class="headerlink" href="#union" title="Permalink to this headline">#</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept. <a class="footnote-reference brackets" href="#gpd-set" id="id3">1</a></p>
+<h3>Union<a class="headerlink" href="#union" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='union'</span></code>, all data (all geometries regardless of overlap) is kept. <a class="footnote-reference brackets" href="#gpd-set" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <figure class="align-default" id="union-of-all-geometries-keeps-all-data">
 <img alt="../_images/vector_union.jpg" src="../_images/vector_union.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id5">2</a></p>
+<p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get union</span>
@@ -1139,7 +857,7 @@ Table shape (rows, columns): (46, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2983314/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   union_result = gpd.overlay(counties, watersheds, how = &#39;union&#39;)
 </pre></div>
 </div>
@@ -1175,9 +893,9 @@ First two rows:
     </tr>
     <tr>
       <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
+      <td>Alameda County</td>
+      <td>SAN_FRANCISCO_BAY</td>
+      <td>MULTIPOLYGON (((1842804.963 642171.499, 184280...</td>
     </tr>
   </tbody>
 </table>
@@ -1212,13 +930,13 @@ First two rows:
       <th>44</th>
       <td>NaN</td>
       <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>MULTIPOLYGON (((1853776.327 587836.804, 185377...</td>
+      <td>MULTIPOLYGON (((1850534.044 591674.474, 185053...</td>
     </tr>
     <tr>
       <th>45</th>
       <td>NaN</td>
       <td>COYOTE</td>
-      <td>MULTIPOLYGON (((1915414.106 583617.325, 191566...</td>
+      <td>MULTIPOLYGON (((1915334.593 586887.473, 191534...</td>
     </tr>
   </tbody>
 </table>
@@ -1233,20 +951,20 @@ First two rows:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e_vector_overlay_13_0.png" src="../_images/e_vector_overlay_13_0.png" />
+<img alt="../_images/29c723d14ab64dbaf0d70f23d8362275b29b444a7be687a947000f225aa91936.png" src="../_images/29c723d14ab64dbaf0d70f23d8362275b29b444a7be687a947000f225aa91936.png" />
 </div>
 </div>
 </section>
 <section id="intersection">
-<h3>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">#</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id6">1</a></p>
+<h3>Intersection<a class="headerlink" href="#intersection" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='intersection'</span></code>, only the areas where all datasets contain data (have geometries) are combined together. <a class="footnote-reference brackets" href="#gpd-set" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <figure class="align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
 <img alt="../_images/vector_intersection.jpg" src="../_images/vector_intersection.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id8">2</a></p>
+<p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get intersection</span>
@@ -1300,9 +1018,9 @@ First two rows:
     </tr>
     <tr>
       <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
+      <td>Alameda County</td>
+      <td>SAN_FRANCISCO_BAY</td>
+      <td>MULTIPOLYGON (((1842804.963 642171.499, 184280...</td>
     </tr>
   </tbody>
 </table>
@@ -1335,29 +1053,29 @@ First two rows:
   <tbody>
     <tr>
       <th>26</th>
-      <td>Santa Clara County</td>
-      <td>SAN_FRANCISCO_COASTAL_SOUTH</td>
-      <td>MULTIPOLYGON (((1855603.246 585515.731, 185557...</td>
+      <td>Sonoma County</td>
+      <td>BODEGA_BAY</td>
+      <td>POLYGON ((1801502.842 693906.337, 1800959.312 ...</td>
     </tr>
     <tr>
       <th>27</th>
       <td>Sonoma County</td>
-      <td>GUALALA-SALMON</td>
-      <td>MULTIPOLYGON (((1770288.265 719971.781, 177026...</td>
+      <td>TOMALES-DRAKE_BAYS</td>
+      <td>POLYGON ((1803454.347 692154.886, 1803299.962 ...</td>
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../_images/e_vector_overlay_15_4.png" src="../_images/e_vector_overlay_15_4.png" />
+</div></div><img alt="../_images/f209a577e8e468953bb4880f6e0666d91fdabc42b84eddafc2c9d8496e390ac9.png" src="../_images/f209a577e8e468953bb4880f6e0666d91fdabc42b84eddafc2c9d8496e390ac9.png" />
 </div>
 </div>
 </section>
 <section id="identity">
-<h3>Identity<a class="headerlink" href="#identity" title="Permalink to this headline">#</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded. <a class="footnote-reference brackets" href="#gpd-set" id="id9">1</a></p>
+<h3>Identity<a class="headerlink" href="#identity" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='identity'</span></code>, data from both layers are combined, but only the geometries that are unique to the first dataset or are covered by both datasets are kept. Any geometries unique to the second dataset (no overlapping with the first dataset) are discarded. <a class="footnote-reference brackets" href="#gpd-set" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <figure class="align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
 <img alt="../_images/vector_identity.jpg" src="../_images/vector_identity.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values.</p>
@@ -1383,7 +1101,7 @@ Table shape (rows, columns): (37, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2983314/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   identity_result = gpd.overlay(counties, watersheds, how = &#39;identity&#39;)
 </pre></div>
 </div>
@@ -1419,9 +1137,9 @@ First two rows:
     </tr>
     <tr>
       <th>1</th>
-      <td>Contra Costa County</td>
-      <td>SAN_PABLO_BAY</td>
-      <td>MULTIPOLYGON (((1850629.396 650637.866, 185062...</td>
+      <td>Alameda County</td>
+      <td>SAN_FRANCISCO_BAY</td>
+      <td>MULTIPOLYGON (((1842804.963 642171.499, 184280...</td>
     </tr>
   </tbody>
 </table>
@@ -1456,7 +1174,7 @@ First two rows:
       <th>35</th>
       <td>Solano County</td>
       <td>NaN</td>
-      <td>MULTIPOLYGON (((1879889.331 727073.884, 188002...</td>
+      <td>MULTIPOLYGON (((1875488.683 673062.075, 187548...</td>
     </tr>
     <tr>
       <th>36</th>
@@ -1466,17 +1184,17 @@ First two rows:
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../_images/e_vector_overlay_17_5.png" src="../_images/e_vector_overlay_17_5.png" />
+</div></div><img alt="../_images/e9a42df4672a77bcdfd4d7834a607a7dc9f64a7ff40579c58af3694702ef3841.png" src="../_images/e9a42df4672a77bcdfd4d7834a607a7dc9f64a7ff40579c58af3694702ef3841.png" />
 </div>
 </div>
 </section>
 <section id="difference-erase">
-<h3>Difference (Erase)<a class="headerlink" href="#difference-erase" title="Permalink to this headline">#</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept. <a class="footnote-reference brackets" href="#gpd-set" id="id10">1</a>, <a class="footnote-reference brackets" href="#bolstad" id="id11">2</a></p>
+<h3>Difference (Erase)<a class="headerlink" href="#difference-erase" title="Link to this heading">#</a></h3>
+<p>With <code class="docutils literal notranslate"><span class="pre">how='difference'</span></code>, the areas covered by the second dataset is used to “cut out” or erase those corresponding areas in the first dataset. In other words, only the areas in the first dataset that do not overlap with the second dataset are kept. <a class="footnote-reference brackets" href="#gpd-set" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <figure class="align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
 <img alt="../_images/vector_erase.jpg" src="../_images/vector_erase.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was “combined” with the first dataset by discarding some data (altering the geometry) from the first dataset.</p>
@@ -1502,7 +1220,7 @@ Table shape (rows, columns): (9, 2)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2983314/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   difference_result = gpd.overlay(counties, watersheds, how = &#39;difference&#39;)
 </pre></div>
 </div>
@@ -1532,12 +1250,12 @@ First two rows:
     <tr>
       <th>0</th>
       <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1913838.781 610713.920, 191389...</td>
+      <td>MULTIPOLYGON (((1864895.796 644294.887, 186520...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Contra Costa County</td>
-      <td>MULTIPOLYGON (((1867018.499 674101.332, 186722...</td>
+      <td>MULTIPOLYGON (((1905610.501 667347.414, 190571...</td>
     </tr>
   </tbody>
 </table>
@@ -1570,7 +1288,7 @@ First two rows:
     <tr>
       <th>7</th>
       <td>Solano County</td>
-      <td>MULTIPOLYGON (((1879889.331 727073.884, 188002...</td>
+      <td>MULTIPOLYGON (((1875488.683 673062.075, 187548...</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1579,45 +1297,46 @@ First two rows:
     </tr>
   </tbody>
 </table>
-</div></div><img alt="../_images/e_vector_overlay_19_5.png" src="../_images/e_vector_overlay_19_5.png" />
+</div></div><img alt="../_images/864ea036883b7796e58c808675806e8b5ff6b380fbb38df2eb7461819b606eb6.png" src="../_images/864ea036883b7796e58c808675806e8b5ff6b380fbb38df2eb7461819b606eb6.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="merge">
-<h2>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">#</a></h2>
+<h2>Merge<a class="headerlink" href="#merge" title="Link to this heading">#</a></h2>
 <section id="spatial-join">
-<h3>Spatial Join<a class="headerlink" href="#spatial-join" title="Permalink to this headline">#</a></h3>
-<p>With spatial join, attributes from one dataset are appended to those in another dataset based on a specified relative spatial relationship. <a class="footnote-reference brackets" href="#gpd-merge" id="id12">3</a>, <a class="footnote-reference brackets" href="#esri-join" id="id13">4</a></p>
-<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we use the <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> function. In addition to passing the datasets as arguments, and we also pass arguments for two parameters <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code>. The <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another. <a class="footnote-reference brackets" href="#gpd-merge" id="id14">3</a></p>
+<h3>Spatial Join<a class="headerlink" href="#spatial-join" title="Link to this heading">#</a></h3>
+<p>With spatial join, attributes from one dataset are appended to those in another dataset based on a specified relative spatial relationship. <a class="footnote-reference brackets" href="#gpd-merge" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#esri-join" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, we use the <code class="docutils literal notranslate"><span class="pre">sjoin()</span></code> function. In addition to passing the datasets as arguments, and we also pass arguments for two parameters <code class="docutils literal notranslate"><span class="pre">op</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code>. The <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter specifies the spatial relationship needed in order for the attributes of one feature to be joined to another. <a class="footnote-reference brackets" href="#gpd-merge" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
 <p>The following spatial relationships are available in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Spatial Relationship</p></th>
-<th class="text-align:right head"><p>Description</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Spatial Relationship</p></th>
+<th class="head text-right"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">contains</span></code></p></td>
-<td class="text-align:right"><p>geometry’s points are not to the exterior of the other geometry, provided that the geometry’s interior contains at least one point of the other geometry’s interior</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">contains</span></code></p></td>
+<td class="text-right"><p>geometry’s points are not to the exterior of the other geometry, provided that the geometry’s interior contains at least one point of the other geometry’s interior</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">crosses</span></code></p></td>
-<td class="text-align:right"><p>geometry’s interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">crosses</span></code></p></td>
+<td class="text-right"><p>geometry’s interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">intersects</span></code></p></td>
-<td class="text-align:right"><p>geometry’s boundary or interior touches or crosses any part of the other geometry</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">intersects</span></code></p></td>
+<td class="text-right"><p>geometry’s boundary or interior touches or crosses any part of the other geometry</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">overlaps</span></code></p></td>
-<td class="text-align:right"><p>geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">overlaps</span></code></p></td>
+<td class="text-right"><p>geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">touches</span></code></p></td>
-<td class="text-align:right"><p>geometry shares at least one point with the other geometry, provided that no part of the geometry’s interior intersects with the other geometry</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">touches</span></code></p></td>
+<td class="text-right"><p>geometry shares at least one point with the other geometry, provided that no part of the geometry’s interior intersects with the other geometry</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">within</span></code></p></td>
-<td class="text-align:right"><p>geometry is enclosed in the other geometry (geometry’s boundary and interior intersects with the other geometry’s interior only)</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">within</span></code></p></td>
+<td class="text-right"><p>geometry is enclosed in the other geometry (geometry’s boundary and interior intersects with the other geometry’s interior only)</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These relationships are defined from the first dataset to the second dataset (for example, <code class="docutils literal notranslate"><span class="pre">contains</span></code> specifies that a feature from the first dataset must contain a feature from the second dataset for a join to occur).</p>
@@ -1626,25 +1345,26 @@ First two rows:
 <p class="admonition-title">Warning</p>
 <p>Depending on the argument specified in the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;intersects&quot;</span></code> will count that point twice and allocate (join) it to both geometries that share the boundary, whereas <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;within&quot;</span></code> will not count or allocate the point at all.</p>
 </div>
-<p>Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter. <a class="footnote-reference brackets" href="#gpd-merge" id="id15">3</a>, <a class="footnote-reference brackets" href="#esri-join" id="id16">4</a></p>
-<table class="colwidths-auto table">
+<p>Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter. <a class="footnote-reference brackets" href="#gpd-merge" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#esri-join" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Join Type</p></th>
-<th class="text-align:right head"><p>Description</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Join Type</p></th>
+<th class="head text-right"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">left</span></code></p></td>
-<td class="text-align:right"><p>all features from the first or left dataset are kept, regardless if the feature met the specified spatial relationship criteria for a join/regardless if there is a match</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">left</span></code></p></td>
+<td class="text-right"><p>all features from the first or left dataset are kept, regardless if the feature met the specified spatial relationship criteria for a join/regardless if there is a match</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">right</span></code></p></td>
-<td class="text-align:right"><p>all features from the second or right dataset are kept, regardless if the feature met the specified spatial relationship  for a join</p></td>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">right</span></code></p></td>
+<td class="text-right"><p>all features from the second or right dataset are kept, regardless if the feature met the specified spatial relationship  for a join</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p><code class="docutils literal notranslate"><span class="pre">inner</span></code></p></td>
-<td class="text-align:right"><p>only features from both datasets that met the spatial relationship and were joined are kept; the geometries from the first or left dataset are used for the join</p></td>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">inner</span></code></p></td>
+<td class="text-right"><p>only features from both datasets that met the spatial relationship and were joined are kept; the geometries from the first or left dataset are used for the join</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>We’ll illustrate this geoprocessing using the county boundaries shapefile and the well locations shapefile. Let’s quickly examine the wells attribute table and plot both datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1749,7 +1469,7 @@ First two rows:
   <tbody>
     <tr>
       <th>6035</th>
-      <td>NaN</td>
+      <td>None</td>
       <td>Unknown</td>
       <td>Unknown</td>
       <td>0</td>
@@ -1768,11 +1488,11 @@ First two rows:
 </div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area County Boundaries and Well Locations&#39;)
 </pre></div>
 </div>
-<img alt="../_images/e_vector_overlay_21_5.png" src="../_images/e_vector_overlay_21_5.png" />
+<img alt="../_images/1acd6aa68a32df3b59c107d1b76788bee93f864ef58efff1cc76ce2459e0b4eb.png" src="../_images/1acd6aa68a32df3b59c107d1b76788bee93f864ef58efff1cc76ce2459e0b4eb.png" />
 </div>
 </div>
 <section id="left-join">
-<h4>Left Join<a class="headerlink" href="#left-join" title="Permalink to this headline">#</a></h4>
+<h4>Left Join<a class="headerlink" href="#left-join" title="Link to this heading">#</a></h4>
 <p>We’ll first demonstrate a left join. Notice that all features from the left dataset (wells dataset) are kept. The features that did not meet the spatial relationship criteria for a join have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values for the fields that originated from the right dataset (county boundaries dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1788,126 +1508,29 @@ First two rows:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Left Join
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Get inner join</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">left_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Print head and tail of attribute table</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Left Join&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">left_join_result</span><span class="p">)</span>
 
-Table shape (rows, columns): (6037, 7)
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/tools/sjoin.py:110,</span> in <span class="ni">sjoin</span><span class="nt">(left_df, right_df, how, predicate, lsuffix, rsuffix, distance, on_attribute, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">first</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sjoin() got an unexpected keyword argument &#39;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="n">on_attribute</span> <span class="o">=</span> <span class="n">_maybe_make_list</span><span class="p">(</span><span class="n">on_attribute</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="n">_basic_checks</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">how</span><span class="p">,</span> <span class="n">lsuffix</span><span class="p">,</span> <span class="n">rsuffix</span><span class="p">,</span> <span class="n">on_attribute</span><span class="o">=</span><span class="n">on_attribute</span><span class="p">),</span>
 
-First two rows:
+<span class="ne">TypeError</span>: sjoin() got an unexpected keyword argument &#39;op&#39;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2400064-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1968290.923 592019.918)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2400099-001</td>
-      <td>Public Supply</td>
-      <td>Single Well</td>
-      <td>0</td>
-      <td>POINT (1969113.543 595876.691)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>6035</th>
-      <td>NaN</td>
-      <td>Unknown</td>
-      <td>Unknown</td>
-      <td>0</td>
-      <td>POINT (1960933.648 610295.428)</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6036</th>
-      <td>06S02W34B006</td>
-      <td>Observation</td>
-      <td>Single Well</td>
-      <td>152</td>
-      <td>POINT (1861394.207 597916.983)</td>
-      <td>6.0</td>
-      <td>Santa Clara County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_23_5.png" src="../_images/e_vector_overlay_23_5.png" />
 </div>
 </div>
 </section>
 <section id="right-join">
-<h4>Right Join<a class="headerlink" href="#right-join" title="Permalink to this headline">#</a></h4>
+<h4>Right Join<a class="headerlink" href="#right-join" title="Link to this heading">#</a></h4>
 <p>For a right join, all features from the right dataset (county boundaries dataset) are kept but are repeated multiple times. This is because a “new” county feature is created for every well point that falls within a county’s boundary. As a result, because wells must fall within the county boundaries for a join to occur on the county boundaries feature, there are no resulting features with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the attribute table.</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
@@ -1926,127 +1549,10 @@ First two rows:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Right Join
-
-Table shape (rows, columns): (1337, 7)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index_left</th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>824</td>
-      <td>3S/2E 30D 2</td>
-      <td>Observation</td>
-      <td>Single Well</td>
-      <td>44</td>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>670</td>
-      <td>3S/2E 19D 8</td>
-      <td>Observation</td>
-      <td>Part of a nested/multi-completion well</td>
-      <td>260</td>
-      <td>Alameda County</td>
-      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index_left</th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>coname</th>
-      <th>geometry</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>8</th>
-      <td>1697</td>
-      <td>AVCA-01</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>100</td>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>3508</td>
-      <td>11N10W08P001M</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>30</td>
-      <td>Sonoma County</td>
-      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_25_5.png" src="../_images/e_vector_overlay_25_5.png" />
-</div>
 </div>
 </section>
 <section id="inner-join">
-<h4>Inner Join<a class="headerlink" href="#inner-join" title="Permalink to this headline">#</a></h4>
+<h4>Inner Join<a class="headerlink" href="#inner-join" title="Link to this heading">#</a></h4>
 <p>Finally, with an inner join, only the well locations that fall within the county boundaries are kept. These well locations have the county boundaries dataset appended to them. Because it’s an inner join, there are no resulting features with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the attribute table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2061,139 +1567,30 @@ First two rows:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Inner Join
-
-Table shape (rows, columns): (1337, 7)
-
-First two rows:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/.local/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3400: FutureWarning: The `op` parameter is deprecated and will be removed in a future release. Please use the `predicate` parameter instead.
-  if await self.run_code(code, result, async_=asy):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>128</th>
-      <td>NaN</td>
-      <td>Stockwatering</td>
-      <td>Unknown</td>
-      <td>40</td>
-      <td>POINT (1882982.865 701605.988)</td>
-      <td>7</td>
-      <td>Solano County</td>
-    </tr>
-    <tr>
-      <th>129</th>
-      <td>NaN</td>
-      <td>Irrigation</td>
-      <td>Unknown</td>
-      <td>240</td>
-      <td>POINT (1884096.112 699303.331)</td>
-      <td>7</td>
-      <td>Solano County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WELL_NAME</th>
-      <th>WELL_USE</th>
-      <th>WELL_TYPE</th>
-      <th>WELL_DEPTH</th>
-      <th>geometry</th>
-      <th>index_right</th>
-      <th>coname</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1759</th>
-      <td>T2S/R5W-06M01</td>
-      <td>Residential</td>
-      <td>Single Well</td>
-      <td>275</td>
-      <td>POINT (1827410.559 644648.215)</td>
-      <td>4</td>
-      <td>San Francisco County</td>
-    </tr>
-    <tr>
-      <th>2316</th>
-      <td>Kirkham MW130</td>
-      <td>Observation</td>
-      <td>Part of a nested/multi-completion well</td>
-      <td>130</td>
-      <td>POINT (1823285.838 641661.323)</td>
-      <td>4</td>
-      <td>San Francisco County</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><img alt="../_images/e_vector_overlay_27_5.png" src="../_images/e_vector_overlay_27_5.png" />
-</div>
 </div>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="gpd-set"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>,<a href="#id6">4</a>,<a href="#id7">5</a>,<a href="#id9">6</a>,<a href="#id10">7</a>)</span></dt>
-<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a></p>
-</dd>
-<dt class="label" id="bolstad"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id5">2</a>,<a href="#id8">3</a>,<a href="#id11">4</a>)</span></dt>
-<dd><p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
-</dd>
-<dt class="label" id="gpd-merge"><span class="brackets">3</span><span class="fn-backref">(<a href="#id12">1</a>,<a href="#id14">2</a>,<a href="#id15">3</a>)</span></dt>
-<dd><p><a class="reference external" href="https://geopandas.org/docs/user_guide/mergingdata.html">Merging Data, GeoPandas</a></p>
-</dd>
-<dt class="label" id="esri-join"><span class="brackets">4</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id16">2</a>)</span></dt>
-<dd><p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm">Spatial Join (Analysis), Esri</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="gpd-set" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id4">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>,<a role="doc-backlink" href="#id9">6</a>,<a role="doc-backlink" href="#id10">7</a>)</span>
+<p><a class="reference external" href="https://geopandas.org/docs/user_guide/set_operations.html">Set-Operations with Overlay, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="bolstad" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>,<a role="doc-backlink" href="#id8">3</a>,<a role="doc-backlink" href="#id11">4</a>)</span>
+<p>GIS Fundamentals: A First Text on Geographic Information Systems, 5th ed., Paul Bolstad</p>
+</aside>
+<aside class="footnote brackets" id="gpd-merge" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id12">1</a>,<a role="doc-backlink" href="#id14">2</a>,<a role="doc-backlink" href="#id15">3</a>)</span>
+<p><a class="reference external" href="https://geopandas.org/docs/user_guide/mergingdata.html">Merging Data, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="esri-join" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id16">2</a>)</span>
+<p><a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/spatial-join.htm">Spatial Join (Analysis), Esri</a></p>
+</aside>
+</aside>
 </section>
 </section>
 </section>
@@ -2219,38 +1616,100 @@ First two rows:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="e_extraction.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Extracting Spatial Data</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="e_extraction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Extracting Spatial Data</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="e_spatial_joins.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="e_spatial_joins.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Spatial Joins</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overlays">Overlays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#union">Union</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersection">Intersection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identity">Identity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-erase">Difference (Erase)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">Merge</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-join">Spatial Join</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#left-join">Left Join</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#right-join">Right Join</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-join">Inner Join</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman<br/>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
   
-    <div class="extra_footer">
-      <div>
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
     <b>Supported by:</b>  <br>
     <a href="https://geography.columbian.gwu.edu/">
  <img alt="GW Geography" src="../_static/global/GWBlue.png"
@@ -2263,20 +1722,22 @@ First two rows:
 <a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
 </div>
 
-    </div>
-</p>
-        </footer>
-    </div>
-    
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

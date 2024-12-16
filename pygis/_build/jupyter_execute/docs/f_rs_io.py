@@ -45,7 +45,7 @@ with gw.open(l8_224078_20200518) as src:
 # 
 # Let's plot out what we have while removing missing values, stored at `0`, and switch the band order around to be RGB.
 
-# In[2]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200)
@@ -58,7 +58,7 @@ plt.tight_layout(pad=1)
 # 
 # Often, satellite bands will be stored in separate raster files. To open the files as one DataArray, specify a list instead of a file name.
 
-# In[3]:
+# In[ ]:
 
 
 from geowombat.data import l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B4
@@ -71,7 +71,7 @@ with gw.open([l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B
 # 
 # Also note the use of `band_names` parameter. Here we can set it to anything we want for instance `['blue','green','red']`.
 
-# In[4]:
+# In[ ]:
 
 
 from geowombat.data import l8_224078_20200518_B2, l8_224078_20200518_B3, l8_224078_20200518_B4
@@ -86,7 +86,7 @@ with gw.open(
 
 # You will see this looks the same as the multiband raster:
 
-# In[5]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200)
@@ -139,7 +139,7 @@ plt.tight_layout(pad=1)
 # 
 # When a list of files are given, GeoWombat will stack the data by default. To mosaic multiple files into the same band coordinate, use the **mosaic** keyword.
 
-# In[6]:
+# In[ ]:
 
 
 from geowombat.data import l8_224077_20200518_B2, l8_224078_20200518_B2
@@ -151,7 +151,7 @@ with gw.open([l8_224077_20200518_B2, l8_224078_20200518_B2],
 
 # Now let's take a look at the mosaiced band 2 image values.
 
-# In[7]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200)
@@ -167,7 +167,7 @@ plt.tight_layout(pad=1)
 # 
 # Let's pretend for a moment that we have a time series of images from the same tile. We can stack them by passing a list of file names `[l8_224078_20200518, l8_224078_20200518]`, it also helps to be specific and assign `time_names=['t1', 't2']`, and specify which dimension we want to stack our data along with `stack_dim='time'`.
 
-# In[8]:
+# In[ ]:
 
 
 with gw.open([l8_224078_20200518, l8_224078_20200518],
@@ -183,7 +183,7 @@ with gw.open([l8_224078_20200518, l8_224078_20200518],
 # 
 # Many raster files do not have the missing value set properly in their profile. Geowombat makes it easy to set or update the missing data value using `nodata` in either `gw.open` or even in `gw.config.update` if you prefer.
 
-# In[9]:
+# In[ ]:
 
 
 fig, ax = plt.subplots(dpi=200)

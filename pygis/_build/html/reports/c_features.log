@@ -1,0 +1,80 @@
+Traceback (most recent call last):
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/mmann1123/miniconda3/envs/pygis2/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import geopandas as gpd
+import matplotlib.pyplot as plt
+from shapely.geometry import Point
+
+d = {'name': ['Washington\n(38.90, -77.03)', 'Baltimore\n(39.29, -76.61)','Fredrick\n(39.41,-77.40)'], 
+     'geometry': [Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)]}
+
+gdf = gpd.GeoDataFrame(d, crs="EPSG:4326")
+print(gdf)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgpd[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mshapely[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgeometry[39;00m [38;5;28;01mimport[39;00m Point
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geopandas/__init__.py:1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mgeopandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_config[39;00m [38;5;28;01mimport[39;00m options  [38;5;66;03m# noqa[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mgeopandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgeoseries[39;00m [38;5;28;01mimport[39;00m GeoSeries  [38;5;66;03m# noqa[39;00m
+[1;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mgeopandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgeodataframe[39;00m [38;5;28;01mimport[39;00m GeoDataFrame  [38;5;66;03m# noqa[39;00m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geopandas/_config.py:109[0m
+[1;32m    102[0m     [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_compat[39;00m [38;5;28;01mas[39;00m [38;5;21;01mcompat[39;00m
+[1;32m    104[0m     compat[38;5;241m.[39mset_use_pygeos(value)
+[1;32m    107[0m use_pygeos [38;5;241m=[39m Option(
+[1;32m    108[0m     key[38;5;241m=[39m[38;5;124m"[39m[38;5;124muse_pygeos[39m[38;5;124m"[39m,
+[0;32m--> 109[0m     default_value[38;5;241m=[39m[43m_default_use_pygeos[49m[43m([49m[43m)[49m,
+[1;32m    110[0m     doc[38;5;241m=[39m(
+[1;32m    111[0m         [38;5;124m"[39m[38;5;124mWhether to use PyGEOS to speed up spatial operations. The default is True [39m[38;5;124m"[39m
+[1;32m    112[0m         [38;5;124m"[39m[38;5;124mif PyGEOS is installed, and follows the USE_PYGEOS environment variable [39m[38;5;124m"[39m
+[1;32m    113[0m         [38;5;124m"[39m[38;5;124mif set.[39m[38;5;124m"[39m
+[1;32m    114[0m     ),
+[1;32m    115[0m     validator[38;5;241m=[39m_validate_bool,
+[1;32m    116[0m     callback[38;5;241m=[39m_callback_use_pygeos,
+[1;32m    117[0m )
+[1;32m    120[0m options [38;5;241m=[39m Options({[38;5;124m"[39m[38;5;124mdisplay_precision[39m[38;5;124m"[39m: display_precision, [38;5;124m"[39m[38;5;124muse_pygeos[39m[38;5;124m"[39m: use_pygeos})
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geopandas/_config.py:95[0m, in [0;36m_default_use_pygeos[0;34m()[0m
+[1;32m     94[0m [38;5;28;01mdef[39;00m [38;5;21m_default_use_pygeos[39m():
+[0;32m---> 95[0m     [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_compat[39;00m [38;5;28;01mas[39;00m [38;5;21;01mcompat[39;00m
+[1;32m     97[0m     [38;5;28;01mreturn[39;00m compat[38;5;241m.[39mUSE_PYGEOS
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/geopandas/_compat.py:10[0m
+[1;32m      8[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+[1;32m      9[0m [38;5;28;01mimport[39;00m [38;5;21;01mpyproj[39;00m
+[0;32m---> 10[0m [38;5;28;01mimport[39;00m [38;5;21;01mshapely[39;00m
+[1;32m     11[0m [38;5;28;01mimport[39;00m [38;5;21;01mshapely[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgeos[39;00m
+[1;32m     14[0m [38;5;66;03m# -----------------------------------------------------------------------------[39;00m
+[1;32m     15[0m [38;5;66;03m# pandas compat[39;00m
+[1;32m     16[0m [38;5;66;03m# -----------------------------------------------------------------------------[39;00m
+
+File [0;32m~/miniconda3/envs/pygis2/lib/python3.10/site-packages/shapely/__init__.py:1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mlib[39;00m [38;5;28;01mimport[39;00m GEOSException  [38;5;66;03m# NOQA[39;00m
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mlib[39;00m [38;5;28;01mimport[39;00m Geometry  [38;5;66;03m# NOQA[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mlib[39;00m [38;5;28;01mimport[39;00m geos_version, geos_version_string  [38;5;66;03m# NOQA[39;00m
+
+[0;31mImportError[0m: numpy.core.multiarray failed to import
+ImportError: numpy.core.multiarray failed to import
+

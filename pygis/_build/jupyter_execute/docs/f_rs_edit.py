@@ -38,7 +38,7 @@ with gw.open(l8_224078_20200518) as src:
 # ## Setting 'no data' Values  
 # Setting missing data values, when not available in the raster profile, can be done using the [configuration manager](f_rs_config.md) or as an argument in the `open` command.
 
-# In[2]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -62,7 +62,7 @@ with gw.config.update(nodata=0):
 # ## Rescaling Values 
 # Most remotely sensed data is stored as `int` to minimize space. We are often left to rescale the values back to floating point on the backend. This can be done in a few ways in geowombat. If the sensor you are using has a geowombat profile, please use that - refer to [configuration manager docs](f_rs_config.md). If it is not natively supported we can manually set the scaling factor using the `gw.config.update`
 
-# In[3]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -79,7 +79,7 @@ with gw.config.update(scale_factor=0.0001):
 # 
 # The GeoWombat `replace` function mimics `pandas.DataFrame.replace`.
 
-# In[4]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -98,7 +98,7 @@ with gw.open(l8_224078_20200518) as src:
 # 
 # Geowombat also accepts normal mathematical expressions such as multiplication and addition:
 
-# In[5]:
+# In[ ]:
 
 
 import geowombat as gw

@@ -130,13 +130,11 @@ fig, ax = plt.subplots(dpi=200,figsize=(5,5))
 
 with gw.config.update(ref_res=150):
    with gw.open([l8_224078_20200518, l8_224078_20200518], 
-                time_names=['t1', 't2'], 
-                stack_dim='time', 
+                stack_dim='band', 
                 nodata=0) as src:
         y = fit_predict(src, pl, labels, col='lc')
         print(y)
-        # plot one time period prediction
-        y.sel(time='t1').plot(robust=True, ax=ax)
+        y.plot(robust=True, ax=ax)
 ```
 
 If you want to do more sophisticated model tuning using sklearn it is also possible to break up your fit and predict steps as follows:
@@ -215,3 +213,29 @@ plt.tight_layout(pad=1)
 In order to create a model with the optimal parameters we need to use `gridsearch.best_params_`, which holds a dictionary of each parameter and its optimal value. To 'use' these values we need to update the parameters held in our returned pipeline, `pipe`, by using the `.set_params` method. We use `**` to unpack the dictionary values, tutorial on [unpacking here](https://medium.com/ml-and-automation/how-to-unpack-list-dictionary-tuple-in-python-c0705d29931c).
 
 Notice that the `gridsearch` has a few attributes of interest. This includes all the results of the kfold rounds `.cv_results_`, the best score obtained `.best_score_`, and the ideal set of parameters to use in the pipeline `.best_params_`.  This lase one `.best_params_` will be use to update our `pipe` pipeline for prediction. 
+
+## Handling Missing Data
+
+Missing data can be a real problem when working with remote sensing data. In the case of Landsat data, missing data is often represented by a value of 0. Or perhaps you already have masked missing data values as `np.nan`. 
+
+This can be a problem when using sklearn models *that expect all data to be present*. To handle this we can use the `nodata` value in `gewombat.open()` and `SimpleImputer` from sklearn in our pipeline. 
+
+If we had a dataset that had 0s as missing data we could use the following to mask out 0s and replace with `np.nan`, then we can pass that data to our pipeline, that replaces `np.nan` with the mean of the column. 
+
+``` python
+from sklearn.impute import SimpleImputer
+
+classifier = Pipeline(
+    [
+        ("remove_nan", SimpleImputer(missing_values=np.nan, strategy="mean")),
+        ("clf", KMeans(n_clusters=6, random_state=0)),
+    ]
+)
+
+with gw.open(files, 
+             band_names=[band_name],
+             time_names = dates,nodata=-9999  ) as ds:
+    ds = ds.gw.mask_nodata()
+    y = fit_predict(ds, classifier)
+```
+Other sklearn imputers are available, see [here](https://scikit-learn.org/stable/modules/impute.html) for more information.

@@ -82,7 +82,7 @@ with gw.open(rgbn,
 #  
 # To extract values at a coordinate pair, translate the coordinates into array indices. For extraction by geometry, for instance with a shapefile, see [extract by point geometry](f_rs_extraction_point).
 
-# In[2]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -102,7 +102,7 @@ print(data.flatten())
 
 # A latitude/longitude pair can be extracted after converting to the map projection.
 
-# In[3]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -126,7 +126,7 @@ print(data.flatten())
 # 
 # In the example below, 'l8_224078_20200518_points' is a [GeoPackage](https://www.geopackage.org/) of point locations, and the output `df` is a [GeoPandas GeoDataFrame](https://geopandas.org/docs/reference/api/geopandas.GeoDataFrame.html?highlight=geodataframe#geopandas.GeoDataFrame). To extract the raster values at the point locations, use `geowombat.extract`.
 
-# In[4]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -145,7 +145,7 @@ print(df)
 # 
 # In the previous example, the point vector had a CRS that matched the raster (i.e., EPSG=32621, or UTM zone 21N). If the CRS had not matched, the `geowombat.extract` function transforms the CRS on-the-fly.
 
-# In[5]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -167,7 +167,7 @@ print(df)
 
 # Set the data band names using `sensor = 'bgr'`, which assigns the band names blue, green, red.
 
-# In[6]:
+# In[ ]:
 
 
 import geowombat as gw
@@ -184,7 +184,7 @@ print(df)
 # ## Extracting time series images by point geometry
 # We can also easily extract a time series of raster images. Extracted pixel values are provided in 'wide' format with appropriate labels, for instance the column 't2_blue' would be the blue band for the second time period
 
-# In[7]:
+# In[ ]:
 
 
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_points
@@ -204,7 +204,7 @@ print(df)
 # 
 # To extract values within polygons, use the same `geowombat.extract` function.
 
-# In[8]:
+# In[ ]:
 
 
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons
@@ -220,7 +220,7 @@ with gw.config.update(sensor='bgr'):
 # ### Calculate mean pixel value by polygon
 # It is simple then to calculate the mean value of pixels within each polygon by using the polygon `id` column and pandas groupby function. You can easily calculate other statistics like min, max, median etc.
 
-# In[9]:
+# In[ ]:
 
 
 from geowombat.data import l8_224078_20200518, l8_224078_20200518_polygons

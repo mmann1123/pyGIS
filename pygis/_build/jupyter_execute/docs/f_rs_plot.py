@@ -37,7 +37,7 @@ import matplotlib.patheffects as pe
 
 # ## Plot a Single Band Image
 
-# In[2]:
+# In[ ]:
 
 
 from geowombat.data import l8_224077_20200518_B2 
@@ -53,7 +53,7 @@ plt.tight_layout(pad=1)
 # ## Plot a True Color LandSat Image
 # Here we open the image, missing data is removed with `.where(src != 0)`, remember the bands in this file are stored in reverse order (blue, green, red), so we put them back into order `.sel(band=[3, 2, 1])`.
 
-# In[3]:
+# In[ ]:
 
 
 # load example data
@@ -67,7 +67,7 @@ plt.tight_layout(pad=1)
 
 # Note you can also set the missing data value when opening a file (assuming it is not in the raster profile), those values then need to be masked using `gw.mask_nodata()` and `src` updated:
 
-# In[4]:
+# In[ ]:
 
 
 # load example data
@@ -88,7 +88,7 @@ plt.tight_layout(pad=1)
 # ### Color Infrared (vegetation)
 # Here we will look at a common false color combo to assigns the nir band to the color red. This make vegetation appear bright red.
 
-# In[5]:
+# In[ ]:
 
 
 from geowombat.data import rgbn
@@ -152,7 +152,7 @@ plt.savefig("rgb_plot.png", dpi=150)
 # ## Plot LandSat Tile Footprints
 # Here we set up a more complicated plotting function for near IR 'nir'.  Note the use of `footprint_grid`.
 
-# In[6]:
+# In[ ]:
 
 
 from geowombat.data import l8_224077_20200518_B4, l8_224078_20200518_B4
@@ -194,7 +194,7 @@ def plot(bounds_by, ref_image=None, cmap='viridis'):
 
 # The two plots below illustrate how two images can be mosaicked. The orange grids highlight the image footprints while the black grids illustrate the ``DataArray`` chunks.
 
-# In[7]:
+# In[ ]:
 
 
 plot('union')

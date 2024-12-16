@@ -45,7 +45,7 @@ with gw.config.update(ref_crs=proj4):
 
 # Let's take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use `.sel(band=[3,2,1])` to put them back in the right order.
 
-# In[2]:
+# In[ ]:
 
 
 import matplotlib.pyplot as plt
@@ -72,7 +72,7 @@ with gw.open(image) as src:
 # 
 # Now let's calculate the tranform matrix for the destination raster:
 
-# In[3]:
+# In[ ]:
 
 
 import numpy as np
@@ -105,7 +105,7 @@ print("Destination Transform:\n", dst_transform)
 # 
 # Ok finally!
 
-# In[4]:
+# In[ ]:
 
 
 dst_crs = "EPSG:3857"  # web mercator(ie google maps)

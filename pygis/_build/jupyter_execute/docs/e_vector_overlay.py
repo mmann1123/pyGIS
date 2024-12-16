@@ -37,7 +37,7 @@ import matplotlib.pyplot as plt
 # ```{important} All the data must have the same coordinate system in order for extraction to work correctly.
 # ```
 
-# In[2]:
+# In[ ]:
 
 
 # Load data
@@ -66,7 +66,7 @@ wells = wells.to_crs(proj)
 
 # We'll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).
 
-# In[3]:
+# In[ ]:
 
 
 def display_table(table_name, attribute_table):
@@ -142,7 +142,7 @@ def plot_merge(merge_type, merge_result, merge_vector):
 # 
 # Let's briefly examine the attribute table of our shapefiles and plot the data so that we know what we're working with.
 
-# In[4]:
+# In[ ]:
 
 
 # Create subplots
@@ -159,14 +159,14 @@ plt.style.use('bmh')
 ax.set_title('San Francisco Bay Area County and Watershed Boundaries', fontdict = {'fontsize': '15', 'fontweight' : '3'})
 
 
-# In[5]:
+# In[ ]:
 
 
 # Print attribute table
 display(counties)
 
 
-# In[6]:
+# In[ ]:
 
 
 # Print attribute table
@@ -184,7 +184,7 @@ display(watersheds)
 # 
 # Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have `NaN` as values in the fields that originated from the other dataset. [^gpd_set], [^bolstad]
 
-# In[7]:
+# In[ ]:
 
 
 # Get union
@@ -196,7 +196,7 @@ display_table(table_name = "Union", attribute_table = union_result)
 
 # Next, we can map the data, filling in the areas with color that have been retained. As the plot shows, no data was removed.
 
-# In[8]:
+# In[ ]:
 
 
 # Plot overlay
@@ -214,7 +214,7 @@ plot_overlay(overlay_type = "Union", overlay_result = union_result)
 # 
 # Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any `NaN` values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). [^gpd_set], [^bolstad]
 
-# In[9]:
+# In[ ]:
 
 
 # Get intersection
@@ -240,7 +240,7 @@ plot_overlay(overlay_type = "Intersection", overlay_result = intersection_result
 # 
 # Looking at the map, we see all combined geometries except for the areas that are unique to the second dataset (watershed boundaries dataset).
 
-# In[10]:
+# In[ ]:
 
 
 # Get identity
@@ -266,7 +266,7 @@ plot_overlay(overlay_type = "Identity", overlay_result = identity_result)
 # 
 # Looking at the map, we only see areas of the first dataset (county dataset) that are not covered by the second dataset (watershed boundaries dataset).
 
-# In[11]:
+# In[ ]:
 
 
 # Get difference
@@ -316,7 +316,7 @@ plot_overlay(overlay_type = "Difference", overlay_result = difference_result)
 # 
 # We'll illustrate this geoprocessing using the county boundaries shapefile and the well locations shapefile. Let's quickly examine the wells attribute table and plot both datasets.
 
-# In[12]:
+# In[ ]:
 
 
 # Print head and tail of attribute table
@@ -340,7 +340,7 @@ ax.set_title('San Francisco Bay Area County Boundaries and Well Locations', font
 # 
 # We'll first demonstrate a left join. Notice that all features from the left dataset (wells dataset) are kept. The features that did not meet the spatial relationship criteria for a join have `NaN` as values for the fields that originated from the right dataset (county boundaries dataset).
 
-# In[13]:
+# In[ ]:
 
 
 # Get inner join
@@ -360,7 +360,7 @@ plot_merge(merge_type = "Left Join", merge_result = left_join_result, merge_vect
 # ```{attention} The results here are a bit useless, since it's just each county boundary multiplied by the number of wells in that county, but we kept this example for comprehensiveness.
 # ```
 
-# In[14]:
+# In[ ]:
 
 
 # Get inner join
@@ -377,7 +377,7 @@ plot_merge(merge_type = "Right Join", merge_result = right_join_result, merge_ve
 # 
 # Finally, with an inner join, only the well locations that fall within the county boundaries are kept. These well locations have the county boundaries dataset appended to them. Because it's an inner join, there are no resulting features with `NaN` as values in the attribute table.
 
-# In[15]:
+# In[ ]:
 
 
 # Get inner join

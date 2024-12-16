@@ -49,7 +49,7 @@ with gw.open(rgbn) as src:
 # Note the use of `nodata` in this case the file `rgbn` doesn't have the missing data value set in its profile, so we can set it manually when opened. 
 # ```
 
-# In[2]:
+# In[ ]:
 
 
 import matplotlib.pyplot as plt
@@ -73,7 +73,7 @@ plt.tight_layout(pad=1)
 
 # Other formats supported by rasterio, (e.g., PROJ4 strings) can be used. Here, we use a PROJ4 string to transform the CRS to a equal area projection.
 
-# In[3]:
+# In[ ]:
 
 
 with gw.config.update(ref_crs=32618):
@@ -94,7 +94,7 @@ with gw.config.update(ref_crs=32618):
 # 
 # The resampling algorithm can be specified in the `geowombat.open` function. Here, we use cubic convolution resampling to warp the data to EPSG code 31972 (a UTM projection).
 
-# In[4]:
+# In[ ]:
 
 
 with gw.config.update(ref_crs=31972):
@@ -107,7 +107,7 @@ with gw.config.update(ref_crs=31972):
 
 # The transformed cell resolution can be added in the context manager. Here, we resample the data to 10m x 10m spatial resolution.
 
-# In[5]:
+# In[ ]:
 
 
 with gw.config.update(ref_crs=31972, ref_res=(10, 10)):
@@ -122,7 +122,7 @@ with gw.config.update(ref_crs=31972, ref_res=(10, 10)):
 # 
 # To transform an `xarray.DataArray` outside of a configuration context, use the `geowombat.transform_crs` function.
 
-# In[6]:
+# In[ ]:
 
 
 with gw.open(rgbn) as src:
