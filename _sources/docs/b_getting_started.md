@@ -429,7 +429,7 @@ drive.mount('/content/drive')
 
 Most popular Python libraries come pre-installed in Google Colab. However, if you need to install additional libraries, you can use the pip package manager directly in a code cell:
 
-```{code-cell} ipython3
+``` bash    
 !pip install pandas
 ```
 

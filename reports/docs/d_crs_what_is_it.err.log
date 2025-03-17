@@ -20,7 +20,8 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import geopandas
 import contextily as ctx
-cities = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
+# Download Natural Earth Populated Places
+cities = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
 cities = cities[cities.name == 'Washington, D.C.']
 cities = cities.to_crs(epsg=3857) # project to webmercator
 
@@ -31,27 +32,22 @@ ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron,zoom = 6, reset_extent
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mAttributeError[0m                            Traceback (most recent call last)
-Cell [0;32mIn[1], line 3[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mcontextily[39;00m [38;5;28;01mas[39;00m [38;5;21;01mctx[39;00m
-[0;32m----> 3[0m cities [38;5;241m=[39m geopandas[38;5;241m.[39mread_file([43mgeopandas[49m[38;5;241;43m.[39;49m[43mdatasets[49m[38;5;241;43m.[39;49m[43mget_path[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mnaturalearth_cities[39;49m[38;5;124;43m'[39;49m[43m)[49m)
-[1;32m      4[0m cities [38;5;241m=[39m cities[cities[38;5;241m.[39mname [38;5;241m==[39m [38;5;124m'[39m[38;5;124mWashington, D.C.[39m[38;5;124m'[39m]
-[1;32m      5[0m cities [38;5;241m=[39m cities[38;5;241m.[39mto_crs(epsg[38;5;241m=[39m[38;5;241m3857[39m) [38;5;66;03m# project to webmercator[39;00m
+[0;32m/tmp/ipykernel_1189545/887999542.py[0m in [0;36m?[0;34m()[0m
+[1;32m      1[0m [0;32mimport[0m [0mgeopandas[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;32mimport[0m [0mcontextily[0m [0;32mas[0m [0mctx[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;31m# Download Natural Earth Populated Places[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mcities[0m [0;34m=[0m [0mgeopandas[0m[0;34m.[0m[0mread_file[0m[0;34m([0m[0;34m'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 5[0;31m [0mcities[0m [0;34m=[0m [0mcities[0m[0;34m[[0m[0mcities[0m[0;34m.[0m[0mname[0m [0;34m==[0m [0;34m'Washington, D.C.'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      6[0m [0mcities[0m [0;34m=[0m [0mcities[0m[0;34m.[0m[0mto_crs[0m[0;34m([0m[0mepsg[0m[0;34m=[0m[0;36m3857[0m[0;34m)[0m [0;31m# project to webmercator[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0max[0m [0;34m=[0m [0mcities[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mfigsize[0m[0;34m=[0m[0;34m([0m[0;36m10[0m[0;34m,[0m [0;36m10[0m[0;34m)[0m[0;34m,[0m [0malpha[0m[0;34m=[0m[0;36m0.5[0m[0;34m,[0m [0medgecolor[0m[0;34m=[0m[0;34m'k'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-File [0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/datasets/__init__.py:18[0m, in [0;36mget_path[0;34m(dataset)[0m
-[1;32m     12[0m error_msg [38;5;241m=[39m (
-[1;32m     13[0m     [38;5;124m"[39m[38;5;124mThe geopandas.dataset has been deprecated and was removed in GeoPandas [39m[38;5;124m"[39m
-[1;32m     14[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124m1.0. You can get the original [39m[38;5;124m'[39m[38;5;132;01m{[39;00mdataset[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m data from [39m[38;5;124m"[39m
-[1;32m     15[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mne_message[38;5;250m [39m[38;5;28;01mif[39;00m[38;5;250m [39m[38;5;124m'[39m[38;5;124mnatural[39m[38;5;124m'[39m[38;5;250m [39m[38;5;129;01min[39;00m[38;5;250m [39mdataset[38;5;250m [39m[38;5;28;01melse[39;00m[38;5;250m [39mnybb_message[38;5;132;01m}[39;00m[38;5;124m"[39m
-[1;32m     16[0m )
-[1;32m     17[0m [38;5;28;01mif[39;00m dataset [38;5;129;01min[39;00m _prev_available:
-[0;32m---> 18[0m     [38;5;28;01mraise[39;00m [38;5;167;01mAttributeError[39;00m(error_msg)
-[1;32m     19[0m [38;5;28;01melse[39;00m:
-[1;32m     20[0m     error_msg [38;5;241m=[39m (
-[1;32m     21[0m         [38;5;124m"[39m[38;5;124mThe geopandas.dataset has been deprecated and [39m[38;5;124m"[39m
-[1;32m     22[0m         [38;5;124m"[39m[38;5;124mwas removed in GeoPandas 1.0. New sample datasets are now available [39m[38;5;124m"[39m
-[1;32m     23[0m         [38;5;124m"[39m[38;5;124min the geodatasets package (https://geodatasets.readthedocs.io/en/latest/)[39m[38;5;124m"[39m
-[1;32m     24[0m     )
-
-[0;31mAttributeError[0m: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original 'naturalearth_cities' data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+[0;32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/pandas/core/generic.py[0m in [0;36m?[0;34m(self, name)[0m
+[1;32m   6295[0m             [0;32mand[0m [0mname[0m [0;32mnot[0m [0;32min[0m [0mself[0m[0;34m.[0m[0m_accessors[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   6296[0m             [0;32mand[0m [0mself[0m[0;34m.[0m[0m_info_axis[0m[0;34m.[0m[0m_can_hold_identifiers_and_holds_name[0m[0;34m([0m[0mname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   6297[0m         ):
+[1;32m   6298[0m             [0;32mreturn[0m [0mself[0m[0;34m[[0m[0mname[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 6299[0;31m         [0;32mreturn[0m [0mobject[0m[0;34m.[0m[0m__getattribute__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mname[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mAttributeError[0m: 'GeoDataFrame' object has no attribute 'name'
 

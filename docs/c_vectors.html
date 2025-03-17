@@ -542,7 +542,7 @@
 </div>
 <p>Here is an example of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> using the ‘naturalearth_lowres’ dataset. This dataset represents a simplified global country boundary map, which can be useful for global scale visualizations:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a GeoDataFrame</span>
-<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson&#39;</span><span class="p">)</span>
 
 <span class="c1"># Preview the data</span>
 <span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>

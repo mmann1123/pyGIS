@@ -527,44 +527,19 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
-<span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
-<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span> <span class="c1"># project to webmercator</span>
+<span class="c1"># Download Natural Earth Populated Places</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson&#39;</span><span class="p">)</span>
+<span class="n">cities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># project to WGS84 LatLon</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="p">[</span><span class="s1">&#39;NAME&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">reset_extent</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">,</span><span class="n">zoom</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">reset_extent</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">geopandas</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">contextily</span> <span class="k">as</span> <span class="nn">ctx</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[</span><span class="n">cities</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">cities</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span> <span class="c1"># project to webmercator</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/datasets/__init__.py:18,</span> in <span class="ni">get_path</span><span class="nt">(dataset)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;The geopandas.dataset has been deprecated and was removed in GeoPandas &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="sa">f</span><span class="s2">&quot;1.0. You can get the original &#39;</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">&#39; data from &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ne_message</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;natural&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">dataset</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">nybb_message</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">if</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">_prev_available</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="s2">&quot;The geopandas.dataset has been deprecated and &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="s2">&quot;was removed in GeoPandas 1.0. New sample datasets are now available &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="s2">&quot;in the geodatasets package (https://geodatasets.readthedocs.io/en/latest/)&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="p">)</span>
-
-<span class="ne">AttributeError</span>: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original &#39;naturalearth_cities&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
-</pre></div>
-</div>
+<img alt="../_images/d92c51c58c006f0fa5fbe8b3b71711777be7b8c80a4b93ff23665bfcf3ef4523.png" src="../_images/d92c51c58c006f0fa5fbe8b3b71711777be7b8c80a4b93ff23665bfcf3ef4523.png" />
 </div>
 </div>
 <p>A GCS is defined by an <strong>ellipsoid</strong>, <strong>geoid</strong> and <strong>datum</strong>. These elements are presented next.</p>

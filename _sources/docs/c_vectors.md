@@ -95,7 +95,7 @@ Here is an example of a `GeoDataFrame` using the 'naturalearth_lowres' dataset. 
 
 ```python
 # Load a GeoDataFrame
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+world = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson')
 
 # Preview the data
 world.head()

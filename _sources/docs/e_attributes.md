@@ -52,7 +52,7 @@ One of the most basic operations is creating new attributes. Let's say for insta
 
 ```{code-cell} ipython3
 import geopandas
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+world = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson')
 world.columns
 ```
 We can then do basic operations on the basis of column names. Here we create a new column `m_pop_est`:
@@ -78,7 +78,7 @@ Pandas provides a suite of methods in order to get purely integer based indexing
 import matplotlib.pyplot as plt
 plt.style.use('bmh') # better for plotting geometries vs general plots.
 
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
+world = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
 northern_world = world.iloc[ 0:4 ]    
 northern_world.plot(figsize=(10,5))  
 plt.show()
@@ -148,14 +148,12 @@ In addition to the standard pandas methods, GeoPandas also provides coordinate b
 Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a `_CoordinateIndexer` using `.cx`. `.cx` allows you to quickly access the table's `geometry`, where indexing reflects `[x,y]` or `[lon,lat]`. Here we will query points above and below 0 degrees latitude:
 
 ```{code-cell} ipython3
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
 northern_world = world.cx[ : , 0: ]   # subsets all rows above 0 with a slice
 northern_world.plot(figsize=(10, 5))
 plt.show()
 ```
 
 ```{code-cell} ipython3
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
 southern_world = world.cx[ : , :0 ]   # subsets all rows below 0  with a slice
 southern_world.plot(figsize=(10, 5))
 plt.show()

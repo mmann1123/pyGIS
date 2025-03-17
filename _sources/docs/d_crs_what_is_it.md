@@ -53,12 +53,13 @@ A latitude measures the angle from the equatorial plane to the location on the e
 :tags: ["hide-input"]
 import geopandas
 import contextily as ctx
-cities = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
-cities = cities[cities.name == 'Washington, D.C.']
-cities = cities.to_crs(epsg=3857) # project to webmercator
+# Download Natural Earth Populated Places
+cities = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson')
+cities.to_crs(epsg=4326, inplace=True) # project to WGS84 LatLon
+cities = cities[cities['NAME'] == 'Washington, D.C.']
 
 ax = cities.plot(figsize=(10, 10), alpha=0.5, edgecolor='k')
-ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron,zoom = 6, reset_extent = True)
+ctx.add_basemap(ax, source=ctx.providers.CartoDB.Positron,zoom = 6, reset_extent = True,crs='EPSG:4326')
 ```
 
 A GCS is defined by an **ellipsoid**, **geoid** and **datum**. These elements are presented next.
