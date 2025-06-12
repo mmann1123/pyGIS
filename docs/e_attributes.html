@@ -462,7 +462,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-attributes">Create New Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-selecting-data">Indexing and Selecting Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-index-position">Selection by Index Position</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different choices for indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different Choices for Indexing</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-points-by-location">Subset Points by Location</a></li>
@@ -667,26 +667,51 @@
 </div>
 </div>
 <section id="different-choices-for-indexing">
-<h4>Different choices for indexing<a class="headerlink" href="#different-choices-for-indexing" title="Link to this heading">#</a></h4>
-<p>Object selection has had a number of user-requested additions in order to
-support more explicit location based indexing.</p>
-<p>Getting values from an object with multi-axes selection uses the following
-notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as
-well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of
-the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to
-<code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
+<h4>Different Choices for Indexing<a class="headerlink" href="#different-choices-for-indexing" title="Link to this heading">#</a></h4>
+<p><strong><code class="docutils literal notranslate"><span class="pre">.loc</span></code></strong><br />
+<code class="docutils literal notranslate"><span class="pre">.loc</span></code> is primarily label based, but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when the items are not found. Allowed inputs are:</p>
+<ul class="simple">
+<li><p>A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a <em>label</em> of the index. This use is <strong>not</strong> an integer position along the index.)</p></li>
+<li><p>A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code></p></li>
+<li><p>A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual Python slices, <strong>both</strong> the start and the stop are included, when present in the index! See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-slicing-with-labels">Slicing with labels</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-endpoints-are-inclusive">Endpoints are inclusive</a>)</p></li>
+<li><p>A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)</p></li>
+</ul>
+<p>See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-label">Selection by Label</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;NAME&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Singapore&#39;</span><span class="p">]</span>  <span class="c1"># Selects the row where the name is &#39;Singapore&#39;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong><code class="docutils literal notranslate"><span class="pre">.iloc</span></code></strong><br />
+<code class="docutils literal notranslate"><span class="pre">.iloc</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">length-1</span></code> of the axis), but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a requested indexer is out-of-bounds, except <em>slice</em> indexers which allow out-of-bounds indexing (this conforms with Python/NumPy <em>slice</em> semantics). Allowed inputs are:</p>
+<ul class="simple">
+<li><p>An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code></p></li>
+<li><p>A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code></p></li>
+<li><p>A slice object with integers <code class="docutils literal notranslate"><span class="pre">1:7</span></code></p></li>
+<li><p>A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)</p></li>
+</ul>
+<p>See more at: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-integer">Selection by Position</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced">Advanced Indexing</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Selects the first row  </span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer.</strong><br />
+See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-callable">Selection By Callable</a>.</p>
+<hr class="docutils" />
+<p>Getting values from an object with multi-axes selection uses the following notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Object Type</p></th>
-<th class="head text-right"><p>Indexers</p></th>
+<th class="head text-left"><p>Indexers</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>Series</p></td>
-<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>DataFrame</p></td>
-<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -793,7 +818,7 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-attributes">Create New Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-selecting-data">Indexing and Selecting Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-index-position">Selection by Index Position</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different choices for indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different Choices for Indexing</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-points-by-location">Subset Points by Location</a></li>

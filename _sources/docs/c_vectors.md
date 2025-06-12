@@ -51,7 +51,7 @@ Here are examples of each type:
 
 The first example creates a GeoSeries of Points. This might be used to represent individual locations on a map. For instance, you could use a Point for each location where a sample was collected, or to mark the location of cities or other points of interest.
 
-```python
+```{code-cell} ipython3
 # Point GeoSeries
 import geopandas
 from shapely.geometry import Point
@@ -61,7 +61,7 @@ s
 
 The next example creates a GeoSeries of Lines. Lines could be used to represent the path of a moving object, the route of a road or river, or the border between different regions. The example creates a single line that connects three points.
 
-```python
+```{code-cell} ipython3
 # Line GeoSeries
 from shapely.geometry import LineString
 l = geopandas.GeoSeries([LineString([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
@@ -70,7 +70,7 @@ l
 
 The last example creates a GeoSeries of Polygons. A Polygon might represent a bounded area, such as the outline of a lake, the footprint of a building, or the boundaries of a country. In this example, the polygon represents an area defined by three points (a triangle).
 
-```python
+```{code-cell} ipython3
 # Polygon GeoSeries
 from shapely.geometry import Polygon
 p = geopandas.GeoSeries([Polygon([Point(-77.036873,38.907192), Point(-76.612190,39.290386,), Point(-77.408456,39.412006)])])
@@ -93,7 +93,7 @@ While a `GeoDataFrame` may contain multiple columns with geometric (shapely) obj
 
 Here is an example of a `GeoDataFrame` using the 'naturalearth_lowres' dataset. This dataset represents a simplified global country boundary map, which can be useful for global scale visualizations:
 
-```python
+```{code-cell} ipython3
 # Load a GeoDataFrame
 world = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson')
 
@@ -103,7 +103,7 @@ world.head()
 
 And now let's create a simple plot from this `GeoDataFrame`:
 
-```python
+```{code-cell} ipython3
 # Plot the GeoDataFrame
 world.plot()
 ```

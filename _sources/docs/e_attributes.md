@@ -83,64 +83,58 @@ northern_world = world.iloc[ 0:4 ]
 northern_world.plot(figsize=(10,5))  
 plt.show()
 ```
+#### Different Choices for Indexing
 
-#### Different choices for indexing
+**`.loc`**  
+`.loc` is primarily label based, but may also be used with a boolean array. `.loc` will raise `KeyError` when the items are not found. Allowed inputs are:
 
-Object selection has had a number of user-requested additions in order to
-support more explicit location based indexing.  
+- A single label, e.g. `5` or `'a'` (Note that `5` is interpreted as a *label* of the index. This use is **not** an integer position along the index.)
+- A list or array of labels `['a', 'b', 'c']`
+- A slice object with labels `'a':'f'` (Note that contrary to usual Python slices, **both** the start and the stop are included, when present in the index! See [Slicing with labels](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-slicing-with-labels) and [Endpoints are inclusive](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-endpoints-are-inclusive))
+- A boolean array (any `NA` values will be treated as `False`)
+- A `callable` function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)
 
-```{panels}
+See more at [Selection by Label](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-label).
 
-* ``.loc`` is primarily label based, but may also be used with a boolean array. ``.loc`` will raise ``KeyError`` when the items are not found. Allowed inputs are:
 
-    * A single label, e.g. ``5`` or ``'a'`` (Note that ``5`` is interpreted as a
-      *label* of the index. This use is **not** an integer position along the
-      index.).
-    * A list or array of labels ``['a', 'b', 'c']``.
-    * A slice object with labels ``'a':'f'`` (Note that contrary to usual Python
-      slices, **both** the start and the stop are included, when present in the
-      index! See [Slicing with labels](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-slicing-with-labels) 
-      and [Endpoints are inclusive](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-endpoints-are-inclusive) 
-    * A boolean array (any ``NA`` values will be treated as ``False``).
-    * A ``callable`` function with one argument (the calling Series or DataFrame) and
-      that returns valid output for indexing (one of the above).
-
-  See more at [Selection by Label](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-label).
-
-------------
-
-* ``.iloc`` is primarily integer position based (from ``0`` to
-  ``length-1`` of the axis), but may also be used with a boolean
-  array.  ``.iloc`` will raise ``IndexError`` if a requested
-  indexer is out-of-bounds, except *slice* indexers which allow
-  out-of-bounds indexing.  (this conforms with Python/NumPy *slice*
-  semantics).  Allowed inputs are:
-
-    * An integer e.g. ``5``.
-    * A list or array of integers ``[4, 3, 0]``.
-    * A slice object with integers ``1:7``.
-    * A boolean array (any ``NA`` values will be treated as ``False``).
-    * A ``callable`` function with one argument (the calling Series or DataFrame) and
-      that returns valid output for indexing (one of the above).
-
-  See more at : [Selection by Position](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-integer) and
-  [Advanced Indexing](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced).
-
-* ``.loc``, ``.iloc``, and also ``[]`` indexing can accept a ``callable`` as indexer. See more at [Selection By Callable](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-callable).
-
+```python
+world.loc[world['NAME'] == 'Singapore']  # Selects the row where the name is 'Singapore'
 ```
 
-Getting values from an object with multi-axes selection uses the following
-notation (using ``.loc`` as an example, but the following applies to ``.iloc`` as
-well). Any of the axes accessors may be the null slice ``:``. Axes left out of
-the specification are assumed to be ``:``, e.g. ``p.loc['a']`` is equivalent to
-``p.loc['a', :, :]``.
+---
+
+**`.iloc`**  
+`.iloc` is primarily integer position based (from `0` to `length-1` of the axis), but may also be used with a boolean array. `.iloc` will raise `IndexError` if a requested indexer is out-of-bounds, except *slice* indexers which allow out-of-bounds indexing (this conforms with Python/NumPy *slice* semantics). Allowed inputs are:
+
+- An integer e.g. `5`
+- A list or array of integers `[4, 3, 0]`
+- A slice object with integers `1:7`
+- A boolean array (any `NA` values will be treated as `False`)
+- A `callable` function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)
+
+See more at: [Selection by Position](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-integer) and [Advanced Indexing](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced).
 
 
-| Object Type    | Indexers    |
-| :--- | ---: |
-| Series    | `s.loc[indexer]`   |
-| DataFrame    | `df.loc[row_indexer,column_indexer]`   |
+```python
+world.iloc[0]  # Selects the first row  
+```
+
+---
+
+**`.loc`, `.iloc`, and also `[]` indexing can accept a `callable` as indexer.**  
+See more at [Selection By Callable](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-callable).
+
+---
+
+Getting values from an object with multi-axes selection uses the following notation (using `.loc` as an example, but the following applies to `.iloc` as well). Any of the axes accessors may be the null slice `:`. Axes left out of the specification are assumed to be `:`, e.g. `p.loc['a']` is equivalent to `p.loc['a', :, :]`.
+
+| Object Type | Indexers                        |
+| :---------- | :----------------------------- |
+| Series      | `s.loc[indexer]`               |
+| DataFrame   | `df.loc[row_indexer,column_indexer]` |
+
+
+
 
 ### Subset Points by Location
 In addition to the standard pandas methods, GeoPandas also provides coordinate based indexing with the cx indexer, which slices using a bounding box. Geometries in the GeoSeries or GeoDataFrame that intersect the bounding box will be returned.
