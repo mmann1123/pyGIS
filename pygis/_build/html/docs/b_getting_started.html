@@ -463,7 +463,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks">Jupyter Notebooks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-jupyter-notebook">Starting the Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-jupyter-lab">Starting the Jupyter Lab</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-basics">Notebook Basics</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-cells">Running Cells</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modal-editing">Modal Editing</a></li>
@@ -504,8 +504,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="setting-up-a-normal-python-environment">
-<span id="b-getting-started"></span><h1>Setting up a Normal Python Environment<a class="headerlink" href="#setting-up-a-normal-python-environment" title="Link to this heading">#</a></h1>
+  <!-- (b_getting_started)= -->
+<section class="tex2jax_ignore mathjax_ignore" id="setting-up-a-normal-python-environment">
+<h1>Setting up a Normal Python Environment<a class="headerlink" href="#setting-up-a-normal-python-environment" title="Link to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In this lecture, you will learn how to</p>
@@ -601,13 +602,13 @@ when you wish to</p>
 <li><p>test new ideas or interact with small pieces of code</p></li>
 <li><p>share scientific ideas with students or colleagues</p></li>
 </ul>
-<section id="starting-the-jupyter-notebook">
-<h3>Starting the Jupyter Notebook<a class="headerlink" href="#starting-the-jupyter-notebook" title="Link to this heading">#</a></h3>
-<p>Once you have installed Anaconda, you can start the Jupyter notebook.</p>
+<section id="starting-the-jupyter-lab">
+<h3>Starting the Jupyter Lab<a class="headerlink" href="#starting-the-jupyter-lab" title="Link to this heading">#</a></h3>
+<p>Once you have installed Anaconda, you can start the Jupyter lab.</p>
 <p>Either</p>
 <ul class="simple">
 <li><p>search for Jupyter in your applications menu, or</p></li>
-<li><p>open up a terminal and type <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p>
+<li><p>open up a terminal and type <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">lab</span></code></p>
 <ul>
 <li><p>Windows users should substitute “Anaconda command prompt” for “terminal” in the previous line.</p></li>
 </ul>
@@ -903,22 +904,8 @@ Count: 4
 <section id="installing-additional-libraries">
 <h2>Installing Additional Libraries<a class="headerlink" href="#installing-additional-libraries" title="Link to this heading">#</a></h2>
 <p>Most popular Python libraries come pre-installed in Google Colab. However, if you need to install additional libraries, you can use the pip package manager directly in a code cell:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>pandas
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (2.2.3)
-Requirement already satisfied: numpy&gt;=1.23.2 in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (from pandas) (1.26.4)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (from pandas) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (from pandas) (2024.1)
-Requirement already satisfied: tzdata&gt;=2022.7 in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (from pandas) (2024.2)
-Requirement already satisfied: six&gt;=1.5 in /home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="limitations">
@@ -1004,7 +991,7 @@ Requirement already satisfied: six&gt;=1.5 in /home/mmann1123/miniconda3/envs/py
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks">Jupyter Notebooks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-jupyter-notebook">Starting the Jupyter Notebook</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-the-jupyter-lab">Starting the Jupyter Lab</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-basics">Notebook Basics</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-cells">Running Cells</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modal-editing">Modal Editing</a></li>

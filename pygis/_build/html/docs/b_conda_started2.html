@@ -459,10 +459,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-miniconda">Installing Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mamba">Installing Mamba</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-activating-a-new-environment">Creating and Activating a New Environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-geospatial-packages">Installing Geospatial Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-the-installation">Verifying the Installation</a></li>
 </ul>
             </nav>
         </div>
@@ -479,49 +478,32 @@
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
 <li><p>Understand the role and significance of package managers in the context of software development and geospatial data science.</p></li>
-<li><p>Install <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> and <code class="docutils literal notranslate"><span class="pre">mamba</span></code> package managers to manage your Python packages.</p></li>
 <li><p>Create and activate a new <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">conda</span></code> and <code class="docutils literal notranslate"><span class="pre">mamba</span></code> to install geospatial packages from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">conda</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span></code> to install geospatial packages from the <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> channel.</p></li>
 <li><p>Recognize key geospatial packages</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
 <p class="admonition-title">Review</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="b_getting_started.html#b-getting-started"><span class="std std-ref">A normal intro to python environments</span></a></p></li>
+<li><p><a class="reference internal" href="b_getting_started.html"><span class="doc std std-doc">A normal intro to python environments</span></a></p></li>
 </ul>
 </div>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="geospatial-environment-installation-guide">
 <h1>Geospatial Environment Installation Guide<a class="headerlink" href="#geospatial-environment-installation-guide" title="Link to this heading">#</a></h1>
 <p>In the world of software development, package managers have become a fundamental tool for simplifying the installation of software packages and their dependencies. They automate the process of installing, upgrading, configuring, and removing software packages in a consistent manner. In the field of geospatial data science, where several packages need to be installed, package managers ensure a smooth and efficient setup of your environment.</p>
-<p>In this guide, we’ll talk about <code class="docutils literal notranslate"><span class="pre">conda</span></code> and <code class="docutils literal notranslate"><span class="pre">mamba</span></code>. <code class="docutils literal notranslate"><span class="pre">Conda</span></code> is a powerful package manager and environment manager that you use with command line commands at the Anaconda Prompt for Windows, or in a terminal window for macOS or Linux. <code class="docutils literal notranslate"><span class="pre">Mamba</span></code> is a reimplementation of the <code class="docutils literal notranslate"><span class="pre">conda</span></code> package manager in C++. It’s designed to be faster and more robust to network issues or packages with tricky dependencies. When working with complex geospatial packages, <code class="docutils literal notranslate"><span class="pre">mamba</span></code> can often be a more efficient choice.</p>
-<p>This page provides a guide on how to install <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> or <code class="docutils literal notranslate"><span class="pre">mamba</span></code>, and various geospatial packages including <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> and <code class="docutils literal notranslate"><span class="pre">geowombat-ml</span></code>.</p>
-<section id="installing-miniconda">
-<h2>Installing Miniconda<a class="headerlink" href="#installing-miniconda" title="Link to this heading">#</a></h2>
-<p>Firstly, you will need to <strong>choose between</strong> Miniconda &amp; Mamba. Miniconda is a free minimal installer for conda. Please follow the instructions from the <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda page</a> to install it on your system.</p>
-</section>
-<section id="installing-mamba">
-<h2>Installing Mamba<a class="headerlink" href="#installing-mamba" title="Link to this heading">#</a></h2>
-<p>To install <code class="docutils literal notranslate"><span class="pre">mamba</span></code> (prefered), please follow the instructions from the <a class="reference external" href="https://mamba.readthedocs.io/en/latest/">Mamba page</a>.</p>
-</section>
+<p><a class="reference internal" href="b_getting_started.html"><span class="doc std std-doc">Follow the instructions to install conda here</span></a></p>
 <section id="creating-and-activating-a-new-environment">
 <h2>Creating and Activating a New Environment<a class="headerlink" href="#creating-and-activating-a-new-environment" title="Link to this heading">#</a></h2>
-<p>You can create a new environment in <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">mamba</span></code> using the following command:</p>
+<p>Each project or workflow may require different versions of packages or even different packages altogether. To manage these variations, it is best practice to create isolated environments for each project. This prevents conflicts between package versions and ensures that your projects remain reproducible.</p>
+<p>You can create a new environment in <code class="docutils literal notranslate"><span class="pre">conda</span></code> using the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name myenv</span>
 </pre></div>
 </div>
-<p>or with <code class="docutils literal notranslate"><span class="pre">mamba</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mamba create --name myenv</span>
-</pre></div>
-</div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">myenv</span></code> with the name of your environment.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For the remainder of this tutorial we will use <code class="docutils literal notranslate"><span class="pre">mamba</span></code>, but <code class="docutils literal notranslate"><span class="pre">conda</span></code> can be exchanged for <code class="docutils literal notranslate"><span class="pre">mamba</span></code> in all commands.</p>
-</div>
 <p>To activate this environment, use:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mamba activate myenv</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda activate myenv</span>
 </pre></div>
 </div>
 <p>Now, any package you install will be installed in this environment, keeping it isolated from other environments.</p>
@@ -529,24 +511,53 @@
 <section id="installing-geospatial-packages">
 <h2>Installing Geospatial Packages<a class="headerlink" href="#installing-geospatial-packages" title="Link to this heading">#</a></h2>
 <p>Before we install the packages, we need to add <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> to your channels:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mamba config --add channels conda-forge</span>
-<span class="go">mamba config --set channel_priority strict</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda config --add channels conda-forge</span>
+<span class="go">conda config --set channel_priority strict</span>
 </pre></div>
 </div>
-<p>Then, we can install <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> and <code class="docutils literal notranslate"><span class="pre">geowombat-ml</span></code> using <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">mamba</span></code>. For <code class="docutils literal notranslate"><span class="pre">mamba</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mamba install geowombat geowombat-ml</span>
+<p>Then, we can install <code class="docutils literal notranslate"><span class="pre">geowombat</span></code> and <code class="docutils literal notranslate"><span class="pre">geowombat-ml</span></code> using <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span></code>. For <code class="docutils literal notranslate"><span class="pre">conda</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install geowombat geowombat-ml</span>
 </pre></div>
 </div>
-<p>Following this, we need to install the following packages: <code class="docutils literal notranslate"><span class="pre">pyproj</span></code>, <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, <code class="docutils literal notranslate"><span class="pre">contextily</span></code>, <code class="docutils literal notranslate"><span class="pre">earthpy</span></code>, <code class="docutils literal notranslate"><span class="pre">census</span></code>, <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, <code class="docutils literal notranslate"><span class="pre">osmnx</span></code>, <code class="docutils literal notranslate"><span class="pre">pykrige</span></code>, and <code class="docutils literal notranslate"><span class="pre">us</span></code>.  We will start with the packages available through <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mamba install pyproj geopandas       </span>
+<p>Following this, we need to install the following packages: <code class="docutils literal notranslate"><span class="pre">pyproj</span></code>,  <code class="docutils literal notranslate"><span class="pre">contextily</span></code>, <code class="docutils literal notranslate"><span class="pre">earthpy</span></code>, <code class="docutils literal notranslate"><span class="pre">census</span></code>, <code class="docutils literal notranslate"><span class="pre">geoplot</span></code>, <code class="docutils literal notranslate"><span class="pre">osmnx</span></code>, <code class="docutils literal notranslate"><span class="pre">pykrige</span></code>, and <code class="docutils literal notranslate"><span class="pre">us</span></code>.  We will start with the packages available through <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda install pyproj geopandas       </span>
 </pre></div>
 </div>
 <p>Finally install those packages that aren’t available through <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install census contextily earthpy geoplot osmnx us pykrige</span>
-<span class="go">``</span>
-
-<span class="go">Now you have all the packages installed and ready to be used in your new environment!</span>
 </pre></div>
+</div>
+<p>Now you have all the packages installed and ready to be used in your new environment!</p>
+</section>
+<section id="verifying-the-installation">
+<h2>Verifying the Installation<a class="headerlink" href="#verifying-the-installation" title="Link to this heading">#</a></h2>
+<p>Next we need to activate the environment and verify that the packages are installed correctly.</p>
+<p>First activate the environment you created earlier:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda activate myenv</span>
+</pre></div>
+</div>
+<p>The enter a pythone session by typing:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python</span>
+</pre></div>
+</div>
+<p>You should now see <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> in your terminal, indicating that you are in a Python interpreter session.</p>
+<p>To verify that the packages are installed correctly, you can run the following commands in a Python interpreter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span>
+<span class="kn">import</span> <span class="nn">geowombat_ml</span>
+<span class="kn">import</span> <span class="nn">pyproj</span>
+<span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">contextily</span>
+<span class="kn">import</span> <span class="nn">earthpy</span>
+<span class="kn">import</span> <span class="nn">census</span>
+</pre></div>
+</div>
+<p>Now you can exit the Python interpreter by typing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you encounter any errors during the import, it means that the package is not installed correctly. You can try reinstalling the package or checking for any dependencies that may be missing.</p>
 </div>
 </section>
 </section>
@@ -616,10 +627,9 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-miniconda">Installing Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mamba">Installing Mamba</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-activating-a-new-environment">Creating and Activating a New Environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-geospatial-packages">Installing Geospatial Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verifying-the-installation">Verifying the Installation</a></li>
 </ul>
   </nav></div>
 

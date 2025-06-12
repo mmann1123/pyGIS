@@ -22,9 +22,8 @@ myst:
 
 ```{admonition} Learning Objectives
 - Understand the role and significance of package managers in the context of software development and geospatial data science.
-- Install `miniconda` and `mamba` package managers to manage your Python packages.
 - Create and activate a new `conda` environment.
-- Use `conda` and `mamba` to install geospatial packages from the `conda-forge` channel.
+- Use `conda` and `conda` to install geospatial packages from the `conda-forge` channel.
 - Recognize key geospatial packages  
 ```
 
@@ -38,41 +37,25 @@ myst:
 
 In the world of software development, package managers have become a fundamental tool for simplifying the installation of software packages and their dependencies. They automate the process of installing, upgrading, configuring, and removing software packages in a consistent manner. In the field of geospatial data science, where several packages need to be installed, package managers ensure a smooth and efficient setup of your environment.
 
-In this guide, we'll talk about `conda` and `mamba`. `Conda` is a powerful package manager and environment manager that you use with command line commands at the Anaconda Prompt for Windows, or in a terminal window for macOS or Linux. `Mamba` is a reimplementation of the `conda` package manager in C++. It's designed to be faster and more robust to network issues or packages with tricky dependencies. When working with complex geospatial packages, `mamba` can often be a more efficient choice.
+[Follow the instructions to install conda here](b_getting_started)
 
-This page provides a guide on how to install `miniconda` or `mamba`, and various geospatial packages including `geowombat` and `geowombat-ml`.
-
-## Installing Miniconda
-
-Firstly, you will need to **choose between** Miniconda & Mamba. Miniconda is a free minimal installer for conda. Please follow the instructions from the [Miniconda page](https://docs.conda.io/en/latest/miniconda.html) to install it on your system.
-
-## Installing Mamba
-
-To install `mamba` (prefered), please follow the instructions from the [Mamba page](https://mamba.readthedocs.io/en/latest/).
 
 ## Creating and Activating a New Environment
+Each project or workflow may require different versions of packages or even different packages altogether. To manage these variations, it is best practice to create isolated environments for each project. This prevents conflicts between package versions and ensures that your projects remain reproducible.
 
-You can create a new environment in `conda` or `mamba` using the following command:
+You can create a new environment in `conda` using the following command:
 
 ```{code-block} console
 conda create --name myenv
 ```
-or with `mamba`:
 
-```{code-block} console
-mamba create --name myenv
-```
 Replace `myenv` with the name of your environment.
-
-:::{note}
-For the remainder of this tutorial we will use `mamba`, but `conda` can be exchanged for `mamba` in all commands.
-:::
 
 
 To activate this environment, use:
 
 ```{code-block} console
-mamba activate myenv
+conda activate myenv
 ```
 
 Now, any package you install will be installed in this environment, keeping it isolated from other environments.
@@ -82,28 +65,67 @@ Now, any package you install will be installed in this environment, keeping it i
 Before we install the packages, we need to add `conda-forge` to your channels:
 
 ```{code-block} console
-mamba config --add channels conda-forge
-mamba config --set channel_priority strict
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 ```
 
-Then, we can install `geowombat` and `geowombat-ml` using `conda` or `mamba`. For `mamba`:
+Then, we can install `geowombat` and `geowombat-ml` using `conda` or `conda`. For `conda`:
 
 ```{code-block} console
-mamba install geowombat geowombat-ml
+conda install geowombat geowombat-ml
 ```
  
 
-Following this, we need to install the following packages: `pyproj`, `geopandas`, `contextily`, `earthpy`, `census`, `geoplot`, `osmnx`, `pykrige`, and `us`.  We will start with the packages available through `conda-forge`:
+Following this, we need to install the following packages: `pyproj`,  `contextily`, `earthpy`, `census`, `geoplot`, `osmnx`, `pykrige`, and `us`.  We will start with the packages available through `conda-forge`:
 
 
 ```{code-block} console
-mamba install pyproj geopandas       
+conda install pyproj geopandas       
 ```
 
 Finally install those packages that aren't available through `conda-forge`:
 
 ```{code-block} console
 pip install census contextily earthpy geoplot osmnx us pykrige
-``
+```
 
 Now you have all the packages installed and ready to be used in your new environment!
+
+## Verifying the Installation
+Next we need to activate the environment and verify that the packages are installed correctly.
+
+First activate the environment you created earlier:
+
+```{code-block} console
+conda activate myenv
+```
+
+The enter a pythone session by typing:
+
+```{code-block} console
+python
+```
+
+You should now see `>>>` in your terminal, indicating that you are in a Python interpreter session.
+
+To verify that the packages are installed correctly, you can run the following commands in a Python interpreter:
+
+```python
+import geowombat
+import geowombat_ml
+import pyproj
+import geopandas
+import contextily
+import earthpy
+import census
+``` 
+
+Now you can exit the Python interpreter by typing:
+
+```python
+exit()
+```
+
+```{note}
+If you encounter any errors during the import, it means that the package is not installed correctly. You can try reinstalling the package or checking for any dependencies that may be missing.
+```

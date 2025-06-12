@@ -16,7 +16,7 @@ myst:
     "property=og:locale": "en_US"
 ---
 
-(d_raster_crs_intro)=
+<!-- (d_raster_crs_intro)= -->
 
 
 ----------------
@@ -365,7 +365,6 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
 ```{figure} ../_static/d_crs/d_reproj_image.png
 :name: Reprojected Landsat Image
 :width: 400px
-Reprojected Landsat Image
 ```
 
 Source: [Creating Raster Data](https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data)

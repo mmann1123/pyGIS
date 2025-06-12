@@ -508,26 +508,58 @@
 </ul>
 <p>Here are examples of each type:</p>
 <p>The first example creates a GeoSeries of Points. This might be used to represent individual locations on a map. For instance, you could use a Point for each location where a sample was collected, or to mark the location of cities or other points of interest.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Point GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Point GeoSeries</span>
 <span class="kn">import</span> <span class="nn">geopandas</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
 <span class="n">s</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POINT (1 1)
+1    POINT (2 2)
+2    POINT (3 3)
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
 <p>The next example creates a GeoSeries of Lines. Lines could be used to represent the path of a moving object, the route of a road or river, or the border between different regions. The example creates a single line that connects three points.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line GeoSeries</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
 <span class="n">l</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">LineString</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
 <span class="n">l</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    LINESTRING (-77.03687 38.90719, -76.61219 39.2...
+dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
 <p>The last example creates a GeoSeries of Polygons. A Polygon might represent a bounded area, such as the outline of a lake, the footprint of a building, or the boundaries of a country. In this example, the polygon represents an area defined by three points (a triangle).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Polygon GeoSeries</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Polygon GeoSeries</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])])</span>
 <span class="n">p</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POLYGON ((-77.03687 38.90719, -76.61219 39.290...
+dtype: geometry
+</pre></div>
+</div>
+</div>
 </div>
 <p>While a <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain different types of geometric objects, not all operations will be possible if the GeoSeries is mixed. Certain methods require all objects in the GeoSeries to be of the same geometric type.</p>
 </section>
@@ -541,17 +573,198 @@
 <p>While a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> may contain multiple columns with geometric (shapely) objects, only one column can be considered the active geometry at a time. To switch the active geometry column, you can use the <code class="docutils literal notranslate"><span class="pre">GeoDataFrame.set_geometry()</span></code> method.</p>
 </div>
 <p>Here is an example of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> using the ‘naturalearth_lowres’ dataset. This dataset represents a simplified global country boundary map, which can be useful for global scale visualizations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a GeoDataFrame</span>
-<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a GeoDataFrame</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson&#39;</span><span class="p">)</span>
 
 <span class="c1"># Preview the data</span>
 <span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scalerank</th>
+      <th>labelrank</th>
+      <th>sovereignt</th>
+      <th>sov_a3</th>
+      <th>adm0_dif</th>
+      <th>level</th>
+      <th>type</th>
+      <th>admin</th>
+      <th>adm0_a3</th>
+      <th>geou_dif</th>
+      <th>...</th>
+      <th>region_un</th>
+      <th>subregion</th>
+      <th>region_wb</th>
+      <th>name_len</th>
+      <th>long_len</th>
+      <th>abbrev_len</th>
+      <th>tiny</th>
+      <th>homepart</th>
+      <th>featureclass</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Asia</td>
+      <td>Southern Asia</td>
+      <td>South Asia</td>
+      <td>11</td>
+      <td>11</td>
+      <td>4</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>POLYGON ((74.89131 37.23164, 74.84023 37.22505...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Africa</td>
+      <td>Middle Africa</td>
+      <td>Sub-Saharan Africa</td>
+      <td>6</td>
+      <td>6</td>
+      <td>4</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>MULTIPOLYGON (((14.19082 -5.87598, 14.39863 -5...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>6</td>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Europe</td>
+      <td>Southern Europe</td>
+      <td>Europe &amp; Central Asia</td>
+      <td>7</td>
+      <td>7</td>
+      <td>4</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>POLYGON ((20.06396 42.54727, 20.10352 42.52466...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>Andorra</td>
+      <td>AND</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Andorra</td>
+      <td>AND</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Europe</td>
+      <td>Southern Europe</td>
+      <td>Europe &amp; Central Asia</td>
+      <td>7</td>
+      <td>7</td>
+      <td>4</td>
+      <td>5</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>POLYGON ((1.70605 42.50332, 1.67852 42.49668, ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>4</td>
+      <td>United Arab Emirates</td>
+      <td>ARE</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>United Arab Emirates</td>
+      <td>ARE</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Asia</td>
+      <td>Western Asia</td>
+      <td>Middle East &amp; North Africa</td>
+      <td>20</td>
+      <td>20</td>
+      <td>6</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>MULTIPOLYGON (((53.92783 24.1772, 53.92812 24....</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 64 columns</p>
+</div></div></div>
+</div>
 <p>And now let’s create a simple plot from this <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the GeoDataFrame</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the GeoDataFrame</span>
 <span class="n">world</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/da3afa3b500d08f513ba94aa2b099158c376dd0a99be08794bfe53bd4ca1853f.png" src="../_images/da3afa3b500d08f513ba94aa2b099158c376dd0a99be08794bfe53bd4ca1853f.png" />
+</div>
 </div>
 <p>The resulting plot shows the geographic locations of all countries in the ‘naturalearth_lowres’ dataset.</p>
 </section>

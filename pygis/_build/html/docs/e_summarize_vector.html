@@ -678,7 +678,7 @@
 <figure class="align-default" id="point-density-using-groupby-and-geopandas">
 <img alt="../_images/PointDensity_Groupby.png" src="../_images/PointDensity_Groupby.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Point density using groupby and geopandas</span><a class="headerlink" href="#point-density-using-groupby-and-geopandas" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Point density using groupby and geopandas</span><a class="headerlink" href="#point-density-using-groupby-and-geopandas" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>First, we will create a grid over the Bay Area.</p>
@@ -711,9 +711,9 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects</span>
-<span class="c1"># op = &quot;intersects&quot; also counts those that fall on a cell boundary (between two cells)</span>
-<span class="c1"># op = &quot;within&quot; will not count those fall on a cell boundary</span>
-<span class="n">wells_cell</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">bay_area_grid</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
+<span class="c1"># predicate = &quot;intersects&quot; also counts those that fall on a cell boundary (between two cells)</span>
+<span class="c1"># predicate = &quot;within&quot; will not count those fall on a cell boundary</span>
+<span class="n">wells_cell</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">bay_area_grid</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
 
 <span class="c1"># Remove duplicate counts</span>
 <span class="c1"># With intersect, those that fall on a boundary will be allocated to all cells that share that boundary</span>
@@ -743,28 +743,100 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># op = &quot;intersects&quot; also counts those that fall on a cell boundary (between two cells)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># op = &quot;within&quot; will not count those fall on a cell boundary</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">wells_cell</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">bay_area_grid</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Remove duplicate counts</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># With intersect, those that fall on a boundary will be allocated to all cells that share that boundary</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">wells_cell</span> <span class="o">=</span> <span class="n">wells_cell</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Well_ID&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/tools/sjoin.py:110,</span> in <span class="ni">sjoin</span><span class="nt">(left_df, right_df, how, predicate, lsuffix, rsuffix, distance, on_attribute, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">first</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sjoin() got an unexpected keyword argument &#39;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="n">on_attribute</span> <span class="o">=</span> <span class="n">_maybe_make_list</span><span class="p">(</span><span class="n">on_attribute</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="n">_basic_checks</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">how</span><span class="p">,</span> <span class="n">lsuffix</span><span class="p">,</span> <span class="n">rsuffix</span><span class="p">,</span> <span class="n">on_attribute</span><span class="o">=</span><span class="n">on_attribute</span><span class="p">),</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="ne">TypeError</span>: sjoin() got an unexpected keyword argument &#39;op&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>Grid_ID</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((1724272.398 497763.821, 1721772.398 ...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((1724272.398 506424.075, 1721772.398 ...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((1724272.398 515084.329, 1721772.398 ...</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((1724272.398 523744.583, 1721772.398 ...</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON ((1724272.398 532404.837, 1721772.398 ...</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1381</th>
+      <td>POLYGON ((1986772.398 787882.331, 1984272.398 ...</td>
+      <td>1381</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1382</th>
+      <td>POLYGON ((1986772.398 796542.585, 1984272.398 ...</td>
+      <td>1382</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1383</th>
+      <td>POLYGON ((1986772.398 805202.839, 1984272.398 ...</td>
+      <td>1383</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1384</th>
+      <td>POLYGON ((1986772.398 813863.093, 1984272.398 ...</td>
+      <td>1384</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1385</th>
+      <td>POLYGON ((1986772.398 822523.347, 1984272.398 ...</td>
+      <td>1385</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1386 rows × 3 columns</p>
+</div></div></div>
 </div>
 <p>We can plot the data to see how it looks.</p>
 <div class="cell docutils container">
@@ -782,12 +854,24 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Binning Well Points&#39;)
+</pre></div>
+</div>
+<img alt="../_images/a77b8133bd36d63926bc453fe41f55e58d4c6c530ae7399800af44aae911165c.png" src="../_images/a77b8133bd36d63926bc453fe41f55e58d4c6c530ae7399800af44aae911165c.png" />
+</div>
 </div>
 <p>The advantage of this method is that it is pretty fast. To verify that all points have been counted once, we can check the aggregate of all the point sums for each cell.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of well points counted: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Number of well points in input data: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">bay_area_grid</span><span class="o">.</span><span class="n">Count</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wells</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of well points counted: 6037
+Number of well points in input data: 6037
 </pre></div>
 </div>
 </div>
@@ -831,6 +915,12 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Santa Clara County - Boundaries, Wells, and Grids&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Santa Clara County - Boundaries, Wells, and Grids&#39;)
+</pre></div>
+</div>
+<img alt="../_images/aa3558a3a8265bbc61514d0cec0d46ad3587f9e6bacab1c22f444d2937e9f413.png" src="../_images/aa3558a3a8265bbc61514d0cec0d46ad3587f9e6bacab1c22f444d2937e9f413.png" />
 </div>
 </div>
 <p>We iterate through each cell in the grid and set a counter for each cell. We iterate through each well point and see if it is within (or intersects) the cell. If it is, the counter is increased by 1, and the feature is “discarded” so that it won’t be counted again (resolving the issue of a point falling on the boundary between two cells).</p>
@@ -909,12 +999,113 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>Grid_ID</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((1859618.426 548178.942, 1857118.426 ...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POLYGON ((1859618.426 556839.196, 1857118.426 ...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POLYGON ((1859618.426 565499.45, 1857118.426 5...</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>POLYGON ((1859618.426 574159.704, 1857118.426 ...</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>POLYGON ((1859618.426 582819.958, 1857118.426 ...</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>POLYGON ((1934618.426 574159.704, 1932118.426 ...</td>
+      <td>88</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>POLYGON ((1934618.426 582819.958, 1932118.426 ...</td>
+      <td>89</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>POLYGON ((1934618.426 591480.212, 1932118.426 ...</td>
+      <td>90</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>POLYGON ((1934618.426 600140.466, 1932118.426 ...</td>
+      <td>91</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>POLYGON ((1934618.426 608800.72, 1932118.426 6...</td>
+      <td>92</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>93 rows × 3 columns</p>
+</div></div></div>
 </div>
 <p>We can check to make sure all well points in Santa Clara County were counted.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check total number of well points counted and compare to number of well points in input data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of well points counted: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Number of well points in input data: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">counts_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">sc_county_wells</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of well points counted: 136
+Number of well points in input data: 136
 </pre></div>
 </div>
 </div>
@@ -934,6 +1125,12 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Santa Clara County - Binning Well Points&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Santa Clara County - Binning Well Points&#39;)
+</pre></div>
+</div>
+<img alt="../_images/1d51dcf96a3ed9d8eb0359fb4528c95d71dd8fc9bb2505dd52223076bf9920e9.png" src="../_images/1d51dcf96a3ed9d8eb0359fb4528c95d71dd8fc9bb2505dd52223076bf9920e9.png" />
 </div>
 </div>
 </section>
@@ -972,6 +1169,20 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;San Francisco Bay Area - Kernel Density Estimation for Wells&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/geoplot/geoplot.py:1310: FutureWarning: 
+
+`shade` is now deprecated in favor of `fill`; setting `fill=True`.
+This will become an error in seaborn v0.14.0; please update your code.
+
+  sns.kdeplot(
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Kernel Density Estimation for Wells&#39;)
+</pre></div>
+</div>
+<img alt="../_images/d5ecc6c26849afcd8dbe3bc8902810a89ae6b284606a11c4a7ccfe08693a77d6.png" src="../_images/d5ecc6c26849afcd8dbe3bc8902810a89ae6b284606a11c4a7ccfe08693a77d6.png" />
 </div>
 </div>
 </section>
@@ -1024,6 +1235,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/af2aeb365fda4325763a33a173cb3d16461799745c5a4c2922ae4e9825a734c0.png" src="../_images/af2aeb365fda4325763a33a173cb3d16461799745c5a4c2922ae4e9825a734c0.png" />
 </div>
 </div>
 <p>We can export the raster if necessary.</p>

@@ -835,7 +835,7 @@
 <figure class="align-default" id="union-of-all-geometries-keeps-all-data">
 <img alt="../_images/vector_union.jpg" src="../_images/vector_union.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Union keeps all the data. In the figure above, all of A and B are kept.</span><a class="headerlink" href="#union-of-all-geometries-keeps-all-data" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the attribute table, we see that the attributes from both individual datasets have been combined. The areas that are unique to one dataset (no overlap) have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values in the fields that originated from the other dataset. <a class="footnote-reference brackets" href="#gpd-set" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
@@ -857,7 +857,7 @@ Table shape (rows, columns): (46, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   union_result = gpd.overlay(counties, watersheds, how = &#39;union&#39;)
 </pre></div>
 </div>
@@ -961,7 +961,7 @@ First two rows:
 <figure class="align-default" id="intersection-of-geometries-keeps-overlapping-geometries">
 <img alt="../_images/vector_intersection.jpg" src="../_images/vector_intersection.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Intersection keeps the geometries that overlap with each other. In the figure above, only the portion where A and B overlap is kept.</span><a class="headerlink" href="#intersection-of-geometries-keeps-overlapping-geometries" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Because there are no areas unique to one dataset, notice how the attribute table of the combined dataset does not have any <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values. When mapping the intersection overlay, we can see that any areas that did not have any overlay were discarded (areas with an outline but no fill). Areas covered by the county and watershed boundaries datasets are kept (shown in color). <a class="footnote-reference brackets" href="#gpd-set" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#bolstad" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
@@ -1075,7 +1075,7 @@ First two rows:
 <figure class="align-default" id="identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets">
 <img alt="../_images/vector_identity.jpg" src="../_images/vector_identity.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Identity keeps the geometries of the first dataset. Any intersecting geometries from the second dataset are also combined and included. In the figure, all of A and the portion of B that intersects A are kept.</span><a class="headerlink" href="#identity-of-the-geometries-keeps-the-geometries-covered-by-the-first-dataset-or-both-datasets" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the attribute table, the fields from the individual datasets have been combined. For those geometries unique to the first dataset, the fields that came from the second dataset have <code class="docutils literal notranslate"><span class="pre">NaN</span></code> as values.</p>
@@ -1101,7 +1101,7 @@ Table shape (rows, columns): (37, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   identity_result = gpd.overlay(counties, watersheds, how = &#39;identity&#39;)
 </pre></div>
 </div>
@@ -1194,7 +1194,7 @@ First two rows:
 <figure class="align-default" id="difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset">
 <img alt="../_images/vector_erase.jpg" src="../_images/vector_erase.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Difference (erase) removes geometries that intersect with each other. In the figure above, B is used to cut out and remove a portion of A.</span><a class="headerlink" href="#difference-or-erase-removes-the-geometries-of-the-first-dataset-from-the-second-dataset" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Looking at the attribute table, the fields from the second dataset do not appear in the combined dataset. The second dataset was “combined” with the first dataset by discarding some data (altering the geometry) from the first dataset.</p>
@@ -1220,7 +1220,7 @@ Table shape (rows, columns): (9, 2)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2864160/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   difference_result = gpd.overlay(counties, watersheds, how = &#39;difference&#39;)
 </pre></div>
 </div>
@@ -1343,7 +1343,7 @@ First two rows:
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Depending on the argument specified in the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;intersects&quot;</span></code> will count that point twice and allocate (join) it to both geometries that share the boundary, whereas <code class="docutils literal notranslate"><span class="pre">op</span> <span class="pre">=</span> <span class="pre">&quot;within&quot;</span></code> will not count or allocate the point at all.</p>
+<p>Depending on the argument specified in the <code class="docutils literal notranslate"><span class="pre">op</span></code> parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, <code class="docutils literal notranslate"><span class="pre">predicate</span> <span class="pre">=</span> <span class="pre">&quot;intersects&quot;</span></code> will count that point twice and allocate (join) it to both geometries that share the boundary, whereas <code class="docutils literal notranslate"><span class="pre">predicate</span> <span class="pre">=</span> <span class="pre">&quot;within&quot;</span></code> will not count or allocate the point at all.</p>
 </div>
 <p>Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the <code class="docutils literal notranslate"><span class="pre">how</span></code> parameter. <a class="footnote-reference brackets" href="#gpd-merge" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#esri-join" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -1497,7 +1497,7 @@ First two rows:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
-<span class="n">left_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
+<span class="n">left_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
 <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Left Join&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">left_join_result</span><span class="p">)</span>
@@ -1508,24 +1508,117 @@ First two rows:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Get inner join</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">left_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Print head and tail of attribute table</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Left Join&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">left_join_result</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Left Join
 
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/tools/sjoin.py:110,</span> in <span class="ni">sjoin</span><span class="nt">(left_df, right_df, how, predicate, lsuffix, rsuffix, distance, on_attribute, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">first</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sjoin() got an unexpected keyword argument &#39;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="n">on_attribute</span> <span class="o">=</span> <span class="n">_maybe_make_list</span><span class="p">(</span><span class="n">on_attribute</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="n">_basic_checks</span><span class="p">(</span><span class="n">left_df</span><span class="p">,</span> <span class="n">right_df</span><span class="p">,</span> <span class="n">how</span><span class="p">,</span> <span class="n">lsuffix</span><span class="p">,</span> <span class="n">rsuffix</span><span class="p">,</span> <span class="n">on_attribute</span><span class="o">=</span><span class="n">on_attribute</span><span class="p">),</span>
+Table shape (rows, columns): (6037, 7)
 
-<span class="ne">TypeError</span>: sjoin() got an unexpected keyword argument &#39;op&#39;
+First two rows:
 </pre></div>
 </div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>coname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2400064-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1968290.923 592019.918)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2400099-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1969113.543 595876.691)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>coname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6035</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1960933.648 610295.428)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6036</th>
+      <td>06S02W34B006</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>152</td>
+      <td>POINT (1861394.207 597916.983)</td>
+      <td>6.0</td>
+      <td>Santa Clara County</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/bb50fc49c85694a65ffed811ca35d1779e24fc8d35e60e243277d6514f5f3f30.png" src="../_images/bb50fc49c85694a65ffed811ca35d1779e24fc8d35e60e243277d6514f5f3f30.png" />
 </div>
 </div>
 </section>
@@ -1539,7 +1632,7 @@ First two rows:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
-<span class="n">right_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
+<span class="n">right_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
 <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Right Join&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">right_join_result</span><span class="p">)</span>
@@ -1549,6 +1642,119 @@ First two rows:
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Right Join
+
+Table shape (rows, columns): (1337, 7)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index_left</th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>coname</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>131</td>
+      <td>None</td>
+      <td>Irrigation</td>
+      <td>Unknown</td>
+      <td>211</td>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>132</td>
+      <td>None</td>
+      <td>Irrigation</td>
+      <td>Unknown</td>
+      <td>92</td>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860234.837 612219.122, 186007...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index_left</th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>coname</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8</th>
+      <td>5606</td>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>70</td>
+      <td>Sonoma County</td>
+      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5925</td>
+      <td>07N09W01C001M</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>110</td>
+      <td>Sonoma County</td>
+      <td>MULTIPOLYGON (((1746855.532 743026.706, 174685...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/45f35098f43e08c30b7fce65b4a071bd228d5b7c36a65feac9ee60f252408bca.png" src="../_images/45f35098f43e08c30b7fce65b4a071bd228d5b7c36a65feac9ee60f252408bca.png" />
+</div>
 </div>
 </section>
 <section id="inner-join">
@@ -1557,7 +1763,7 @@ First two rows:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get inner join</span>
-<span class="n">inner_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
+<span class="n">inner_join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">counties</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;inner&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print head and tail of attribute table</span>
 <span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Inner Join&quot;</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">inner_join_result</span><span class="p">)</span>
@@ -1566,6 +1772,119 @@ First two rows:
 <span class="n">plot_merge</span><span class="p">(</span><span class="n">merge_type</span> <span class="o">=</span> <span class="s2">&quot;Inner Join&quot;</span><span class="p">,</span> <span class="n">merge_result</span> <span class="o">=</span> <span class="n">inner_join_result</span><span class="p">,</span> <span class="n">merge_vector</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Inner Join
+
+Table shape (rows, columns): (1337, 7)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>coname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>128</th>
+      <td>None</td>
+      <td>Stockwatering</td>
+      <td>Unknown</td>
+      <td>40</td>
+      <td>POINT (1882982.865 701605.988)</td>
+      <td>7</td>
+      <td>Solano County</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>None</td>
+      <td>Irrigation</td>
+      <td>Unknown</td>
+      <td>240</td>
+      <td>POINT (1884096.112 699303.331)</td>
+      <td>7</td>
+      <td>Solano County</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>coname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6033</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>76</td>
+      <td>POINT (1841755.238 707939.225)</td>
+      <td>3</td>
+      <td>Napa County</td>
+    </tr>
+    <tr>
+      <th>6036</th>
+      <td>06S02W34B006</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>152</td>
+      <td>POINT (1861394.207 597916.983)</td>
+      <td>6</td>
+      <td>Santa Clara County</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/f76f16477c9818f2b36e779fe8049fee5dea7217b75c3c566c7bd7bba6fe2a7f.png" src="../_images/f76f16477c9818f2b36e779fe8049fee5dea7217b75c3c566c7bd7bba6fe2a7f.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />

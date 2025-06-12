@@ -30,7 +30,7 @@ One of the most basic operations is creating new attributes. Let's say for insta
 
 ```{code-cell} ipython3
 import geopandas
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+world = geopandas.read_file('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson')
 world.columns
 ```
 We can then do basic operations on the basis of column names. Here we create a new column `m_pop_est`:

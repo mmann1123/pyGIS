@@ -16,7 +16,7 @@ myst:
     "property=og:locale": "en_US"
 ---
 
-(d_understand_crs_codes)=
+<!-- (d_understand_crs_codes)= -->
 
 # Understanding a CRS: Proj4 and CRS codes
 ----------------

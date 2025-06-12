@@ -14,7 +14,7 @@ myst:
     "property=og:locale": "en_US"
 ---
 
-(e_table_joins)=
+<!-- (e_table_joins)= -->
 
 ----------------
 ```{admonition} Learning Objectives

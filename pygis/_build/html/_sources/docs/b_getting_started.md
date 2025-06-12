@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 ---
 
-(b_getting_started)=
+<!-- (b_getting_started)= -->
 
 # Setting up a Normal Python Environment
 
@@ -122,14 +122,14 @@ when you wish to
 -   share scientific ideas with students or colleagues
 
 
-### Starting the Jupyter Notebook
+### Starting the Jupyter Lab
 
-Once you have installed Anaconda, you can start the Jupyter notebook.
+Once you have installed Anaconda, you can start the Jupyter lab.
 
 Either
 
 -   search for Jupyter in your applications menu, or
--   open up a terminal and type `jupyter notebook`
+-   open up a terminal and type `jupyter lab`
     - Windows users should substitute \"Anaconda command prompt\" for \"terminal\" in the previous line.
 
 If you use the second option, you will see something like this
@@ -429,7 +429,7 @@ drive.mount('/content/drive')
 
 Most popular Python libraries come pre-installed in Google Colab. However, if you need to install additional libraries, you can use the pip package manager directly in a code cell:
 
-```{code-cell} ipython3
+``` bash    
 !pip install pandas
 ```
 

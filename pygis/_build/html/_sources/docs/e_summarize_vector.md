@@ -227,9 +227,9 @@ Next, we will conduct a spatial join for each well point, essentially assigning 
 
 ```{code-cell} ipython3
 # Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects
-# op = "intersects" also counts those that fall on a cell boundary (between two cells)
-# op = "within" will not count those fall on a cell boundary
-wells_cell = gpd.sjoin(wells, bay_area_grid, how = "inner", op = "intersects")
+# predicate = "intersects" also counts those that fall on a cell boundary (between two cells)
+# predicate = "within" will not count those fall on a cell boundary
+wells_cell = gpd.sjoin(wells, bay_area_grid, how = "inner", predicate = "intersects")
 
 # Remove duplicate counts
 # With intersect, those that fall on a boundary will be allocated to all cells that share that boundary

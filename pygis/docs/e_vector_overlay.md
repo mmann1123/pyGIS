@@ -301,7 +301,7 @@ These relationships are defined from the first dataset to the second dataset (fo
 ```
 
 ```{warning}
-Depending on the argument specified in the `op` parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, `op = "intersects"` will count that point twice and allocate (join) it to both geometries that share the boundary, whereas `op = "within"` will not count or allocate the point at all.
+Depending on the argument specified in the `op` parameter, a geometry that falls directly on the boundary of another geometry may be counted, may be counted twice, or may not be counted at all. For example, if a point falls on a boundary between two geometries, `predicate = "intersects"` will count that point twice and allocate (join) it to both geometries that share the boundary, whereas `predicate = "within"` will not count or allocate the point at all.
 ```
 
 Just like regular table joins, there are multiple types of spatial joins, which determine which features from both datasets are kept in the output dataset. This is specified using the `how` parameter. [^gpd_merge], [^esri_join]
@@ -338,7 +338,7 @@ We'll first demonstrate a left join. Notice that all features from the left data
 
 ```{code-cell} ipython3
 # Get inner join
-left_join_result = gpd.sjoin(wells, counties, how = "left", op = 'within')
+left_join_result = gpd.sjoin(wells, counties, how = "left", predicate = 'within')
 
 # Print head and tail of attribute table
 display_table(table_name = "Left Join", attribute_table = left_join_result)
@@ -356,7 +356,7 @@ For a right join, all features from the right dataset (county boundaries dataset
 
 ```{code-cell} ipython3
 # Get inner join
-right_join_result = gpd.sjoin(wells, counties, how = "right", op = 'within')
+right_join_result = gpd.sjoin(wells, counties, how = "right", predicate = 'within')
 
 # Print head and tail of attribute table
 display_table(table_name = "Right Join", attribute_table = right_join_result)
@@ -371,7 +371,7 @@ Finally, with an inner join, only the well locations that fall within the county
 
 ```{code-cell} ipython3
 # Get inner join
-inner_join_result = gpd.sjoin(wells, counties, how = "inner", op = 'within')
+inner_join_result = gpd.sjoin(wells, counties, how = "inner", predicate = 'within')
 
 # Print head and tail of attribute table
 display_table(table_name = "Inner Join", attribute_table = inner_join_result)

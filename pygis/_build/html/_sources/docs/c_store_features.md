@@ -158,8 +158,6 @@ The **Imagine** file format, developed by the image processing software company 
 
 Raster data can also be stored in a **File Geodatabase**, alongside vector data. File Geodatabases offer certain advantages for handling raster data. They can define image mosaic structures, allowing users to "stitch" together multiple image files stored in the geodatabase. Furthermore, processing extensive raster files can be computationally more efficient in a File Geodatabase, compared to an Imagine or GeoTiff file format.
 
-Sure, here are some resources specifically targeting data storage formats in GIS:
-
 ---
 ## Learn More
 

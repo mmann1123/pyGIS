@@ -41,7 +41,7 @@ Affine transformations allows us to use simple systems of linear equations to ma
 
 
 ```{figure} ../_static/d_crs/warp.png
-:name: Example of a warped (reprojected) image
+:name: Example of a warped image - reprojected 
 ```
 
 First some general properties of affine transforms:

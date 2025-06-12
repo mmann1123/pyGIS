@@ -462,7 +462,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-attributes">Create New Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-selecting-data">Indexing and Selecting Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-index-position">Selection by Index Position</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different choices for indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different Choices for Indexing</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-points-by-location">Subset Points by Location</a></li>
@@ -501,7 +501,7 @@
 <figure class="align-default" id="vector-properties">
 <img alt="../_images/dataframe.svg" src="../_images/dataframe.svg" />
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Structure of a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> extends the functionality of a Pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></span><a class="headerlink" href="#vector-properties" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> can contain any geometry type (e.g. points, lines, polygon) and has a <code class="docutils literal notranslate"><span class="pre">GeoSeries.crs</span></code> attribute, which stores information on the projection (CRS stands for Coordinate Reference System). Therefore, each <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> in a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> can be in a different projection, allowing you to have, for example, multiple versions of the same geometry, just in a different CRS.</p>
@@ -515,35 +515,25 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span>
-<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson&#39;</span><span class="p">)</span>
 <span class="n">world</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">geopandas</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">world</span><span class="o">.</span><span class="n">columns</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/datasets/__init__.py:18,</span> in <span class="ni">get_path</span><span class="nt">(dataset)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;The geopandas.dataset has been deprecated and was removed in GeoPandas &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="sa">f</span><span class="s2">&quot;1.0. You can get the original &#39;</span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">&#39; data from &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ne_message</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;natural&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">dataset</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">nybb_message</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">if</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">_prev_available</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="s2">&quot;The geopandas.dataset has been deprecated and &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="s2">&quot;was removed in GeoPandas 1.0. New sample datasets are now available &quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>         <span class="s2">&quot;in the geodatasets package (https://geodatasets.readthedocs.io/en/latest/)&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="p">)</span>
-
-<span class="ne">AttributeError</span>: The geopandas.dataset has been deprecated and was removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;scalerank&#39;, &#39;labelrank&#39;, &#39;sovereignt&#39;, &#39;sov_a3&#39;, &#39;adm0_dif&#39;, &#39;level&#39;,
+       &#39;type&#39;, &#39;admin&#39;, &#39;adm0_a3&#39;, &#39;geou_dif&#39;, &#39;geounit&#39;, &#39;gu_a3&#39;, &#39;su_dif&#39;,
+       &#39;subunit&#39;, &#39;su_a3&#39;, &#39;brk_diff&#39;, &#39;name&#39;, &#39;name_long&#39;, &#39;brk_a3&#39;,
+       &#39;brk_name&#39;, &#39;brk_group&#39;, &#39;abbrev&#39;, &#39;postal&#39;, &#39;formal_en&#39;, &#39;formal_fr&#39;,
+       &#39;note_adm0&#39;, &#39;note_brk&#39;, &#39;name_sort&#39;, &#39;name_alt&#39;, &#39;mapcolor7&#39;,
+       &#39;mapcolor8&#39;, &#39;mapcolor9&#39;, &#39;mapcolor13&#39;, &#39;pop_est&#39;, &#39;gdp_md_est&#39;,
+       &#39;pop_year&#39;, &#39;lastcensus&#39;, &#39;gdp_year&#39;, &#39;economy&#39;, &#39;income_grp&#39;,
+       &#39;wikipedia&#39;, &#39;fips_10&#39;, &#39;iso_a2&#39;, &#39;iso_a3&#39;, &#39;iso_n3&#39;, &#39;un_a3&#39;, &#39;wb_a2&#39;,
+       &#39;wb_a3&#39;, &#39;woe_id&#39;, &#39;adm0_a3_is&#39;, &#39;adm0_a3_us&#39;, &#39;adm0_a3_un&#39;,
+       &#39;adm0_a3_wb&#39;, &#39;continent&#39;, &#39;region_un&#39;, &#39;subregion&#39;, &#39;region_wb&#39;,
+       &#39;name_len&#39;, &#39;long_len&#39;, &#39;abbrev_len&#39;, &#39;tiny&#39;, &#39;homepart&#39;,
+       &#39;featureclass&#39;, &#39;geometry&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -556,6 +546,101 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scalerank</th>
+      <th>labelrank</th>
+      <th>sovereignt</th>
+      <th>sov_a3</th>
+      <th>adm0_dif</th>
+      <th>level</th>
+      <th>type</th>
+      <th>admin</th>
+      <th>adm0_a3</th>
+      <th>geou_dif</th>
+      <th>...</th>
+      <th>subregion</th>
+      <th>region_wb</th>
+      <th>name_len</th>
+      <th>long_len</th>
+      <th>abbrev_len</th>
+      <th>tiny</th>
+      <th>homepart</th>
+      <th>featureclass</th>
+      <th>geometry</th>
+      <th>m_pop_est</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Southern Asia</td>
+      <td>South Asia</td>
+      <td>11</td>
+      <td>11</td>
+      <td>4</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>POLYGON ((74.89131 37.23164, 74.84023 37.22505...</td>
+      <td>28.400000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>3</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>0</td>
+      <td>2</td>
+      <td>Sovereign country</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>0</td>
+      <td>...</td>
+      <td>Middle Africa</td>
+      <td>Sub-Saharan Africa</td>
+      <td>6</td>
+      <td>6</td>
+      <td>4</td>
+      <td>-99</td>
+      <td>1</td>
+      <td>Admin-0 sovereignty</td>
+      <td>MULTIPOLYGON (((14.19082 -5.87598, 14.39863 -5...</td>
+      <td>12.799293</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 65 columns</p>
+</div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -570,35 +655,63 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
 
-<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
+<span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson&#39;</span><span class="p">)</span>
 <span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span> <span class="p">]</span>    
 <span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>  
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/c804058f1615fa81b3bff7c1785b040b42960e203d7cc497db79139fd7644dce.png" src="../_images/c804058f1615fa81b3bff7c1785b040b42960e203d7cc497db79139fd7644dce.png" />
+</div>
 </div>
 <section id="different-choices-for-indexing">
-<h4>Different choices for indexing<a class="headerlink" href="#different-choices-for-indexing" title="Link to this heading">#</a></h4>
-<p>Object selection has had a number of user-requested additions in order to
-support more explicit location based indexing.</p>
-<p>Getting values from an object with multi-axes selection uses the following
-notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as
-well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of
-the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to
-<code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
+<h4>Different Choices for Indexing<a class="headerlink" href="#different-choices-for-indexing" title="Link to this heading">#</a></h4>
+<p><strong><code class="docutils literal notranslate"><span class="pre">.loc</span></code></strong><br />
+<code class="docutils literal notranslate"><span class="pre">.loc</span></code> is primarily label based, but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when the items are not found. Allowed inputs are:</p>
+<ul class="simple">
+<li><p>A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a <em>label</em> of the index. This use is <strong>not</strong> an integer position along the index.)</p></li>
+<li><p>A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code></p></li>
+<li><p>A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual Python slices, <strong>both</strong> the start and the stop are included, when present in the index! See <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-slicing-with-labels">Slicing with labels</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced-endpoints-are-inclusive">Endpoints are inclusive</a>)</p></li>
+<li><p>A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)</p></li>
+</ul>
+<p>See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-label">Selection by Label</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;NAME&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Singapore&#39;</span><span class="p">]</span>  <span class="c1"># Selects the row where the name is &#39;Singapore&#39;</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong><code class="docutils literal notranslate"><span class="pre">.iloc</span></code></strong><br />
+<code class="docutils literal notranslate"><span class="pre">.iloc</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">length-1</span></code> of the axis), but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a requested indexer is out-of-bounds, except <em>slice</em> indexers which allow out-of-bounds indexing (this conforms with Python/NumPy <em>slice</em> semantics). Allowed inputs are:</p>
+<ul class="simple">
+<li><p>An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code></p></li>
+<li><p>A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code></p></li>
+<li><p>A slice object with integers <code class="docutils literal notranslate"><span class="pre">1:7</span></code></p></li>
+<li><p>A boolean array (any <code class="docutils literal notranslate"><span class="pre">NA</span></code> values will be treated as <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and that returns valid output for indexing (one of the above)</p></li>
+</ul>
+<p>See more at: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-integer">Selection by Position</a> and <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced">Advanced Indexing</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Selects the first row  </span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer.</strong><br />
+See more at <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-callable">Selection By Callable</a>.</p>
+<hr class="docutils" />
+<p>Getting values from an object with multi-axes selection uses the following notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Object Type</p></th>
-<th class="head text-right"><p>Indexers</p></th>
+<th class="head text-left"><p>Indexers</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-left"><p>Series</p></td>
-<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>DataFrame</p></td>
-<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -611,22 +724,26 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 <p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>. <code class="docutils literal notranslate"><span class="pre">.cx</span></code> allows you to quickly access the table’s <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, where indexing reflects <code class="docutils literal notranslate"><span class="pre">[x,y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[lon,lat]</span></code>. Here we will query points above and below 0 degrees latitude:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
 <span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0deef1f03489f6d84987a79f4a05648b78ef25ea6b22e1023a1e0e0c37f1690.png" src="../_images/a0deef1f03489f6d84987a79f4a05648b78ef25ea6b22e1023a1e0e0c37f1690.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geopandas</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_cities&#39;</span><span class="p">))</span>
-<span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
 <span class="n">southern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f98df73fdf1f26e4d94c79fe19663e630f599675c2f7efe7b3d7a474a1f97d53.png" src="../_images/f98df73fdf1f26e4d94c79fe19663e630f599675c2f7efe7b3d7a474a1f97d53.png" />
 </div>
 </div>
 </section>
@@ -701,7 +818,7 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-new-attributes">Create New Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-selecting-data">Indexing and Selecting Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-index-position">Selection by Index Position</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different choices for indexing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#different-choices-for-indexing">Different Choices for Indexing</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-points-by-location">Subset Points by Location</a></li>

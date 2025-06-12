@@ -721,8 +721,8 @@ ax.set_title(
 )
 # %%
 # Perform spatial join, merging attribute table of wells point and that of the cell with which it intersects
-# op = "intersects" also counts those that fall on a cell boundary (between two cells)
-# op = "within" will not count those fall on a cell boundary
+# predicate = "intersects" also counts those that fall on a cell boundary (between two cells)
+# predicate = "within" will not count those fall on a cell boundary
 wells_cell = gpd.sjoin(wells, bay_area_grid, how="inner", op="intersects")
 
 # Remove duplicate counts

@@ -243,7 +243,7 @@ A spatial join can be conducted to assign the rainfall training "values" to its 
 
 ```{code-cell} ipython3
 # If rainfall point within the polygon, assign that rainfall value to the polygon
-tp_polys_clipped_values = gpd.sjoin(rain_train_gdf, tp_polys_clipped, how = "right", op = 'within')
+tp_polys_clipped_values = gpd.sjoin(rain_train_gdf, tp_polys_clipped, how = "right", predicate = 'within')
 
 # Drop un-needed column
 tp_polys_clipped_values = tp_polys_clipped_values.drop("index_left", axis = 1)
@@ -260,7 +260,7 @@ A second spatial join can be conducted to assign those values from the Thiessen 
 
 ```{code-cell} ipython3
 # If test point is within a polygon, assign that polygon's value to the test point
-rain_test_pred_tp = gpd.sjoin(rain_test_gdf, tp_polys_clipped_values, how = "left", op = 'within')
+rain_test_pred_tp = gpd.sjoin(rain_test_gdf, tp_polys_clipped_values, how = "left", predicate = 'within')
 
 # Drop un-needed column
 rain_test_pred_tp = rain_test_pred_tp.drop("index_right", axis = 1)
