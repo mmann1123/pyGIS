@@ -55,7 +55,7 @@ place_name = "Edgewood Washington, DC, USA"
 
 ### OSM Location Boundary
 
-Let's also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the `ox.geocode_to_gdf` [docs](https://osmnx.readthedocs.io/en/stable/osmnx.html?highlight=geocode_to_gdf(#osmnx.geocoder.geocode_to_gdf) function.
+Let's also plot the Polygon that represents the boundary of our area of interest (Washington DC). We can retrieve the Polygon geometry using the `ox.geocode_to_gdf` [docs](https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.geocoder.geocode_to_gdf) function.
 
 ```{code-cell} ipython3
 # import osmnx
@@ -66,7 +66,7 @@ import geopandas as gpd
 area = ox.geocode_to_gdf(place_name)
 ```
 
-As the name of the function already tells us, `gdf_from_place()`returns a GeoDataFrame based on the specified place name query.
+As the name of the function already tells us, `geocode_to_gdf()`returns a GeoDataFrame based on the specified place name query.
 
 ```{code-cell} ipython3
 # Check the data type
