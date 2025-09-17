@@ -35,7 +35,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -527,7 +527,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 
 <span class="c1"># Read data (shapefile)</span>
 <span class="n">dc</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://opendata.arcgis.com/datasets/7241f6d500b44288ad983f0942b39663_10.geojson&quot;</span><span class="p">)</span>
@@ -539,9 +539,9 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="k">def</span> <span class="nf">map_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">map_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function superimposes all the data on a map and sets a title for the map.&#39;&#39;&#39;</span>    
     
     <span class="c1"># Create subplots</span>
@@ -915,9 +915,9 @@ Name: geometry, dtype: geometry
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
-<span class="kn">import</span> <span class="nn">pyproj</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyproj</span>
 
-<span class="k">def</span> <span class="nf">get_epsg</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">70</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_epsg</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">70</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Function takes a PROJ.4 string and optional minimum confidence level as inputs and outputs the relevant EPSG code, if one exists. Source: https://geopandas.org/docs/user_guide/projections.html&#39;&#39;&#39;</span>
     
     <span class="c1"># Get relevant EPSG at the specified minimum confidence level</span>

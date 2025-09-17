@@ -35,7 +35,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -511,15 +511,15 @@
 <p>In the following example we will use Landsat data, some training data to train a supervised sklearn model. In order to do this we first need  to have land classifications for a set of points of polygons. In this case we have three polygons with the classes [‘water’,’crop’,’tree’,’developed’]. The first step is to use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> to convert these to integer based categories, which we store in a new column called ‘lc’.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
-<span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">fit_predict</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">sklearn_xarray.preprocessing</span> <span class="kn">import</span> <span class="n">Featurizer</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224078_20200518_polygons</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">fit</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">fit_predict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn_xarray.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Featurizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
 
 <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
 
@@ -531,10 +531,6 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        name                                           geometry  lc
 0      water  POLYGON ((737544.502 -2795232.772, 737544.502 ...   3
 1       crop  POLYGON ((742517.658 -2798160.232, 743046.717 ...   0
@@ -553,7 +549,7 @@
 <p>In this example we will fit and predict the model in two steps. The <code class="docutils literal notranslate"><span class="pre">fit</span></code> method returns three objects, a transformed version of the original dataset <code class="docutils literal notranslate"><span class="pre">X</span></code> that can be used by sklearn, <code class="docutils literal notranslate"><span class="pre">Xy</span></code> a tuple containing the data used for training <code class="docutils literal notranslate"><span class="pre">(X,y)</span></code> where any data outside the polygons is removed, and the trained pipeline <code class="docutils literal notranslate"><span class="pre">clf</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Use a data pipeline</span>
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
@@ -579,7 +575,7 @@
 <p>In order to fit and predict to our original data in one step, we simply use <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geowombat.ml</span> <span class="kn">import</span> <span class="n">fit_predict</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.ml</span><span class="w"> </span><span class="kn">import</span> <span class="n">fit_predict</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_res</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
@@ -601,7 +597,7 @@
 <p>In this example we will use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">kmeans</a> to do our clustering. To run we need to decide apriori how many clusters we want to identify. Typically you want to roughly double the number of expected classes and then recombine them later into the desired labels. This helps to better understand and categorize the variation in your image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="n">cl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -706,8 +702,8 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <p>So <code class="docutils literal notranslate"><span class="pre">&quot;pca__n_components&quot;:</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> says that for the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step of the pipeline, we will try out tree different values for the parameter <code class="docutils literal notranslate"><span class="pre">n_components</span></code>, allowing us to choose the one that performs best at predicting our ‘testing’ data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">sklearn_xarray.model_selection</span> <span class="kn">import</span> <span class="n">CrossValidatorWrapper</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn_xarray.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrossValidatorWrapper</span>
 
 <span class="n">pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
                <span class="p">(</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span>
@@ -744,11 +740,11 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.02978282, 0.03216944, 0.03088088, 0.04051414, 0.0339602 ,
-       0.03285961]), &#39;std_fit_time&#39;: array([0.01268907, 0.01220501, 0.01280433, 0.01645652, 0.01686904,
-       0.00911179]), &#39;mean_score_time&#39;: array([0.0199842 , 0.0272943 , 0.01923423, 0.02078547, 0.02181134,
-       0.01547008]), &#39;std_score_time&#39;: array([0.00603066, 0.00889152, 0.00505685, 0.00850104, 0.00808258,
-       0.00227719]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mean_fit_time&#39;: array([0.05510368, 0.04388471, 0.03987565, 0.03169737, 0.04054618,
+       0.03622856]), &#39;std_fit_time&#39;: array([0.01393044, 0.01606931, 0.009578  , 0.00529488, 0.02137382,
+       0.00727397]), &#39;mean_score_time&#39;: array([0.04039063, 0.0282649 , 0.0382268 , 0.01865692, 0.02631249,
+       0.02241416]), &#39;std_score_time&#39;: array([0.0092931 , 0.01201335, 0.01174707, 0.0026065 , 0.0134019 ,
+       0.00927791]), &#39;param_pca__n_components&#39;: masked_array(data=[1, 1, 2, 2, 3, 3],
              mask=[False, False, False, False, False, False],
        fill_value=999999), &#39;param_scaler__with_std&#39;: masked_array(data=[True, False, True, False, True, False],
              mask=[False, False, False, False, False, False],
@@ -774,7 +770,7 @@ our model. In this case we will see if we need to keep 1, 2, or 3 <a class="refe
 <p>Missing data can be a real problem when working with remote sensing data. In the case of Landsat data, missing data is often represented by a value of 0. Or perhaps you already have masked missing data values as <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>.</p>
 <p>This can be a problem when using sklearn models <em>that expect all data to be present</em>. To handle this we can use the <code class="docutils literal notranslate"><span class="pre">nodata</span></code> value in <code class="docutils literal notranslate"><span class="pre">gewombat.open()</span></code> and <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code> from sklearn in our pipeline.</p>
 <p>If we had a dataset that had 0s as missing data we could use the following to mask out 0s and replace with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>, then we can pass that data to our pipeline, that replaces <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> with the mean of the column.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
 
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
     <span class="p">[</span>
