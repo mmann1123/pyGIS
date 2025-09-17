@@ -35,7 +35,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -514,7 +514,7 @@
 <section id="how-do-i-use-it">
 <h2>How do I use it?<a class="headerlink" href="#how-do-i-use-it" title="Link to this heading">#</a></h2>
 <p>To use GeoWombat’s configuration manager, just call <code class="docutils literal notranslate"><span class="pre">geowombat.config.update</span></code> before opening a file. For example,</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">&lt;</span><span class="n">keywords</span><span class="o">&gt;...</span><span class="p">):</span>
 
@@ -527,8 +527,8 @@
 <p><code class="docutils literal notranslate"><span class="pre">geowombat.config.update</span></code> stores keywords in a dictionary. To see all GeoWombat configuration keywords, just iterate over the dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Using the manager without keywords will set defaults</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">():</span>
@@ -539,10 +539,6 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Keyword: with_config     Value: True
 Keyword: ignore_warnings Value: False
 Keyword: sensor          Value: None
@@ -609,8 +605,8 @@ Keyword: nasa_earthdata_code Value: None
 <p>Configuration keywords beginning with <strong>ref</strong> are the most important commands when opening rasters. For example, to transform the CRS of the data on-the-fly, use <strong>ref_crs</strong>. For more on Coordinate Reference Systems, see <a class="reference internal" href="f_rs_crs.html"><span class="std std-doc">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs &quot;</span>
 
@@ -638,8 +634,8 @@ Keyword: nasa_earthdata_code Value: None
 <p>It is possible to combine multiple configuration keywords. In the example below, the raster CRS is transformed from UTM to Albers Equal Area with a resampled cell size of 100m x 100m.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Without the manager</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -665,9 +661,9 @@ Keyword: nasa_earthdata_code Value: None
 <p>To subset an image, specify bounds as a <strong>tuple</strong> of (left, bottom, right, top) or a rasterio <strong>BoundingBox</strong> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
-<span class="kn">from</span> <span class="nn">rasterio.coords</span> <span class="kn">import</span> <span class="n">BoundingBox</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.coords</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundingBox</span>
 
 <span class="n">bounds</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">724634.17</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=-</span><span class="mf">2806501.39</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">737655.48</span><span class="p">,</span> <span class="n">top</span><span class="o">=-</span><span class="mf">2796221.42</span><span class="p">)</span>
 
@@ -687,7 +683,9 @@ Keyword: nasa_earthdata_code Value: None
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(717345.0, -2832795.0, 778575.0, -2776995.0)
-(724634.17, -2806481.42, 737654.17, -2796221.42)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(724634.17, -2806481.42, 737654.17, -2796221.42)
 </pre></div>
 </div>
 </div>
@@ -708,8 +706,8 @@ Keyword: nasa_earthdata_code Value: None
 <p>To use another image as a reference, just set <strong>ref_image</strong>. Then, the opened file’s bounds, CRS, and cell size will be transformed to match those of the reference image.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224077_20200518_B2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">l8_224077_20200518_B2</span>
 
 <span class="c1"># Without the manager</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -745,8 +743,8 @@ Keyword: nasa_earthdata_code Value: None
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Without the manager</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>

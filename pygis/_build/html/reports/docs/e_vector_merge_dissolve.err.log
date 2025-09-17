@@ -1,37 +1,172 @@
 Traceback (most recent call last):
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 182, in ensure_async
-    result = await obj
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 1319, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
     return loop.run_until_complete(inner)
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
     return future.result()
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+           ^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-  File "/home/mmann1123/miniconda3/envs/pygisbookgw/lib/python3.9/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 100 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)', '# C17002_001E: count of ratio of income to poverty in the past 12 months (total)', '# C17002_002E: count of ratio of income to poverty in the past 12 months (< 0.50)', '# C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)', '# B01003_001E: total population']
-...
-["va_census = c.acs5.state_county_tract(fields = ('NAME', 'C17002_001E', 'C17002_002E', 'C17002_003E', 'B01003_001E'),", '                                      state_fips = states.VA.fips,', '                                      county_fips = "*",', '                                      tract = "*",', '                                      year = 2017)']
--------------------
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Access shapefile of Virginia census tracts
+va_tract = gpd.read_file("https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip")
+
+# Reproject shapefile to UTM Zone 17N
+# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/
+va_tract = va_tract.to_crs(epsg = 32617)
+
+# Print GeoDataFrame of shapefile
+print(va_tract.head(2))
+print('Shape: ', va_tract.shape)
+
+# Check shapefile projection
+print("\nThe shapefile projection is: {}".format(va_tract.crs))
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mSSLCertVerificationError[39m                  Traceback (most recent call last)
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1348[39m, in [36mAbstractHTTPHandler.do_open[39m[34m(self, http_class, req, **http_conn_args)[39m
+[32m   1347[39m [38;5;28;01mtry[39;00m:
+[32m-> [39m[32m1348[39m     [43mh[49m[43m.[49m[43mrequest[49m[43m([49m[43mreq[49m[43m.[49m[43mget_method[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mreq[49m[43m.[49m[43mselector[49m[43m,[49m[43m [49m[43mreq[49m[43m.[49m[43mdata[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m
+[32m   1349[39m [43m              [49m[43mencode_chunked[49m[43m=[49m[43mreq[49m[43m.[49m[43mhas_header[49m[43m([49m[33;43m'[39;49m[33;43mTransfer-encoding[39;49m[33;43m'[39;49m[43m)[49m[43m)[49m
+[32m   1350[39m [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1286[39m, in [36mHTTPConnection.request[39m[34m(self, method, url, body, headers, encode_chunked)[39m
+[32m   1285[39m [38;5;250m[39m[33;03m"""Send a complete request to the server."""[39;00m
+[32m-> [39m[32m1286[39m [38;5;28;43mself[39;49m[43m.[49m[43m_send_request[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m,[49m[43m [49m[43mheaders[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1332[39m, in [36mHTTPConnection._send_request[39m[34m(self, method, url, body, headers, encode_chunked)[39m
+[32m   1331[39m     body = _encode(body, [33m'[39m[33mbody[39m[33m'[39m)
+[32m-> [39m[32m1332[39m [38;5;28;43mself[39;49m[43m.[49m[43mendheaders[49m[43m([49m[43mbody[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m=[49m[43mencode_chunked[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1281[39m, in [36mHTTPConnection.endheaders[39m[34m(self, message_body, encode_chunked)[39m
+[32m   1280[39m     [38;5;28;01mraise[39;00m CannotSendHeader()
+[32m-> [39m[32m1281[39m [38;5;28;43mself[39;49m[43m.[49m[43m_send_output[49m[43m([49m[43mmessage_body[49m[43m,[49m[43m [49m[43mencode_chunked[49m[43m=[49m[43mencode_chunked[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1041[39m, in [36mHTTPConnection._send_output[39m[34m(self, message_body, encode_chunked)[39m
+[32m   1040[39m [38;5;28;01mdel[39;00m [38;5;28mself[39m._buffer[:]
+[32m-> [39m[32m1041[39m [38;5;28;43mself[39;49m[43m.[49m[43msend[49m[43m([49m[43mmsg[49m[43m)[49m
+[32m   1043[39m [38;5;28;01mif[39;00m message_body [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m   1044[39m 
+[32m   1045[39m     [38;5;66;03m# create a consistent interface to message_body[39;00m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:979[39m, in [36mHTTPConnection.send[39m[34m(self, data)[39m
+[32m    978[39m [38;5;28;01mif[39;00m [38;5;28mself[39m.auto_open:
+[32m--> [39m[32m979[39m     [38;5;28;43mself[39;49m[43m.[49m[43mconnect[49m[43m([49m[43m)[49m
+[32m    980[39m [38;5;28;01melse[39;00m:
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1458[39m, in [36mHTTPSConnection.connect[39m[34m(self)[39m
+[32m   1456[39m     server_hostname = [38;5;28mself[39m.host
+[32m-> [39m[32m1458[39m [38;5;28mself[39m.sock = [38;5;28;43mself[39;49m[43m.[49m[43m_context[49m[43m.[49m[43mwrap_socket[49m[43m([49m[38;5;28;43mself[39;49m[43m.[49m[43msock[49m[43m,[49m
+[32m   1459[39m [43m                                      [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/ssl.py:517[39m, in [36mSSLContext.wrap_socket[39m[34m(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)[39m
+[32m    511[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mwrap_socket[39m([38;5;28mself[39m, sock, server_side=[38;5;28;01mFalse[39;00m,
+[32m    512[39m                 do_handshake_on_connect=[38;5;28;01mTrue[39;00m,
+[32m    513[39m                 suppress_ragged_eofs=[38;5;28;01mTrue[39;00m,
+[32m    514[39m                 server_hostname=[38;5;28;01mNone[39;00m, session=[38;5;28;01mNone[39;00m):
+[32m    515[39m     [38;5;66;03m# SSLSocket class handles server_hostname encoding before it calls[39;00m
+[32m    516[39m     [38;5;66;03m# ctx._wrap_socket()[39;00m
+[32m--> [39m[32m517[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43msslsocket_class[49m[43m.[49m[43m_create[49m[43m([49m
+[32m    518[39m [43m        [49m[43msock[49m[43m=[49m[43msock[49m[43m,[49m
+[32m    519[39m [43m        [49m[43mserver_side[49m[43m=[49m[43mserver_side[49m[43m,[49m
+[32m    520[39m [43m        [49m[43mdo_handshake_on_connect[49m[43m=[49m[43mdo_handshake_on_connect[49m[43m,[49m
+[32m    521[39m [43m        [49m[43msuppress_ragged_eofs[49m[43m=[49m[43msuppress_ragged_eofs[49m[43m,[49m
+[32m    522[39m [43m        [49m[43mserver_hostname[49m[43m=[49m[43mserver_hostname[49m[43m,[49m
+[32m    523[39m [43m        [49m[43mcontext[49m[43m=[49m[38;5;28;43mself[39;49m[43m,[49m
+[32m    524[39m [43m        [49m[43msession[49m[43m=[49m[43msession[49m
+[32m    525[39m [43m    [49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1108[39m, in [36mSSLSocket._create[39m[34m(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)[39m
+[32m   1107[39m             [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([33m"[39m[33mdo_handshake_on_connect should not be specified for non-blocking sockets[39m[33m"[39m)
+[32m-> [39m[32m1108[39m         [38;5;28;43mself[39;49m[43m.[49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[32m   1109[39m [38;5;28;01mexcept[39;00m ([38;5;167;01mOSError[39;00m, [38;5;167;01mValueError[39;00m):
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1379[39m, in [36mSSLSocket.do_handshake[39m[34m(self, block)[39m
+[32m   1378[39m         [38;5;28mself[39m.settimeout([38;5;28;01mNone[39;00m)
+[32m-> [39m[32m1379[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_sslobj[49m[43m.[49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[32m   1380[39m [38;5;28;01mfinally[39;00m:
+
+[31mSSLCertVerificationError[39m: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+
+During handling of the above exception, another exception occurred:
+
+[31mURLError[39m                                  Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[6][39m[32m, line 2[39m
+[32m      1[39m [38;5;66;03m# Access shapefile of Virginia census tracts[39;00m
+[32m----> [39m[32m2[39m va_tract = [43mgpd[49m[43m.[49m[43mread_file[49m[43m([49m[33;43m"[39;49m[33;43mhttps://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip[39;49m[33;43m"[39;49m[43m)[49m
+[32m      4[39m [38;5;66;03m# Reproject shapefile to UTM Zone 17N[39;00m
+[32m      5[39m [38;5;66;03m# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/[39;00m
+[32m      6[39m va_tract = va_tract.to_crs(epsg = [32m32617[39m)
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/io/file.py:288[39m, in [36m_read_file[39m[34m(filename, bbox, mask, columns, rows, engine, **kwargs)[39m
+[32m    282[39m from_bytes = [38;5;28;01mFalse[39;00m
+[32m    283[39m [38;5;28;01mif[39;00m _is_url(filename):
+[32m    284[39m     [38;5;66;03m# if it is a url that supports random access -> pass through to[39;00m
+[32m    285[39m     [38;5;66;03m# pyogrio/fiona as is (to support downloading only part of the file)[39;00m
+[32m    286[39m     [38;5;66;03m# otherwise still download manually because pyogrio/fiona don't support[39;00m
+[32m    287[39m     [38;5;66;03m# all types of urls (https://github.com/geopandas/geopandas/issues/2908)[39;00m
+[32m--> [39m[32m288[39m     [38;5;28;01mwith[39;00m [43murllib[49m[43m.[49m[43mrequest[49m[43m.[49m[43murlopen[49m[43m([49m[43mfilename[49m[43m)[49m [38;5;28;01mas[39;00m response:
+[32m    289[39m         [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m response.headers.get([33m"[39m[33mAccept-Ranges[39m[33m"[39m) == [33m"[39m[33mbytes[39m[33m"[39m:
+[32m    290[39m             filename = response.read()
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:216[39m, in [36murlopen[39m[34m(url, data, timeout, cafile, capath, cadefault, context)[39m
+[32m    214[39m [38;5;28;01melse[39;00m:
+[32m    215[39m     opener = _opener
+[32m--> [39m[32m216[39m [38;5;28;01mreturn[39;00m [43mopener[49m[43m.[49m[43mopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[43mdata[49m[43m,[49m[43m [49m[43mtimeout[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:519[39m, in [36mOpenerDirector.open[39m[34m(self, fullurl, data, timeout)[39m
+[32m    516[39m     req = meth(req)
+[32m    518[39m sys.audit([33m'[39m[33murllib.Request[39m[33m'[39m, req.full_url, req.data, req.headers, req.get_method())
+[32m--> [39m[32m519[39m response = [38;5;28;43mself[39;49m[43m.[49m[43m_open[49m[43m([49m[43mreq[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m
+[32m    521[39m [38;5;66;03m# post-process response[39;00m
+[32m    522[39m meth_name = protocol+[33m"[39m[33m_response[39m[33m"[39m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:536[39m, in [36mOpenerDirector._open[39m[34m(self, req, data)[39m
+[32m    533[39m     [38;5;28;01mreturn[39;00m result
+[32m    535[39m protocol = req.type
+[32m--> [39m[32m536[39m result = [38;5;28;43mself[39;49m[43m.[49m[43m_call_chain[49m[43m([49m[38;5;28;43mself[39;49m[43m.[49m[43mhandle_open[49m[43m,[49m[43m [49m[43mprotocol[49m[43m,[49m[43m [49m[43mprotocol[49m[43m [49m[43m+[49m
+[32m    537[39m [43m                          [49m[33;43m'[39;49m[33;43m_open[39;49m[33;43m'[39;49m[43m,[49m[43m [49m[43mreq[49m[43m)[49m
+[32m    538[39m [38;5;28;01mif[39;00m result:
+[32m    539[39m     [38;5;28;01mreturn[39;00m result
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:496[39m, in [36mOpenerDirector._call_chain[39m[34m(self, chain, kind, meth_name, *args)[39m
+[32m    494[39m [38;5;28;01mfor[39;00m handler [38;5;129;01min[39;00m handlers:
+[32m    495[39m     func = [38;5;28mgetattr[39m(handler, meth_name)
+[32m--> [39m[32m496[39m     result = [43mfunc[49m[43m([49m[43m*[49m[43margs[49m[43m)[49m
+[32m    497[39m     [38;5;28;01mif[39;00m result [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m    498[39m         [38;5;28;01mreturn[39;00m result
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1391[39m, in [36mHTTPSHandler.https_open[39m[34m(self, req)[39m
+[32m   1390[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mhttps_open[39m([38;5;28mself[39m, req):
+[32m-> [39m[32m1391[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43mdo_open[49m[43m([49m[43mhttp[49m[43m.[49m[43mclient[49m[43m.[49m[43mHTTPSConnection[49m[43m,[49m[43m [49m[43mreq[49m[43m,[49m
+[32m   1392[39m [43m        [49m[43mcontext[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43m_context[49m[43m,[49m[43m [49m[43mcheck_hostname[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43m_check_hostname[49m[43m)[49m
+
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1351[39m, in [36mAbstractHTTPHandler.do_open[39m[34m(self, http_class, req, **http_conn_args)[39m
+[32m   1348[39m         h.request(req.get_method(), req.selector, req.data, headers,
+[32m   1349[39m                   encode_chunked=req.has_header([33m'[39m[33mTransfer-encoding[39m[33m'[39m))
+[32m   1350[39m     [38;5;28;01mexcept[39;00m [38;5;167;01mOSError[39;00m [38;5;28;01mas[39;00m err: [38;5;66;03m# timeout error[39;00m
+[32m-> [39m[32m1351[39m         [38;5;28;01mraise[39;00m URLError(err)
+[32m   1352[39m     r = h.getresponse()
+[32m   1353[39m [38;5;28;01mexcept[39;00m:
+
+[31mURLError[39m: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>
 

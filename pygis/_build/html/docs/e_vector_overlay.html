@@ -33,7 +33,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -517,8 +517,8 @@
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -571,7 +571,7 @@
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Display the first and last two rows of attribute table.&#39;&#39;&#39;</span>
 
     <span class="c1"># Print title</span>
@@ -589,7 +589,7 @@
     <span class="n">display</span><span class="p">(</span><span class="n">attribute_table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 
 
-<span class="k">def</span> <span class="nf">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span><span class="p">,</span> <span class="n">overlay_result</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_overlay</span><span class="p">(</span><span class="n">overlay_type</span><span class="p">,</span> <span class="n">overlay_result</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Plot the overlay result on a map and add the outlines of the original shapefiles on top.&#39;&#39;&#39;</span>
 
     <span class="c1"># Create subplots</span>
@@ -609,7 +609,7 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;San Francisco Bay Area County and Watershed Boundaries</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">overlay_type</span><span class="p">),</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 
 
-<span class="k">def</span> <span class="nf">plot_merge</span><span class="p">(</span><span class="n">merge_type</span><span class="p">,</span> <span class="n">merge_result</span><span class="p">,</span> <span class="n">merge_vector</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_merge</span><span class="p">(</span><span class="n">merge_type</span><span class="p">,</span> <span class="n">merge_result</span><span class="p">,</span> <span class="n">merge_vector</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Plot the merge result on a map.&#39;&#39;&#39;</span>
 
     <span class="c1"># Create subplots</span>
@@ -857,7 +857,7 @@ Table shape (rows, columns): (46, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2392720/3249878955.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   union_result = gpd.overlay(counties, watersheds, how = &#39;union&#39;)
 </pre></div>
 </div>
@@ -1101,7 +1101,7 @@ Table shape (rows, columns): (37, 3)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2392720/1037757824.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   identity_result = gpd.overlay(counties, watersheds, how = &#39;identity&#39;)
 </pre></div>
 </div>
@@ -1220,7 +1220,7 @@ Table shape (rows, columns): (9, 2)
 First two rows:
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_499721/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2392720/1761870941.py:2: UserWarning: `keep_geom_type=True` in overlay resulted in 7 dropped geometries of different geometry types than df1 has. Set `keep_geom_type=False` to retain all geometries
   difference_result = gpd.overlay(counties, watersheds, how = &#39;difference&#39;)
 </pre></div>
 </div>

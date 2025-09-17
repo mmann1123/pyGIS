@@ -35,7 +35,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -516,12 +516,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">from</span> <span class="nn">census</span> <span class="kn">import</span> <span class="n">Census</span>
-<span class="kn">from</span> <span class="nn">us</span> <span class="kn">import</span> <span class="n">states</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">census</span><span class="w"> </span><span class="kn">import</span> <span class="n">Census</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">us</span><span class="w"> </span><span class="kn">import</span> <span class="n">states</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
 </div>
 </div>
@@ -622,20 +622,134 @@ Shape:  (1907, 8)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID    NAME             NAMELSAD  MTFCC  \
-0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
-1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">SSLCertVerificationError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1348,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1347</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1348</span>     <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span>               <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1350</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
 
-  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
-0        S  2552457       0  +37.1475176  -076.5212499   
-1        S  3478916  165945  +37.1625163  -076.5527816   
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1286,</span> in <span class="ni">HTTPConnection.request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1286</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
 
-                                            geometry  
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...  
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...  
-Shape:  (1907, 13)
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1332,</span> in <span class="ni">HTTPConnection._send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1331</span>     <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1332</span> <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
 
-The shapefile projection is: epsg:32617
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1281,</span> in <span class="ni">HTTPConnection.endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1280</span>     <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1281</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1041,</span> in <span class="ni">HTTPConnection._send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1040</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
+<span class="ne">-&gt; </span><span class="mi">1041</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span> <span class="k">if</span> <span class="n">message_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1045</span>     <span class="c1"># create a consistent interface to message_body</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:979,</span> in <span class="ni">HTTPConnection.send</span><span class="nt">(self, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">978</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">979</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1458,</span> in <span class="ni">HTTPSConnection.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1456</span>     <span class="n">server_hostname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span>
+<span class="ne">-&gt; </span><span class="mi">1458</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1459</span>                                       <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:517,</span> in <span class="ni">SSLContext.wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">,</span> <span class="n">server_side</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span>                 <span class="n">do_handshake_on_connect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">513</span>                 <span class="n">suppress_ragged_eofs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">514</span>                 <span class="n">server_hostname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="c1"># SSLSocket class handles server_hostname encoding before it calls</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="c1"># ctx._wrap_socket()</span>
+<span class="ne">--&gt; </span><span class="mi">517</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sslsocket_class</span><span class="o">.</span><span class="n">_create</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span>         <span class="n">sock</span><span class="o">=</span><span class="n">sock</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span>         <span class="n">server_side</span><span class="o">=</span><span class="n">server_side</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">520</span>         <span class="n">do_handshake_on_connect</span><span class="o">=</span><span class="n">do_handshake_on_connect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span>         <span class="n">suppress_ragged_eofs</span><span class="o">=</span><span class="n">suppress_ragged_eofs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span>         <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">524</span>         <span class="n">session</span><span class="o">=</span><span class="n">session</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span>     <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1108,</span> in <span class="ni">SSLSocket._create</span><span class="nt">(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1107</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1108</span>         <span class="bp">self</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1109</span> <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1379,</span> in <span class="ni">SSLSocket.do_handshake</span><span class="nt">(self, block)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1378</span>         <span class="bp">self</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1379</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1380</span> <span class="k">finally</span><span class="p">:</span>
+
+<span class="ne">SSLCertVerificationError</span>: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Access shapefile of Virginia census tracts</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">va_tract</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Reproject shapefile to UTM Zone 17N</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">va_tract</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">32617</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/io/file.py:288,</span> in <span class="ni">_read_file</span><span class="nt">(filename, bbox, mask, columns, rows, engine, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span> <span class="n">from_bytes</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span> <span class="k">if</span> <span class="n">_is_url</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span>     <span class="c1"># if it is a url that supports random access -&gt; pass through to</span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span>     <span class="c1"># pyogrio/fiona as is (to support downloading only part of the file)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span>     <span class="c1"># otherwise still download manually because pyogrio/fiona don&#39;t support</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span>     <span class="c1"># all types of urls (https://github.com/geopandas/geopandas/issues/2908)</span>
+<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Accept-Ranges&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;bytes&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>             <span class="n">filename</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:216,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">216</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:519,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="n">sys</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s1">&#39;urllib.Request&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">())</span>
+<span class="ne">--&gt; </span><span class="mi">519</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="c1"># post-process response</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span> <span class="n">meth_name</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">+</span><span class="s2">&quot;_response&quot;</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:536,</span> in <span class="ni">OpenerDirector._open</span><span class="nt">(self, req, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
+<span class="ne">--&gt; </span><span class="mi">536</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>                           <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span> <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span>     <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:496,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span>     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">496</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span>         <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1391,</span> in <span class="ni">HTTPSHandler.https_open</span><span class="nt">(self, req)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1390</span> <span class="k">def</span><span class="w"> </span><span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1391</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1392</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1351,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span>         <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span>                   <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1350</span>     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<span class="ne">-&gt; </span><span class="mi">1351</span>         <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1352</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1353</span> <span class="k">except</span><span class="p">:</span>
+
+<span class="ne">URLError</span>: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)&gt;
 </pre></div>
 </div>
 </div>
@@ -667,64 +781,6 @@ The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>NAME</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>state</th>
-      <th>county</th>
-      <th>tract</th>
-      <th>GEOID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Census Tract 60, Norfolk city, Virginia</td>
-      <td>3947.0</td>
-      <td>284.0</td>
-      <td>507.0</td>
-      <td>3947.0</td>
-      <td>51</td>
-      <td>710</td>
-      <td>006000</td>
-      <td>51710006000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Census Tract 65.02, Norfolk city, Virginia</td>
-      <td>3287.0</td>
-      <td>383.0</td>
-      <td>480.0</td>
-      <td>3302.0</td>
-      <td>51</td>
-      <td>710</td>
-      <td>006502</td>
-      <td>51710006502</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="remove-dataframe-columns-that-are-no-longer-needed">
@@ -740,55 +796,6 @@ The shapefile projection is: epsg:32617
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>NAME</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>GEOID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Census Tract 60, Norfolk city, Virginia</td>
-      <td>3947.0</td>
-      <td>284.0</td>
-      <td>507.0</td>
-      <td>3947.0</td>
-      <td>51710006000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Census Tract 65.02, Norfolk city, Virginia</td>
-      <td>3287.0</td>
-      <td>383.0</td>
-      <td>480.0</td>
-      <td>3302.0</td>
-      <td>51710006502</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="check-column-data-types">
@@ -803,34 +810,6 @@ The shapefile projection is: epsg:32617
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Column data types for census shapefile:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
 
 <span class="c1"># Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Column data types for census data:
-NAME            object
-C17002_001E    float64
-C17002_002E    float64
-C17002_003E    float64
-B01003_001E    float64
-GEOID           object
-dtype: object
-
-Column data types for census shapefile:
-STATEFP       object
-COUNTYFP      object
-TRACTCE       object
-GEOID         object
-NAME          object
-NAMELSAD      object
-MTFCC         object
-FUNCSTAT      object
-ALAND          int64
-AWATER         int64
-INTPTLAT      object
-INTPTLON      object
-geometry    geometry
-dtype: object
 </pre></div>
 </div>
 </div>
@@ -849,30 +828,6 @@ dtype: object
 <span class="c1"># Show result</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">va_merge</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_merge</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  NAME_x             NAMELSAD  MTFCC  \
-0      51      700  032132  51700032132  321.32  Census Tract 321.32  G5020   
-1      51      700  032226  51700032226  322.26  Census Tract 322.26  G5020   
-
-  FUNCSTAT    ALAND  AWATER     INTPTLAT      INTPTLON  \
-0        S  2552457       0  +37.1475176  -076.5212499   
-1        S  3478916  165945  +37.1625163  -076.5527816   
-
-                                            geometry  \
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...   
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...   
-
-                                             NAME_y  C17002_001E  C17002_002E  \
-0  Census Tract 321.32, Newport News city, Virginia       5025.0        161.0   
-1  Census Tract 322.26, Newport News city, Virginia       4167.0        736.0   
-
-   C17002_003E  B01003_001E  
-0        342.0       5079.0  
-1        559.0       4167.0  
-Shape:  (1907, 18)
 </pre></div>
 </div>
 </div>
@@ -898,22 +853,6 @@ Shape:  (1907, 18)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  STATEFP COUNTYFP TRACTCE        GEOID  \
-0      51      700  032132  51700032132   
-1      51      700  032226  51700032226   
-
-                                            geometry  C17002_001E  \
-0  POLYGON ((897174.191 4119897.084, 897174.811 4...       5025.0   
-1  POLYGON ((893470.562 4123469.385, 893542.722 4...       4167.0   
-
-   C17002_002E  C17002_003E  B01003_001E  
-0        161.0        342.0       5079.0  
-1        736.0        559.0       4167.0  
-Shape:  (1907, 9)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice how the number of columns dropped from 13 to 9.</p>
 </section>
@@ -929,35 +868,6 @@ Shape:  (1907, 9)
 <span class="c1"># Show dataframe</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_county</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                   geometry  \
-COUNTYFP                                                      
-001       POLYGON ((971814.409 4160130.005, 971664.507 4...   
-003       POLYGON ((722871.236 4189239.708, 722813.526 4...   
-
-                                               STATEFP  \
-COUNTYFP                                                 
-001                           515151515151515151515151   
-003       51515151515151515151515151515151515151515151   
-
-                                                    TRACTCE  \
-COUNTYFP                                                      
-001       0902009802009801000904000903000908009902000906...   
-003       0113030112010112020102020102010104010104020113...   
-
-                                                      GEOID  C17002_001E  \
-COUNTYFP                                                                   
-001       5100109020051001980200510019801005100109040051...      32345.0   
-003       5100301130351003011201510030112025100301020251...      97587.0   
-
-          C17002_002E  C17002_003E  B01003_001E  
-COUNTYFP                                         
-001            2423.0       3993.0      32840.0  
-003            5276.0       4305.0     105105.0  
-Shape:  (133, 8)
 </pre></div>
 </div>
 </div>
@@ -978,76 +888,6 @@ Shape:  (133, 8)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>STATEFP</th>
-      <th>TRACTCE</th>
-      <th>GEOID</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>Poverty_Rate</th>
-    </tr>
-    <tr>
-      <th>COUNTYFP</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>001</th>
-      <td>POLYGON ((971814.409 4160130.005, 971664.507 4...</td>
-      <td>515151515151515151515151</td>
-      <td>0902009802009801000904000903000908009902000906...</td>
-      <td>5100109020051001980200510019801005100109040051...</td>
-      <td>32345.0</td>
-      <td>2423.0</td>
-      <td>3993.0</td>
-      <td>32840.0</td>
-      <td>19.537150</td>
-    </tr>
-    <tr>
-      <th>003</th>
-      <td>POLYGON ((722871.236 4189239.708, 722813.526 4...</td>
-      <td>51515151515151515151515151515151515151515151</td>
-      <td>0113030112010112020102020102010104010104020113...</td>
-      <td>5100301130351003011201510030112025100301020251...</td>
-      <td>97587.0</td>
-      <td>5276.0</td>
-      <td>4305.0</td>
-      <td>105105.0</td>
-      <td>9.115646</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -1073,12 +913,6 @@ Shape:  (133, 8)
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Poverty Rates (%) in Virginia&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;25&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Poverty Rates (%) in Virginia&#39;)
-</pre></div>
-</div>
-<img alt="../_images/9f991dbc7a71919a80fd462a649f39936074e065bdb7712efe40e03e4b45d948.png" src="../_images/9f991dbc7a71919a80fd462a649f39936074e065bdb7712efe40e03e4b45d948.png" />
 </div>
 </div>
 </section>

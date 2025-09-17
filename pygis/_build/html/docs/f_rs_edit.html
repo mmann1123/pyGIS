@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -493,18 +493,12 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">xarray.DataArray.where</span></code> function masks data by setting nans, as demonstrated by the example below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Zeros are replaced with nans</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">src</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -515,8 +509,8 @@
 <p>Setting missing data values, when not available in the raster profile, can be done using the <a class="reference internal" href="f_rs_config.html"><span class="std std-doc">configuration manager</span></a> or as an argument in the <code class="docutils literal notranslate"><span class="pre">open</span></code> command.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Zeros are replaced with nans</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -547,8 +541,8 @@ gw.config (0, 0, 0)
 <p>Most remotely sensed data is stored as <code class="docutils literal notranslate"><span class="pre">int</span></code> to minimize space. We are often left to rescale the values back to floating point on the backend. This can be done in a few ways in geowombat. If the sensor you are using has a geowombat profile, please use that - refer to <a class="reference internal" href="f_rs_config.html"><span class="std std-doc">configuration manager docs</span></a>. If it is not natively supported we can manually set the scaling factor using the <code class="docutils literal notranslate"><span class="pre">gw.config.update</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
  
 <span class="c1"># Zeros are replaced with nans</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
@@ -569,8 +563,8 @@ gw.config (0, 0, 0)
 <p>The GeoWombat <code class="docutils literal notranslate"><span class="pre">replace</span></code> function mimics <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame.replace</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Replace 1 with 10</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
@@ -589,8 +583,8 @@ gw.config (0, 0, 0)
 <p>Geowombat also accepts normal mathematical expressions such as multiplication and addition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geowombat</span> <span class="k">as</span> <span class="nn">gw</span>
-<span class="kn">from</span> <span class="nn">geowombat.data</span> <span class="kn">import</span> <span class="n">l8_224078_20200518</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">l8_224078_20200518</span>
 
 <span class="c1"># Replace 1 with 10</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">l8_224078_20200518</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
