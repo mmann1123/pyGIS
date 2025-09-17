@@ -1,2 +1,3 @@
 pygis/temp/**
 ./temp/**
+pygis/docs/credentials.yaml
