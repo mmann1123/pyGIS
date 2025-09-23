@@ -40,7 +40,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 
 [31m---------------------------------------------------------------------------[39m
 [31mHTTPError[39m                                 Traceback (most recent call last)
-[36mFile [39m[32m~/Documents/github/pytidycensus/pytidycensus/api.py:141[39m, in [36mCensusAPI.get[39m[34m(self, year, dataset, variables, geography, survey, show_call)[39m
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/api.py:141[39m, in [36mCensusAPI.get[39m[34m(self, year, dataset, variables, geography, survey, show_call)[39m
 [32m    140[39m response = [38;5;28mself[39m.session.get(url, params=params, timeout=[32m30[39m)
 [32m--> [39m[32m141[39m [43mresponse[49m[43m.[49m[43mraise_for_status[49m[43m([49m[43m)[49m
 [32m    143[39m [38;5;28;01mtry[39;00m:
@@ -54,7 +54,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 During handling of the above exception, another exception occurred:
 
 [31mRequestException[39m                          Traceback (most recent call last)
-[36mFile [39m[32m~/Documents/github/pytidycensus/pytidycensus/acs.py:303[39m, in [36mget_acs[39m[34m(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)[39m
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/acs.py:303[39m, in [36mget_acs[39m[34m(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)[39m
 [32m    301[39m [38;5;28;01mif[39;00m [38;5;28mlen[39m(all_variables) <= MAX_VARIABLES_PER_REQUEST:
 [32m    302[39m     [38;5;66;03m# Single API request for small variable lists[39;00m
 [32m--> [39m[32m303[39m     data = [43mapi[49m[43m.[49m[43mget[49m[43m([49m
@@ -67,7 +67,7 @@ During handling of the above exception, another exception occurred:
 [32m    310[39m [43m    [49m[43m)[49m
 [32m    312[39m     [38;5;66;03m# Filter variables to only those present in the data[39;00m
 
-[36mFile [39m[32m~/Documents/github/pytidycensus/pytidycensus/api.py:166[39m, in [36mCensusAPI.get[39m[34m(self, year, dataset, variables, geography, survey, show_call)[39m
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/api.py:166[39m, in [36mCensusAPI.get[39m[34m(self, year, dataset, variables, geography, survey, show_call)[39m
 [32m    165[39m [38;5;28;01mexcept[39;00m requests.RequestException [38;5;28;01mas[39;00m e:
 [32m--> [39m[32m166[39m     [38;5;28;01mraise[39;00m requests.RequestException(
 [32m    167[39m         [33mf[39m[33m"""[39m
@@ -90,7 +90,7 @@ During handling of the above exception, another exception occurred:
 During handling of the above exception, another exception occurred:
 
 [31mException[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[20][39m[32m, line 1[39m
+[36mCell[39m[36m [39m[32mIn[21][39m[32m, line 1[39m
 [32m----> [39m[32m1[39m cbsa_bachelors = [43mtc[49m[43m.[49m[43mget_acs[49m[43m([49m
 [32m      2[39m [43m    [49m[43mgeography[49m[43m=[49m[33;43m"[39;49m[33;43mcbsa[39;49m[33;43m"[39;49m[43m,[49m
 [32m      3[39m [43m    [49m[43mvariables[49m[43m=[49m[33;43m"[39;49m[33;43mDP02_0068P[39;49m[33;43m"[39;49m[43m,[49m
@@ -98,7 +98,7 @@ During handling of the above exception, another exception occurred:
 [32m      5[39m [43m    [49m[43mshow_call[49m[43m=[49m[38;5;28;43;01mTrue[39;49;00m
 [32m      6[39m [43m)[49m
 
-[36mFile [39m[32m~/Documents/github/pytidycensus/pytidycensus/acs.py:538[39m, in [36mget_acs[39m[34m(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)[39m
+[36mFile [39m[32m~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/acs.py:538[39m, in [36mget_acs[39m[34m(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)[39m
 [32m    535[39m     [38;5;28;01mreturn[39;00m df
 [32m    537[39m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m e:
 [32m--> [39m[32m538[39m     [38;5;28;01mraise[39;00m [38;5;167;01mException[39;00m([33mf[39m[33m"[39m[33mFailed to retrieve ACS data: [39m[38;5;132;01m{[39;00m[38;5;28mstr[39m(e)[38;5;132;01m}[39;00m[33m"[39m)

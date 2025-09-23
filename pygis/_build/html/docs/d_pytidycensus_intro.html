@@ -604,7 +604,7 @@ Using the PL 94-171 Redistricting Data Summary File
 4    36    36       New York  P1_005N    149690
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/Documents/github/pytidycensus/pytidycensus/decennial.py:429: UserWarning: Note: 2020 decennial Census data use differential privacy, a technique that introduces errors into data to preserve respondent confidentiality. Small counts should be interpreted with caution. See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/decennial.py:429: UserWarning: Note: 2020 decennial Census data use differential privacy, a technique that introduces errors into data to preserve respondent confidentiality. Small counts should be interpreted with caution. See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.
   warnings.warn(
 </pre></div>
 </div>
@@ -1093,7 +1093,7 @@ Downloading variables for 2019 acs acs1
 <section id="understanding-geoids">
 <h3>Understanding GEOIDs<a class="headerlink" href="#understanding-geoids" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column returned by default in <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> can be used to uniquely identify geographic units in a given dataset. For geographies within the core Census hierarchy (Census block through state), GEOIDs can be used to uniquely identify specific units as well as units’ parent geographies. Let’s take the example of households by Census block from the 2020 Census in Cimarron County, Oklahoma.</p>
-<div class="cell tag_skip-execution docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cimarron_blocks</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_decennial</span><span class="p">(</span>
     <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
@@ -1105,6 +1105,31 @@ Downloading variables for 2019 acs acs1
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">cimarron_blocks</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2020 decennial Census
+Using the PL 94-171 Redistricting Data Summary File
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state county   tract block        GEOID                       NAME variable  \
+0    40    025  950100  1501  40025950100  Cimarron County, Oklahoma  H1_001N   
+1    40    025  950100  1504  40025950100  Cimarron County, Oklahoma  H1_001N   
+2    40    025  950100  1507  40025950100  Cimarron County, Oklahoma  H1_001N   
+3    40    025  950100  1511  40025950100  Cimarron County, Oklahoma  H1_001N   
+4    40    025  950100  1514  40025950100  Cimarron County, Oklahoma  H1_001N   
+
+   estimate  
+0         0  
+1         0  
+2         0  
+3         0  
+4         0  
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/decennial.py:429: UserWarning: Note: 2020 decennial Census data use differential privacy, a technique that introduces errors into data to preserve respondent confidentiality. Small counts should be interpreted with caution. See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.
+  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -1344,7 +1369,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">HTTPError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/api.py:141,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/api.py:141,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
 <span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">141</span> <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">try</span><span class="p">:</span>
@@ -1358,7 +1383,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">RequestException</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
-<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/acs.py:303,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/acs.py:303,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_variables</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MAX_VARIABLES_PER_REQUEST</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="c1"># Single API request for small variable lists</span>
 <span class="ne">--&gt; </span><span class="mi">303</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -1371,7 +1396,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 <span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="c1"># Filter variables to only those present in the data</span>
 
-<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/api.py:166,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/api.py:166,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
 <span class="g g-Whitespace">    </span><span class="mi">165</span> <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">166</span>     <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">167</span>         <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
@@ -1394,7 +1419,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cbsa_bachelors</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;cbsa&quot;</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;DP02_0068P&quot;</span><span class="p">,</span>
@@ -1402,7 +1427,7 @@ Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP0
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">show_call</span><span class="o">=</span><span class="kc">True</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
 
-<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/acs.py:538,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/pytidycensus/acs.py:538,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="k">return</span> <span class="n">df</span>
 <span class="g g-Whitespace">    </span><span class="mi">537</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">538</span>     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to retrieve ACS data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
