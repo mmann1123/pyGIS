@@ -305,7 +305,6 @@ The wide-form dataset includes `GEOID` and `NAME` columns, as in the tidy datase
 The `GEOID` column returned by default in `pytidycensus` can be used to uniquely identify geographic units in a given dataset. For geographies within the core Census hierarchy (Census block through state), GEOIDs can be used to uniquely identify specific units as well as units' parent geographies. Let's take the example of households by Census block from the 2020 Census in Cimarron County, Oklahoma.
 
 ```{code-cell} ipython3
-:tags: ["skip-execution"]
 cimarron_blocks = tc.get_decennial(
     geography="block",
     variables="H1_001N",
