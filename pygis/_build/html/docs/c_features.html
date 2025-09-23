@@ -241,6 +241,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
@@ -523,7 +524,7 @@
 <p>In this example, we’re using the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and <code class="docutils literal notranslate"><span class="pre">shapely</span></code> libraries to create a GeoDataFrame that contains point data. Try copying and running this code snippet below to demonstrate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
 
@@ -535,20 +536,12 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                          name                    geometry
-0  Washington\n(38.90, -77.03)  POINT (-77.03687 38.90719)
-1   Baltimore\n(39.29, -76.61)  POINT (-76.61219 39.29039)
-2     Fredrick\n(39.41,-77.40)  POINT (-77.40846 39.41201)
-</pre></div>
-</div>
-</div>
 </div>
 <p>A <a class="reference external" href="https://shapely.readthedocs.io/en/stable/reference/shapely.Point.html">point</a> is composed of one coordinate pair representing a specific location in a coordinate system. Points are the most basic geometric primitives having no length or area. By definition a point can’t be “seen” since it has no area; but this is not practical if such primitives are to be mapped. So points on a map are represented using <em>symbols</em> that have both area and shape (e.g. circle, square, plus signs).</p>
 <p>In the following code snippet, we’re using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to plot our <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html#geopandas.GeoDataFrame">GeoDataFrame</a>. Try copying and running the code to see the visual representation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
@@ -561,9 +554,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/4264f679c7537e6216531ff5368ae3b172aaf8349c22f80e24f99177fc546c7a.png" src="../_images/4264f679c7537e6216531ff5368ae3b172aaf8349c22f80e24f99177fc546c7a.png" />
-</div>
 </div>
 <p>We seem capable of interpreting such symbols as points, but there may be instances when such interpretation may be ambiguous (e.g. is a round symbol delineating the area of a round feature on the ground such as a large oil storage tank or is it representing the point location of that tank?).</p>
 </section>
@@ -573,7 +563,7 @@
 <p>Try copying and running this code snippet below to demonstrate creating a polyline using the Python libraries shapely and geopandas. This code also uses matplotlib’s pyplot module to plot the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required modules</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required modules</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">Point</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -592,9 +582,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/7fe6314c7aca132dd49ecc2442762c62852bac49ea7e236d892d691190a4010c.png" src="../_images/7fe6314c7aca132dd49ecc2442762c62852bac49ea7e236d892d691190a4010c.png" />
-</div>
 </div>
 <p>Like a point, a true line can’t be seen since it has no area. And like a point, a line is symbolized using shapes that have a color, width and style (e.g. solid, dashed, dotted, etc…). Roads and rivers are commonly stored as polylines in a GIS.</p>
 </section>
@@ -605,7 +592,7 @@
 <p>In the following example, we use the libraries Shapely and GeoPandas to create a polygon. It is formed by three line segments with matching start and end coordinates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Washington</span><span class="se">\n</span><span class="s1">(38.90, -77.03)&#39;</span> <span class="p">],</span> 
      <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Polygon</span><span class="p">([</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.036873</span><span class="p">,</span><span class="mf">38.907192</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">76.612190</span><span class="p">,</span><span class="mf">39.290386</span><span class="p">,),</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mf">77.408456</span><span class="p">,</span><span class="mf">39.412006</span><span class="p">)])]}</span>
@@ -615,9 +602,6 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/b6452a6ba1882cce35d974954fee083419c7f2f600e7844244cf17ef5b2b1fc7.png" src="../_images/b6452a6ba1882cce35d974954fee083419c7f2f600e7844244cf17ef5b2b1fc7.png" />
 </div>
 </div>
 </section>
@@ -630,7 +614,7 @@
 <p>The following Python code generates a 2D array of random integers and displays it as an image using matplotlib:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
@@ -641,14 +625,11 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/76134e63515015cc5fb4d7313ee0b5cd1550347c60e3bd02b19bd52c4a3ae839.png" src="../_images/76134e63515015cc5fb4d7313ee0b5cd1550347c60e3bd02b19bd52c4a3ae839.png" />
-</div>
 </div>
 <p>For a more practical example, we can use the library rasterio to handle geospatial raster data. Rasterio reads and writes geospatial raster datasets, making it an essential tool for raster analysis. The following code reads a raster dataset and then plots it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">show</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -660,9 +641,6 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/a02452f71c8786fbc71a27b2d85120263b58cc9c706fcb53cbb51b7e4129d231.png" src="../_images/a02452f71c8786fbc71a27b2d85120263b58cc9c706fcb53cbb51b7e4129d231.png" />
 </div>
 </div>
 <p>This code opens a connection to the demo raster dataset’s URL, reads it into a Rasterio Dataset object, and then plots it. The dataset is an RGB GeoTIFF, which is a common format for geospatial raster data. It’s important to use a context manager (<code class="docutils literal notranslate"><span class="pre">with</span></code> statement) when opening files with Rasterio to ensure they’re properly closed after use.</p>

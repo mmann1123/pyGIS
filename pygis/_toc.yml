@@ -46,6 +46,7 @@ parts:
   chapters:
   - file: docs/d_access_osm
   - file: docs/d_access_census
+  - file: docs/d_pytidycensus_intro
 - caption: 6 - Remote Sensing in Python
   chapters:
   - file: docs/f_rs_io

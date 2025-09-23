@@ -13,7 +13,7 @@
 <meta content="python, spatial, census, american community survey, ACS" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Accessing Census and ACS Data in Python &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Accessing Census and ACS Data in Python using `pytidycensus &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -84,7 +84,7 @@
     <link rel="canonical" href="https://pygis.io/docs/d_access_census.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Reading/Writing Remote Sensed Images" href="f_rs_io.html" />
+    <link rel="next" title="Introduction to pytidycensus" href="d_pytidycensus_intro.html" />
     <link rel="prev" title="Accessing OSM Data in Python" href="d_access_osm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -238,7 +238,8 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
@@ -449,7 +450,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Accessing Census and ACS Data in Python</h1>
+    <h1>Accessing Census and ACS Data in Python using `pytidycensus</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -483,8 +484,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="accessing-census-and-acs-data-in-python">
-<h1>Accessing Census and ACS Data in Python<a class="headerlink" href="#accessing-census-and-acs-data-in-python" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="accessing-census-and-acs-data-in-python-using-pytidycensus">
+<h1>Accessing Census and ACS Data in Python using `pytidycensus<a class="headerlink" href="#accessing-census-and-acs-data-in-python-using-pytidycensus" title="Link to this heading">#</a></h1>
 <p>By: Steven Chao &amp; Michael Mann</p>
 <hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
@@ -527,7 +528,7 @@
 <section id="import-census-data">
 <h3>Import census data<a class="headerlink" href="#import-census-data" title="Link to this heading">#</a></h3>
 <p>Let’s begin by accessing and importing census data. Importing census data into Python using pytidycensus requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
-<div class="cell tag_remove-output docutils container">
+<div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set API key for pytidycensus</span>
 <span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="s2">&quot;CENSUS API KEY HERE&quot;</span><span class="p">)</span>
@@ -602,14 +603,18 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   C17002_001E  C17002_002E  C17002_003E  B01003_001E state county   tract  \
-0         4804          197          146         4863    51    065  020200   
-1         4578           58           30         4578    51    059  460702   
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         GEOID  C17002_001E  C17002_002E  C17002_003E  B01003_001E state  \
+0  51065020200         4804          197          146         4863    51   
+1  51059460702         4578           58           30         4578    51   
 
-         GEOID  C17002_001_moe  C17002_002_moe  C17002_003_moe B01003_001_moe  
-0  51065020200           387.0           144.0           111.0          383.0  
-1  51059460702           239.0            62.0            27.0          239.0  
-Shape:  (1907, 12)
+  county   tract                       NAME  C17002_001_moe  C17002_002_moe  \
+0    065  020200  Fluvanna County, Virginia           387.0           144.0   
+1    059  460702   Fairfax County, Virginia           239.0            62.0   
+
+   C17002_003_moe B01003_001_moe  
+0           111.0          383.0  
+1            27.0          239.0  
+Shape:  (1907, 13)
 </pre></div>
 </div>
 </div>
@@ -652,22 +657,22 @@ Shape:  (1907, 12)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading tract boundaries...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         GEOID    NAME                                           geometry  \
-0  51700032132  321.32  POLYGON ((897174.191 4119897.084, 897174.811 4...   
-1  51700032226  322.26  POLYGON ((893470.562 4123469.385, 893542.722 4...   
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         GEOID                                           geometry  \
+0  51700032132  POLYGON ((897174.191 4119897.084, 897174.811 4...   
+1  51700032226  POLYGON ((893470.562 4123469.385, 893542.722 4...   
 
-  STATEFP COUNTYFP TRACTCE  C17002_001E  C17002_002E  C17002_003E  \
-0      51      700  032132         4997          208          182   
-1      51      700  032226         4483          625          739   
+   C17002_001E  C17002_002E  C17002_003E  B01003_001E state county   tract  \
+0         4997          208          182         4997    51    700  032132   
+1         4483          625          739         4490    51    700  032226   
 
-   B01003_001E state county   tract  C17002_001_moe  C17002_002_moe  \
-0         4997    51    700  032132           426.0           115.0   
-1         4490    51    700  032226           453.0           463.0   
+                          NAME  C17002_001_moe  C17002_002_moe  \
+0  Newport News city, Virginia           426.0           115.0   
+1  Newport News city, Virginia           453.0           463.0   
 
    C17002_003_moe B01003_001_moe  
 0           219.0          426.0  
 1           381.0          454.0  
-Shape:  (1907, 17)
+Shape:  (1907, 14)
 
 The projection is: epsg:32617
 </pre></div>
@@ -900,11 +905,11 @@ Shape:  (133, 5)
       </div>
     </a>
     <a class="right-next"
-       href="f_rs_io.html"
+       href="d_pytidycensus_intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reading/Writing Remote Sensed Images</p>
+        <p class="prev-next-title">Introduction to pytidycensus</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

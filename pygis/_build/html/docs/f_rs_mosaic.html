@@ -234,6 +234,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="current nav bd-sidenav">
@@ -496,7 +497,7 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <p>Note we rename the band name with <code class="docutils literal notranslate"><span class="pre">band_names=['blue']</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import GeoWombat</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import GeoWombat</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
 
 <span class="c1"># import plotting</span>
@@ -520,9 +521,6 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/39a1327271ace75a52315718fea4bfbc1f421f285d3a0bcd735e64de061396a7.png" src="../_images/39a1327271ace75a52315718fea4bfbc1f421f285d3a0bcd735e64de061396a7.png" />
-</div>
 </div>
 </section>
 <section id="intersection-of-remotely-sensed-image">
@@ -530,7 +528,7 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <p>Same idea with the intersection, using <code class="docutils literal notranslate"><span class="pre">bounds_by='intersection'</span></code>, we still need to mosaic the two images <code class="docutils literal notranslate"><span class="pre">mosaic=True</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">l8_224077_20200518_B2</span><span class="p">,</span> <span class="n">l8_224078_20200518_B2</span><span class="p">]</span>
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span>
                 <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span>
@@ -541,9 +539,6 @@ https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/what-is-
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/857bc384e3c65dc8be678f2a09f3735bdfb4d8da429140c44a6d2a5f48bcc333.png" src="../_images/857bc384e3c65dc8be678f2a09f3735bdfb4d8da429140c44a6d2a5f48bcc333.png" />
 </div>
 </div>
 </section>

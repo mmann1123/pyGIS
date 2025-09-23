@@ -239,6 +239,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
@@ -515,13 +516,13 @@
 <p>This chapter will introduce you to some of the basic operations that you can perform on dataframes. We will use these basic operations in order to calculate and map poverty rates in the Commonwealth of Virginia. We will pull data from the US Census Bureau’s <a class="reference external" href="https://www.census.gov/programs-surveys/acs">American Community Survey (ACS)</a> 2019 (see <a class="reference external" href="https://www.census.gov/data/developers/data-sets/acs-5year.html">this page</a> for the data).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">census</span><span class="w"> </span><span class="kn">import</span> <span class="n">Census</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">us</span><span class="w"> </span><span class="kn">import</span> <span class="n">states</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Import modules
+import matplotlib.pyplot as plt
+import pandas as pd
+import geopandas as gpd
+from census import Census
+from us import states
+import os
 </pre></div>
 </div>
 </div>
@@ -534,8 +535,8 @@
 <p>Let’s begin by accessing and importing census data. Importing census data into Python requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set API key</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="s2">&quot;CENSUS API KEY HERE&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Set API key
+c = Census(&quot;CENSUS API KEY HERE&quot;)
 </pre></div>
 </div>
 </div>
@@ -547,8 +548,8 @@
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ignore this, I am just reading in my api key privately</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Census</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;census_api_key&#39;</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#ignore this, I am just reading in my api key privately
+c = Census(os.environ.get(&#39;census_api_key&#39;))
 </pre></div>
 </div>
 </div>
@@ -558,17 +559,17 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">census</span></code> package provides us with some easy convenience methods that allow us to obtain data for a wide variety of geographies. The FIPS code for Virginia is 51, but if needed, we can also use the <code class="docutils literal notranslate"><span class="pre">us</span></code> library to help us figure out the relevant FIPS code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)</span>
-<span class="c1"># C17002_001E: count of ratio of income to poverty in the past 12 months (total)</span>
-<span class="c1"># C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)</span>
-<span class="c1"># C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)</span>
-<span class="c1"># B01003_001E: total population</span>
-<span class="c1"># Sources: https://api.census.gov/data/2019/acs/acs5/variables.html; https://pypi.org/project/census/</span>
-<span class="n">va_census</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">acs5</span><span class="o">.</span><span class="n">state_county_tract</span><span class="p">(</span><span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_001E&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_002E&#39;</span><span class="p">,</span> <span class="s1">&#39;C17002_003E&#39;</span><span class="p">,</span> <span class="s1">&#39;B01003_001E&#39;</span><span class="p">),</span>
-                                      <span class="n">state_fips</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">VA</span><span class="o">.</span><span class="n">fips</span><span class="p">,</span>
-                                      <span class="n">county_fips</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-                                      <span class="n">tract</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
-                                      <span class="n">year</span> <span class="o">=</span> <span class="mi">2017</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia (FIPS code: 51)
+# C17002_001E: count of ratio of income to poverty in the past 12 months (total)
+# C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)
+# C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)
+# B01003_001E: total population
+# Sources: https://api.census.gov/data/2019/acs/acs5/variables.html; https://pypi.org/project/census/
+va_census = c.acs5.state_county_tract(fields = (&#39;NAME&#39;, &#39;C17002_001E&#39;, &#39;C17002_002E&#39;, &#39;C17002_003E&#39;, &#39;B01003_001E&#39;),
+                                      state_fips = states.VA.fips,
+                                      county_fips = &quot;*&quot;,
+                                      tract = &quot;*&quot;,
+                                      year = 2017)
 </pre></div>
 </div>
 </div>
@@ -576,24 +577,12 @@
 <p>Now that we have accessed the data and assigned it to a variable, we can read the data into a dataframe using the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dataframe from the census data</span>
-<span class="n">va_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">va_census</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create a dataframe from the census data
+va_df = pd.DataFrame(va_census)
 
-<span class="c1"># Show the dataframe</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                         NAME  C17002_001E  C17002_002E  \
-0     Census Tract 60, Norfolk city, Virginia       3947.0        284.0   
-1  Census Tract 65.02, Norfolk city, Virginia       3287.0        383.0   
-
-   C17002_003E  B01003_001E state county   tract  
-0        507.0       3947.0    51    710  006000  
-1        480.0       3302.0    51    710  006502  
-Shape:  (1907, 8)
+# Show the dataframe
+print(va_df.head(2))
+print(&#39;Shape: &#39;, va_df.shape)
 </pre></div>
 </div>
 </div>
@@ -605,151 +594,19 @@ Shape:  (1907, 8)
 <p>Let’s also read into Python a shapefile of the Virginia census tracts and reproject it to the UTM Zone 17N projection. (This shapefile can be downloaded on the Census Bureau’s website on the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html">Cartographic Boundary Files page</a> or the <a class="reference external" href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">TIGER/Line Shapefiles page</a>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access shapefile of Virginia census tracts</span>
-<span class="n">va_tract</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Access shapefile of Virginia census tracts
+va_tract = gpd.read_file(&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;)
 
-<span class="c1"># Reproject shapefile to UTM Zone 17N</span>
-<span class="c1"># https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/</span>
-<span class="n">va_tract</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">32617</span><span class="p">)</span>
+# Reproject shapefile to UTM Zone 17N
+# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/
+va_tract = va_tract.to_crs(epsg = 32617)
 
-<span class="c1"># Print GeoDataFrame of shapefile</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+# Print GeoDataFrame of shapefile
+print(va_tract.head(2))
+print(&#39;Shape: &#39;, va_tract.shape)
 
-<span class="c1"># Check shapefile projection</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The shapefile projection is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">SSLCertVerificationError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1348,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1347</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1348</span>     <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>               <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span> <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1286,</span> in <span class="ni">HTTPConnection.request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1285</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1286</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1332,</span> in <span class="ni">HTTPConnection._send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1331</span>     <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1332</span> <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1281,</span> in <span class="ni">HTTPConnection.endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1280</span>     <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1281</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1041,</span> in <span class="ni">HTTPConnection._send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1040</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1041</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1043</span> <span class="k">if</span> <span class="n">message_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1044</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1045</span>     <span class="c1"># create a consistent interface to message_body</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:979,</span> in <span class="ni">HTTPConnection.send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">978</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">979</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">980</span> <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/http/client.py:1458,</span> in <span class="ni">HTTPSConnection.connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1456</span>     <span class="n">server_hostname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span>
-<span class="ne">-&gt; </span><span class="mi">1458</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1459</span>                                       <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:517,</span> in <span class="ni">SSLContext.wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sock</span><span class="p">,</span> <span class="n">server_side</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span>                 <span class="n">do_handshake_on_connect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">513</span>                 <span class="n">suppress_ragged_eofs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span>                 <span class="n">server_hostname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="c1"># SSLSocket class handles server_hostname encoding before it calls</span>
-<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="c1"># ctx._wrap_socket()</span>
-<span class="ne">--&gt; </span><span class="mi">517</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sslsocket_class</span><span class="o">.</span><span class="n">_create</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span>         <span class="n">sock</span><span class="o">=</span><span class="n">sock</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">519</span>         <span class="n">server_side</span><span class="o">=</span><span class="n">server_side</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">520</span>         <span class="n">do_handshake_on_connect</span><span class="o">=</span><span class="n">do_handshake_on_connect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span>         <span class="n">suppress_ragged_eofs</span><span class="o">=</span><span class="n">suppress_ragged_eofs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span>         <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">523</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span>         <span class="n">session</span><span class="o">=</span><span class="n">session</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span>     <span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1108,</span> in <span class="ni">SSLSocket._create</span><span class="nt">(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1107</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1108</span>         <span class="bp">self</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1109</span> <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/ssl.py:1379,</span> in <span class="ni">SSLSocket.do_handshake</span><span class="nt">(self, block)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1378</span>         <span class="bp">self</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1379</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1380</span> <span class="k">finally</span><span class="p">:</span>
-
-<span class="ne">SSLCertVerificationError</span>: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Access shapefile of Virginia census tracts</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">va_tract</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://www2.census.gov/geo/tiger/TIGER2019/TRACT/tl_2019_51_tract.zip&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Reproject shapefile to UTM Zone 17N</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">va_tract</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span> <span class="o">=</span> <span class="mi">32617</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geopandas/io/file.py:288,</span> in <span class="ni">_read_file</span><span class="nt">(filename, bbox, mask, columns, rows, engine, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">282</span> <span class="n">from_bytes</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">283</span> <span class="k">if</span> <span class="n">_is_url</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">284</span>     <span class="c1"># if it is a url that supports random access -&gt; pass through to</span>
-<span class="g g-Whitespace">    </span><span class="mi">285</span>     <span class="c1"># pyogrio/fiona as is (to support downloading only part of the file)</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span>     <span class="c1"># otherwise still download manually because pyogrio/fiona don&#39;t support</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span>     <span class="c1"># all types of urls (https://github.com/geopandas/geopandas/issues/2908)</span>
-<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="k">with</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Accept-Ranges&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;bytes&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>             <span class="n">filename</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:216,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
-<span class="ne">--&gt; </span><span class="mi">216</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:519,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="n">sys</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s1">&#39;urllib.Request&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">())</span>
-<span class="ne">--&gt; </span><span class="mi">519</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="c1"># post-process response</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span> <span class="n">meth_name</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">+</span><span class="s2">&quot;_response&quot;</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:536,</span> in <span class="ni">OpenerDirector._open</span><span class="nt">(self, req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="k">return</span> <span class="n">result</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
-<span class="ne">--&gt; </span><span class="mi">536</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span>                           <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span> <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">539</span>     <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:496,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">495</span>     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">496</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">497</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">498</span>         <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1391,</span> in <span class="ni">HTTPSHandler.https_open</span><span class="nt">(self, req)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1390</span> <span class="k">def</span><span class="w"> </span><span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1391</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1392</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/urllib/request.py:1351,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>         <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>                   <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>         <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1352</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1353</span> <span class="k">except</span><span class="p">:</span>
-
-<span class="ne">URLError</span>: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)&gt;
+# Check shapefile projection
+print(&quot;\nThe shapefile projection is: {}&quot;.format(va_tract.crs))
 </pre></div>
 </div>
 </div>
@@ -767,8 +624,8 @@ Shape:  (1907, 8)
 <p>To create a new column–or call an existing column in a dataframe–we can use indexing with <code class="docutils literal notranslate"><span class="pre">[]</span></code> and the column name (string). (There is a different way if you want to access columns using the index number; read more about indexing and selecting data <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">in the pandas documentation</a>.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine state, county, and tract columns together to create a new string and assign to new column</span>
-<span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;GEOID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;county&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_df</span><span class="p">[</span><span class="s2">&quot;tract&quot;</span><span class="p">]</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Combine state, county, and tract columns together to create a new string and assign to new column
+va_df[&quot;GEOID&quot;] = va_df[&quot;state&quot;] + va_df[&quot;county&quot;] + va_df[&quot;tract&quot;]
 </pre></div>
 </div>
 </div>
@@ -776,8 +633,8 @@ Shape:  (1907, 8)
 <p>Printing out the first rew rows of the dataframe, we can see that the new column <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> has been created with the values from the three columns combined.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print head of dataframe</span>
-<span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Print head of dataframe
+va_df.head(2)
 </pre></div>
 </div>
 </div>
@@ -788,11 +645,11 @@ Shape:  (1907, 8)
 <p>To reduce clutter, we can delete the <code class="docutils literal notranslate"><span class="pre">state</span></code>, <code class="docutils literal notranslate"><span class="pre">county</span></code>, and <code class="docutils literal notranslate"><span class="pre">tract</span></code> columns from <code class="docutils literal notranslate"><span class="pre">va_df</span></code> since we don’t need them anymore. Remember that when we want to modify a dataframe, we must assign the modified dataframe back to the original variable (or a new one, if preferred). Otherwise, any modifications won’t be saved. An alternative to assigning the dataframe back to the variable is to simply pass <code class="docutils literal notranslate"><span class="pre">inplace</span> <span class="pre">=</span> <span class="pre">True</span></code>. For more information, see the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">pandas help documentation on <code class="docutils literal notranslate"><span class="pre">drop</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove columns</span>
-<span class="n">va_df</span> <span class="o">=</span> <span class="n">va_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="s2">&quot;tract&quot;</span><span class="p">])</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Remove columns
+va_df = va_df.drop(columns = [&quot;state&quot;, &quot;county&quot;, &quot;tract&quot;])
 
-<span class="c1"># Show updated dataframe</span>
-<span class="n">va_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+# Show updated dataframe
+va_df.head(2)
 </pre></div>
 </div>
 </div>
@@ -803,13 +660,13 @@ Shape:  (1907, 8)
 <p>The key in both dataframe must be of the same data type. Let’s check the data type of the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns in both dataframes. If they aren’t the same, we will have to change the data type of columns to make them the same.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check column data types for census data</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Column data types for census data:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Check column data types for census data
+print(&quot;Column data types for census data:\n{}&quot;.format(va_df.dtypes))
 
-<span class="c1"># Check column data types for census shapefile</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Column data types for census shapefile:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">dtypes</span><span class="p">))</span>
+# Check column data types for census shapefile
+print(&quot;\nColumn data types for census shapefile:\n{}&quot;.format(va_tract.dtypes))
 
-<span class="c1"># Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html</span>
+# Source: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.dtypes.html
 </pre></div>
 </div>
 </div>
@@ -821,13 +678,13 @@ Shape:  (1907, 8)
 <p>Now, we are ready to merge the two dataframes together, using the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> columns as the primary key. We can use the <code class="docutils literal notranslate"><span class="pre">merge</span></code> method in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code> called on the <code class="docutils literal notranslate"><span class="pre">va_tract</span></code> shapefile dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Join the attributes of the dataframes together</span>
-<span class="c1"># Source: https://geopandas.org/docs/user_guide/mergingdata.html</span>
-<span class="n">va_merge</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">va_df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;GEOID&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Join the attributes of the dataframes together
+# Source: https://geopandas.org/docs/user_guide/mergingdata.html
+va_merge = va_tract.merge(va_df, on = &quot;GEOID&quot;)
 
-<span class="c1"># Show result</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_merge</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_merge</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+# Show result
+print(va_merge.head(2))
+print(&#39;Shape: &#39;, va_merge.shape)
 </pre></div>
 </div>
 </div>
@@ -844,12 +701,12 @@ Shape:  (1907, 8)
 <p>Now that we merged the dataframes together, we can further clean up the dataframe and remove columns that are not needed. Instead of using the <code class="docutils literal notranslate"><span class="pre">drop</span></code> method, we can simply select the columns we want to keep and create a new dataframe with those selected columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create new dataframe from select columns</span>
-<span class="n">va_poverty_tract</span> <span class="o">=</span> <span class="n">va_merge</span><span class="p">[[</span><span class="s2">&quot;STATEFP&quot;</span><span class="p">,</span> <span class="s2">&quot;COUNTYFP&quot;</span><span class="p">,</span> <span class="s2">&quot;TRACTCE&quot;</span><span class="p">,</span> <span class="s2">&quot;GEOID&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_002E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_003E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01003_001E&quot;</span><span class="p">]]</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create new dataframe from select columns
+va_poverty_tract = va_merge[[&quot;STATEFP&quot;, &quot;COUNTYFP&quot;, &quot;TRACTCE&quot;, &quot;GEOID&quot;, &quot;geometry&quot;, &quot;C17002_001E&quot;, &quot;C17002_002E&quot;, &quot;C17002_003E&quot;, &quot;B01003_001E&quot;]]
 
-<span class="c1"># Show dataframe</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+# Show dataframe
+print(va_poverty_tract.head(2))
+print(&#39;Shape: &#39;, va_poverty_tract.shape)
 </pre></div>
 </div>
 </div>
@@ -861,13 +718,13 @@ Shape:  (1907, 8)
 <p>Next, we will group all the census tracts within the same county (<code class="docutils literal notranslate"><span class="pre">COUNTYFP</span></code>) and aggregate the poverty and population values for those tracts within the same county. We can use the <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> function in <code class="docutils literal notranslate"><span class="pre">GeoPandas</span></code>, which is the spatial version of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. We use <code class="docutils literal notranslate"><span class="pre">dissolve</span></code> instead of <code class="docutils literal notranslate"><span class="pre">groupby</span></code> because the former also groups and merges all the geometries (in this case, census tracts) within a given group (in this case, counties).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dissolve and group the census tracts within each county and aggregate all the values together</span>
-<span class="c1"># Source: https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html</span>
-<span class="n">va_poverty_county</span> <span class="o">=</span> <span class="n">va_poverty_tract</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;COUNTYFP&#39;</span><span class="p">,</span> <span class="n">aggfunc</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Dissolve and group the census tracts within each county and aggregate all the values together
+# Source: https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html
+va_poverty_county = va_poverty_tract.dissolve(by = &#39;COUNTYFP&#39;, aggfunc = &#39;sum&#39;)
 
-<span class="c1"># Show dataframe</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_county</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+# Show dataframe
+print(va_poverty_county.head(2))
+print(&#39;Shape: &#39;, va_poverty_county.shape)
 </pre></div>
 </div>
 </div>
@@ -880,11 +737,11 @@ Shape:  (1907, 8)
 <p>Side note: Notice that <code class="docutils literal notranslate"><span class="pre">C17002_001E</span></code> (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population). We’ll disregard this for now since the difference is not too significant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get poverty rate and store values in new column</span>
-<span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_002E&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_003E&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;B01003_001E&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Get poverty rate and store values in new column
+va_poverty_county[&quot;Poverty_Rate&quot;] = (va_poverty_county[&quot;C17002_002E&quot;] + va_poverty_county[&quot;C17002_003E&quot;]) / va_poverty_county[&quot;B01003_001E&quot;] * 100
 
-<span class="c1"># Show dataframe</span>
-<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+# Show dataframe
+va_poverty_county.head(2)
 </pre></div>
 </div>
 </div>
@@ -896,21 +753,21 @@ Shape:  (1907, 8)
 <p>Finally, since we have the spatial component connected to our census data, we can plot the results!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create subplots
+fig, ax = plt.subplots(1, 1, figsize = (20, 10))
 
-<span class="c1"># Plot data</span>
-<span class="c1"># Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html</span>
-<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">,</span>
-                       <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span>
-                       <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;RdPu&quot;</span><span class="p">,</span>
-                       <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+# Plot data
+# Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html
+va_poverty_county.plot(column = &quot;Poverty_Rate&quot;,
+                       ax = ax,
+                       cmap = &quot;RdPu&quot;,
+                       legend = True)
 
-<span class="c1"># Stylize plots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>
+# Stylize plots
+plt.style.use(&#39;bmh&#39;)
 
-<span class="c1"># Set title</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Poverty Rates (%) in Virginia&#39;</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;25&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span> <span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
+# Set title
+ax.set_title(&#39;Poverty Rates (%) in Virginia&#39;, fontdict = {&#39;fontsize&#39;: &#39;25&#39;, &#39;fontweight&#39; : &#39;3&#39;})
 </pre></div>
 </div>
 </div>
