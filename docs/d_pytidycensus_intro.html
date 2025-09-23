@@ -1,0 +1,1577 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to pytidycensus &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/d_pytidycensus_intro';</script>
+    <link rel="canonical" href="https://pygis.io/docs/d_pytidycensus_intro.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Reading/Writing Remote Sensed Images" href="f_rs_io.html" />
+    <link rel="prev" title="Accessing Census and ACS Data in Python using `pytidycensus" href="d_access_census.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to pytidycensus</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/d_pytidycensus_intro.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/d_pytidycensus_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/d_pytidycensus_intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to pytidycensus</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytidycensus">Getting started with pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decennial-census">Decennial Census</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-files-in-the-decennial-census">Summary files in the decennial Census</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#american-community-survey">American Community Survey</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geography-and-variables-in-pytidycensus">Geography and variables in pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-subsets">Geographic subsets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-variables-in-pytidycensus">Searching for variables in pytidycensus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structure-in-pytidycensus">Data structure in pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-geoids">Understanding GEOIDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-variable-ids">Renaming variable IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-data-with-pytidycensus">Spatial data with pytidycensus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-pytidycensus-errors">Debugging pytidycensus errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pytidycensus">
+<h1>Introduction to pytidycensus<a class="headerlink" href="#introduction-to-pytidycensus" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> is a Python package designed to facilitate the process of acquiring and working with US Census Bureau population data in Python.</p>
+<p>This is a port of Kyle Walker’s excelent <a class="reference external" href="https://walker-data.com/census-r/an-introduction-to-tidycensus.html">intro to tidycensus in R</a> - he deserves the credit for this tutorial! I just converted it to Python.</p>
+<p>The package has two primary goals: first, to make Census data available to Python users in a pandas-friendly format, helping kickstart the process of generating insights from US Census data. Second, the package streamlines the data wrangling process for spatial Census data analysts. With <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code>, Python users can request <em>geometry</em> along with attributes for their Census data, helping facilitate mapping and spatial analysis.</p>
+<p>The US Census Bureau makes a wide range of datasets available through their APIs and other data download resources. <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> focuses on a select number of datasets implemented in a series of core functions. These core functions include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, which requests data from the US Decennial Census APIs for 2000, 2010, and 2020.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, which requests data from the 1-year and 5-year American Community Survey samples. Data are available from the 1-year ACS back to 2005 and the 5-year ACS back to 2005-2009.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code>, an interface to the Population Estimates APIs. These datasets include yearly estimates of population characteristics by state, county, and metropolitan area, along with components of change demographic estimates like births, deaths, and migration rates.</p></li>
+</ul>
+<section id="getting-started-with-pytidycensus">
+<h2>Getting started with pytidycensus<a class="headerlink" href="#getting-started-with-pytidycensus" title="Link to this heading">#</a></h2>
+<p>To get started with <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code>, users should install the package and load it in their Python environment. They’ll also need to set their Census API key. API keys can be obtained at <a class="reference external" href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a>. After you’ve signed up for an API key, be sure to activate the key from the email you receive from the Census Bureau so it works correctly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytidycensus</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
+
+<span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ignore this, I am just reading in my api key privately</span>
+<span class="c1"># Read API key from environment variable (for GitHub Actions)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytidycensus</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
+
+<span class="c1"># Try to get API key from environment </span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CENSUS_API_KEY&#39;</span><span class="p">)</span>
+
+<span class="c1"># For documentation builds without a key, we&#39;ll mock the responses</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="n">api_key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using Census API key from environment&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using example API key for documentation&quot;</span><span class="p">)</span>
+    <span class="c1"># This won&#39;t make real API calls during documentation builds</span>
+    <span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="s2">&quot;EXAMPLE_API_KEY_FOR_DOCS&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Census API key has been set for this session.
+Using Census API key from environment
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="decennial-census">
+<h3>Decennial Census<a class="headerlink" href="#decennial-census" title="Link to this heading">#</a></h3>
+<p>Once an API key is set, users can obtain decennial Census or ACS data with a single function call. Let’s start with <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, which is used to access decennial Census data from the 2000, 2010, and 2020 decennial US Censuses.</p>
+<p>To get data from the decennial US Census, users must specify a string representing the requested <code class="docutils literal notranslate"><span class="pre">geography</span></code>; a vector of Census variable IDs, represented by <code class="docutils literal notranslate"><span class="pre">variables</span></code>; or optionally a Census table ID, passed to <code class="docutils literal notranslate"><span class="pre">table</span></code>. The code below gets data on total population by state from the 2010 decennial Census.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytidycensus</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
+
+<span class="n">total_population_10</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_decennial</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;P001001&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2010</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">total_population_10</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2010 decennial Census
+Using Census Summary File 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID        NAME variable  estimate
+0    01    01     Alabama  P001001   4779736
+1    02    02      Alaska  P001001    710231
+2    04    04     Arizona  P001001   6392017
+3    05    05    Arkansas  P001001   2915918
+4    06    06  California  P001001  37253956
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function returns a pandas DataFrame with information on total population by state, and assigns it to the object <code class="docutils literal notranslate"><span class="pre">total_population_10</span></code>. Data for 2000 or 2020 can also be obtained by supplying the appropriate year to the <code class="docutils literal notranslate"><span class="pre">year</span></code> parameter.</p>
+<section id="summary-files-in-the-decennial-census">
+<h4>Summary files in the decennial Census<a class="headerlink" href="#summary-files-in-the-decennial-census" title="Link to this heading">#</a></h4>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code> uses the argument <code class="docutils literal notranslate"><span class="pre">sumfile</span> <span class="pre">=</span> <span class="pre">&quot;sf1&quot;</span></code>, which fetches data from the decennial Census Summary File 1. This summary file exists for the 2000 and 2010 decennial US Censuses, and includes core demographic characteristics for Census geographies.</p>
+<p>2020 Decennial Census data are available from the PL 94-171 Redistricting summary file, which is specified with <code class="docutils literal notranslate"><span class="pre">sumfile</span> <span class="pre">=</span> <span class="pre">&quot;pl&quot;</span></code> and is also available for 2010. The Redistricting summary files include a limited subset of variables from the decennial US Census to be used for legislative redistricting. These variables include total population and housing units; race and ethnicity; voting-age population; and group quarters population. For example, the code below retrieves information on the American Indian &amp; Alaska Native population by state from the 2020 decennial Census.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aian_2020</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_decennial</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;P1_005N&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
+    <span class="n">sumfile</span><span class="o">=</span><span class="s2">&quot;pl&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">aian_2020</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2020 decennial Census
+Using the PL 94-171 Redistricting Data Summary File
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID           NAME variable  estimate
+0    42    42   Pennsylvania  P1_005N     31052
+1    06    06     California  P1_005N    631016
+2    54    54  West Virginia  P1_005N      3706
+3    49    49           Utah  P1_005N     41644
+4    36    36       New York  P1_005N    149690
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/mmann1123/Documents/github/pytidycensus/pytidycensus/decennial.py:429: UserWarning: Note: 2020 decennial Census data use differential privacy, a technique that introduces errors into data to preserve respondent confidentiality. Small counts should be interpreted with caution. See https://www.census.gov/library/fact-sheets/2021/protecting-the-confidentiality-of-the-2020-census-redistricting-data.html for additional guidance.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>The argument <code class="docutils literal notranslate"><span class="pre">sumfile</span> <span class="pre">=</span> <span class="pre">&quot;pl&quot;</span></code> is assumed (and in turn not required) when users request data for 2020 until more detailed files are released.</p>
+<blockquote>
+<div><p><strong>Note</strong>: When users request data from the 2020 decennial Census, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code> prints out a message alerting users that 2020 decennial Census data use <em>differential privacy</em> as a method to preserve confidentiality of individuals who responded to the Census. This can lead to inaccuracies in small area analyses using 2020 Census data and also can make comparisons of small counts across years difficult.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="american-community-survey">
+<h3>American Community Survey<a class="headerlink" href="#american-community-survey" title="Link to this heading">#</a></h3>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> retrieves data from the American Community Survey. The ACS includes a wide variety of variables detailing characteristics of the US population not found in the decennial Census. The example below fetches data on the number of residents born in Mexico by state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">born_in_mexico</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B05006_150&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">born_in_mexico</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID           NAME    variable   estimate      moe
+0    42    42   Pennsylvania  B05006_150    53749.0   3042.0
+1    06    06     California  B05006_150  3962910.0  25353.0
+2    54    54  West Virginia  B05006_150     1942.0    381.0
+3    49    49           Utah  B05006_150    98336.0   3302.0
+4    36    36       New York  B05006_150   209202.0   6566.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the year is not specified, <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> defaults to the most recent five-year ACS sample. The data returned is similar in structure to that returned by <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, but includes an <code class="docutils literal notranslate"><span class="pre">estimate</span></code> column (for the ACS estimate) and <code class="docutils literal notranslate"><span class="pre">moe</span></code> column (for the margin of error around that estimate) instead of a <code class="docutils literal notranslate"><span class="pre">value</span></code> column. Different years and different surveys are available by adjusting the <code class="docutils literal notranslate"><span class="pre">year</span></code> and <code class="docutils literal notranslate"><span class="pre">survey</span></code> parameters. <code class="docutils literal notranslate"><span class="pre">survey</span></code> defaults to the 5-year ACS; however this can be changed to the 1-year ACS by using the argument <code class="docutils literal notranslate"><span class="pre">survey</span> <span class="pre">=</span> <span class="pre">&quot;acs1&quot;</span></code>. For example, the following code will fetch data from the 1-year ACS for 2019:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">born_in_mexico_1yr</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B05006_150&quot;</span><span class="p">,</span>
+    <span class="n">survey</span><span class="o">=</span><span class="s2">&quot;acs1&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">born_in_mexico_1yr</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2019 1-year ACS
+The 1-year ACS provides data for geographies with populations of 65,000 and greater.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID      NAME    variable  estimate      moe
+0    17    17  Illinois  B05006_150  601682.0  16488.0
+1    13    13   Georgia  B05006_150  231850.0  11680.0
+2    16    16     Idaho  B05006_150       NaN      NaN
+3    15    15    Hawaii  B05006_150       NaN      NaN
+4    18    18   Indiana  B05006_150   94028.0   7717.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the differences between the 5-year ACS estimates and the 1-year ACS estimates. For states with larger Mexican-born populations like Arizona, California, and Colorado, the 1-year ACS data will represent the most up-to-date estimates, albeit characterized by larger margins of error relative to their estimates. For states with smaller Mexican-born populations, the estimate might return <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, Python’s notation representing missing data. If you encounter this in your data’s <code class="docutils literal notranslate"><span class="pre">estimate</span></code> column, it will generally mean that the estimate is too small for a given geography to be deemed reliable by the Census Bureau. In this case, only the states with the largest Mexican-born populations have data available for that variable in the 1-year ACS, meaning that the 5-year ACS should be used to make full state-wise comparisons if desired.</p>
+<blockquote>
+<div><p><strong>Note</strong>: The regular 1-year ACS was not released in 2020 due to low response rates during the COVID-19 pandemic. The Census Bureau released a set of experimental estimates for the 2020 1-year ACS that are not available in pytidycensus. These estimates can be downloaded at <a class="reference external" href="https://www.census.gov/programs-surveys/acs/data/experimental-data/1-year.html">https://www.census.gov/programs-surveys/acs/data/experimental-data/1-year.html</a>.</p>
+</div></blockquote>
+<p>Variables from the ACS detailed tables, data profiles, summary tables, comparison profile, and supplemental estimates are available through <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code>’s <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> function; the function will auto-detect from which dataset to look for variables based on their names. Alternatively, users can supply a table name to the <code class="docutils literal notranslate"><span class="pre">table</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>; this will return data for every variable in that table. For example, to get all variables associated with table B01001, which covers sex broken down by age, from the 2016-2020 5-year ACS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">age_table</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="s2">&quot;B01001&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">age_table</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+Downloading variables for 2020 acs acs5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Large table request: 98 variables will be retrieved in chunks
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID           NAME    variable    estimate  moe
+0    42    42   Pennsylvania  B01001_001  12794885.0  NaN
+1    06    06     California  B01001_001  39346023.0  NaN
+2    54    54  West Virginia  B01001_001   1807426.0  NaN
+3    49    49           Utah  B01001_001   3151239.0  NaN
+4    36    36       New York  B01001_001  19514849.0  NaN
+</pre></div>
+</div>
+</div>
+</div>
+<p>To find all of the variables associated with a given ACS table, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> downloads a dataset of variables from the Census Bureau website and looks up the variable codes for download. If the <code class="docutils literal notranslate"><span class="pre">cache_table</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the function instructs <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> to cache this dataset on the user’s computer for faster future access. This only needs to be done once per ACS or Census dataset if the user would like to specify this option.</p>
+</section>
+</section>
+<section id="geography-and-variables-in-pytidycensus">
+<h2>Geography and variables in pytidycensus<a class="headerlink" href="#geography-and-variables-in-pytidycensus" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">geography</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code> allows users to request data aggregated to common Census enumeration units. <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> accepts enumeration units nested within states and/or counties, when applicable. Census blocks are available in <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code> but not in <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> as block-level data are not available from the American Community Survey. To request data within states and/or counties, state and county names can be supplied to the <code class="docutils literal notranslate"><span class="pre">state</span></code> and <code class="docutils literal notranslate"><span class="pre">county</span></code> parameters, respectively.</p>
+<p>Here’s a table of commonly used geographies:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Geography</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Available by</p></th>
+<th class="head"><p>Available in</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;us&quot;</span></code></p></td>
+<td><p>United States</p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;region&quot;</span></code></p></td>
+<td><p>Census region</p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;division&quot;</span></code></p></td>
+<td><p>Census division</p></td>
+<td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;</span></code></p></td>
+<td><p>State or equivalent</p></td>
+<td><p>state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;county&quot;</span></code></p></td>
+<td><p>County or equivalent</p></td>
+<td><p>state, county</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;county</span> <span class="pre">subdivision&quot;</span></code></p></td>
+<td><p>County subdivision</p></td>
+<td><p><strong>state</strong>, county</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;tract&quot;</span></code></p></td>
+<td><p>Census tract</p></td>
+<td><p><strong>state</strong>, county</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;block</span> <span class="pre">group&quot;</span></code></p></td>
+<td><p>Census block group</p></td>
+<td><p><strong>state</strong>, county</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> (2013-), <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;block&quot;</span></code></p></td>
+<td><p>Census block</p></td>
+<td><p><strong>state</strong>, <strong>county</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;place&quot;</span></code></p></td>
+<td><p>Census-designated place</p></td>
+<td><p>state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;metropolitan</span> <span class="pre">statistical</span> <span class="pre">area/micropolitan</span> <span class="pre">statistical</span> <span class="pre">area&quot;</span></code> OR <code class="docutils literal notranslate"><span class="pre">&quot;cbsa&quot;</span></code></p></td>
+<td><p>Core-based statistical area</p></td>
+<td><p>state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_estimates()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;zip</span> <span class="pre">code</span> <span class="pre">tabulation</span> <span class="pre">area&quot;</span></code> OR <code class="docutils literal notranslate"><span class="pre">&quot;zcta&quot;</span></code></p></td>
+<td><p>Zip code tabulation area</p></td>
+<td><p>state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">get_acs()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The geography parameter must be typed exactly as specified in the table above to request data correctly from the Census API. For core-based statistical areas and zip code tabulation areas, two heavily-requested geographies, the aliases <code class="docutils literal notranslate"><span class="pre">&quot;cbsa&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;zcta&quot;</span></code> can be used, respectively, to fetch data for those geographies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cbsa_population</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;cbsa&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B01003_001&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cbsa_population</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                      NAME  GEOID    variable  estimate  moe
+0  Aberdeen, SD Micro Area  10100  B01003_001   42864.0  NaN
+1  Aberdeen, WA Micro Area  10140  B01003_001   73769.0  NaN
+2   Abilene, TX Metro Area  10180  B01003_001  171354.0  NaN
+3       Ada, OK Micro Area  10220  B01003_001   38385.0  NaN
+4    Adrian, MI Micro Area  10300  B01003_001   98310.0  NaN
+</pre></div>
+</div>
+</div>
+</div>
+<section id="geographic-subsets">
+<h3>Geographic subsets<a class="headerlink" href="#geographic-subsets" title="Link to this heading">#</a></h3>
+<p>For many geographies, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> supports more granular requests that are subsetted by state or even by county, if supported by the API. If a geographic subset is in bold in the table above, it is required; if not, it is optional.</p>
+<p>For example, an analyst might be interested in studying variations in household income in the state of Wisconsin. Although the analyst <em>can</em> request all counties in the United States, this is not necessary for this specific task. In turn, they can use the <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter to subset the request for a specific state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wi_income</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;WI&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">wi_income</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state county  GEOID                       NAME    variable  estimate     moe
+0    55    003  55003  Ashland County, Wisconsin  B19013_001     47869  3190.0
+1    55    005  55005   Barron County, Wisconsin  B19013_001     52346  2092.0
+2    55    009  55009    Brown County, Wisconsin  B19013_001     64728  1419.0
+3    55    011  55011  Buffalo County, Wisconsin  B19013_001     58364  1871.0
+4    55    015  55015  Calumet County, Wisconsin  B19013_001     76065  2314.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> accepts state names (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;Wisconsin&quot;</span></code>), state postal codes (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;WI&quot;</span></code>), and state FIPS codes (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;55&quot;</span></code>), so an analyst can use what they are most comfortable with.</p>
+<p>Smaller geographies like Census tracts can also be subsetted by county. Given that Census tracts nest neatly within counties (and do not cross county boundaries), we can request all Census tracts for a given county by using the optional <code class="docutils literal notranslate"><span class="pre">county</span></code> parameter. Dane County, home to Wisconsin’s capital city of Madison, is shown below. Note that the name of the county can be supplied as well as the FIPS code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dane_income</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;tract&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;WI&quot;</span><span class="p">,</span>
+    <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Dane&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dane_income</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state county   tract        GEOID                    NAME    variable  \
+0    55    025  000100  55025000100  Dane County, Wisconsin  B19013_001   
+1    55    025  000201  55025000201  Dane County, Wisconsin  B19013_001   
+2    55    025  000202  55025000202  Dane County, Wisconsin  B19013_001   
+3    55    025  000204  55025000204  Dane County, Wisconsin  B19013_001   
+4    55    025  000205  55025000205  Dane County, Wisconsin  B19013_001   
+
+   estimate      moe  
+0   74054.0  15662.0  
+1   92460.0  27067.0  
+2   88092.0   5189.0  
+3   82717.0  12175.0  
+4  100000.0  17506.0  
+</pre></div>
+</div>
+</div>
+</div>
+<p>With respect to geography and the American Community Survey, users should be aware that whereas the 5-year ACS covers geographies down to the block group, the 1-year ACS only returns data for geographies of population 65,000 and greater. This means that some geographies (e.g. Census tracts) will never be available in the 1-year ACS, and that other geographies such as counties are only partially available. To illustrate this, we can check the number of rows in the object <code class="docutils literal notranslate"><span class="pre">wi_income</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wi_income</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 72 rows in this dataset, one for each county in Wisconsin. However, if the same data were requested from the 2019 1-year ACS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wi_income_1yr</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;WI&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
+    <span class="n">survey</span><span class="o">=</span><span class="s2">&quot;acs1&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wi_income_1yr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2019 1-year ACS
+The 1-year ACS provides data for geographies with populations of 65,000 and greater.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are fewer rows in this dataset, representing only the counties that meet the “total population of 65,000 or greater” threshold required to be included in the 1-year ACS data.</p>
+</section>
+</section>
+<section id="searching-for-variables-in-pytidycensus">
+<h2>Searching for variables in pytidycensus<a class="headerlink" href="#searching-for-variables-in-pytidycensus" title="Link to this heading">#</a></h2>
+<p>One additional challenge when searching for Census variables is understanding variable IDs, which are required to fetch data from the Census and ACS APIs. There are thousands of variables available across the different datasets and summary files. To make searching easier for Python users, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> offers the <code class="docutils literal notranslate"><span class="pre">load_variables()</span></code> function. This function obtains a dataset of variables from the Census Bureau website and formats it for fast searching.</p>
+<p>The function takes two required arguments: <code class="docutils literal notranslate"><span class="pre">year</span></code>, which takes the year or endyear of the Census dataset or ACS sample, and <code class="docutils literal notranslate"><span class="pre">dataset</span></code>, which references the dataset name. For the 2000 or 2010 Decennial Census, use <code class="docutils literal notranslate"><span class="pre">&quot;sf1&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;sf2&quot;</span></code> as the dataset name to access variables from Summary Files 1 and 2, respectively. For 2020, the only dataset supported at the time of this writing is <code class="docutils literal notranslate"><span class="pre">&quot;pl&quot;</span></code> for the PL-94171 Redistricting dataset.</p>
+<p>For variables from the American Community Survey, users should specify the dataset as <code class="docutils literal notranslate"><span class="pre">&quot;acs&quot;</span></code> and survey as <code class="docutils literal notranslate"><span class="pre">&quot;acs1&quot;</span></code> for the 1-year ACS or <code class="docutils literal notranslate"><span class="pre">&quot;acs5&quot;</span></code> for the 5-year ACS. An example request would look like <code class="docutils literal notranslate"><span class="pre">load_variables(year=2020,</span> <span class="pre">dataset=&quot;acs&quot;,</span> <span class="pre">survey=&quot;acs5&quot;)</span></code> for variables from the 2020 5-year ACS Detailed Tables.</p>
+<p>As this function requires processing thousands of variables from the Census Bureau which may take a few moments depending on the user’s internet connection, the user can specify <code class="docutils literal notranslate"><span class="pre">cache=True</span></code> in the function call to store the data in the user’s cache directory for future access.</p>
+<p>An example of how <code class="docutils literal notranslate"><span class="pre">load_variables()</span></code> works is as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v20</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">load_variables</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="s2">&quot;acs&quot;</span><span class="p">,</span> <span class="s2">&quot;acs5&quot;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v20</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded cached variables for 2020 acs acs5
+     name      label concept predicateType group  limit table
+0  AIANHH  Geography                         N/A      0   NaN
+1   AIARO  Geography                         N/A      0   NaN
+2  AIHHTL  Geography                         N/A      0   NaN
+3   AIRES  Geography                         N/A      0   NaN
+4    ANRC  Geography                         N/A      0   NaN
+</pre></div>
+</div>
+</div>
+</div>
+<p>The returned DataFrame has columns including: <code class="docutils literal notranslate"><span class="pre">name</span></code>, which refers to the Census variable ID; <code class="docutils literal notranslate"><span class="pre">label</span></code>, which is a descriptive data label for the variable; and <code class="docutils literal notranslate"><span class="pre">concept</span></code>, which refers to the topic of the data and often corresponds to a table of Census data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> also provides a convenient <code class="docutils literal notranslate"><span class="pre">search_variables()</span></code> function to help find specific variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search for income-related variables</span>
+<span class="n">income_vars</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">search_variables</span><span class="p">(</span><span class="s2">&quot;income&quot;</span><span class="p">,</span> <span class="mi">2020</span><span class="p">,</span> <span class="s2">&quot;acs&quot;</span><span class="p">,</span> <span class="s2">&quot;acs5&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">income_vars</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded cached variables for 2020 acs acs5
+            name                                              label  \
+0  B06010PR_002E                        Estimate!!Total:!!No income   
+1  B06010PR_003E                     Estimate!!Total:!!With income:   
+2  B06010PR_004E  Estimate!!Total:!!With income:!!$1 to $9,999 o...   
+3  B06010PR_005E  Estimate!!Total:!!With income:!!$10,000 to $14...   
+4  B06010PR_006E  Estimate!!Total:!!With income:!!$15,000 to $24...   
+
+                                             concept predicateType     group  \
+0  PLACE OF BIRTH BY INDIVIDUAL INCOME IN THE PAS...           int  B06010PR   
+1  PLACE OF BIRTH BY INDIVIDUAL INCOME IN THE PAS...           int  B06010PR   
+2  PLACE OF BIRTH BY INDIVIDUAL INCOME IN THE PAS...           int  B06010PR   
+3  PLACE OF BIRTH BY INDIVIDUAL INCOME IN THE PAS...           int  B06010PR   
+4  PLACE OF BIRTH BY INDIVIDUAL INCOME IN THE PAS...           int  B06010PR   
+
+   limit     table  
+0      0  B06010PR  
+1      0  B06010PR  
+2      0  B06010PR  
+3      0  B06010PR  
+4      0  B06010PR  
+</pre></div>
+</div>
+</div>
+</div>
+<p>By browsing the table in this way, users can identify the appropriate variable IDs (found in the <code class="docutils literal notranslate"><span class="pre">name</span></code> column) that can be passed to the <code class="docutils literal notranslate"><span class="pre">variables</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>. Additionally, if users desire an entire table of related variables from the ACS, they can use the <code class="docutils literal notranslate"><span class="pre">get_table_variables()</span></code> function or pass the table prefix to the <code class="docutils literal notranslate"><span class="pre">table</span></code> parameter in the main functions.</p>
+</section>
+<section id="data-structure-in-pytidycensus">
+<h2>Data structure in pytidycensus<a class="headerlink" href="#data-structure-in-pytidycensus" title="Link to this heading">#</a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> returns a pandas DataFrame of ACS or decennial Census data. For decennial Census data, this will include columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GEOID</span></code>, representing the Census ID code that uniquely identifies the geographic unit;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NAME</span></code>, which represents a descriptive name of the unit;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable</span></code>, which contains information on the Census variable name corresponding to that row;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>, which contains the data values for each unit-variable combination.</p></li>
+</ul>
+<p>For ACS data, instead of a <code class="docutils literal notranslate"><span class="pre">value</span></code> column, there will be two columns: <code class="docutils literal notranslate"><span class="pre">estimate</span></code>, which represents the ACS estimate, and <code class="docutils literal notranslate"><span class="pre">moe</span></code>, representing the margin of error around that estimate.</p>
+<p>By default, data is returned in a “tidy” format where each row represents a unique geography-variable combination. This is ideal for data analysis with pandas. Here’s an example with income groups by state for the ACS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hhinc</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="s2">&quot;B19001&quot;</span><span class="p">,</span>
+    <span class="n">survey</span><span class="o">=</span><span class="s2">&quot;acs1&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hhinc</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2019 1-year ACS
+The 1-year ACS provides data for geographies with populations of 65,000 and greater.
+Downloading variables for 2019 acs acs1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state GEOID      NAME    variable  estimate      moe
+0    17    17  Illinois  B19001_001   4866006  12627.0
+1    13    13   Georgia  B19001_001   3852714  14425.0
+2    16    16     Idaho  B19001_001    655859   5316.0
+3    15    15    Hawaii  B19001_001    465299   5012.0
+4    18    18   Indiana  B19001_001   2597765  12716.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, each row represents state-characteristic combinations. Alternatively, if a user desires the variables spread across the columns of the dataset, the setting <code class="docutils literal notranslate"><span class="pre">output=&quot;wide&quot;</span></code> will enable this. For ACS data, estimates and margins of error for each ACS variable will be found in their own columns. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hhinc_wide</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="s2">&quot;B19001&quot;</span><span class="p">,</span>
+    <span class="n">survey</span><span class="o">=</span><span class="s2">&quot;acs1&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hhinc_wide</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2019 1-year ACS
+The 1-year ACS provides data for geographies with populations of 65,000 and greater.
+Downloading variables for 2019 acs acs1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  GEOID  B19001_001E  B19001_002E  B19001_003E  B19001_004E  B19001_005E  \
+0    17      4866006       289515       178230       183540       206595   
+1    13      3852714       237054       163741       166221       173428   
+2    16       655859        27773        24498        30937        28519   
+3    15       465299        23344        12238        12277        15179   
+4    18      2597765       153355       104333       114209       130573   
+
+   B19001_006E  B19001_007E  B19001_008E  B19001_009E  ...  B19001_008_moe  \
+0       189948       197382       186475       197027  ...          6024.0   
+1       169736       174416       160146       168658  ...          8450.0   
+2        29674        33553        29333        28390  ...          2652.0   
+3        12991        16607        12211        14811  ...          1880.0   
+4       119781       134479       119809       126321  ...          6480.0   
+
+   B19001_009_moe  B19001_010_moe  B19001_011_moe  B19001_012_moe  \
+0          8242.0          7120.0          9644.0         10099.0   
+1          9366.0          7865.0         10319.0         13725.0   
+2          2763.0          2955.0          4165.0          4653.0   
+3          1770.0          1601.0          2968.0          3741.0   
+4          5521.0          5822.0          7454.0          8045.0   
+
+   B19001_013_moe  B19001_014_moe  B19001_015_moe B19001_016_moe  \
+0         11460.0         11851.0          8103.0         8588.0   
+1         11586.0          8991.0          8362.0         7657.0   
+2          5688.0          3869.0          3380.0         3485.0   
+3          3941.0          3256.0          3111.0         3352.0   
+4          8714.0          7242.0          6171.0         5495.0   
+
+  B19001_017_moe  
+0         8929.0  
+1         8944.0  
+2         2923.0  
+3         3266.0  
+4         5142.0  
+
+[5 rows x 37 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The wide-form dataset includes <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> and <code class="docutils literal notranslate"><span class="pre">NAME</span></code> columns, as in the tidy dataset, but is also characterized by estimate/margin of error pairs across the columns for each Census variable in the table.</p>
+<section id="understanding-geoids">
+<h3>Understanding GEOIDs<a class="headerlink" href="#understanding-geoids" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> column returned by default in <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> can be used to uniquely identify geographic units in a given dataset. For geographies within the core Census hierarchy (Census block through state), GEOIDs can be used to uniquely identify specific units as well as units’ parent geographies. Let’s take the example of households by Census block from the 2020 Census in Cimarron County, Oklahoma.</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cimarron_blocks</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_decennial</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;block&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;H1_001N&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+    <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Cimarron&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
+    <span class="n">sumfile</span><span class="o">=</span><span class="s2">&quot;pl&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cimarron_blocks</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The mapping between the <code class="docutils literal notranslate"><span class="pre">GEOID</span></code> and <code class="docutils literal notranslate"><span class="pre">NAME</span></code> columns in the returned 2020 Census block data offers some insight into how GEOIDs work for geographies within the core Census hierarchy. Take the first block in the table, which might have a GEOID like <strong>400259503001110</strong>. The GEOID value breaks down as follows:</p>
+<ul class="simple">
+<li><p>The first two digits, <strong>40</strong>, correspond to the <a class="reference external" href="https://www.census.gov/library/reference/code-lists/ansi.html">Federal Information Processing Series (FIPS) code</a> for the state of Oklahoma.</p></li>
+<li><p>Digits 3 through 5, <strong>025</strong>, are representative of Cimarron County.</p></li>
+<li><p>The next six digits, <strong>950300</strong>, represent the block’s Census tract.</p></li>
+<li><p>The twelfth digit, <strong>1</strong>, represents the parent block group of the Census block.</p></li>
+<li><p>The last three digits, <strong>110</strong>, represent the individual Census block.</p></li>
+</ul>
+<p>For geographies outside the core Census hierarchy, GEOIDs will uniquely identify geographic units but will only include IDs of parent geographies to the degree to which they nest within them.</p>
+</section>
+<section id="renaming-variable-ids">
+<h3>Renaming variable IDs<a class="headerlink" href="#renaming-variable-ids" title="Link to this heading">#</a></h3>
+<p>Census variables IDs can be cumbersome to type and remember. As such, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> has built-in tools to automatically rename the variable IDs if requested by a user. For example, let’s say that a user is requesting data on median household income (variable ID <code class="docutils literal notranslate"><span class="pre">B19013_001</span></code>) and median age (variable ID <code class="docutils literal notranslate"><span class="pre">B01002_001</span></code>). By passing a <em>dictionary</em> to the <code class="docutils literal notranslate"><span class="pre">variables</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">get_acs()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_decennial()</span></code>, the functions will return the desired names rather than the Census variable IDs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ga</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Georgia&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;medinc&quot;</span><span class="p">:</span> <span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span> <span class="s2">&quot;medage&quot;</span><span class="p">:</span> <span class="s2">&quot;B01002_001&quot;</span><span class="p">},</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ga</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  state county  GEOID                      NAME variable  estimate     moe
+0    13    001  13001   Appling County, Georgia   medinc   37924.0  4761.0
+1    13    003  13003  Atkinson County, Georgia   medinc   35703.0  5493.0
+2    13    005  13005     Bacon County, Georgia   medinc   36692.0  3774.0
+3    13    007  13007     Baker County, Georgia   medinc   34034.0  9879.0
+4    13    011  13011     Banks County, Georgia   medinc   50912.0  4278.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>ACS variable IDs, which would be found in the <code class="docutils literal notranslate"><span class="pre">variable</span></code> column, are replaced by <code class="docutils literal notranslate"><span class="pre">medage</span></code> and <code class="docutils literal notranslate"><span class="pre">medinc</span></code>, as requested. When a wide-form dataset is requested, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> will still append suffixes to the specified column names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ga_wide</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Georgia&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;medinc&quot;</span><span class="p">:</span> <span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span> <span class="s2">&quot;medage&quot;</span><span class="p">:</span> <span class="s2">&quot;B01002_001&quot;</span><span class="p">},</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ga_wide</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   GEOID  medinc  medage state county                      NAME  medinc_moe  \
+0  13001   37924    39.9    13    001   Appling County, Georgia      4761.0   
+1  13003   35703    35.9    13    003  Atkinson County, Georgia      5493.0   
+2  13005   36692    36.5    13    005     Bacon County, Georgia      3774.0   
+3  13007   34034    52.2    13    007     Baker County, Georgia      9879.0   
+4  13011   50912    41.5    13    011     Banks County, Georgia      4278.0   
+
+   medage_moe  
+0         1.7  
+1         1.5  
+2         1.0  
+3         4.8  
+4         1.1  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="spatial-data-with-pytidycensus">
+<h2>Spatial data with pytidycensus<a class="headerlink" href="#spatial-data-with-pytidycensus" title="Link to this heading">#</a></h2>
+<p>One of the most powerful features of <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> is its ability to return geometry along with Census data, facilitating mapping and spatial analysis. To get geometry with your data, simply set the <code class="docutils literal notranslate"><span class="pre">geometry=True</span></code> parameter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wi_income_geo</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;B19013_001&quot;</span><span class="p">,</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;WI&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">wi_income_geo</span><span class="p">))</span>  <span class="c1"># This will be a GeoDataFrame</span>
+<span class="n">wi_income_geo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2016-2020 5-year ACS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading county boundaries...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GEOID</th>
+      <th>geometry</th>
+      <th>NAMELSAD</th>
+      <th>B19013_001E</th>
+      <th>state</th>
+      <th>county</th>
+      <th>NAME</th>
+      <th>B19013_001_moe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>55111</td>
+      <td>POLYGON ((-90.19196 43.555, -90.19676 43.55494...</td>
+      <td>Sauk County</td>
+      <td>62808</td>
+      <td>55</td>
+      <td>111</td>
+      <td>Sauk County, Wisconsin</td>
+      <td>1745.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55093</td>
+      <td>POLYGON ((-92.69454 44.68874, -92.69466 44.688...</td>
+      <td>Pierce County</td>
+      <td>73873</td>
+      <td>55</td>
+      <td>093</td>
+      <td>Pierce County, Wisconsin</td>
+      <td>4004.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>55063</td>
+      <td>POLYGON ((-91.34774 43.91196, -91.34874 43.912...</td>
+      <td>La Crosse County</td>
+      <td>60307</td>
+      <td>55</td>
+      <td>063</td>
+      <td>La Crosse County, Wisconsin</td>
+      <td>1759.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>55033</td>
+      <td>POLYGON ((-92.13538 44.94481, -92.13538 44.944...</td>
+      <td>Dunn County</td>
+      <td>59588</td>
+      <td>55</td>
+      <td>033</td>
+      <td>Dunn County, Wisconsin</td>
+      <td>4042.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>55053</td>
+      <td>POLYGON ((-91.166 44.33519, -91.16599 44.33555...</td>
+      <td>Jackson County</td>
+      <td>55228</td>
+      <td>55</td>
+      <td>053</td>
+      <td>Jackson County, Wisconsin</td>
+      <td>2999.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The returned object will be a GeoPandas GeoDataFrame, which can be used for mapping and spatial analysis. For example, you could create a simple choropleth map:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot the data (if using a Jupyter notebook, you might want to use %matplotlib inline)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">wi_income_geo</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;B19013_001E&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Median Household Income by County in Wisconsin&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/670f424903cb5e3d3514da2de6a4e9df9359ff2845aa71eb276f889dd96d710e.png" src="../_images/670f424903cb5e3d3514da2de6a4e9df9359ff2845aa71eb276f889dd96d710e.png" />
+</div>
+</div>
+</section>
+<section id="debugging-pytidycensus-errors">
+<h2>Debugging pytidycensus errors<a class="headerlink" href="#debugging-pytidycensus-errors" title="Link to this heading">#</a></h2>
+<p>At times, you may think that you’ve formatted your use of a <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> function correctly but the Census API doesn’t return the data you expected. Whenever possible, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> carries through the error message from the Census API or translates common errors for the user.</p>
+<p>To assist with debugging errors, or more generally to help users understand how <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> functions are being translated to Census API calls, <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> offers a parameter <code class="docutils literal notranslate"><span class="pre">show_call</span></code> that when set to <code class="docutils literal notranslate"><span class="pre">True</span></code> prints out the actual API call that <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> is making to the Census API.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cbsa_bachelors</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;cbsa&quot;</span><span class="p">,</span>
+    <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;DP02_0068P&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
+    <span class="n">show_call</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2015-2019 5-year ACS
+Census API call: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;key=983980b9fc504149e82117c949d7ed44653dc507&amp;for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">HTTPError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/api.py:141,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">141</span> <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/requests/models.py:1024,</span> in <span class="ni">Response.raise_for_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="k">if</span> <span class="n">http_error_msg</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1024</span>     <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="n">http_error_msg</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="ne">HTTPError</span>: 400 Client Error:  for url: https://api.census.gov/data/2019/acs/acs5?get=DP02_0068PE%2CDP02_0068PM%2CNAME&amp;key=983980b9fc504149e82117c949d7ed44653dc507&amp;for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">RequestException</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/acs.py:303,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_variables</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MAX_VARIABLES_PER_REQUEST</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>     <span class="c1"># Single API request for small variable lists</span>
+<span class="ne">--&gt; </span><span class="mi">303</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">304</span>         <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span>         <span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;acs&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>         <span class="n">variables</span><span class="o">=</span><span class="n">all_variables</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="n">geography</span><span class="o">=</span><span class="n">geo_params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="n">survey</span><span class="o">=</span><span class="n">survey</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>         <span class="n">show_call</span><span class="o">=</span><span class="n">show_call</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="c1"># Filter variables to only those present in the data</span>
+
+<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/api.py:166,</span> in <span class="ni">CensusAPI.get</span><span class="nt">(self, year, dataset, variables, geography, survey, show_call)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span> <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">166</span>     <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>         <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span><span class="s2">         Failed to fetch data from Census API  </span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">         =======================================</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="s2">         Please make sure you get a valid API key set</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span><span class="s2">         ========================================</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="s2">         </span><span class="si">{</span><span class="n">e</span><span class="si">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>     <span class="p">)</span>
+
+<span class="ne">RequestException</span>: 
+                <span class="n">Failed</span> <span class="n">to</span> <span class="n">fetch</span> <span class="n">data</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Census</span> <span class="n">API</span>  
+                <span class="o">=======================================</span>
+                <span class="n">Please</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">get</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">API</span> <span class="n">key</span> <span class="nb">set</span>
+                <span class="o">========================================</span>
+<span class="g g-Whitespace">                </span><span class="mi">400</span> <span class="n">Client</span> <span class="n">Error</span><span class="p">:</span>  <span class="k">for</span> <span class="n">url</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">census</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="mi">2019</span><span class="o">/</span><span class="n">acs</span><span class="o">/</span><span class="n">acs5</span><span class="err">?</span><span class="n">get</span><span class="o">=</span><span class="n">DP02_0068PE</span><span class="o">%</span><span class="k">2CDP02_0068PM</span>%2CNAME&amp;key=983980b9fc504149e82117c949d7ed44653dc507&amp;for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A
+                
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">cbsa_bachelors</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;cbsa&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">variables</span><span class="o">=</span><span class="s2">&quot;DP02_0068P&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">show_call</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
+
+<span class="nn">File ~/Documents/github/pytidycensus/pytidycensus/acs.py:538,</span> in <span class="ni">get_acs</span><span class="nt">(geography, variables, table, cache_table, year, survey, state, county, zcta, output, geometry, keep_geo_vars, shift_geo, summary_var, moe_level, api_key, show_call, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="k">return</span> <span class="n">df</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">538</span>     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to retrieve ACS data: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">Exception</span>: Failed to retrieve ACS data: 
+                <span class="n">Failed</span> <span class="n">to</span> <span class="n">fetch</span> <span class="n">data</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Census</span> <span class="n">API</span>  
+                <span class="o">=======================================</span>
+                <span class="n">Please</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">get</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">API</span> <span class="n">key</span> <span class="nb">set</span>
+                <span class="o">========================================</span>
+<span class="g g-Whitespace">                </span><span class="mi">400</span> <span class="n">Client</span> <span class="n">Error</span><span class="p">:</span>  <span class="k">for</span> <span class="n">url</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">census</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="mi">2019</span><span class="o">/</span><span class="n">acs</span><span class="o">/</span><span class="n">acs5</span><span class="err">?</span><span class="n">get</span><span class="o">=</span><span class="n">DP02_0068PE</span><span class="o">%</span><span class="k">2CDP02_0068PM</span>%2CNAME&amp;key=983980b9fc504149e82117c949d7ed44653dc507&amp;for=metropolitan+statistical+area%2Fmicropolitan+statistical+area%3A%2A
+                
+</pre></div>
+</div>
+</div>
+</div>
+<p>The printed URL can be copy-pasted into a web browser where users can see the raw JSON returned by the Census API and inspect the results.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>This introduction to <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> has covered the basics of retrieving and working with Census data in Python. The package provides a convenient interface to access data from the US Census Bureau’s APIs, with built-in support for spatial data analysis. For more information and examples, please refer to the examples directory and the package documentation.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="d_access_census.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Accessing Census and ACS Data in Python using `pytidycensus</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="f_rs_io.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reading/Writing Remote Sensed Images</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-pytidycensus">Getting started with pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decennial-census">Decennial Census</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-files-in-the-decennial-census">Summary files in the decennial Census</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#american-community-survey">American Community Survey</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geography-and-variables-in-pytidycensus">Geography and variables in pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geographic-subsets">Geographic subsets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-variables-in-pytidycensus">Searching for variables in pytidycensus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structure-in-pytidycensus">Data structure in pytidycensus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-geoids">Understanding GEOIDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-variable-ids">Renaming variable IDs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-data-with-pytidycensus">Spatial data with pytidycensus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-pytidycensus-errors">Debugging pytidycensus errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300" align="left">
+</div>
+<div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+</div><br><br>
+<div>
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

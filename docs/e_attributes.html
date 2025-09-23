@@ -239,6 +239,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
@@ -514,26 +515,9 @@
 <p>One of the most basic operations is creating new attributes. Let’s say for instance we want to look at the world population in millions. We can start with an existing column of data <code class="docutils literal notranslate"><span class="pre">pop_est</span></code>. Let’s start by looking at the column names:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span>
 <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_sovereignty.geojson&#39;</span><span class="p">)</span>
 <span class="n">world</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;scalerank&#39;, &#39;labelrank&#39;, &#39;sovereignt&#39;, &#39;sov_a3&#39;, &#39;adm0_dif&#39;, &#39;level&#39;,
-       &#39;type&#39;, &#39;admin&#39;, &#39;adm0_a3&#39;, &#39;geou_dif&#39;, &#39;geounit&#39;, &#39;gu_a3&#39;, &#39;su_dif&#39;,
-       &#39;subunit&#39;, &#39;su_a3&#39;, &#39;brk_diff&#39;, &#39;name&#39;, &#39;name_long&#39;, &#39;brk_a3&#39;,
-       &#39;brk_name&#39;, &#39;brk_group&#39;, &#39;abbrev&#39;, &#39;postal&#39;, &#39;formal_en&#39;, &#39;formal_fr&#39;,
-       &#39;note_adm0&#39;, &#39;note_brk&#39;, &#39;name_sort&#39;, &#39;name_alt&#39;, &#39;mapcolor7&#39;,
-       &#39;mapcolor8&#39;, &#39;mapcolor9&#39;, &#39;mapcolor13&#39;, &#39;pop_est&#39;, &#39;gdp_md_est&#39;,
-       &#39;pop_year&#39;, &#39;lastcensus&#39;, &#39;gdp_year&#39;, &#39;economy&#39;, &#39;income_grp&#39;,
-       &#39;wikipedia&#39;, &#39;fips_10&#39;, &#39;iso_a2&#39;, &#39;iso_a3&#39;, &#39;iso_n3&#39;, &#39;un_a3&#39;, &#39;wb_a2&#39;,
-       &#39;wb_a3&#39;, &#39;woe_id&#39;, &#39;adm0_a3_is&#39;, &#39;adm0_a3_us&#39;, &#39;adm0_a3_un&#39;,
-       &#39;adm0_a3_wb&#39;, &#39;continent&#39;, &#39;region_un&#39;, &#39;subregion&#39;, &#39;region_wb&#39;,
-       &#39;name_len&#39;, &#39;long_len&#39;, &#39;abbrev_len&#39;, &#39;tiny&#39;, &#39;homepart&#39;,
-       &#39;featureclass&#39;, &#39;geometry&#39;],
-      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -541,106 +525,11 @@
 <p>We can then do basic operations on the basis of column names. Here we create a new column <code class="docutils literal notranslate"><span class="pre">m_pop_est</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;m_pop_est&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="p">[</span><span class="s1">&#39;m_pop_est&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span>
 <span class="n">world</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>scalerank</th>
-      <th>labelrank</th>
-      <th>sovereignt</th>
-      <th>sov_a3</th>
-      <th>adm0_dif</th>
-      <th>level</th>
-      <th>type</th>
-      <th>admin</th>
-      <th>adm0_a3</th>
-      <th>geou_dif</th>
-      <th>...</th>
-      <th>subregion</th>
-      <th>region_wb</th>
-      <th>name_len</th>
-      <th>long_len</th>
-      <th>abbrev_len</th>
-      <th>tiny</th>
-      <th>homepart</th>
-      <th>featureclass</th>
-      <th>geometry</th>
-      <th>m_pop_est</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>3</td>
-      <td>Afghanistan</td>
-      <td>AFG</td>
-      <td>0</td>
-      <td>2</td>
-      <td>Sovereign country</td>
-      <td>Afghanistan</td>
-      <td>AFG</td>
-      <td>0</td>
-      <td>...</td>
-      <td>Southern Asia</td>
-      <td>South Asia</td>
-      <td>11</td>
-      <td>11</td>
-      <td>4</td>
-      <td>-99</td>
-      <td>1</td>
-      <td>Admin-0 sovereignty</td>
-      <td>POLYGON ((74.89131 37.23164, 74.84023 37.22505...</td>
-      <td>28.400000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>3</td>
-      <td>Angola</td>
-      <td>AGO</td>
-      <td>0</td>
-      <td>2</td>
-      <td>Sovereign country</td>
-      <td>Angola</td>
-      <td>AGO</td>
-      <td>0</td>
-      <td>...</td>
-      <td>Middle Africa</td>
-      <td>Sub-Saharan Africa</td>
-      <td>6</td>
-      <td>6</td>
-      <td>4</td>
-      <td>-99</td>
-      <td>1</td>
-      <td>Admin-0 sovereignty</td>
-      <td>MULTIPOLYGON (((14.19082 -5.87598, 14.39863 -5...</td>
-      <td>12.799293</td>
-    </tr>
-  </tbody>
-</table>
-<p>2 rows × 65 columns</p>
-</div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -652,7 +541,7 @@
 <p>Pandas provides a suite of methods in order to get purely integer based indexing. The semantics follow closely Python and NumPy slicing. These are 0-based indexing. When slicing, the start bound is included, while the upper bound is excluded.  For instance <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">'fudge'</span></code> with <code class="docutils literal notranslate"><span class="pre">name[0:3]</span></code> returns <code class="docutils literal notranslate"><span class="pre">'fud'</span></code>, where f is at 0 and g is at the 3 position with the upper bound excluded.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># better for plotting geometries vs general plots.</span>
 
 <span class="n">world</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson&#39;</span><span class="p">)</span>
@@ -661,9 +550,6 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/c804058f1615fa81b3bff7c1785b040b42960e203d7cc497db79139fd7644dce.png" src="../_images/c804058f1615fa81b3bff7c1785b040b42960e203d7cc497db79139fd7644dce.png" />
 </div>
 </div>
 <section id="different-choices-for-indexing">
@@ -724,26 +610,20 @@ See more at <a class="reference external" href="https://pandas.pydata.org/pandas
 <p>Using the world dataset, we can use this functionality to quickly select all cities in the northern and southern hemisphere using a <code class="docutils literal notranslate"><span class="pre">_CoordinateIndexer</span></code> using <code class="docutils literal notranslate"><span class="pre">.cx</span></code>. <code class="docutils literal notranslate"><span class="pre">.cx</span></code> allows you to quickly access the table’s <code class="docutils literal notranslate"><span class="pre">geometry</span></code>, where indexing reflects <code class="docutils literal notranslate"><span class="pre">[x,y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[lon,lat]</span></code>. Here we will query points above and below 0 degrees latitude:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">northern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="p">]</span>   <span class="c1"># subsets all rows above 0 with a slice</span>
 <span class="n">northern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/a0deef1f03489f6d84987a79f4a05648b78ef25ea6b22e1023a1e0e0c37f1690.png" src="../_images/a0deef1f03489f6d84987a79f4a05648b78ef25ea6b22e1023a1e0e0c37f1690.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">southern_world</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">cx</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="p">:</span><span class="mi">0</span> <span class="p">]</span>   <span class="c1"># subsets all rows below 0  with a slice</span>
 <span class="n">southern_world</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f98df73fdf1f26e4d94c79fe19663e630f599675c2f7efe7b3d7a474a1f97d53.png" src="../_images/f98df73fdf1f26e4d94c79fe19663e630f599675c2f7efe7b3d7a474a1f97d53.png" />
 </div>
 </div>
 </section>

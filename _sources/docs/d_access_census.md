@@ -17,7 +17,7 @@ myst:
     "property=og:locale": "en_US"
 ---
 
-# Accessing Census and ACS Data in Python
+# Accessing Census and ACS Data in Python using `pytidycensus 
 
 By: Steven Chao & Michael Mann
 
@@ -36,7 +36,6 @@ By: Steven Chao & Michael Mann
 --------------
 
 ## Introduction
-
 This chapter will show you how to access US  Decennial Census and American Community Survey Data (ACS). We will use these basic operations in order to calculate and map poverty rates in the Commonwealth of Virginia. We will pull data from the US Census Bureau's [American Community Survey (ACS)](https://www.census.gov/programs-surveys/acs) 2019 (see [this page](https://www.census.gov/data/developers/data-sets/acs-5year.html) for the data).
 
 For a detailed list of variable explainations, visit [https://censusreporter.org/topics/table-codes/](https://censusreporter.org/topics/table-codes/).
@@ -58,7 +57,7 @@ import os
 Let's begin by accessing and importing census data. Importing census data into Python using pytidycensus requires a Census API key. A key can be obtained from [Census API Key](http://api.census.gov/data/key_signup.html).  **It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.**
 
 ```{code-cell} ipython3
-:tags: ["remove-output"]
+:tags: ["skip-execution"]
 # Set API key for pytidycensus
 tc.set_census_api_key("CENSUS API KEY HERE")
 ```

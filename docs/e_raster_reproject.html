@@ -241,6 +241,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
@@ -498,8 +499,8 @@
 <p>Far and away the easiest way to handle raster data is by using <a class="reference external" href="https://geowombat.readthedocs.io/en/latest/index.html">geowombat</a>. Here’s an example of quickly and easily reprojecting a three band landsat image, and writing it to disk.</p>
 <p>In order to reproject on the fly we are going to open the raster using <code class="docutils literal notranslate"><span class="pre">gw.config.update()</span></code>.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a <code class="docutils literal notranslate"><span class="pre">ref_crs</span></code> to the configuration manager. We can also use the <code class="docutils literal notranslate"><span class="pre">resampling</span></code> method when we <code class="docutils literal notranslate"><span class="pre">open</span></code> the image, by default it will be <code class="docutils literal notranslate"><span class="pre">nearest</span></code>, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
 
 <span class="n">proj4</span> <span class="o">=</span> <span class="s2">&quot;+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs&quot;</span>
 <span class="n">image</span> <span class="o">=</span> <span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span>
@@ -514,93 +515,11 @@
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ref_crs</span><span class="o">=</span><span class="n">proj4</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">resampling</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">9</span>         <span class="n">src</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>             <span class="s2">&quot;../temp/LC08_20200518_aea.tif&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>             <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="p">)</span> 
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geowombat/core/geoxarray.py:917,</span> in <span class="ni">GeoWombatAccessor.to_raster</span><span class="nt">(self, filename, readxsize, readysize, separate, out_block_type, keep_blocks, verbose, overwrite, gdal_cache, scheduler, n_jobs, n_workers, n_threads, n_chunks, overviews, resampling, driver, nodata, blockxsize, blockysize, tags, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="k">if</span> <span class="s1">&#39;dtype&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">915</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dtype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span>
-<span class="ne">--&gt; </span><span class="mi">917</span> <span class="n">to_raster</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">918</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">919</span>     <span class="n">filename</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">920</span>     <span class="n">readxsize</span><span class="o">=</span><span class="n">readxsize</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">921</span>     <span class="n">readysize</span><span class="o">=</span><span class="n">readysize</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">922</span>     <span class="n">separate</span><span class="o">=</span><span class="n">separate</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">923</span>     <span class="n">out_block_type</span><span class="o">=</span><span class="n">out_block_type</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">924</span>     <span class="n">keep_blocks</span><span class="o">=</span><span class="n">keep_blocks</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">925</span>     <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">926</span>     <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="n">gdal_cache</span><span class="o">=</span><span class="n">gdal_cache</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">928</span>     <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">929</span>     <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="n">n_workers</span><span class="o">=</span><span class="n">n_workers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="n">n_threads</span><span class="o">=</span><span class="n">n_threads</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">932</span>     <span class="n">n_chunks</span><span class="o">=</span><span class="n">n_chunks</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">933</span>     <span class="n">overviews</span><span class="o">=</span><span class="n">overviews</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">934</span>     <span class="n">resampling</span><span class="o">=</span><span class="n">resampling</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">937</span> <span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/geowombat/core/io.py:1087,</span> in <span class="ni">to_raster</span><span class="nt">(data, filename, readxsize, readysize, separate, out_block_type, keep_blocks, verbose, overwrite, gdal_cache, scheduler, n_jobs, n_workers, n_threads, n_chunks, padding, tags, tqdm_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1084</span> <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1085</span>     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  Creating the file ...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1087</span> <span class="k">with</span> <span class="n">rio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">rio_dst</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1088</span>     <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1089</span>         <span class="n">rio_dst</span><span class="o">.</span><span class="n">update_tags</span><span class="p">(</span><span class="o">**</span><span class="n">tags</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/rasterio/env.py:444,</span> in <span class="ni">ensure_env_with_credentials.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">441</span>     <span class="n">session</span> <span class="o">=</span> <span class="n">DummySession</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">443</span> <span class="k">with</span> <span class="n">env_ctor</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">444</span>     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/envs/pygis/lib/python3.11/site-packages/rasterio/__init__.py:314,</span> in <span class="ni">open</span><span class="nt">(fp, mode, driver, width, height, count, crs, transform, dtype, nodata, sharing, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">get_writer_for_driver</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">313</span> <span class="k">if</span> <span class="n">writer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">314</span>     <span class="n">dataset</span> <span class="o">=</span> <span class="n">writer</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="n">path</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span>         <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span>         <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">318</span>         <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span>         <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">320</span>         <span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>         <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>         <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>         <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>         <span class="n">nodata</span><span class="o">=</span><span class="n">nodata</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="n">sharing</span><span class="o">=</span><span class="n">sharing</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span>     <span class="k">raise</span> <span class="n">DriverCapabilityError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span>         <span class="s2">&quot;Writer does not exist for driver: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span>     <span class="p">)</span>
-
-<span class="nn">File rasterio/_io.pyx:1461,</span> in <span class="ni">rasterio._io.DatasetWriterBase.__init__</span><span class="nt">()</span>
-
-<span class="ne">ValueError</span>: Given nodata value, nan, is beyond the valid range of its data type, uint16.
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <p>Let’s take a look, remember from earlier that this image is stored as green, blue, red (rather than red, green, blue), so we will use <code class="docutils literal notranslate"><span class="pre">.sel(band=[3,2,1])</span></code> to put them back in the right order.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
@@ -625,7 +544,7 @@
 <p>Now let’s calculate the tranform matrix for the destination raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.warp</span><span class="w"> </span><span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 
@@ -658,7 +577,7 @@
 <p>Ok finally!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
 
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
