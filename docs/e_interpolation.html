@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
@@ -11,42 +11,39 @@
 <meta content="python, spatial, interpolation, vector, shapefile" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Spatial Interpolation &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Spatial Interpolation &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -86,11 +83,10 @@
     <link rel="prev" title="Point Density Measures - Counts &amp; Kernel Density" href="e_summarize_vector.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
 
   
   
@@ -102,8 +98,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -111,6 +118,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -118,8 +126,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -135,8 +143,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -162,28 +169,30 @@
   
     
     
-      
     
-    
-    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
-    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="a_intro.html">
-                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
                 </a>
             </li>
         </ul>
@@ -235,13 +244,15 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_stac.html">Accessing STAC Imagery with GeoWombat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
@@ -254,6 +265,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
 </ul>
 
     </div>
@@ -425,16 +440,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -462,8 +485,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors">K-Nearest Neighbors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kriging">Kriging</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-pykrige">Method 1 - Using <code class="docutils literal notranslate"><span class="pre">PyKrige</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-scikit-learn">Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-scikit-learn">Method 2 - Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -479,7 +501,6 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="spatial-interpolation">
 <h1>Spatial Interpolation<a class="headerlink" href="#spatial-interpolation" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
@@ -500,13 +521,13 @@
 <p>Interpolation is the process of using locations with known, sampled values (of a phenomenon) to estimate the values at unknown, unsampled areas <a class="footnote-reference brackets" href="#bolstad" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. In this chapter, we will explore three interpolation methods: Thiessen polygons (Voronoi diagrams), k-nearest neighbors (KNN), and kriging.</p>
 <p>We will first begin by importing modules (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -534,13 +555,13 @@
 <p>It is critical to use a ‘projected’ coordinate system when doing interpolation. If you keep your data in geographic lat lon distances will vary significantly as you move up and down in latitude… since interpolation depends on distance as a way of establishing relationships this would be a problem… a big one.</p>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
 
 <span class="c1"># County boundaries</span>
 <span class="c1"># Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640</span>
@@ -563,13 +584,13 @@
 </div>
 <p>Next, we’ll prepare the data for geoprocessing (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and Y coordinates of rainfall points</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get X and Y coordinates of rainfall points</span>
 <span class="n">x_rain</span> <span class="o">=</span> <span class="n">rainfall</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
 <span class="n">y_rain</span> <span class="o">=</span> <span class="n">rainfall</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
 
@@ -598,7 +619,7 @@
 <p>We will also define a function for exporting rasters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">export_kde_raster</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">export_kde_raster</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Export and save a kernel density raster.&#39;&#39;&#39;</span>
 
     <span class="c1"># Get resolution</span>
@@ -629,7 +650,7 @@
 <p>We will separate our rainfall dataset into two subsets: one for training and the other for testing. These subsets will be used in our KNN and kriging analyses.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split data into testing and training sets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split data into testing and training sets</span>
 <span class="n">coords_rain_train</span><span class="p">,</span> <span class="n">coords_rain_test</span><span class="p">,</span> <span class="n">value_rain_train</span><span class="p">,</span> <span class="n">value_rain_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">coords_rain</span><span class="p">,</span> <span class="n">value_rain</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Create separate GeoDataFrames for testing and training sets</span>
@@ -647,7 +668,7 @@
 <p>Let’s plot our data!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Stylize plots</span>
@@ -662,6 +683,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Rainfall Measurement Locations&#39;)
+</pre></div>
+</div>
+<img alt="../_images/9a02d47ef51efc4c59524cbacc02e0e9928ca733c51780d7602f6800c963427d.png" src="../_images/9a02d47ef51efc4c59524cbacc02e0e9928ca733c51780d7602f6800c963427d.png" />
+</div>
 </div>
 <p>In the map above, the green and blue points are the rainfall points that we loaded separated into the training set and testing set, respectively.</p>
 <section id="thiessen-polygons-voronoi-diagrams">
@@ -674,7 +701,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extend extent of counties feature by using buffer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extend extent of counties feature by using buffer</span>
 <span class="n">counties_buffer</span> <span class="o">=</span> <span class="n">counties</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
 
 <span class="c1"># Get extent of buffered input feature</span>
@@ -730,7 +757,7 @@
 <p>A spatial join can be conducted to assign the rainfall training “values” to its associated Thiessen polygon.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If rainfall point within the polygon, assign that rainfall value to the polygon</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If rainfall point within the polygon, assign that rainfall value to the polygon</span>
 <span class="n">tp_polys_clipped_values</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">rain_train_gdf</span><span class="p">,</span> <span class="n">tp_polys_clipped</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Drop un-needed column</span>
@@ -745,11 +772,66 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Thiessen Polygon Interpolated Values
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VALUE_Thiessen</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>13</th>
+      <td>31</td>
+      <td>POLYGON ((-138976.334 -112365.094, -136050.399...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>56</td>
+      <td>POLYGON ((-206051.365 -86531.722, -205209.852 ...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>42</td>
+      <td>POLYGON ((-175950.824 -82651.951, -171865.597 ...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>58</td>
+      <td>POLYGON ((-205209.852 -86150.045, -198923.353 ...</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>37</td>
+      <td>POLYGON ((-183161.675 -76937.99, -175852 -7928...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>A second spatial join can be conducted to assign those values from the Thiessen polygons to the points from the testing dataset (only if a test point falls within a polygon). We can subsequently get the out-of-sample r-squared value, which is calculated by using the data points that the model did not use (the testing dataset) and comparing the testing dataset’s actual values to the values as predicted by the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If test point is within a polygon, assign that polygon&#39;s value to the test point</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If test point is within a polygon, assign that polygon&#39;s value to the test point</span>
 <span class="n">rain_test_pred_tp</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">rain_test_gdf</span><span class="p">,</span> <span class="n">tp_polys_clipped_values</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">predicate</span> <span class="o">=</span> <span class="s1">&#39;within&#39;</span><span class="p">)</span>
 
 <span class="c1"># Drop un-needed column</span>
@@ -768,11 +850,56 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thiessen polygon out-of-sample r-squared: 0.89
+
+Attribute Table: Testing Dataset Interpolated Values - Thiessen Polygon Method
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>VALUE_Actual</th>
+      <th>VALUE_Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (-229633.026 40063.754)</td>
+      <td>56</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (-273849.35 92453.689)</td>
+      <td>73</td>
+      <td>91</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Plotting the data, we see that each polygon has one green training point (and vice-versa). All space within one polygon is closest to the known training point (green dot) within the polygon. The testing points (blue dots) are assigned the value of the Thiessen polygon in which it falls.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 
 <span class="c1"># Stylize plots</span>
@@ -797,12 +924,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - Rainfall Measurement Locations &amp; Thiessen Polygons&#39;)
+</pre></div>
+</div>
+<img alt="../_images/46aefce7720f04e67bd87ee7d93c8f561ee7c61cf3e33259ae9945b62d4d161e.png" src="../_images/46aefce7720f04e67bd87ee7d93c8f561ee7c61cf3e33259ae9945b62d4d161e.png" />
+</div>
 </div>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">vertices</span></code>, there are a few other attributes we can call if we want to further explore the polygons. These attributes will provide actual values (e.g., vertices) or provide the indices for querying other attributes. <a class="footnote-reference brackets" href="#scipy-voronoi" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p>In the example below, we demonstrate how to extract the value of one of the Thiessen polygons at a new location for which we want a predicted value. We use the <code class="docutils literal notranslate"><span class="pre">point_region</span></code> attribute to provide the index of a point’s Voronoi region, and we use that index to get the region in <code class="docutils literal notranslate"><span class="pre">regions</span></code>. That provides indices of the vertices that make up the polygon, which we use to get the appropriate values in <code class="docutils literal notranslate"><span class="pre">vertices</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set index for feature of interest</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set index for feature of interest</span>
 <span class="n">feature_index_one</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="c1"># Get a Voronoi polygon for one feature</span>
@@ -828,11 +961,46 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: Thiessen Polygon Interpolated Value
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>VALUE_Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POLYGON ((-175342.667 -35601.127, -180478.221 ...</td>
+      <td>38</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Here’s how that one Thiessen polygon looks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># Stylize plots</span>
@@ -847,6 +1015,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;San Francisco Bay Area - One Point and Thiessen Polygon&#39;)
+</pre></div>
+</div>
+<img alt="../_images/ec148923f37c383fc2816ce22d4b48d7b43cc02a6f93588cbbcbdd7192c89919.png" src="../_images/ec148923f37c383fc2816ce22d4b48d7b43cc02a6f93588cbbcbdd7192c89919.png" />
+</div>
 </div>
 </section>
 <section id="k-nearest-neighbors">
@@ -855,7 +1029,7 @@
 <p>We can use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html"><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> to perform KNN analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set number of neighbors to look for</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set number of neighbors to look for</span>
 <span class="n">neighbors</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="c1"># Initialize KNN regressor</span>
@@ -866,13 +1040,823 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+}
+
+#sk-container-id-1.light {
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: black;
+  --sklearn-color-background: white;
+  --sklearn-color-border-box: black;
+  --sklearn-color-icon: #696969;
+}
+
+#sk-container-id-1.dark {
+  --sklearn-color-text-on-default-background: white;
+  --sklearn-color-background: #111;
+  --sklearn-color-border-box: white;
+  --sklearn-color-icon: #878787;
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  display: none;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-3) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3) 1pt solid;
+  color: var(--sklearn-color-fitted-level-3);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-0);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-fitted-level-0);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-unfitted-level-0);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.estimator-table {
+    font-family: monospace;
+}
+
+.estimator-table summary {
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.estimator-table summary::marker {
+    font-size: 0.7rem;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+/*
+    `table td`is set in notebook with right text-align.
+    We need to overwrite it.
+*/
+.estimator-table table td.param {
+    text-align: left;
+    position: relative;
+    padding: 0;
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left !important;
+}
+
+.user-set td.value {
+    color:rgb(255, 94, 0);
+    background-color: transparent;
+}
+
+.default td {
+    color: black;
+    text-align: left !important;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+/*
+    Styles for parameter documentation links
+    We need styling for visited so jupyter doesn't overwrite it
+*/
+a.param-doc-link,
+a.param-doc-link:link,
+a.param-doc-link:visited {
+    text-decoration: underline dashed;
+    text-underline-offset: .3em;
+    color: inherit;
+    display: block;
+    padding: .5em;
+}
+
+/* "hack" to make the entire area of the cell containing the link clickable */
+a.param-doc-link::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+}
+
+.param-doc-description {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    padding: .5ex;
+    margin-left: 1.5em;
+    color: var(--sklearn-color-text);
+    box-shadow: .3em .3em .4em #999;
+    width: max-content;
+    text-align: left;
+    max-height: 10em;
+    overflow-y: auto;
+
+    /* unfitted */
+    background: var(--sklearn-color-unfitted-level-0);
+    border: thin solid var(--sklearn-color-unfitted-level-3);
+}
+
+/* Fitted state for parameter tooltips */
+.fitted .param-doc-description {
+    /* fitted */
+    background: var(--sklearn-color-fitted-level-0);
+    border: thin solid var(--sklearn-color-fitted-level-3);
+}
+
+.param-doc-link:hover .param-doc-description {
+    display: block;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><body><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsRegressor(weights=&#x27;distance&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>KNeighborsRegressor</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">?<span>Documentation for KNeighborsRegressor</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_neighbors',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=n_neighbors,-int%2C%20default%3D5">
+            n_neighbors
+            <span class="param-doc-description">n_neighbors: int, default=5<br><br>Number of neighbors to use by default for :meth:`kneighbors` queries.</span>
+        </a>
+    </td>
+            <td class="value">5</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('weights',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=weights,-%7B%27uniform%27%2C%20%27distance%27%7D%2C%20callable%20or%20None%2C%20default%3D%27uniform%27">
+            weights
+            <span class="param-doc-description">weights: {'uniform', 'distance'}, callable or None, default='uniform'<br><br>Weight function used in prediction.  Possible values:<br><br>- 'uniform' : uniform weights.  All points in each neighborhood<br>  are weighted equally.<br>- 'distance' : weight points by the inverse of their distance.<br>  in this case, closer neighbors of a query point will have a<br>  greater influence than neighbors which are further away.<br>- [callable] : a user-defined function which accepts an<br>  array of distances, and returns an array of the same shape<br>  containing the weights.<br><br>Uniform weights are used by default.<br><br>See the following example for a demonstration of the impact of<br>different weighting schemes on predictions:<br>:ref:`sphx_glr_auto_examples_neighbors_plot_regression.py`.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;distance&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('algorithm',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=algorithm,-%7B%27auto%27%2C%20%27ball_tree%27%2C%20%27kd_tree%27%2C%20%27brute%27%7D%2C%20default%3D%27auto%27">
+            algorithm
+            <span class="param-doc-description">algorithm: {'auto', 'ball_tree', 'kd_tree', 'brute'}, default='auto'<br><br>Algorithm used to compute the nearest neighbors:<br><br>- 'ball_tree' will use :class:`BallTree`<br>- 'kd_tree' will use :class:`KDTree`<br>- 'brute' will use a brute-force search.<br>- 'auto' will attempt to decide the most appropriate algorithm<br>  based on the values passed to :meth:`fit` method.<br><br>Note: fitting on sparse input will override the setting of<br>this parameter, using brute force.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;auto&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('leaf_size',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=leaf_size,-int%2C%20default%3D30">
+            leaf_size
+            <span class="param-doc-description">leaf_size: int, default=30<br><br>Leaf size passed to BallTree or KDTree.  This can affect the<br>speed of the construction and query, as well as the memory<br>required to store the tree.  The optimal value depends on the<br>nature of the problem.</span>
+        </a>
+    </td>
+            <td class="value">30</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('p',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=p,-float%2C%20default%3D2">
+            p
+            <span class="param-doc-description">p: float, default=2<br><br>Power parameter for the Minkowski metric. When p = 1, this is<br>equivalent to using manhattan_distance (l1), and euclidean_distance<br>(l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.</span>
+        </a>
+    </td>
+            <td class="value">2</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('metric',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=metric,-str%2C%20DistanceMetric%20object%20or%20callable%2C%20default%3D%27minkowski%27">
+            metric
+            <span class="param-doc-description">metric: str, DistanceMetric object or callable, default='minkowski'<br><br>Metric to use for distance computation. Default is "minkowski", which<br>results in the standard Euclidean distance when p = 2. See the<br>documentation of `scipy.spatial.distance<br><https://docs.scipy.org/doc/scipy/reference/spatial.distance.html>`_ and<br>the metrics listed in<br>:class:`~sklearn.metrics.pairwise.distance_metrics` for valid metric<br>values.<br><br>If metric is "precomputed", X is assumed to be a distance matrix and<br>must be square during fit. X may be a :term:`sparse graph`, in which<br>case only "nonzero" elements may be considered neighbors.<br><br>If metric is a callable function, it takes two arrays representing 1D<br>vectors as inputs and must return one value indicating the distance<br>between those vectors. This works for Scipy's metrics, but is less<br>efficient than passing the metric name as a string.<br><br>If metric is a DistanceMetric object, it will be passed directly to<br>the underlying computation routines.</span>
+        </a>
+    </td>
+            <td class="value">&#x27;minkowski&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('metric_params',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=metric_params,-dict%2C%20default%3DNone">
+            metric_params
+            <span class="param-doc-description">metric_params: dict, default=None<br><br>Additional keyword arguments for the metric function.</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">
+        <a class="param-doc-link"
+            rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsRegressor.html#:~:text=n_jobs,-int%2C%20default%3DNone">
+            n_jobs
+            <span class="param-doc-description">n_jobs: int, default=None<br><br>The number of parallel jobs to run for neighbors search.<br>``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.<br>``-1`` means using all processors. See :term:`Glossary <n_jobs>`<br>for more details.<br>Doesn't affect :meth:`fit` method.</span>
+        </a>
+    </td>
+            <td class="value">None</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling
+        .textContent.trim().split(' ')[0];
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+
+
+/**
+ * Adapted from Skrub
+ * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
+ * @returns "light" or "dark"
+ */
+function detectTheme(element) {
+    const body = document.querySelector('body');
+
+    // Check VSCode theme
+    const themeKindAttr = body.getAttribute('data-vscode-theme-kind');
+    const themeNameAttr = body.getAttribute('data-vscode-theme-name');
+
+    if (themeKindAttr && themeNameAttr) {
+        const themeKind = themeKindAttr.toLowerCase();
+        const themeName = themeNameAttr.toLowerCase();
+
+        if (themeKind.includes("dark") || themeName.includes("dark")) {
+            return "dark";
+        }
+        if (themeKind.includes("light") || themeName.includes("light")) {
+            return "light";
+        }
+    }
+
+    // Check Jupyter theme
+    if (body.getAttribute('data-jp-theme-light') === 'false') {
+        return 'dark';
+    } else if (body.getAttribute('data-jp-theme-light') === 'true') {
+        return 'light';
+    }
+
+    // Guess based on a parent element's color
+    const color = window.getComputedStyle(element.parentNode, null).getPropertyValue('color');
+    const match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i);
+    if (match) {
+        const [r, g, b] = [
+            parseFloat(match[1]),
+            parseFloat(match[2]),
+            parseFloat(match[3])
+        ];
+
+        // https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness
+        const luma = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        if (luma > 180) {
+            // If the text is very bright we have a dark theme
+            return 'dark';
+        }
+        if (luma < 75) {
+            // If the text is very dark we have a light theme
+            return 'light';
+        }
+        // Otherwise fall back to the next heuristic.
+    }
+
+    // Fallback to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+
+function forceTheme(elementId) {
+    const estimatorElement = document.querySelector(`#${elementId}`);
+    if (estimatorElement === null) {
+        console.error(`Element with id ${elementId} not found.`);
+    } else {
+        const theme = detectTheme(estimatorElement);
+        estimatorElement.classList.add(theme);
+    }
+}
+
+forceTheme('sk-container-id-1');</script></body></div></div>
 </div>
 <p>Now that we have created the KNN model, we can get the in-sample r-squared value. An in-sample statistic, as suggested by its name, is calculated by using the data that were used to build the model (the “training” dataset).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in-sample R^2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in-sample R^2</span>
 <span class="n">in_r_squared_knn</span> <span class="o">=</span> <span class="n">knn_regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">coords_rain_train</span><span class="p">,</span> <span class="n">value_rain_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN in-sample r-squared: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">in_r_squared_knn</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNN in-sample r-squared: 1.0
 </pre></div>
 </div>
 </div>
@@ -881,7 +1865,7 @@
 <p>Similarily, we can also get the out-of-sample r-squared value and compare the test dataset’s actual values to the values as predicted by the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate out-of-sample R^2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate out-of-sample R^2</span>
 <span class="n">out_r_squared_knn</span> <span class="o">=</span> <span class="n">knn_regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">coords_rain_test</span><span class="p">,</span> <span class="n">value_rain_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KNN out-of-sample r-squared: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">out_r_squared_knn</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 
@@ -900,6 +1884,51 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNN out-of-sample r-squared: 0.93
+
+Attribute Table: Testing Set Interpolated Values - KNN Method
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coordinate_Pair</th>
+      <th>VALUE_Actual</th>
+      <th>VALUE_Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[-229633.02624581114, 40063.75429398427]</td>
+      <td>56</td>
+      <td>55.827992</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[-273849.3497429455, 92453.68931061402]</td>
+      <td>73</td>
+      <td>87.640078</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Out-of-sample r-squared looks pretty strong!</p>
 <div class="admonition tip">
@@ -913,31 +1942,29 @@
 <p>For more information, see this <a class="reference external" href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/3d-analyst/how-kriging-works.htm">ArcGIS help guide on kriging</a>.</p>
 <p>Two Python packages that can be used for kriging include <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> and <code class="docutils literal notranslate"><span class="pre">pykrige</span></code>. The former package works best when the input data has a WGS 84 projection, so we will begin by reprojecting all of our data to that coordinate system (click the + below to show code cell).</p>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Set projection to WGS 84 and reproject data</span>
-<span class="sd">proj_wgs = 4326</span>
-<span class="sd">counties_wgs = counties.to_crs(proj_wgs)</span>
-<span class="sd">rainfall_wgs = rainfall.to_crs(proj_wgs)</span>
-<span class="sd">rain_train_gdf_wgs = rain_train_gdf.to_crs(proj_wgs)</span>
-<span class="sd">rain_test_gdf_wgs = rain_test_gdf.to_crs(proj_wgs)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set projection to WGS 84 and reproject data</span>
+<span class="n">proj_wgs</span> <span class="o">=</span> <span class="mi">4326</span>
+<span class="n">counties_wgs</span> <span class="o">=</span> <span class="n">counties</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
+<span class="n">rainfall_wgs</span> <span class="o">=</span> <span class="n">rainfall</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
+<span class="n">rain_train_gdf_wgs</span> <span class="o">=</span> <span class="n">rain_train_gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
+<span class="n">rain_test_gdf_wgs</span> <span class="o">=</span> <span class="n">rain_test_gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj_wgs</span><span class="p">)</span>
 
-<span class="sd"># Get X and Y coordinates of rainfall points</span>
-<span class="sd">x_rain_wgs = rainfall_wgs[&quot;geometry&quot;].x</span>
-<span class="sd">y_rain_wgs = rainfall_wgs[&quot;geometry&quot;].y</span>
+<span class="c1"># Get X and Y coordinates of rainfall points</span>
+<span class="n">x_rain_wgs</span> <span class="o">=</span> <span class="n">rainfall_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>
+<span class="n">y_rain_wgs</span> <span class="o">=</span> <span class="n">rainfall_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span>
 
-<span class="sd"># Create list of XY coordinate pairs</span>
-<span class="sd">coords_rain_train_wgs = [list(xy) for xy in zip(rain_train_gdf_wgs[&quot;geometry&quot;].x, rain_train_gdf_wgs[&quot;geometry&quot;].y)]</span>
-<span class="sd">coords_rain_test_wgs = [list(xy) for xy in zip(rain_test_gdf_wgs[&quot;geometry&quot;].x, rain_test_gdf_wgs[&quot;geometry&quot;].y)]</span>
+<span class="c1"># Create list of XY coordinate pairs</span>
+<span class="n">coords_rain_train_wgs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rain_train_gdf_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">rain_train_gdf_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">)]</span>
+<span class="n">coords_rain_test_wgs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rain_test_gdf_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">rain_test_gdf_wgs</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">y</span><span class="p">)]</span>
 
-<span class="sd"># Get minimum and maximum coordinate values of rainfall points</span>
-<span class="sd">min_x_rain_wgs, min_y_rain_wgs, max_x_rain_wgs, max_y_rain_wgs = rain_train_gdf_wgs.total_bounds</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Get minimum and maximum coordinate values of rainfall points</span>
+<span class="n">min_x_rain_wgs</span><span class="p">,</span> <span class="n">min_y_rain_wgs</span><span class="p">,</span> <span class="n">max_x_rain_wgs</span><span class="p">,</span> <span class="n">max_y_rain_wgs</span> <span class="o">=</span> <span class="n">rain_train_gdf_wgs</span><span class="o">.</span><span class="n">total_bounds</span>
 </pre></div>
 </div>
 </div>
@@ -948,7 +1975,7 @@
 <p>The <a class="reference external" href="https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/index.html"><code class="docutils literal notranslate"><span class="pre">pykrige</span></code> module</a> offers ordinary and universal kriging. It also supports various variogram models in addition to Gaussian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adapted from: https://geostat-framework.readthedocs.io/projects/pykrige/en/latest/examples/04_krige_geometric.html</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adapted from: https://geostat-framework.readthedocs.io/projects/pykrige/en/latest/examples/04_krige_geometric.html</span>
 
 <span class="c1"># Create a 100 by 100 grid</span>
 <span class="c1"># Horizontal and vertical cell counts should be the same</span>
@@ -1030,33 +2057,77 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyKrige Kriging out-of-sample r-squared: 0.99
+
+Attribute Table: Random Points Interpolated Values - PyKrige Kriging Method
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>Actual_Value</th>
+      <th>VALUE_Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (-229633.026 40063.754)</td>
+      <td>56</td>
+      <td>55.089479</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (-244809.95 1296.393)</td>
+      <td>62</td>
+      <td>61.013348</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/8e8bcd638800a5c5a9bf76c0d67b7b1addc4dd7eb5fcd2d0ef7da290c462964d.png" src="../_images/8e8bcd638800a5c5a9bf76c0d67b7b1addc4dd7eb5fcd2d0ef7da290c462964d.png" />
+</div>
 </div>
 </section>
 <section id="method-2-using-scikit-learn">
-<h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#method-2-using-scikit-learn" title="Link to this heading">#</a></h3>
+<h3>Method 2 - Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#method-2-using-scikit-learn" title="Link to this heading">#</a></h3>
 <p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Create a 100 by 100 cell mesh grid</span>
-<span class="sd"># Horizontal and vertical cell counts should be the same</span>
-<span class="sd">XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 100 by 100 cell mesh grid</span>
+<span class="c1"># Horizontal and vertical cell counts should be the same</span>
+<span class="n">XX_sk_krig</span><span class="p">,</span> <span class="n">YY_sk_krig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">min_x_rain_wgs</span><span class="p">:</span><span class="n">max_x_rain_wgs</span><span class="p">:</span><span class="mi">100</span><span class="n">j</span><span class="p">,</span> <span class="n">min_y_rain_wgs</span><span class="p">:</span><span class="n">max_y_rain_wgs</span><span class="p">:</span><span class="mi">100</span><span class="n">j</span><span class="p">]</span>
 
-<span class="sd"># Create 2-D array of the coordinates (paired) of each cell in the mesh grid</span>
-<span class="sd">positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T</span>
+<span class="c1"># Create 2-D array of the coordinates (paired) of each cell in the mesh grid</span>
+<span class="n">positions_sk_krig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">XX_sk_krig</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">YY_sk_krig</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span><span class="o">.</span><span class="n">T</span>
 
-<span class="sd"># Generate Gaussian Process model (can change parameters as desired)</span>
-<span class="sd">gp = GaussianProcessRegressor(n_restarts_optimizer = 10)</span>
+<span class="c1"># Generate Gaussian Process model (can change parameters as desired)</span>
+<span class="n">gp</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">n_restarts_optimizer</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
-<span class="sd"># Fit kernel density estimator to coordinates and values</span>
-<span class="sd">gp.fit(coords_rain_train_wgs, value_rain_train)</span>
+<span class="c1"># Fit kernel density estimator to coordinates and values</span>
+<span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">coords_rain_train_wgs</span><span class="p">,</span> <span class="n">value_rain_train</span><span class="p">)</span>
 
-<span class="sd"># Evaluate the model on coordinate pairs</span>
-<span class="sd">Z_sk_krig = gp.predict(positions_sk_krig)</span>
+<span class="c1"># Evaluate the model on coordinate pairs</span>
+<span class="n">Z_sk_krig</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">positions_sk_krig</span><span class="p">)</span>
 
-<span class="sd"># Reshape the data to fit mesh grid</span>
-<span class="sd">Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Reshape the data to fit mesh grid</span>
+<span class="n">Z_sk_krig</span> <span class="o">=</span> <span class="n">Z_sk_krig</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">XX_sk_krig</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1064,44 +2135,86 @@
 <p>Next, we can calculate our r-squared statistics and predictions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Generate in-sample R^2</span>
-<span class="sd">in_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)</span>
-<span class="sd">print(&quot;Scikit-Learn Kriging in-sample r-squared: {}&quot;.format(round(in_r_squared_sk_krig, 2)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate in-sample R^2</span>
+<span class="n">in_r_squared_sk_krig</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">coords_rain_train_wgs</span><span class="p">,</span> <span class="n">value_rain_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scikit-Learn Kriging in-sample r-squared: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">in_r_squared_sk_krig</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 
-<span class="sd"># Generate out-of-sample R^2</span>
-<span class="sd">out_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)</span>
-<span class="sd">print(&quot;Scikit-Learn Kriging out-of-sample r-squared: {}&quot;.format(round(out_r_squared_sk_krig, 2)))</span>
+<span class="c1"># Generate out-of-sample R^2</span>
+<span class="n">out_r_squared_sk_krig</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">coords_rain_test_wgs</span><span class="p">,</span> <span class="n">value_rain_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scikit-Learn Kriging out-of-sample r-squared: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">out_r_squared_sk_krig</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 
-<span class="sd"># Predict values for testing dataset</span>
-<span class="sd">coords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)</span>
+<span class="c1"># Predict values for testing dataset</span>
+<span class="n">coords_rain_test_predict_sk_krig</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">coords_rain_test_wgs</span><span class="p">)</span>
 
-<span class="sd"># Create dictionary holding the actual and predicted values</span>
-<span class="sd">predict_dict_sk_krig = {&quot;Coordinate_Pair&quot;: coords_rain_test_wgs, &quot;VALUE_Actual&quot;: value_rain_test, &quot;VALUE_Predict&quot;: coords_rain_test_predict_sk_krig}</span>
+<span class="c1"># Create dictionary holding the actual and predicted values</span>
+<span class="n">predict_dict_sk_krig</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Coordinate_Pair&quot;</span><span class="p">:</span> <span class="n">coords_rain_test_wgs</span><span class="p">,</span> <span class="s2">&quot;VALUE_Actual&quot;</span><span class="p">:</span> <span class="n">value_rain_test</span><span class="p">,</span> <span class="s2">&quot;VALUE_Predict&quot;</span><span class="p">:</span> <span class="n">coords_rain_test_predict_sk_krig</span><span class="p">}</span>
 
-<span class="sd"># Create dataframe from dictionary</span>
-<span class="sd">predict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)</span>
+<span class="c1"># Create dataframe from dictionary</span>
+<span class="n">predict_df_sk_krig</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predict_dict_sk_krig</span><span class="p">)</span>
 
-<span class="sd"># Display attribute table</span>
-<span class="sd">print(&quot;\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method&quot;)</span>
-<span class="sd">display(predict_df_sk_krig.head(2))</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Display attribute table</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Attribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">predict_df_sk_krig</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scikit-Learn Kriging in-sample r-squared: 0.92
+Scikit-Learn Kriging out-of-sample r-squared: 0.91
+
+Attribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Coordinate_Pair</th>
+      <th>VALUE_Actual</th>
+      <th>VALUE_Predict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[-122.63103459126236, 38.34810139689813]</td>
+      <td>56</td>
+      <td>47.770813</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[-123.15728724047081, 38.80705195058424]</td>
+      <td>73</td>
+      <td>85.753052</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Model seems like a good fit! Let’s export the raster.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Flip array vertically and rotate 270 degrees</span>
-<span class="sd">Z_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flip array vertically and rotate 270 degrees</span>
+<span class="n">Z_sk_krig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">Z_sk_krig</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="sd"># Export raster</span>
-<span class="sd">export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,</span>
-<span class="sd">                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,</span>
-<span class="sd">                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Export raster</span>
+<span class="n">export_kde_raster</span><span class="p">(</span><span class="n">Z</span><span class="o">=</span><span class="n">Z_sk_krig</span><span class="p">,</span> <span class="n">XX</span><span class="o">=</span><span class="n">XX_sk_krig</span><span class="p">,</span> <span class="n">YY</span><span class="o">=</span><span class="n">YY_sk_krig</span><span class="p">,</span>
+                  <span class="n">min_x</span><span class="o">=</span><span class="n">min_x_rain_wgs</span><span class="p">,</span> <span class="n">max_x</span><span class="o">=</span><span class="n">max_x_rain_wgs</span><span class="p">,</span> <span class="n">min_y</span><span class="o">=</span><span class="n">min_y_rain_wgs</span><span class="p">,</span> <span class="n">max_y</span><span class="o">=</span><span class="n">max_y_rain_wgs</span><span class="p">,</span>
+                  <span class="n">proj</span><span class="o">=</span><span class="n">proj_wgs</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1113,141 +2226,32 @@
 <p>Finally, we import the raster, mask it to the counties boundaries, and plot the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Open raster</span>
-<span class="sd">raster_sk = rasterio.open(&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open raster</span>
+<span class="n">raster_sk</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;</span><span class="p">)</span>
 
-<span class="sd"># Mask raster to counties shape</span>
-<span class="sd">out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)</span>
+<span class="c1"># Mask raster to counties shape</span>
+<span class="n">out_image_sk</span><span class="p">,</span> <span class="n">out_transform_sk</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">raster_sk</span><span class="p">,</span> <span class="n">counties_wgs</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">crop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="sd"># Stylize plots</span>
-<span class="sd">plt.style.use(&#39;bmh&#39;)</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Stylize plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot data</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">show</span><span class="p">(</span><span class="n">out_image_sk</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">out_transform_sk</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdPu&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_rain_wgs</span><span class="p">,</span> <span class="n">y_rain_wgs</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">counties_wgs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;dimgray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="c1"># Set title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
+
+<span class="c1"># Display plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="id7">
-<h3>Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>Kriging can be performed using <a class="reference external" href="https://scikit-learn.org/stable/modules/gaussian_process.html">Gaussian processes from the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> module</a> (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Create a 100 by 100 cell mesh grid</span>
-<span class="sd"># Horizontal and vertical cell counts should be the same</span>
-<span class="sd">XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]</span>
-
-<span class="sd"># Create 2-D array of the coordinates (paired) of each cell in the mesh grid</span>
-<span class="sd">positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T</span>
-
-<span class="sd"># Generate Gaussian Process model (can change parameters as desired)</span>
-<span class="sd">gp = GaussianProcessRegressor(n_restarts_optimizer = 10)</span>
-
-<span class="sd"># Fit kernel density estimator to coordinates and values</span>
-<span class="sd">gp.fit(coords_rain_train_wgs, value_rain_train)</span>
-
-<span class="sd"># Evaluate the model on coordinate pairs</span>
-<span class="sd">Z_sk_krig = gp.predict(positions_sk_krig)</span>
-
-<span class="sd"># Reshape the data to fit mesh grid</span>
-<span class="sd">Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)</span>
-<span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Next, we can calculate our r-squared statistics and predictions.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Generate in-sample R^2</span>
-<span class="sd">in_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)</span>
-<span class="sd">print(&quot;Scikit-Learn Kriging in-sample r-squared: {}&quot;.format(round(in_r_squared_sk_krig, 2)))</span>
-
-<span class="sd"># Generate out-of-sample R^2</span>
-<span class="sd">out_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)</span>
-<span class="sd">print(&quot;Scikit-Learn Kriging out-of-sample r-squared: {}&quot;.format(round(out_r_squared_sk_krig, 2)))</span>
-
-<span class="sd"># Predict values for testing dataset</span>
-<span class="sd">coords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)</span>
-
-<span class="sd"># Create dictionary holding the actual and predicted values</span>
-<span class="sd">predict_dict_sk_krig = {&quot;Coordinate_Pair&quot;: coords_rain_test_wgs, &quot;VALUE_Actual&quot;: value_rain_test, &quot;VALUE_Predict&quot;: coords_rain_test_predict_sk_krig}</span>
-
-<span class="sd"># Create dataframe from dictionary</span>
-<span class="sd">predict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)</span>
-
-<span class="sd"># Display attribute table</span>
-<span class="sd">print(&quot;\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method&quot;)</span>
-<span class="sd">display(predict_df_sk_krig.head(2))</span>
-<span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Model seems like a good fit! Let’s export the raster.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Flip array vertically and rotate 270 degrees</span>
-<span class="sd">Z_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)</span>
-
-<span class="sd"># Export raster</span>
-<span class="sd">export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,</span>
-<span class="sd">                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,</span>
-<span class="sd">                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
-<span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>The resulting raster should be clipped. Because the resulting raster covers the extent of the points in a bounding box fashion, the raster in this case covers areas that are not within the counties boundaries (such as in the ocean) where we do not have sample points. Thus, there will be interpolated values in those areas that might not make sense.</p>
-</div>
-<p>Finally, we import the raster, mask it to the counties boundaries, and plot the data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># Open raster</span>
-<span class="sd">raster_sk = rasterio.open(&quot;../temp/e_bay-area-rain_sk_kriging.tif&quot;)</span>
-
-<span class="sd"># Mask raster to counties shape</span>
-<span class="sd">out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)</span>
-
-<span class="sd"># Stylize plots</span>
-<span class="sd">plt.style.use(&#39;bmh&#39;)</span>
-
-<span class="sd"># Plot data</span>
-<span class="sd">fig, ax = plt.subplots(1, figsize = (10, 10))</span>
-<span class="sd">show(out_image_sk, ax = ax, transform = out_transform_sk, cmap = &quot;RdPu&quot;)</span>
-<span class="sd">ax.plot(x_rain_wgs, y_rain_wgs, &#39;k.&#39;, markersize = 2, alpha = 0.5)</span>
-<span class="sd">counties_wgs.plot(ax = ax, color = &#39;none&#39;, edgecolor = &#39;dimgray&#39;)</span>
-<span class="sd">plt.gca().invert_yaxis()</span>
-
-<span class="sd"># Set title</span>
-<span class="sd">ax.set_title(&#39;San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn&#39;, fontdict = {&#39;fontsize&#39;: &#39;15&#39;, &#39;fontweight&#39; : &#39;3&#39;})</span>
-
-<span class="sd"># Display plot</span>
-<span class="sd">plt.show()</span>
-
-
-<span class="sd"># Plot data</span>
-<span class="sd">fig, ax = plt.subplots(1, figsize = (10, 10))</span>
-<span class="sd">show(out_image_sk, ax = ax, transform = out_transform_sk, cmap = &quot;RdPu&quot;)</span>
-<span class="sd">ax.plot(x_rain_wgs, y_rain_wgs, &#39;k.&#39;, markersize = 2, alpha = 0.5)</span>
-<span class="sd">counties_wgs.plot(ax = ax, color = &#39;none&#39;, edgecolor = &#39;dimgray&#39;)</span>
-<span class="sd">plt.gca().invert_yaxis()</span>
-
-<span class="sd"># Set title</span>
-<span class="sd">ax.set_title(&#39;San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn&#39;, fontdict = {&#39;fontsize&#39;: &#39;15&#39;, &#39;fontweight&#39; : &#39;3&#39;})</span>
-
-<span class="sd"># Display plot</span>
-<span class="sd">plt.show()</span>
-<span class="sd">&#39;&#39;&#39;</span>
-</pre></div>
-</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a51ea060929a6ca1d8a002c6c6bbf9cf65909e683651eddde1f60d4d26524620.png" src="../_images/a51ea060929a6ca1d8a002c6c6bbf9cf65909e683651eddde1f60d4d26524620.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
@@ -1329,8 +2333,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1343,8 +2346,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors">K-Nearest Neighbors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kriging">Kriging</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-using-pykrige">Method 1 - Using <code class="docutils literal notranslate"><span class="pre">PyKrige</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-scikit-learn">Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Method 2- Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-using-scikit-learn">Method 2 - Using <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1385,10 +2387,19 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 </div><br><br>
 <div>
-<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
 </div>
 
 </div>
@@ -1403,8 +2414,8 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

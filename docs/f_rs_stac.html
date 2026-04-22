@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="Learn how to search, stream, and composite satellite imagery from STAC catalogs (Element 84, Microsoft Planetary Computer, NASA) using GeoWombat. Includes Sentinel-2, Landsat, and Harmonized Landsat Sentinel-2 (HLS) examples with cloud masking and temporal composites." lang="en" name="description" xml:lang="en" />
+<meta content="Apprenez à rechercher, diffuser et composer des images satellites à partir de catalogues STAC (Element 84, Microsoft Planetary Computer, NASA) en utilisant GeoWombat." lang="fr" name="description" xml:lang="fr" />
+<meta content="Aprenda a buscar, transmitir y componer imágenes satelitales de catálogos STAC (Element 84, Microsoft Planetary Computer, NASA) usando GeoWombat." lang="es" name="description" xml:lang="es" />
+<meta content="spatial, remote sensing, STAC, SpatioTemporal Asset Catalog, Sentinel-2, Landsat, HLS, geowombat, planetary computer, element 84, cloud masking, temporal composite" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
+    <title>Accessing STAC Imagery with GeoWombat &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"7e2ad30635be48cc9d12ba1973436d1e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "eebdaa0f2bf44ca9b49b58687f6db1ad": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": [], "layout": "IPY_MODEL_7e2ad30635be48cc9d12ba1973436d1e"}}, "1642964413cd4d25b549704e78bd7bcd": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "905faaae84c04f2c942960ed626cd127": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "657966ee6218405c9e8170990836100d": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_1642964413cd4d25b549704e78bd7bcd", "max": 7.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_905faaae84c04f2c942960ed626cd127", "value": 7.0}}, "03c4258c3d8e419abedbd5d37d5d5743": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6fb08cbdf6634e4399dd712bb7014ae8": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "cf0a59abac35441ea8783bfd6b6a5974": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_03c4258c3d8e419abedbd5d37d5d5743", "placeholder": "\u200b", "style": "IPY_MODEL_6fb08cbdf6634e4399dd712bb7014ae8", "value": "Downloading\u2007sentinel_s2_l2a:\u2007100%"}}, "ba6d39c5b683413a979240ffe21d1f26": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "497da5e0e9c9454585ec85247d85ea5d": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "53a1a0d47950479d93b9f0351efcd362": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_ba6d39c5b683413a979240ffe21d1f26", "placeholder": "\u200b", "style": "IPY_MODEL_497da5e0e9c9454585ec85247d85ea5d", "value": "\u20077/7\u2007[00:01&lt;00:00,\u2007\u20071.57s/it]"}}, "576d92c848c44e9696daf679f1d4a2af": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "245db10ee1e84ba9a661e38f0b523311": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_cf0a59abac35441ea8783bfd6b6a5974", "IPY_MODEL_657966ee6218405c9e8170990836100d", "IPY_MODEL_53a1a0d47950479d93b9f0351efcd362"], "layout": "IPY_MODEL_576d92c848c44e9696daf679f1d4a2af"}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/f_rs_stac';</script>
+    <link rel="canonical" href="https://pygis.io/docs/f_rs_stac.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration manager" href="f_rs_config.html" />
+    <link rel="prev" title="Reading/Writing Remote Sensed Images" href="f_rs_io.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_extraction.html">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing STAC Imagery with GeoWombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/f_rs_stac.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/f_rs_stac.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/f_rs_stac.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Accessing STAC Imagery with GeoWombat</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-stac-catalog">What is a STAC catalog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-stac-query-streaming-sentinel-2">Your first STAC query: streaming Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-catalogs-landsat-from-microsoft-planetary-computer">Switching catalogs: Landsat from Microsoft Planetary Computer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel-2-hls">Harmonized Landsat Sentinel-2 (HLS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-masking-the-easy-way">Cloud masking — the easy way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-composites-cloud-free-mosaics-over-time">Temporal composites — cloud-free mosaics over time</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-time-frequency">Choosing a time frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-aggregation">Choosing an aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-collections-into-a-single-time-series">Merging collections into a single time series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up">Wrapping up</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <hr class="docutils" id="f-rs-stac" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Understand what a STAC catalog is and why it matters for remote sensing</p></li>
+<li><p>Stream Sentinel-2, Landsat, and HLS imagery directly into Python without downloading</p></li>
+<li><p>Apply automatic cloud masking to STAC queries</p></li>
+<li><p>Build cloud-free temporal composites (monthly, quarterly, etc.)</p></li>
+<li><p>Merge imagery from multiple sensors into a single time series</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="c_rasters.html"><span class="std std-doc">Raster Data</span></a></p></li>
+<li><p><a class="reference internal" href="f_rs_io.html"><span class="std std-doc">Reading/Writing Remote Sensed Images</span></a></p></li>
+<li><p><a class="reference internal" href="f_rs_config.html"><span class="std std-doc">Configuration Manager</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="accessing-stac-imagery-with-geowombat">
+<h1>Accessing STAC Imagery with GeoWombat<a class="headerlink" href="#accessing-stac-imagery-with-geowombat" title="Link to this heading">#</a></h1>
+<p>Not long ago, working with satellite imagery meant downloading enormous files, wrestling with sensor-specific folder structures, and hoping your hard drive could keep up. For a single Landsat scene that might be several gigabytes; for a year of Sentinel-2 over a small study area, easily hundreds. Most of those bytes were pixels you never actually needed.</p>
+<p>The <strong>SpatioTemporal Asset Catalog (STAC)</strong> specification changes the workflow. A STAC catalog is a standardized, queryable index of spatial-temporal data hosted in the cloud. Instead of downloading whole scenes, you describe the imagery you want — by bounding box, date range, and cloud cover — and stream just the bytes that overlap your study area directly into an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>. The data stay in the cloud; only the pixels you request cross the wire.</p>
+<p>GeoWombat wraps this process in a single function, <code class="docutils literal notranslate"><span class="pre">open_stac</span></code>, so you can go from “I want Sentinel-2 over Washington, D.C. last summer” to an analysis-ready, lazily-loaded DataArray in a handful of lines.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>STAC access in GeoWombat requires a few extra dependencies. Install them with:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">&quot;geowombat[stac]&quot;</span></code></p>
+<p>This pulls in <code class="docutils literal notranslate"><span class="pre">pystac</span></code>, <code class="docutils literal notranslate"><span class="pre">pystac_client</span></code>, <code class="docutils literal notranslate"><span class="pre">stackstac</span></code>, and <code class="docutils literal notranslate"><span class="pre">planetary_computer</span></code>.</p>
+</div>
+<section id="what-is-a-stac-catalog">
+<h2>What is a STAC catalog?<a class="headerlink" href="#what-is-a-stac-catalog" title="Link to this heading">#</a></h2>
+<p>Think of a STAC catalog as a library card catalog for satellite imagery. Every “book” (called an <strong>item</strong>) is a scene with standardized metadata: when and where it was captured, which sensor produced it, how cloudy it is, and where each band lives as a separate Cloud-Optimized GeoTIFF (COG). Because the metadata is standardized, you can query many catalogs the same way.</p>
+<p>Several public STAC catalogs are supported out of the box:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Catalog</p></th>
+<th class="head"><p>What it hosts</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">element84_v1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sentinel_s2_l2a</span></code>, <code class="docutils literal notranslate"><span class="pre">sentinel_s2_l1c</span></code>, <code class="docutils literal notranslate"><span class="pre">sentinel_s1_l1c</span></code>, <code class="docutils literal notranslate"><span class="pre">landsat_c2_l2</span></code>, <code class="docutils literal notranslate"><span class="pre">cop_dem_glo_30</span></code>, <code class="docutils literal notranslate"><span class="pre">naip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">microsoft_v1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">landsat_c2_l2</span></code>, <code class="docutils literal notranslate"><span class="pre">sentinel_s2_l2a</span></code>, <code class="docutils literal notranslate"><span class="pre">sentinel_s1_l1c</span></code>, <code class="docutils literal notranslate"><span class="pre">io_lulc</span></code>, <code class="docutils literal notranslate"><span class="pre">usda_cdl</span></code>, <code class="docutils literal notranslate"><span class="pre">esa_worldcover</span></code>, <code class="docutils literal notranslate"><span class="pre">cop_dem_glo_30</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nasa_lp_cloud</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hls_l30</span></code> (HLS Landsat 30m), <code class="docutils literal notranslate"><span class="pre">hls_s30</span></code> (HLS Sentinel-2 30m)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">element84_v0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sentinel_s2_l2a_cogs</span></code> (legacy)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each catalog has slightly different coverage, latency, and rate limits, but the GeoWombat API is the same across all of them.</p>
+</section>
+<section id="your-first-stac-query-streaming-sentinel-2">
+<h2>Your first STAC query: streaming Sentinel-2<a class="headerlink" href="#your-first-stac-query-streaming-sentinel-2" title="Link to this heading">#</a></h2>
+<p>Let’s start with the workhorse of open-access optical imagery: Sentinel-2 Level 2A (atmospherically corrected surface reflectance), served by Element 84. The live query below grabs the blue, green, and red bands over a small window around Washington, D.C., for June–July 2023, keeping only scenes with less than 10% cloud cover.</p>
+<p>The only bit of bookkeeping worth highlighting is <code class="docutils literal notranslate"><span class="pre">epsg</span></code>. STAC scenes may be stored in many UTM zones; <code class="docutils literal notranslate"><span class="pre">open_stac</span></code> reprojects everything to the EPSG code you pass in so the returned DataArray has a single, consistent CRS. For D.C., UTM Zone 18N (<code class="docutils literal notranslate"><span class="pre">EPSG:32618</span></code>) is the natural choice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.core.stac</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_stac</span>
+
+<span class="n">data</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.05</span><span class="p">,</span> <span class="mf">38.88</span><span class="p">,</span> <span class="o">-</span><span class="mf">77.00</span><span class="p">,</span> <span class="mf">38.92</span><span class="p">),</span>   <span class="c1"># small DC window (lon/lat)</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>                               <span class="c1"># UTM Zone 18N</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">],</span>
+    <span class="n">cloud_cover_perc</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-07-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">chunksize</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Searching element84_v1 for sentinel_s2_l2a...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 1 items.
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "245db10ee1e84ba9a661e38f0b523311"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;stackstac-838dcd8abe6665e31911ab86333b182c&#39; (time: 1,
+                                                                band: 3,
+                                                                y: 454, x: 445)&gt; Size: 5MB
+array([[[[  383.,   354.,   384., ...,  2940.,  5772.,  9720.],
+         [  360.,   334.,   388., ...,  5428.,  5724.,  9648.],
+         [  384.,   376.,   388., ...,  8928.,  2480.,  1816.],
+         ...,
+         [  502.,   495.,   524., ...,   708.,   435.,  1744.],
+         [  528.,   505.,   504., ...,   500.,   535.,  1162.],
+         [  536.,   517.,   511., ...,   625.,   612.,   420.]],
+
+        [[  596.,   390.,   456., ...,  3308.,  5612.,  8104.],
+         [  404.,   388.,   548., ...,  5996.,  5280.,  8504.],
+         [  475.,   537.,   554., ...,  9632.,  3018.,  2244.],
+         ...,
+         [  556.,   543.,   531., ...,   884.,   632.,  1908.],
+         [  579.,   558.,   542., ...,   668.,   735.,  1328.],
+         [  564.,   575.,   550., ...,   770.,   750.,   598.]],
+
+        [[  319.,   275.,   274., ...,  3984.,  5092.,  6872.],
+         [  278.,   237.,   294., ...,  6388.,  5992.,  7368.],
+         [  266.,   271.,   302., ..., 10704.,  4028.,  2378.],
+         ...,
+         [  377.,   368.,   364., ...,   798.,   616.,  1768.],
+         [  430.,   383.,   360., ...,   534.,   620.,  1338.],
+         [  444.,   398.,   374., ...,   622.,   552.,   478.]]]])
+Coordinates: (12/14)
+  * time                 (time) datetime64[ns] 8B 2023-06-02T16:12:23.667000
+    id                   (time) &lt;U24 96B &#39;S2B_18SUJ_20230602_0_L2A&#39;
+  * band                 (band) &lt;U5 60B &#39;blue&#39; &#39;green&#39; &#39;red&#39;
+  * x                    (x) float64 4kB 3.222e+05 3.222e+05 ... 3.266e+05
+  * y                    (y) float64 4kB 4.31e+06 4.31e+06 ... 4.305e+06
+    proj:transform       object 8B {0, 300000, 4400040, 10, -10}
+    ...                   ...
+    raster:bands         object 8B {&#39;nodata&#39;: 0, &#39;data_type&#39;: &#39;uint16&#39;, &#39;bits...
+    title                (band) &lt;U20 240B &#39;Blue (band 2) - 10m&#39; ... &#39;Red (ban...
+    common_name          (band) &lt;U5 60B &#39;blue&#39; &#39;green&#39; &#39;red&#39;
+    center_wavelength    (band) float64 24B 0.49 0.56 0.665
+    full_width_half_max  (band) float64 24B 0.098 0.045 0.038
+    epsg                 int64 8B 32618
+Attributes:
+    spec:        RasterSpec(epsg=32618, bounds=(322170.0, 4305360.0, 326620.0...
+    crs:         epsg:32618
+    transform:   | 10.00, 0.00, 322170.00|\n| 0.00,-10.00, 4309900.00|\n| 0.0...
+    resolution:  10.0
+    res:         (10.0, 10.0)
+    collection:  sentinel_s2_l2a
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two things come back: <code class="docutils literal notranslate"><span class="pre">data</span></code> is a lazy, dask-backed <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> with dimensions <code class="docutils literal notranslate"><span class="pre">(time,</span> <span class="pre">band,</span> <span class="pre">y,</span> <span class="pre">x)</span></code>, and <code class="docutils literal notranslate"><span class="pre">df</span></code> is a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> describing the individual scenes that went into it (footprints, timestamps, cloud cover, asset URLs). No pixels have actually been downloaded yet — they will be pulled on demand the moment you call <code class="docutils literal notranslate"><span class="pre">.compute()</span></code>, <code class="docutils literal notranslate"><span class="pre">.plot()</span></code>, or write to disk.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bounds</span></code> argument is always in <strong>geographic (lon/lat) coordinates</strong>, regardless of the <code class="docutils literal notranslate"><span class="pre">epsg</span></code> you request for the output. This keeps the query language consistent whether you are working in D.C., Darfur, or Darwin.</p>
+</div>
+<p>Plotting the first timestamp as an RGB composite triggers the actual download and renders the scene:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sentinel-2 RGB — Washington, D.C.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b5108db74f24b302db37f989d81e7f7542b0d5e93a86d345339b3d0890138455.png" src="../_images/b5108db74f24b302db37f989d81e7f7542b0d5e93a86d345339b3d0890138455.png" />
+</div>
+</div>
+<p>That image came straight off the Element 84 catalog over the network — no scene was ever downloaded to disk. The rest of the examples in this chapter use the same pattern, just with different catalogs, bands, or time windows. They’re shown as plain code blocks so the page builds quickly; swap them to <code class="docutils literal notranslate"><span class="pre">{code-cell}</span> <span class="pre">ipython3</span></code> if you want to execute them yourself.</p>
+</section>
+<section id="switching-catalogs-landsat-from-microsoft-planetary-computer">
+<h2>Switching catalogs: Landsat from Microsoft Planetary Computer<a class="headerlink" href="#switching-catalogs-landsat-from-microsoft-planetary-computer" title="Link to this heading">#</a></h2>
+<p>Need Landsat instead? Change two arguments. The query pattern is identical because GeoWombat hides the catalog-specific details (asset names, endpoint URLs, sign-in tokens) behind a consistent interface.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.core.stac</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_stac</span>
+
+<span class="n">data_l</span><span class="p">,</span> <span class="n">df_l</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;microsoft_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;landsat_c2_l2&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-07-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+    <span class="n">chunksize</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data_l</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">max_items</span></code> caps how many scenes the query returns — useful when you’re exploring a new area and don’t want to wait for a full year of Landsat to materialize.</p>
+</section>
+<section id="harmonized-landsat-sentinel-2-hls">
+<h2>Harmonized Landsat Sentinel-2 (HLS)<a class="headerlink" href="#harmonized-landsat-sentinel-2-hls" title="Link to this heading">#</a></h2>
+<p>Combining Landsat and Sentinel-2 sounds tidy in theory but is painful in practice: different spatial resolutions, different band centers, different BRDF characteristics. NASA’s <strong>Harmonized Landsat Sentinel-2</strong> product does the hard work for you, producing BRDF-normalized surface reflectance from both sensors resampled to a common 30 m MGRS grid.</p>
+<p>Two collections are available through the <code class="docutils literal notranslate"><span class="pre">nasa_lp_cloud</span></code> catalog:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hls_l30</span></code> — Landsat OLI (30 m, ~8-day revisit)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hls_s30</span></code> — Sentinel-2 MSI (30 m, ~5-day revisit)</p></li>
+</ul>
+<p>GeoWombat maps the friendly band names you already know (<code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code>, <code class="docutils literal notranslate"><span class="pre">blue</span></code>, <code class="docutils literal notranslate"><span class="pre">nir</span></code>, etc.) onto the correct HLS asset keys automatically, so the call looks just like the ones above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_hls</span><span class="p">,</span> <span class="n">df_hls</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;nasa_lp_cloud&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;hls_l30&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-07-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cloud-masking-the-easy-way">
+<h2>Cloud masking — the easy way<a class="headerlink" href="#cloud-masking-the-easy-way" title="Link to this heading">#</a></h2>
+<p>Optical imagery without cloud masking is a trap. A beautifully green summer pixel may actually be cloud top, and a “dark” pixel may be cloud shadow. Every sensor ships its own quality band, and every quality band has its own bitmask conventions. Rather than ask you to memorize them, GeoWombat exposes a single switch: <code class="docutils literal notranslate"><span class="pre">mask_data=True</span></code>.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">mask_data=True</span></code>, the appropriate QA band is injected into the query automatically, the mask is applied, and then the QA band is dropped from the returned DataArray. You do <strong>not</strong> need to add <code class="docutils literal notranslate"><span class="pre">qa_pixel</span></code> or <code class="docutils literal notranslate"><span class="pre">scl</span></code> to your <code class="docutils literal notranslate"><span class="pre">bands</span></code> list — in fact, you shouldn’t.</p>
+<p>Under the hood, the defaults are sensible for each sensor:</p>
+<ul class="simple">
+<li><p><strong>Sentinel-2</strong> — uses the SCL (Scene Classification Layer) and masks <code class="docutils literal notranslate"><span class="pre">no_data</span></code>, <code class="docutils literal notranslate"><span class="pre">saturated_defective</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud_shadow</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud_medium_prob</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud_high_prob</span></code>, and <code class="docutils literal notranslate"><span class="pre">thin_cirrus</span></code>.</p></li>
+<li><p><strong>Landsat</strong> — uses <code class="docutils literal notranslate"><span class="pre">qa_pixel</span></code> and masks <code class="docutils literal notranslate"><span class="pre">fill</span></code>, <code class="docutils literal notranslate"><span class="pre">dilated</span> <span class="pre">cloud</span></code>, <code class="docutils literal notranslate"><span class="pre">cirrus</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud</span> <span class="pre">shadow</span></code>, and <code class="docutils literal notranslate"><span class="pre">snow</span></code>.</p></li>
+<li><p><strong>HLS</strong> — uses <code class="docutils literal notranslate"><span class="pre">Fmask</span></code> and masks <code class="docutils literal notranslate"><span class="pre">cirrus</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud</span></code>, <code class="docutils literal notranslate"><span class="pre">adjacent_cloud</span></code>, <code class="docutils literal notranslate"><span class="pre">cloud_shadow</span></code>, and <code class="docutils literal notranslate"><span class="pre">snow_ice</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sentinel-2 with cloud masking</span>
+<span class="n">data_s2</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-07-31&quot;</span><span class="p">,</span>
+    <span class="n">cloud_cover_perc</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">mask_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If the defaults are too aggressive (or too permissive) for your use case, override them with <code class="docutils literal notranslate"><span class="pre">mask_items</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mask only clouds and cloud shadow; keep cirrus and saturated pixels</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-07-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">mask_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">mask_items</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cloud_shadow&quot;</span><span class="p">,</span> <span class="s2">&quot;cloud_high_prob&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="temporal-composites-cloud-free-mosaics-over-time">
+<h2>Temporal composites — cloud-free mosaics over time<a class="headerlink" href="#temporal-composites-cloud-free-mosaics-over-time" title="Link to this heading">#</a></h2>
+<p>A single Sentinel-2 scene is a snapshot; what you usually want is a <strong>composite</strong> — a summary of many scenes over a time window that smooths out clouds, shadows, and sensor artifacts. The classic recipe is “take the median of all clear observations within each month.” GeoWombat’s <code class="docutils literal notranslate"><span class="pre">composite_stac</span></code> wraps <code class="docutils literal notranslate"><span class="pre">open_stac</span></code> with automatic cloud masking and temporal aggregation so you can do this in one call.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.core.stac</span><span class="w"> </span><span class="kn">import</span> <span class="n">composite_stac</span>
+
+<span class="c1"># Monthly Sentinel-2 median composite</span>
+<span class="n">comp_s2</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">composite_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-08-31&quot;</span><span class="p">,</span>
+    <span class="n">cloud_cover_perc</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;MS&quot;</span><span class="p">,</span>   <span class="c1"># &quot;month start&quot; — one composite per calendar month</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">comp_s2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (time=3, band=4, y, x) — one per month</span>
+</pre></div>
+</div>
+<section id="choosing-a-time-frequency">
+<h3>Choosing a time frequency<a class="headerlink" href="#choosing-a-time-frequency" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">frequency</span></code> accepts any <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/timeseries.html#offset-aliases">pandas offset alias</a>. A few common ones:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Alias</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'D'</span></code></p></td>
+<td><p>Daily</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'W'</span></code></p></td>
+<td><p>Weekly</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'2W'</span></code></p></td>
+<td><p>Biweekly</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'MS'</span></code></p></td>
+<td><p>Monthly (month start) — <strong>default</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'QS'</span></code></p></td>
+<td><p>Quarterly (quarter start)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'YS'</span></code></p></td>
+<td><p>Yearly (year start)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Multiplied forms such as <code class="docutils literal notranslate"><span class="pre">'15D'</span></code> (every 15 days) or <code class="docutils literal notranslate"><span class="pre">'2MS'</span></code> (every two months) work too.</p>
+</section>
+<section id="choosing-an-aggregation">
+<h3>Choosing an aggregation<a class="headerlink" href="#choosing-an-aggregation" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">agg</span></code> controls how observations within each time period are combined. The default is <code class="docutils literal notranslate"><span class="pre">median</span></code>, which is robust to residual clouds the mask may have missed.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'median'</span></code></p></td>
+<td><p>Median (default) — robust to outliers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'mean'</span></code></p></td>
+<td><p>Mean — sensitive to outliers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'min'</span></code></p></td>
+<td><p>Per-pixel minimum</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'max'</span></code></p></td>
+<td><p>Per-pixel maximum</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Biweekly mean composite</span>
+<span class="n">comp</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">composite_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-08-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;2W&quot;</span><span class="p">,</span>
+    <span class="n">agg</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Because HLS blends both Landsat and Sentinel-2 observations, it is particularly powerful for composites — you get a denser time series with fewer gaps. Pass <code class="docutils literal notranslate"><span class="pre">collection=&quot;hls&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">composite_stac</span></code> will query both <code class="docutils literal notranslate"><span class="pre">hls_l30</span></code> and <code class="docutils literal notranslate"><span class="pre">hls_s30</span></code> and combine them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">comp_hls</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">composite_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;nasa_lp_cloud&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;hls&quot;</span><span class="p">,</span>                    <span class="c1"># queries both hls_l30 and hls_s30</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;nir&quot;</span><span class="p">],</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-06-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-08-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="s2">&quot;MS&quot;</span><span class="p">,</span>
+    <span class="n">max_items</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">comp_hls</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># more observations per period from two sensors</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Composites preserve all spatial attributes (<code class="docutils literal notranslate"><span class="pre">crs</span></code>, <code class="docutils literal notranslate"><span class="pre">res</span></code>, <code class="docutils literal notranslate"><span class="pre">transform</span></code>), so you can save the output straight to disk with <code class="docutils literal notranslate"><span class="pre">gw.save(comp,</span> <span class="pre">&quot;composite.tif&quot;)</span></code>. Time periods where every pixel is cloudy are dropped from the output automatically.</p>
+</div>
+</section>
+</section>
+<section id="merging-collections-into-a-single-time-series">
+<h2>Merging collections into a single time series<a class="headerlink" href="#merging-collections-into-a-single-time-series" title="Link to this heading">#</a></h2>
+<p>Finally, if you need to hand-combine sensors rather than rely on HLS — for example, Landsat (30 m) back to the 1980s combined with Sentinel-2 (10 m) from 2015 on — use <code class="docutils literal notranslate"><span class="pre">merge_stac</span></code>. Each call to <code class="docutils literal notranslate"><span class="pre">open_stac</span></code> is independent, so you can set resampling and CRS per sensor and then concatenate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.core.stac</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_stac</span><span class="p">,</span> <span class="n">merge_stac</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">Resampling</span>
+
+<span class="n">data_l</span><span class="p">,</span> <span class="n">df_l</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;microsoft_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;landsat_c2_l2&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+    <span class="n">mask_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-01-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">data_s2</span><span class="p">,</span> <span class="n">df_s2</span> <span class="o">=</span> <span class="n">open_stac</span><span class="p">(</span>
+    <span class="n">stac_catalog</span><span class="o">=</span><span class="s2">&quot;element84_v1&quot;</span><span class="p">,</span>
+    <span class="n">collection</span><span class="o">=</span><span class="s2">&quot;sentinel_s2_l2a&quot;</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">77.1</span><span class="p">,</span> <span class="mf">38.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">76.95</span><span class="p">,</span> <span class="mf">38.95</span><span class="p">),</span>
+    <span class="n">epsg</span><span class="o">=</span><span class="mi">32618</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">],</span>
+    <span class="n">resampling</span><span class="o">=</span><span class="n">Resampling</span><span class="o">.</span><span class="n">cubic</span><span class="p">,</span>
+    <span class="n">mask_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2023-01-01&quot;</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span>                   <span class="c1"># resample Sentinel-2 to match Landsat</span>
+<span class="p">)</span>
+
+<span class="n">stack</span> <span class="o">=</span> <span class="n">merge_stac</span><span class="p">(</span><span class="n">data_l</span><span class="p">,</span> <span class="n">data_s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is a single DataArray sorted in time, ready for band math, extraction, or machine-learning pipelines covered in the rest of this section.</p>
+</section>
+<section id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h2>
+<p>STAC turns the question “how do I get imagery?” into “what do I want?” Combined with GeoWombat’s consistent interface, cloud masking, and compositing, you can go from a bounding box on a map to a clean, analysis-ready time series in a single cell of code — no downloads, no sensor-specific boilerplate, and no hand-rolled QA bitmasks.</p>
+<div class="admonition-next-steps admonition">
+<p class="admonition-title">Next Steps</p>
+<p>With a DataArray in hand, everything you’ve already learned about GeoWombat applies: <a class="reference internal" href="f_rs_band_math.html"><span class="std std-doc">band math</span></a>, <a class="reference internal" href="f_rs_extraction.html"><span class="std std-doc">extraction</span></a>, and <a class="reference internal" href="f_rs_ml_predict.html"><span class="std std-doc">machine-learning prediction</span></a> all work exactly the same whether the pixels came from disk or from a STAC query.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="f_rs_io.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reading/Writing Remote Sensed Images</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="f_rs_config.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Configuration manager</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-stac-catalog">What is a STAC catalog?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-stac-query-streaming-sentinel-2">Your first STAC query: streaming Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#switching-catalogs-landsat-from-microsoft-planetary-computer">Switching catalogs: Landsat from Microsoft Planetary Computer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonized-landsat-sentinel-2-hls">Harmonized Landsat Sentinel-2 (HLS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-masking-the-easy-way">Cloud masking — the easy way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-composites-cloud-free-mosaics-over-time">Temporal composites — cloud-free mosaics over time</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-time-frequency">Choosing a time frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-an-aggregation">Choosing an aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merging-collections-into-a-single-time-series">Merging collections into a single time series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-up">Wrapping up</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300" align="left">
+</div>
+<div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</div><br><br>
+<div>
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

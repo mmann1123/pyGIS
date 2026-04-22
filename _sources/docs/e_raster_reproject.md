@@ -51,7 +51,7 @@ image = "../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF"
 with gw.config.update(ref_crs=proj4):
     with gw.open(image, resampling="nearest") as src:
     
-        src.gw.to_raster(
+        src.gw.save(
             "../temp/LC08_20200518_aea.tif",
             overwrite=True,
         ) 

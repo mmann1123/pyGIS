@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
@@ -13,42 +13,39 @@
 <meta content="spatial, raster, affine, crs, coordinate reference system, interpolation, projection" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Raster Coordinate Reference Systems (CRS) &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Raster Coordinate Reference Systems (CRS) &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -90,11 +87,10 @@
     <link rel="prev" title="Vector Coordinate Reference Systems (CRS)" href="d_vector_crs_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
 
   
   
@@ -106,8 +102,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -115,6 +122,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -122,8 +130,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -139,8 +147,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -166,28 +173,30 @@
   
     
     
-      
     
-    
-    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
-    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="a_intro.html">
-                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
                 </a>
             </li>
         </ul>
@@ -239,13 +248,15 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_stac.html">Accessing STAC Imagery with GeoWombat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
@@ -258,6 +269,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
 </ul>
 
     </div>
@@ -429,16 +444,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -522,7 +545,7 @@
 <p>Let’s start from the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> <code class="docutils literal notranslate"><span class="pre">Z</span></code> that we want to span from [-90°,90°] longitude, and [-90°,90°] latitude. For more detail on the construction of these arrays please refer to <a class="reference internal" href="c_rasters.html"><span class="std std-doc">the raster section</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
@@ -538,9 +561,6 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/bda7465c8b2e1f2cad6274592e24c1a9921e8ee6bc5d6f4661ae602c716bbcd9.png" src="../_images/bda7465c8b2e1f2cad6274592e24c1a9921e8ee6bc5d6f4661ae602c716bbcd9.png" />
 </div>
 </div>
 <p>Note that <em><code class="docutils literal notranslate"><span class="pre">Z</span></code> contains no data on its location</em>. Its just an array, the information stored in <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> aren’t associated with it at all. This location data will often be stored in the header of file. In order to ‘locate’ the array on the map we will use affine transformations.</p>
@@ -559,13 +579,8 @@
 <p>Both arrays have the same spatial resolution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xres</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xres</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">xres</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0
 </pre></div>
 </div>
 </div>
@@ -573,13 +588,8 @@
 <p>But notice that the y resolution is <strong>negative</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yres</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">yres</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">yres</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-30.0
 </pre></div>
 </div>
 </div>
@@ -588,15 +598,8 @@
 <p>We can therefore define the upper left hand corner by setting <span class="math notranslate nohighlight">\(\Delta x = x[0] - xres / 2\)</span> and <span class="math notranslate nohighlight">\(\Delta y = y[0] - yres / 2\)</span>. Remember yres is negative, so subtraction is correct.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affine</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affine</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">Affine</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 1.00, 0.00,-105.00|
-| 0.00, 1.00, 105.00|
-| 0.00, 0.00, 1.00|
 </pre></div>
 </div>
 </div>
@@ -610,14 +613,7 @@
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">xres</span><span class="p">,</span> <span class="n">yres</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 30.00, 0.00, 0.00|
-| 0.00,-30.00, 0.00|
-| 0.00, 0.00, 1.00|
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">xres</span><span class="p">,</span> <span class="n">yres</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -629,15 +625,8 @@
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span> <span class="o">=</span> <span class="n">Affine</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">xres</span><span class="p">,</span> <span class="n">yres</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transform</span> <span class="o">=</span> <span class="n">Affine</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yres</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Affine</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">xres</span><span class="p">,</span> <span class="n">yres</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 30.00, 0.00,-105.00|
-| 0.00,-30.00, 105.00|
-| 0.00, 0.00, 1.00|
 </pre></div>
 </div>
 </div>
@@ -645,7 +634,7 @@
 <p>Now we need to write out a <code class="docutils literal notranslate"><span class="pre">tif</span></code> file that holds the data in <code class="docutils literal notranslate"><span class="pre">Z</span></code> and its data type with <code class="docutils literal notranslate"><span class="pre">dtype</span></code>, the location described by <code class="docutils literal notranslate"><span class="pre">transform</span></code>, in coordinates described by the coordinate reference system <code class="docutils literal notranslate"><span class="pre">+proj=latlon</span></code>, the number of ‘bands’ of data in <code class="docutils literal notranslate"><span class="pre">count</span></code> (in this case just one), and the shape in <code class="docutils literal notranslate"><span class="pre">height</span></code> and <code class="docutils literal notranslate"><span class="pre">width</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
     <span class="s1">&#39;../temp/Z.tif&#39;</span><span class="p">,</span>
     <span class="s1">&#39;w&#39;</span><span class="p">,</span>
@@ -668,14 +657,16 @@
 <p>To help us understand what is going on with <code class="docutils literal notranslate"><span class="pre">transform</span></code> it helps to work an example. For our example above we need to define the translate matrix that helps define the upper left hand corner of our rainfall raster data <code class="docutils literal notranslate"><span class="pre">Z</span></code>. In particular we need the upper left cell center to be located at (-90,90), so the upper left hand corner need to be 1/2 the resolution above and to the left of (-90,90), implying a location of (-105,105) since the resolution is 30 degrees.</p>
 <p>We can visualize what we need to do here:</p>
 <figure class="align-default" id="example-of-using-affine-translation-to-shift-the-upper-left-hand-corner">
-<a class="reference internal image-reference" href="../_images/c_raster_upperleft_drawing.png"><img alt="../_images/c_raster_upperleft_drawing.png" src="../_images/c_raster_upperleft_drawing.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/c_raster_upperleft_drawing.png"><img alt="../_images/c_raster_upperleft_drawing.png" src="../_images/c_raster_upperleft_drawing.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 43 </span><span class="caption-text">Example of using translation to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-to-shift-the-upper-left-hand-corner" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Let’s walk through the math behind the scenes. Here we use our transform matrix to move our upper left hand corner which is assumed to start at the origin (0,0).</p>
 <figure class="align-default" id="example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner">
-<a class="reference internal image-reference" href="../_images/c_raster_upperleft_transform.png"><img alt="../_images/c_raster_upperleft_transform.png" src="../_images/c_raster_upperleft_transform.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/c_raster_upperleft_transform.png"><img alt="../_images/c_raster_upperleft_transform.png" src="../_images/c_raster_upperleft_transform.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 44 </span><span class="caption-text">Example of using affine translation of a matrix to shift the upper left hand corner</span><a class="headerlink" href="#example-of-using-affine-translation-of-a-matrix-to-shift-the-upper-left-hand-corner" title="Link to this image">#</a></p>
 </figcaption>
@@ -687,7 +678,8 @@
 <p>Now here’s the magic, our new <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix can be used to easily find the coordinates of any cell based on its row and column number. To see how if works, we are going to multiply our <code class="docutils literal notranslate"><span class="pre">translate</span></code> matrix by <code class="docutils literal notranslate"><span class="pre">(column_number,</span> <span class="pre">row_number)</span></code> to retrieve the coordinates of that cell’s upper right hand corner. Essentially, <code class="docutils literal notranslate"><span class="pre">translate</span></code> “maps” row and column indexes to coordinates! OMG! This is fun… ok kidding, but it’s useful.</p>
 <p>Let’s see how we can calculate a few coordinates (upper left) based on the visual examples below:</p>
 <figure class="align-default" id="example-of-using-transform-to-identify-coordinates-based-on-row-and-column">
-<a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/c_raster_raster.png"><img alt="../_images/c_raster_raster.png" src="../_images/c_raster_raster.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 45 </span><span class="caption-text">Example of using transform to identify coordinates based on row and column</span><a class="headerlink" href="#example-of-using-transform-to-identify-coordinates-based-on-row-and-column" title="Link to this image">#</a></p>
 </figcaption>
@@ -695,12 +687,7 @@
 <p>Let’s start with the easiest and retrieve the upper left corner coordinates based on <code class="docutils literal notranslate"><span class="pre">transform</span> <span class="pre">*</span> <span class="pre">(row_number,</span> <span class="pre">column_number)</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-105.0, 105.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -708,12 +695,7 @@
 <p>Let’s find the corner that is one cell down (-30°) and to the right (+30°)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-75.0, 75.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -721,12 +703,7 @@
 <p>Just to make sure it works let’s find a harder one, 5th column right, 2nd row down:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(45.0, 45.0)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transform</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -763,14 +740,16 @@
 <p>One of the easiest cases is that of false easting, or moving the prime meridian. Let’s walk through an example where we start with a raster with an upper left hand corner at (0, 45), then we will apply a transform to move it to (10, 45) by moving the prime meridian 10° to the west (e.g. using <code class="docutils literal notranslate"><span class="pre">+lon_0=-10</span></code> from the  <a class="reference internal" href="d_understand_crs_codes.html"><span class="std std-doc">proj4string</span></a>).</p>
 <p>Let’s start be looking visually at what we plan to do:</p>
 <figure class="align-default" id="example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian">
-<a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_europe_translate_raster.png"><img alt="../_images/d_europe_translate_raster.png" src="../_images/d_europe_translate_raster.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 46 </span><span class="caption-text">Example of using translate to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-to-reproject-an-image-by-moving-prime-meridian" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We can then use our knowledge of matrix algebra and transform matrices to solve for the new upper left hand corner coordinate (<span class="math notranslate nohighlight">\(x_B\)</span>, <span class="math notranslate nohighlight">\(y_B\)</span>)</p>
 <figure class="align-default" id="example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian">
-<a class="reference internal image-reference" href="../_images/d_europe_translate_raster_m.png"><img alt="../_images/d_europe_translate_raster_m.png" src="../_images/d_europe_translate_raster_m.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_europe_translate_raster_m.png"><img alt="../_images/d_europe_translate_raster_m.png" src="../_images/d_europe_translate_raster_m.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 47 </span><span class="caption-text">Example of using translate matrix to reproject an image by moving prime meridian</span><a class="headerlink" href="#example-of-using-translate-matrix-to-reproject-an-image-by-moving-prime-meridian" title="Link to this image">#</a></p>
 </figcaption>
@@ -782,7 +761,8 @@
 <p>In many cases reprojecting a raster requires changing the number of rows or columns, or ‘warping’ (i.e. bending) an image. All of these examples create a problem, the centroids of the new projected raster don’t line up with the centroids of the original raster. Therefore they now represent locations on the ground that weren’t in the original dataset.</p>
 <p>Take for instance the case of a ‘warped’ raster image (below) which for instance occurs when you switch from a spherical CRS (like lat lon) to a projected (or flat) CRS. Notice that the centroids of the two rasters no longer over lap:</p>
 <figure class="align-default" id="example-of-warping-an-image-during-reprojection">
-<a class="reference internal image-reference" href="../_images/d_warp.png"><img alt="../_images/d_warp.png" src="../_images/d_warp.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_warp.png"><img alt="../_images/d_warp.png" src="../_images/d_warp.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 48 </span><span class="caption-text">Example of warping an image during reprojection</span><a class="headerlink" href="#example-of-warping-an-image-during-reprojection" title="Link to this image">#</a></p>
 </figcaption>
@@ -797,13 +777,15 @@
 <p>There are three commonly used interpolation methods: a) Nearest neighbor - assigns the value of the nearest centroid, b) bilinear interpolation - uses a straight line between know locations, c) bicubic interpolation - uses curved line between known locations.</p>
 <p>In the visual example below we will try to estimate the value for location <code class="docutils literal notranslate"><span class="pre">C</span></code> based on the known values at locations <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
 <figure class="align-default" id="example-of-nearest-neighbor-and-bilinear-interpolation">
-<a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_bilinear.png"><img alt="../_images/d_bilinear.png" src="../_images/d_bilinear.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 49 </span><span class="caption-text">Example of nearest neighbor and bilinear interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bilinear-interpolation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="example-of-nearest-neighbor-and-bicubic-interpolation">
-<a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_bicubic.png"><img alt="../_images/d_bicubic.png" src="../_images/d_bicubic.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 50 </span><span class="caption-text">Example of nearest neighbor and bicubic interpolation</span><a class="headerlink" href="#example-of-nearest-neighbor-and-bicubic-interpolation" title="Link to this image">#</a></p>
 </figcaption>
@@ -857,7 +839,7 @@
 <p>Now let’s calculate the tranform matrix for the destination raster:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.warp</span><span class="w"> </span><span class="kn">import</span> <span class="n">reproject</span><span class="p">,</span> <span class="n">Resampling</span><span class="p">,</span> <span class="n">calculate_default_transform</span>
 
@@ -882,25 +864,12 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Source Transform:
- | 30.00, 0.00, 717345.00|
-| 0.00,-30.00,-2776995.00|
-| 0.00, 0.00, 1.00| 
-
-Destination Transform:
- | 33.24, 0.00,-6105300.09|
-| 0.00,-33.24,-2885952.71|
-| 0.00, 0.00, 1.00|
-</pre></div>
-</div>
-</div>
 </div>
 <p>Notice that in order to keep the same number of rows and columns that the resolution of the destination raster increased from 30 meters to 33.24 meters. Also the coordinates of the upper left hand corner have shifted (check <span class="math notranslate nohighlight">\(\Delta x, \Delta x\)</span>).</p>
 <p>Ok finally!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dst_crs</span> <span class="o">=</span> <span class="s2">&quot;EPSG:3857&quot;</span>  <span class="c1"># web mercator(ie google maps)</span>
 
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">src_transform</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span>
@@ -942,7 +911,8 @@ Destination Transform:
 </div>
 </div>
 <figure class="align-default" id="reprojected-landsat-image">
-<a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../_images/d_reproj_image.png"><img alt="../_images/d_reproj_image.png" src="../_images/d_reproj_image.png" style="width: 400px;" />
+</a>
 </figure>
 <p>Source: <a class="reference external" href="https://rasterio.readthedocs.io/en/latest/quickstart.html?highlight=X%2C%20Y%20%3D%20np.meshgrid(x%2C%20y)#creating-data">Creating Raster Data</a></p>
 <!-- 
@@ -1057,8 +1027,7 @@ There is more to learn about CRSs. An excellent resource in this area, also impl
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1123,10 +1092,19 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 </div><br><br>
 <div>
-<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
 </div>
 
 </div>
@@ -1141,8 +1119,8 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -39,8 +39,9 @@ Band math is a way to combine bands of remotely sensed data to create new bands 
 
 Here is a visual example of a band math operation combinine three bands of data `b1`, `b2`, and `b3` to create a new single output. 
 
-```{image} ../_static/f_rs/bandmath.gif
+```{figure} ../_static/f_rs/bandmath.gif
 :alt: a visual example of a band math operation combinine three bands of data b1, b2, and b3 to create a new single output.
+
 Band math example
 ```
 

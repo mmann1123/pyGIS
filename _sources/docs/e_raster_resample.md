@@ -24,7 +24,7 @@ myst:
 - Learn how to match the extent
 ```
 ```{admonition} Review
-* [Affine transformation](d_affine)
+* [Affine transformation](d_affine.md)
 * [Raster Coordinate Reference Systems](d_raster_crs_intro)
 * [Reprojecting Rasters](e_raster_reproject.md)
 * [Interpolation Methods Explained](d_raster_crs_intro_interpolation_options)
@@ -70,7 +70,7 @@ There are [a number of methods](https://rasterio.readthedocs.io/en/latest/api/ra
 Occationally you will need to resample your data by some factor, for instance you might want data upsampled to a courser resolution due to memory constraints. 
 
 
-Here's an example of how to generate the `data` array and the `transform` needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the `transform`, let's review [affine transformations](d_affine). Here we will update the scale values with the new resolution using $S_{y}$ and $S_{x}$ show below
+Here's an example of how to generate the `data` array and the `transform` needed to write it out. We will start by simply reading in the data and coersing a higher resolution, by adding more rows and columns. To understand the `transform`, let's review [affine transformations](d_affine.md). Here we will update the scale values with the new resolution using $S_{y}$ and $S_{x}$ show below
 
 $$
    \begin{eqnarray}
@@ -146,7 +146,7 @@ with gw.config.update(ref_res=15):
         print(src)
         
         # to write out simply:
-        # src.gw.to_raster(
+        # src.gw.save(
         #     "../temp/LC08_20200518_15m.tif",
         #     overwrite=True,
         # ) 
@@ -247,7 +247,7 @@ with gw.config.update(ref_image=LS):
         ax.imshow(src.data[0])
         
         # to write out simply:
-        # src.gw.to_raster(
+        # src.gw.save(
         #     "../temp/precip_20200601_30m.tif",
         #     overwrite=True,
         # ) 

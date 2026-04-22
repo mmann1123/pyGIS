@@ -16,8 +16,6 @@ myst:
 
 # Band Math w. Rasterio
 
-----------------
-
 ```{admonition} Learning Objectives
 * Conduct mathematical operations on raster bands with rasterio
 * Understand the requirements for successful mathematical operations

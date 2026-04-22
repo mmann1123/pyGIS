@@ -17,8 +17,6 @@ myst:
 
 # Spatial Interpolation
 
-----------------
-
 ```{admonition} Learning Objectives
 * Conduct various types of interpolation on point dataset
 * Obtain interpolated values at specified unsampled locations
@@ -418,7 +416,6 @@ Two Python packages that can be used for kriging include `scikit-learn` and `pyk
 ```{code-cell} ipython3
 :tags: [hide-cell]
 
-'''
 # Set projection to WGS 84 and reproject data
 proj_wgs = 4326
 counties_wgs = counties.to_crs(proj_wgs)
@@ -436,7 +433,6 @@ coords_rain_test_wgs = [list(xy) for xy in zip(rain_test_gdf_wgs["geometry"].x, 
 
 # Get minimum and maximum coordinate values of rainfall points
 min_x_rain_wgs, min_y_rain_wgs, max_x_rain_wgs, max_y_rain_wgs = rain_train_gdf_wgs.total_bounds
-'''
 ```
 
 ### Method 1 - Using `PyKrige`
@@ -526,12 +522,11 @@ plt.show()
 ```
 
 
-### Method 2- Using `scikit-learn`
+### Method 2 - Using `scikit-learn`
 
 Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
 
 ```{code-cell} ipython3
-'''
 # Create a 100 by 100 cell mesh grid
 # Horizontal and vertical cell counts should be the same
 XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]
@@ -540,7 +535,7 @@ XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain
 positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T
 
 # Generate Gaussian Process model (can change parameters as desired)
-gp = GaussianProcessRegressor(n_restarts_optimizer = 10)
+gp = GaussianProcessRegressor(n_restarts_optimizer=10)
 
 # Fit kernel density estimator to coordinates and values
 gp.fit(coords_rain_train_wgs, value_rain_train)
@@ -550,13 +545,11 @@ Z_sk_krig = gp.predict(positions_sk_krig)
 
 # Reshape the data to fit mesh grid
 Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)
-'''
 ```
 
 Next, we can calculate our r-squared statistics and predictions.
 
 ```{code-cell} ipython3
-'''
 # Generate in-sample R^2
 in_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)
 print("Scikit-Learn Kriging in-sample r-squared: {}".format(round(in_r_squared_sk_krig, 2)))
@@ -577,21 +570,18 @@ predict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)
 # Display attribute table
 print("\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method")
 display(predict_df_sk_krig.head(2))
-'''
 ```
 
 Model seems like a good fit! Let's export the raster.
 
 ```{code-cell} ipython3
-'''
 # Flip array vertically and rotate 270 degrees
 Z_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)
 
 # Export raster
-export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
-                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,
-                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif")
-'''
+export_kde_raster(Z=Z_sk_krig, XX=XX_sk_krig, YY=YY_sk_krig,
+                  min_x=min_x_rain_wgs, max_x=max_x_rain_wgs, min_y=min_y_rain_wgs, max_y=max_y_rain_wgs,
+                  proj=proj_wgs, filename="../temp/e_bay-area-rain_sk_kriging.tif")
 ```
 
 ```{attention} The resulting raster should be clipped. Because the resulting raster covers the extent of the points in a bounding box fashion, the raster in this case covers areas that are not within the counties boundaries (such as in the ocean) where we do not have sample points. Thus, there will be interpolated values in those areas that might not make sense.
@@ -600,128 +590,27 @@ export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
 Finally, we import the raster, mask it to the counties boundaries, and plot the data.
 
 ```{code-cell} ipython3
-'''
 # Open raster
 raster_sk = rasterio.open("../temp/e_bay-area-rain_sk_kriging.tif")
 
 # Mask raster to counties shape
-out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)
-
-# Stylize plots
-plt.style.use('bmh')
-'''
-```
-### Method 2- Using `scikit-learn`
-
-Kriging can be performed using [Gaussian processes from the `scikit-learn` module](https://scikit-learn.org/stable/modules/gaussian_process.html) (Gaussian processes is essentially equivalent to kriging). Various kernels for Gaussian processes can be specified. We will continue to use the training and testing datasets created from our KNN analysis.
-
-```{code-cell} ipython3
-'''
-# Create a 100 by 100 cell mesh grid
-# Horizontal and vertical cell counts should be the same
-XX_sk_krig, YY_sk_krig = np.mgrid[min_x_rain_wgs:max_x_rain_wgs:100j, min_y_rain_wgs:max_y_rain_wgs:100j]
-
-# Create 2-D array of the coordinates (paired) of each cell in the mesh grid
-positions_sk_krig = np.vstack([XX_sk_krig.ravel(), YY_sk_krig.ravel()]).T
-
-# Generate Gaussian Process model (can change parameters as desired)
-gp = GaussianProcessRegressor(n_restarts_optimizer = 10)
-
-# Fit kernel density estimator to coordinates and values
-gp.fit(coords_rain_train_wgs, value_rain_train)
-
-# Evaluate the model on coordinate pairs
-Z_sk_krig = gp.predict(positions_sk_krig)
-
-# Reshape the data to fit mesh grid
-Z_sk_krig = Z_sk_krig.reshape(XX_sk_krig.shape)
-'''
-```
-
-Next, we can calculate our r-squared statistics and predictions.
-
-```{code-cell} ipython3
-'''
-# Generate in-sample R^2
-in_r_squared_sk_krig = gp.score(coords_rain_train_wgs, value_rain_train)
-print("Scikit-Learn Kriging in-sample r-squared: {}".format(round(in_r_squared_sk_krig, 2)))
-
-# Generate out-of-sample R^2
-out_r_squared_sk_krig = gp.score(coords_rain_test_wgs, value_rain_test)
-print("Scikit-Learn Kriging out-of-sample r-squared: {}".format(round(out_r_squared_sk_krig, 2)))
-
-# Predict values for testing dataset
-coords_rain_test_predict_sk_krig = gp.predict(coords_rain_test_wgs)
-
-# Create dictionary holding the actual and predicted values
-predict_dict_sk_krig = {"Coordinate_Pair": coords_rain_test_wgs, "VALUE_Actual": value_rain_test, "VALUE_Predict": coords_rain_test_predict_sk_krig}
-
-# Create dataframe from dictionary
-predict_df_sk_krig = pd.DataFrame(predict_dict_sk_krig)
-
-# Display attribute table
-print("\nAttribute Table: Testing Set Interpolated Values - Scikit-Learn Kriging Method")
-display(predict_df_sk_krig.head(2))
-'''
-```
-
-Model seems like a good fit! Let's export the raster.
-
-```{code-cell} ipython3
-'''
-# Flip array vertically and rotate 270 degrees
-Z_sk_krig = np.rot90(np.flip(Z_sk_krig, 0), 3)
-
-# Export raster
-export_kde_raster(Z = Z_sk_krig, XX = XX_sk_krig, YY = YY_sk_krig,
-                  min_x = min_x_rain_wgs, max_x = max_x_rain_wgs, min_y = min_y_rain_wgs, max_y = max_y_rain_wgs,
-                  proj = proj_wgs, filename = ../temp/e_bay-area-rain_sk_kriging.tif")
-'''
-```
-
-```{attention} The resulting raster should be clipped. Because the resulting raster covers the extent of the points in a bounding box fashion, the raster in this case covers areas that are not within the counties boundaries (such as in the ocean) where we do not have sample points. Thus, there will be interpolated values in those areas that might not make sense.
-```
-
-Finally, we import the raster, mask it to the counties boundaries, and plot the data.
-
-```{code-cell} ipython3
-'''
-# Open raster
-raster_sk = rasterio.open("../temp/e_bay-area-rain_sk_kriging.tif")
-
-# Mask raster to counties shape
-out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop = True)
+out_image_sk, out_transform_sk = rasterio.mask.mask(raster_sk, counties_wgs.geometry.values, crop=True)
 
 # Stylize plots
 plt.style.use('bmh')
 
 # Plot data
-fig, ax = plt.subplots(1, figsize = (10, 10))
-show(out_image_sk, ax = ax, transform = out_transform_sk, cmap = "RdPu")
-ax.plot(x_rain_wgs, y_rain_wgs, 'k.', markersize = 2, alpha = 0.5)
-counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
+fig, ax = plt.subplots(1, figsize=(10, 10))
+show(out_image_sk, ax=ax, transform=out_transform_sk, cmap="RdPu")
+ax.plot(x_rain_wgs, y_rain_wgs, 'k.', markersize=2, alpha=0.5)
+counties_wgs.plot(ax=ax, color='none', edgecolor='dimgray')
 plt.gca().invert_yaxis()
 
 # Set title
-ax.set_title('San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn', fontdict = {'fontsize': '15', 'fontweight' : '3'})
+ax.set_title('San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn', fontdict={'fontsize': '15', 'fontweight': '3'})
 
 # Display plot
 plt.show()
-
-
-# Plot data
-fig, ax = plt.subplots(1, figsize = (10, 10))
-show(out_image_sk, ax = ax, transform = out_transform_sk, cmap = "RdPu")
-ax.plot(x_rain_wgs, y_rain_wgs, 'k.', markersize = 2, alpha = 0.5)
-counties_wgs.plot(ax = ax, color = 'none', edgecolor = 'dimgray')
-plt.gca().invert_yaxis()
-
-# Set title
-ax.set_title('San Francisco Bay Area - Interpolating Rainfall using Kriging from Scikit-Learn', fontdict = {'fontsize': '15', 'fontweight' : '3'})
-
-# Display plot
-plt.show()
-'''
 ```
 
 
