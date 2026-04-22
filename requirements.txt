@@ -1,14 +1,14 @@
-jupyter-book
+jupyter-book==1.0.4.post1
 matplotlib
 numpy<2
 ghp-import
 pyproj
 geopandas
-geopandas
 contextily
 cython
 earthpy
-census 
+census
+pytidycensus
 geoplot
 osmnx
 sympy
@@ -20,4 +20,4 @@ pykrige
 us
 numpy_groupies
 pydata-sphinx-theme
-sklearn-xarray@git+https://github.com/jgrss/sklearn-xarray.git
+geowombat[stac,ml]

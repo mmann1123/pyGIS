@@ -193,9 +193,7 @@ plt.tight_layout(pad=1)
 
 ## Writing DataArrays to file
 
-GeoWombat's I/O can be accessed through the `to_vrt` and `to_raster` functions. These functions use
-Rasterio's `write` and Dask.array `store` functions as I/O backends. In the examples below,
-``src`` is an ``xarray.DataArray`` with the necessary transform information to write to an image file.
+The recommended way to write a GeoWombat `DataArray` to disk is the `.gw.save()` accessor. It preserves the CRS, transform, and nodata value, handles Dask-backed arrays, and writes in parallel. `to_vrt` is still available for VRT output. In the examples below, ``src`` is an ``xarray.DataArray`` with the necessary transform information to write to an image file.
 
 Write to a VRT file.
 
@@ -226,11 +224,8 @@ with gw.open(l8_224077_20200518_B4) as src:
 
     src.attrs = attrs
 
-    # Write the data to a GeoTiff
-    src.gw.to_raster('output.tif',
-                        verbose=1,
-                        n_workers=4,    # number of process workers sent to ``concurrent.futures``
-                        n_chunks=200)   # number of window chunks to send as concurrent futures
+    # Write the data to a GeoTiff — .gw.save() is the default writer
+    src.gw.save('output.tif', overwrite=True)
 ```
 
 <!-- See :ref:`io-distributed` for more examples describing concurrent file writing with GeoWombat. -->

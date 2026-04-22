@@ -13,7 +13,7 @@
 <meta content="spatial, crs, proj4string, EPSG, coordinate reference system, projection" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Understanding a CRS: Proj4 and CRS codes &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Understanding a CRS: Proj4 and CRS codes &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -21,34 +21,31 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -88,7 +85,6 @@
     <link rel="prev" title="What is a CRS?" href="d_crs_what_is_it.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -104,8 +100,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -113,6 +120,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,8 +128,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -137,8 +145,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -167,25 +174,29 @@
       
     
     
-    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
-    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="a_intro.html">
-                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
                 </a>
             </li>
         </ul>
@@ -237,13 +248,15 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Intro to pytidycensus</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_stac.html">Accessing STAC Imagery with GeoWombat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
@@ -256,6 +269,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
 </ul>
 
     </div>
@@ -427,16 +444,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -499,7 +524,6 @@
   <!-- (d_understand_crs_codes)= -->
 <section class="tex2jax_ignore mathjax_ignore" id="understanding-a-crs-proj4-and-crs-codes">
 <h1>Understanding a CRS: Proj4 and CRS codes<a class="headerlink" href="#understanding-a-crs-proj4-and-crs-codes" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
@@ -527,7 +551,7 @@
 <p>Let’s begin by reading in this dataset (no need to download the shapefile as we will pull it directly from the website).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 
 <span class="c1"># Read data (shapefile)</span>
@@ -539,7 +563,7 @@
 <p>Let’s also define a function that will allow us to quickly produce a map of our data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">map_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
@@ -570,13 +594,10 @@
 <p>Now, we can see how the shapefile we just read in looks like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create map using DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create map using DC shapefile</span>
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc</span><span class="p">],</span> <span class="s2">&quot;Washington, DC&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/db455e1714f7afb60468010bf2b4d0e9ea57e61747370ca3b49be75ea6e05284.png" src="../_images/db455e1714f7afb60468010bf2b4d0e9ea57e61747370ca3b49be75ea6e05284.png" />
 </div>
 </div>
 <p>It looks like Washington, DC, albeit a bit squished! Next, let’s see how we can work with CRSs in Python.</p>
@@ -588,13 +609,8 @@
 <p>To check the dataset’s CRS (assuming it has one), use the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get CRS for DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get CRS for DC shapefile</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CRS: EPSG:4326
 </pre></div>
 </div>
 </div>
@@ -606,7 +622,7 @@
 <p>To change a dataset’s CRS, we’ll need to reproject the data. Here, we will project copies of our data twice using the <code class="docutils literal notranslate"><span class="pre">to_crs()</span></code> function, once with a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string and once with an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code. Both of these values reference the same CRS (in this case, NAD83)–they are simply different ways to reference it. The projection will remain in latitude and longitude, but we will change the ellipsoid and datum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Create a copy of the DC shapefile</span>
 <span class="n">dc_reproject_proj4</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Example 1: Reproject the data to NAD83 using PROJ.4 string</span>
@@ -627,17 +643,11 @@
 <p>When we call the <code class="docutils literal notranslate"><span class="pre">.crs</span></code> attribute, it’s no longer <code class="docutils literal notranslate"><span class="pre">'epsg:4326'</span></code>, which means that the data has been reprojected!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Print new CRS of DC</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Print new CRS of DC</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 1 (PROJ.4 string) CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc_reproject_proj4</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
 
 <span class="c1"># Example 2: Print new CRS of DC</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 2 (EPSG code) CRS: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc_reproject_epsg</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example 1 (PROJ.4 string) CRS: +proj=longlat +ellps=GRS80 +datum=NAD83 +no_defs +type=crs
-Example 2 (EPSG code) CRS: epsg:4269
 </pre></div>
 </div>
 </div>
@@ -734,27 +744,17 @@ Example 2 (EPSG code) CRS: epsg:4269
 <p>Below is the original shapefile of DC that we read in above–this will serve as a reference point for comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map original DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map original DC shapefile</span>
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc</span><span class="p">],</span> <span class="s2">&quot;Washington, DC - WGS84&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/374bd91d57a973ed866994f0afea9d35afd8fe511054ff3c24bc767abbe2933c.png" src="../_images/374bd91d57a973ed866994f0afea9d35afd8fe511054ff3c24bc767abbe2933c.png" />
 </div>
 </div>
 <p>The map above utilizes a geographic coordinate system, as evidenced by the latitude and longitude values on the axes. Another way to check is to look at the geometry of the shapefile.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check geometry values of original shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check geometry values of original shapefile</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Geometry of shapefile:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dc</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
-0    POLYGON ((-77.1198 38.93435, -77.11979 38.9343...
-Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
@@ -765,7 +765,7 @@ Name: geometry, dtype: geometry
 <p>Now, we will reproject the shapefile using a projected coordinate system. Here, we will use the Lambert Conformal Conic projection.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic</span>
@@ -780,14 +780,6 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometry of shapefile:
-0    POLYGON ((1106986.814 4694966.592, 1106987.033...
-Name: geometry, dtype: geometry
-</pre></div>
-</div>
-<img alt="../_images/e6f7a106ca800d600203316715961e7e2d872c9b1bbf81e88c2614bbef68e3c5.png" src="../_images/e6f7a106ca800d600203316715961e7e2d872c9b1bbf81e88c2614bbef68e3c5.png" />
-</div>
 </div>
 <p>Notice how the values on the axes changed from latitude and longitude to meters.</p>
 </section>
@@ -797,7 +789,7 @@ Name: geometry, dtype: geometry
 <p>We can change the values for <code class="docutils literal notranslate"><span class="pre">lat_0</span></code> and <code class="docutils literal notranslate"><span class="pre">lon_0</span></code>, which refer to the latitude of origin and the central meridian, respectively. We will change those values to <code class="docutils literal notranslate"><span class="pre">38.9072</span></code> and <code class="docutils literal notranslate"><span class="pre">-77.0369</span></code>, which is the center of DC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_center</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point</span>
@@ -808,9 +800,6 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/04e751e24f25bfe2de64b18f4ce940b8e62f7fb3fad4b5db7cadab68513efb3e.png" src="../_images/04e751e24f25bfe2de64b18f4ce940b8e62f7fb3fad4b5db7cadab68513efb3e.png" />
-</div>
 </div>
 <p>As seen in the new map above, the values on both axes have changed. The origin <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> is now in the center of DC.</p>
 </section>
@@ -820,7 +809,7 @@ Name: geometry, dtype: geometry
 <p>Here, we will set our two standard parallels at <code class="docutils literal notranslate"><span class="pre">38.850</span></code> and <code class="docutils literal notranslate"><span class="pre">39.950</span></code> as they fall within the DC boundaries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_parallels_1</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point and standard parallels</span>
@@ -831,14 +820,11 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/cd09b875758157346313f06d4499713171c0ae944587a0f6f76cac7253c9bf27.png" src="../_images/cd09b875758157346313f06d4499713171c0ae944587a0f6f76cac7253c9bf27.png" />
-</div>
 </div>
 <p>Nothing really appears to be different; however, these values are important. Look what happens when we assign different values–ones that don’t really make sense for mapping in DC–and compare the resulting DC map to the previous map.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_parallels_2</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># # Reproject the data to Lambert Conformal Conic with specified center point and arbitrary standard parallels</span>
@@ -849,9 +835,6 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/ae71c05b860e4e61172dbd9ccd15134e8e7bcdbb7a7ccfde1fccf8ae455e756f.png" src="../_images/ae71c05b860e4e61172dbd9ccd15134e8e7bcdbb7a7ccfde1fccf8ae455e756f.png" />
-</div>
 </div>
 <p>It appears DC has shrunk! Of course, that’s not the case in reality, but because map projections are inherently imperfect, choosing arbitrary parameters can make things worse. In this case, since the chosen standard parallels are relatively far from each other and from DC, all the data in between the standard parallels end up being compressed even more. For more information, check out this <a class="reference external" href="https://giscourses.cfans.umn.edu/sites/giscourses.cfans.umn.edu/files/understanding_map_projections.pdf">Esri publication on map projections</a>.</p>
 </section>
@@ -861,7 +844,7 @@ Name: geometry, dtype: geometry
 <p>Let’s set a false easting value of <code class="docutils literal notranslate"><span class="pre">500000</span></code> and a false northing value of <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_lcc_false_e</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to Lambert Conformal Conic with specified center point, standard parallels, and false easting/northing</span>
@@ -872,9 +855,6 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/e6a264d37be1a2fafcea52b39779dc9861bdb8037e3c67eabbc34c26b4a23333.png" src="../_images/e6a264d37be1a2fafcea52b39779dc9861bdb8037e3c67eabbc34c26b4a23333.png" />
-</div>
 </div>
 <p>Notice that the x-axis shifted to the left by 500,000 meters. The y-axis stayed the same because we did not use false northing. Now, the “origin” is <code class="docutils literal notranslate"><span class="pre">(500000,</span> <span class="pre">0)</span></code>.</p>
 <p>Source: <a class="reference external" href="http://www.geo.hunter.cuny.edu/~jochen/gtech201/lectures/lec6concepts/Map%20coordinate%20systems/UTM%20and%20UPS.htm">Universal Transverse Mercator system, Hunter College Department of Geography and Environmental Science</a></p>
@@ -884,7 +864,7 @@ Name: geometry, dtype: geometry
 <p>UTM is conformal. So let’s compare our custom projection to UTM Zone 18N (in which DC falls).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a copy of the DC shapefile</span>
 <span class="n">dc_utm18n</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Reproject the data to UTM Zone 18N</span>
@@ -895,9 +875,6 @@ Name: geometry, dtype: geometry
 <span class="n">map_data</span><span class="p">([</span><span class="n">dc_utm18n</span><span class="p">],</span> <span class="s2">&quot;Washington, DC - UTM Zone 18N&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/27335e9e78592d42f8b1d7c6d76c730a79b780fa9f3cd3915f434a8766de23f3.png" src="../_images/27335e9e78592d42f8b1d7c6d76c730a79b780fa9f3cd3915f434a8766de23f3.png" />
 </div>
 </div>
 <p>Looks pretty much the same as our custom one!</p>
@@ -915,7 +892,7 @@ Name: geometry, dtype: geometry
 <p>Not all CRSs have a corresponding <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code, but we can find the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (if it exists) given a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. To do so, we can use the <code class="docutils literal notranslate"><span class="pre">to_espg()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import module</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyproj</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_epsg</span><span class="p">(</span><span class="n">proj4_string</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">70</span><span class="p">):</span>
@@ -937,16 +914,11 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +x_0=2000000 +y_0=500000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: 26943.
-</pre></div>
-</div>
-</div>
 </div>
 <p>Success! In the example above, we were able to successfully obtain the <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code (in this case, <code class="docutils literal notranslate"><span class="pre">26943</span></code> for NAD83 / California zone 3) because it is exactly matched to the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string. If we’re missing some information in the <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string, however, we might not be able to get an exact <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code match.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set variable to the PROJ.4 string of NAD83 / California zone 3, with a few parameters missing</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set variable to the PROJ.4 string of NAD83 / California zone 3, with a few parameters missing</span>
 <span class="n">proj4_missing</span> <span class="o">=</span> <span class="s2">&quot;+proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs&quot;</span>
 
 <span class="c1"># Call function to obtain relevant EPSG code</span>
@@ -957,11 +929,6 @@ Name: geometry, dtype: geometry
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: None.
-</pre></div>
-</div>
-</div>
 </div>
 <p>Source: <a class="reference external" href="https://geopandas.org/docs/user_guide/projections.html">Managing Projections: Coordinate Reference Systems, GeoPandas</a></p>
 <section id="lowering-minimum-confidence-parameter">
@@ -969,16 +936,11 @@ Name: geometry, dtype: geometry
 <p>We can lower the min_confidence parameter value in the <code class="docutils literal notranslate"><span class="pre">to_epsg()</span></code> function, which will cause the function to return an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code that is the closest match to the provided <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call function to obtain relevant EPSG code and lower the minimum confidence value</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call function to obtain relevant EPSG code and lower the minimum confidence value</span>
 <span class="n">result_lower_confidence</span> <span class="o">=</span> <span class="n">get_epsg</span><span class="p">(</span><span class="n">proj4_missing</span><span class="p">,</span> <span class="n">min_confidence</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="c1"># Print result</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EPSG code for </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">proj4_missing</span><span class="p">,</span> <span class="n">result_lower_confidence</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG code for +proj=lcc +lat_1=38.43333333333333 +lat_2=37.06666666666667 +lat_0=36.5 +lon_0=-120.5 +ellps=GRS80 +datum=NAD83 +units=m +no_defs: 26943.
 </pre></div>
 </div>
 </div>
@@ -1046,8 +1008,7 @@ Name: geometry, dtype: geometry
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1119,10 +1080,19 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 </div><br><br>
 <div>
-<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
 </div>
 
 </div>
@@ -1137,8 +1107,8 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

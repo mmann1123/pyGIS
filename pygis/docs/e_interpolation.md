@@ -17,8 +17,6 @@ myst:
 
 # Spatial Interpolation
 
-----------------
-
 ```{admonition} Learning Objectives
 * Conduct various types of interpolation on point dataset
 * Obtain interpolated values at specified unsampled locations

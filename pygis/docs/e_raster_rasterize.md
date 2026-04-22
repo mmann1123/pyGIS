@@ -16,8 +16,6 @@ myst:
 
 # Rasterize Vectors w. Rasterio
 
-----------------
-
 ```{admonition} Learning Objectives
 * Convert vector data into raster format with rasterio
 * Understand the requirements for successful conversion

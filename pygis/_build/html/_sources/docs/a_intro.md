@@ -17,10 +17,14 @@ myst:
  
 
 
-PyGIS - Open Source Spatial Programming & Remote Sensing
+PyGIS&trade; - Open Source Spatial Programming & Remote Sensing
 ============================
 
 The globe is now digital. Everything from monitoring deforestation, predicting wildfires, to training autonomous vehicles and tracking uprisings on social media requires you to understand how to leverage location data. This book will introduce you to the methods required for spatial programming. We focus on building your core programming techniques while helping you: leverage spatial data from OSM and the US Census, use satellite imagery, track land-use change, and track social distance during a pandemic, amongst others. We will leverage open source Python packages such as GeoPandas, Rasterio, Sklearn, and Geowombat to better understand our world and help predict its future. Some Python programming experience is required, however the material will be presented in a student-friendly manner and will focus on real-world application.
+
+```{note}
+**PyGIS&trade;** is a trademark of Michael Mann. The book's content is openly licensed under [CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/), but the **PyGIS&trade;** name and logo are **not** covered by that license. Please review the [PyGIS&trade; Trademark Policy](a_trademark.md) before using the name or logo in your own projects, forks, courses, or products.
+```
 
 ```{tableofcontents}
 ```

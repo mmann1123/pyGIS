@@ -20,8 +20,8 @@ kernelspec:
 
 ```
 ```{admonition} Review
-* [Opening Remotely Sensed Data](f_rs_io)
-* [Raster Operations](e_raster_op_intro)
+* [Opening Remotely Sensed Data](f_rs_io.md)
+* [Spatial Raster Data](c_rasters.md)
 ```
 ----------------
 <!-- https://www.l3harrisgeospatial.com/docs/MosaicSeamless.html -->

@@ -13,7 +13,7 @@
 <meta content="python, spatial, census, american community survey, ACS" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>Accessing Census and ACS Data in Python using `pytidycensus &#8212; Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>Accessing Census and ACS Data in Python using `pytidycensus &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -21,34 +21,31 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -84,11 +81,10 @@
     <link rel="canonical" href="https://pygis.io/docs/d_access_census.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction to pytidycensus" href="d_pytidycensus_intro.html" />
-    <link rel="prev" title="Accessing OSM Data in Python" href="d_access_osm.html" />
+    <link rel="next" title="Time Series Analysis with Census Data" href="d_time_series_analysis.html" />
+    <link rel="prev" title="Introduction to pytidycensus" href="d_pytidycensus_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -104,8 +100,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -113,6 +120,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -120,8 +128,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -137,8 +145,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -167,25 +174,29 @@
       
     
     
-    <img src="../_static/pygis.png" class="logo__image only-light" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
-    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <script>document.write(`<img src="../_static/pygis.png" class="logo__image only-dark" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="a_intro.html">
-                    PyGIS - Open Source Spatial Programming & Remote Sensing
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
                 </a>
             </li>
         </ul>
@@ -237,13 +248,15 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_stac.html">Accessing STAC Imagery with GeoWombat</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
@@ -256,6 +269,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
 </ul>
 
     </div>
@@ -427,16 +444,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -512,12 +537,12 @@
 <p>For a detailed list of variable explainations, visit <a class="reference external" href="https://censusreporter.org/topics/table-codes/">https://censusreporter.org/topics/table-codes/</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pytidycensus</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tc</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Import modules
+import matplotlib.pyplot as plt
+import pandas as pd
+import geopandas as gpd
+import pytidycensus as tc
+import os
 </pre></div>
 </div>
 </div>
@@ -530,38 +555,33 @@
 <p>Let’s begin by accessing and importing census data. Importing census data into Python using pytidycensus requires a Census API key. A key can be obtained from <a class="reference external" href="http://api.census.gov/data/key_signup.html">Census API Key</a>.  <strong>It will provide you with a unique 40 digit text string. Please keep track of this number. Store it in a safe place.</strong></p>
 <div class="cell tag_skip-execution docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set API key for pytidycensus</span>
-<span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="s2">&quot;CENSUS API KEY HERE&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Set API key for pytidycensus
+tc.set_census_api_key(&quot;CENSUS API KEY HERE&quot;)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ignore this, I am just reading in my api key privately</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ignore this, I am just reading in my api key privately
+import yaml
+import os
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_credentials</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;credentials.yaml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{}</span>
+def get_credentials():
+    try:
+        with open(&#39;credentials.yaml&#39;) as f:
+            return yaml.safe_load(f)
+    except FileNotFoundError:
+        return {}
 
-<span class="n">creds</span> <span class="o">=</span> <span class="n">get_credentials</span><span class="p">()</span>
-<span class="n">api_key</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;census_api_key&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CENSUS_API_KEY&#39;</span><span class="p">)</span>
-<span class="n">tc</span><span class="o">.</span><span class="n">set_census_api_key</span><span class="p">(</span><span class="n">api_key</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Census API key has been set for this session.
+creds = get_credentials()
+api_key = creds.get(&#39;census_api_key&#39;) or os.environ.get(&#39;CENSUS_API_KEY&#39;)
+tc.set_census_api_key(api_key)
 </pre></div>
 </div>
 </div>
@@ -571,24 +591,19 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> package provides us with clean, convenient methods to obtain data for a wide variety of geographies. We can simply specify the state name (e.g., “Virginia” or “VA”) without needing to look up FIPS codes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia</span>
-<span class="c1"># C17002_001E: count of ratio of income to poverty in the past 12 months (total)</span>
-<span class="c1"># C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)</span>
-<span class="c1"># C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)</span>
-<span class="c1"># B01003_001E: total population</span>
-<span class="c1"># Sources: https://api.census.gov/data/2019/acs/acs5/variables.html</span>
-<span class="n">va_census</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
-    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;tract&quot;</span><span class="p">,</span>
-    <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C17002_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_002E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_003E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01003_001E&quot;</span><span class="p">],</span>
-    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;VA&quot;</span><span class="p">,</span>
-    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2015-2019 5-year ACS
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Obtain Census variables from the 2019 ACS at the tract level for the Commonwealth of Virginia
+# C17002_001E: count of ratio of income to poverty in the past 12 months (total)
+# C17002_002E: count of ratio of income to poverty in the past 12 months (&lt; 0.50)
+# C17002_003E: count of ratio of income to poverty in the past 12 months (0.50 - 0.99)
+# B01003_001E: total population
+# Sources: https://api.census.gov/data/2019/acs/acs5/variables.html
+va_census = tc.get_acs(
+    geography=&quot;tract&quot;,
+    variables=[&quot;C17002_001E&quot;, &quot;C17002_002E&quot;, &quot;C17002_003E&quot;, &quot;B01003_001E&quot;],
+    state=&quot;VA&quot;,
+    year=2019,
+    output=&quot;wide&quot;
+)
 </pre></div>
 </div>
 </div>
@@ -596,25 +611,9 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> package returns data as pandas DataFrames by default, so our data is already in the correct format.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show the dataframe (already a pandas DataFrame)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_census</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_census</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         GEOID  C17002_001E  C17002_002E  C17002_003E  B01003_001E state  \
-0  51065020200         4804          197          146         4863    51   
-1  51059460702         4578           58           30         4578    51   
-
-  county   tract                       NAME  C17002_001_moe  C17002_002_moe  \
-0    065  020200  Fluvanna County, Virginia           387.0           144.0   
-1    059  460702   Fairfax County, Virginia           239.0            62.0   
-
-   C17002_003_moe B01003_001_moe  
-0           111.0          383.0  
-1            27.0          239.0  
-Shape:  (1907, 13)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Show the dataframe (already a pandas DataFrame)
+print(va_census.head(2))
+print(&#39;Shape: &#39;, va_census.shape)
 </pre></div>
 </div>
 </div>
@@ -627,54 +626,26 @@ Shape:  (1907, 13)
 <p>Instead of manually downloading shapefiles, we can use <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code> to automatically retrieve the geographic boundaries along with our census data. Let’s get the same tract-level data but this time with geometry included:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get census data with geometric boundaries included</span>
-<span class="n">va_tract</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_acs</span><span class="p">(</span>
-    <span class="n">geography</span><span class="o">=</span><span class="s2">&quot;tract&quot;</span><span class="p">,</span>
-    <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C17002_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_002E&quot;</span><span class="p">,</span> <span class="s2">&quot;C17002_003E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01003_001E&quot;</span><span class="p">],</span>
-    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;VA&quot;</span><span class="p">,</span>
-    <span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span>
-    <span class="n">geometry</span><span class="o">=</span><span class="kc">True</span>
-<span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Get census data with geometric boundaries included
+va_tract = tc.get_acs(
+    geography=&quot;tract&quot;,
+    variables=[&quot;C17002_001E&quot;, &quot;C17002_002E&quot;, &quot;C17002_003E&quot;, &quot;B01003_001E&quot;],
+    state=&quot;VA&quot;,
+    year=2019,
+    output=&quot;wide&quot;,
+    geometry=True
+)
 
-<span class="c1"># Reproject to UTM Zone 17N for better area calculations</span>
-<span class="c1"># https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/</span>
-<span class="n">va_tract</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32617</span><span class="p">)</span>
+# Reproject to UTM Zone 17N for better area calculations
+# https://spatialreference.org/ref/epsg/wgs-84-utm-zone-17n/
+va_tract = va_tract.to_crs(epsg=32617)
 
-<span class="c1"># Print GeoDataFrame</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+# Print GeoDataFrame
+print(va_tract.head(2))
+print(&#39;Shape: &#39;, va_tract.shape)
 
-<span class="c1"># Check projection</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The projection is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">va_tract</span><span class="o">.</span><span class="n">crs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Getting data from the 2015-2019 5-year ACS
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading tract boundaries...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         GEOID                                           geometry  \
-0  51700032132  POLYGON ((897174.191 4119897.084, 897174.811 4...   
-1  51700032226  POLYGON ((893470.562 4123469.385, 893542.722 4...   
-
-   C17002_001E  C17002_002E  C17002_003E  B01003_001E state county   tract  \
-0         4997          208          182         4997    51    700  032132   
-1         4483          625          739         4490    51    700  032226   
-
-                          NAME  C17002_001_moe  C17002_002_moe  \
-0  Newport News city, Virginia           426.0           115.0   
-1  Newport News city, Virginia           453.0           463.0   
-
-   C17002_003_moe B01003_001_moe  
-0           219.0          426.0  
-1           381.0          454.0  
-Shape:  (1907, 14)
-
-The projection is: epsg:32617
+# Check projection
+print(&quot;\nThe projection is: {}&quot;.format(va_tract.crs))
 </pre></div>
 </div>
 </div>
@@ -691,34 +662,20 @@ The projection is: epsg:32617
 <p>To control which columns are aggregated and how they are aggregated, we can use the <code class="docutils literal notranslate"><span class="pre">aggfunc</span></code> parameter. In this case, we want to sum up the poverty counts and population values for all the census tracts within each county.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract county FIPS from GEOID (first 5 characters: state + county)</span>
-<span class="n">va_tract</span><span class="p">[</span><span class="s1">&#39;COUNTYFP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">va_tract</span><span class="p">[</span><span class="s1">&#39;GEOID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Extract county FIPS from GEOID (first 5 characters: state + county)
+va_tract[&#39;COUNTYFP&#39;] = va_tract[&#39;GEOID&#39;].str[:5]
 
-<span class="c1"># Dissolve and group the census tracts within each county and aggregate all the values together  https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html</span>
+# Dissolve and group the census tracts within each county and aggregate all the values together  https://geopandas.org/docs/user_guide/aggregation_with_dissolve.html
 
-<span class="n">va_poverty_county</span> <span class="o">=</span> <span class="n">va_tract</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;COUNTYFP&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;C17002_001E&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
-                                                              <span class="s1">&#39;C17002_002E&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
-                                                              <span class="s1">&#39;C17002_003E&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
-                                                              <span class="s1">&#39;B01003_001E&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
+va_poverty_county = va_tract.dissolve(by=&#39;COUNTYFP&#39;, aggfunc={&#39;C17002_001E&#39;: &#39;sum&#39;,
+                                                              &#39;C17002_002E&#39;: &#39;sum&#39;,
+                                                              &#39;C17002_003E&#39;: &#39;sum&#39;,
+                                                              &#39;B01003_001E&#39;: &#39;sum&#39;})
 
 
-<span class="c1"># Show dataframe</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape: &#39;</span><span class="p">,</span> <span class="n">va_poverty_county</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                   geometry  C17002_001E  \
-COUNTYFP                                                                   
-51001     POLYGON ((971814.409 4160130.005, 971664.507 4...        32325   
-51003     POLYGON ((722871.236 4189239.708, 722813.526 4...       100293   
-
-          C17002_002E  C17002_003E  B01003_001E  
-COUNTYFP                                         
-51001            2352         3789        32673  
-51003            5034         4108       107405  
-Shape:  (133, 5)
+# Show dataframe
+print(va_poverty_county.head(2))
+print(&#39;Shape: &#39;, va_poverty_county.shape)
 </pre></div>
 </div>
 </div>
@@ -731,75 +688,17 @@ Shape:  (133, 5)
 <p>Side note: Notice that <code class="docutils literal notranslate"><span class="pre">C17002_001E</span></code> (ratio of income to poverty in the past 12 months, total), which theoretically should count everyone, does not exactly match up with <code class="docutils literal notranslate"><span class="pre">B01003_001E</span></code> (total population). We’ll disregard this for now since the difference is not too significant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate poverty rate and store values in new column</span>
-<span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_002E&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;C17002_003E&quot;</span><span class="p">])</span> <span class="o">/</span> 
-    <span class="n">va_poverty_county</span><span class="p">[</span><span class="s2">&quot;B01003_001E&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Calculate poverty rate and store values in new column
+va_poverty_county[&quot;Poverty_Rate&quot;] = (
+    (va_poverty_county[&quot;C17002_002E&quot;] + va_poverty_county[&quot;C17002_003E&quot;]) / 
+    va_poverty_county[&quot;B01003_001E&quot;] * 100
+)
 
-<span class="c1"># Show dataframe</span>
-<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+# Show dataframe
+va_poverty_county.head(2)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>geometry</th>
-      <th>C17002_001E</th>
-      <th>C17002_002E</th>
-      <th>C17002_003E</th>
-      <th>B01003_001E</th>
-      <th>Poverty_Rate</th>
-    </tr>
-    <tr>
-      <th>COUNTYFP</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>51001</th>
-      <td>POLYGON ((971814.409 4160130.005, 971664.507 4...</td>
-      <td>32325</td>
-      <td>2352</td>
-      <td>3789</td>
-      <td>32673</td>
-      <td>18.795336</td>
-    </tr>
-    <tr>
-      <th>51003</th>
-      <td>POLYGON ((722871.236 4189239.708, 722813.526 4...</td>
-      <td>100293</td>
-      <td>5034</td>
-      <td>4108</td>
-      <td>107405</td>
-      <td>8.511708</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -808,39 +707,36 @@ Shape:  (133, 5)
 <p>Finally, since we have the spatial component connected to our census data using <code class="docutils literal notranslate"><span class="pre">pytidycensus</span></code>, we can plot the results! The integration of geometry with census data makes mapping straightforward.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create subplots
+fig, ax = plt.subplots(1, 1, figsize=(20, 10))
 
-<span class="c1"># Plot data</span>
-<span class="c1"># Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html</span>
-<span class="n">va_poverty_county</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">column</span><span class="o">=</span><span class="s2">&quot;Poverty_Rate&quot;</span><span class="p">,</span>
-    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdPu&quot;</span><span class="p">,</span>
-    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
-    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span>
-<span class="p">)</span>
+# Plot data
+# Source: https://geopandas.readthedocs.io/en/latest/docs/user_guide/mapping.html
+va_poverty_county.plot(
+    column=&quot;Poverty_Rate&quot;,
+    ax=ax,
+    cmap=&quot;RdPu&quot;,
+    legend=True,
+    edgecolor=&#39;white&#39;,
+    linewidth=0.5
+)
 
-<span class="c1"># Stylize plots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span>
+# Stylize plots
+plt.style.use(&#39;bmh&#39;)
 
-<span class="c1"># Set title</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Poverty Rates (%) in Virginia Counties&#39;</span><span class="p">,</span> 
-             <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="s1">&#39;25&#39;</span><span class="p">,</span> <span class="s1">&#39;fontweight&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">})</span>
+# Set title
+ax.set_title(&#39;Poverty Rates (%) in Virginia Counties&#39;, 
+             fontdict={&#39;fontsize&#39;: &#39;25&#39;, &#39;fontweight&#39;: &#39;3&#39;})
 
-<span class="c1"># Remove axis ticks for cleaner look</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+# Remove axis ticks for cleaner look
+ax.set_xticks([])
+ax.set_yticks([])
 
-<span class="c1"># Show the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Show the plot
+plt.tight_layout()
+plt.show()
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/270e5276e4e8f01bb4c80c90b713375d505571d48c69f17477f0c70c80df4f28.png" src="../_images/270e5276e4e8f01bb4c80c90b713375d505571d48c69f17477f0c70c80df4f28.png" />
 </div>
 </div>
 </section>
@@ -896,20 +792,20 @@ Shape:  (133, 5)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="d_access_osm.html"
+       href="d_pytidycensus_intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Accessing OSM Data in Python</p>
+        <p class="prev-next-title">Introduction to pytidycensus</p>
       </div>
     </a>
     <a class="right-next"
-       href="d_pytidycensus_intro.html"
+       href="d_time_series_analysis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to pytidycensus</p>
+        <p class="prev-next-title">Time Series Analysis with Census Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -920,8 +816,7 @@ Shape:  (133, 5)
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -981,10 +876,19 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   width="300" align="left">
 </div>
 <div>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 </div><br><br>
 <div>
-<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
 </div>
 
 </div>
@@ -999,8 +903,8 @@ By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 myst:
   html_meta:
-    "description lang=en": ""
+    "description lang=en": "Learn how to read and write raster datasets using rasterio, including creating raster data from scratch with numpy arrays and working with affine transformations."
     "keywords": "spatial, raster, reproject, crs, landsat"
     "property=og:locale": "en_US"
 ---
@@ -214,7 +214,7 @@ with rasterio.open("../temp/LS_scaled_20200518.tif", mode="r") as src:
     show(src,adjust='linear')
 ```
 
-To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_intro).
+To help make all of this easier and more intuitive we will be presenting the use of `geowombat` for remote sensing applications later, [start here](f_rs_io.md).
 
 Just as a preview, here's how to do this in `geowombat`. 
 

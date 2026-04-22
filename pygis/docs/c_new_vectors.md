@@ -311,7 +311,7 @@ outfp = r"../temp/gwu_geog.shp"
 newdata.to_file(outfp)
 ```
 
-```tip}
+```{tip}
 Given the close integration between Geopandas and Pandas, it's beneficial to delve into the [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html) for a comprehensive understanding.
 ```
 

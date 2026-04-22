@@ -16,8 +16,6 @@ myst:
 
 # Replacing Values w. Rasterio
 
-----------------
-
 ```{admonition} Learning Objectives
 * Replace and interpolate values in a raster with rasterio
 ```

@@ -12,7 +12,7 @@
 
 #######################################################################################
 # Book settings
-title                       : Python Open Source Spatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
+title                       : PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing  # The title of the book. Will be placed in the left navbar.
 author                      : Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman  # The author of the book
 logo                        : pygis.png  # A path to the book logo
 sphinx:
@@ -20,7 +20,7 @@ sphinx:
     html_show_copyright: false
     html_baseurl: 'https://pygis.io/' #    must have / after last character 'https://mmann1123.github.io/pyGIS/'
     bibtex_reference_style: author_year
-    bibtex_bibfiles: reference.bib
+    bibtex_bibfiles: ["reference.bib"]
     language: en
 
     # templates_path:
@@ -34,16 +34,26 @@ sphinx:
 #######################################################################################
 # Execution settings
 execute:
-  execute_notebooks         : force  #auto, cache, off ,force
-  exclude_patterns          : 
-                              [ 
-                                'a_*',
+  execute_notebooks         : cache  #auto, cache, off ,force  — cache keeps STAC/ML outputs so rebuilds skip slow network calls
+  exclude_patterns          :
+                              [
+                              'a_*',
                               'b_*',
                               'c_*',
-                              # # 'd_*', 
-                               'e_*',
-                              'f_*',
-                               'g_*',
+                              'd_*',
+                              'e_*',
+                              'f_rs_band_math*',
+                              'f_rs_config*',
+                              'f_rs_crs*',
+                              'f_rs_edit*',
+                              'f_rs_extraction*',
+                              'f_rs_intro*',
+                              'f_rs_io*',
+                              'f_rs_mosaic*',
+                              'f_rs_plot*',
+                              'f_rs_task1*',
+                              #  'f_rs_stac*',  # executed to demo live STAC download
+                              #  'g_*',
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 
   #'e_attributes*','e_extraction*','e_new_vectors*','e_raster_op_intro*','e_raster_reproject*',
@@ -67,7 +77,6 @@ html:
   home_page_in_navbar:          true
   use_repository_button:        true
   google_analytics_id       :  'G-MQPNBR6XWJ' #  'UA-192844775-1' # A GA id that can be used to track book views.
-  extra_footer              :  
   extra_footer: |
         <div>
             <b>Supported by:</b>  <br>
@@ -76,10 +85,19 @@ html:
           width="300" align="left">
         </div>
         <div>
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
         </div><br><br>
         <div>
-        <a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a> 
+        <a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+        </div>
+        <br clear="all"><br>
+        <div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+          PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+          All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+          <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+          Content on this site is licensed under
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+          the trademark is <em>not</em> licensed under that license and is reserved separately.
         </div>
     
   # Will be displayed underneath the footer. width=150" height="70"

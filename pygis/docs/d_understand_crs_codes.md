@@ -19,7 +19,6 @@ myst:
 <!-- (d_understand_crs_codes)= -->
 
 # Understanding a CRS: Proj4 and CRS codes
-----------------
 
 ```{admonition} Learning Objectives
 * Understand how to read a `PROJ.4` string

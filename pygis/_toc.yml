@@ -46,10 +46,12 @@ parts:
   chapters:
   - file: docs/d_pytidycensus_intro
   - file: docs/d_access_census
+  - file: docs/d_time_series_analysis
   - file: docs/d_access_osm
 - caption: 6 - Remote Sensing in Python
   chapters:
   - file: docs/f_rs_io
+  - file: docs/f_rs_stac
   - file: docs/f_rs_config
   - file: docs/f_rs_edit
   - file: docs/f_rs_plot
@@ -61,4 +63,7 @@ parts:
 - caption: Hire pygis.io
   chapters:
   - file: docs/g_hire
+- caption: Legal
+  chapters:
+  - file: docs/a_trademark
 

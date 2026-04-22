@@ -16,8 +16,6 @@ myst:
 
 # Window Operations with Rasterio and GeoWombat
 
-----------------
-
 ```{admonition} Learning Objectives
 * Conduct and understand window operations with rasterio
 * Conduct window operations with GeoWombat
