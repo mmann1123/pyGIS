@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
@@ -18,8 +18,8 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
@@ -90,7 +90,7 @@
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
 
   
   
@@ -172,8 +172,6 @@
   
   
     
-    
-      
     
     
     <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
@@ -549,7 +547,7 @@ document.write(`
 <p>We can perform basic arithmetic operations on bands like addition, subtraction, multiplication, and division. For example, we can combine the red and green bands to create a new band that highlights vegetation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">rgbn</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
@@ -559,7 +557,7 @@ document.write(`
 <p>Calculate a new band adding the <code class="docutils literal notranslate"><span class="pre">red</span></code> and <code class="docutils literal notranslate"><span class="pre">nir</span></code> bands, returning an <code class="docutils literal notranslate"><span class="pre">Xarray.DataArray</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">,</span> <span class="n">band_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;nir&#39;</span><span class="p">])</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
     <span class="n">add_nir_red</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s1">&#39;nir&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
@@ -568,6 +566,16 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (y: 403, x: 515)&gt; Size: 208kB
+dask.array&lt;add, shape=(403, 515), dtype=uint8, chunksize=(64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * x        (x) float64 4kB 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 3kB 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+</pre></div>
+</div>
+<img alt="../_images/91b74de3e7758be0206b82f2e6d2bbdd72e57944adb6504a1c9fc3b7af257377.png" src="../_images/91b74de3e7758be0206b82f2e6d2bbdd72e57944adb6504a1c9fc3b7af257377.png" />
 </div>
 </div>
 <p>These simple operations can be combined with other geowombat functions to create more complex outputs like vegetation indices described below.</p>
@@ -585,7 +593,7 @@ document.write(`
 <p>Let’s start by looking at the original image in true color.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geowombat</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gw</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">geowombat.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">rgbn</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -599,14 +607,61 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/bc76a23f6204b00b63362b117c3e319050e4a54cc25cc8157f3936d739a007cc.png" src="../_images/bc76a23f6204b00b63362b117c3e319050e4a54cc25cc8157f3936d739a007cc.png" />
+</div>
 </div>
 <p>Calculate a vegetation index, returning an <code class="docutils literal notranslate"><span class="pre">Xarray.DataArray</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
     <span class="n">evi</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">evi</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">evi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (band: 4, y: 403, x: 515)&gt; Size: 830kB
+dask.array&lt;open_rasterio-41c714d5f49a58cd4f56df918bb0a310&lt;this-array&gt;, shape=(4, 403, 515), dtype=uint8, chunksize=(4, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * band     (band) int64 32B 1 2 3 4
+  * x        (x) float64 4kB 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 3kB 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+Attributes: (12/14)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan, nan, nan, nan)
+    _FillValue:          nan
+    ...                  ...
+    filename:            /home/mmann1123/miniconda3/envs/pygis/lib/python3.11...
+    resampling:          nearest
+    AREA_OR_POINT:       Area
+    DataType:            Generic
+    _data_are_separate:  0
+    _data_are_stacked:   0
+&lt;xarray.DataArray (band: 1, y: 403, x: 515)&gt; Size: 2MB
+dask.array&lt;where, shape=(1, 403, 515), dtype=float64, chunksize=(1, 64, 64), chunktype=numpy.ndarray&gt;
+Coordinates:
+  * x        (x) float64 4kB 7.93e+05 7.93e+05 7.93e+05 ... 7.956e+05 7.956e+05
+  * y        (y) float64 3kB 2.05e+06 2.05e+06 2.05e+06 ... 2.048e+06 2.048e+06
+  * band     (band) &lt;U3 12B &#39;evi&#39;
+Attributes: (12/18)
+    transform:           (5.0, 0.0, 792988.0, 0.0, -5.0, 2050382.0)
+    crs:                 32618
+    res:                 (5.0, 5.0)
+    is_tiled:            1
+    nodatavals:          (nan,)
+    _FillValue:          nan
+    ...                  ...
+    _data_are_separate:  0
+    _data_are_stacked:   0
+    pre-scaling:         0.0001
+    sensor:              rgbn
+    vi:                  evi
+    drange:              (0, 1)
 </pre></div>
 </div>
 </div>
@@ -614,7 +669,7 @@ document.write(`
 <p>Or use the configuration context to set parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -625,6 +680,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d53b2ecaac9f83b6fd96ffe46e4484fc4393645b8f87793aa12f69d64a8b238c.png" src="../_images/d53b2ecaac9f83b6fd96ffe46e4484fc4393645b8f87793aa12f69d64a8b238c.png" />
+</div>
 </div>
 </section>
 <section id="two-band-enhanced-vegetation-index-evi2">
@@ -633,7 +691,7 @@ document.write(`
 <p>This allows us to extend EVI calculations back in time using AVHRR, and avoids some problems with the blue band which tends to be noisy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -643,6 +701,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/c8e472df65793d9b16d0bda4fd6b3c787bce582cbc5b11d254be766392247584.png" src="../_images/c8e472df65793d9b16d0bda4fd6b3c787bce582cbc5b11d254be766392247584.png" />
+</div>
 </div>
 </section>
 <section id="normalized-difference-indices-ndvi">
@@ -651,7 +712,7 @@ document.write(`
 <p>We can calculate it using the generic <code class="docutils literal notranslate"><span class="pre">norm_diff</span></code> function for any two-band combination.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;rgbn&#39;</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -661,6 +722,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/b082873709ee75add14ce3e5f199b08f6d13c86f3a25e5d82202b70df5082e1b.png" src="../_images/b082873709ee75add14ce3e5f199b08f6d13c86f3a25e5d82202b70df5082e1b.png" />
+</div>
 </div>
 </section>
 <section id="tasseled-cap-transformations">
@@ -668,7 +732,7 @@ document.write(`
 <p>Tasseled cap tranform uses a linear equation to try to differentiate different components of the spectrum that are of interest for vegetation dynamics such as phenological stages. The output includes three bands including <code class="docutils literal notranslate"><span class="pre">brightness</span></code>, <code class="docutils literal notranslate"><span class="pre">greeness</span></code> for vegetation, and <code class="docutils literal notranslate"><span class="pre">wetness</span></code> as an idicator of soil and canopy moisture. Use <code class="docutils literal notranslate"><span class="pre">.sel(band='wetness')</span></code> to select them individually.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="s1">&#39;qb&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">gw</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">rgbn</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
@@ -678,6 +742,12 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bands [&#39;brightness&#39; &#39;greenness&#39; &#39;wetness&#39;]
+</pre></div>
+</div>
+<img alt="../_images/d8584254278745612849441d550dc3151fa99a3cf6aeb570845643491537cfc8.png" src="../_images/d8584254278745612849441d550dc3151fa99a3cf6aeb570845643491537cfc8.png" />
 </div>
 </div>
 </section>

@@ -22,6 +22,8 @@ sphinx:
     bibtex_reference_style: author_year
     bibtex_bibfiles: ["reference.bib"]
     language: en
+    html_context:
+      default_mode: light   # force light mode; users can still toggle via the theme switcher
 
     # templates_path:
       # - _templates
@@ -41,18 +43,9 @@ execute:
                               'b_*',
                               'c_*',
                               'd_*',
-                              'e_*',
-                              'f_rs_band_math*',
-                              'f_rs_config*',
-                              'f_rs_crs*',
-                              'f_rs_edit*',
-                              'f_rs_extraction*',
-                              'f_rs_intro*',
-                              'f_rs_io*',
-                              'f_rs_mosaic*',
-                              'f_rs_plot*',
-                              'f_rs_task1*',
-                              #  'f_rs_stac*',  # executed to demo live STAC download
+                              #  Vector & raster ops (e_*) + remote sensing (f_rs_*)
+                              #  now execute so their outputs render in the HTML.
+                              #  Re-add specific files here if one starts failing.
                               #  'g_*',
                               ]     # A list of patterns to *skip* in execution (e.g. a notebook that takes a really long time)
 

@@ -264,7 +264,7 @@ There are multiple spatial relationships available in `geopandas`: [^gpd_binary]
 | covered by | `covered_by()` | all of the geometry's points are to the interior of the other geometry's points |
 | crosses | `crosses()` | geometry's interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry |
 | disjoint | `disjoint()` | geometry's boundary and interior do not intersect the boundary and interior of the other geometry |
-| equal geometry | `geom_equals()`, `geom_almost_equals()`, `geom_equals_exact()` | geometry's boundary, interior, and exterior matches (within a range) those of the other |
+| equal geometry | `geom_equals()`, `geom_equals_exact(other, tolerance=...)` | geometry's boundary, interior, and exterior matches (within a range) those of the other |
 | intersects | `intersects()` | geometry's boundary or interior touches or crosses any part of the other geometry |
 | overlaps | `overlaps()` | geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions |
 | touches | `touches()` | geometry shares at least one point with the other geometry, provided that no part of the geometry's interior intersects with the other geometry |
