@@ -23,7 +23,7 @@ myst:
 ```{admonition} Learning Objectives
 - Understand the role and significance of package managers in the context of software development and geospatial data science.
 - Create and activate a new `conda` environment.
-- Use `conda` and `conda` to install geospatial packages from the `conda-forge` channel.
+- Use `conda` to install geospatial packages from the `conda-forge` channel.
 - Recognize key geospatial packages  
 ```
 
@@ -69,7 +69,7 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Then, we can install `geowombat` and `geowombat-ml` using `conda` or `conda`. For `conda`:
+Then, we can install `geowombat` and `geowombat-ml` using `conda`:
 
 ```{code-block} console
 conda install geowombat geowombat-ml
