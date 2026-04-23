@@ -21,8 +21,8 @@ myst:
 ----------------
 
 ```{admonition} Learning Objectives
-- How to assign a projection to vector data
-- How to reproject vector data
+- Assign a projection to vector data
+- Reproject vector data
 ```
 ```{admonition} Review
 * [Understanding CRS codes](d_understand_crs_codes.md)

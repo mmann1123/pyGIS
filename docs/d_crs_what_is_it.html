@@ -13,7 +13,7 @@
 <meta content="spatial,  crs, coordinate reference system, projection" name="keywords" />
 <meta content="en_US" property="og:locale" />
 
-    <title>What is a CRS? &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
+    <title>What is a Coordinate Reference System (CRS)? &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
   
   
   
@@ -217,7 +217,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">What is a CRS?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">What is a Coordinate Reference System (CRS)?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
@@ -473,7 +473,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>What is a CRS?</h1>
+    <h1>What is a Coordinate Reference System (CRS)?</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -517,10 +517,9 @@ document.write(`
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
-<li><p>Learn what a Coordinate Reference System (CRS) is</p></li>
-<li><p>Learn about the properties of a CRS</p></li>
-<li><p>Differentiate projected and geographic CRSs</p></li>
-<li><p>Understand CRS impact on shape, area and distance</p></li>
+<li><p>Identify the properties of a Coordinate Reference System (CRS)</p></li>
+<li><p>Differentiate between projected and geographic coordinate reference systems</p></li>
+<li><p>Identify the impact of a CRS on shape, area, and distance</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -530,8 +529,8 @@ document.write(`
 </ul>
 </div>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="what-is-a-crs">
-<h1>What is a CRS?<a class="headerlink" href="#what-is-a-crs" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-a-coordinate-reference-system-crs">
+<h1>What is a Coordinate Reference System (CRS)?<a class="headerlink" href="#what-is-a-coordinate-reference-system-crs" title="Link to this heading">#</a></h1>
 <p>Implicit with any GIS data is a spatial reference system. It can consist of a simple arbitrary reference system such as a 10 m x 10 m sampling grid in a wood lot or, the boundaries of a soccer field or, it can consist of a geographic reference system, i.e. one where the spatial features are mapped to an earth based reference system. The focus of this topic is on earth reference systems which can be based on a Geographic Coordinate System (GCS) or a Project Coordinate System (PCS).</p>
 <section id="geographic-coordinate-systems">
 <h2>Geographic Coordinate Systems<a class="headerlink" href="#geographic-coordinate-systems" title="Link to this heading">#</a></h2>

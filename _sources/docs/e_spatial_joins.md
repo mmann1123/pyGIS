@@ -17,9 +17,9 @@ myst:
 
 ----------------
 ```{admonition} Learning Objectives
-* Understand various types of spatial join relationships
+* Identify various types of spatial join relationships
 * Recognize different types of spatial joins
-* Understand how table relationships can affect a spatial join
+* Explain how table relationships can affect a spatial join
 ```
 ----------------
 

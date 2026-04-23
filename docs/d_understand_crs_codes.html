@@ -82,7 +82,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Affine Transforms" href="d_affine.html" />
-    <link rel="prev" title="What is a CRS?" href="d_crs_what_is_it.html" />
+    <link rel="prev" title="What is a Coordinate Reference System (CRS)?" href="d_crs_what_is_it.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -217,7 +217,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a CRS?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a Coordinate Reference System (CRS)?</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Understanding a CRS: Proj4 and CRS codes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
@@ -525,9 +525,10 @@ document.write(`
 <div class="admonition-learning-objectives admonition">
 <p class="admonition-title">Learning Objectives</p>
 <ul class="simple">
-<li><p>Understand how to read a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string</p></li>
-<li><p>Understand how a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string relates to an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code</p></li>
-<li><p>Visually explore changing <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string parameters</p></li>
+<li><p>Read and apply a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string</p></li>
+<li><p>Obtain an <code class="docutils literal notranslate"><span class="pre">EPSG</span></code> code from a <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string</p></li>
+<li><p>Create a custom CRS using <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code></p></li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">PROJ.4</span></code> string parameters</p></li>
 </ul>
 </div>
 <div class="admonition-review admonition">
@@ -987,7 +988,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">What is a CRS?</p>
+        <p class="prev-next-title">What is a Coordinate Reference System (CRS)?</p>
       </div>
     </a>
     <a class="right-next"

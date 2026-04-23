@@ -18,8 +18,8 @@ myst:
 ----------------
 
 ```{admonition} Learning Objectives
-* Utilize different vector overlays and understand the differences between each
-* Join data based on their geographic location and explore the different join types
+* Apply different vector overlays and differentiate between them
+* Join data based on their geographic location and compare the different join types
 ```
 ```{admonition} Review
 * [Spatial Vector Data](c_vectors.md)

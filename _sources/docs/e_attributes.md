@@ -43,7 +43,7 @@ Structure of a `GeoDataFrame` extends the functionality of a Pandas `DataFrame`
 Each `GeoSeries` can contain any geometry type (e.g. points, lines, polygon) and has a `GeoSeries.crs` attribute, which stores information on the projection (CRS stands for Coordinate Reference System). Therefore, each `GeoSeries` in a `GeoDataFrame` can be in a different projection, allowing you to have, for example, multiple versions of the same geometry, just in a different CRS.
 
 
-```{tip}  Becuase GeoPandas are so intertwined spend the time to learn more about here [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
+```{tip}  Because GeoPandas and Pandas are so intertwined, spend the time to learn more here: [Pandas User Guide](https://pandas.pydata.org/pandas-docs/stable/user_guide/index.html)
 ```
 
 ## Create New Attributes
