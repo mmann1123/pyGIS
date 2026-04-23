@@ -22,10 +22,10 @@ myst:
 ----------------
 
 ```{admonition} Learning Objectives
-- Learn how rasters are reprojected
-- Learn how affine transforms are used 
-- Use rasterio to reproject a raster
-- Learn about interpolation options during transforms
+- Describe how rasters are reprojected
+- Explain how affine transforms are used
+- Utilize rasterio to reproject a raster
+- Identify and apply interpolation options when using transforms
 ```
 ```{admonition} Review
 * [Intro to Raster data](c_rasters.md)

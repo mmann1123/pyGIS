@@ -21,10 +21,9 @@ myst:
 ----------------
 
 ```{admonition} Learning Objectives
-* Learn what a Coordinate Reference System (CRS) is
-* Learn about the properties of a CRS
-* Differentiate projected and geographic CRSs
-* Understand CRS impact on shape, area and distance
+* Identify the properties of a Coordinate Reference System (CRS)
+* Differentiate between projected and geographic coordinate reference systems
+* Identify the impact of a CRS on shape, area, and distance
 ```
 ```{admonition} Review
 * [Affine Transforms](d_affine.md)
@@ -33,7 +32,7 @@ myst:
 
 
 
-# What is a CRS?
+# What is a Coordinate Reference System (CRS)?
  
 Implicit with any GIS data is a spatial reference system. It can consist of a simple arbitrary reference system such as a 10 m x 10 m sampling grid in a wood lot or, the boundaries of a soccer field or, it can consist of a geographic reference system, i.e. one where the spatial features are mapped to an earth based reference system. The focus of this topic is on earth reference systems which can be based on a Geographic Coordinate System (GCS) or a Project Coordinate System (PCS). 
 

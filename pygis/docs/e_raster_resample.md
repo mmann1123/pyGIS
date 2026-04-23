@@ -21,7 +21,7 @@ myst:
 
 ```{admonition} Learning Objectives
 - Resample a raster with rasterio & geowombat
-- Learn how to match the extent
+- Co-register two rasters by aligning their extent and resolution
 ```
 ```{admonition} Review
 * [Affine transformation](d_affine.md)

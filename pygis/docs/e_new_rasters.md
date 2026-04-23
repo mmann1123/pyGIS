@@ -18,8 +18,8 @@ myst:
 
 ----------------
 ```{admonition} Learning Objectives
-- Creating raster data with Rasterio
-- Creating raster data with Rasterio
+- Create raster data with Rasterio
+- Assign a CRS and affine transform to a new raster
 ```
 ```{admonition} Review
 * [Affine transformation](d_affine.md)

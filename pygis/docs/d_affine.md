@@ -21,8 +21,8 @@ myst:
 
 ---------------
 ```{admonition} Learning Objectives
-* Learn how to use Affine transforms
-* Differentiate translate, rotate, skew, shear
+* Utilize Affine transforms
+* Differentiate between translate, rotate, skew, and shear transformations
 ```
 ```{admonition} Review
 * [Data Structures](c_features.md)

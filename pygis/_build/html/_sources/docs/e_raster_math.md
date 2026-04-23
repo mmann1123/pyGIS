@@ -17,8 +17,8 @@ myst:
 # Band Math w. Rasterio
 
 ```{admonition} Learning Objectives
-* Conduct mathematical operations on raster bands with rasterio
-* Understand the requirements for successful mathematical operations
+* Perform mathematical operations on raster bands using rasterio
+* Identify the requirements for successful mathematical operations
 ```
 ```{admonition} Review
 * [Reproject Rasters w. Rasterio and Geowombat](e_raster_reproject.md)

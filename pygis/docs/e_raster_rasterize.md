@@ -18,7 +18,7 @@ myst:
 
 ```{admonition} Learning Objectives
 * Convert vector data into raster format with rasterio
-* Understand the requirements for successful conversion
+* Identify the requirements for successful conversion
 ```
 ```{admonition} Review
 * [Spatial Vector Data](c_vectors.md)

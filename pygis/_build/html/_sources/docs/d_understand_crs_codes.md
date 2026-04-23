@@ -21,9 +21,10 @@ myst:
 # Understanding a CRS: Proj4 and CRS codes
 
 ```{admonition} Learning Objectives
-* Understand how to read a `PROJ.4` string
-* Understand how a `PROJ.4` string relates to an `EPSG` code
-* Visually explore changing `PROJ.4` string parameters
+* Read and apply a `PROJ.4` string
+* Obtain an `EPSG` code from a `PROJ.4` string
+* Create a custom CRS using `PROJ.4`
+* Modify `PROJ.4` string parameters
 ```
 ```{admonition} Review
 * [CRS what is it?](d_crs_what_is_it)
