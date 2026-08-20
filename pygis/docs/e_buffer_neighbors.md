@@ -71,13 +71,14 @@ Let's take a look at the data.
 lines.plot(column='ID')
 ```
 
-```{important} NEVER do distance analysis with unprojected data (e.g. lat/lon). Distances are best not measured in degrees! Instead use `.to_crs()` to convert to a projected coordinate system with a linear unit in feet or meters.
+```{important}
+NEVER do distance analysis with unprojected data (e.g. lat/lon). Distances are best not measured in degrees! Instead use `.to_crs()` to convert to a projected coordinate system with a linear unit in feet or meters.
 ```
 
 Why does this matter? Geographic coordinates (lat/lon) are *angular* — they locate a point by degrees around the globe, and a degree of longitude covers a different ground distance depending on how far you are from the equator. A projected coordinate system instead lays the world out on a flat, Cartesian grid measured in constant linear units (meters or feet), so the straight-line distance between two points is meaningful and consistent. Although it is not clearly stated, the `distance` parameter is measured in the linear unit of the projection, so before we get started we need to use `to_crs()` to convert to a projected coordinate system. 
 
 ```{code-cell} ipython3
-# plot county outline and add wells to axis (ax)
+# reproject the lines to a projected CRS (Web Mercator, EPSG:3857)
 lines = lines.to_crs(3857)
 # check the linear unit name in `unit_name`.
 print(lines.crs.axis_info)
