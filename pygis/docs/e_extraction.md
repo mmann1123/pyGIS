@@ -315,6 +315,37 @@ plot_df(result_name = "San Francisco Bay Area Wells within Santa Clara County", 
 If we are interested in wells that fall within two or more counties (i.e., we have multiple records that will be used for selection), we can enclose the above code in a `for` loop.
 ```
 
+For example, if we are interested in wells that fall within two or more counties, we can loop over the county names, select each county's boundary, subset the wells within it, and combine the results into a single GeoDataFrame.
+
+```{code-cell} ipython3
+# The counties we want to select wells from
+county_names = ["Santa Clara County", "Alameda County"]
+
+# Create an empty list to collect the wells found in each county
+selected_wells = []
+
+# Loop over each county name
+for name in county_names:
+
+    # Select this county's boundary
+    county_boundary = counties[counties["coname"] == name]
+
+    # Subset the wells that fall within this county's Shapely object
+    wells_in_county = wells[wells.within(county_boundary.geometry.values[0])]
+
+    # Add this county's wells to our list
+    selected_wells.append(wells_in_county)
+
+# Combine the per-county results into a single GeoDataFrame
+wells_within_multiple = pd.concat(selected_wells)
+
+# Display first two and last two rows of attribute table
+display_table(table_name = "San Francisco Bay Area Wells within Santa Clara and Alameda Counties", attribute_table = wells_within_multiple)
+
+# Plot selection
+plot_df(result_name = "San Francisco Bay Area Wells within Santa Clara and Alameda Counties", result_df = wells_within_multiple, result_geom_type = "point", area = counties[counties["coname"].isin(county_names)])
+```
+
 [^gpd_clip]: [Clip Vector Data with GeoPandas, GeoPandas](https://geopandas.org/gallery/plot_clip.html)
 [^gpd_select]: [Indexing and Selecting Data, GeoPandas](https://geopandas.org/docs/user_guide/indexing.html)
 [^pd_select]: [Indexing and selecting data, pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html)

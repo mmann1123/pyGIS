@@ -41,6 +41,24 @@ Far and away the easiest way to handle raster data is by using [geowombat](https
 
 In order to reproject on the fly we are going to open the raster using `gw.config.update()`.  The configuration manager allows easy control over opened raster dimensions, alignment, and transformations. All we need to do is pass a `ref_crs` to the configuration manager. We can also use the `resampling` method when we `open` the image, by default it will be `nearest`, but you can also choose one of [‘average’, ‘bilinear’, ‘cubic’, ‘cubic_spline’, ‘gauss’, ‘lanczos’, ‘max’, ‘med’, ‘min’, ‘mode’, ‘nearest’].
 
+```{admonition} Which resampling method should I use?
+:class: tip
+
+When we reproject, the output pixel centers rarely line up with the input pixels, so each new pixel value has to be *estimated* from its neighbors. The `resampling` method controls how that estimate is made. The most important question is whether your raster is **categorical** (land-cover classes, where inventing an in-between value is meaningless) or **continuous** (reflectance, elevation, temperature).
+
+| Method | Best for | What it does |
+|---|---|---|
+| `nearest` | categorical (default) | copies the value of the single closest input pixel — never invents new values |
+| `mode` | categorical | assigns the most common value among the surrounding pixels |
+| `bilinear` | continuous | distance-weighted average of the 4 nearest pixels — smooth and fast |
+| `cubic` | continuous | weighted average over the 16 nearest pixels using a cubic kernel — smoother than bilinear |
+| `cubic_spline` | continuous | fits a smooth spline through the surrounding pixels; smoother still, but can overshoot near sharp edges |
+| `average` | downsampling continuous | mean of all input pixels that fall under the output pixel |
+| `lanczos` | continuous | high-quality sinc-based filter; sharpest result but slowest |
+
+The difference between `cubic` and `cubic_spline` is the interpolating curve: `cubic` applies a fixed convolution kernel over a 4×4 window, while `cubic_spline` fits a piecewise polynomial (a *spline*) that passes smoothly through the points — see [this walkthrough of cubic spline interpolation](https://pythonnumericalmethods.berkeley.edu/notebooks/chapter17.03-Cubic-Spline-Interpolation.html). Rule of thumb: use `nearest` for categorical rasters and `bilinear` or `cubic` for continuous ones.
+```
+
 ```{code-cell} ipython3
 :tags: ["hide-output"]
 import geowombat as gw
@@ -157,8 +175,11 @@ with rasterio.open("../data/LC08_L1TP_224078_20200518_20200518_01_RT.TIF") as sr
             )
 ```
 
+The result is shown in {numref}`Figure %s <reproj_landsat>`.
+
 ```{figure} ../_static/d_crs/d_reproj_image.png
-:name: Reprojected Landsat Image
+:name: reproj_landsat
 :width: 400px
-Reprojected Landsat Image
+
+The Landsat scene reprojected to Web Mercator (`EPSG:3857`) with Rasterio. Compare it to the geowombat output at the top of the page — both take the same source image and warp it onto a new coordinate grid, but here we built the destination transform by hand with `calculate_default_transform`. The black wedges along the edges are `nodata` (0) pixels: reprojection rotates and stretches the image relative to its original rectangular footprint, so the corners of the new raster fall outside the area covered by the original scene.
 ```

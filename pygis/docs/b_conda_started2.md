@@ -62,31 +62,29 @@ Now, any package you install will be installed in this environment, keeping it i
 
 ## Installing Geospatial Packages
 
-Before we install the packages, we need to add `conda-forge` to your channels:
+Before we install anything, we need to tell `conda` to use the `conda-forge` channel, which carries the most up-to-date geospatial packages. If you installed Miniforge this is already the default, but setting it explicitly does no harm:
 
 ```{code-block} console
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Then, we can install `geowombat` and `geowombat-ml` using `conda`:
+Nearly all of the packages we need are available on `conda-forge`, so we can install them in a single command. Installing them from one channel — rather than mixing `conda` and `pip` — is the approach the GeoPandas developers recommend, since pulling geospatial dependencies from different sources can lead to hard-to-debug import errors.
 
 ```{code-block} console
-conda install geowombat geowombat-ml
-```
- 
-
-Following this, we need to install the following packages: `pyproj`,  `contextily`, `earthpy`, `census`, `geoplot`, `osmnx`, `pykrige`, and `us`.  We will start with the packages available through `conda-forge`:
-
-
-```{code-block} console
-conda install pyproj geopandas       
+conda install -c conda-forge geowombat geowombat-ml geowombat-stac pyproj geopandas contextily earthpy census geoplot osmnx pykrige us
 ```
 
-Finally install those packages that aren't available through `conda-forge`:
+One package, `pytidycensus` (used in the census chapter), is not published on `conda-forge`, so we install that single package from PyPI into the same environment:
 
 ```{code-block} console
-pip install census contextily earthpy geoplot osmnx us pykrige
+pip install pytidycensus
+```
+
+```{note}
+Prefer `pip` for everything? You can instead install the whole stack into a virtual environment with
+`pip install "geowombat[ml,stac]" pyproj geopandas contextily earthpy census pytidycensus geoplot osmnx pykrige us` —
+just don't mix `pip` and `conda` for the *geospatial* packages within one environment. Installing the pure-Python `pytidycensus` with `pip` on top of a conda environment, as above, is fine.
 ```
 
 Now you have all the packages installed and ready to be used in your new environment!
@@ -100,7 +98,7 @@ First activate the environment you created earlier:
 conda activate myenv
 ```
 
-The enter a pythone session by typing:
+Then enter a Python session by typing:
 
 ```{code-block} console
 python
@@ -111,8 +109,8 @@ You should now see `>>>` in your terminal, indicating that you are in a Python i
 To verify that the packages are installed correctly, you can run the following commands in a Python interpreter:
 
 ```python
-import geowombat
-import geowombat_ml
+import geowombat as gw
+from geowombat.ml import fit, predict, fit_predict
 import pyproj
 import geopandas
 import contextily

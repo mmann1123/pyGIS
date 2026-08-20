@@ -53,7 +53,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import rasterio
-from rasterio.transform import Affine
+from rasterio.transform import Affine, from_bounds
 from scipy import stats
 from shapely.geometry import Polygon, box
 from sklearn.datasets import fetch_species_distributions
@@ -497,27 +497,34 @@ plt.show()
 
 We can export the raster if necessary.
 
+Saving a NumPy array as a georeferenced raster has one subtlety worth pausing on: **array orientation**. When we built the KDE surface we used `np.mgrid[min_x:max_x, min_y:max_y]`, so in `Z` the *first* axis increases from west to east and the *second* axis increases from south to north. A GeoTIFF, on the other hand, expects the *first* axis (rows) to run north→south and the *second* axis (columns) to run west→east. To reconcile the two we rotate the array 90° counter-clockwise with `np.rot90(Z)` — so that row 0 becomes the northern-most row — and then let `rasterio.transform.from_bounds()` build a standard north-up transform for us (origin at the top-left corner, with a negative y-resolution).
+
+```{note}
+An earlier version of this example flipped and rotated the array (`np.rot90(np.flip(Z, 0), 3)`) and wrote a transform with a *positive* y-resolution. That still stores a valid pixel-to-coordinate mapping — so `rasterio`'s `.sample()` returns the correct density at any coordinate — but the raster ends up upside-down relative to the usual north-up convention, so it appears vertically flipped in most GIS software. Pairing `np.rot90(Z)` with `from_bounds()` keeps that same correct coordinate mapping *and* stores the raster north-up, so it displays right-side up everywhere.
+```
+
 ```{code-cell} ipython3
 def export_kde_raster(Z, XX, YY, min_x, max_x, min_y, max_y, proj, filename):
     '''Export and save a kernel density raster.'''
 
-    # Flip array vertically and rotate 270 degrees
-    Z_export = np.rot90(np.flip(Z, 0), 3)
+    # Rotate the array 90 degrees counter-clockwise so it is oriented north-up
+    # (row 0 = northern-most row, column 0 = western-most column), the layout
+    # a GeoTIFF expects.
+    Z_export = np.rot90(Z)
 
-    # Get resolution
-    xres = (max_x - min_x) / len(XX)
-    yres = (max_y - min_y) / len(YY)
-
-    # Set transform
-    transform = Affine.translation(min_x - xres / 2, min_y - yres / 2) * Affine.scale(xres, yres)
+    # Build a north-up affine transform directly from the data bounds and the
+    # rotated array's shape. from_bounds places the origin at the top-left
+    # corner and sets a negative y-resolution for us.
+    height, width = Z_export.shape
+    transform = from_bounds(min_x, min_y, max_x, max_y, width, height)
 
     # Export array as raster
     with rasterio.open(
             filename,
             mode = "w",
             driver = "GTiff",
-            height = Z_export.shape[0],
-            width = Z_export.shape[1],
+            height = height,
+            width = width,
             count = 1,
             dtype = Z_export.dtype,
             crs = proj,

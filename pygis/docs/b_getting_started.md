@@ -22,7 +22,7 @@ In this lecture, you will learn how to
 3.  run a sample program
 4.  install the code libraries that underpin these lectures
 
-## Anaconda
+## Conda and Miniforge
 
 The [core Python package](https://www.python.org/downloads/) is easy to
 install but *not* what you should choose for these lectures.
@@ -34,24 +34,35 @@ which
 -   is painful to install one piece at a time.
 
 Hence the best approach for our purposes is to install a Python
-distribution that contains
+distribution that comes with
 
 1.  the core Python language **and**
-2.  compatible versions of the most popular scientific libraries.
+2.  a package manager that can pull in compatible versions of the most
+    popular scientific libraries.
 
+That package manager is `conda`, and the distribution we recommend is
+[Miniforge](https://github.com/conda-forge/miniforge).
 
-The best such distribution is
-[Anaconda](https://www.anaconda.com/what-is-anaconda/).
+Miniforge is
 
-Anaconda is
+-   lightweight --- it installs `conda` and little else, so you add only
+    the packages you actually need
+-   cross-platform (Windows, macOS, and Linux)
+-   configured to use the community-run
+    [conda-forge](https://conda-forge.org/) channel by default, which has
+    the most up-to-date geospatial packages
+-   free for everyone to use, including large organizations and
+    grant-funded research
 
--   very popular
--   cross-platform
--   comprehensive
--   completely unrelated to the Nicki Minaj song of the same name
-
-Anaconda also comes with a great package management system to organize
-your code libraries.
+```{note}
+You may have seen the full **Anaconda** distribution recommended elsewhere
+(it is very popular, comprehensive, and completely unrelated to the Nicki
+Minaj song of the same name). It still works, but as of 2024 Anaconda\'s
+terms of service require a paid license for larger organizations and some
+grant-funded research, and it defaults to Anaconda\'s own channels rather
+than conda-forge. Miniforge sidesteps both issues, which is why we use it
+here.
+```
 
 ```{note}
 All of what follows assumes that you adopt this recommendation!
@@ -59,32 +70,28 @@ All of what follows assumes that you adopt this recommendation!
 
 (install_anaconda)=
 
-### Installing Anaconda
+### Installing Miniforge
 
-To install Anaconda, [download](https://www.anaconda.com/download/) the
-binary and follow the instructions.
+To install Miniforge,
+[download](https://github.com/conda-forge/miniforge#download) the installer
+for your operating system and follow the instructions.
 
 Important points:
 
 -   Install the latest version!
--   If you are asked during the installation process whether you\'d like
-    to make Anaconda your default Python installation, say yes.
+-   On Windows, use the **Miniforge Prompt** that gets installed for the
+    commands below; on macOS and Linux, use your normal terminal.
 
-### Updating Anaconda
+### Updating conda
 
-Anaconda supplies a tool called `conda` to manage and
-upgrade your Anaconda packages.
+`conda` is the tool you use to manage and upgrade your packages.
 
-One `conda` command you should execute regularly is the one
-that updates the whole Anaconda distribution.
+One command you should run regularly keeps `conda` itself up to date:
 
-As a practice run, please execute the following
+1.  Open up a terminal (or the Miniforge Prompt on Windows)
+2.  Type `conda update conda`
 
-1.  Open up a terminal
-2.  Type `conda update anaconda`
-
-For more information on `conda`, type `conda
-help` in a terminal.
+For more information on `conda`, type `conda help` in a terminal.
 
 (ipython_notebook)=
 
@@ -370,10 +377,6 @@ icon.
 Save it somewhere, navigate to it from the Jupyter dashboard and then
 run as discussed above.
 
-
-Sure! Let's add a section using Myst Markdown to explain how to access and use Google Colab.
-
- 
 
 ## Using Google Colab
 

@@ -17,9 +17,9 @@ myst:
 ----------------
 
 ```{admonition} Learning Objectives
-* Do distance/proximity based analysis for points, lines, polygons
+* Conduct distance and proximity-based analysis for points, lines, and polygons
 * Create buffers
-* Get nearest neighbors
+* Compute nearest neighbors
 ```
 ```{admonition} Review
 * [Spatial Vector Data](c_vectors.md)
@@ -33,6 +33,8 @@ In this chapter we are going to dig into some of the most common spatial operati
  
 
 ## Buffer Analysis
+A *buffer* is a zone of a specified distance drawn around a feature. Buffering a point produces a circle, buffering a line produces a corridor, and buffering a polygon grows (or, with a negative distance, shrinks) its boundary. Buffers are how we answer proximity questions like *"which homes fall within 50 meters of a highway?"* — anything that falls inside the buffer zone counts as close enough.
+
 First, we will import the necessary modules and create two lines (click the + below to show code cell). 
 
 ```{code-cell} ipython3
@@ -69,10 +71,10 @@ Let's take a look at the data.
 lines.plot(column='ID')
 ```
 
-```{important} NEVER do distance analysis with unprojeted data (e.g. lat lon). Distances are best not measured in degrees! Instead use .to_crs() to convert it to a projected coordinate system with a linear unit in feet or meters etc.
+```{important} NEVER do distance analysis with unprojected data (e.g. lat/lon). Distances are best not measured in degrees! Instead use `.to_crs()` to convert to a projected coordinate system with a linear unit in feet or meters.
 ```
 
-Although it is not clearly stated the `distance` parameter is measured in the linear unit of the projection. So before we get started we need to make sure to use `to_crs()` to convert to a projected coordinate system. 
+Why does this matter? Geographic coordinates (lat/lon) are *angular* — they locate a point by degrees around the globe, and a degree of longitude covers a different ground distance depending on how far you are from the equator. A projected coordinate system instead lays the world out on a flat, Cartesian grid measured in constant linear units (meters or feet), so the straight-line distance between two points is meaningful and consistent. Although it is not clearly stated, the `distance` parameter is measured in the linear unit of the projection, so before we get started we need to use `to_crs()` to convert to a projected coordinate system. 
 
 ```{code-cell} ipython3
 # plot county outline and add wells to axis (ax)
@@ -166,6 +168,29 @@ print('Coordinates of closest destination point:',nearest_destination)
 ```
 
 As you can see the `nearest_points` function returns a tuple of geometries where the first item is the geometry of our origin point and the second item (at index 1) is the actual nearest geometry from the destination points. Hence, the closest destination point seems to be the one located at coordinates (0, 1.45).
+
+Let's visualize what just happened. We'll plot the origin, the candidate destinations, and draw a line to the one the function picked as the nearest neighbor.
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6, 6))
+
+# Plot the origin point
+ax.scatter(orig.x, orig.y, color='red', s=90, zorder=3, label='Origin')
+
+# Plot each candidate destination and label it
+for i, d in enumerate([dest1, dest2, dest3], start=1):
+    ax.scatter(d.x, d.y, color='dimgray', s=70, zorder=3)
+    ax.annotate('dest{}'.format(i), (d.x, d.y), textcoords='offset points', xytext=(6, 6))
+
+# Draw a line from the origin to the nearest destination
+ax.plot([orig.x, nearest_destination.x], [orig.y, nearest_destination.y],
+        color='dodgerblue', linewidth=2, zorder=2, label='Nearest')
+
+ax.legend()
+ax.set_title('Nearest neighbor: origin to its closest destination')
+```
 
 This is the basic logic how we can find the nearest point from a set of points.
 
