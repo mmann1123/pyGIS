@@ -1,0 +1,41 @@
+# Conda environment used by .github/workflows/book.yml to build and test the
+# book. Mirrors pygis_env.sh (single conda-forge solve for the geospatial
+# stack) plus the Jupyter Book toolchain from requirements.txt.
+name: pygis-book
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - "numpy<2"
+  - geowombat
+  - geowombat-ml
+  - geowombat-stac
+  - geopandas
+  - rasterio
+  - pyproj
+  - contextily
+  - earthpy
+  - census
+  - geoplot
+  - osmnx
+  - pykrige
+  - us
+  - numpy_groupies
+  - sympy
+  - cython
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - ipykernel
+  - pip
+  - pip:
+      - jupyter-book==1.0.4.post1
+      - sphinx_sitemap
+      - sphinxcontrib.bibtex
+      - sphinx_inline_tabs
+      - pydata-sphinx-theme
+      - pytidycensus
+      - ghp-import
+      - pytest
+      - beautifulsoup4
+      - pyyaml
