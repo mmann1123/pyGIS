@@ -1,0 +1,2005 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="Learn how to subset and extract data from a GeoDataFrame through clipping, selecting by attribute, and selecting by location" lang="en" name="description" xml:lang="en" />
+<meta content="spatial, attribute data, subset, extract, selection, vector, shapefile" name="keywords" />
+<meta content="en_US" property="og:locale" />
+
+    <title>Extracting Spatial Data &#8212; PyGIS&amp;trade; - Python Open Source Spatial Programming &amp; Remote Sensing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MQPNBR6XWJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('consent', 'default', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied'
+                });
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('consent', 'default', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied'
+                });
+                gtag('js', new Date());
+                gtag('config', 'G-MQPNBR6XWJ');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/e_extraction';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://pygis.io/docs/e_extraction.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Spatial Overlays and Joins" href="e_vector_overlay.html" />
+    <link rel="prev" title="Merge Data &amp; Dissolve Polygons" href="e_vector_merge_dissolve.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="light">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="a_intro.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../_static/pygis.png" class="logo__image only-light" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+    <img src="../_static/pygis.png" class="logo__image only-dark pst-js-only" alt="PyGIS&trade; - Python Open Source Spatial Programming & Remote Sensing - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="a_intro.html">
+                    PyGIS™ - Open Source Spatial Programming & Remote Sensing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">0 - Get Started in Spatial Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="b_intro_py.html">Welcome - Let’s get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_about_py.html">Getting Started in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_getting_started.html">Setting up a Normal Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_conda_started2.html">Geospatial Environment Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="b_learn_more.html">Learn More</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">1 - Spatial Data Types in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="c_features.html">Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_store_features.html">Data Storage Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_vectors.html">Working with Spatial Vector Data using GeoPandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_new_vectors.html">Manipulating Spatial Objects: Points, Lines, Polygons in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="c_rasters.html">Spatial Raster Data in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2 - Nature of Coordinate Systems in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_crs_what_is_it.html">What is a Coordinate Reference System (CRS)?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_understand_crs_codes.html">Understanding a CRS: Proj4 and CRS codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_affine.html">Affine Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_vector_crs_intro.html">Vector Coordinate Reference Systems (CRS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_raster_crs_intro.html">Raster Coordinate Reference Systems (CRS)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3 - Vector Operations in Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_attributes.html">Attributes &amp; Indexing for Vector Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_buffer_neighbors.html">Proximity Analysis - Buffers, Nearest Neighbor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_merge_dissolve.html">Merge Data &amp; Dissolve Polygons</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Extracting Spatial Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_vector_overlay.html">Spatial Overlays and Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_spatial_joins.html">Spatial Joins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_summarize_vector.html">Point Density Measures - Counts &amp; Kernel Density</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_interpolation.html">Spatial Interpolation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4 - Raster Operations in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="e_new_rasters.html">Reading &amp; Writing Rasters with Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_reproject.html">Reproject Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_resample.html">Resampling &amp; Registering Rasters w. Rasterio and Geowombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_math.html">Band Math w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_replace_values.html">Replacing Values w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_rasterize.html">Rasterize Vectors w. Rasterio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="e_raster_window_operations.html">Window Operations with Rasterio and GeoWombat</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5 - Accessing OSM &amp; Census Data in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="d_pytidycensus_intro.html">Introduction to pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_census.html">Accessing Census and ACS Data in Python using `pytidycensus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_time_series_analysis.html">Time Series Analysis with Census Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="d_access_osm.html">Accessing OSM Data in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6 - Remote Sensing in Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="f_rs_io.html">Reading/Writing Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_stac.html">Accessing STAC Imagery with GeoWombat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_config.html">Configuration manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_edit.html">Editing Rasters and Remotely Sensed Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_plot.html">Plot Remote Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_crs.html">Remote Sensing Coordinate Reference Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_mosaic.html">Handle Multiple Remotely Sensed Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_band_math.html">Band Math &amp; Vegetation Indices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_extraction.html">Raster Data Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="f_rs_ml_predict.html">Spatial Prediction using ML in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hire pygis.io</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="g_hire.html">Pygis.io Consultancy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Legal</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a_trademark.html">PyGIS™ Trademark Policy</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/edit/main/./pygis/docs/e_extraction.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mmann1123/pyGIS/issues/new?title=Issue%20on%20page%20%2Fdocs/e_extraction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/e_extraction.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Extracting Spatial Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clip-spatial-polygons">Clip Spatial Polygons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-location-by-attributes">Select Location by Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-by-location">Select by Location</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-shapely-vector">Method 1 - Shapely vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-geodataframe">Method 2 - GeoDataFrame</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <hr class="docutils" />
+<div class="admonition-learning-objectives admonition">
+<p class="admonition-title">Learning Objectives</p>
+<ul class="simple">
+<li><p>Clip a vector feature using another vector feature</p></li>
+<li><p>Select features by their attributes</p></li>
+<li><p>Select features by their locations</p></li>
+</ul>
+</div>
+<div class="admonition-review admonition">
+<p class="admonition-title">Review</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="c_vectors.html"><span class="std std-doc">Spatial Vector Data</span></a></p></li>
+<li><p><a class="reference internal" href="e_attributes.html"><span class="std std-doc">Attributes &amp; Indexing for Vector Data</span></a></p></li>
+<li><p><a class="reference internal" href="c_new_vectors.html"><span class="std std-doc">Creating Spatial Vector Data</span></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="extracting-spatial-data">
+<h1>Extracting Spatial Data<a class="headerlink" href="#extracting-spatial-data" title="Link to this heading">#</a></h1>
+<p>Subsetting and extracting data is useful when we want to select or analyze a portion of the dataset based on a feature’s location, attribute, or its spatial relationship to another dataset.</p>
+<p>In this chapter, we will explore three ways that data from a GeoDataFrame can be subsetted and extracted: clip, select location by attribute, and select by location.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<p>First, let’s import the necessary modules (click the + below to show code cell).</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import modules</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>We will utilize shapefiles of San Francisco Bay Area county boundaries and wells within the Bay Area and the surrounding 50 km. We will first load in the data and reproject the data (click the + below to show code cell).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>All the data must have the same coordinate system in order for extraction to work correctly.</p>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+
+<span class="c1"># County boundaries</span>
+<span class="c1"># Source: https://opendata.mtc.ca.gov/datasets/san-francisco-bay-region-counties-clipped?geometry=-125.590%2C37.123%2C-119.152%2C38.640</span>
+<span class="n">counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">"../_static/e_vector_shapefiles/sf_bay_counties/sf_bay_counties.shp"</span><span class="p">)</span>
+
+<span class="c1"># Well locations</span>
+<span class="c1"># Source: https://gis.data.ca.gov/datasets/3a3e681b894644a9a95f9815aeeeb57f_0?geometry=-123.143%2C36.405%2C-119.230%2C37.175</span>
+<span class="c1"># Modified by author so that only the well locations within the counties and the surrounding 50 km were kept</span>
+<span class="n">wells</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">"../_static/e_vector_shapefiles/sf_bay_wells_50km/sf_bay_wells_50km.shp"</span><span class="p">)</span>
+
+<span class="c1"># Reproject data to NAD83(HARN) / California Zone 3</span>
+<span class="c1"># https://spatialreference.org/ref/epsg/2768/</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="mi">2768</span>
+<span class="n">counties</span> <span class="o">=</span> <span class="n">counties</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+<span class="n">wells</span> <span class="o">=</span> <span class="n">wells</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>We will also create a rectangle over a part of the Bay Area. We have identified coordinates to use for this rectangle, but you can also use <a class="reference external" href="http://bboxfinder.com/">bbox finder</a> to generate custom bounding boxes and obtain their coordinates (click the + below to show code cell).</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list of coordinate pairs</span>
+<span class="n">coordinates</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1790787</span><span class="p">,</span> <span class="mi">736108</span><span class="p">],</span> <span class="p">[</span><span class="mi">1929652</span><span class="p">,</span> <span class="mi">736108</span><span class="p">],</span> <span class="p">[</span><span class="mi">1929652</span><span class="p">,</span> <span class="mi">598414</span><span class="p">],</span> <span class="p">[</span><span class="mi">1790787</span><span class="p">,</span> <span class="mi">598414</span><span class="p">]]</span>
+
+<span class="c1"># Create a Shapely polygon from the coordinate-tuple list</span>
+<span class="n">poly_shapely</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+
+<span class="c1"># Create a dictionary with needed attributes and required geometry column</span>
+<span class="n">attributes_df</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Attribute'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'name1'</span><span class="p">],</span> <span class="s1">'geometry'</span><span class="p">:</span> <span class="n">poly_shapely</span><span class="p">}</span>
+
+<span class="c1"># Convert shapely object to a GeoDataFrame</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">attributes_df</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="s1">'geometry'</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="s2">"EPSG:2768"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>We’ll define some functions to make displaying and mapping our results a bit easier (click the + below to show code cell).</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">display_table</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">attribute_table</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''Display the first and last five rows of attribute table.'''</span>
+
+    <span class="c1"># Print title</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Attribute Table: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">))</span>
+
+    <span class="c1"># Print number of rows and columns</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Table shape (rows, columns): </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attribute_table</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="c1"># Display first two rows of attribute table</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First two rows:"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">attribute_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># Display last two rows of attribute table</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Last two rows:"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">attribute_table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_df</span><span class="p">(</span><span class="n">result_name</span><span class="p">,</span> <span class="n">result_df</span><span class="p">,</span> <span class="n">result_geom_type</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">'''Plot the result on a map and add the outlines of the original shapefiles.'''</span>
+
+    <span class="c1"># Create subplots</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="c1"># Plot data depending on vector type</span>
+    <span class="c1"># For points</span>
+    <span class="k">if</span> <span class="n">result_geom_type</span> <span class="o">==</span> <span class="s2">"point"</span><span class="p">:</span>
+
+        <span class="c1"># Plot data</span>
+        <span class="n">counties</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'none'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'dimgray'</span><span class="p">)</span>
+        <span class="n">wells</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'dimgray'</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">result_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'dodgerblue'</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># For polygons</span>
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="c1"># Plot overlay data</span>
+        <span class="n">result_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">'Set2'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'black'</span><span class="p">)</span>
+
+        <span class="c1"># Plot outlines of original shapefiles</span>
+        <span class="n">counties</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'none'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'dimgray'</span><span class="p">)</span>
+
+    <span class="c1"># Add additional outlined boundary if specified</span>
+    <span class="k">if</span> <span class="n">area</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1"># Plot data</span>
+        <span class="n">area</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'none'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'lightseagreen'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Else, pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Stylize plots</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'bmh'</span><span class="p">)</span>
+
+    <span class="c1"># Set title</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">result_name</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'fontsize'</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span> <span class="s1">'fontweight'</span> <span class="p">:</span> <span class="s1">'3'</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s take a look at what our input data looks like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Plot data</span>
+<span class="n">counties</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'bisque'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'dimgray'</span><span class="p">)</span>
+<span class="n">wells</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'dodgerblue'</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">'aquamarine'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">'lightseagreen'</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.55</span><span class="p">)</span>
+
+<span class="c1"># Stylize plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'bmh'</span><span class="p">)</span>
+
+<span class="c1"># Set title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'San Francisco Bay Area'</span><span class="p">,</span> <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'fontsize'</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span> <span class="s1">'fontweight'</span> <span class="p">:</span> <span class="s1">'3'</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, 'San Francisco Bay Area')
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight 3 for DejaVu Sans, now using 200.
+</pre></div>
+</div>
+<img alt="../_images/9f70c233a8302de06945778d7594a161681ab805263ab674a7243f4b509f29c6.png" src="../_images/9f70c233a8302de06945778d7594a161681ab805263ab674a7243f4b509f29c6.png" />
+</div>
+</div>
+</section>
+<section id="clip-spatial-polygons">
+<h2>Clip Spatial Polygons<a class="headerlink" href="#clip-spatial-polygons" title="Link to this heading">#</a></h2>
+<p>Clip extracts and keeps only the geometries of a vector feature that are within extent of another vector feature (think of it like a cookie-cutter or mask). We can use  <code class="docutils literal notranslate"><span class="pre">clip()</span></code> in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>, with the first parameter being the vector that will be clipped and the second parameter being the vector that will define the extent of the clip. <em>All attributes for the resulting clipped vector will be kept.</em> <a class="footnote-reference brackets" href="#gpd-clip" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is only available in the more recent versions of <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>.</p>
+</div>
+<p>We will first clip the Bay Area counties polygon to our created rectangle polygon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
+<span class="n">clip_counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">counties</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+
+<span class="c1"># Display attribute table</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clip_counties</span><span class="p">)</span>
+
+<span class="c1"># Plot clip</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Counties</span><span class="se">\n</span><span class="s2">Clip"</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">clip_counties</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">"polygon"</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>coname</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>Santa Clara County</td>
+      <td>MULTIPOLYGON (((1858743.389 607583.832, 185874...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>San Mateo County</td>
+      <td>MULTIPOLYGON (((1850037.244 614954.64, 1850859...</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Alameda County</td>
+      <td>MULTIPOLYGON (((1860073.077 612066.462, 185990...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>San Francisco County</td>
+      <td>MULTIPOLYGON (((1834350.912 641735.721, 183437...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Contra Costa County</td>
+      <td>MULTIPOLYGON (((1836498.14 656511.674, 1836495...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Marin County</td>
+      <td>MULTIPOLYGON (((1830505.126 653828.366, 183051...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Solano County</td>
+      <td>MULTIPOLYGON (((1875491.252 673069.363, 187548...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Sonoma County</td>
+      <td>POLYGON ((1813605.098 736060.762, 1813555.586 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Napa County</td>
+      <td>POLYGON ((1860170.736 724644.473, 1860169.835 ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Failed to find font weight 3 for DejaVu Sans, now using 200.
+</pre></div>
+</div>
+<img alt="../_images/16ade08e487e0f77fc9bcc4584fc6382b79e1d1a111bf988a249a146c08ba728.png" src="../_images/16ade08e487e0f77fc9bcc4584fc6382b79e1d1a111bf988a249a146c08ba728.png" />
+</div>
+</div>
+<p>We can clip any vector type. Next, we will clip the wells point data to our created rectangle polygon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clip data</span>
+<span class="n">clip_wells</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">wells</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+
+<span class="c1"># Display attribute table</span>
+<span class="n">display</span><span class="p">(</span><span class="n">clip_wells</span><span class="p">)</span>
+
+<span class="c1"># Plot clip</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells</span><span class="se">\n</span><span class="s2">Clip"</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">clip_wells</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">"point"</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4764</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1928106.578 619294.408)</td>
+    </tr>
+    <tr>
+      <th>4733</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1927444.679 619366.782)</td>
+    </tr>
+    <tr>
+      <th>4391</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1927051.274 621834.123)</td>
+    </tr>
+    <tr>
+      <th>4554</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
+    </tr>
+    <tr>
+      <th>4553</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1926420.722 622427.938)</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5669</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>200</td>
+      <td>POINT (1824748.04 729726.154)</td>
+    </tr>
+    <tr>
+      <th>4077</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>175</td>
+      <td>POINT (1823812.719 730423.625)</td>
+    </tr>
+    <tr>
+      <th>4076</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>210</td>
+      <td>POINT (1823821.913 730445.634)</td>
+    </tr>
+    <tr>
+      <th>1365</th>
+      <td>202</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>280</td>
+      <td>POINT (1830194.589 731335.971)</td>
+    </tr>
+    <tr>
+      <th>5626</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>130</td>
+      <td>POINT (1824114.227 731871.693)</td>
+    </tr>
+  </tbody>
+</table>
+<p>2013 rows × 5 columns</p>
+</div></div><img alt="../_images/78195ec05b955b5c8edb8473f47e78ab4dd68efbb1fb1afd7ef02005e9fb74d1.png" src="../_images/78195ec05b955b5c8edb8473f47e78ab4dd68efbb1fb1afd7ef02005e9fb74d1.png" />
+</div>
+</div>
+</section>
+<section id="select-location-by-attributes">
+<h2>Select Location by Attributes<a class="headerlink" href="#select-location-by-attributes" title="Link to this heading">#</a></h2>
+<p>Selecting by attribute selects only the features in a dataset whose attribute values match the specified criteria. <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> uses the indexing and selection methods  in <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, so data in a GeoDataFrame can be selected and queried in the same way a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe can. <a class="footnote-reference brackets" href="#gpd-select" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#pd-select" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#pd-subset" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+<p>We will use use different criteria to subset the wells dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display attribute table</span>
+<span class="n">display</span><span class="p">(</span><span class="n">wells</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2400064-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1968290.923 592019.918)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2400099-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1969113.543 595876.691)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The criteria can use a variety of operators, including comparison and logical operators.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply</span>
+<span class="n">wells_public</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[(</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_USE"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Public Supply"</span><span class="p">)]</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells - Public Supply"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_public</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply
+
+Table shape (rows, columns): (33, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2400064-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1968290.923 592019.918)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2400099-001</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1969113.543 595876.691)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3368</th>
+      <td>Aptos Creek PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>713</td>
+      <td>POINT (1875127.938 553764.966)</td>
+    </tr>
+    <tr>
+      <th>3369</th>
+      <td>Country Club PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>495</td>
+      <td>POINT (1877219.818 552137.819)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft</span>
+<span class="n">wells_public_deep</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[(</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_USE"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Public Supply"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_DEPTH"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)]</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_public_deep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft
+
+Table shape (rows, columns): (24, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>919</th>
+      <td>Granite Way PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>670</td>
+      <td>POINT (1875403.34 554078.279)</td>
+    </tr>
+    <tr>
+      <th>1082</th>
+      <td>Aptos Jr. High 2 PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>590</td>
+      <td>POINT (1876872.389 553821.138)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3368</th>
+      <td>Aptos Creek PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>713</td>
+      <td>POINT (1875127.938 553764.966)</td>
+    </tr>
+    <tr>
+      <th>3369</th>
+      <td>Country Club PW</td>
+      <td>Public Supply</td>
+      <td>Single Well</td>
+      <td>495</td>
+      <td>POINT (1877219.818 552137.819)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that are public supply and have a depth greater than 50 ft OR are residential</span>
+<span class="n">wells_public_deep_residential</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[((</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_USE"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Public Supply"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_DEPTH"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span><span class="n">wells</span><span class="p">[</span><span class="s2">"WELL_USE"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Residential"</span><span class="p">)]</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_public_deep_residential</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells - Public Supply with Depth Greater than 50 ft or Residential
+
+Table shape (rows, columns): (725, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>137</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>78</td>
+      <td>POINT (1886296.744 730378.969)</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>80</td>
+      <td>POINT (1877320.295 730464.652)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6032</th>
+      <td>GV FARM</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>67</td>
+      <td>POINT (1855297.377 693189.634)</td>
+    </tr>
+    <tr>
+      <th>6033</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>76</td>
+      <td>POINT (1841755.238 707939.225)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="select-by-location">
+<h2>Select by Location<a class="headerlink" href="#select-by-location" title="Link to this heading">#</a></h2>
+<p>Selecting by location selects features based on its relative spatial relationship with another dataset. In other words, features are selected based on their location relative to the location of another dataset.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><p>to know how many wells there are in Santa Clara County, we could select all the wells that fall within Santa Clara County boundaries (which we do in one of the examples below)</p></li>
+<li><p>to know what rivers flow through Santa Clara County, we could select all the river polylines that intersect with Santa Clara County boundaries</p></li>
+</ul>
+<p>For more information on selecting by location and spatial relationships, check out this <a class="reference external" href="https://desktop.arcgis.com/en/arcmap/10.3/map/working-with-layers/using-select-by-location.htm">ArcGIS documentation</a>.</p>
+<p>There are multiple spatial relationships available in <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>: <a class="footnote-reference brackets" href="#gpd-binary" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Spatial Relationship</p></th>
+<th class="head"><p>Function(s)</p></th>
+<th class="head text-right"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>contains</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">contains()</span></code></p></td>
+<td class="text-right"><p>geometry encompasses the other geometry’s boundary and interior without any boundaries touching</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>covers</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">covers()</span></code></p></td>
+<td class="text-right"><p>all of the geometry’s points are to the exterior of the other geometry’s points</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>covered by</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">covered_by()</span></code></p></td>
+<td class="text-right"><p>all of the geometry’s points are to the interior of the other geometry’s points</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>crosses</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">crosses()</span></code></p></td>
+<td class="text-right"><p>geometry’s interior intersects that of the other geometry, provided that the geometry does not contain the other and the dimension of the intersection is less than the dimension of either geometry</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>disjoint</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">disjoint()</span></code></p></td>
+<td class="text-right"><p>geometry’s boundary and interior do not intersect the boundary and interior of the other geometry</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>equal geometry</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">geom_equals()</span></code>, <code class="docutils literal notranslate"><span class="pre">geom_equals_exact(other,</span> <span class="pre">tolerance=...)</span></code></p></td>
+<td class="text-right"><p>geometry’s boundary, interior, and exterior matches (within a range) those of the other</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>intersects</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">intersects()</span></code></p></td>
+<td class="text-right"><p>geometry’s boundary or interior touches or crosses any part of the other geometry</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>overlaps</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">overlaps()</span></code></p></td>
+<td class="text-right"><p>geometry shares at least one point, but not all points, with the other geometry, provided that the geometries and the intersection of their interiors all have the same dimensions</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>touches</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">touches()</span></code></p></td>
+<td class="text-right"><p>geometry shares at least one point with the other geometry, provided that no part of the geometry’s interior intersects with the other geometry</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>within</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">within()</span></code></p></td>
+<td class="text-right"><p>geometry is enclosed in the other geometry (geometry’s boundary and interior intersects with the other geometry’s interior only)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The functions for these spatial relationships will generally output a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> series with Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>) whose indexing corresponds with the input dataset (from where we want to subset the data). We can use these Boolean values to subset the dataset (where only the rows that have a <code class="docutils literal notranslate"><span class="pre">True</span></code> output will be retained).</p>
+</div>
+<section id="method-1-shapely-vector">
+<h3>Method 1 - Shapely vector<a class="headerlink" href="#method-1-shapely-vector" title="Link to this heading">#</a></h3>
+<p>These functions can be used to select features that have the specified spatial relationship with a single Shapely vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select wells that fall within Shapely rectangle</span>
+<span class="n">wells_within_rect_shapely</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[</span><span class="n">wells</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">poly_shapely</span><span class="p">)]</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within a User-Defined Rectangle"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_within_rect_shapely</span><span class="p">)</span>
+
+<span class="c1"># Plot selection</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within a User-Defined Rectangle"</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">wells_within_rect_shapely</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">"point"</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells within a User-Defined Rectangle
+
+Table shape (rows, columns): (2013, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Flag City Well 3</td>
+      <td>Unknown</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1922067.711 679380.918)</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Flag City Well 1</td>
+      <td>Unknown</td>
+      <td>Single Well</td>
+      <td>170</td>
+      <td>POINT (1922680.537 679641.516)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6032</th>
+      <td>GV FARM</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>67</td>
+      <td>POINT (1855297.377 693189.634)</td>
+    </tr>
+    <tr>
+      <th>6033</th>
+      <td>None</td>
+      <td>Residential</td>
+      <td>Unknown</td>
+      <td>76</td>
+      <td>POINT (1841755.238 707939.225)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/cb247a9d0e939276ee89028c0a071a85aaa3c071d852bb99a06561086558ce23.png" src="../_images/cb247a9d0e939276ee89028c0a071a85aaa3c071d852bb99a06561086558ce23.png" />
+</div>
+</div>
+</section>
+<section id="method-2-geodataframe">
+<h3>Method 2 - GeoDataFrame<a class="headerlink" href="#method-2-geodataframe" title="Link to this heading">#</a></h3>
+<p>If we’re trying to select features that have a specified spatial relationship with another <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> object, it gets a little tricky. This is because the <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> spatial relationship functions verify the spatial relationship either row by row or index by index. In other words, the first row in the first dataset will be compared with the corresponding row or index in the second dataset, the second row in the first dataset will be compared with the corresponding row or index in the second dataset, and so on. <a class="footnote-reference brackets" href="#gpd-within" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#gpd-data" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
+<p>As a result, the number of rows need to correspond or the indices numbers need to match between the two datasets–or else we’ll get a warning and the output will be empty.</p>
+<p>Because each record in a GeoDataFrame has a geometry column that stores that record’s geometry as a <code class="docutils literal notranslate"><span class="pre">shapely</span></code> object, we can call this object if we want to check a bunch of features against one extent (with one geometry). <a class="footnote-reference brackets" href="#gpd-within" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#gpd-data" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the Santa Clara County boundary</span>
+<span class="n">sc_county</span> <span class="o">=</span> <span class="n">counties</span><span class="p">[</span><span class="n">counties</span><span class="p">[</span><span class="s2">"coname"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Santa Clara County"</span><span class="p">]</span>
+
+<span class="c1"># Subset the GeoDataFrame by checking which wells are within Santa Clara County's Shapely object</span>
+<span class="n">wells_within_sc_shapely</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[</span><span class="n">wells</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">sc_county</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within Santa Clara County"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_within_sc_shapely</span><span class="p">)</span>
+
+<span class="c1"># Plot selection</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within Santa Clara County"</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">wells_within_sc_shapely</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">"point"</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">sc_county</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells within Santa Clara County
+
+Table shape (rows, columns): (136, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>980</th>
+      <td>CalFire Pacheco No 2</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1924674.853 557296.117)</td>
+    </tr>
+    <tr>
+      <th>1020</th>
+      <td>05S02W35R002</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>80</td>
+      <td>POINT (1863211.218 606236.916)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5962</th>
+      <td>07S01W25L001</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>404</td>
+      <td>POINT (1873814.137 589052.339)</td>
+    </tr>
+    <tr>
+      <th>6036</th>
+      <td>06S02W34B006</td>
+      <td>Observation</td>
+      <td>Single Well</td>
+      <td>152</td>
+      <td>POINT (1861394.207 597916.983)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/7d7e456244e1b3eb6ed0f0fbc5b70e495651deffa0d82bd732e673b89a7dcdc3.png" src="../_images/7d7e456244e1b3eb6ed0f0fbc5b70e495651deffa0d82bd732e673b89a7dcdc3.png" />
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If we are interested in wells that fall within two or more counties (i.e., we have multiple records that will be used for selection), we can enclose the above code in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+</div>
+<p>For example, if we are interested in wells that fall within two or more counties, we can loop over the county names, select each county’s boundary, subset the wells within it, and combine the results into a single GeoDataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The counties we want to select wells from</span>
+<span class="n">county_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Santa Clara County"</span><span class="p">,</span> <span class="s2">"Alameda County"</span><span class="p">]</span>
+
+<span class="c1"># Create an empty list to collect the wells found in each county</span>
+<span class="n">selected_wells</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop over each county name</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">county_names</span><span class="p">:</span>
+
+    <span class="c1"># Select this county's boundary</span>
+    <span class="n">county_boundary</span> <span class="o">=</span> <span class="n">counties</span><span class="p">[</span><span class="n">counties</span><span class="p">[</span><span class="s2">"coname"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+
+    <span class="c1"># Subset the wells that fall within this county's Shapely object</span>
+    <span class="n">wells_in_county</span> <span class="o">=</span> <span class="n">wells</span><span class="p">[</span><span class="n">wells</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">county_boundary</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+    <span class="c1"># Add this county's wells to our list</span>
+    <span class="n">selected_wells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wells_in_county</span><span class="p">)</span>
+
+<span class="c1"># Combine the per-county results into a single GeoDataFrame</span>
+<span class="n">wells_within_multiple</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">selected_wells</span><span class="p">)</span>
+
+<span class="c1"># Display first two and last two rows of attribute table</span>
+<span class="n">display_table</span><span class="p">(</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within Santa Clara and Alameda Counties"</span><span class="p">,</span> <span class="n">attribute_table</span> <span class="o">=</span> <span class="n">wells_within_multiple</span><span class="p">)</span>
+
+<span class="c1"># Plot selection</span>
+<span class="n">plot_df</span><span class="p">(</span><span class="n">result_name</span> <span class="o">=</span> <span class="s2">"San Francisco Bay Area Wells within Santa Clara and Alameda Counties"</span><span class="p">,</span> <span class="n">result_df</span> <span class="o">=</span> <span class="n">wells_within_multiple</span><span class="p">,</span> <span class="n">result_geom_type</span> <span class="o">=</span> <span class="s2">"point"</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="n">counties</span><span class="p">[</span><span class="n">counties</span><span class="p">[</span><span class="s2">"coname"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">county_names</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attribute Table: San Francisco Bay Area Wells within Santa Clara and Alameda Counties
+
+Table shape (rows, columns): (370, 5)
+
+First two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>980</th>
+      <td>CalFire Pacheco No 2</td>
+      <td>Residential</td>
+      <td>Single Well</td>
+      <td>0</td>
+      <td>POINT (1924674.853 557296.117)</td>
+    </tr>
+    <tr>
+      <th>1020</th>
+      <td>05S02W35R002</td>
+      <td>Observation</td>
+      <td>Part of a nested/multi-completion well</td>
+      <td>80</td>
+      <td>POINT (1863211.218 606236.916)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last two rows:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WELL_NAME</th>
+      <th>WELL_USE</th>
+      <th>WELL_TYPE</th>
+      <th>WELL_DEPTH</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5412</th>
+      <td>None</td>
+      <td>Unknown</td>
+      <td>Unknown</td>
+      <td>0</td>
+      <td>POINT (1906557.479 636191.597)</td>
+    </tr>
+    <tr>
+      <th>5530</th>
+      <td>None</td>
+      <td>Industrial</td>
+      <td>Unknown</td>
+      <td>350</td>
+      <td>POINT (1856151.107 626060.838)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/0db10b3653dee34ddd37dc5ed5c658b8292461a15cc041c29454198d3121020c.png" src="../_images/0db10b3653dee34ddd37dc5ed5c658b8292461a15cc041c29454198d3121020c.png" />
+</div>
+</div>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="gpd-clip" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://geopandas.org/gallery/plot_clip.html">Clip Vector Data with GeoPandas, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="gpd-select" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://geopandas.org/docs/user_guide/indexing.html">Indexing and Selecting Data, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="pd-select" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html">Indexing and selecting data, pandas</a></p>
+</aside>
+<aside class="footnote brackets" id="pd-subset" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/03_subset_data.html">How do I select a subset of a DataFrame?, pandas</a></p>
+</aside>
+<aside class="footnote brackets" id="gpd-binary" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://geopandas.org/docs/reference/geoseries.html#binary-predicates">GeoSeries - Binary Predicates, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="gpd-within" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p><a class="reference external" href="https://geopandas.org/docs/reference/api/geopandas.GeoSeries.within.html">geopandas.GeoSeries.within, GeoPandas</a></p>
+</aside>
+<aside class="footnote brackets" id="gpd-data" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id9">2</a>)</span>
+<p><a class="reference external" href="https://geopandas.org/docs/user_guide/data_structures.html">Data Structures, GeoPandas</a></p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="e_vector_merge_dissolve.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Merge Data &amp; Dissolve Polygons</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="e_vector_overlay.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Spatial Overlays and Joins</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clip-spatial-polygons">Clip Spatial Polygons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-location-by-attributes">Select Location by Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-by-location">Select by Location</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-shapely-vector">Method 1 - Shapely vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-2-geodataframe">Method 2 - GeoDataFrame</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Michael Mann, Steven Chao, Jordan Graesser, Nina Feldman
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+    <b>Supported by:</b>  <br>
+    <a href="https://geography.columbian.gwu.edu/">
+ <img alt="GW Geography" src="../_static/global/GWBlue.png"
+  width="300" align="left">
+</div>
+<div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" ><img align="right" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</div><br><br>
+<div>
+<a rel="Reference" href="https://zenodo.org/badge/latestdoi/344683467" ><img align="right" alt="Reference our work" style="border-width:0" src="https://zenodo.org/badge/344683467.svg" /></a>
+</div>
+<br clear="all"><br>
+<div style="font-size: 0.85em; color: #555; border-top: 1px solid #ddd; padding-top: 8px;">
+  PyGIS&trade; and the PyGIS&trade; logo are trademarks of Michael Mann.
+  All rights reserved. Use of the PyGIS&trade; name or logo is governed by the
+  <a href="a_trademark.html">PyGIS&trade; Trademark Policy</a>.
+  Content on this site is licensed under
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>;
+  the trademark is <em>not</em> licensed under that license and is reserved separately.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
