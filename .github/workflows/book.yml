@@ -1,0 +1,86 @@
+name: Build, test & deploy book
+
+# Builds the Jupyter Book, checks that the Python code cells rendered and
+# executed (tests/test_book_render.py), and only then publishes
+# pygis/_build/html to the gh-pages branch that serves https://pygis.io.
+# Pull requests and other branches build + test but never deploy.
+
+on:
+  push:
+    branches: ["**"]
+    paths-ignore: ["README.md", "CONTRIBUTING.md", "LICENSE"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: book-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: .github/book-environment.yml
+          cache-environment: true
+
+      # Notebooks are executed with `execute_notebooks: cache`. Start from the
+      # cache committed in pygis/_build/.jupyter_cache and carry newly executed
+      # notebooks forward between runs, so only changed pages re-execute.
+      - uses: actions/cache@v4
+        with:
+          path: pygis/_build/.jupyter_cache
+          key: jupyter-cache-${{ github.run_id }}
+          restore-keys: jupyter-cache-
+
+      # Drop the committed HTML so stale pages or old execution reports
+      # can't mask a broken build.
+      - name: Clean previous build output
+        run: rm -rf pygis/_build/html pygis/_build/jupyter_execute pygis/_build/.doctrees
+
+      - name: Build book
+        run: jupyter-book build pygis
+
+      - name: Test rendered book
+        run: python -m pytest tests -v
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: book-html
+          path: pygis/_build/html
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: README.md
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: book-html
+          path: html
+
+      # Same command as the manual recipe in pygis/_config.yml.
+      - name: Publish to gh-pages
+        run: |
+          pip install ghp-import
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          ghp-import -n -p -f -c pygis.io -m "Update documentation (${GITHUB_SHA::7})" html
